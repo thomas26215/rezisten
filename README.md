@@ -2,7 +2,7 @@
 
 <dl>
 <dt>Chef·fe projet</dt>
-<dd>Fontanière Tristan</dd>
+<dd>FONTANIERE Tristan</dd>
 <dt>Membres</dt>
 <dd>
 
