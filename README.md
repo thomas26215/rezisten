@@ -2,14 +2,16 @@
 
 <dl>
 <dt>Chef·fe projet</dt>
-<dd>NOM Prénom</dd>
+<dd>Fontanière Tristan</dd>
 <dt>Membres</dt>
 <dd>
 
-- NOM Prénom
-- NOM Prénom
-- NOM Prénom
-- …
+- PEGUIN Quentin
+- VENOUIL Thomas
+- ARNAUD Sophie
+- CELUSNIAK DE SOUZA Maria Luiza
+- JOANNIC Elouan
+- BILS Brayan
 
 </dd>
 
