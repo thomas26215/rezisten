@@ -1,1 +1,0 @@
-Avec malekal.com, j'apprends à écrire dans un fichier en PowerShell
