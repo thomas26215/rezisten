@@ -29,8 +29,8 @@ INSERT INTO HISTOIRES(titre,numchap,createur,id_lieu,background) values('début 
 
 
 --Création de deux personnages participants au prologue
-INSERT INTO PERSONNAGES(prenom,nom,img) values('jean','dupont','jeandupont.jpeg');
-INSERT INTO PERSONNAGES(prenom,nom,img) values('michel','durand','micheldurand.jpeg');
+INSERT INTO PERSONNAGES(prenom,nom,img) values('jean','dupont','jeandupont.webp');
+INSERT INTO PERSONNAGES(prenom,nom,img) values('michel','durand','micheldurand.webp');
 
 --Création de dialogues pour l'histoire 1 qui correspond au premier niveau du prologue
 INSERT INTO DIALOGUES(id_dialog, id_histoire,interlocuteur, contenu) values(0,1,1,'bonjour commandant !');
