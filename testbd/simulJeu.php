@@ -34,7 +34,7 @@ $dialogue = pg_fetch_all($resDial);
     <main>
     <section id="persos">
         <?php foreach($persos as $personnage) :  ?>
-            <img src="<?= $imgPath.$personnage['img'].'.webp'?>" alt="">
+            <img src="<?= $imgPath.$personnage['img']?>" alt="">
             <?php endforeach; ?>
     </section>
 <div id="dial">
