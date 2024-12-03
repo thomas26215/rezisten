@@ -33,12 +33,12 @@ INSERT INTO PERSONNAGES(prenom,nom,img) values('jean','dupont','jeandupont.webp'
 INSERT INTO PERSONNAGES(prenom,nom,img) values('michel','durand','micheldurand.webp');
 
 --Création de dialogues pour l'histoire 1 qui correspond au premier niveau du prologue
-INSERT INTO DIALOGUES(id_dialog, id_histoire,interlocuteur, contenu) values(0,1,1,'bonjour commandant !');
-INSERT INTO DIALOGUES(id_dialog, id_histoire,interlocuteur, contenu) values(1,1,1,'comment allez vous ?');
-INSERT INTO DIALOGUES(id_dialog, id_histoire,interlocuteur, contenu) values(2,1,2,'tu as lu le journal ...?');
+INSERT INTO DIALOGUES(id_dialog, id_histoire,interlocuteur, contenu,bonus) values(0,1,1,'bonjour commandant !',false);
+INSERT INTO DIALOGUES(id_dialog, id_histoire,interlocuteur, contenu,bonus) values(1,1,1,'comment allez vous ?',false);
+INSERT INTO DIALOGUES(id_dialog, id_histoire,interlocuteur, contenu,bonus) values(2,1,2,'tu as lu le journal ...?',false);
 
 --Création d'un dialogue pour le niveau 2 dans le chapitre 1
-INSERT INTO DIALOGUES(id_dialog, id_histoire,interlocuteur, contenu) values(0,2,1,'Tous à couvert !');
+INSERT INTO DIALOGUES(id_dialog, id_histoire,interlocuteur, contenu,bonus) values(0,2,1,'Tous à couvert !',false);
 
 --Précision des apparitions dans la table prévue
 INSERT INTO APPARITION values(1,1);

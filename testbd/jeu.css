@@ -1,34 +1,26 @@
 #persos{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 h1{
     text-align: center;
 }
 body{
     
-    background-image: url(./public/img/bg.webp);
+    background-image: url(public/img/bg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    min-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:space-around;
-margin:0;
 }
 
 #dial{
     border: 1px solid;
 }
 main{
-    background-image: url(public/img/bgprologue.webp);
+    background-image: url(public/img/bgprologue);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-display:flex;
-flex-direction:column;
-justify-content:space-between;
 
 }
 h2{
