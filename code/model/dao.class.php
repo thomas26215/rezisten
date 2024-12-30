@@ -9,7 +9,6 @@ class DAO {
     private function __construct() {
         try {
             $this->db = new PDO($this->database);
-            //var_dump($this);
             if (!$this->db) {
                 throw new Exception("Impossible d'ouvrir ".$this->database);
                 ("Database error");
@@ -20,6 +19,7 @@ class DAO {
         }
     }
 
+    //Retourne une instance de DAO
     public static function getInstance() : DAO {
         if(is_null(self::$instance)) {
             self::$instance = new DAO();
@@ -34,8 +34,8 @@ class DAO {
      * @throws Exception Le message d'erreur correspondant à l'exception
      */
     private function getPDOError(PDOException $e){
-        $code_erreur = $e->getMessage();
-        if($this->getPDOMessage($code) == "duplication"){
+        $code_erreur = $e->getCode();
+        if($this->getPDOMessage($code_erreur) == "duplication"){
              throw new Exception("Erreur : entrée en double détectée.");
         }else{
             throw new Exception("Erreur lors de l'exécution : " . $e->getMessage());
@@ -62,6 +62,23 @@ class DAO {
     }
 
     /**
+      * Exécute une requête dans la base de données
+      *
+      * @param string $query la requête
+      * @param array $params les paramètre de la requête
+      * @return bool Retourne true si l'insertion de la requête réussit
+      * @throws Exception Si une erreur se produit lors de l'exécution de la requête SQL
+      *
+      */
+
+
+    public function execute($query, $params){
+        if(!$query->execute($params)){
+            throw new Exception("Erreur lors de l'insertion de la requête");
+        }return true;
+    }
+
+    /**
      * Exécute une requête préparée dans la base de données
      *
      * @param string $query La requête SQL d'insertion à exécuter.
@@ -71,11 +88,12 @@ class DAO {
      *
      * @note La préparation se fait dans cette fonction (appelle à une autre fonction)
      */
-    public function executePrepare($query) {
+    public function executePrepare($query, $params) {
         try {
-            $this->prepare($query);
+            $query = $this->prepare($query);
+            return $this->execute($query, $params);
         } catch (PDOException $e) {
-           throw($this->getPDOError());
+           throw($this->getPDOError($e));
         }
         catch(Exception $e){
             throw new Exception($e->getMessage());
@@ -97,7 +115,7 @@ class DAO {
             return ":$key";
         }, array_keys($datas)));
         echo "insert into $table ($columns) values ($placeholders)";
-        return $this->executePrepare("insert into $table ($columns) values ($placeholders)");
+        return $this->executePrepare("insert into $table ($columns) values ($placeholders)", $datas);
     }
 
     /**
