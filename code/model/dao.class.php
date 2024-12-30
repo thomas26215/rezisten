@@ -4,7 +4,7 @@
 class DAO {
     private static $instance = null;
     private PDO $db;
-    private string $database = 'sqlite:'.__DIR__.'/../data/bricomachin.db';
+    private string $database = 'sqlite:'.__DIR__.'/../data/database.db';
 
     private function __construct() {
         try {
@@ -50,14 +50,14 @@ class DAO {
      * @return bool Retourne true si l'insertion réussit, false sinon.
      * @throws Exception Si une erreur se produit lors de la préparation de la requête SQL.
      */
-    private function prepare($query, $params){
+    public function prepare($query){
         $stmt = $this->db->prepare($query);
         if($stmt == false){
             throw new Exception("Erreur lors de la préparation de la requête");
         }else if($stmt === false){
             throw new Exception("Erreur lors de l'exécution de la requête");
         }else{
-            return true;
+            return $stmt;
         }
     }
 
@@ -71,11 +71,11 @@ class DAO {
      *
      * @note La préparation se fait dans cette fonction (appelle à une autre fonction)
      */
-    private function executePrepare($query, $params) {
+    public function executePrepare($query) {
         try {
-            prepare($query, $params);
+            $this->prepare($query);
         } catch (PDOException $e) {
-           throw($this->getPDOError);
+           throw($this->getPDOError());
         }
         catch(Exception $e){
             throw new Exception($e->getMessage());
@@ -90,13 +90,14 @@ class DAO {
      * @return bool Retourne true si l'insertion réussit, false sinon.
      * @throws Exception Si une erreur se produit lors de la préparation ou exécution de la requête SQL.
      */
-    private function insertRelatedData($table, $datas) {
+    public function insertRelatedData($table, $datas) {
         // Construire les colonnes et les placeholders
         $columns = implode(", ", array_keys($datas));
         $placeholders = implode(", ", array_map(function ($key) {
             return ":$key";
         }, array_keys($datas)));
-        return $this->executePrepare("INSERT INTO $table ($columns) VALUES ($placeholders)", $datas);
+        echo "insert into $table ($columns) values ($placeholders)";
+        return $this->executePrepare("insert into $table ($columns) values ($placeholders)");
     }
 
     /**
@@ -105,7 +106,7 @@ class DAO {
      * @param string $code Le code d'erreur PDO
      * @return string $errorMessage le message d'erreur en clair
      */
-    private function getPDOMessage($code){
+    public function getPDOMessage($code){
         switch($code){
         case '23000':
             return "duplication";
