@@ -62,6 +62,149 @@ class DAO {
     }
 
     /**
+     * Insère des données liées dans la table spécifiée.
+     *
+     * @param string $table Le nom de la table où les données seront insérées.
+     * @param array $datas Les données à insérer sous forme clé-valeur.
+     * @return bool Retourne true si l'insertion réussit, false sinon.
+     * @throws Exception Si une erreur se produit lors de la préparation ou exécution de la requête SQL.
+     */
+    public function insertRelatedData($table, $datas) {
+        // Construire les colonnes et les placeholders
+        $columns = implode(", ", array_keys($datas));
+        $placeholders = implode(", ", array_map(function ($key) {
+            return ":$key";
+        }, array_keys($datas)));
+        echo "insert into $table ($columns) values ($placeholders)";
+        return $this->executePrepare("insert into $table ($columns) values ($placeholders)", $datas);
+    }
+
+    /**
+     * Récupère des données d'une table en fonction des paramètres spécifiés.
+     *
+     * @param string $table Le nom de la table.
+     * @param array $parameters Un tableau associatif des paramètres de recherche.
+     * @param array $columns Les colonnes à récupérer (par défaut, toutes les colonnes).
+     * @return array La liste des données récupérées.
+     * @throws PDOException Si une erreur de base de données se produit.
+     */
+    public function getColumnWithParameter($table, $parameters, $columns = ['*'])
+    {
+        try {
+            // Construire la partie SELECT de la requête
+            $selectColumns = implode(', ', $columns);
+
+            // Construire la partie WHERE de la requête
+            $whereClauses = [];
+            $values = [];
+            foreach ($parameters as $column => $value) {
+                $whereClauses[] = "$column = :$column";
+                $values[":$column"] = $value;
+            }
+            $whereClause = implode(' AND ', $whereClauses);
+
+            // Construire la requête complète
+            $query = "SELECT $selectColumns FROM $table";
+            if (!empty($whereClause)) {
+                $query .= " WHERE $whereClause";
+            }
+
+            // Préparer et exécuter la requête
+            $stmt = $this->db->prepare($query);
+            $stmt->execute($values);
+
+            // Récupérer les résultats
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            // Log l'erreur et la relancer
+            error_log("Erreur lors de la récupération des données : " . $e->getMessage());
+            throw $e;
+        }
+    }
+
+    /**
+    * Met à jour des données dans une table en fonction des paramètres spécifiés.
+    *
+    * @param string $table Le nom de la table.
+    * @param array $updateData Un tableau associatif des données à mettre à jour.
+    * @param array $whereConditions Un tableau associatif des conditions WHERE.
+    * @return int Le nombre de lignes affectées.
+    * @throws PDOException Si une erreur de base de données se produit.
+    */
+    public function update($table, $updateData, $whereConditions)
+    {
+        try {
+            // Construire la partie SET de la requête
+            $setClauses = [];
+            $values = [];
+            foreach ($updateData as $column => $value) {
+                $setClauses[] = "$column = :set_$column";
+                $values[":set_$column"] = $value;
+            }
+            $setClause = implode(', ', $setClauses);
+
+            // Construire la partie WHERE de la requête
+            $whereClauses = [];
+            foreach ($whereConditions as $column => $value) {
+                $whereClauses[] = "$column = :where_$column";
+                $values[":where_$column"] = $value;
+            }
+            $whereClause = implode(' AND ', $whereClauses);
+
+            // Construire la requête complète
+            $query = "UPDATE $table SET $setClause WHERE $whereClause";
+
+            // Préparer et exécuter la requête
+            $stmt = $this->db->prepare($query);
+            $stmt->execute($values);
+
+            // Retourner le nombre de lignes affectées
+            return $stmt->rowCount();
+        } catch (PDOException $e) {
+            // Log l'erreur et la relancer
+            error_log("Erreur lors de la mise à jour des données : " . $e->getMessage());
+            throw $e;
+        }
+    }
+
+        /**
+     * Supprime les données liées à un utilisateur dans une table spécifique.
+     *
+     * @param string $table Le nom de la table.
+     * @param int $userId L'identifiant de l'utilisateur.
+     * @return bool Retourne true si la suppression est réussie, false sinon.
+     */
+    private function deleteRelatedData($table, $userId) {
+        return $this->executeDelete("DELETE FROM $table WHERE utilisateur_id = :userId", [':userId' => $userId]);
+    }
+
+    /**
+     * Exécute une requête de suppression.
+     *
+     * @param string $query La requête SQL de suppression.
+     * @param array $params Les paramètres de la requête.
+     * @return bool Retourne true si la suppression est réussie, false sinon.
+     */
+    private function executeDelete($query, $params) {
+        $this->db->beginTransaction();
+        try {
+            $stmt = $this->db->prepare($query);
+            foreach ($params as $key => $value) {
+                $stmt->bindValue($key, $value, PDO::PARAM_INT);
+            }
+            $stmt->execute();
+            $this->db->commit();    
+            return true;
+        } catch (PDOException $e) {
+            $this->db->rollBack();
+            return false;
+        }
+    }
+
+
+
+
+    /**
       * Exécute une requête dans la base de données
       *
       * @param string $query la requête
@@ -70,8 +213,6 @@ class DAO {
       * @throws Exception Si une erreur se produit lors de l'exécution de la requête SQL
       *
       */
-
-
     public function execute($query, $params){
         if(!$query->execute($params)){
             throw new Exception("Erreur lors de l'insertion de la requête");
@@ -100,23 +241,7 @@ class DAO {
         }
     }
 
-    /**
-     * Insère des données liées dans la table spécifiée.
-     *
-     * @param string $table Le nom de la table où les données seront insérées.
-     * @param array $datas Les données à insérer sous forme clé-valeur.
-     * @return bool Retourne true si l'insertion réussit, false sinon.
-     * @throws Exception Si une erreur se produit lors de la préparation ou exécution de la requête SQL.
-     */
-    public function insertRelatedData($table, $datas) {
-        // Construire les colonnes et les placeholders
-        $columns = implode(", ", array_keys($datas));
-        $placeholders = implode(", ", array_map(function ($key) {
-            return ":$key";
-        }, array_keys($datas)));
-        echo "insert into $table ($columns) values ($placeholders)";
-        return $this->executePrepare("insert into $table ($columns) values ($placeholders)", $datas);
-    }
+    
 
     /**
      * Retourne l'erreur en fonction du code d'erreur renvoyé par PDO
