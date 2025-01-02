@@ -9,14 +9,22 @@ try{
 
 
 $dao = DAO::getInstance();
-$dao->insertRelatedData("users", ["id" => 3, "username" => "thomas26215", "prenom" => "Thomas", "Nom" => "Venouil"]);
+$values = $dao->getColumnWithParameters("users", ["id" => 11]);
+$dao->insertRelatedData("users", ["username" => "thomas26215", "prenom" => "Thomas", "Nom" => "Venouil"]);
+$dao->deleteRelatedData("users", 140);
+try {
+    $rowsAffected = $dao->update("users", ["prenom" => "Sophie"], ["id" => 389]);
+    echo "$rowsAffected lignes mises à jour.";
+} catch (Exception $e) {
+    echo "Erreur : " . $e->getMessage();
+}
 
 //$stmt = $dao->prepare("INSERT INTO users (id, username, prenom) values (2, 'Thomas26215', 'Thomas')");
 //$stmt->execute();
 
 
 $view = new View();
-$view->assign("prenom", "Thomas");
+$view->assign("prenom", $values[0]["prenom"]);
 $view->assign("nombre", 10);
 $view->display("main");
 
