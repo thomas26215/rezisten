@@ -42,25 +42,7 @@ class DAO {
         }
     }
 
-    /**
-     * Prépare une requête
-     *
-     * @param string $query La requête SQL d'insertion à exécuter.
-     * @param array $params Les paramètres à associer à la requête SQL.
-     * @return bool Retourne true si l'insertion réussit, false sinon.
-     * @throws Exception Si une erreur se produit lors de la préparation de la requête SQL.
-     */
-    public function prepare($query){
-        $stmt = $this->db->prepare($query);
-        if($stmt == false){
-            throw new Exception("Erreur lors de la préparation de la requête");
-        }else if($stmt === false){
-            throw new Exception("Erreur lors de l'exécution de la requête");
-        }else{
-            return $stmt;
-        }
-    }
-
+    
     /**
      * Insère des données liées dans la table spécifiée.
      *
@@ -70,14 +52,20 @@ class DAO {
      * @throws Exception Si une erreur se produit lors de la préparation ou exécution de la requête SQL.
      */
     public function insertRelatedData($table, $datas) {
+        list($columns, $placeholders) = $this->buildQueryParts($datas);
+        return $this->executePrepare("INSERT INTO $table ($columns) VALUES ($placeholders)", $datas);
+    }
+
+    private function buildQueryParts($datas) {
         // Construire les colonnes et les placeholders
         $columns = implode(", ", array_keys($datas));
         $placeholders = implode(", ", array_map(function ($key) {
             return ":$key";
         }, array_keys($datas)));
-        echo "insert into $table ($columns) values ($placeholders)";
-        return $this->executePrepare("insert into $table ($columns) values ($placeholders)", $datas);
+        
+        return [$columns, $placeholders];
     }
+
 
     /**
      * Récupère des données d'une table en fonction des paramètres spécifiés.
@@ -88,39 +76,46 @@ class DAO {
      * @return array La liste des données récupérées.
      * @throws PDOException Si une erreur de base de données se produit.
      */
-    public function getColumnWithParameter($table, $parameters, $columns = ['*'])
-    {
+    public function getColumnWithParameters($table, $parameters, $columns = ['*']) {
         try {
             // Construire la partie SELECT de la requête
             $selectColumns = implode(', ', $columns);
-
+            
             // Construire la partie WHERE de la requête
-            $whereClauses = [];
-            $values = [];
-            foreach ($parameters as $column => $value) {
-                $whereClauses[] = "$column = :$column";
-                $values[":$column"] = $value;
-            }
-            $whereClause = implode(' AND ', $whereClauses);
-
+            list($whereClause, $values) = $this->buildWhereClause($parameters);
+            
             // Construire la requête complète
             $query = "SELECT $selectColumns FROM $table";
             if (!empty($whereClause)) {
                 $query .= " WHERE $whereClause";
             }
-
+            
             // Préparer et exécuter la requête
-            $stmt = $this->db->prepare($query);
+            $stmt = $this->prepare($query);
             $stmt->execute($values);
-
+            
             // Récupérer les résultats
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            // Log l'erreur et la relancer
             error_log("Erreur lors de la récupération des données : " . $e->getMessage());
             throw $e;
         }
     }
+
+
+    private function buildWhereClause($parameters) {
+        $whereClauses = [];
+        $values = [];
+        foreach ($parameters as $column => $value) {
+            $whereClauses[] = "$column = :$column";
+            $values[":$column"] = $value;
+        }
+        return [implode(' AND ', $whereClauses), $values];
+    }
+
+    
+
+
 
     /**
     * Met à jour des données dans une table en fonction des paramètres spécifiés.
@@ -141,7 +136,7 @@ class DAO {
                 $setClauses[] = "$column = :set_$column";
                 $values[":set_$column"] = $value;
             }
-            $setClause = implode(', ', $setClauses);
+            $setClause = implode(', ', array_keys($updateData));
 
             // Construire la partie WHERE de la requête
             $whereClauses = [];
@@ -156,13 +151,16 @@ class DAO {
 
             // Préparer et exécuter la requête
             $stmt = $this->db->prepare($query);
-            $stmt->execute($values);
+            $this->execute($stmt, $values);
 
             // Retourner le nombre de lignes affectées
             return $stmt->rowCount();
-        } catch (PDOException $e) {
+        } catch (Exception $e) {
             // Log l'erreur et la relancer
             error_log("Erreur lors de la mise à jour des données : " . $e->getMessage());
+            throw $e;
+        } catch (PDOException $e){
+            error_log("Erreur de PDO lors de la mise à jour des données :" . $e->getMessage());
             throw $e;
         }
     }
@@ -202,7 +200,24 @@ class DAO {
     }
 
 
-
+    /**
+     * Prépare une requête
+     *
+     * @param string $query La requête SQL d'insertion à exécuter.
+     * @param array $params Les paramètres à associer à la requête SQL.
+     * @return bool Retourne true si l'insertion réussit, false sinon.
+     * @throws Exception Si une erreur se produit lors de la préparation de la requête SQL.
+     */
+    public function prepare($query){
+        $stmt = $this->db->prepare($query);
+        if($stmt == false){
+            throw new Exception("Erreur lors de la préparation de la requête");
+        }else if($stmt === false){
+            throw new Exception("Erreur lors de l'exécution de la requête");
+        }else{
+            return $stmt;
+        }
+    }
 
     /**
       * Exécute une requête dans la base de données
