@@ -84,6 +84,17 @@ class DAO {
         }
     }
 
+    public function getLastInsertId(string $table){
+        try{
+            $query = "SELECT MAX(id) AS last_id FROM $table";
+            $this->setUtilitaire($query);
+            $this->daoUtilitaire->executePrepare();
+            return $this->daoUtilitaire->fetchAll();
+        }catch(PDOException $e){
+            throw new Exception("PDOException : " . $e->getMessage);
+        }
+    }
+
     /**
     * Met à jour des données dans une table en fonction des paramètres spécifiés.
     *
