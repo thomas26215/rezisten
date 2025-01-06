@@ -3,4 +3,14 @@
 footer{
     background-color: #0c2a42;
     display: flex;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+footer img {
+    background-color: #ebe6d6;
+    width: 10%;
+}
+
+footer article{
+    color: #ebe6d6;
 }
