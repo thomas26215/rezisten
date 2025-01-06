@@ -5,22 +5,25 @@ require_once(__DIR__ . "/dao.class.php");
 class User {
     private int $id;
     private string $username;
-    private string $prenom;
-    private string $nom;
-    private string $date_naissance;
-    private string $email;
+    private string $first_name;
+    private string $surname;
+    private string $birth_date;
+    private string $mail;
     private string $password;
+    private string $role;
+    
 
     private DAO $dao;
 
-    public function __construct(string $username, string $prenom, string $nom, string $date_naissance, string $email, string $password) {
+    public function __construct(string $username, string $first_name, string $surname, string $birth_date, string $mail, string $password, string $role) {
         $this->id = -1; // ID sera défini lors de l'insertion dans la base de données
         $this->username = $username;
-        $this->prenom = $prenom;
-        $this->nom = $nom;
-        $this->date_naissance = $date_naissance;
-        $this->email = $email;
+        $this->first_name = $first_name;
+        $this->surname = $surname;
+        $this->birth_date = $birth_date;
+        $this->mail = $mail;
         $this->password = password_hash($password, PASSWORD_DEFAULT); // Hash le mot de passe
+        $this->role = $role;
         $this->dao = DAO::getInstance(); // Initialiser DAO
     }
 
@@ -34,24 +37,28 @@ class User {
         return $this->username;
     }
 
-    public function getPrenom() {
-        return $this->prenom;
+    public function getFirstName() {
+        return $this->first_name;
     }
 
-    public function getNom() {
-        return $this->nom;
+    public function getSurname() {
+        return $this->surname;
     }
 
-    public function getDateNaissance() {
-        return $this->date_naissance; // Correction du nom de la variable
+    public function getBirthDate() {
+        return $this->birth_date; // Correction du nom de la variable
     }
 
-    public function getEmail() {
-        return $this->email;
+    public function getMail() {
+        return $this->mail;
     }
 
     public function getPassword() {
         return $this->password; // Ne pas exposer le mot de passe en clair
+    }
+
+    public function getRole(){
+        return $this->role;
     }
 
     /* --- Setters --- */
@@ -64,25 +71,29 @@ class User {
         $this->username = $username; // Correction pour assigner le username
     }
 
-    public function setPrenom(string $prenom) {
-        $this->prenom = $prenom; // Correction pour assigner le prénom
+    public function setFirstName(string $firstname) {
+        $this->first_name = $firstname; // Correction pour assigner le prénom
     }
 
-    public function setNom(string $nom) {
-        $this->nom = $nom; // Correction pour assigner le nom
+    public function setSurname(string $surname) {
+        $this->surname = $surname; // Correction pour assigner le nom
     }
 
-    public function setDateNaissance(string $date_naissance) {
-        $this->date_naissance = $date_naissance; // Correction pour assigner la date de naissance
+    public function setBirthDate(string $birth_date) {
+        $this->birth_date = $birth_date; // Correction pour assigner la date de naissance
     }
 
-    public function setEmail(string $email) {
-        $this->email = $email; // Correction pour assigner l'email
+    public function setMail(string $mail) {
+        $this->mail = $mail; // Correction pour assigner l'email
     }
 
     public function setPassword(string $password) {
         // Hash le mot de passe avant de l'assigner
         $this->password = password_hash($password, PASSWORD_DEFAULT);
+    }
+
+    public function setRole(string $role){
+        $this->role = $role;
     }
 
     /* --- Méthodes CRUD --- */
@@ -91,12 +102,13 @@ class User {
     public function create() {
         // Insérer l'utilisateur dans la base de données et récupérer l'ID généré
         if ($this->dao->insertRelatedData("users", [
-            "username" => $this->username,
-            "prenom" => $this->prenom,
-            "nom" => $this->nom,
-            "date_naissance" => $this->date_naissance,
-            "email" => $this->email,
-            "password" => $this->password,
+            "pseudo" => $this->username,
+            "prenom" => $this->first_name,
+            "nom" => $this->surname,
+            "datenaiss" => $this->birth_date,
+            "mail" => $this->mail,
+            "mot_de_passe" => $this->password,
+            "role" => $this->role,
         ])) {
             // Récupérer l'ID généré et l'assigner à l'objet User
             $this->setId($this->dao->getLastInsertId("users")[0]["last_id"]);
@@ -112,12 +124,13 @@ class User {
         // Récupérer les données de l'utilisateur depuis la base de données
         if ($userData = $dao->getColumnWithParameters("users", ["id" => (int)$id])) {
             return new User(
-                $userData[0]["username"],
+                $userData[0]["pseudo"],
                 $userData[0]["prenom"],
                 $userData[0]["nom"],
-                $userData[0]["date_naissance"],
-                $userData[0]["email"],
-                "" // Ne pas exposer le mot de passe ici
+                $userData[0]["datenaiss"],
+                $userData[0]["mail"],
+                "",
+                $userData[0]["role"]
             );
         }
         
@@ -132,8 +145,9 @@ class User {
                 "prenom" => $this->prenom,
                 "nom" => $this->nom,
                 "date_naissance" => $this->date_naissance,
-                "email" => $this->email,
+                "mail" => $this->email,
                 "password" => password_hash($this->password, PASSWORD_DEFAULT), // Hash le nouveau mot de passe si modifié
+                "role" => $this->role,
             ], ["id" => (int)$this->id]);
         }
         
