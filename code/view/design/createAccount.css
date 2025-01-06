@@ -2,3 +2,23 @@ body {
     background-image: url(./image/background_story.png) ;
     background-size: cover;
 }
+
+.body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+span {
+    color: #952d20;
+}
+
+.form {
+    background-color: #ecdfb9;
+}
+
+form  {
+    display: flex; 
+    flex-wrap: wrap;
+}
