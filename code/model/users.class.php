@@ -142,12 +142,12 @@ class User {
     public function update() {
         if ($this->id !== -1) { // Vérifier que l'utilisateur a un ID valide
             return $this->dao->update("utilisateurs", [
-                "username" => $this->username,
+                "pseudo" => $this->username,
                 "prenom" => $this->first_name,
                 "nom" => $this->surname,
                 "date_naissance" => $this->birth_date,
                 "mail" => $this->mail,
-                "password" => password_hash($this->password, PASSWORD_DEFAULT), // Hash le nouveau mot de passe si modifié
+                "mot_de_passe" => password_hash($this->password, PASSWORD_DEFAULT), // Hash le nouveau mot de passe si modifié
                 "role" => $this->role,
             ], ["id" => (int)$this->id]);
         }
@@ -158,7 +158,7 @@ class User {
     // Supprimer un utilisateur par ID
     public static function delete($id) {
         if ($id > 0) { // Vérifier que l'ID est valide
-            return DAO::getInstance()->deleteRelatedData("utilisateurs", 442);
+            return DAO::getInstance()->deleteRelatedData("utilisateurs", $id);
         }
         
         return false; // Échec si l'ID n'est pas valide
