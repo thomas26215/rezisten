@@ -15,7 +15,7 @@ class User {
 
     private DAO $dao;
 
-    public function __construct(string $username, string $first_name, string $surname, string $birth_date, string $mail, string $password, string $role) {
+    public function __construct(string $username, string $first_name, string $surname, string $birth_date, string $mail, string $password, string $role, int $id = -1) {
         $this->id = -1; // ID sera défini lors de l'insertion dans la base de données
         $this->username = $username;
         $this->first_name = $first_name;
@@ -130,7 +130,8 @@ class User {
                 $userData[0]["datenaiss"],
                 $userData[0]["mail"],
                 "",
-                $userData[0]["role"]
+                $userData[0]["role"],
+                $userData[0]["id"]
             );
         }
         
