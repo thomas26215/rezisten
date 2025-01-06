@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="design/headerHistoire.css">
 </head>
 <body>
-     <div class="home">
+     <a href="./main.view.php" class="home">
+        <img src="./design/image/home.png" alt="home">
         <p>Accueil</p>
-     </div>
-     <div class="user">
+      </a>
+     <a href="./main.view.php" class="user">
+        <img src="./design/image/user.png" alt="user">
         <p>Jano</p>
-     </div>   
+      </a>   
 </body>
 </html>

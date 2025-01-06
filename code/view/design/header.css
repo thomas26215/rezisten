@@ -1,0 +1,7 @@
+body {
+    display: flex;
+    justify-content: left;
+    padding-top: 10px;
+    padding-left: 15px;
+    size: 15px;
+}
