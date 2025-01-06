@@ -9,5 +9,38 @@ h1 {
 
 article  {
     text-align: center;
-    border-color: black;
+    display: block;
+    border: 2px solid black;
+    background-image: url(./image/image_test.png);
+    background-size:1920px ;
+    margin-right: 12em;
+    margin-left: 12em;
+    
+}
+article li {
+    display: flex;
+}
+
+article li ul{
+    display: inline-block;
+    width: 25%; 
+    vertical-align: top;
+    margin: auto;
+    margin-top: 5em;
+
+}
+
+article section {
+    border: 2px solid black;
+    background-color: var(--beige);
+}
+
+article section p {
+    text-align: left;
+}
+
+img{
+    max-width: 8em;
+    height: auto;
+
 }
