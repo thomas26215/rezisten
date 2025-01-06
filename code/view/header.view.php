@@ -6,8 +6,10 @@
     <title>Document</title>
 </head>
 <body>
-    <a href="">
-     <img src="./design/image/return.png" alt="bouton arrièrre">
-    </a>
+    <header>
+        <a href="">
+            <img src="./design/image/return.png" alt="bouton arrièrre">
+        </a>
+    </header>
 </body>
 </html>
