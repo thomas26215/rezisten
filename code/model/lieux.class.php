@@ -8,6 +8,9 @@ class Lieu {
     private string $commune;
     private string $coordonnees;
     private int $id;
+    private DAO $dao;
+    
+    
 
     public function __construct(string $name, string $place_type, string $description, string $commune, string $coordonnees, int $id = -1) {
         $this->name = $name;
@@ -16,6 +19,7 @@ class Lieu {
         $this->commune = $commune;
         $this->coordonnees = $coordonnees;
         $this->id = $id;
+        $this->dao = DAO::getInstance();
     }
 
     /* --- Getters --- */
@@ -78,22 +82,22 @@ class Lieu {
 
     public function create() {
         if($this->dao->insertRelatedData("lieux", [
-            "id" => $this->id,
-            "prenom" => $this->name,
+            "nom" => $this->name,
             "type_lieu" => $this->place_type,
             "description" => $this->description,
             "commune" => $this->commune,
             "coordonnee" => $this->coordonnees,
         ])) {
-            $this->setId($this->dao->getLastInsertId("lieux")[]["last_id"]);
+            $this->setId($this->dao->getLastInsertId("lieux")[0]["last_id"]);
             return true;
         }return false;
     }
 
     public static function read($id){
+        $dao = DAO::getInstance();
         if($lieuData = $dao->getColumnWithParameters("lieux", ["id" => (int)$id])){
             return new Lieu(
-                $lieuData[0]["prenom"],
+                $lieuData[0]["nom"],
                 $lieuData[0]["type_lieu"],
                 $lieuData[0]["description"],
                 $lieuData[0]["commune"],
