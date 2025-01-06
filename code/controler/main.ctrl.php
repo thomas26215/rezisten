@@ -1,7 +1,7 @@
 <?php
 
 include_once('framework/view.fw.php');
-try{
+/*try{
     include_once('model/dao.class.php');
 }catch(Exception $e){
     var_dump($e->getMessage());
@@ -17,14 +17,14 @@ try {
     echo "$rowsAffected lignes mises à jour.";
 } catch (Exception $e) {
     echo "Erreur : " . $e->getMessage();
-}
+}*/
 
 //$stmt = $dao->prepare("INSERT INTO users (id, username, prenom) values (2, 'Thomas26215', 'Thomas')");
 //$stmt->execute();
 
 
 $view = new View();
-$view->assign("prenom", $values[0]["prenom"]);
+$view->assign("prenom", "prenom");
 $view->assign("nombre", 10);
 $view->display("main");
 
