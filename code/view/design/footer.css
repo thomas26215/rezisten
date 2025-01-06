@@ -1,11 +1,18 @@
+:root{
+    --bleu: #0c2a42;
+}
+body{
+    background-image:url("view/design/image/logoCoupe.png");
+}
+
+
 
 footer{
     display : flex;
-    
 }
 
 footer article{
-    background-color: #0c2a42;
+    background-color: var(--bleu);
     display: flex;
     font-family: 'Courier New', Courier, monospace;
     padding-top : 10px;
@@ -25,6 +32,7 @@ footer img {
 
 footer section {
     color: #ebe6d6;
+    font-size: larger;
 }
 
 footer section a{
