@@ -1,0 +1,12 @@
+body{
+    display: flex;
+    flex-direction: column;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+}
+form{
+    
+}
+button{
+    align-self: center;
+}

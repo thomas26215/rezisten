@@ -1,6 +1,3 @@
-:root{
-    --bleu: #0c2a42;
-}
 body{
     margin: 0%;
 }
@@ -26,11 +23,11 @@ footer img {
 
 }
 
-footer section {
+footer section , footer section a{
     color: #ebe6d6;
-    font-size: larger;
+    font-size: large;
 }
 
-footer section a{
-    color: #ebe6d6;
+footer section ul {
+    text-align: left;
 }
