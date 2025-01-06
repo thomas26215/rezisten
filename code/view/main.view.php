@@ -13,14 +13,14 @@
     </body>
     <footer>
         <img src="view/design/image/logo.png" alt="logo Rézisten">
-        <article>Crédit : 
+        <section>Crédit : 
             <ul> 
                 <li>Freepik</li>
                 <li>Personnages</li>
             </ul>
-        </article>
-        <article><a href="https://www.google.com/">Condition générales d'utilisation</a></article>
-        <article><a href="https://www.google.com/">Partenaire</a></article>
-        <article><a href="https://www.google.com/">Contactez-nous</a></article>
+        </section>
+        <section><a href="https://www.google.com/">Condition générales d'utilisation</a></section>
+        <section><a href="https://www.google.com/">Partenaire</a></section>
+        <section><a href="https://www.google.com/">Contactez-nous</a></section>
     </footer>
 </html>
