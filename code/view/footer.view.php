@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
     <link rel="stylesheet" type="text/css" href="./design/footer.css">
+    <link rel="stylesheet" type="text/css" href="./design/global.css">
 </head>
 <body>
-    <footer>
+<footer>
         <img src="./design/image/logoCoupe.png" alt="logo Rézisten">
         <article>
             <section>Crédit : 

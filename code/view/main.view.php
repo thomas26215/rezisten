@@ -12,5 +12,5 @@
         <p>Nombre : <?= $nombre ?></p>
     </body>
 
-    <?php include_once("footer.view.php"); ?>
+    <?php include_once("contact.view.php"); ?>
 </html>
