@@ -8,6 +8,8 @@
     --beige-ecriture: #ebe6d6;
     --police: 'Courier New', Courier, monospace;
     --dyslexique: 'Verdana', sans-serif;
+    --background-histoire: url(./image/background_story.png);
+    --background-drapeau: rien;
 }
 
 body {
@@ -24,10 +26,15 @@ button {
     /* Centrer horizontalement */
     background-color: var(--noir);
     /* Couleur de fond */
-    padding: 5% 10%;
+    padding: 1% 5%;
+    min-width: 200px;
+    max-width: 350px;
+
     border: none;
     /* Retirer la bordure du bouton */
     color: var(--beige-ecriture);
+    font-weight: bold;
+
     clip-path: polygon(28% 0%, 72% 0%, 100% 50%, 72% 100%, 28% 100%, 0% 50%);
     /* Forme du bouton */
     font-size: 20px;
@@ -73,4 +80,18 @@ button::before {
 a {
     text-decoration: none;
     color: white;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
 }

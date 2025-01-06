@@ -1,5 +1,6 @@
 body {
-    background-image: url(./image/background_story.png) ;
+    background-image: var(--background-histoire);
+    ;
     background-size: cover;
     font-family: 'Courier New', Courier, monospace;
 
@@ -9,39 +10,42 @@ h1 {
     text-align: center;
 }
 
-article  {
+article {
     text-align: center;
     display: block;
-    border: 2px solid black;
+    border: 2px solid var(--noir);
     margin-right: 12em;
     margin-left: 12em;
-    
-}
-article.image{
-    background-image: url(./image/image_test.png);
-    background-size:1920px ;
 
 }
+
+article.image {
+    background-image: url(./image/image_test.png);
+    background-size: 1920px;
+
+}
+
 article li {
     display: flex;
 }
 
-article li ul{
+article li ul {
     display: inline-block;
-    width: 40%; 
+    width: 40%;
     vertical-align: top;
     margin: auto;
     margin-top: 5em;
-    color: black; /* Couleur du texte */
-    text-shadow: 
-       -1px -1px 0 white,  
+    color: var(--noir);
+    /* Couleur du texte */
+    text-shadow:
+        -1px -1px 0 white,
         1px -1px 0 white,
-       -1px  1px 0 white,
-        1px  1px 0 white;
+        -1px 1px 0 white,
+        1px 1px 0 white;
 }
 
 article section {
-    border: 2px solid black;
+    border: 2px solid var(--noir);
     background-color: var(--beige);
 }
 
@@ -49,39 +53,43 @@ article section p {
     text-align: left;
 }
 
-img.logo{
+img.logo {
     max-width: 8em;
     height: auto;
 
 }
 
 
-
-
-
 h2.speaker {
     position: relative;
-    right: 0.15em;
-    bottom: 1.65em;
-    border: 2px solid black;
+    right: 3.5em;
+    bottom: 1em;
     width: 8em;
-    background-color: blue;
 
+    margin: 0;
+    /* Centrer horizontalement */
+    background-color: var(--noir);
+    /* Couleur de fond */
+    padding: 1% 5%;
+
+    border: none;
+    color: var(--beige-ecriture);
+    clip-path: polygon(28% 0%, 72% 0%, 80% 50%, 72% 100%, 28% 100%, 28% 50%);
 }
 
-
-
-button{
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-    text-decoration: none;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    
+h2.speaker::before {
+    content: '';
+    /* Créer un élément avant le bouton */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--bleu);
+    /* Couleur de fond de la bordure */
+    clip-path: polygon(30% 7%, 70% 7%, 78% 50%, 70% 93%, 30% 93%, 30% 50%);
+    /* La même forme que la div */
+    z-index: -1;
+    /* Placer la bordure derrière le bouton */
 }
 
