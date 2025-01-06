@@ -145,7 +145,7 @@ class User {
                 "pseudo" => $this->username,
                 "prenom" => $this->first_name,
                 "nom" => $this->surname,
-                "date_naissance" => $this->birth_date,
+                "datenaiss" => $this->birth_date,
                 "mail" => $this->mail,
                 "mot_de_passe" => password_hash($this->password, PASSWORD_DEFAULT), // Hash le nouveau mot de passe si modifié
                 "role" => $this->role,

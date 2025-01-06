@@ -39,6 +39,10 @@ class DAO {
         $this->daoUtilitaire->setParams($params);
     }
 
+    public function getUtilitaire(){
+        return $this->daoUtilitaire;
+    }
+
     /**
      * Insère des données liées dans la table spécifiée.
      *
@@ -91,7 +95,7 @@ class DAO {
             $this->daoUtilitaire->executePrepare();
             return $this->daoUtilitaire->fetchAll();
         }catch(PDOException $e){
-            throw new Exception("PDOException : " . $e->getMessage);
+            throw new Exception("PDOException : " . $e->getMessage());
         }
     }
 

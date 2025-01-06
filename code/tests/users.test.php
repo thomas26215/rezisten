@@ -1,8 +1,9 @@
 <?php
 // Acces aux classe
-require_once(__DIR__.'/../model/users.php');
+require_once(__DIR__.'/../model/users.class.php');
+require_once(__DIR__.'/../model/dao.class.php');
 
-// Definition d'un user pour les tests
+
 
 
 
@@ -58,6 +59,21 @@ try {
     }
 
     print(" getter ok, bravo thomas \n");
+
+
+
+    print("TEST FONCTION CREATE");
+
+    $user->create();
+    $expected = new User("prapra","brayan","bils","24/08/2005","bilsbrayan@gmail.com","2706","a");
+    $dao = DAO::getInstance();
+    $query = $dao->getUtilitaire()->prepare("Select * FROM utilisateurs WHERE username = :username");
+    $query->execute([":username" => "prapra"]);
+    $table = $querry->fetchAll();
+    $row = $table[0];
+    
+
+
 
 }
 catch
