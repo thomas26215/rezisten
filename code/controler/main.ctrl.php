@@ -30,6 +30,6 @@ $user2->delete(442);
 $view = new View();
 $view->assign("prenom", "prenom");
 $view->assign("nombre", 10);
-$view->display("histoire");
+$view->display("contact");
 
 ?>
