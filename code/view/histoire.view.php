@@ -5,7 +5,7 @@
         <title>Rézisten</title>
         <meta name="author" content="Jean-Pierre Chevallet" />
         <link rel="stylesheet" type="text/css" href="./design/histoire.css">
-
+        <link rel="stylesheet" type="text/css" href="./design/global.css">
     </head>
 
     <body>
@@ -17,13 +17,14 @@
 <article class="image">
                 <li>
                     <ul> <img src="./design/image/milicien.png" alt="milicien"> </ul> <!-- Affichage des personnages -->
-                    <ul><p>  $Character2  </p></ul>
+                    <ul> <img src="./design/image/resistant.png" alt="resistant"> </ul>
                 </li>
             </article>
 <article>
 
                 <section> <!-- Pour la zone de texte -->
-                    <h2 class="speaker">  $Name1  </h2>
+                    
+                <div><h2 class="speaker">  $Name1  </h2></div>
 
                     <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
                         Nam mattis sed est eu efficitur. Fusce vitae congue arcu, et rhoncus magna. 
@@ -32,18 +33,15 @@
                          Aliquam interdum tempor magna, eget pharetra nisi cursus id. Nam ut bibendum libero.
                           Maecenas fermentum nunc vitae mauris rhoncus volutpat. Praesent eget sagittis nunc.   </p>
 
-                    <button> <a href="#"> < Précédent </a> </button>   <!-- changer les href car je sais pas quoi mettre comme lien -->
-                    <button> <a href="#"> Suivant > </a> </button>
+                    <button class="before"> <a href="#"> < Précédent </a> </button>   <!-- changer les href car je sais pas quoi mettre comme lien -->
+                    <button class="next"> <a href="#"> Suivant > </a> </button>
 
 
 
                 </section>
 </article>
 
-<img src="./design/image/logo.png" alt="Logo" class="logo">
-
-
-
+        <img src="./design/image/logo.png" alt="Logo" class="logo">
 
 
     </body>
