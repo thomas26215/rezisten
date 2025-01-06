@@ -22,7 +22,7 @@
 
                     <p> <?= $text ?> </p>
 
-                    <button> <a href="#"> < Précédent </a> </button>
+                    <button> <a href="#"> < Précédent </a> </button>   <!-- changer les href car je sais pas quoi mettre comme lien -->
                     <button> <a href="#"> Suivant > </a> </button>
 
 
@@ -30,7 +30,7 @@
                 </section>
 
             </article>
-
+<img src="/users/info/etu-2a/bilsb/SAE/rendus/code/view/design/image/logo.png" alt="Logo">
 
 
 
