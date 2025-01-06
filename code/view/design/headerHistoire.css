@@ -1,0 +1,14 @@
+body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#home {
+    size: 9px;
+}
+
+#user {
+    size: 16px;
+    font-weight: bold;
+}
