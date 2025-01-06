@@ -1,21 +1,38 @@
+:root{
+    --bleu: #0c2a42;
+}
+body{
+    background-image:url("view/design/image/logoCoupe.png");
+}
+
 
 
 footer{
-    background-color: #0c2a42;
+    display : flex;
+}
+
+footer article{
+    background-color: var(--bleu);
     display: flex;
     font-family: 'Courier New', Courier, monospace;
     padding-top : 10px;
+    justify-content: space-around;
+    width: 100%;
+
 }
 
 footer img {
     background-color: #ebe6d6;
-    width: 20%;
-    padding-top : 10px;
-    margin-top: 10px;
+    width: 15%;
+    height: auto;
+    padding: 1%;
+    padding-bottom: 0%;
+
 }
 
 footer section {
     color: #ebe6d6;
+    font-size: larger;
 }
 
 footer section a{
