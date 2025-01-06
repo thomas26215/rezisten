@@ -118,6 +118,8 @@ class User {
         return false; // Échec de l'insertion
     }
 
+//FIXME: ajouter le type de retour
+
     // Lire un utilisateur par ID
     public static function read($id) {
         $dao = DAO::getInstance();
