@@ -101,7 +101,7 @@ class User {
     // Créer un nouvel utilisateur dans la base de données
     public function create() {
         // Insérer l'utilisateur dans la base de données et récupérer l'ID généré
-        if ($this->dao->insertRelatedData("users", [
+        if ($this->dao->insertRelatedData("utilisateurs", [
             "pseudo" => $this->username,
             "prenom" => $this->first_name,
             "nom" => $this->surname,
@@ -111,7 +111,7 @@ class User {
             "role" => $this->role,
         ])) {
             // Récupérer l'ID généré et l'assigner à l'objet User
-            $this->setId($this->dao->getLastInsertId("users")[0]["last_id"]);
+            $this->setId($this->dao->getLastInsertId("utilisateurs")[0]["last_id"]);
             return true; // Insertion réussie
         }
         
@@ -122,7 +122,7 @@ class User {
     public static function read($id) {
         $dao = DAO::getInstance();
         // Récupérer les données de l'utilisateur depuis la base de données
-        if ($userData = $dao->getColumnWithParameters("users", ["id" => (int)$id])) {
+        if ($userData = $dao->getColumnWithParameters("utilisateurs", ["id" => (int)$id])) {
             return new User(
                 $userData[0]["pseudo"],
                 $userData[0]["prenom"],
@@ -140,7 +140,7 @@ class User {
     // Mettre à jour un utilisateur existant
     public function update() {
         if ($this->id !== -1) { // Vérifier que l'utilisateur a un ID valide
-            return $this->dao->update("users", [
+            return $this->dao->update("utilisateurs", [
                 "username" => $this->username,
                 "prenom" => $this->prenom,
                 "nom" => $this->nom,
@@ -157,7 +157,7 @@ class User {
     // Supprimer un utilisateur par ID
     public static function delete($id) {
         if ($id > 0) { // Vérifier que l'ID est valide
-            return DAO::getInstance()->deleteRelatedData("users", 442);
+            return DAO::getInstance()->deleteRelatedData("utilisateurs", 442);
         }
         
         return false; // Échec si l'ID n'est pas valide
