@@ -26,6 +26,6 @@ try {
 $view = new View();
 $view->assign("prenom", "prenom");
 $view->assign("nombre", 10);
-$view->display("main");
+$view->display("histoire");
 
 ?>
