@@ -1,6 +1,8 @@
 body {
     background-image: url(./image/background_story.png) ;
-    background-size: cover
+    background-size: cover;
+    font-family: 'Courier New', Courier, monospace;
+
 }
 
 h1 {
@@ -11,11 +13,14 @@ article  {
     text-align: center;
     display: block;
     border: 2px solid black;
-    background-image: url(./image/image_test.png);
-    background-size:1920px ;
     margin-right: 12em;
     margin-left: 12em;
     
+}
+article.image{
+    background-image: url(./image/image_test.png);
+    background-size:1920px ;
+
 }
 article li {
     display: flex;
@@ -23,11 +28,16 @@ article li {
 
 article li ul{
     display: inline-block;
-    width: 25%; 
+    width: 40%; 
     vertical-align: top;
     margin: auto;
     margin-top: 5em;
-
+    color: black; /* Couleur du texte */
+    text-shadow: 
+       -1px -1px 0 white,  
+        1px -1px 0 white,
+       -1px  1px 0 white,
+        1px  1px 0 white;
 }
 
 article section {
@@ -39,7 +49,7 @@ article section p {
     text-align: left;
 }
 
-img{
+img.logo{
     max-width: 8em;
     height: auto;
 
@@ -47,8 +57,26 @@ img{
 h2.speaker {
     position: relative;
     right: 0.15em;
-    bottom: 1.5em;
+    bottom: 1.65em;
     border: 2px solid black;
     width: 10em;
-    background-color: var(--bleue);
+    background-color: blue;
+}
+
+button{
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    background-color: lightgray;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    
+
+
 }
