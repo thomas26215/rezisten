@@ -13,7 +13,7 @@
         <p>Accueil</p>
       </a>
      <a href="./main.view.php" class="user">
-        <img src="./design/image/user.png" alt="user">
+        <img src="./design/image/photoProfil.jpg" alt="user">
         <p>Jano</p>
       </a> 
    </header>
