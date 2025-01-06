@@ -1,17 +1,26 @@
 
-
 footer{
+    display : flex;
+    
+}
+
+footer article{
     background-color: #0c2a42;
     display: flex;
     font-family: 'Courier New', Courier, monospace;
     padding-top : 10px;
+    justify-content: space-around;
+    width: 100%;
+
 }
 
 footer img {
     background-color: #ebe6d6;
-    width: 20%;
-    padding-top : 10px;
-    margin-top: 10px;
+    width: 15%;
+    height: auto;
+    padding: 1%;
+    padding-bottom: 0%;
+
 }
 
 footer section {

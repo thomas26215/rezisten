@@ -12,15 +12,17 @@
         <p>Nombre : <?= $nombre ?></p>
     </body>
     <footer>
-        <img src="view/design/image/logo.png" alt="logo Rézisten">
-        <section>Crédit : 
+        <img src="view/design/image/logoCoupe.png" alt="logo Rézisten">
+        <article>
+            <section>Crédit : 
             <ul> 
                 <li>Freepik</li>
                 <li>Personnages</li>
             </ul>
-        </section>
-        <section><a href="https://www.google.com/">Condition générales d'utilisation</a></section>
-        <section><a href="https://www.google.com/">Partenaire</a></section>
-        <section><a href="https://www.google.com/">Contactez-nous</a></section>
+            </section>
+            <section><a href="https://www.google.com/">Condition générales d'utilisation</a></section>
+            <section><a href="https://www.google.com/">Partenaire</a></section>
+            <section><a href="https://www.google.com/">Contactez-nous</a></section>
+        </article>
     </footer>
 </html>
