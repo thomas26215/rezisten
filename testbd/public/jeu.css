@@ -1,0 +1,50 @@
+#persos {
+    display: flex;
+    justify-content: space-between;
+}
+
+h1 {
+    text-align: center;
+}
+
+body {
+
+    background-image: url(public/img/bg.webp);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#dial {
+    border: 1px solid;
+}
+
+main {
+    background-image: url(public/img/bgprologue.webp);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+
+h2 {
+    border: 1px solid;
+    text-align: center;
+    border-radius: 45%;
+    width: 10%;
+    background-color: #33553D;
+    color: white;
+}
+
+#dial {
+    border: 1px solid;
+    background-color: #ECDFB9;
+    margin-left: 1em;
+    margin-right: 1em;
+    margin-bottom: 1em;
+}
+
+#dial p {
+    text-align: center;
+    font-size: 2em;
+}
