@@ -21,8 +21,5 @@ Deny from all
 # Mise en place du renommage des différentes pages sans extension html puis php
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^([^.]+)$ $1.html [NC,L]
-
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^([^.]+)$ $1.php [NC,L]
+
