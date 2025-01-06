@@ -5,9 +5,11 @@
         <title>Rézisten</title>
         <meta name="author" content="Jean-Pierre Chevallet" />
         <link rel="stylesheet" type="text/css" href="./design/histoire.css">
+
     </head>
 
     <body>
+
 
             <h1>Chapitre 1 : Histoire 2 : Sabotage</h1>  <!--Remplacer après, de façon a récupérer les informations en fonction de l'histoire  -->
 
@@ -19,7 +21,7 @@
                 </li>
 
                 <section> <!-- Pour la zone de texte -->
-                    <h2>  $Name1  </h2>
+                    <h2 class="speaker">  $Name1  </h2>
 
                     <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
                         Nam mattis sed est eu efficitur. Fusce vitae congue arcu, et rhoncus magna. 
