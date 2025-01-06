@@ -7,7 +7,7 @@ try{
     var_dump($e->getMessage());
 }
 
-include_once('model/users.php');
+include_once('model/users.class.php');
 
 
 $dao = DAO::getInstance();
