@@ -1,5 +1,5 @@
-body {
-    display: flex;
+header {
+    display: block;
     justify-content: left;
     padding-top: 10px;
     padding-left: 15px;

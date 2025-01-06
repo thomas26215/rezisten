@@ -5,22 +5,32 @@
         <title>Rézisten</title>
         <meta name="author" content="Jean-Pierre Chevallet" />
         <link rel="stylesheet" type="text/css" href="./design/histoire.css">
+
     </head>
 
     <body>
 
+
             <h1>Chapitre 1 : Histoire 2 : Sabotage</h1>  <!--Remplacer après, de façon a récupérer les informations en fonction de l'histoire  -->
 
-            <article>
+
+<article class="image">
                 <li>
-                    <ul><p>  $Charactere1  $Name1 </p> </ul> <!-- Affichage des personnages avec leurs noms -->
-                    <ul><p>  $Charactere2  $Name2 </p></ul>
+                    <ul> <img src="./design/image/milicien.png" alt="milicien"> </ul> <!-- Affichage des personnages -->
+                    <ul><p>  $Character2  </p></ul>
                 </li>
+            </article>
+<article>
 
                 <section> <!-- Pour la zone de texte -->
-                    <h2>  $Name1  </h2>
+                    <h2 class="speaker">  $Name1  </h2>
 
-                    <p> $text  </p>
+                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                        Nam mattis sed est eu efficitur. Fusce vitae congue arcu, et rhoncus magna. 
+                        Suspendisse eget eleifend ante. Suspendisse facilisis, orci egestas molestie interdum,
+                         odio massa ultrices ligula, eget accumsan justo erat id purus. 
+                         Aliquam interdum tempor magna, eget pharetra nisi cursus id. Nam ut bibendum libero.
+                          Maecenas fermentum nunc vitae mauris rhoncus volutpat. Praesent eget sagittis nunc.   </p>
 
                     <button> <a href="#"> < Précédent </a> </button>   <!-- changer les href car je sais pas quoi mettre comme lien -->
                     <button> <a href="#"> Suivant > </a> </button>
@@ -28,9 +38,9 @@
 
 
                 </section>
+</article>
 
-            </article>
-<img src="/users/info/etu-2a/bilsb/SAE/rendus/code/view/design/image/logo.png" alt="Logo">
+<img src="./design/image/logo.png" alt="Logo" class="logo">
 
 
 
