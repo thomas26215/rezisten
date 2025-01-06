@@ -11,7 +11,6 @@ include_once('model/users.php');
 
 
 $dao = DAO::getInstance();
-$values = $dao->getColumnWithParameters("users", ["id" => 424]);
 
 
 $user = User::read(1);
