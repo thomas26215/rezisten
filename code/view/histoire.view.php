@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <title>Rézisten</title>
         <meta name="author" content="Jean-Pierre Chevallet" />
-        <link rel="stylesheet" type="text/css" href="../design/histoire.css">
+        <link rel="stylesheet" type="text/css" href="./design/histoire.css">
     </head>
 
     <body>
