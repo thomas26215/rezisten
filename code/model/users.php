@@ -143,10 +143,10 @@ class User {
         if ($this->id !== -1) { // Vérifier que l'utilisateur a un ID valide
             return $this->dao->update("utilisateurs", [
                 "username" => $this->username,
-                "prenom" => $this->prenom,
-                "nom" => $this->nom,
-                "date_naissance" => $this->date_naissance,
-                "mail" => $this->email,
+                "prenom" => $this->first_name,
+                "nom" => $this->surname,
+                "date_naissance" => $this->birth_date,
+                "mail" => $this->mail,
                 "password" => password_hash($this->password, PASSWORD_DEFAULT), // Hash le nouveau mot de passe si modifié
                 "role" => $this->role,
             ], ["id" => (int)$this->id]);
