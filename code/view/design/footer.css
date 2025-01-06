@@ -3,4 +3,21 @@
 footer{
     background-color: #0c2a42;
     display: flex;
+    font-family: 'Courier New', Courier, monospace;
+    padding-top : 10px;
+}
+
+footer img {
+    background-color: #ebe6d6;
+    width: 20%;
+    padding-top : 10px;
+    margin-top: 10px;
+}
+
+footer section {
+    color: #ebe6d6;
+}
+
+footer section a{
+    color: #ebe6d6;
 }
