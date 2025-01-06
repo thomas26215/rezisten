@@ -1,23 +1,28 @@
 <?php
 
 include_once('framework/view.fw.php');
-/*try{
+try{
     include_once('model/dao.class.php');
 }catch(Exception $e){
     var_dump($e->getMessage());
 }
 
+include_once('model/users.php');
+
 
 $dao = DAO::getInstance();
-$values = $dao->getColumnWithParameters("users", ["id" => 11]);
-$dao->insertRelatedData("users", ["username" => "thomas26215", "prenom" => "Thomas", "Nom" => "Venouil"]);
-$dao->deleteRelatedData("users", 140);
-try {
-    $rowsAffected = $dao->update("users", ["prenom" => "Sophie"], ["id" => 389]);
-    echo "$rowsAffected lignes mises à jour.";
-} catch (Exception $e) {
-    echo "Erreur : " . $e->getMessage();
-}*/
+$values = $dao->getColumnWithParameters("users", ["id" => 424]);
+
+
+$user = User::read(1);
+
+$user2 = new User("soso", "Sophie", "Arnaud", "25/03/2005", "soso@gmail 
+.com", "testMDP", 'c');
+/*var_dump($user2->create());*/
+$user2->setFirstName("prenomTest");
+$user2->update();
+$user2->delete(442);
+
 
 //$stmt = $dao->prepare("INSERT INTO users (id, username, prenom) values (2, 'Thomas26215', 'Thomas')");
 //$stmt->execute();
