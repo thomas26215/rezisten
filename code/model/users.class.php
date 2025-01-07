@@ -160,11 +160,11 @@ class User {
 
     // Supprimer un utilisateur par ID
     public static function delete($id) {
-        if ($id > 0) { // Vérifier que l'ID est valide
-            return DAO::getInstance()->deleteRelatedData("utilisateurs", $id);
+        if ($id > 0) {
+            return DAO::getInstance()->deleteDatasById("utilisateurs", $id);
         }
         
-        return false; // Échec si l'ID n'est pas valide
+        return false;
     }
 }
 

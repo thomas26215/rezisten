@@ -75,7 +75,7 @@ try {
         }
 
 
-        $updatedPersonnage = Character::read($lieu->getId());
+        $updatedPersonnage = Character::read($personnage->getId());
         if ($updatedPersonnage->getFirstName() !== "PaulModifié") {
             throw new Exception("La mise à jour du personnage n'a pas été effectuée correctement");
         }
@@ -100,7 +100,7 @@ try {
     }
     print("OK\n");
 
-
+ 
 
 
 
