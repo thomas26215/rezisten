@@ -20,7 +20,7 @@
     font-weight: bold;
 
     /*clip-path: polygon(28% 0%, 72% 0%, 100% 50%, 72% 100%, 28% 100%, 0% 50%);*/
-    clip-path:  polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
+    clip-path:  polygon(8% 0%, 92% 0%, 100% 50%, 92% 100%, 8% 100%, 0% 50%);
     /* Forme du bouton */
     font-size: 20px;
     margin-top: 1rem;
@@ -36,7 +36,7 @@
     bottom: 0;
     background-color: var(--gris);
     /* Couleur de fond de la bordure */
-    clip-path: polygon(11% 8%, 89% 8%, 99% 50%, 89% 92%, 11% 92%, 1% 50%);
+    clip-path: polygon(10% 7%, 90% 7%, 97% 50%, 90% 93%, 10% 93%, 3% 50%);
     /* La même forme que la div */
     z-index: -1;
     /* Placer la bordure derrière le bouton */
