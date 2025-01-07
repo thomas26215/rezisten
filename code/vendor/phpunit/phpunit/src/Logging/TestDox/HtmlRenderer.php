@@ -23,7 +23,7 @@ final readonly class HtmlRenderer
      */
     private const PAGE_HEADER = <<<'EOT'
 <!doctype html>
-<html lang="en">
+<html lang="fr">
     <head>
         <meta charset="utf-8"/>
         <title>Test Documentation</title>
