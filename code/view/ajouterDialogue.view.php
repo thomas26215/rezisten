@@ -1,8 +1,31 @@
+<head>
+    <link rel="stylesheet" href="./design/ajouterDialogue.css">
+</head>
 <article class="content">
     <div>
         <h2 class="titre"> Ajouter un dialogue </h2>
     </div>
-    Lorem ipsum odor amet, consectetuer adipiscing elit. Ridiculus sit nisl laoreet facilisis aliquet.
-    Potenti dignissim litora eget montes rhoncus sapien neque urna. Cursus libero sapien integer magnis
-    ligula lobortis quam ut.
+    <form action="">
+        <!-- personnage -->
+        <section>
+            <label for="personnage">Personnage qui parle : </label>
+            <select name="nom">
+                <option value="A">Pierre</option><!-- mettre un foreache -->
+                <option value="B">Paul</option>
+                <option value="-">Jaques</option>
+            </select>
+        </section>
+
+        <!-- dialogue -->
+        <section>
+            <label for="dialogue">Entrez le texte du dialogue : </label>
+            <textarea name="dialogue" id="dialogue"></textarea>
+        </section>
+
+        <!-- boutons -->
+        <section>
+            <button class=button-rouge>Supprimer</button>
+            <button class=button-vert>Valider</button>
+        </section>
+    </form>
 </article>
