@@ -7,20 +7,23 @@
     /* Centrer horizontalement */
     background-color: var(--noir);
     /* Couleur de fond */
-    padding: 1% 5%;
+    padding: 10px 50px;
     min-width: 200px;
-    max-width: 350px;
+    height: 50px;
     justify-content: space-between;
     align-items: center;
 
+    box-sizing: border-box;
     border: none;
     /* Retirer la bordure du bouton */
     color: var(--beige-ecriture);
     font-weight: bold;
 
-    clip-path: polygon(28% 0%, 72% 0%, 100% 50%, 72% 100%, 28% 100%, 0% 50%);
+    /*clip-path: polygon(28% 0%, 72% 0%, 100% 50%, 72% 100%, 28% 100%, 0% 50%);*/
+    clip-path:  polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
     /* Forme du bouton */
     font-size: 20px;
+    margin-top: 1rem;
 }
 
 .container::before {
@@ -33,7 +36,7 @@
     bottom: 0;
     background-color: var(--gris);
     /* Couleur de fond de la bordure */
-    clip-path: polygon(30% 7%, 70% 7%, 95% 50%, 70% 93%, 30% 93%, 5% 50%);
+    clip-path: polygon(11% 8%, 89% 8%, 99% 50%, 89% 92%, 11% 92%, 1% 50%);
     /* La même forme que la div */
     z-index: -1;
     /* Placer la bordure derrière le bouton */
@@ -42,6 +45,40 @@
 body {
     background-image: var(--background-histoire);
     background-size: cover;
-    margin-inline: auto;
-    min-height: calc(100vh- var(--height-header) - var(--height-footer));
+    min-height: calc(100vh- var(--height-header));
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.histoires {
+    width: 35rem;
+}
+
+.titres {
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 2rem;
+}
+
+.container p {
+    font-weight: bold;
+}
+
+.after {
+    border-top: 2px solid var(--noir);
+}
+
+.modif {
+    color: red;
+}
+
+.creer {
+    height: 80px;
+    width: 20rem;
 }

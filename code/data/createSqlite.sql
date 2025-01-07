@@ -33,8 +33,7 @@ CREATE TABLE LIEUX (
 -- Table des chapitres 
 CREATE TABLE CHAPITRES (
     numchap INTEGER PRIMARY KEY,
-    titre VARCHAR(50) NOT NULL,
-    visible BOOLEAN
+    titre VARCHAR(50) NOT NULL
 );
 
 -- Table des histoires associées aux chapitres
@@ -45,6 +44,7 @@ CREATE TABLE HISTOIRES (
     createur INTEGER,
     id_lieu INTEGER,
     background VARCHAR(50) NOT NULL,
+    visible,
     FOREIGN KEY (id_lieu) REFERENCES LIEUX(id),
     FOREIGN KEY (numchap) REFERENCES CHAPITRES(numchap),
     FOREIGN KEY (createur) REFERENCES UTILISATEURS(id)
