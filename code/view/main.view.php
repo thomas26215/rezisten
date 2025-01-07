@@ -13,10 +13,9 @@
         <?php include_once 'headerHistoire.view.php'; ?>
 
         <div id="maindiv" class="flex-col">
-            <img id="logo" src="./design/image/logo.png" alt="">
+            <img id="logo" src="./design/image/logo.png" alt="Logo">
             <a href="./chapitre.view.php">
                 <button class="button-gris" type="submit">Lire les histoires</button>
-                <div class="msgCreateur">Vous devez être créateur pour accéder à cette fonctionnalité : faites une demande sur votre profil</div>
             </a>
             <a href="./ajouterDialogue.view.php" class="bloque">
                 <button class="button-gris" type="submit">Créer une histoire <img src="./design/imag/cadenas.png" alt="(Bloqué)"></button>

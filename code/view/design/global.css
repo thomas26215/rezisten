@@ -16,9 +16,10 @@
 
 body {
     font-family: var(--police);
+    min-height: 100vh;
 }
 
-main {
+main, body {
     background-size: cover;
     /* Pour que l'image couvre tout l'élément main */
     background-repeat: no-repeat;
