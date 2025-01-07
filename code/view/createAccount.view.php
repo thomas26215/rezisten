@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="design/createAccount.css">
 </head>
+
 <body>
-    <?php include_once("header.view.php")?>
+    <?php include_once("header.view.php") ?>
     <div class="formContent">
-        
+
         <h1>Créer mon compte</h1>
 
         <form action="post">
@@ -45,17 +47,19 @@
                 </div>
                 <div class="labelInput">
                     <input type="checkbox" name="check" id="check">
-                    <label for="check">En cochant cette case, j'ai lu et accepte les <a class="cond" href="">Conditions Générales d'Utilisation</a></label>
+                    <label for="check">En cochant cette case, j'ai lu et accepte les <a class="cond" href="">Conditions
+                            Générales d'Utilisation</a></label>
                 </div>
             </div>
             <a href="">
-                <button class="creer" type="submit">Créer mon compte</button> 
-            </a> 
+                <button class="creer" type="submit">Créer mon compte</button>
+            </a>
             <a href="login.view.php">
-                <button class="connecter">Se connecter</button>
+                <button class="connecter button-gris">Se connecter</button>
             </a>
         </form>
     </div>
-
+    <?php include_once("footer.view.php"); ?>
 </body>
+
 </html>

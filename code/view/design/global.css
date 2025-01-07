@@ -4,11 +4,15 @@
     --rouge: #a45254;
     --vert: #33553d;
     --noir: #221816;
+    --gris: #c7c3b3;
+    --beige-ecriture: #ebe6d6;
     --police: 'Courier New', Courier, monospace;
     --dyslexique: 'Verdana', sans-serif;
+    --background-histoire: url(./image/background_story.png);
+    --background-drapeau: rien;
 }
 
-body{
+body {
     font-family: var(--police);
 }
 
@@ -22,11 +26,18 @@ button {
     /* Centrer horizontalement */
     background-color: var(--noir);
     /* Couleur de fond */
-    padding: 5% 10%;
+    padding: 1% 5%;
+    min-width: 200px;
+    max-width: 350px;
+
     border: none;
     /* Retirer la bordure du bouton */
+    color: var(--beige-ecriture);
+    font-weight: bold;
+
     clip-path: polygon(28% 0%, 72% 0%, 100% 50%, 72% 100%, 28% 100%, 0% 50%);
     /* Forme du bouton */
+    font-size: 20px;
 }
 
 button::before {
@@ -37,10 +48,50 @@ button::before {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: var(--beige);
+    background-color: var(--bleu);
     /* Couleur de fond de la bordure */
     clip-path: polygon(30% 7%, 70% 7%, 95% 50%, 70% 93%, 30% 93%, 5% 50%);
     /* La même forme que la div */
     z-index: -1;
     /* Placer la bordure derrière le bouton */
+}
+
+.button-beige::before {
+    background-color: var(--beige);
+}
+
+.button-rouge::before {
+    background-color: var(--rouge);
+}
+
+.button-noir::before {
+    background-color: var(--noir);
+}
+
+.button-vert::before {
+    background-color: var(--vert);
+}
+
+.button-gris::before {
+    background-color: var(--gris);
+}
+
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
 }
