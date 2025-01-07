@@ -14,7 +14,7 @@ class Story
     private User $creator;
     private Place $place;
     private string $background;
-    private bool $visible;
+    private bool $visibility;
 
     private DAO $dao;
 
@@ -111,7 +111,7 @@ class Story
             $chapter = Chapter::read($historyDatas['numchap']);
             $creator = User::read($historyDatas['createur']);
             $place = Place::read($historyDatas['id_lieu']);
-            return new Histoire(
+            return new Story(
                 $historyDatas['titre'],
                 $chapter,
                 $creator,
@@ -128,7 +128,7 @@ class Story
         if($this->id != -1){ // Vérifie que l'ID est valide
             return $this->dao->update("histoires",[
                 "titre" => $this->title,
-                "numchap" => $this->numchap->getNumchap(),
+                "numchap" => $this->chapter->getNumchap(),
                 "createur" => $this->creator->getId(),
                 "id_lieu" => $this->place->getId(),
                 "background" => $this->background,

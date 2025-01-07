@@ -88,11 +88,13 @@ try {
         print("L'update a échouée\n");
     }
 
+
+    
     print("Test de la méthode getDialogsFromStory");
     try{
         $hist = Story::read(2);
         $expectedAmount = Dialog::countDialogs($hist->getId());
-        $amount = sizeof(Dialogs::getdialogsFromstory($hist->getId()));
+        $amount = sizeof(Dialog::getdialogsFromstory($hist->getId()));
         if($amount != $expectedAmount){
             print("Le nombre est incorrect");
         }else{

@@ -76,7 +76,7 @@ class Dialog
         for($i = 0 ; $i < sizeof($dialogs) ; $i++){
             $story = $dialogs[$i]['id'];
             $speaker = $dialogs[$i]['interlocuteur'];
-            $d = new Dialogue(
+            $d = new Dialog(
                 $dialogs[$i]['id'],
                 $story,
                 $speaker,
