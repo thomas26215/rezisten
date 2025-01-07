@@ -12,7 +12,11 @@ include_once(__DIR__. '/demandes.test.php');
 print("\ntest des lieux : \n\n");
 include_once(__DIR__. '/lieux.test.php');
 
+<<<<<<< HEAD
 
+=======
+KEY
+>>>>>>> 33a66c4 (rebase)
 
 
 
