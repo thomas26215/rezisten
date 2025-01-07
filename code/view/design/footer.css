@@ -19,7 +19,7 @@ footer>article{
 }
 
 footer>img {
-    background-color: #ebe6d6;
+    background-color: var(--beige);
     width: 15%;
     height: auto;
     padding-bottom: 0%;
@@ -28,7 +28,7 @@ footer>img {
 }
 
 footer>article>section , footer>article>section a{
-    color: #ebe6d6;
+    color: var(--beige-ecriture);
     font-size: large;
     margin: 3%;
 }

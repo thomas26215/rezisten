@@ -16,6 +16,8 @@ class Histoire
     private string $background;
     private boolean $visible;
 
+    private DAO $dao;
+
     const bgURL = "https://192.168.14.118/imagesRezisten/histBackground/";
 
 
@@ -28,6 +30,7 @@ class Histoire
         $this->lieu = $lieu;
         $this->background = $background;
         $this->visible = $visible;
+        $this->dao = DAO::getInstance();
     }
 
     /* Getters */
@@ -84,7 +87,7 @@ class Histoire
     // Création d'une histoire dans la base de données
     public function create(){
         //Insertion dans la base en récupérant l'ID généré
-        if($this->dao->InsertRelatedData("histoires", [
+        if($this->dao->insertRelatedData("histoires", [
             "titre" => $this->titre,
             "numchap" => $this->chapitre->getNumchap(),
             "createur" => $this->createur->getId(),
