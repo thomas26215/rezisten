@@ -31,13 +31,13 @@
                 <h2 class="speaker"> $Name1 </h2>
             </div>
 
-            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            <p class="text"> Je suis libertine, je suis une catin. Je suis une putain, une chienne, une garce.
                 Nam mattis sed est eu efficitur. Fusce vitae congue arcu, et rhoncus magna.
                 Suspendisse eget eleifend ante. Suspendisse facilisis, orci egestas molestie interdum,
                 odio massa ultrices ligula, eget accumsan justo erat id purus.
                 Aliquam interdum tempor magna, eget pharetra nisi cursus id. Nam ut bibendum libero.
                 Maecenas fermentum nunc vitae mauris rhoncus volutpat. Praesent eget sagittis nunc. </p>
-            <div class="flex-row"> 
+            <div class="flex-row">
                 <button class="before button-gris"> <a href="#">
                         < Précédent </a> </button> <!-- changer les href car je sais pas quoi mettre comme lien -->
                 <button class="next button-gris"> <a href="#"> Suivant > </a> </button>
@@ -47,7 +47,7 @@
         </section>
     </article>
 
-    <img src="./design/image/logo.png" alt="Logo" class="logo">
-
-
 </body>
+<script src="./js/machineAEcrire.js"></script>
+
+</html>

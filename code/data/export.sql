@@ -49,7 +49,7 @@ INSERT INTO lieux VALUES (15, 'Fort de Queuleu', 'fort', 'Fort de la première c
 -- Data for Name: utilisateurs; Type: TABLE DATA; Schema: public; Owner: superrezi
 --
 
-INSERT INTO utilisateurs VALUES (1, 'tritri', NULL, NULL, '2005-06-14', 'tritri@gmail.com', '1945lo1234', 'j');
+INSERT INTO utilisateurs VALUES ('tritri', NULL, NULL, '2005-06-14', 'tritri@gmail.com', '1945lo1234', 'j');
 INSERT INTO utilisateurs VALUES (2, 'aiel', 'quentin', 'pingouin', '2005-10-12', 'aiel.gaming@gmail.com', 'lepgm2024du', 'j');
 INSERT INTO utilisateurs VALUES (3, 'jeanm', 'jean', 'mejean', '1978-10-31', 'jean.mejean@gmail.com', '12hist34prof ', 'c');
 INSERT INTO utilisateurs VALUES (4, 'admin_rezisten', NULL, NULL, '1999-09-12', 'admin.rezisten@rezisten.fr', 'jesuisadmin2025', 'a');

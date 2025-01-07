@@ -14,7 +14,8 @@
     --height-footer: 150px;
 }
 
-body {
+
+html, body {
     font-family: var(--police);
     min-height: 100vh;
 }
@@ -26,6 +27,7 @@ main, body {
     /* Pour éviter la répétition de l'image */
     background-position: center;
     /* Pour centrer l'image */
+    overflow-x: hidden;
 }
 
 button {
