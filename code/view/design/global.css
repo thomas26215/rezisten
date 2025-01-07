@@ -9,6 +9,7 @@
     --police: 'Courier New', Courier, monospace;
     --dyslexique: 'Verdana', sans-serif;
     --background-histoire: url(./image/background_story.png);
+    --height-header: 60px;
     --background-drapeau: url(./image/background-drapeau.png);
     --height-footer: 150px;
 }
@@ -38,6 +39,7 @@ button {
     padding: 1% 5%;
     min-width: 200px;
     max-width: 350px;
+
 
     border: none;
     /* Retirer la bordure du bouton */

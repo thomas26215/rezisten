@@ -5,19 +5,19 @@ class Lieu {
     private string $name;
     private string $place_type;
     private string $description;
-    private string $commune;
-    private string $coordonnees;
+    private string $city;
+    private string $coordinates;
     private int $id;
     private DAO $dao;
     
     
 
-    public function __construct(string $name, string $place_type, string $description, string $commune, string $coordonnees, int $id = -1) {
+    public function __construct(string $name, string $place_type, string $description, string $city, string $coordinates, int $id = -1) {
         $this->name = $name;
         $this->place_type = $place_type;
         $this->description = $description;
-        $this->commune = $commune;
-        $this->coordonnees = $coordonnees;
+        $this->city = $city;
+        $this->coordinates = $coordinates;
         $this->id = $id;
         $this->dao = DAO::getInstance();
     }
@@ -40,12 +40,12 @@ class Lieu {
         return $this->description;
     }
 
-    public function getCommune(): string {
-        return $this->commune;
+    public function getCity(): string {
+        return $this->city;
     }
 
-    public function getCoordonnees(): string {
-        return $this->coordonnees;
+    public function getCoordinates(): string {
+        return $this->coordinates;
     }
 
     /* --- Setters --- */
@@ -70,12 +70,12 @@ class Lieu {
         $this->description = $description;
     }
 
-    public function setCommune(string $commune): void {
-        $this->commune = $commune;
+    public function setCity(string $city): void {
+        $this->city = $city;
     }
 
-    public function setCoordonnees(string $coordonnees): void {
-        $this->coordonnees = $coordonnees;
+    public function setCoordinates(string $coordinates): void {
+        $this->coordinates = $coordinates;
     }
 
     /* --- Méthodes CRUD --- */
@@ -85,8 +85,8 @@ class Lieu {
             "nom" => $this->name,
             "type_lieu" => $this->place_type,
             "description" => $this->description,
-            "commune" => $this->commune,
-            "coordonnee" => $this->coordonnees,
+            "commune" => $this->city,
+            "coordonnee" => $this->coordinates,
         ])) {
             $this->setId($this->dao->getLastInsertId("lieux")[0]["last_id"]);
             return true;
@@ -115,8 +115,8 @@ class Lieu {
                 "nom" => $this->name,
                 "type_lieu" => $this->place_type,
                 "description" => $this->description,
-                "commune" => $this->commune,
-                "coordonnee" => $this->coordonnees,
+                "commune" => $this->city,
+                "coordonnee" => $this->coordinates,
             ], ["id" => (int)$this->id]);
         }
         return false;

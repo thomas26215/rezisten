@@ -14,7 +14,7 @@
       </a>
      <a href="./profil.view.php" class="user">
         <img src="./design/image/photoProfil.jpg" alt="user">
-        <p>Jano</p>
+        <p class="nomUser">Jano</p>
       </a> 
    </header>
 </body>

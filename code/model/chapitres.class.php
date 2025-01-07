@@ -2,7 +2,7 @@
 require_once(__DIR__ . "/dao.class.php");
 
 
-class Chapitre
+class Chapter
 {
     private int $numchap;
     private string $title;
@@ -20,7 +20,7 @@ class Chapitre
         return $this->numchap;
     }
 
-    public function gettitle(){
+    public function getTitle(){
         return $this->title;
     }
 
@@ -29,7 +29,7 @@ class Chapitre
         $this->numchap = $numchap;
     }
 
-    public function settitle(string $title){
+    public function setTitle(string $title){
         $this->title = $title;
     }
 

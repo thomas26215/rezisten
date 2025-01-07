@@ -2,6 +2,7 @@ body{
     display: flex;
     flex-direction: column;
     text-align: center;
+    background-image: var(--background-drapeau);
 }
 
 body>ul>li>h2{
