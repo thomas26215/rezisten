@@ -110,8 +110,9 @@ class Lieu {
 
     public function update(){
         if($this->id !== -1){
+            
             return $this->dao->update("lieux", [
-                "prenom" => $this->name,
+                "nom" => $this->name,
                 "type_lieu" => $this->place_type,
                 "description" => $this->description,
                 "commune" => $this->commune,
@@ -122,7 +123,8 @@ class Lieu {
     }
     public static function delete($id){
         if($id > 0){
-            return $dao->deleteRelatedData("lieux", $id);
+            return DAO::getInstance()->deleteRelatedData("lieux", $id);
+            
         }
         return false;
     }
