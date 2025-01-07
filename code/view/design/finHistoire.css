@@ -1,0 +1,19 @@
+body {
+    background-image: var(--background-histoire);
+}
+
+main{
+    min-height: calc(100vh - var(--height-header));
+}
+
+.img-milieu{
+    border: solid 5px var(--noir);
+    min-width: 500px;
+    max-width: 500px;
+
+}
+
+span{
+    color:var(--bleu);
+    text-decoration: underline;
+}
