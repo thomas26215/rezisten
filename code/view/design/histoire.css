@@ -89,7 +89,7 @@ h2.speaker::before {
     /* Couleur de fond de la bordure */
     clip-path: polygon(30% 7%, 70% 7%, 78% 50%, 70% 93%, 30% 93%, 30% 50%);
     /* La même forme que la div */
-    z-index: -1;
+    z-index: -10;
     /* Placer la bordure derrière le bouton */
 }
 
