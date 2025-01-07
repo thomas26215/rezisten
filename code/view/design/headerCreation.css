@@ -1,7 +1,15 @@
 body{
   background-image: var(--background-histoire);
+  width: 100vw;
+  font-size: larger;
 }
+/*
+main{
+  min-height: calc(100vh - var(--height-header));
+}*/
 
+
+/* Pour la disposition de la page*/
 .container {
   display: grid;
   grid-template-areas:
@@ -26,7 +34,7 @@ body{
 .container > section.menu {
   grid-area: menu;
 }
-.container > section.content {
+.container > article.content {
   grid-area: content;
 }
 .container > section.footer {
@@ -35,11 +43,79 @@ body{
   grid-area: footer;
 }
 
+
+/*pour les élément*/ 
+
+/*bouron pour consulter les personnages*/
+
 button{
-    margin: 4%;
-    padding: 20px;
+  width: 300px;
+  max-width: none !important;
+  height: 60px;
+  margin-top: 25%;
 }
 
 div{
   display :flex;
+}
+
+article{
+  background-color: var(--beige);
+  height: 95%;
+  margin-right: 10%;
+  margin-left: -5%;
+  margin-top: 50px;
+  border: 2px solid var(--noir);
+}
+
+#info{
+  max-height: 50px;
+  margin-left: 20%;
+}
+
+label{
+  align-self: center;
+  margin-right: 10px;
+}
+
+
+h2.titre {
+  position: relative;
+  right: 1.75em;
+  bottom: 2.1em;
+  width: 8em;
+
+  margin: 0;
+  /* Centrer horizontalement */
+  background-color: var(--noir);
+  /* Couleur de fond */
+  padding: 1% 5%;
+
+  border: none;
+  color: var(--beige-ecriture);
+  clip-path: polygon(10% 0%, 72% 0%, 80% 50%, 72% 100%, 10% 100%, 10% 50%);
+
+  font-size: medium;
+}
+
+h2.titre::before {
+  content: '';
+  /* Créer un élément avant le bouton */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--bleu);
+  /* Couleur de fond de la bordure */
+  clip-path: polygon(12% 7%, 71% 7%, 78% 50%, 71% 93%, 12% 93%, 12% 50%);
+  /* La même forme que la div */
+  z-index: -1;
+  /* Placer la bordure derrière le bouton */
+}
+
+
+/*premier boutton*/
+.container > section.header  button{
+  margin-top: 0%;
 }

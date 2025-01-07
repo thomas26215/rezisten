@@ -112,7 +112,7 @@ class User {
         ])) {
             // Récupérer l'ID généré et l'assigner à l'objet User
             var_dump($this->dao->getLastInsertId("utilisateurs")[0]["last_id"]);
-            $this->setId($this->dao->getLastInsertId("utilisateurs")[0]["last_id"]+1);
+            $this->setId($this->dao->getLastInsertId("utilisateurs")[0]["last_id"]);
             return true; // Insertion réussie
         }
         
