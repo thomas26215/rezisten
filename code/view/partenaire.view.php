@@ -7,6 +7,7 @@
         <link rel="stylesheet" type="text/css" href="./design/partenaire.css">
     </head>
     <body>
+        <main class="flex-col">
         <h1>Nos partenaires</h1>
         <ul>
             <li>
@@ -52,7 +53,8 @@
                     </section>
                 </article>
             </li>
-        </ul>
+        </ul>      
+        </main>
+        <?php include_once("footer.view.php"); ?>
     </body>
-    <?php include_once("footer.view.php"); ?>
 </html>
