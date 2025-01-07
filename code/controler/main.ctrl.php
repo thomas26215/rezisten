@@ -7,18 +7,15 @@ try{
     var_dump($e->getMessage());
 }
 
-<<<<<<< Updated upstream
-include_once('model/users.class.php');
-=======
 include_once('model/users.php');
-include_once('model/demandes.php');
->>>>>>> Stashed changes
+
 
 
 $dao = DAO::getInstance();
 
 
 $user = User::read(1);
+var_dump($user->getUserName());
 
 $user2 = new User("soso", "Sophie", "Arnaud", "25/03/2005", "soso@gmail 
 .com", "testMDP", 'c');
