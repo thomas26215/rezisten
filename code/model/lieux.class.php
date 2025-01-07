@@ -1,7 +1,7 @@
 <?php
 require_once(__DIR__ . "/dao.class.php");
 
-class Lieu {
+class Place {
     private string $name;
     private string $place_type;
     private string $description;
