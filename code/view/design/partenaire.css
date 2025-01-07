@@ -1,0 +1,36 @@
+body{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+body>ul>li>h2{
+    text-align: left;
+}
+
+body>ul{
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+body>ul>li>article{
+    display: flex;
+}
+
+body ul li article img {
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+    object-position: center;
+    margin-right: 5%;
+    max-width: 150px;
+    min-width: 100px;
+}
+
+body>ul>li>article>section{
+    text-align: left;
+}
+
+body>ul>li>article>section>p{
+    text-align: justify;
+}

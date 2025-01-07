@@ -1,5 +1,5 @@
 body {
-    background-image: url(./image/background_story.png) ;
+    background-image: var(--background-histoire);
     background-size: cover;
     font-family: 'Courier New', Courier;
     margin-inline: auto;
@@ -18,11 +18,11 @@ h1 {
 }
 
 span {
-    color:  var(--rouge);
+    color: var(--rouge);
 }
 
 .form {
-    background-color: #ecdfb9;
+    background-color: var(--beige);
     padding: 1rem 10rem 3rem 3rem;
     margin-inline: auto;
     width: 40rem;
@@ -32,7 +32,7 @@ span {
     flex-direction: column;
     font-weight: bold;
     font-size: 19px;
-    border: 3px solid black;
+    border: 3px solid var(--noir);
     gap: 0.5;
     text-align: right;
 }
@@ -53,7 +53,7 @@ form {
 .labelInput input {
     width: 12rem;
     height: 1.5rem;
-    border: 2px solid black;
+    border: 2px solid var(--noir);
     padding-inline: 1rem;
 }
 
@@ -63,25 +63,14 @@ form {
 }
 
 .creer {
-    background-color: var(--bleu);
-    color: #ebe6d6;
-    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
-    height: 4rem;
     width: 16rem;
-    font-size: 20px;
-    font-family: 'Courier New', Courier;
-    border: none;
     margin-top: 2rem;
 }
 
+
 .connecter {
-    background-color: #c7c3b3;
-    color: black;
-    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
-    font-family: 'Courier New', Courier;
-    height: 3rem;
+    color: var(--noir);
     width: 10rem;
-    border: none;
     margin-top: 2rem;
 }
 
