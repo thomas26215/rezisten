@@ -89,9 +89,9 @@ class Character {
         }
         return false;
     }
-    public function delete($id){
+    public static function delete($id){
         if($id > 0){
-            return $this->dao->deleteRelatedData("personnages", $id);
+            return DAO::getInstance()->deleteRelatedData("personnages", $id);
         }
         return false;
     }

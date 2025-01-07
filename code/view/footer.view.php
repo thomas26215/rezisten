@@ -14,10 +14,10 @@
                 <li><a href="https://charactercreator.org/" target="_blank">Personnages</a></li>
             </ul>
         </section>
-        <section><a href="https://www.google.com/">Condition générales d'utilisation</a></section>
+        <section><a href="./conditionGeneralesDutilisation.view.php">Condition générales d'utilisation</a></section>
         <!-- TO DO : changer les liens pour les bonnes pages-->
-        <section><a href="https://www.google.com/" target="_blank">Partenaire</a></section>
-        <section><a href="https://www.google.com/">Contactez-nous</a></section>
+        <section><a href="./partenaire.view.php">Partenaire</a></section>
+        <section><a href="./contact.view.php">Contactez-nous</a></section>
     </article>
 </footer>
 

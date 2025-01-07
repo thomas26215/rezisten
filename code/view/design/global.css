@@ -9,15 +9,17 @@
     --police: 'Courier New', Courier, monospace;
     --dyslexique: 'Verdana', sans-serif;
     --background-histoire: url(./image/background_story.png);
+    --height-header: 60px;
     --background-drapeau: url(./image/background-drapeau.png);
     --height-footer: 150px;
 }
 
 body {
     font-family: var(--police);
+    min-height: 100vh;
 }
 
-main {
+main, body {
     background-size: cover;
     /* Pour que l'image couvre tout l'élément main */
     background-repeat: no-repeat;
@@ -39,6 +41,7 @@ button {
     min-width: 200px;
     max-width: 350px;
 
+
     border: none;
     /* Retirer la bordure du bouton */
     color: var(--beige-ecriture);
@@ -47,6 +50,7 @@ button {
     clip-path: polygon(28% 0%, 72% 0%, 100% 50%, 72% 100%, 28% 100%, 0% 50%);
     /* Forme du bouton */
     font-size: 20px;
+    cursor: pointer;
 }
 
 button::before {
@@ -67,6 +71,10 @@ button::before {
 
 .button-beige::before {
     background-color: var(--beige);
+}
+
+.button-beige, .button-gris {
+    color: var(--noir);
 }
 
 .button-rouge::before {

@@ -2,7 +2,7 @@
 require_once(__DIR__ . "/dao.class.php");
 
 
-class Chapitre
+class Chapter
 {
     private int $numchap;
     private string $title;

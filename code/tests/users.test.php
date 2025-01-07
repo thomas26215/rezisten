@@ -5,7 +5,7 @@ require_once(__DIR__.'/../model/dao.class.php');
 
 try {
     // Test de création d'un utilisateur
-    print("Création d'un user : ");
+    print("Création d'un user : \n");
     $user = new User("prapra","brayan","bils","24/08/2005","bilsbrayan@gmail.com","2706","a");
 
     // Test des getters
@@ -88,7 +88,6 @@ try {
     }
     print("OK\n");
 
-    print("Tous les tests ont réussi !\n");
 
 } catch (Exception $e) {
     exit("\nErreur: ".$e->getMessage()."\n");

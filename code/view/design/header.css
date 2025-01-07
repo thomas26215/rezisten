@@ -1,7 +1,13 @@
 header {
-    display: block;
+    display: flex;
     justify-content: left;
     padding-top: 10px;
     padding-left: 15px;
-    size: 15px;
+    box-sizing: border-box;
+    height: var(--height-header);
+}
+
+header a img {
+    height: 45px;
+    width: 45px;
 }

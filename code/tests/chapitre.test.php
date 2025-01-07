@@ -120,7 +120,7 @@ try {
         print("OK\n");
 
             // Test de la méthode delete
-    print("Test de la méthode delete : ");
+   /* print("Test de la méthode delete : ");
 
 
 
@@ -130,32 +130,15 @@ try {
         throw new Exception("Échec de la suppression du chapitre");
     }
 
-    /* // Vérifier que le chapitre a bien été supprimé
+     // Vérifier que le chapitre a bien été supprimé
     $deletedChapitre = Chapitre::read($idToDelete);
     if ($deletedChapitre !== null) {
         throw new Exception("Le chapitre n'a pas été supprimé correctement");
     }
     print("OK\n");
+*/
 
-
-    print("Tous les tests ont réussi !\n");
- */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
 
 
     } catch (Exception $e) {

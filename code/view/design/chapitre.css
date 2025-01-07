@@ -1,0 +1,54 @@
+body {
+    background-image: var(--background-drapeau);
+    width: 100vw;
+    gap: 20px;
+    min-height: calc(100vh - var(--height-footer));
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+
+}
+
+.img-button {
+    position: relative;
+    top:7px;
+}
+
+button {
+    box-sizing: border-box;
+    width: 500px;
+    height: 60px;
+    max-width: none !important;
+    position: relative;
+    /* Nécessaire pour positionner la pop-up */
+}
+
+#logo {
+    width: 500px;
+}
+
+.msgCreateur {
+    display: none;
+    max-width: 200px;
+    max-height: 200px;
+    background-color: var(--gris);
+    position: absolute;
+    bottom: 300px;
+    /* Ajustez cette valeur selon vos besoins */
+    right: 350px;
+    transform: translateX(-50%);
+    color: var(--noir);
+    opacity: 0.9;
+    border-radius: 25px;
+    padding: 10px;
+    z-index: 10;
+    /* Pour s'assurer que la pop-up est au-dessus des autres éléments */
+}
+
+a.bloque:hover .msgCreateur,
+a.bloque:focus .msgCreateur {
+    display: block;
+}
