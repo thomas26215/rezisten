@@ -1,6 +1,6 @@
 <?php
 require_once(__DIR__ . "/dao.class.php");
-require_once(__DIR__ . "/daoUtilitaire.class.php");
+require_once(__DIR__ . "/daoUtilitaire.php");
 require_once(__DIR__ . "/histoires.class.php");
 require_once(__DIR__ . "/personnages.class.php");
 
@@ -8,15 +8,15 @@ require_once(__DIR__ . "/personnages.class.php");
 class Dialog
 {
     private int $id;
-    private story $story;
+    private Story $story;
     private Character $speaker;
     private string $content;
-    private boolean $bonus;
+    private bool $bonus;
 
     private DAO $dao;
 
 
-    public function __construct(int $id, story $story, Character $speaker, string $content, boolean $bonus){
+    public function __construct(int $id, story $story, Character $speaker, string $content, bool $bonus){
         $this->id = $id;
         $this->story = $story;
         $this->speaker = $speaker;
@@ -56,7 +56,7 @@ class Dialog
     public function setContent(string $content){
         $this->content = $content;
     }
-    public function setBonus(boolean $bonus){
+    public function setBonus(bool $bonus){
         $this->bonus = $bonus;
     }
     
@@ -70,7 +70,7 @@ class Dialog
 
         $dialogs = dao->getColumnWithParameters("dialogues", ["id_histoire" => $idStory]);
         if(empty($dialogs)){
-            return null;
+            throw new Exception("Aucun dialogue correspondat à l'histoire numéro ".$idStory);
         }
 
         for($i = 0 ; $i < sizeof($dialogs) ; $i++){
@@ -112,7 +112,7 @@ class Dialog
         ])){
             return true;
         }
-        return false;
+        throw new Exception("Le dialogue n'a pas pu être créé");
     }
 
     // Pas de méthode read car utile dans aucun cas d'utilisation
@@ -136,6 +136,7 @@ class Dialog
         if($id > 0 && $idStory > 0){
             return DAO::getInstance()->deleteRelatedData("dialogues",$id,$idStory);
         }
+        throw new Exception("Le dialogue ".$id."n'existe pas pour l'histoire ".$idStory);
     }
 }
 

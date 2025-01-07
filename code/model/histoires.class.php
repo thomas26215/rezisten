@@ -6,7 +6,7 @@ require_once(__DIR__ . "/lieux.class.php");
 
 
 
-class History
+class Story
 {
     private int $id;
     private string $title;
@@ -14,7 +14,7 @@ class History
     private User $creator;
     private Place $place;
     private string $background;
-    private boolean $visible;
+    private bool $visible;
 
     private DAO $dao;
 
@@ -22,7 +22,7 @@ class History
 
 
 
-    public function __construct(string $title, chapter $chapter, User $creator, Place $place, string $background, boolean $visibility){
+    public function __construct(string $title, chapter $chapter, User $creator, Place $place, string $background, bool $visibility){
         $this->id = -1; // id défini par rapport à la BDD
         $this->title = $title;
         $this->chapter = $chapter;
@@ -77,7 +77,7 @@ class History
     public function setBackground(string $background){
         $this->background = $background;
     }
-    public function setVisibility(boolean $visibility){
+    public function setVisibility(bool $visibility){
         $this->visibility = $visibility;
     }
 

@@ -8,12 +8,12 @@ INSERT INTO UTILISATEURS(pseudo,datenaiss,mail,mot_de_passe,role) VALUES ('admin
 INSERT INTO DEMANDES VALUES(2,'aiel-id.png');
 
 --Création des deux premiers chapitres de l'histoire
-INSERT INTO CHAPITRES(numchap,titre,visible) values(0,'Prologue',true);
-INSERT INTO CHAPITRES(numchap,titre,visible) values(0,'L''heure de résister',true);
+INSERT INTO CHAPITRES(numchap,titre) values(0,'Prologue');
+INSERT INTO CHAPITRES(numchap,titre) values(1,'L''heure de résister');
 
 
 --Création d'une hisoitr pour le prologue et deux pour le chapitre 1
-INSERT INTO HISTOIRES(titre,numchap,createur,id_lieu,background) values('Un jour de septembre',0,8,3,'hist0_bg.webp');
+INSERT INTO HISTOIRES(titre,numchap,createur,id_lieu,background) values('Un jour de septembre',0,4,3,'hist0_bg.webp');
 INSERT INTO HISTOIRES(titre,numchap,createur,id_lieu,background) values('Une rencontre fortuite',0,4,3,'hist1_bg.webp');
 INSERT INTO HISTOIRES(titre,numchap,createur,id_lieu,background) values('Sabotage',0,4,3,'hist2_bg.webp');
 
@@ -57,14 +57,14 @@ parents à lui refusent de se mettre en sécurité ',false);
 INSERT INTO DIALOGUES(id,id_histoire,interlocuteur,contenu,bonus) VALUES (14,1,4,'Et je les comprends, dans tous les cas personnes n’oserai les y forcer, ils sont bien trop puissants.',false);
 INSERT INTO DIALOGUES(id,id_histoire,interlocuteur,contenu,bonus) VALUES (15,1,5,'L’argent ne sauve pas de tout tu sais ?',false);
 INSERT INTO DIALOGUES(id,id_histoire,interlocuteur,contenu,bonus) VALUES (16,1,4,'C’est cela, et il ne fait pas le bonheur non plus.',false);
-INSERT INTO DIALOGUES(id,id_histoire,interlocuteur,contenu,bonus) VALUES (16,1,2,'Bon ce n’est pas tout ça mais cette radio me déprime... J’ai entendu parler d’une radio qui diffuse
+INSERT INTO DIALOGUES(id,id_histoire,interlocuteur,contenu,bonus) VALUES (17,1,2,'Bon ce n’est pas tout ça mais cette radio me déprime... J’ai entendu parler d’une radio qui diffuse
 encore de la musique sur la fréquence 89.9, je vais essayer de la capter. ',false);
-INSERT INTO DIALOGUES(id,id_histoire,interlocuteur,contenu,bonus) VALUES (17,1,10,'Pierre commence alors à manipuler la radio pendant un long moment. Jusqu''à ce que quelqu''un l''interrompe soudainement.',false);
-INSERT INTO DIALOGUES(id,id_histoire,interlocuteur,contenu,bonus) VALUES (18,1,5,'Attends !',false);
-INSERT INTO DIALOGUES(id,id_histoire,interlocuteur,contenu,bonus) VALUES (19,1,3,'Je crois que j’ai entendu quelque chose moi aussi, reviens en arrière.',false);
-INSERT INTO DIALOGUES(id,id_histoire,interlocuteur,contenu,bonus) VALUES (20,1,1,'La radio grésille jusqu''à ce que retentissent des mots que nous n’oublierions jamais.',false);
-INSERT INTO DIALOGUES(id,id_histoire,interlocuteur,contenu,bonus) VALUES (21,1,9,'Malgré nos efforts, nous avons été submergés par la force terrestre et aérienne de l''ennemi...',false);
-INSERT INTO DIALOGUES(id,id_histoire,interlocuteur,contenu,bonus) VALUES (22,1,9,'Dès demain matin, nous engageons la mobilisation générales des citoyens français dans ces combats.',false);
+INSERT INTO DIALOGUES(id,id_histoire,interlocuteur,contenu,bonus) VALUES (18,1,10,'Pierre commence alors à manipuler la radio pendant un long moment. Jusqu''à ce que quelqu''un l''interrompe soudainement.',false);
+INSERT INTO DIALOGUES(id,id_histoire,interlocuteur,contenu,bonus) VALUES (19,1,5,'Attends !',false);
+INSERT INTO DIALOGUES(id,id_histoire,interlocuteur,contenu,bonus) VALUES (20,1,3,'Je crois que j’ai entendu quelque chose moi aussi, reviens en arrière.',false);
+INSERT INTO DIALOGUES(id,id_histoire,interlocuteur,contenu,bonus) VALUES (21,1,1,'La radio grésille jusqu''à ce que retentissent des mots que nous n’oublierions jamais.',false);
+INSERT INTO DIALOGUES(id,id_histoire,interlocuteur,contenu,bonus) VALUES (22,1,9,'Malgré nos efforts, nous avons été submergés par la force terrestre et aérienne de l''ennemi...',false);
+INSERT INTO DIALOGUES(id,id_histoire,interlocuteur,contenu,bonus) VALUES (23,1,9,'Dès demain matin, nous engageons la mobilisation générales des citoyens français dans ces combats.',false);
 
 
 
