@@ -4,7 +4,7 @@ body{
     font-family: 'Courier New', Courier, monospace;
     text-align: center;
     font-size: larger;
-    background-image: var(--background-histoire);
+    background-image: var(--background-drapeau);
     background-size:1920px ;
 }
 

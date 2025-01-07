@@ -9,14 +9,23 @@
     --police: 'Courier New', Courier, monospace;
     --dyslexique: 'Verdana', sans-serif;
     --background-histoire: url(./image/background_story.png);
-    --background-drapeau: rien;
     --height-header: 60px;
+    --background-drapeau: url(./image/background-drapeau.png);
+    --height-footer: 150px;
 }
 
 body {
     font-family: var(--police);
 }
 
+main {
+    background-size: cover;
+    /* Pour que l'image couvre tout l'élément main */
+    background-repeat: no-repeat;
+    /* Pour éviter la répétition de l'image */
+    background-position: center;
+    /* Pour centrer l'image */
+}
 
 button {
     position: relative;
