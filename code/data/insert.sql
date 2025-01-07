@@ -2,7 +2,7 @@
 INSERT INTO UTILISATEURS(pseudo,datenaiss,mail,mot_de_passe,role) VALUES('tritri','2005-06-14','tritri@gmail.com','1945lo1234','j');
 INSERT INTO UTILISATEURS(pseudo,prenom,nom,datenaiss,mail,mot_de_passe,role) VALUES('aiel','quentin','pingouin','2005-10-12','aiel.gaming@gmail.com','lepgm2024du','j');
 INSERT INTO UTILISATEURS(pseudo,prenom,nom,datenaiss,mail,mot_de_passe,role) VALUES('jeanm','jean','mejean','1978-10-31','jean.mejean@gmail.com','12hist34prof ','c');
-INSERT INTO UTILISATEURS(pseudo,prenom,nom,datenaiss,mail,mot_de_passe,role) VALUES ('admin_rezisten',"admin","admin",'1999-09-12','admin.rezisten@rezisten.fr','jesuisadmin2025','a');
+INSERT INTO UTILISATEURS(pseudo,prenom,nom,datenaiss,mail,mot_de_passe,role) VALUES ('admin_rezisten','admin','admin','1999-09-12','admin.rezisten@rezisten.fr','jesuisadmin2025','a');
 
 -- Ajout d'une demande de créateur
 INSERT INTO DEMANDES VALUES(2,'aiel-id.png');
