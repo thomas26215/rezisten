@@ -7,7 +7,7 @@
 # DataBase
 
 testdb/rezisten.db
-./code/data/database.db
+/code/data/database.db
 ### Eclipse ###
 .metadata
 bin/
