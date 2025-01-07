@@ -8,14 +8,14 @@ class Dialogue
 {
     private int $id;
     private story $story;
-    private Personnage $speaker;
+    private Character $speaker;
     private string $content;
     private boolean $bonus;
 
     private DAO $dao;
 
 
-    public function __construct(int $id, story $story, Personnage $speaker, string $content, boolean $bonus){
+    public function __construct(int $id, story $story, Character $speaker, string $content, boolean $bonus){
         $this->id = $id;
         $this->story = $story;
         $this->speaker = $speaker;
@@ -49,7 +49,7 @@ class Dialogue
     public function setStory(story $story){
         $this->story = $story;
     }
-    public function setSpeaker(Personnage $speaker){
+    public function setSpeaker(Character $speaker){
         $this->speaker = $speaker;
     }
     public function setContent(string $content){
