@@ -93,3 +93,27 @@ h2.speaker::before {
     /* Placer la bordure derrière le bouton */
 }
 
+.text {
+    font-size: 1.5em;
+    color: #333;
+    border-right: 2px solid black;
+    /* Curseur clignotant */
+    white-space: wrap;
+    overflow: hidden;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        border-color: transparent;
+    }
+
+    50% {
+        border-color: black;
+    }
+}
+
+.text {
+    animation: blink 0.8s steps(1) infinite;
+}
