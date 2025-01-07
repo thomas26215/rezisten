@@ -4,17 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/design/profil.css">
+    <link rel="stylesheet" href="design/profil.css">
 </head>
 <body>
     <?php include_once("header.view.php")?>
     
-    <div>
-        <img src="/design/images/photoProfil.jpg" alt="photo profil">
-        <p>Jano</p>
-    </div>
+    <div class="container">
+        <div class="profilHead">
+            <img src="design/image/photoProfil.jpg" alt="photo profil">
+            <p>Jano</p>
+        </div>
 
-    <button>Se déconnecter</button>
+        <a href="main.view.php">
+            <button class="deconnect button-rouge">Se déconnecter</button>
+        </a>
+    </div>
 
     <form action="post">
         <div>
@@ -27,13 +31,21 @@
             <input type="email" name="mail" id="mail" placeholder="jean@jaimail.com">
         </div>
 
-        <button>Valider</button>
+        <button class="valider button-vert">Valider</button>
     </form>
 
-    <div>
-        <button>Mode dyslexique</button>
-        <button>Faire la demande d'être créateur</button>
-        <button>Modifier mon mot de passe</button>
+    <div class="buttons">
+        <a href="">
+            <button class="button-gris">Mode dyslexique</button>
+        </a>
+        <a href="demandeCreateur.view.php">
+            <button class="button-gris">Faire la demande d'être créateur</button>
+        </a>
+        <a href="">
+            <button class="button-gris">Modifier mon mot de passe</button>
+        </a>
     </div>
+
+    <?php include_once("footer.view.php")?>
 </body>
 </html>

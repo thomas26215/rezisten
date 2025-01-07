@@ -1,0 +1,87 @@
+body {
+    background-image: var(--background-histoire);
+    background-size: cover;
+    margin-inline: auto;
+    min-height: calc(100vh- var(--height-header) - var(--height-footer));
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+
+}
+
+.container a {
+    position: absolute;
+    right: 20px;
+}
+
+.profilHead img{
+    border: 3px solid var(--noir);
+    height: 10rem;
+}
+
+.profilHead p {
+    font-weight: bold;
+}
+
+.profilHead {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex: 1;
+}
+
+.deconnect {
+    height: 6rem;
+    width: 18rem;
+    color: var(--noir);
+}
+
+form {
+    background-color: var(--beige) ;
+    display: flex; 
+    flex-direction: column;
+    border: 3px solid var(--noir);
+    width: fit-content;
+    text-align: right;
+    margin-inline: auto;
+    gap: 1rem;
+    padding: 3rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+form div label {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+form div input {
+    height: 35px;
+    width: 18rem;
+    border: 2px solid var(--noir);
+}
+
+
+.valider {
+    margin-top: 1rem;
+}
+
+.buttons {
+    display: flex;
+    margin-bottom: 3rem;
+    align-items: center;
+    justify-content: center;
+    gap: 5rem;
+}
+
+.buttons a button {
+    height: 6rem;
+    width: 25rem;
+}
+
+
+

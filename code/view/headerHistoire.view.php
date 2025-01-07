@@ -12,9 +12,9 @@
         <img src="./design/image/home.png" alt="home">
         <p>Accueil</p>
       </a>
-     <a href="./main.view.php" class="user">
+     <a href="./profil.view.php" class="user">
         <img src="./design/image/photoProfil.jpg" alt="user">
-        <p>Jano</p>
+        <p class="nomUser">Jano</p>
       </a> 
    </header>
 </body>
