@@ -23,7 +23,7 @@ $dialogue = pg_fetch_all($resDial);
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
