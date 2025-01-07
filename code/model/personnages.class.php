@@ -5,14 +5,12 @@ require_once(__DIR__ . "/dao.class.php");
 class Character {
     private int $id;
     private string $first_name;
-    private string $surname;
     private string $image;
     private DAO $dao;
 
-    public function __construct(string $first_name, string $surname, string $image, int $id = -1) {
+    public function __construct(string $first_name, string $image, int $id = -1) {
         $this->id = $id;
         $this->first_name = $first_name;
-        $this->surname = $surname;
         $this->image = $image;
         $this->dao = DAO::getInstance();
     }
@@ -24,10 +22,6 @@ class Character {
 
     public function getFirstName(): string {
         return $this->first_name;
-    }
-
-    public function getSurname(): string {
-        return $this->surname;
     }
 
     public function getImage(): string {
@@ -51,14 +45,6 @@ class Character {
         }
     }
 
-    public function setSurname(string $surname): void {
-        if (!empty($surname)) {
-            $this->surname = $surname;
-        } else {
-            throw new Exception("Le nom ne peut pas être vide.");
-        }
-    }
-
     public function setImage(string $image): void {
         if (!empty($image)) {
             $this->image = $image;
@@ -72,7 +58,6 @@ class Character {
     public function create(){
         if($this->dao->insertRelatedData("personnages", [
             "prenom" => $this->first_name,
-            "nom" => $this-> surname,
             "img" => $this->image,
         ])){
             //TODO: Quand je récupère le dernier ID et qu'il n'y a aucune ligne dans la BDD, est ce que ça vérifie dans le dao si ça renvoie 0 s'il n'y a aucune ligne ?
@@ -88,7 +73,6 @@ class Character {
             $characterDatas = $characterData[0];
             return new Character(
                 $characterDatas["prenom"],
-                $characterDatas["nom"],
                 $characterDatas["img"],
                 $characterDatas["id"]
             );
@@ -100,7 +84,6 @@ class Character {
         if($this->id !== -1){
             return $this->dao->update("personnages", [
                 "prenom" => $this->first_name,
-                "nom" => $this-> surname,
                 "img" => $this->image,
             ], ["id" => (int)$this->id]);
         }
