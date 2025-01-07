@@ -16,9 +16,10 @@
 
 body {
     font-family: var(--police);
+    min-height: 100vh;
 }
 
-main {
+main, body {
     background-size: cover;
     /* Pour que l'image couvre tout l'élément main */
     background-repeat: no-repeat;
@@ -46,7 +47,7 @@ button {
     color: var(--beige-ecriture);
     font-weight: bold;
 
-    clip-path: polygon(28% 0%, 72% 0%, 100% 50%, 72% 100%, 28% 100%, 0% 50%);
+    clip-path: polygon(8% 0%, 92% 0%, 100% 50%, 92% 100%, 8% 100%, 0% 50%);
     /* Forme du bouton */
     font-size: 20px;
     cursor: pointer;
@@ -62,7 +63,7 @@ button::before {
     bottom: 0;
     background-color: var(--bleu);
     /* Couleur de fond de la bordure */
-    clip-path: polygon(30% 7%, 70% 7%, 95% 50%, 70% 93%, 30% 93%, 5% 50%);
+    clip-path: polygon(10% 7%, 90% 7%, 97% 50%, 90% 93%, 10% 93%, 3% 50%);
     /* La même forme que la div */
     z-index: -1;
     /* Placer la bordure derrière le bouton */
