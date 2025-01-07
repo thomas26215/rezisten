@@ -8,16 +8,33 @@ INSERT INTO UTILISATEURS(pseudo,datenaiss,mail,mot_de_passe,role) VALUES ('admin
 INSERT INTO DEMANDES VALUES(2,'aiel-id.png');
 
 --Création des deux premiers chapitres de l'histoire
-INSERT INTO CHAPITRES(numchap,titre,visible) values(0,'prologue',true);
+INSERT INTO CHAPITRES(numchap,titre,visible) values(0,'Prologue',true);
+INSERT INTO CHAPITRES(numchap,titre,visible) values(0,'L''heure de résister',true);
+
 
 --Création d'une hisoitr pour le prologue et deux pour le chapitre 1
-INSERT INTO HISTOIRES(titre,numchap,createur,id_lieu,background) values('le commencement',0,4,3,'hist_bg.webp');
+INSERT INTO HISTOIRES(titre,numchap,createur,id_lieu,background) values('Un jour de septembre',0,4,3,'hist0_bg.webp');
+INSERT INTO HISTOIRES(titre,numchap,createur,id_lieu,background) values('Une rencontre fortuite',0,4,3,'hist1_bg.webp');
+INSERT INTO HISTOIRES(titre,numchap,createur,id_lieu,background) values('Sabotage',0,4,3,'hist2_bg.webp');
+
 
 --Création de deux personnages participants au prologue
-INSERT INTO PERSONNAGES(prenom,nom,img) values('jean','dupont','jeandupont.webp');
+INSERT INTO PERSONNAGES(prenom,img) values('Raymond','raymond.webp');
+INSERT INTO PERSONNAGES(prenom,img) values('Pierre','pierre.webp');
+INSERT INTO PERSONNAGES(prenom,img) values('Jean','jean.webp');
+INSERT INTO PERSONNAGES(prenom,img) values('André','andre.webp');
+INSERT INTO PERSONNAGES(prenom,img) values('David','david.webp');
+INSERT INTO PERSONNAGES(prenom,img) values('Michel','michel.webp');
+INSERT INTO PERSONNAGES(prenom,img) values('Marie','marie.webp');
+INSERT INTO PERSONNAGES(prenom,img) values('Milicien','milicien.webp');
+INSERT INTO PERSONNAGES(prenom,img) values('Inconnu','inconnu.webp');
+INSERT INTO PERSONNAGES(prenom,img) values('Narrateur','narrateur.webp');
+
+
+
 
 --Création de dialogues pour l'histoire 1 qui correspond au premier niveau du prologue
-INSERT INTO DIALOGUES(id, id_histoire,interlocuteur, contenu,bonus) values(0,1,1,'bonjour commandant !',false);
+INSERT INTO DIALOGUES(id_histoire,interlocuteur,contenu,bonus)
 
 
 

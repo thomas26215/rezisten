@@ -55,7 +55,6 @@ CREATE TABLE HISTOIRES (
 CREATE TABLE PERSONNAGES(
     id SERIAL PRIMARY KEY,          -- Identifiant du personnage pour faciliter l'unicité des n-uplets
     prenom varchar(50) NOT NULL,    -- Prenom du personnage
-    nom varchar(50) NOT NULL,       -- Nom du personnage
     img varchar(50) NOT NULL        -- Nom de l'image (le modèle) du personnage stockée ailleurs
 );
 

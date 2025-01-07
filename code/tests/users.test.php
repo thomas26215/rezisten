@@ -58,6 +58,7 @@ try {
 
     // Test de la méthode delete
     print("Test de la méthode delete : ");
+    
     if (!User::delete($user->getId())) {
         throw new Exception("Échec de la suppression de l'utilisateur");
     }
