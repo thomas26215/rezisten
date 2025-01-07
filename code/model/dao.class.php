@@ -144,6 +144,7 @@ class DAO {
         try{
             $this->daoUtilitaire->prepare();
             $this->daoUtilitaire->execute();
+            return $this->daoUtilitaire->rowCount() > 0;
         }catch(PDOException $e){
             error_log($e->getMessage());
             return false;

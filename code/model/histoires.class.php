@@ -1,8 +1,8 @@
 <?php
 require_once(__DIR__ . "/dao.class.php");
 require_once(__DIR__ . "/users.class.php");
-require_once(__DIR__ . "/chapitre.class.php");
-require_once(__DIR__ . "/lieu.class.php");
+require_once(__DIR__ . "/chapitres.class.php");
+require_once(__DIR__ . "/lieux.class.php");
 
 
 
