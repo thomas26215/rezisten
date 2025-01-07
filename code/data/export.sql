@@ -49,19 +49,19 @@ INSERT INTO lieux VALUES (15, 'Fort de Queuleu', 'fort', 'Fort de la première c
 -- Data for Name: utilisateurs; Type: TABLE DATA; Schema: public; Owner: superrezi
 --
 
-INSERT INTO utilisateurs VALUES ('tritri', NULL, NULL, '2005-06-14', 'tritri@gmail.com', '1945lo1234', 'j');
+INSERT INTO utilisateurs VALUES (1, 'tritri', NULL, NULL, '2005-06-14', 'tritri@gmail.com', '1945lo1234', 'j');
 INSERT INTO utilisateurs VALUES (2, 'aiel', 'quentin', 'pingouin', '2005-10-12', 'aiel.gaming@gmail.com', 'lepgm2024du', 'j');
 INSERT INTO utilisateurs VALUES (3, 'jeanm', 'jean', 'mejean', '1978-10-31', 'jean.mejean@gmail.com', '12hist34prof ', 'c');
-INSERT INTO utilisateurs VALUES (4, 'admin_rezisten', NULL, NULL, '1999-09-12', 'admin.rezisten@rezisten.fr', 'jesuisadmin2025', 'a');
+INSERT INTO utilisateurs VALUES (4, 'admin_rezisten', 'admin', 'admin', '1999-09-12', 'admin.rezisten@rezisten.fr', 'jesuisadmin2025', 'a');
 
 
 --
 -- Data for Name: histoires; Type: TABLE DATA; Schema: public; Owner: superrezi
 --
 
-INSERT INTO histoires VALUES (1, 'Un jour de septembre', 0, 4, 3, 'hist0_bg.webp', NULL);
-INSERT INTO histoires VALUES (2, 'Une rencontre fortuite', 0, 4, 3, 'hist1_bg.webp', NULL);
-INSERT INTO histoires VALUES (3, 'Sabotage', 0, 4, 3, 'hist2_bg.webp', NULL);
+INSERT INTO histoires VALUES (1, 'Un jour de septembre', 0, 4, 8, 'hist0_bg.webp', true);
+INSERT INTO histoires VALUES (2, 'Une rencontre fortuite', 0, 4, 14, 'hist1_bg.webp', true);
+INSERT INTO histoires VALUES (3, 'Sabotage', 0, 4, 3, 'hist2_bg.webp', false);
 
 
 --
@@ -135,6 +135,43 @@ INSERT INTO dialogues VALUES (20, 1, 3, 'Je crois que j’ai entendu quelque cho
 INSERT INTO dialogues VALUES (21, 1, 1, 'La radio grésille jusqu''à ce que retentissent des mots que nous n’oublierions jamais.', false);
 INSERT INTO dialogues VALUES (22, 1, 9, 'Malgré nos efforts, nous avons été submergés par la force terrestre et aérienne de l''ennemi...', false);
 INSERT INTO dialogues VALUES (23, 1, 9, 'Dès demain matin, nous engageons la mobilisation générales des citoyens français dans ces combats.', false);
+INSERT INTO dialogues VALUES (1, 2, 10, '2 ans après la diffusion radio qui aura changé la vie de ces jeunes hommes....', false);
+INSERT INTO dialogues VALUES (2, 2, 10, 'Raymond dégage les fougères derrière lesquelles nous nous sommes cachés pour s''assurer que nous ne soyons pas repérés.', false);
+INSERT INTO dialogues VALUES (3, 2, 1, 'Ils arrivent bientôt ?  !', false);
+INSERT INTO dialogues VALUES (4, 2, 3, 'Sûrement, on est au point de rendez vous prévu de toute façon.', false);
+INSERT INTO dialogues VALUES (5, 2, 10, 'Cela va bientôt faire 1 heure que l’on attend nos contacts au point de rendez-vous pour qu’il nous
+délivre un certain colis. L’ordre de mission était arrivé au maquis ce matin : escorter deux refugiés en lieu sûr. L’ordre avait été émis par Mr Jean Moulin en personne. 10 h plus tard, nous nous retrouvions donc
+en forêt, cachés derrière des fougères à attendre.', false);
+INSERT INTO dialogues VALUES (6, 2, 10, 'Depuis maintenant 2 ans et demi nous avons perdu et la France est désormais coupée en deux. Au
+début, on se disait que cette situation serait temporaire, et puis ça a tenu et on a commencé a vivre avec.', false);
+INSERT INTO dialogues VALUES (7, 2, 10, 'C’est devenu notre quotidien, seulement éclairci par les apparitions occasionelles à la radio du Général de
+Gaulle. Jusqu’à ce qu’un jour je croise des lycéens de Valence distribuant des faux journaux pour ce qu’ils
+appellaient "La Résistance". Et c’est comme ça que nous avions rejoins le maquis voisin.', false);
+INSERT INTO dialogues VALUES (8, 2, 10, 'Nous avons d’abord été surtout assigné à des missions de moindre importance, et un jour mes
+connaissances de la région m''ont amené à devenir l''acteur principal des escortes qui devaient être réalisées.. Je suis donc devenu le
+guide qui doit ouvrir des voies pour les refugiés qui fuient le nord et l’occupation. Et
+aujourd’hui n’était pas une exception.', false);
+INSERT INTO dialogues VALUES (9, 2, 10, 'Soudain des bruits de pas nous sortent de notre torpeur...', false);
+INSERT INTO dialogues VALUES (10, 2, 3, 'Ce doit être eux.', false);
+INSERT INTO dialogues VALUES (11, 2, 10, 'Deux silouhettes se dessinent dans l’ombre et s’approchent de la lumière de notre lampe.
+Les deux visages que je vois apparaître m''était familières', false);
+INSERT INTO dialogues VALUES (12, 2, 3, 'Monsieur et Madame Vasseur ?', false);
+INSERT INTO dialogues VALUES (13, 2, 7, 'Jean ? Raymond ?', false);
+INSERT INTO dialogues VALUES (14, 2, 6, 'C’est vous mes garçons ? Ça pour une surprise !', false);
+INSERT INTO dialogues VALUES (15, 2, 10, 'Les parents de notre ami Pierre étaient apparus à notre lumiere. Nous pouvions facilement deviner leur première question.', false);
+INSERT INTO dialogues VALUES (16, 2, 6, 'Où est donc Pierre ?', false);
+INSERT INTO dialogues VALUES (17, 2, 10, 'Demanda Michel en balayant les alentours d''un regard attentif.', false);
+INSERT INTO dialogues VALUES (18, 2, 10, 'On a été séparés, mais il va bien ne vous inquiétez pas, vous le connaissez il se débrouille, il a eu sa
+propre mission avec André.', false);
+INSERT INTO dialogues VALUES (19, 2, 3, '', false);
+INSERT INTO dialogues VALUES (20, 2, 10, 'Rétorqua rapidement Jean pour rassurer les parents de notre ami.', false);
+INSERT INTO dialogues VALUES (21, 2, 1, 'Je suis désolé de vous interrompre, on doit partir rapidement pour éviter les patrouilles de la milice.', false);
+INSERT INTO dialogues VALUES (22, 2, 6, 'Allons-y !', false);
+INSERT INTO dialogues VALUES (23, 2, 10, 'En traversant la foret j’explique aux parents de Pierre comment on a ete amené à les retrouver,
+jusqu’à ce qu’un bruit me fasse m’interrompre.', false);
+INSERT INTO dialogues VALUES (24, 2, 3, 'Dans le buisson, maintenant !', false);
+INSERT INTO dialogues VALUES (25, 2, 10, 'Nous nous jettons tous les quatres dans un recoin caché derrière le buisson que je viens de pointer.
+Peu de temps après, des bruits de pas passent devant nous.', false);
 
 
 --

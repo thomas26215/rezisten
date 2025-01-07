@@ -126,7 +126,7 @@ class Place {
     }
     public static function delete($id){
         if($id > 0){
-            return DAO::getInstance()->deleteRelatedData("lieux", $id);
+            return DAO::getInstance()->deleteDatasById("lieux", $id);
             
         }
         return false;

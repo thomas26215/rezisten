@@ -96,7 +96,7 @@ class Demande {
 
     public static function delete($id_utilisateur) {
         if ($id_utilisateur > 0) { // Vérifier que l'ID est valide
-            return DAO::getInstance()->deleteRelatedData("demandes", (int)$id_utilisateur);
+            return DAO::getInstance()->deleteRelatedData("demandes", ["id_utilisateur" => (int)$id_utilisateur]);
         }
         
         return false; // Échec si l'ID n'est pas valide

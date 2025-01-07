@@ -36,21 +36,17 @@ class Chapter
 
     /* Méthodes CRUD et utilitaires sur la BDD */
 
-    // Lecture de tous les chapters pour l'affichage
-    public static function readchapters() : array {
+    public static function readAllchapters() : array {
         $dao = DAO::getInstance();
         $listchap = array();
-
-        $chapters = $dao->getColumnWithParameters("chaptires");
+        $chapters = $dao->getColumnWithParameters("chapitres", []);
         if(empty($chapters)){
             return null;
         }
-
         for($i = 0 ; $i < sizeof($chapters) ; $i++){
-            $chap =  new Chapitre($chapters[$i]['numchap'],$chapters[$i]['titre']);
+            $chap =  new Chapter($chapters[$i]['numchap'],$chapters[$i]['titre']);
             array_push($listchap,$chap);
         }
-
         return $listchap;
 
     }
@@ -91,9 +87,9 @@ class Chapter
     }
 
     // Suppresion du chapitre si celui-ci existe dans la base de données
-    public static function delete($id){
-        if($id > 0){
-            return DAO::getInstance()->deleteRelatedData("chapitres",$id);
+    public static function delete($num_chapter){
+        if($num_chapter > 0){
+            return DAO::getInstance()->deleteDatas("chapitres", ["numchap" => $num_chapter]);
         }
         return false;
     }

@@ -12,6 +12,8 @@ include_once(__DIR__. '/demandes.test.php');
 print("\ntest des lieux : \n\n");
 include_once(__DIR__. '/lieux.test.php');
 
+print("\ntest des Personnages : \n");
+include_once(__DIR__. '/personnages.test.php');
 
 
 
