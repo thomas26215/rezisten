@@ -59,5 +59,6 @@
         
         </section>
 </body>
+    <script src="./js/dyslexique.js"></script>
 
 </html>

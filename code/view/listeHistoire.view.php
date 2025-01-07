@@ -31,5 +31,6 @@
     <?php include_once 'footer.view.php'; ?>
 
 </body>
+    <script src="./js/dyslexique.js"></script>
 
 </html>

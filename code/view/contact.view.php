@@ -29,5 +29,6 @@
             </form>
         </main>
     </body>
+    <script src="./js/dyslexique.js"></script>
     <?php include_once("footer.view.php"); ?>
 </html>

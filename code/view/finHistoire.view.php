@@ -25,5 +25,6 @@ $nomLieuEspaceEnPlus = "prison de Montluc";
         </a>
     </main>
 </body>
+    <script src="./js/dyslexique.js"></script>
 
 </html>

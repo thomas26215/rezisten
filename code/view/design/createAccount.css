@@ -1,7 +1,5 @@
 body {
     background-image: var(--background-histoire);
-    background-size: cover;
-    font-family: 'Courier New', Courier;
     margin-inline: auto;
 }
 

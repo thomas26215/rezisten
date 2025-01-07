@@ -1,7 +1,6 @@
 body{
     display: flex;
     flex-direction: column;
-    font-family: 'Courier New', Courier, monospace;
     text-align: center;
     font-size: larger;
     background-image: var(--background-drapeau);
