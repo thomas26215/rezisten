@@ -10,7 +10,7 @@ require_once(__DIR__.'/../model/dao.class.php');
 try {
     // Test de création d'un lieu
 
-    $chapitre = new Chapitre(1,"Comment rater son école d'art");
+    $chapitre = new Chapter(1,"Comment rater son école d'art");
 
 
     // Test des getters
@@ -59,7 +59,7 @@ try {
         // Test de la méthode read
         print("Test de la méthode read : ");
 
-        $readChapitre = Chapitre::read($chapitre->getNumchap());
+        $readChapitre = Chapter::read($chapitre->getNumchap());
         if (!$readChapitre || $readChapitre->getTitle() !== $chapitre->getTitle()) {
             throw new Exception("Échec de la lecture du chapitre");
         }
@@ -68,7 +68,7 @@ try {
 /*         // Test de la méthode readchapters
 
         // Appel de la méthode à tester
-        $chapters = Chapitre::readchapters();
+        $chapters = Chapter::readchapters();
 
         // Vérification que la méthode retourne un tableau
         if (!is_array($chapters)) {
@@ -112,7 +112,7 @@ try {
         }
 
         
-        $updatedChapitre = Chapitre::read($chapitre->getNumchap());
+        $updatedChapitre = Chapter::read($chapitre->getNumchap());
         if ($updatedChapitre->getTitle() !== "titleModifié") {
             throw new Exception("La mise à jour n'a pas été effectuée correctement");
         }
