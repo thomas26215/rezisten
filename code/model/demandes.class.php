@@ -1,7 +1,7 @@
 <?php
 
 require_once(__DIR__ . "/dao.class.php");
-require_once(__DIR__ . "/users.php");
+require_once(__DIR__ . "/users.class.php");
 
 class Demande {
     private User $user;

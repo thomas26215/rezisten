@@ -7,19 +7,19 @@ require_once(__DIR__ . "/personnages.class.php");
 class Dialogue
 {
     private int $id;
-    private Histoire $histoire;
-    private Personnage $interlocuteur;
-    private string $contenu;
+    private story $story;
+    private Personnage $speaker;
+    private string $content;
     private boolean $bonus;
 
     private DAO $dao;
 
 
-    public function __construct(int $id, Histoire $histoire, Personnage $interlocuteur, string $contenu, boolean $bonus){
+    public function __construct(int $id, story $story, Personnage $speaker, string $content, boolean $bonus){
         $this->id = $id;
-        $this->histoire = $histoire;
-        $this->interlocuteur = $interlocuteur;
-        $this->contenu = $contenu;
+        $this->story = $story;
+        $this->speaker = $speaker;
+        $this->content = $content;
         $this->bonus = $bonus;
         $this->dao = DAO::getInstance();
     }
@@ -28,14 +28,14 @@ class Dialogue
     public function getId(){
         return $this->id;
     }
-    public function getHistoire(){
-        return $this->histoire;
+    public function getStory(){
+        return $this->story;
     }
-    public function getInterlocuteur(){
-        return $this->interlocuteur;
+    public function getSpeaker(){
+        return $this->speaker;
     }
-    public function getContenu(){
-        return $this->contenu;
+    public function getContent(){
+        return $this->content;
     }
     public function getBonus(){
         return $this->bonus;
@@ -46,53 +46,53 @@ class Dialogue
     public function setId(int $id){
         $this->id = $id;
     }
-    public function setHistoire(Histoire $histoire){
-        $this->histoire = $histoire;
+    public function setStory(story $story){
+        $this->story = $story;
     }
-    public function setInterlocuteur(Personnage $interlocuteur){
-        $this->interlocuteur = $interlocuteur;
+    public function setSpeaker(Personnage $speaker){
+        $this->speaker = $speaker;
     }
-    public function setContenu(string $contenu){
-        $this->contenu = $contenu;
+    public function setContent(string $content){
+        $this->content = $content;
     }
     public function setBonus(boolean $bonus){
         $this->bonus = $bonus;
     }
     
-    /* Méthodes CRUD et utilitaire sur les dialogues */
+    /* Méthodes CRUD et utilitaire sur les dialogs */
 
-    public static function getDialoguesFromHistoire(int $idHist) : array{
+    public static function getdialogsFromstory(int $idStory) : array{
         $dao = DAO::getInstance();
-        $listDialogues = array();
+        $listDialogs = array();
 
-        $dialogues = dao->getColumnWithParameters("dialogues", ["id_histoire" => $idHist]);
-        if(empty($dialogues)){
+        $dialogs = dao->getColumnWithParameters("dialogs", ["id_story" => $idStory]);
+        if(empty($dialogs)){
             return null;
         }
 
-        for($i = 0 ; $i < sizeof($dialogues) ; $i++){
-            $histoire = $dialogues[$i]['id'];
-            $interlocuteur = $dialogues[$i]['interlocuteur'];
+        for($i = 0 ; $i < sizeof($dialogs) ; $i++){
+            $story = $dialogs[$i]['id'];
+            $speaker = $dialogs[$i]['speaker'];
             $d = new Dialogue(
-                $dialogues[$i]['id'],
-                $histoire,
-                $interlocuteur,
-                $dialogues[$i]['contenu'],
-                $dialogues[$i]['bonus']
+                $dialogs[$i]['id'],
+                $story,
+                $speaker,
+                $dialogs[$i]['content'],
+                $dialogs[$i]['bonus']
             );
-            array_push($listDialogues,$d);
+            array_push($listdialogs,$d);
         }
 
-        return $listDialogues;
+        return $listdialogs;
     }
 
     // Ajout d'un dialogue à la base 
     public function create(){
-        if($this->dao->insertRelatedData("dialogues", [
+        if($this->dao->insertRelatedData("dialogs", [
             "id" => $this->id,
-            "id_histoire" => $this->histoire->getId(),
-            "interlocuteur" => $this->interlocuteur->getId(),
-            "contenu" => $this->contenu,
+            "id_story" => $this->story->getId(),
+            "speaker" => $this->speaker->getId(),
+            "content" => $this->content,
             "bonus" => $this->bonus
         ])){
             return true;
@@ -104,22 +104,22 @@ class Dialogue
     
 
 
-    // Modification d'un dialogue en connaissant son id et son histoire
+    // Modification d'un dialogue en connaissant son id et son story
     public function update(){
-        return $this->dao->update("dialogues", [
+        return $this->dao->update("dialogs", [
             "id" => $this->id,
-            "id_histoire" => $this->histoire->getId(),
-            "interlocuteur" => $this->interlocuteur->getId(),
-            "contenu" => $this->contenu,
+            "id_story" => $this->story->getId(),
+            "speaker" => $this->speaker->getId(),
+            "content" => $this->content,
             "bonus" => $this->bonus
-        ], ["id" => $this->id, "id_histoire" => $this->histoire->getId()]);
+        ], ["id" => $this->id, "id_story" => $this->story->getId()]);
     }
 
 
     //FIXME: ICI IL FAUT CHANGER LA METHODE CAR DEUX ARGUMENTS 
-    public static function delete($id, $idhist){
-        if($id > 0 && $idhist > 0){
-            return DAO::getInstance()->deleteRelatedData("dialogues",$id,$idhist);
+    public static function delete($id, $idStory){
+        if($id > 0 && $idStory > 0){
+            return DAO::getInstance()->deleteRelatedData("dialogs",$id,$idStory);
         }
     }
 }

@@ -5,13 +5,13 @@ require_once(__DIR__ . "/dao.class.php");
 class Chapitre
 {
     private int $numchap;
-    private string $titre;
+    private string $title;
 
     private DAO $dao;
 
-    public function __construct(int $numchap, string $titre){
+    public function __construct(int $numchap, string $title){
         $this->numchap = $numchap;
-        $this->titre = $titre;
+        $this->title = $title;
         $this->dao = DAO::getInstance(); // Initialise le dao pour les futures méthodes
     }
 
@@ -20,8 +20,8 @@ class Chapitre
         return $this->numchap;
     }
 
-    public function getTitre(){
-        return $this->titre;
+    public function gettitle(){
+        return $this->title;
     }
 
     /* Ensemble des setters */
@@ -29,29 +29,29 @@ class Chapitre
         $this->numchap = $numchap;
     }
 
-    public function setTitre(string $titre){
-        $this->titre = $titre;
+    public function settitle(string $title){
+        $this->title = $title;
     }
 
 
     /* Méthodes CRUD et utilitaires sur la BDD */
 
-    // Lecture de tous les chapitres pour l'affichage
-    public static function readChapitres() : array {
+    // Lecture de tous les chapters pour l'affichage
+    public static function readchapters() : array {
         $dao = DAO::getInstance();
-        $listechap = array();
+        $listchap = array();
 
-        $chapitres = $dao->getColumnWithParameters("chapitres");
-        if(empty($chapitres)){
+        $chapters = $dao->getColumnWithParameters("chaptires");
+        if(empty($chapters)){
             return null;
         }
 
-        for($i = 0 ; $i < sizeof($chapitres) ; $i++){
-            $chap =  new Chapitre($chapitres[$i]['numchap'],$chapitres[$i]['titre']);
-            array_push($listechap,$chap);
+        for($i = 0 ; $i < sizeof($chapters) ; $i++){
+            $chap =  new Chapitre($chapters[$i]['numchap'],$chapters[$i]['titre']);
+            array_push($listchap,$chap);
         }
 
-        return $listechap;
+        return $listchap;
 
     }
 
@@ -60,7 +60,7 @@ class Chapitre
         // Insérer le chapitre dans la base et vérifier si cela fonctionne
         if($this->dao->insertRelatedData("chapitres", [ 
             "numchap" => $this->numchap,
-            "titre" => $this->titre
+            "titre" => $this->title
         ])){
             return true;
         }
@@ -73,10 +73,10 @@ class Chapitre
         $dao = DAO::getInstance();
         // Lecture des données depuis la base
         if($chap = $dao->getColumnWithParameters("chapitres", ["numchap" => (int)$id])){
-            $row = $chap[0];
+            $chapData = $chap[0];
             return new Chapitre(
-                $row['numchap'],
-                $row['titre']
+                $chapData['numchap'],
+                $chapData['titre']
             );
         }
         return null;
@@ -86,7 +86,7 @@ class Chapitre
     public function update(){
         return $this->dao->update("chapitres", [
             "numchap" => $this->numchap,
-            "titre" => $this->titre
+            "titre" => $this->title
         ], ["numchap" => $this->numchap]);
     }
 
