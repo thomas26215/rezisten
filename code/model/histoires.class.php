@@ -102,7 +102,7 @@ class Story
     }
 
     // Accéder aux données d'une histoire à partir de son id
-    public static function read($id) : Histoire{
+    public static function read($id) : Story{
         $dao = DAO::getInstance();
 
         //Récupère les données de l'histoire depuis la base

@@ -72,6 +72,36 @@ try {
              }
              print("OK\n");
 
+    print("Test de la méthode create : ");
+    try{
+        $dialogue->create();
+        print("La création a réussi\n");
+    }catch(Exception $e){
+        print("La création a échouée\n");
+    }
+
+    print("Test de la méthode update : ");
+    try{
+        $dialogue->update();
+        print("L'update a réussi\n");
+    }catch(Exception $e){
+        print("L'update a échouée\n");
+    }
+
+    print("Test de la méthode getDialogsFromStory");
+    try{
+        $hist = Story::read(2);
+        $expectedAmount = Dialog::countDialogs($hist->getId());
+        $amount = sizeof(Dialogs::getdialogsFromstory($hist->getId()));
+        if($amount != $expectedAmount){
+            print("Le nombre est incorrect");
+        }else{
+            print("Le nombre de dialogues est correct");
+        }
+
+    }catch(Exception $e){
+        print("Les dialogues n'ont pas pu être lus");
+    }
     
 
 
