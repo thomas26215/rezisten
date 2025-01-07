@@ -47,6 +47,7 @@ button {
     clip-path: polygon(28% 0%, 72% 0%, 100% 50%, 72% 100%, 28% 100%, 0% 50%);
     /* Forme du bouton */
     font-size: 20px;
+    cursor: pointer;
 }
 
 button::before {
@@ -67,6 +68,10 @@ button::before {
 
 .button-beige::before {
     background-color: var(--beige);
+}
+
+.button-beige, .button-gris {
+    color: var(--noir);
 }
 
 .button-rouge::before {
