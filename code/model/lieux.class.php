@@ -88,15 +88,18 @@ class Place {
             "commune" => $this->city,
             "coordonnee" => $this->coordinates,
         ])) {
-            $this->setId($this->dao->getLastInsertId("lieux")[0]["last_id"]);
+            $lastId = $this->dao->getLastInsertId("lieux");
+        if (isset($lastId[0]["last_id"]) && is_numeric($lastId[0]["last_id"])) {
+            $this->setId((int)$lastId[0]["last_id"]);
             return true;
+        }
         }return false;
     }
 
     public static function read($id){
         $dao = DAO::getInstance();
         if($lieuData = $dao->getColumnWithParameters("lieux", ["id" => (int)$id])){
-            return new Lieu(
+            return new Place(
                 $lieuData[0]["nom"],
                 $lieuData[0]["type_lieu"],
                 $lieuData[0]["description"],

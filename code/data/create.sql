@@ -34,7 +34,7 @@ CREATE TABLE LIEUX (
 -- Table des chapitres 
 CREATE TABLE CHAPITRES (
     numchap INT PRIMARY KEY,                  -- Numéro unique pour chaque chapitre 
-    titre VARCHAR(50) NOT NULL,                -- Titre du chapitre 
+    titre VARCHAR(50) NOT NULL                -- Titre du chapitre 
 );
 
 -- Table des histoires associées aux chapitres

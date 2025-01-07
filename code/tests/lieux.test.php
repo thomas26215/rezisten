@@ -10,7 +10,7 @@ require_once(__DIR__.'/../model/dao.class.php');
 try {
     // Test de création d'un lieu
 
-    $lieu = new Lieu("iut" ,"batiment" ,"Endoit où l'on a cour", "38000" , "0.0");
+    $lieu = new Place("iut" ,"batiment" ,"Endoit où l'on a cour", "38000" , "0.0");
 
 
     // Test des getters
@@ -19,8 +19,8 @@ try {
         ['method' => 'getName', 'expected' => "iut"],
         ['method' => 'getPlaceType', 'expected' => "batiment"],
         ['method' => 'getDescription', 'expected' => "Endoit où l'on a cour"],
-        ['method' => 'getCommune', 'expected' => "38000"],
-        ['method' => 'getCoordonnees', 'expected' => "0.0"]];
+        ['method' => 'getCity', 'expected' => "38000"],
+        ['method' => 'getCoordinates', 'expected' => "0.0"]];
 
         foreach ($testGetters as $test) {
             $value = $lieu->{$test['method']}();
@@ -36,14 +36,14 @@ try {
      // Test des setters
      print("Test des setters : ");
 
-        $lieu->setCommune("NewCommune");
-        $lieu->setCoordonnees("newCoordonnées");
+        $lieu->setCity("NewCommune");
+        $lieu->setCoordinates("newCoordonnées");
         $lieu->setDescription("Newdescription");
         $lieu->setName("NewName");
         $lieu->setPlaceType("NewType");
 
-        if ( $lieu->getCommune() !== "NewCommune" ||
-             $lieu->getCoordonnees() !== "newCoordonnées" ||
+        if ( $lieu->getCity() !== "NewCommune" ||
+             $lieu->getCoordinates() !== "newCoordonnées" ||
              $lieu->getDescription() !== "Newdescription" ||
              $lieu->getName() !== "NewName" ||
              $lieu->getPlaceType() !== "NewType" )
@@ -67,7 +67,7 @@ try {
         // Test de la méthode read
         print("Test de la méthode read : ");
 
-        $readLieux = Lieu::read($lieu->getId());
+        $readLieux = Place::read($lieu->getId());
         if (!$readLieux || $readLieux->getName() !== $lieu->getName()) {
             throw new Exception("Échec de la lecture du lieu");
         }
@@ -83,7 +83,7 @@ try {
         }
 
         
-        $updatedLieu = Lieu::read($lieu->getId());
+        $updatedLieu = Place::read($lieu->getId());
         if ($updatedLieu->getName() !== "iutModifié") {
             throw new Exception("La mise à jour n'a pas été effectuée correctement");
         }
@@ -95,12 +95,12 @@ try {
     print("Test de la méthode delete : ");
     $idToDelete = $lieu->getId();
 
-    if (!Lieu::delete($idToDelete)) {
+    if (!Place::delete($idToDelete)) {
         throw new Exception("Échec de la suppression du lieu");
     }
 
     // Vérifier que le lieu a bien été supprimé
-    $deletedLieu = Lieu::read($idToDelete);
+    $deletedLieu = Place::read($idToDelete);
     if ($deletedLieu !== null) {
         throw new Exception("Le lieu n'a pas été supprimé correctement");
     }
