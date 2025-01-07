@@ -107,8 +107,6 @@ try {
     print("OK\n");
 
 
-    print("Tous les tests ont réussi !\n");
-
     
 
     

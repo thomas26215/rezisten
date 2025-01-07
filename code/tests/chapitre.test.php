@@ -138,24 +138,7 @@ try {
     print("OK\n");
 */
 
-    print("Tous les tests ont réussi , pour l'instant c'est faux ! \n");
  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     } catch (Exception $e) {
