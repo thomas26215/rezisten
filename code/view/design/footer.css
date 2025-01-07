@@ -19,7 +19,7 @@ footer>article{
 }
 
 footer>img {
-    background-color: #ebe6d6;
+    background-color: var(--beige-ecriture);
     width: 15%;
     height: auto;
     padding-bottom: 0%;

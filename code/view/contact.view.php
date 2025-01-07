@@ -12,7 +12,7 @@
             <article>
                 <section>
                     <label for="mail">Adresse mail :</label>
-                    <input type="text" id="mail" name="mail" value="" required>
+                    <input type="text" id="mail" name="mail" value="" required  placeholder="jean@gmail.com" >
                 </section>
                 <section>
                     <label for="objet">Objet :</label>
