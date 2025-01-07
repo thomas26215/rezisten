@@ -16,7 +16,7 @@ class User {
     private DAO $dao;
 
     public function __construct(string $username, string $first_name, string $surname, string $birth_date, string $mail, string $password, string $role, int $id = -1) {
-        $this->id = -1; // ID sera défini lors de l'insertion dans la base de données
+        $this->id = $id; // ID sera défini lors de l'insertion dans la base de données
         $this->username = $username;
         $this->first_name = $first_name;
         $this->surname = $surname;
@@ -111,7 +111,6 @@ class User {
             "role" => $this->role,
         ])) {
             // Récupérer l'ID généré et l'assigner à l'objet User
-            var_dump($this->dao->getLastInsertId("utilisateurs")[0]["last_id"]);
             $this->setId($this->dao->getLastInsertId("utilisateurs")[0]["last_id"]);
             return true; // Insertion réussie
         }
@@ -119,14 +118,13 @@ class User {
         return false; // Échec de l'insertion
     }
 
-//FIXME: ajouter le type de retour
-
     // Lire un utilisateur par ID
     public static function read($id) {
         $dao = DAO::getInstance();
         // Récupérer les données de l'utilisateur depuis la base de données
         if ($userData = $dao->getColumnWithParameters("utilisateurs", ["id" => (int)$id])) {
             return new User(
+                //FIXME: Pour toutes les fonctions : créer une variable $userDatas = $userData[0];
                 $userData[0]["pseudo"],
                 $userData[0]["prenom"],
                 $userData[0]["nom"],
@@ -148,7 +146,7 @@ class User {
                 "pseudo" => $this->username,
                 "prenom" => $this->first_name,
                 "nom" => $this->surname,
-                "datenaiss" => $this->birth_date,
+                "date_naissance" => $this->birth_date,
                 "mail" => $this->mail,
                 "mot_de_passe" => password_hash($this->password, PASSWORD_DEFAULT), // Hash le nouveau mot de passe si modifié
                 "role" => $this->role,

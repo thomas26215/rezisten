@@ -74,7 +74,7 @@ class Chapter
         // Lecture des données depuis la base
         if($chap = $dao->getColumnWithParameters("chapitres", ["numchap" => (int)$id])){
             $chapData = $chap[0];
-            return new Chapitre(
+            return new Chapter(
                 $chapData['numchap'],
                 $chapData['titre']
             );

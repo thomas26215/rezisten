@@ -104,7 +104,6 @@ class Question {
         return false;
     }
     
-    public function delete($id_history)
 
 }
 

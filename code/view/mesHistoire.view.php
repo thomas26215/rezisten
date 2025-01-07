@@ -12,13 +12,13 @@
     <main>
         <h1>Mes histoires</h1>
 
-        <div>
-            <p>Publiées : </p>
+        <div class="histoires">
+            <p class="titres">Publiées : </p>
             <div class="container">
                 <p>Titre</p>
-                <div>
-                    <img src="design/image/modifier.png" alt="Modifier">
-                    <img src="design/image/poubelle.png" alt="supprimer">
+                <div >
+                    <img class="modif" src="design/image/modifier.png" alt="Modifier">
+                    <img class="poubelle" src="design/image/poubelle.png" alt="supprimer">
                 </div>
             </div>
             <div class="container">
@@ -29,8 +29,8 @@
                 </div>
             </div>
         </div>
-        <div>
-            <p>Sauvegardées : </p>
+        <div class="histoires after">
+            <p class="titres">Sauvegardées : </p>
             <div class="container">
                 <p>Titre</p>
                 <div>
@@ -45,9 +45,10 @@
                     <img src="design/image/poubelle.png" alt="supprimer">
                 </div>
             </div>
+            
         </div>
         <a href="ajouterDialogue.view.php">
-            <button>Créer une histoire</button>
+            <button class="creer">Créer une histoire</button>
         </a>
     </main>
 </body>
