@@ -45,7 +45,7 @@ CREATE TABLE HISTOIRES (
     createur INTEGER,                         -- Référence à l'identifiant du créateur dans la table CREATEURS
     id_lieu INTEGER,                         -- Référence à l'identifiant du lieu dans la table LIEUX
     background varchar(50) NOT NULL,         -- Nom de l'image d'arrière plan de l'histoire stockée sur le serveur web
-    visible boolean                             -- vrai si le chapitre a été validé, faux sinon
+    visible boolean,                             -- vrai si le chapitre a été validé, faux sinon
     FOREIGN KEY (id_lieu) REFERENCES LIEUX(id),  -- Clé étrangère référencée à la table LIEUX
     FOREIGN KEY (numchap) REFERENCES CHAPITRES(numchap),  -- Clé étrangère référencée à la table CHAPITRES
     FOREIGN KEY (createur) REFERENCES UTILISATEURS(id)   -- Clé étrangère référencée à la table CREATEURS
