@@ -65,40 +65,10 @@ try {
         }
         print("OK\n");
         
-/*         // Test de la méthode readchapters
 
-        // Appel de la méthode à tester
-        $chapters = Chapter::readchapters();
+        //TODO: Ajouter les test pour la méthode readAllChapters        
 
-        // Vérification que la méthode retourne un tableau
-        if (!is_array($chapters)) {
-            throw new Exception("La méthode readchapters ne retourne pas un tableau");
-        }
-
-        // Vérification que le tableau n'est pas vide
-        if (empty($chapters)) {
-            throw new Exception("La méthode readchapters retourne un tableau vide");
-        }
-
-        // Vérification que chaque élément du tableau est une instance de Chapitre
-        foreach ($chapters as $chapter) {
-            if (!($chapter instanceof Chapitre)) {
-                throw new Exception("Un élément du tableau n'est pas une instance de Chapitre");
-            }
-        }
-
-        // Vérification des propriétés de chaque chapitre
-        foreach ($chapters as $chapter) {
-            if (empty($chapter->getNumchap()) || empty($chapter->getTitre())) {
-                throw new Exception("Un chapitre a des propriétés manquantes ou vides");
-            }
-        }
-
-        print("OK\n");
-        print("Nombre de chapitres récupérés : " . count($chapters) . "\n");
-
-
- */
+ 
 
 
         //Test de la méthode update
@@ -120,23 +90,23 @@ try {
         print("OK\n");
 
             // Test de la méthode delete
-   /* print("Test de la méthode delete : ");
+    print("Test de la méthode delete : ");
 
 
 
     $idToDelete = $chapitre->getNumchap();
 
-    if (!Chapitre::delete($idToDelete)) {
+    if (!Chapter::delete($idToDelete)) {
         throw new Exception("Échec de la suppression du chapitre");
     }
 
      // Vérifier que le chapitre a bien été supprimé
-    $deletedChapitre = Chapitre::read($idToDelete);
+    $deletedChapitre = Chapter::read($idToDelete);
     if ($deletedChapitre !== null) {
         throw new Exception("Le chapitre n'a pas été supprimé correctement");
     }
     print("OK\n");
-*/
+
 
  
 
