@@ -85,7 +85,7 @@ class Character {
     public static function read(int $id){
         $dao = DAO::getInstance();
         if($characterData = $dao->getColumnWithParameters("personnages", ["id" => $id])){
-            characterDatas = $characterData[0];
+            $characterDatas = $characterData[0];
             return new Character(
                 $characterDatas["prenom"],
                 $characterDatas["nom"],
