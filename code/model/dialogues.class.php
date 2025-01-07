@@ -4,7 +4,7 @@ require_once(__DIR__ . "/histoires.class.php");
 require_once(__DIR__ . "/personnages.class.php");
 
 
-class Dialogue
+class Dialog
 {
     private int $id;
     private story $story;
