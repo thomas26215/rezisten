@@ -7,9 +7,7 @@ require_once(__DIR__.'/../model/dao.class.php');
 try {
     // Test de création d'un lieu
 
-    $lieu = new
-
-
+    $lieu = new 
 
 
 

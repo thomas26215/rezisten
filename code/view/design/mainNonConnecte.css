@@ -1,0 +1,24 @@
+main {
+    background-image: var(--background-drapeau);
+    width: 100vw;
+    gap: 20px;
+    min-height: calc(100vh - var(--height-footer));
+}
+
+button {
+    width: 400px
+}
+
+
+
+.title {
+    font-size: 2em;
+    margin-right: 10px;
+    position: relative;
+    top: -50px;
+    left: 50px;
+}
+
+#logo{
+    width:500px ;
+}

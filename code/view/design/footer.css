@@ -14,7 +14,7 @@ footer>article{
     padding: 0%;
     height: 1%;
     border: none;
-    max-height:150px ;
+    max-height:var(--height-footer); ;
 
 }
 
@@ -23,7 +23,7 @@ footer>img {
     width: 15%;
     height: auto;
     padding-bottom: 0%;
-    max-height:150px ;
+    max-height:var(--height-footer) ;
 
 }
 
