@@ -59,9 +59,9 @@ INSERT INTO utilisateurs VALUES (4, 'admin_rezisten', 'admin', 'admin', '1999-09
 -- Data for Name: histoires; Type: TABLE DATA; Schema: public; Owner: superrezi
 --
 
-INSERT INTO histoires VALUES (1, 'Un jour de septembre', 0, 4, 8, 'hist0_bg.webp', NULL);
-INSERT INTO histoires VALUES (2, 'Une rencontre fortuite', 0, 4, 14, 'hist1_bg.webp', NULL);
-INSERT INTO histoires VALUES (3, 'Sabotage', 0, 4, 3, 'hist2_bg.webp', NULL);
+INSERT INTO histoires VALUES (1, 'Un jour de septembre', 0, 4, 8, 'hist0_bg.webp', true);
+INSERT INTO histoires VALUES (2, 'Une rencontre fortuite', 0, 4, 14, 'hist1_bg.webp', true);
+INSERT INTO histoires VALUES (3, 'Sabotage', 0, 4, 3, 'hist2_bg.webp', false);
 
 
 --

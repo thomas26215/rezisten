@@ -68,7 +68,7 @@ class Dialog
         $dao = DAO::getInstance();
         $listDialogs = array();
 
-        $dialogs = dao->getColumnWithParameters("dialogues", ["id_histoire" => $idStory]);
+        $dialogs = DAO::getInstance()->getColumnWithParameters("dialogues", ["id_histoire" => $idStory]);
         if(empty($dialogs)){
             throw new Exception("Aucun dialogue correspondat à l'histoire numéro ".$idStory);
         }
@@ -88,9 +88,9 @@ class Dialog
 
         return $listdialogs;
     }
-
+//FIXME: Fixer la fonction
     // Méthode utilitaire pour les tests permettant de compter les dialogues d'une histoire
-    public static function countDialogs(int $idStory) : int{
+    /*public static function countDialogs(int $idStory) : int{
         $daoUtilitaire = DAO::getInstance()->getUtilitaire();
         $query = $daoUtilitaire->prepare("SELECT count(*) FROM dialogues WHERE id_histoire = :idStory");
         $query->execute([":idStory" => $idStory]);
@@ -99,7 +99,7 @@ class Dialog
 
         return $result;
 
-    }
+    }*/
 
     // Ajout d'un dialogue à la base 
     public function create(){
