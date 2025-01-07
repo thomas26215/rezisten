@@ -2,6 +2,13 @@ body {
     background-image: var(--background-histoire);
     background-size: cover;
     margin-inline: auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+main {
     min-height: calc(100vh- var(--height-header) - var(--height-footer));
 }
 
@@ -16,7 +23,7 @@ body {
     right: 20px;
 }
 
-.profilHead img{
+.profilHead img {
     border: 3px solid var(--noir);
     height: 10rem;
 }
@@ -41,8 +48,8 @@ body {
 }
 
 form {
-    background-color: var(--beige) ;
-    display: flex; 
+    background-color: var(--beige);
+    display: flex;
     flex-direction: column;
     border: 3px solid var(--noir);
     width: fit-content;
@@ -82,6 +89,3 @@ form div input {
     height: 6rem;
     width: 25rem;
 }
-
-
-
