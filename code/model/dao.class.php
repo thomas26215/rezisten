@@ -132,20 +132,41 @@ class DAO {
     }
     
     /**
-     * Supprime les données liées à un utilisateur dans une table spécifique.
+     * Supprime des données d'une table en fonction de l'identifiant spécifié.
      *
      * @param string $table Le nom de la table.
-     * @param int $userId L'identifiant de l'utilisateur.
-     * @return bool Retourne true si la suppression est réussie, false sinon.
-     * @note $dao->deleteRelatedData("users", 140);
+     * @param int $userId L'identifiant de l'utilisateur à supprimer.
+     * @return bool Retourne true si la suppression réussit, false sinon.
      */
-    public function deleteRelatedData($table, $userId) {
-        $this->setUtilitaire("DELETE FROM $table WHERE id = :userId", ['userId' => $userId]);
-        try{
+    public function deleteDatasById($table, $userId) {
+        return $this->deleteDatas($table, ['id' => $userId]);
+    }
+
+    /**
+     * Supprime des données d'une table en fonction des conditions spécifiées.
+     *
+     * @param string $table Le nom de la table.
+     * @param array $conditions Un tableau associatif des conditions de suppression.
+     * @return bool Retourne true si la suppression réussit, false sinon.
+     * @throws Exception Si les conditions sont vides.
+     */
+    public function deleteDatas($table, array $conditions) {
+        if (empty($conditions)) {
+            throw new Exception("Les conditions ne peuvent pas être vides.");
+        }
+        
+        try {
+            $this->setUtilitaire("", $conditions);
+            list($whereClause, $values) = $this->daoUtilitaire->buildWhereClause($conditions); // Correction ici
+           $query = "DELETE FROM $table";
+            if(!empty($whereClause)) {
+                $query .= " WHERE $whereClause";
+            }
+            $this->setUtilitaire($query, $values);
             $this->daoUtilitaire->prepare();
             $this->daoUtilitaire->execute();
             return $this->daoUtilitaire->rowCount() > 0;
-        }catch(PDOException $e){
+        } catch (PDOException $e) {
             error_log($e->getMessage());
             return false;
         }
