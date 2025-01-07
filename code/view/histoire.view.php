@@ -31,7 +31,7 @@
                 <h2 class="speaker"> $Name1 </h2>
             </div>
 
-            <p class="text"> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            <p class="text"> Je suis libertine, je suis une catin. Je suis une putain, une chienne, une garce.
                 Nam mattis sed est eu efficitur. Fusce vitae congue arcu, et rhoncus magna.
                 Suspendisse eget eleifend ante. Suspendisse facilisis, orci egestas molestie interdum,
                 odio massa ultrices ligula, eget accumsan justo erat id purus.
@@ -46,9 +46,6 @@
 
         </section>
     </article>
-
-    <img src="./design/image/logo.png" alt="Logo" class="logo">
-
 
 </body>
 <script src="./js/machineAEcrire.js"></script>
