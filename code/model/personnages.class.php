@@ -61,7 +61,7 @@ class Character {
             "img" => $this->image,
         ])){
             //TODO: Quand je récupère le dernier ID et qu'il n'y a aucune ligne dans la BDD, est ce que ça vérifie dans le dao si ça renvoie 0 s'il n'y a aucune ligne ?
-            $this->setId($this->dao->getLastInsertId("utilisateurs")[0]["last_id"]);
+            $this->setId($this->dao->getLastInsertId("personnages")[0]["last_id"]);
             return true;
         }
         return false;
