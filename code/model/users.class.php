@@ -67,6 +67,9 @@ class User {
     }
 
     public function setUsername(string $username): void {
+        if($username === ""){
+            throw new Exception("Le nom d'utilisateur ne peut pas être null");
+        }
         $this->username = $username;
     }
 
@@ -78,24 +81,39 @@ class User {
         $this->surname = $surname;
     }
 
-    // ! Le format de la date de naissance doit être jj:mm:aaaa
+    // ! Le format de la date de naissance doit être jj/mm/aaaa
     public function setBirthDate(string $birth_date): void {
-        if($birth_date <= 16) {
-            $this->birth_date = $birth_date;
-        }else{
-            throw Exception("L'utilisateur doit avoir plus de 16 ans !");
+        if($birth_date === ""){
+            throw new Exception("La date de naissance ne peut pas être null");
         }
+        $array = explode("/", $birth_date);
+        if(count($array) != 3) {
+            throw new Exception("La date d'anniversaire n'est pas de bon format");
+        }
+        if((int)date("Y")-(int)$array[2] < 16){
+            throw new Exception("L'utilisateur doit avoir + que 16 ans");
+        }
+        $this->birth_date = $birth_date;
     }
 
     public function setMail(string $mail): void {
+        if($mail === ""){
+            throw new Exception("Le mail ne peut pas être null");
+        }
         $this->mail = $mail;
     }
 
     public function setPassword(string $password): void {
+        if($password === ""){
+            throw new Exception("Le mot de passe ne peut pas être null");
+        }
         $this->password = password_hash($password, PASSWORD_DEFAULT);
     }
 
     public function setRole(string $role): void {
+        if($role === "") {
+            throw new Exception("Le rôle ne peut pas être null");
+        }
         $this->role = $role;
     }
 
@@ -103,78 +121,62 @@ class User {
 
     
     public function create(): bool {
-        try {
-            if ($this->dao->insertRelatedData("utilisateurs", [
-                "pseudo" => $this->username,
-                "prenom" => $this->first_name,
-                "nom" => $this->surname,
-                "datenaiss" => $this->birth_date,
-                "mail" => $this->mail,
-                "mot_de_passe" => $this->password,
-                "role" => $this->role,
-            ])) {
-                $lastId = $this->dao->getLastInsertId("utilisateurs");
-                if (!empty($lastId) && isset($lastId[0]["last_id"])) {
-                    $this->setId($lastId[0]["last_id"]);
-                    return true;
-                }
+        if ($this->dao->insertRelatedData("utilisateurs", [
+            "pseudo" => $this->username,
+            "prenom" => $this->first_name,
+            "nom" => $this->surname,
+            "datenaiss" => $this->birth_date,
+            "mail" => $this->mail,
+            "mot_de_passe" => $this->password,
+            "role" => $this->role,
+        ])) {
+            $lastId = $this->dao->getLastInsertId("utilisateurs");
+            if (!empty($lastId) && isset($lastId[0]["last_id"])) {
+                $this->setId($lastId[0]["last_id"]);
+                return true;
             }
-            return false;
-        } catch (PDOException $e) {
-            throw $e;
         }
+        return false;
     }
 
     public static function read(int $id): ?User {
-        try {
-            $dao = DAO::getInstance();
-            $userData = $dao->getColumnWithParameters("utilisateurs", ["id" => $id]);
-            if (!empty($userData)) {
-                return new User(
-                    $userData[0]["pseudo"],
-                    $userData[0]["prenom"],
-                    $userData[0]["nom"],
-                    $userData[0]["datenaiss"],
-                    $userData[0]["mail"],
-                    "",
-                    $userData[0]["role"],
-                    $userData[0]["id"]
-                );
-            }
-            return null;
-        } catch (DAOException $e) {
-            throw new DAOException("Erreur lors de la lecture de l'utilisateur : " . $e->getMessage());
+        $dao = DAO::getInstance();
+        $userData = $dao->getColumnWithParameters("utilisateurs", ["id" => $id]);
+        if (!empty($userData)) {
+            return new User(
+                $userData[0]["pseudo"],
+                $userData[0]["prenom"],
+                $userData[0]["nom"],
+                $userData[0]["datenaiss"],
+                $userData[0]["mail"],
+                "",
+                $userData[0]["role"],
+                $userData[0]["id"]
+            );
         }
+        return null;
     }
 
     public function update(): bool {
         if ($this->id === -1) {
             throw new DAOException("Impossible de mettre à jour un utilisateur sans ID valide.");
         }
-        try {
-            return $this->dao->update("utilisateurs", [
-                "pseudo" => $this->username,
-                "prenom" => $this->first_name,
-                "nom" => $this->surname,
-                "datenaiss" => $this->birth_date,
-                "mail" => $this->mail,
-                "mot_de_passe" => $this->password,
-                "role" => $this->role,
-            ], ["id" => $this->id]) > 0;
-        } catch (DAOException $e) {
-            throw new DAOException("Erreur lors de la mise à jour de l'utilisateur : " . $e->getMessage());
-        }
-    }
+        return $this->dao->update("utilisateurs", [
+            "pseudo" => $this->username,
+            "prenom" => $this->first_name,
+            "nom" => $this->surname,
+            "datenaiss" => $this->birth_date,
+            "mail" => $this->mail,
+            "mot_de_passe" => $this->password,
+            "role" => $this->role,
+        ], ["id" => $this->id]) > 0;
+    } 
 
     public static function delete(int $id): bool {
         if ($id <= 0) {
             throw new DAOException("ID d'utilisateur invalide pour la suppression.");
         }
-        try {
-            return DAO::getInstance()->deleteDatasById("utilisateurs", $id);
-        } catch (DAOException $e) {
-            throw new DAOException("Erreur lors de la suppression de l'utilisateur : " . $e->getMessage());
-        }
+        return DAO::getInstance()->deleteDatasById("utilisateurs", $id);
     }
 }
 

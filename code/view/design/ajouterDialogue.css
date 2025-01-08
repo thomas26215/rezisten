@@ -14,12 +14,12 @@
 }
 
 .content form>:nth-child(2) textarea{ /* Pour la partie du dialogue */
-    height: 20vw;
-    width: 260%;
-    /*min-width: 100%;*/
-    max-width: 400%;
+    height: 20vh;
+    width: 55vw;
+    min-width: 20vw;
+    max-width: 55vw;
     min-height: 100%;
-    /*max-height: 500px;*/
+    max-height: 50vh;
 }
 
 .content form :last-child{ /* Pour la partie du dialogue */

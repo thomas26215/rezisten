@@ -3,12 +3,11 @@
 
 <head>
     <link rel="icon" href="favicon.ico" type="image/x-icon">    
-    <link rel="icon" href="favicon.ico" type="image/x-icon">    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rézisten</title>
     <link rel="stylesheet" href="./design/global.css">
-    <link rel="stylesheet" href="./design/headerCreation.css">
+    <link rel="stylesheet" href="./design/creation.css">
 </head>
 
 <body>
@@ -49,9 +48,10 @@
             </section>
 
             <?php
-            /* CHANGER EN FONCTION DE CONTROLEUR 
-            /*include_once 'ajouterDialogue.view.php'; */
-            include_once 'ajouterQuestion.view.php';
+            /* CHANGER EN FONCTION DE CONTROLEUR */
+            /*include_once 'ajouterDialogue.view.php';*/ 
+            /*include_once 'ajouterQuestion.view.php'; */
+            include_once 'afficherHistoire.view.php';
             ?>
 
             <section class="footer">

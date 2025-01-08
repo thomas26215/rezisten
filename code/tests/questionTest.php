@@ -72,6 +72,64 @@ try {
             print("OK\n");
 
 
+        // Test de la méthode create
+            print("Test de la méthode create : ");
+                
+            if (!$questions->create()) {
+                throw new Exception("Échec de la création d'une question");
+            }
+
+        print("OK\n");
+
+
+        // Test de la méthode read
+        print("Test de la méthode read : ");
+
+            $readQuestion = Question::read($questions->getHistory()->getId() , $questions->getType());
+            if (!$readQuestion) {
+                throw new Exception("Échec de la lecture de la question : Question non trouvée");
+            }
+            if (!$readQuestion|| $readQuestion->getQuestion()!== $questions->getQuestion()) {
+                throw new Exception("Échec de la lecture de la question : Les questions ne correspondent pas. 
+                Attendu : '{$questions->getQuestion()}', Obtenu : '{$readQuestion->getQuestion()}'");
+        }
+        print("OK\n");
+
+
+
+
+        //Test de la méthode update
+            print("Test de la méthode update : ");
+            $questions->setQuestion("QuestionModifié");
+            
+            if (!$questions->update()) {
+                throw new Exception("Échec de la mise à jour de la questions");
+            }
+
+            
+            $updatedQuestion = Question::read($questions->getHistory()->getId() , $questions->getType());
+            if ($updatedQuestion->getQuestion() !== "QuestionModifié") {
+                throw new Exception("La mise à jour n'a pas été effectuée correctement");
+            }
+
+        print("OK\n");
+
+
+
+            // Test de la méthode delete
+            print("Test de la méthode delete : ");
+                $idToDelete = $questions->getHistory()->getId();
+
+                if (!Question::delete($idToDelete ,$questions->getType())) {
+                    throw new Exception("Échec de la suppression de la question");
+                }
+
+                // Vérifier que la question a bien été supprimé
+                $deletedQuestion = Question::read($questions->getHistory()->getId() , $questions->getType());
+                if ($deletedQuestion !== null) {
+                    throw new Exception("La question n'a pas été supprimé correctement");
+                }
+            print("OK\n");
 
 
 
@@ -79,14 +137,12 @@ try {
 
 
 
-
-
-
-
-
-
-
-
+            print("Suppression des valeurs de test de la base de données \n");
+            $lieu->delete($lieu->getId());
+            $user->delete($user->getId());
+            $chapitre->delete($chapitre->getNumchap());
+            
+            
 
 
 

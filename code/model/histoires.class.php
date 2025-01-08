@@ -22,14 +22,14 @@ class Story
 
 
 
-    public function __construct(string $title, chapter $chapter, User $creator, Place $place, string $background, bool $visibility){
-        $this->id = -1; // id défini par rapport à la BDD
-        $this->title = $title;
-        $this->chapter = $chapter;
-        $this->creator = $creator;
-        $this->place = $place;
-        $this->background = $background;
-        $this->visibility = $visibility;
+    public function __construct(string $title, chapter $chapter, User $creator, Place $place, string $background, bool $visibility, int $id = -1){
+        $this->setId($id);
+        $this->setTitle($title);
+        $this->setChapter($chapter);
+        $this->setCreator($creator);
+        $this->setPlace($place);
+        $this->setBackground($background);
+        $this->setVisibility($visibility);
         $this->dao = DAO::getInstance();
     }
 
@@ -62,10 +62,16 @@ class Story
     public function setId(int $id){
         $this->id = $id;
     }
-    public function setTitle(string $title){
+    public function setTitle(string $title) {
+        if($title == "") {
+            throw new Exception("Le titre ne peut pas être vide");
+        }
         $this->title = $title;
     }
     public function setChapter(chapter $chapter){
+        if($chapter == "") {
+            throw new Exception("Le numéro de chapitre ne peut pas être vide");
+        }
         $this->chapter = $chapter;
     }
     public function setCreator(User $creator){
@@ -75,6 +81,9 @@ class Story
         $this->place = $place;
     }
     public function setBackground(string $background){
+        if($background == "") {
+            throw new Exception("Le background ne peut pas être vide");
+        }
         $this->background = $background;
     }
     public function setVisibility(bool $visibility){
@@ -106,18 +115,19 @@ class Story
         $dao = DAO::getInstance();
 
         //Récupère les données de l'histoire depuis la base
-        if($historyData = $dao->getColumnWithParameters("histoires", [ "id" => (int)$id])){
-            $historyDatas = $historyData[0];
-            $chapter = Chapter::read($historyDatas['numchap']);
-            $creator = User::read($historyDatas['createur']);
-            $place = Place::read($historyDatas['id_lieu']);
+        if($historyDatas = $dao->getColumnWithParameters("histoires", [ "id" => (int)$id])){
+            $historyData = $historyDatas[0];
+            $chapter = Chapter::read($historyData['numchap']);
+            $creator = User::read($historyData['createur']);
+            $place = Place::read($historyData['id_lieu']);
             return new Story(
-                $historyDatas['titre'],
+                $historyData['titre'],
                 $chapter,
                 $creator,
                 $place,
-                $historyDatas['background'],
-                $historyDatas['visible']
+                $historyData['background'],
+                $historyData['visible'],
+                $historyData['id']
             );
         }
         return null;

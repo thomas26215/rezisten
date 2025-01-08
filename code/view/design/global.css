@@ -43,9 +43,6 @@ button {
     background-color: var(--noir);
     /* Couleur de fond */
     padding: 1% 5%;
-    min-width: 200px;
-    max-width: 350px;
-
 
     border: none;
     /* Retirer la bordure du bouton */

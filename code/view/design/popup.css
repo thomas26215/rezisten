@@ -1,0 +1,32 @@
+dialog {
+    background-color: var(--beige);
+    height: 300px;
+    width: 360px;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#fermerDialog {
+    height: 5.5rem;
+    max-height: none;
+}
+
+#dialog div {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#dialog h2 {
+    text-align: center;
+}
+
+::backdrop {
+    background-color: var(--noir);
+    opacity: 0.4;
+}

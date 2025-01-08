@@ -1,0 +1,8 @@
+body{
+    background-image: var(--background-drapeau);
+}
+
+main{
+    padding: 1em;
+
+}

@@ -1,0 +1,69 @@
+body {
+    background-image: var(--background-histoire);
+    margin-inline: auto;
+}
+
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 600px;
+    margin-inline: auto;
+}
+
+.infos {
+    background-color: var(--beige);
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: center;
+    padding: 1rem 3rem 1rem 5rem;
+    border: 3px solid var(--noir);
+    gap: 1rem;
+}
+
+h1 {
+    font-size: 50px;
+}
+
+span {
+    color: var(--rouge);
+    font-weight: bold;
+}
+
+.infos div label {
+    font-weight: bold;
+    font-size: 27px;
+}
+
+.infos div input {
+    height: 30px;
+    width: 14rem;
+}
+
+.texte{
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    max-width: 400px;
+    text-align: center;
+}
+
+.envoyer {
+    margin-top: 1.5rem;
+    width: 450px;
+    height: 5rem;
+    max-width: none;
+    margin-bottom: 2rem;
+    font-size: 33px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

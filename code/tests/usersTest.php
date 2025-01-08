@@ -1,4 +1,3 @@
-
 <?php
 use PHPUnit\Framework\TestCase;
 
@@ -52,6 +51,8 @@ class usersTest extends TestCase
         $this->user->create();
         $this->assertTrue(User::delete($this->user->getId()));
         $this->assertNull(User::read($this->user->getId()));
+
+
     }
 
     public function testSetters()
@@ -70,6 +71,14 @@ class usersTest extends TestCase
         $this->assertEquals("01/01/2000", $this->user->getBirthDate());
         $this->assertEquals("new@email.com", $this->user->getMail());
         $this->assertEquals("b", $this->user->getRole());
+
+        $this->expectException(Exception::class);
+        $this->user->setUsername("");
+        $this->user->setBirthDate("");
+        $this->user->setBirthDate("18:09/2005");
+        $this->user->setBirthDate("18:09:2023");
+        $this->user->setMail("");
+        $this->user->setPassword("");
     }
 
     public function testCreateWithInvalidData()

@@ -13,12 +13,12 @@ class Place {
     
 
     public function __construct(string $name, string $place_type, string $description, string $city, string $coordinates, int $id = -1) {
-        $this->name = $name;
-        $this->place_type = $place_type;
-        $this->description = $description;
-        $this->city = $city;
-        $this->coordinates = $coordinates;
-        $this->id = $id;
+        $this->setName($name);
+        $this->setPlaceType($place_type);
+        $this->setDescription($description);
+        $this->setCity($city);
+        $this->setCoordinates($coordinates);
+        $this->setId($id);
         $this->dao = DAO::getInstance();
     }
 

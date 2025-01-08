@@ -13,11 +13,11 @@ class DAO {
         try {
             $this->db = new PDO($this->database);
             if (!$this->db) {
-                throw new DAOException("Impossible d'ouvrir ".$this->database);
+                throw new Exception("Impossible d'ouvrir ".$this->database);
             }
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-            throw new DAOException("Erreur PDO : ".$e->getMessage().' sur '.$this->database);
+            throw new Exception("Erreur PDO : ".$e->getMessage().' sur '.$this->database);
         }
     }
 
@@ -97,7 +97,7 @@ class DAO {
             $this->daoUtilitaire->executePrepare();
             return $this->daoUtilitaire->fetchAll();
         } catch(Exception $e){
-            throw new DAOException("Erreur lors de la récupération du dernier ID : " . $e->getMessage());
+            throw new Exception("Erreur lors de la récupération du dernier ID : " . $e->getMessage());
         }
     }
 
@@ -124,7 +124,7 @@ class DAO {
             $this->daoUtilitaire->execute();
             return $this->daoUtilitaire->rowCount();
         } catch (Exception $e) {
-            throw new DAOException("Erreur lors de la mise à jour des données : " . $e->getMessage());
+            throw new Exception("Erreur lors de la mise à jour des données : " . $e->getMessage());
         }
     }
     
@@ -138,6 +138,13 @@ class DAO {
     public function deleteDatasById($table, $userId) {
         return $this->deleteDatas($table, ['id' => $userId]);
     }
+    public function deleteDatasByIdAndType($table, $Id, $type) {
+        return $this->deleteDatas($table, ['id_histoire' => $Id , 'type' => $type]);
+    }
+    public function deleteDatasByIds($table, $Idhistoire, $idPerso) {
+        return $this->deleteDatas($table, ['id_histoire' => $Idhistoire , 'id_perso' => $idPerso]);
+    }
+
 
     /**
      * Supprime des données d'une table en fonction des conditions spécifiées.
@@ -149,7 +156,7 @@ class DAO {
      */
     public function deleteDatas($table, array $conditions) {
         if (empty($conditions)) {
-            throw new DAOException("Les conditions ne peuvent pas être vides.");
+            throw new Exception("Les conditions ne peuvent pas être vides.");
         }
         
         try {
@@ -164,7 +171,7 @@ class DAO {
             $this->daoUtilitaire->execute();
             return $this->daoUtilitaire->rowCount() > 0;
         } catch (Exception $e) {
-            throw new DAOException("Erreur lors de la suppression des données : " . $e->getMessage());
+            throw new Exception("Erreur lors de la suppression des données : " . $e->getMessage());
         }
     }
 }
