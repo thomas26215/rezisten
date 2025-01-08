@@ -22,5 +22,8 @@ include_once(__DIR__. '/histoireTest.php');
 print("\ntest des Questions : \n");
 include_once(__DIR__. '/questionTest.php');
 
+print("\ntest des Dialogues : \n");
+include_once(__DIR__.'/dialoguesTest.php');
+
 
 ?>
