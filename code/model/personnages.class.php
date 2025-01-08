@@ -9,9 +9,9 @@ class Character {
     private DAO $dao;
 
     public function __construct(string $first_name, string $image, int $id = -1) {
-        $this->id = $id;
-        $this->first_name = $first_name;
-        $this->image = $image;
+        $this->setId($id);
+        $this->setFirstName($first_name);
+        $this->setImage($image);
         $this->dao = DAO::getInstance();
     }
 
@@ -38,20 +38,19 @@ class Character {
     }
 
     public function setFirstName(string $first_name): void {
-        if (!empty($first_name)) {
-            $this->first_name = $first_name;
-        } else {
-            throw new Exception("Le prénom ne peut pas être vide.");
+        if(empty($first_name)) {
+            throw new Exception("Le prénom ne peut pas être vide");
         }
+        $this->first_name = $first_name;
     }
 
     public function setImage(string $image): void {
-        if (!empty($image)) {
-            $this->image = $image;
-        } else {
+        if (empty($image)) {
             throw new Exception("L'image ne peut pas être vide.");
         }
+        $this->image = $image;
     }
+
 
     /* --- Méthodes CRUD --- */
 

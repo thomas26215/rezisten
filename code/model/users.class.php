@@ -176,7 +176,6 @@ class User {
         if ($id <= 0) {
             throw new DAOException("ID d'utilisateur invalide pour la suppression.");
         }
-    
         return DAO::getInstance()->deleteDatasById("utilisateurs", $id);
     }
 }
