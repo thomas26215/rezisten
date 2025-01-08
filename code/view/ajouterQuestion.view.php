@@ -1,10 +1,10 @@
 <head>
     <link rel="icon" href="favicon.ico" type="image/x-icon">    
-    <link rel="stylesheet" href="./design/ajouterDialogue.css">
+    <link rel="stylesheet" href="./design/ajouterQuestion.css">
 </head>
 <article class="content">
     <div>
-        <h2 class="titre"> Ajouter un dialogue </h2>
+        <h2 class="titre"> Ajouter une question</h2>
     </div>
     <form action="">
         <!-- personnage -->
@@ -18,9 +18,15 @@
         </section>
 
         <!-- dialogue -->
-        <section>
-            <label for="dialogue">Entrez le texte du dialogue : </label>
-            <textarea name="dialogue" id="dialogue"></textarea>
+        <section class="input-superpose">
+            <label for="question">Entrez la question : </label>
+            <textarea name="question" id="question"></textarea>
+        </section>
+
+        <!-- dialogue -->
+        <section class="input-superpose">
+            <label for="reponse">Entrez la réponse : </label>
+            <textarea name="reponse" id="reponse"></textarea>
         </section>
 
         <!-- boutons -->
