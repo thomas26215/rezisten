@@ -143,7 +143,7 @@ try {
             $newPerso->delete($newPerso->getId());
 
 
-            print("Le update ne marche toujours pas juste au cas ou \n\n");
+            print("\nLe update de apparition ne marche toujours pas juste au cas ou \n\n");
 
 
 
