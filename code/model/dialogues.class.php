@@ -19,7 +19,7 @@ class Dialog
     const audioURL = "192.168.14.118/rezisten/doublageDialogue/";
 
 
-    public function __construct(int $id, story $story, Character $speaker, string $content, bool $bonus, string $dubbing){
+    public function __construct(int $id, Story $story, Character $speaker, string $content, bool $bonus, string $dubbing){
         $this->setId($id);
         $this->setStory($story);
         $this->setSpeaker($speaker);
@@ -78,14 +78,14 @@ class Dialog
         $dao = DAO::getInstance();
         $listDialogs = array();
 
-        $dialogs = DAO::getInstance()->getColumnWithParameters("dialogues", ["id_histoire" => $idStory]);
+        $dialogs = $dao->getColumnWithParameters("dialogues", ["id_histoire" => $idStory]);
         if(empty($dialogs)){
             throw new Exception("Aucun dialogue correspondat à l'histoire numéro ".$idStory);
         }
 
         for($i = 0 ; $i < sizeof($dialogs) ; $i++){
-            $story = $dialogs[$i]['id'];
-            $speaker = $dialogs[$i]['interlocuteur'];
+            $story = Story::read($dialogs[$i]['id_histoire']);
+            $speaker = Character::read($dialogs[$i]['interlocuteur']);
             $d = new Dialog(
                 $dialogs[$i]['id'],
                 $story,
@@ -111,6 +111,36 @@ class Dialog
         return $result;
 
     }*/
+
+    
+
+    public static function getDialogsBonusAfterQuestion(int $idStory) : array{
+        $dao = DAO::getInstance();
+        $dialogsBonus = array();
+
+        $dialogs = $dao->getColumnWithParameters("dialogues",["id_histoire" => $idStory]);
+        if(empty($dialogs)){
+            throw new Exception("Aucun dialogue trouvé");
+        }
+
+        for($i = 0 ; $i < sizeof($dialogs) ; $i++){
+            if($dialogs[$i]['bonus'] === "true"){
+                $story = Story::read($dialogs[$i]['id_histoire']);
+                $speaker = Character::read($dialogs[$i]['interlocuteur']);
+                $d = new Dialog(
+                    $dialogs[$i]['id'],
+                    $story,
+                    $speaker,
+                    $dialogs[$i]['contenu'],
+                    $dialogs[$i]['bonus'],
+                    $dialogs[$i]['doublage']
+                );
+                array_push($dialogsBonus,$d);
+            }
+            $i++;
+        }
+        return $dialogsBonus;
+    }
 
     // Ajout d'un dialogue à la base 
     public function create(){
