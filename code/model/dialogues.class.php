@@ -73,18 +73,19 @@ class Dialog
     /* Méthodes CRUD et utilitaire sur les dialogs */
 
 
-    // Récupère tous les dialogues d'une histoire
-    public static function getdialogsFromstory(int $idStory) : array{
+    // Récupère tous les dialogues en amont de la question d'une histoire
+    public static function getDialogsBeforeQuestion(int $idStory) : array{
         $dao = DAO::getInstance();
-        $listDialogs = array();
+        $dialogsBeforeQuestion = array();
 
         $dialogs = $dao->getColumnWithParameters("dialogues", ["id_histoire" => $idStory]);
         if(empty($dialogs)){
-            throw new Exception("Aucun dialogue correspondat à l'histoire numéro ".$idStory);
+            throw new Exception("Aucun dialogue trouvé pour l'histoire ".$idStory);
         }
 
-        for($i = 0 ; $i < sizeof($dialogs) ; $i++){
-            $story = Story::read($dialogs[$i]['id_histoire']);
+        $i = 0;
+        while($i < sizeof($dialogs) && $dialogs[$i]['contenu'] !== 'limquestion'){
+            $story = Story::read($idStory);
             $speaker = Character::read($dialogs[$i]['interlocuteur']);
             $d = new Dialog(
                 $dialogs[$i]['id'],
@@ -94,10 +95,10 @@ class Dialog
                 $dialogs[$i]['bonus'],
                 $dialogs[$i]['doublage']
             );
-            array_push($listdialogs,$d);
+            array_push($dialogsBeforeQuestion,$d);
+            $i++;
         }
-
-        return $listdialogs;
+        return $dialogsBeforeQuestion;
     }
 //FIXME: Fixer la fonction
     // Méthode utilitaire pour les tests permettant de compter les dialogues d'une histoire
@@ -112,8 +113,8 @@ class Dialog
 
     }*/
 
-    
 
+    // Récupère tous les dialogues bonus d'une histoire
     public static function getDialogsBonusAfterQuestion(int $idStory) : array{
         $dao = DAO::getInstance();
         $dialogsBonus = array();
@@ -125,7 +126,7 @@ class Dialog
 
         for($i = 0 ; $i < sizeof($dialogs) ; $i++){
             if($dialogs[$i]['bonus'] === "true"){
-                $story = Story::read($dialogs[$i]['id_histoire']);
+                $story = Story::read($idStory);
                 $speaker = Character::read($dialogs[$i]['interlocuteur']);
                 $d = new Dialog(
                     $dialogs[$i]['id'],
@@ -140,6 +141,35 @@ class Dialog
             $i++;
         }
         return $dialogsBonus;
+    }
+
+    //Récupère les dialogues n'étants pas liés au bonus (fin classique)
+    public static function getDialogsClassicAfterQuestion(int $idStory) : array{
+        $dao = DAO::getInstance();
+        $dialogsClassic = array();
+
+        $dialogs = $dao->getColumnWithParameters("dialogues",["id_histoire" => $idStory]);
+        if(empty($dialogs)){
+            throw new Exception("Aucun dialogue trouvé");
+        }
+
+        for($i = 0 ; $i < sizeof($dialogs) ; $i++){
+            if($dialogs[$i]['bonus'] === "false"){
+                $story = Story::read($idStory);
+                $speaker = Character::read($dialogs[$i]['interlocuteur']);
+                $d = new Dialog(
+                    $dialogs[$i]['id'],
+                    $story,
+                    $speaker,
+                    $dialogs[$i]['contenu'],
+                    $dialogs[$i]['bonus'],
+                    $dialogs[$i]['doublage']
+                );
+                array_push($dialogsClassic,$d);
+            }
+            $i++;
+        }
+        return $dialogsClassic;
     }
 
     // Ajout d'un dialogue à la base 
