@@ -65,13 +65,27 @@ class demandesTest extends TestCase {
         $this->assertNull(Demande::read($this->user->getId()));
     }
 
+    public function testReadNonExistenceDemande() {
+        $this->assertNull(Demande::read(99999));
+    } 
+
+    public function testUpdateNonExistenceDemande() {
+        $this->user->create();
+        $this->demande->create();
+
+        $tempId = $this->demande->getUser()->getId();
+        $this->demande->getUser()->setId(99999);
+        
+        $this->assertFalse($this->demande->update());
+        $this->demande->getUser()->setId($tempId);
+    }
+
     protected function tearDown(): void {
         if($this->user->getId() > 0) {
             User::delete($this->user->getId());
         }
-        if($this->demande->getUser()->getId() > 0) {
-            Demande::delete($this->demande->getUser()->getId());
-        }
+        Demande::delete(99999);
+        
     }
 }
 ?>
