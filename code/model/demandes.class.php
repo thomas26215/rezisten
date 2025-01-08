@@ -6,66 +6,58 @@ require_once(__DIR__ . "/users.class.php");
 class Demande {
     private User $user;
     private string $document;
+
     private DAO $dao;
 
     public function __construct(User $user, string $document) {
         if ($user === NULL) {
             throw new Exception("L'utilisateur ne peut pas être null");
         }
-        $this->user = $user;
-        $this->document = $document;
+        $this->setUser($user);
+        $this->setDocument($document);
         $this->dao = DAO::getInstance(); // Initialiser DAO
     }
 
     /* --- Getters --- */
 
-    public function getUser() {
+    public function getUser(): User {
         return $this->user;
     }
 
-    public function getDocument() {
+    public function getDocument(): string {
         return $this->document;
     }
 
     /* --- Setters --- */
 
-    public function setUser(User $user) {
+    public function setUser(User $user): void {
         $this->user = $user;
     }
 
-    public function setDocument(string $document) {
+    public function setDocument(string $document): void {
         $this->document = $document;
     }
 
     /* --- Méthodes CRUD --- */
 
-    public function create() {
-        // Récupération de l'ID utilisateur
+    public function create(): bool {
         $userId = $this->user->getId();
-
-        // Vérification si l'ID utilisateur est valide
         if ($userId < 1) {
             throw new Exception("Impossible de créer une demande : Aucun utilisateur ne correspond à l'id fourni");
         }
-
-        // Insertion des données dans la table "demandes"
         if ($this->dao->insertRelatedData("demandes", [
             "id_utilisateur" => $userId,
             "doc" => $this->document,
         ])) {
-            return true; // Retourne vrai si l'insertion a réussi
+            return true;
         } else {
-            return false; // Retourne faux si l'insertion a échoué
+            return false;
         }
     }
 
-    public static function read($id_utilisateur) {
+    public static function read($id_utilisateur): ?Demande {
         $dao = DAO::getInstance();
-
-        // Récupération des données de la demande
         $demandeData = $dao->getColumnWithParameters("demandes", ["id_utilisateur" => (int)$id_utilisateur]);
-        
-        // Vérification si des données ont été récupérées
         if ($demandeData) {
             $newUser = User::read($id_utilisateur);
             return new Demande(
@@ -73,33 +65,26 @@ class Demande {
                 $demandeData[0]["doc"]
             );
         }
-        
-        return null; // Retourne null si aucune donnée n'est trouvée
+        return null;
     }
 
-    public function update() {
-        // Vérification si l'utilisateur est valide
+    public function update(): bool {
         if ($this->user === NULL || $this->user->getId() < 1) {
             throw new Exception("Impossible de mettre à jour la demande : L'utilisateur est invalide");
         }
-
-        // Mise à jour de la demande dans la base de données
         if ($this->dao->update("demandes", [
             "doc" => $this->document,
             "id_utilisateur" => $this->user->getId()
         ], ["id_utilisateur" => (int)$this->user->getId()])) {
-            return true; // Retourne vrai si la mise à jour a réussi
+            return true;
         }
-        
-        return false; // Retourne faux si la mise à jour a échoué
+        return false;
     }
-
-    public static function delete($id_utilisateur) {
-        if ($id_utilisateur > 0) { // Vérifier que l'ID est valide
+    public static function delete($id_utilisateur): bool {
+        if ($id_utilisateur > 0) {
             return DAO::getInstance()->deleteRelatedData("demandes", ["id_utilisateur" => (int)$id_utilisateur]);
         }
-        
-        return false; // Échec si l'ID n'est pas valide
+        return false;
     }
 }
 

@@ -1,6 +1,6 @@
 <?php
 require_once("daoUtilitaire.php");
-require_once("daoException.php");
+
 // Le Data Access Object 
 // Il représente la base de donnée
 class DAO {
@@ -13,12 +13,11 @@ class DAO {
         try {
             $this->db = new PDO($this->database);
             if (!$this->db) {
-                throw new Exception("Impossible d'ouvrir ".$this->database);
-                ("Database error");
+                throw new DAOException("Impossible d'ouvrir ".$this->database);
             }
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-            throw new Exception("Erreur PDO : ".$e->getMessage().' sur '.$this->database);
+            throw new DAOException("Erreur PDO : ".$e->getMessage().' sur '.$this->database);
         }
     }
 
@@ -53,10 +52,14 @@ class DAO {
      * @note Exemple d'utilisation : $dao->insertRelatedData("users", ["username" => "thomas26215", "prenom" => "Thomas", ...]);
      */
     public function insertRelatedData($table, $datas) {
-        $this->setUtilitaire("", $datas);
-        list($columns, $placeholders) = $this->daoUtilitaire->buildQueryParts();
-        $this->daoUtilitaire->setQuery("INSERT INTO $table ($columns) VALUES ($placeholders)");
-        return $this->daoUtilitaire->executePrepare();
+        try {
+            $this->setUtilitaire("", $datas);
+            list($columns, $placeholders) = $this->daoUtilitaire->buildQueryParts();
+            $this->daoUtilitaire->setQuery("INSERT INTO $table ($columns) VALUES ($placeholders)");
+            return $this->daoUtilitaire->executePrepare();
+        } catch (Exception $e) {
+            throw $e;
+        }
     }
 
     /**
@@ -83,7 +86,6 @@ class DAO {
             $this->daoUtilitaire->execute();
             return $this->daoUtilitaire->fetchAll();
         } catch (PDOException $e) {
-            error_log("Erreur lors de la récupération des données : " . $e->getMessage());
             throw $e;
         }
     }
@@ -94,8 +96,8 @@ class DAO {
             $this->setUtilitaire($query);
             $this->daoUtilitaire->executePrepare();
             return $this->daoUtilitaire->fetchAll();
-        }catch(PDOException $e){
-            throw new Exception("PDOException : " . $e->getMessage());
+        } catch(Exception $e){
+            throw new DAOException("Erreur lors de la récupération du dernier ID : " . $e->getMessage());
         }
     }
 
@@ -109,7 +111,6 @@ class DAO {
     * @throws PDOException Si une erreur de base de données se produit.
     * @note $numberRowAffected = $dao->update("users", ["prenom" => "Thomas", "nom" => "Venouil", ...], ["id" => 147]);
     */
-
     public function update($table, $updateData, $whereConditions) {
         try {
             $this->setUtilitaire();
@@ -123,11 +124,7 @@ class DAO {
             $this->daoUtilitaire->execute();
             return $this->daoUtilitaire->rowCount();
         } catch (Exception $e) {
-            error_log("Erreur lors de la mise à jour des données : " . $e->getMessage());
-            throw $e;
-        } catch (PDOException $e) {
-            error_log("Erreur de PDO lors de la mise à jour des données : " . $e->getMessage());
-            throw $e;
+            throw new DAOException("Erreur lors de la mise à jour des données : " . $e->getMessage());
         }
     }
     
@@ -152,13 +149,13 @@ class DAO {
      */
     public function deleteDatas($table, array $conditions) {
         if (empty($conditions)) {
-            throw new Exception("Les conditions ne peuvent pas être vides.");
+            throw new DAOException("Les conditions ne peuvent pas être vides.");
         }
         
         try {
             $this->setUtilitaire("", $conditions);
-            list($whereClause, $values) = $this->daoUtilitaire->buildWhereClause($conditions); // Correction ici
-           $query = "DELETE FROM $table";
+            list($whereClause, $values) = $this->daoUtilitaire->buildWhereClause($conditions);
+            $query = "DELETE FROM $table";
             if(!empty($whereClause)) {
                 $query .= " WHERE $whereClause";
             }
@@ -166,10 +163,10 @@ class DAO {
             $this->daoUtilitaire->prepare();
             $this->daoUtilitaire->execute();
             return $this->daoUtilitaire->rowCount() > 0;
-        } catch (PDOException $e) {
-            error_log($e->getMessage());
-            return false;
+        } catch (Exception $e) {
+            throw new DAOException("Erreur lors de la suppression des données : " . $e->getMessage());
         }
     }
 }
 ?>
+

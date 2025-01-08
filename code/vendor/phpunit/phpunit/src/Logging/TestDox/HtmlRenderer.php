@@ -23,7 +23,7 @@ final readonly class HtmlRenderer
      */
     private const PAGE_HEADER = <<<'EOT'
 <!doctype html>
-<html lang="fr">
+<html lang="en">
     <head>
     <link rel="icon" href="favicon.ico" type="image/x-icon">    
         <meta charset="utf-8"/>
