@@ -44,7 +44,7 @@ CREATE TABLE HISTOIRES (
     createur INTEGER,
     id_lieu INTEGER,
     background VARCHAR(50) NOT NULL,
-    visible,
+    visible BOOLEAN,
     FOREIGN KEY (id_lieu) REFERENCES LIEUX(id),
     FOREIGN KEY (numchap) REFERENCES CHAPITRES(numchap),
     FOREIGN KEY (createur) REFERENCES UTILISATEURS(id)
@@ -64,6 +64,7 @@ CREATE TABLE DIALOGUES (
     interlocuteur INTEGER,
     contenu VARCHAR(400),
     bonus BOOLEAN NOT NULL,
+    doublage VARCHAR(10),
     PRIMARY KEY(id_histoire, id),
     FOREIGN KEY (id_histoire) REFERENCES HISTOIRES(id),
     FOREIGN KEY (interlocuteur) REFERENCES PERSONNAGES(id)

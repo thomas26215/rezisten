@@ -1,10 +1,16 @@
 body {
     background-image: var(--background-histoire);
+    max-height: calc(100vh - var(--height-header));
+}
+
+main {
+    max-height: calc(100vh - var(--height-header));
 
 }
 
 h1 {
     text-align: center;
+    max-width: 70vw;
 }
 
 article {
@@ -99,10 +105,11 @@ img.logo {
 
 }
 
+
 h2.speaker {
-    position: relative;
-    right: 4.2em;
-    bottom: 1.2em;
+    position: absolute;
+    left: 4.5%;
+    bottom: 10%;
     width: 8em;
 
     margin: 0;
@@ -132,6 +139,11 @@ h2.speaker::before {
     /* Placer la bordure derrière le bouton */
 }
 
+.speaker.question::before {
+    background-color: var(--rouge);
+
+}
+
 .text {
     font-size: 1.5em;
     color: #333;
@@ -156,4 +168,8 @@ h2.speaker::before {
 .text {
     animation: blink 0.8s steps(1) infinite;
     padding: 10px;
+}
+
+.lieux {
+    min-width: 100%;
 }

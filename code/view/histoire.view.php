@@ -2,7 +2,7 @@
 <html lang="fr">
 
 <head>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">    
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <meta charset="utf-8">
     <title>Rézisten</title>
     <meta name="author" content="Brayan" />
@@ -14,7 +14,7 @@
 
     <?php include_once 'headerHistoire.view.php'; ?>
     <main class="flex-col">
-        <h1>Chapitre 1 : Histoire 2 : Sabotage</h1>
+        <h1>$Chapitre 1 : Histoire 2 : Sabotage</h1>
         <!--Remplacer après, de façon a récupérer les informations en fonction de l'histoire  -->
 
 
@@ -30,9 +30,7 @@
 
             <section> <!-- Pour la zone de texte -->
 
-                <div>
-                    <h2 class="speaker"> $Name1 </h2>
-                </div>
+                <h2 class="speaker"> $Name1 </h2>
 
                 <p class="text"> En chantier, je m'appelle teuse. Et toi ture. Et lui C'est cateur. Et voici le père
                     Sécuteur.
@@ -48,6 +46,7 @@
         </article>
 
     </main>
+
 </body>
 <script src="./js/dyslexique.js"></script>
 <script src="./js/machineAEcrire.js"></script>

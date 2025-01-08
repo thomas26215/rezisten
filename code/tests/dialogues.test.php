@@ -22,11 +22,11 @@ require_once(__DIR__.'/../model/dialogues.class.php');
 try {
     // Test de création d'un dialogue
 
-    $chapitre =  new Chapter(1,"Le début");
-    $createur = new User("toto","jean","toto","2000-12-24","jean@gmail.com","jeantotot1234","j");
-    $lieu = new Place("prison","camp","aucune info","villeneuve","-40 60");
-    $histoire = new Story("prologue",$chapitre,$createur,$lieu,"bg.png",true);
-    $perso = new Character("jean","jean.png");
+    $chapitre =  Chapter::read(0);
+    $createur = User::read(4);
+    $lieu = Place::read(1);
+    $histoire = Story::read(1);
+    $perso = Character::read(1);
     $dialogue = new Dialog(1,$histoire ,$perso, "Bonjour" , false,'11.mp3');
 
 
@@ -91,6 +91,47 @@ try {
         print("L'update a échouée\n");
     }
 
+    print("Test de la méthode getDialogsBeforeQuestion : ");
+    try{
+        $dialogs = Dialog::getDialogsBeforeQuestion(1);
+        foreach($dialogs as $dial):
+            if($dial->getContent() === "limquestion"){
+                print("La recherche va trop loin");
+                exit;
+            }
+        endforeach;
+        print("La recherche a fonctionnée\n");
+    }catch(Exception $e){
+        print($e->getMessage());
+    }
+
+    print("Test de la méthode getDialogsBonusAfterQuestion : ");
+    try{
+        $dialogs = Dialog::getDialogsBonusAfterQuestion(1);
+        foreach($dialogs as $dial):
+            if($dial->getBonus() === "false"){
+                print("Un dialogue non bonus est trouvé !!");
+                exit;
+            }
+        endforeach;
+        print("La recherche a fonctionné\n");
+    }catch(Exception $e){
+        print($e->getMessage());
+    }
+
+    print("Test de la méthode getDialogsClassicAfterQuestion : ");
+    try{
+        $dialogs = Dialog::getDialogsClassicAfterQuestion(1);
+        foreach($dialogs as $dial):
+            if($dial->getBonus() === "true"){
+                print("Un dialogue bonus est trouvé !!");
+                exit;
+            }
+        endforeach;
+        print("La recherche a fonctionné\n");
+    }catch(Exception $e){
+        print($e->getMessage());
+    }
 
     
 /*     print("Test de la méthode getDialogsFromStory");

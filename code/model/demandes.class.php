@@ -31,9 +31,6 @@ class Demande {
     /* --- Setters --- */
 
     public function setUser(User $user): void {
-        if($user === "") {
-            throw new Exception("L'utilisateur ne peut pas être vide");
-        }
         $this->user = $user;
     }
 
