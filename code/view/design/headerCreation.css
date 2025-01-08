@@ -3,11 +3,6 @@ body{
   width: 100vw;
   font-size: larger;
 }
-/*
-main{
-  min-height: calc(100vh - var(--height-header));
-}*/
-
 
 /* Pour la disposition de la page*/
 .container {
@@ -25,17 +20,24 @@ main{
   padding: 10px;
 }
 .container > section.header {
-    display: flex;
-    justify-content: space-around;
+   display: flex;
+  justify-content: space-around;
   grid-area: header;
   text-align: center;
   max-height: 50px;
 }
 .container > section.menu {
   grid-area: menu;
+  margin-left: -10vw;
 }
 .container > article.content {
   grid-area: content;
+  background-color: var(--beige);
+  height: 95%;
+  margin-right: 0%;
+  margin-left: -5%;
+  margin-top: 50px;
+  border: 2px solid var(--noir);
 }
 .container > section.footer {
   display: flex;
@@ -59,15 +61,6 @@ div{
   display :flex;
 }
 
-article{
-  background-color: var(--beige);
-  height: 95%;
-  margin-right: 10%;
-  margin-left: -5%;
-  margin-top: 50px;
-  border: 2px solid var(--noir);
-}
-
 #info{
   max-height: 50px;
   margin-left: 20%;
@@ -81,8 +74,8 @@ label{
 
 h2.titre {
   position: relative;
-  right: 1.75em;
-  bottom: 2.1em;
+  right: 1.55em;
+  bottom: 1.9em;
   width: 8em;
 
   margin: 0;
