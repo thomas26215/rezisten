@@ -65,6 +65,7 @@ CREATE TABLE DIALOGUES (
     interlocuteur INTEGER,                    -- Référence au personnage qui dit ce dialogue
     contenu VARCHAR(400),                    -- Contenu du dialogue
     bonus BOOLEAN NOT NULL,                  -- Dialogue étant un bonus lié à la question spécifique
+    doublage VARCHAR(10),                   -- Nom fichier audio : clé primaire
     PRIMARY KEY(id_histoire, id),     -- Clé primaire composite pour garantir l'unicité par histoire et dialogue
     FOREIGN KEY (id_histoire) REFERENCES HISTOIRES(id),  -- Clé étrangère référencée à la table HISTOIRES
     FOREIGN KEY (interlocuteur) REFERENCES PERSONNAGES(id)
