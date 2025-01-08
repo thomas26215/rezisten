@@ -1,19 +1,22 @@
 <?php
 
 print("\ntest des users : \n\n");
-include_once(__DIR__. '/users.test.php');
+include_once(__DIR__. '/usersTest.php');
 
 print("\ntest des chapitres : \n\n"  );
-include_once(__DIR__. '/chapitre.test.php');
+include_once(__DIR__. '/chapitreTest.php');
 
 print("\ntest des demandes : \n");
-include_once(__DIR__. '/demandes.test.php');
+include_once(__DIR__. '/demandesTest.php');
 
 print("\ntest des lieux : \n\n");
-include_once(__DIR__. '/lieux.test.php');
+include_once(__DIR__. '/lieuxTest.php');
 
 print("\ntest des Personnages : \n");
-include_once(__DIR__. '/personnages.test.php');
+include_once(__DIR__. '/personnagesTest.php');
+
+print("\ntest des Histoires : \n");
+include_once(__DIR__. '/histoireTest.php');
 
 
 
