@@ -103,6 +103,15 @@ class Question {
         }
         return false;
     }
+
+    public static function delete($id){
+        if($id > 0){ // Vérification de la possible existence de l'id
+            return DAO::getInstance()->deleteDatasById("questions",$id);
+        }
+        return false; // Echec si id invalide ou inexistant
+
+    }
+
     
 
 }
