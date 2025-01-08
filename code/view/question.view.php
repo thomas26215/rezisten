@@ -2,10 +2,9 @@
 <html lang="fr">
 
 <head>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <meta charset="utf-8">
-    <title>Rézisten</title>
-    <meta name="author" content="Brayan" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question</title>
     <link rel="stylesheet" type="text/css" href="./design/histoire.css">
     <link rel="stylesheet" type="text/css" href="./design/global.css">
 </head>
@@ -28,17 +27,26 @@
 
         <article>
 
-            <section> <!-- Pour la zone de texte -->
+            <section>
 
-                <h2 class="speaker"> $Name1 </h2>
+                <h2 class="speaker question"> $Type Question </h2>
 
-                <p class="text"> En chantier, je m'appelle teuse. Et toi ture. Et lui C'est cateur. Et voici le père
+                <button>Consulter le lieux</button>
+
+                <p class="text"> $TextQuestion En chantier, je m'appelle teuse. Et toi ture. Et lui C'est cateur. Et
+                    voici le père
                     Sécuteur.
-                    Et la Mère Cedes. Il y a aussi le frère Jaques. Et enfin Vibro ma soeur. Et Moi sonnoneuse.</p>
+                    Et la Mère Cedes. Il y a aussi le frère Jaques. Et enfin Vibro ma soeur. Et Moi sonnoneuse.
+                </p>
+
+
                 <div class="flex-row">
-                    <button class="before button-gris"> <a href="#">
-                            < Précédent </a> </button> <!-- changer les href car je sais pas quoi mettre comme lien -->
-                    <button class="next button-gris"> <a href="#"> Suivant > </a> </button>
+                    <label for="reponse">Réponse :</label>
+                    <input type="number" name="reponse" id="reponse">
+                    <button class="repondre button-vert"> <a href="#">
+                            Répondre </a> </button> <!-- changer les href car je sais pas quoi mettre comme lien -->
+                    <button class="autreQuestion button-gris"> <a href="#"> Accéder a la question $(simple/Complexe)</a>
+                    </button>
                 </div>
 
 
