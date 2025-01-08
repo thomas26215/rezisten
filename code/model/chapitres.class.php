@@ -10,8 +10,8 @@ class Chapter
     private DAO $dao;
 
     public function __construct(int $numchap, string $title){
-        $this->numchap = $numchap;
-        $this->title = $title;
+        $this->setNumChap($numchap);
+        $this->setTitle($title);
         $this->dao = DAO::getInstance(); // Initialise le dao pour les futures méthodes
     }
 
@@ -26,10 +26,16 @@ class Chapter
 
     /* Ensemble des setters */
     public function setNumchap(int $numchap){
+        if($numchap == "") {
+            throw new Exception("Le chapitre ne peut pas être vide");
+        }
         $this->numchap = $numchap;
     }
 
     public function setTitle(string $title){
+        if($title == "") {
+            throw new Exception("Le titre ne peut pas être vide");
+        }
         $this->title = $title;
     }
 

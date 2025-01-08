@@ -2,14 +2,13 @@
 
 require_once(__DIR__ . "/dao.class.php");
 require_once(__DIR__ . "/histoire.class.php");
-require_once(__DIR__ . "/")
 
 class Apparitions{
-    private History $history;
+    private Story $history;
     private Character $character;
     private DAO $dao;
 
-    public function __construct(History $history, Character $character){
+    public function __construct(Story $history, Character $character){
         $this->history = $history;
         $this->character = $character;
     }
@@ -24,7 +23,7 @@ class Apparitions{
         return $this->character;
     }
 
-    public function setHistory(History $history) {
+    public function setHistory(Story $history) {
         $this->history = $history;
     }
     public function setCharacter(Character $character) {
@@ -37,7 +36,7 @@ class Apparitions{
         $historyId = $this->history->getId();
         $characterId = $this->character->getId();
         if($historyId < 1 || $characterId < 1){
-            throw new Exception"Impossible de créer une apparition : Aucune histoire ou Personnage ne correspond à l'id fournit");
+            throw new Exception("Impossible de créer une apparition : Aucune histoire ou Personnage ne correspond à l'id fournit");
 }
         if($this->dao->insertRelatedData("apparitions", [
             "id_histoire" => $historyId,
@@ -53,11 +52,11 @@ class Apparitions{
         $dao = DAO::getInstance();
         $apparitionData = $dao->getColumnWithParameters("apparitions", ["id_history" => $id_history, "id_character" => $id_character]);
         if($apparitionData) {
-            $newHistory = History::read($id_history);
+            $newHistory = Story::read($id_history);
             $newCharacter = Character::read($id_character);
-            return new Apparition(
+            return new Apparitions(
                 $newHistory,
-                newCharacter
+                $newCharacter
             );
         }
         return null;
@@ -80,8 +79,10 @@ class Apparitions{
     }
 
     public function delete($id_history, $id_character){
-        if($id_character > 0 && id_history > 0){
+        if($id_character > 0 && $id_history > 0){
             return DAO::getInstance()->deleteRelatedData("apparitions", ["id_histoire" => $id_history, "id_perso" => $id_history]);
         }
     }
 }
+
+?>

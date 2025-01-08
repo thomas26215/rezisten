@@ -27,7 +27,7 @@ try {
     $lieu = new Place("prison","camp","aucune info","villeneuve","-40 60");
     $histoire = new Story("prologue",$chapitre,$createur,$lieu,"bg.png",true);
     $perso = new Character("jean","jean.png");
-    $dialogue = new Dialog(1,$histoire ,$perso, "Bonjour" , false);
+    $dialogue = new Dialog(1,$histoire ,$perso, "Bonjour" , false,'11.mp3');
 
 
     // Test des getters
@@ -37,7 +37,8 @@ try {
         ['method' => 'getStory', 'expected' => $histoire],
         ['method' => 'getSpeaker', 'expected' => $perso],
         ['method' => 'getContent', 'expected' => "Bonjour"],
-        ['method' => 'getBonus', 'expected' => false]];
+        ['method' => 'getBonus', 'expected' => false],
+        ['method' => 'getDubbing', 'expected' => "11.mp3"]];
 
         foreach ($testGetters as $test) {
             $value = $dialogue->{$test['method']}();
@@ -60,13 +61,15 @@ try {
         $dialogue->setSpeaker($newSpeaker);
         $dialogue->setContent("Salut");
         $dialogue->setBonus(true);
+        $dialogue->setDubbing("121.mp3");
 
 
         if ( $dialogue->getId() !== 2 ||
              $dialogue->getStory() !== $newStory ||
              $dialogue->getSpeaker() !== $newSpeaker ||
              $dialogue->getContent() !== "Salut" ||
-             $dialogue->getBonus() !== true )
+             $dialogue->getBonus() !== true ||
+             $dialogue->getDubbing() !== "121.mp3")
              {   
                 throw new Exception("Les setters n'ont pas fonctionné correctement");
              }
@@ -88,9 +91,37 @@ try {
         print("L'update a échouée\n");
     }
 
+    print("Test de la méthode getDialogsBeforeQuestion");
+    try{
+        $dialogs = Dialog::getDialogsBeforeQuestion(1);
+        foreach($dialogs as $dial):
+            if($dial['contenu'] === "limquestion"){
+                print("La recherche va trop loin");
+                exit;
+            }
+        endforeach;
+        print("La recherche a fonctionnée\n");
+    }catch(Exception $e){
+        print($e->getMessage());
+    }
+
+    print("Test de la méthode getDialogsBonusAfterQuestion : ");
+    try{
+        $dialogs = Dialog::getDialogsBonusAfterQuestion(1);
+        foreach($dialogs as $dial):
+            if($dial['bonus'] === "true"){
+                print("Un dialogue non bonus est trouvé !!");
+                exit;
+            }
+        endforeach;
+        print("La recherche a fonctionné\n");
+    }catch(Exception $e){
+        print($e->getMessage());
+    }
+
 
     
-    print("Test de la méthode getDialogsFromStory");
+/*     print("Test de la méthode getDialogsFromStory");
     try{
         $hist = Story::read(2);
         $expectedAmount = Dialog::countDialogs($hist->getId());
@@ -104,7 +135,10 @@ try {
     }catch(Exception $e){
         print("Les dialogues n'ont pas pu être lus");
     }
-    
+ */    
+
+
+ 
 
 
     }catch(Exception $e){

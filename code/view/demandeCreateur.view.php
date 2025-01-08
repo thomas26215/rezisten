@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Demande Créateur</title>
+    <link rel="stylesheet" href="design/demandeCreateur.css">
 </head>
 <body>
     <?php include_once 'header.view.php'; ?>
@@ -11,7 +12,7 @@
         <h1>Demande créateur</h1>
         
         <form action="">
-            <div>
+            <div class="infos">
                 <div>
                     <label for="nom">Nom <span>*</span>: </label>
                     <input id="nom" name="nom" type="text" placeholder="Jean">
@@ -21,12 +22,15 @@
                     <input id="prenom" name="prenom" type="text" placeholder="Jean">
                 </div>
             </div>
-            <p>Merci de nous envoyer des documents pour prouver vos compétences afin de pouvoir écrire et publier vos histoires.</p>
-            <button class="button-gris">Ajouter des documents</button>
-            <button>Envoyer la demande</button>
+            <p class="texte">Merci de nous envoyer des documents pour prouver vos compétences afin de pouvoir écrire et publier vos histoires.</p>
+            <button id="photoSend" class="button-gris">Ajouter des documents</button>
+            <input type="file" id="photoUpload" name="photo" accept="image/*" style="display: none;">
+            <p id="fileName">Pas de document ajoutée</p>
+            <button class="envoyer">Envoyer la demande</button>
         </form>
         
     </main>
     <?php include_once 'footer.view.php'; ?>
 </body>
+<script src="js/photoSelect.js"></script>
 </html>
