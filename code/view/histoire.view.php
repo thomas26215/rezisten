@@ -12,43 +12,43 @@
 <body>
 
     <?php include_once 'headerHistoire.view.php'; ?>
+    <main class="flex-col">
+        <h1>Chapitre 1 : Histoire 2 : Sabotage</h1>
+        <!--Remplacer après, de façon a récupérer les informations en fonction de l'histoire  -->
 
-    <h1>Chapitre 1 : Histoire 2 : Sabotage</h1>
-    <!--Remplacer après, de façon a récupérer les informations en fonction de l'histoire  -->
 
-
-    <article class="image">
-        <li>
-            <ul> <img src="./design/image/milicien.png" alt="milicien"> </ul> <!-- Affichage des personnages -->
-            <ul> <img src="./design/image/resistant.png" alt="resistant"> </ul>
-        </li>
-    </article>
-    <article>
-
-        <section> <!-- Pour la zone de texte -->
-
-            <div>
-                <h2 class="speaker"> $Name1 </h2>
+        <article class="fond-container">
+            <img class="fond" src="./design/image/image_test.png" alt="Fond">
+            <div class="personnages">
+                <img class="parle" src="./design/image/milicien.png" alt="milicien">
+                <img class="parle-pas" src="./design/image/resistant.png" alt="resistant">
             </div>
+        </article>
 
-            <p class="text"> Je suis libertine, je suis une catin. Je suis une putain, une chienne, une garce.
-                Nam mattis sed est eu efficitur. Fusce vitae congue arcu, et rhoncus magna.
-                Suspendisse eget eleifend ante. Suspendisse facilisis, orci egestas molestie interdum,
-                odio massa ultrices ligula, eget accumsan justo erat id purus.
-                Aliquam interdum tempor magna, eget pharetra nisi cursus id. Nam ut bibendum libero.
-                Maecenas fermentum nunc vitae mauris rhoncus volutpat. Praesent eget sagittis nunc. </p>
-            <div class="flex-row">
-                <button class="before button-gris"> <a href="#">
-                        < Précédent </a> </button> <!-- changer les href car je sais pas quoi mettre comme lien -->
-                <button class="next button-gris"> <a href="#"> Suivant > </a> </button>
-            </div>
+        <article>
+
+            <section> <!-- Pour la zone de texte -->
+
+                <div>
+                    <h2 class="speaker"> $Name1 </h2>
+                </div>
+
+                <p class="text"> En chantier, je m'appelle teuse. Et toi ture. Et lui C'est cateur. Et voici le père
+                    Sécuteur.
+                    Et la Mère Cedes. Il y a aussi le frère Jaques. Et enfin Vibro ma soeur. Et Moi sonnoneuse.</p>
+                <div class="flex-row">
+                    <button class="before button-gris"> <a href="#">
+                            < Précédent </a> </button> <!-- changer les href car je sais pas quoi mettre comme lien -->
+                    <button class="next button-gris"> <a href="#"> Suivant > </a> </button>
+                </div>
 
 
-        </section>
-    </article>
+            </section>
+        </article>
 
+    </main>
 </body>
-    <script src="./js/dyslexique.js"></script>
+<script src="./js/dyslexique.js"></script>
 <script src="./js/machineAEcrire.js"></script>
 
 </html>
