@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rézisten</title>
     <link rel="stylesheet" href="./design/global.css">
+    <link rel="stylesheet" href="./design/popup.css">
     <link rel="stylesheet" href="./design/headerCreation.css">
 </head>
 
@@ -55,14 +56,19 @@
             ?>
 
             <section class="footer">
-                <a href="./ajouterDialogue.view.php"><button class=button-rouge>Quitter</button></a>
+                <a href="./ajouterDialogue.view.php"><button id="ouvrirDialog" class=button-rouge>Quitter</button></a>
                 <a href="./ajouterQuestion.view.php"><button>Sauvegarder</button></a>
 
-                <a href="./afficherHistoire.view.php"><button class=button-vert>Publier</button></a>
+                <a href="#"><button id="ouvrirDialog" class=button-vert>Publier</button></a>
             </section>
+            
+            <button id="ouvrirDialog">a</button>
+            <?php include_once 'popup.view.php'; ?>
         </section>
+        <script src="./js/popup.js"></script>
 </body>
     <script src="./js/dyslexique.js"></script>
+    
     <script>
         // Vérifiez si le mode dyslexique est activé dans le localStorage
         if (localStorage.getItem('dyslexique') === 'true') {
