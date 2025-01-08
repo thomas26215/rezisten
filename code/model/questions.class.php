@@ -4,13 +4,13 @@ require_once(__DIR__ . "/dao.class.php");
 require_once(__DIR__ . "/histoires.class.php");
 
 class Question {
-    private History $history;
+    private Story $history;
     private string $question;
     private string $answer;
     private string $type;
     private DAO $dao;
 
-    public function __construct(History $history, string $question, string $answer, string $type){
+    public function __construct(Story $history, string $question, string $answer, string $type){
         $this->history = $history;
         $this->question = $question;
         $this->answer = $answer;
@@ -20,7 +20,7 @@ class Question {
 
     /* --- Getters --- */
     
-    public function getHistory(): History {
+    public function getHistory(): Story {
         return $this->history;
     }
 
@@ -38,7 +38,7 @@ class Question {
 
     /* --- Setters --- */
 
-    public function setHistory(History $history): void {
+    public function setHistory(Story $history): void {
         $this->history = $history;
     }
 
@@ -75,11 +75,11 @@ class Question {
 
     public static function read(int $id_histoire) {
         $dao = DAO::getInstance();
-        $quetionDatas = $dao->getColumnWithParameters("questions", ["id_histoire" => (int)$id_histoire]);
-        if($demandeData) {
-            $newHistory = Histoire::read($id_histoire);
-            questionData = questionDatas[0];
-            return new user(
+        $questionDatas = $dao->getColumnWithParameters("questions", ["id_histoire" => (int)$id_histoire]);
+        if($questionDatas) {
+            $newHistory = Story::read($id_histoire);
+            $questionData = $questionDatas[0];
+            return new Question(
                 $newHistory,
                 $questionData["id_histoire"],
                 $questionData["question"],
@@ -98,7 +98,7 @@ class Question {
             "question" => $this->question,
             "reponse" => $this->answer,
             "type" => $this->type,
-        ], ["id_histoire" => (int)$this->user->getId(), "type" => $this->type])) {
+        ], ["id_histoire" => (int)$this->history->getId(), "type" => $this->type])) {
             return true;
         }
         return false;
