@@ -1,95 +1,109 @@
+
 <?php
-// Accès aux classes
+use PHPUnit\Framework\TestCase;
+
 require_once(__DIR__.'/../model/users.class.php');
 require_once(__DIR__.'/../model/dao.class.php');
 
-try {
-    // Test de création d'un utilisateur
-    print("Création d'un user : \n");
-    $user = new User("prapra","brayan","bils","24/08/2005","bilsbrayan@gmail.com","2706","a");
+class usersTest extends TestCase
+{
+    private User $user;
 
-    // Test des getters
-    print("Test des getters : ");
-    $testGetters = [
-        ['method' => 'getBirthDate', 'expected' => "24/08/2005"],
-        ['method' => 'getFirstName', 'expected' => "brayan"],
-        ['method' => 'getMail', 'expected' => "bilsbrayan@gmail.com"],
-        ['method' => 'getRole', 'expected' => "a"],
-        ['method' => 'getSurname', 'expected' => "bils"],
-        ['method' => 'getUsername', 'expected' => "prapra"]
-    ];
+    protected function setUp(): void
+    {
+        $this->user = new User("prapra", "brayan", "bils", "24/08/2005", "bilsbrayan@gmail.com", "2706", "a");
+    }
 
-    foreach ($testGetters as $test) {
-        $value = $user->{$test['method']}();
-        $expected = $test['expected'];
-        if ($value != $expected) {
-            throw new Exception("{$test['method']} incorrect : '$value', attendu '$expected'");
+    public function testGetters()
+    {
+        $this->assertEquals("24/08/2005", $this->user->getBirthDate());
+        $this->assertEquals("brayan", $this->user->getFirstName());
+        $this->assertEquals("bilsbrayan@gmail.com", $this->user->getMail());
+        $this->assertEquals("a", $this->user->getRole());
+        $this->assertEquals("bils", $this->user->getSurname());
+        $this->assertEquals("prapra", $this->user->getUsername());
+    }
+
+    public function testCreate()
+    {
+        $this->assertTrue($this->user->create());
+        $this->assertGreaterThan(0, $this->user->getId());
+    }
+
+    public function testRead()
+    {
+        $this->user->create();
+        $readUser = User::read($this->user->getId());
+        $this->assertInstanceOf(User::class, $readUser);
+        $this->assertEquals($this->user->getUsername(), $readUser->getUsername());
+    }
+
+    public function testUpdate()
+    {
+        $this->user->create();
+        $this->user->setFirstName("BrayanModifié");
+        $this->assertTrue($this->user->update());
+        $updatedUser = User::read($this->user->getId());
+        $this->assertEquals("BrayanModifié", $updatedUser->getFirstName());
+    }
+
+    public function testDelete()
+    {
+        $this->user->create();
+        $this->assertTrue(User::delete($this->user->getId()));
+        $this->assertNull(User::read($this->user->getId()));
+    }
+
+    public function testSetters()
+    {
+        $this->user->setUsername("newUsername");
+        $this->user->setFirstName("newFirstName");
+        $this->user->setSurname("newSurname");
+        $this->user->setBirthDate("01/01/2000");
+        $this->user->setMail("new@email.com");
+        $this->user->setPassword("newPassword");
+        $this->user->setRole("b");
+
+        $this->assertEquals("newUsername", $this->user->getUsername());
+        $this->assertEquals("newFirstName", $this->user->getFirstName());
+        $this->assertEquals("newSurname", $this->user->getSurname());
+        $this->assertEquals("01/01/2000", $this->user->getBirthDate());
+        $this->assertEquals("new@email.com", $this->user->getMail());
+        $this->assertEquals("b", $this->user->getRole());
+    }
+
+    public function testCreateWithInvalidData()
+    {
+        $invalidUser = new User("", "", "", "", "", "", "");
+        $this->expectException(Exception::class);
+        $invalidUser->create();
+    }
+
+    //TODO: Rajouter un test pouru vérifier si l'utilisateur a + de 16 ans
+    //TODO: Compléter les tests
+
+    public function testReadNonExistentUser()
+    {
+        $this->assertNull(User::read(99999));
+    }
+
+    public function testUpdateNonExistentUser()
+    {
+        $nonExistentUser = new User("test", "test", "test", "01/01/2000", "test@test.com", "password", "a", 99999);
+        $this->assertFalse($nonExistentUser->update(), "La mise à jour d'un utilisateur devrait retourner false");
+    }
+
+    public function testDeleteNonExistentUser()
+    {
+        $this->assertFalse(User::delete(99999), "La suppression d'un utilisateur devrait retourner false");
+    }
+
+    protected function tearDown(): void
+    {
+        // Nettoyer la base de données après chaque test si nécessaire
+        if ($this->user->getId() > 0) {
+            User::delete($this->user->getId());
         }
     }
-
-    print("Getters OK\n");
-
-    // Test de la méthode create
-    print("Test de la méthode create : ");
-    if (!$user->create()) {
-        throw new Exception("Échec de la création de l'utilisateur");
-    }
-    print("OK\n");
-
-    // Test de la méthode read
-    print("Test de la méthode read : ");
-    $readUser = User::read($user->getId());
-    if (!$readUser || $readUser->getUsername() !== $user->getUsername()) {
-        throw new Exception("Échec de la lecture de l'utilisateur");
-    }
-    print("OK\n");
-
-    // Test de la méthode update
-    print("Test de la méthode update : ");
-    $user->setFirstName("BrayanModifié");
-    if (!$user->update()) {
-        throw new Exception("Échec de la mise à jour de l'utilisateur");
-    }
-    $updatedUser = User::read($user->getId());
-    if ($updatedUser->getFirstName() !== "BrayanModifié") {
-        throw new Exception("La mise à jour n'a pas été effectuée correctement");
-    }
-    print("OK\n");
-
-    // Test de la méthode delete
-    print("Test de la méthode delete : ");
-    
-    if (!User::delete($user->getId())) {
-        throw new Exception("Échec de la suppression de l'utilisateur");
-    }
-    $deletedUser = User::read($user->getId());
-    if ($deletedUser !== null) {
-        throw new Exception("L'utilisateur n'a pas été supprimé correctement");
-    }
-    print("OK\n");
-
-    // Test des setters
-    print("Test des setters : ");
-    $user->setUsername("newUsername");
-    $user->setFirstName("newFirstName");
-    $user->setSurname("newSurname");
-    $user->setBirthDate("01/01/2000");
-    $user->setMail("new@email.com");
-    $user->setPassword("newPassword");
-    $user->setRole("b");
-
-    if ($user->getUsername() !== "newUsername" ||
-        $user->getFirstName() !== "newFirstName" ||
-        $user->getSurname() !== "newSurname" ||
-        $user->getBirthDate() !== "01/01/2000" ||
-        $user->getMail() !== "new@email.com" ||
-        $user->getRole() !== "b") {
-        throw new Exception("Les setters n'ont pas fonctionné correctement");
-    }
-    print("OK\n");
-
-
-} catch (Exception $e) {
-    exit("\nErreur: ".$e->getMessage()."\n");
 }
-?>
+
