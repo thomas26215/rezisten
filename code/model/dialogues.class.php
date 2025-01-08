@@ -20,12 +20,12 @@ class Dialog
 
 
     public function __construct(int $id, story $story, Character $speaker, string $content, bool $bonus, string $dubbing){
-        $this->id = $id;
-        $this->story = $story;
-        $this->speaker = $speaker;
-        $this->content = $content;
-        $this->bonus = $bonus;
-        $this->dubbing = $dubbing;
+        $this->setId($id);
+        $this->setStory($story);
+        $this->setSpeaker($speaker);
+        $this->setContent($content);
+        $this->setBonus($bonus);
+        $this->setDubbing($dubbing);
         $this->dao = DAO::getInstance();
     }
 

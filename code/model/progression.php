@@ -7,7 +7,7 @@ require_once(__DIR__ . "/histoires.class.php");
 class Progression {
     private User $user;
     private History $history;
-    private bool $status;
+private bool $status;
     private $dao;
     public function __construct(User $user, History $history, bool $status) {
         $this->setUser($user);

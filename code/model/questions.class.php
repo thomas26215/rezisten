@@ -11,10 +11,10 @@ class Question {
     private DAO $dao;
 
     public function __construct(Story $history, string $question, string $answer, string $type){
-        $this->history = $history;
-        $this->question = $question;
-        $this->answer = $answer;
-        $this->type = $type;
+        $this->setHistory($history);
+        $this->setQuestion($question);
+        $this->setAnswer($answer);
+        $this->setType($type);
         $this->dao = DAO::getInstance();
 }
 
@@ -39,18 +39,30 @@ class Question {
     /* --- Setters --- */
 
     public function setHistory(Story $history): void {
+        if(empty($history)) {
+            throw new Exception("L'histoire ne peut pas être vide");
+        }
         $this->history = $history;
     }
 
     public function setQuestion(string $question): void {
+        if(empty($question)) {
+            throw new Exception("La question ne peut pas être vide");
+        }
         $this->question = $question;
     }
 
     public function setAnswer(string $answer): void {
+        if(empty($answer)) {
+            throw new Exception("La réponse ne peut pas être vide");
+        }
         $this->answer = $answer;
     }
 
     public function setType(string $type): void {
+        if(empty($type)) {
+            throw new Exception("Le type ne peut pas être vide");
+        }
         $this->type = $type;
     }
 
