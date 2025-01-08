@@ -50,7 +50,7 @@
             <?php
             /* CHANGER EN FONCTION DE CONTROLEUR */
             /*include_once 'ajouterDialogue.view.php';*/ 
-            /*include_once 'ajouterQuestion.view.php';*/ 
+            /*include_once 'ajouterQuestion.view.php'; */
             include_once 'afficherHistoire.view.php';
             ?>
 

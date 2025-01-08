@@ -91,6 +91,34 @@ try {
         print("L'update a échouée\n");
     }
 
+    print("Test de la méthode getDialogsBeforeQuestion");
+    try{
+        $dialogs = Dialog::getDialogsBeforeQuestion(1);
+        foreach($dialogs as $dial):
+            if($dial['contenu'] === "limquestion"){
+                print("La recherche va trop loin");
+                exit;
+            }
+        endforeach;
+        print("La recherche a fonctionnée\n");
+    }catch(Exception $e){
+        print($e->getMessage());
+    }
+
+    print("Test de la méthode getDialogsBonusAfterQuestion : ");
+    try{
+        $dialogs = Dialog::getDialogsBonusAfterQuestion(1);
+        foreach($dialogs as $dial):
+            if($dial['bonus'] === "true"){
+                print("Un dialogue non bonus est trouvé !!");
+                exit;
+            }
+        endforeach;
+        print("La recherche a fonctionné\n");
+    }catch(Exception $e){
+        print($e->getMessage());
+    }
+
 
     
 /*     print("Test de la méthode getDialogsFromStory");

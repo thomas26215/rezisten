@@ -6,36 +6,92 @@
     <div>
         <h2 class="titre"> Afficher toute l'histoire</h2>
     </div>
-    <form action="">
-        <section>
-            <h2>Qui parle : </h2>
-            <label for="personnage">Personnage qui parle : </label>
-            <select name="nom">
-                <option value="A">Pierre</option><!-- mettre un foreache -->
-                <option value="B">Paul</option>
-                <option value="-">Jaques</option>
-            </select>
-        </section>
-        <section>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta dolore cupiditate debitis sunt architecto quod, 
-                hic reiciendis cumque aut qui natus! Incidunt rem ipsam fugiat harum ab laborum vitae impedit!
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta dolore cupiditate debitis sunt architecto quod, 
-                hic reiciendis cumque aut qui natus! Incidunt rem ipsam fugiat harum ab laborum vitae impedit!
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta dolore cupiditate debitis sunt architecto quod, 
-                hic reiciendis cumque aut qui natus! Incidunt rem ipsam fugiat harum ab laborum vitae impedit!
-            </p>
-            <div>
-                <p>^</p>
-                <p>^</p>
-            </div>
-            <img src="design/image/poubelle.png" alt="mémorial national prison de montluc">
-        </section>
+    <article>
+        <form action="">
+            <section>
+                <label for="personnage">Personnage qui parle : </label>
+                <select name="nom">
+                    <option value="A">Pierre</option><!-- mettre un foreache -->
+                    <option value="B">Paul</option>
+                    <option value="-">Jaques</option>
+                </select>
+            </section>
+            <!-- il faut que le premier n'est pas de fleche vers le haut et que le dernier n'est pas de fleche vers le bas -->
+            <section class=flex-row>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta dolore cupiditate debitis sunt architecto quod, 
+                    hic reiciendis cumque aut qui natus! Incidunt rem ipsam fugiat harum ab laborum vitae impedit!
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta dolore cupiditate debitis sunt architecto quod, 
+                    hic reiciendis cumque aut qui natus! Incidunt rem ipsam fugiat harum ab laborum vitae impedit!
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta dolore cupiditate debitis sunt architecto quod, 
+                    hic reiciendis cumque aut qui natus! Incidunt rem ipsam fugiat harum ab laborum vitae impedit!
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta dolore cupiditate debitis sunt architecto quod, 
+                    hic reiciendis cumque aut qui natus! Incidunt rem ipsam fugiat harum ab laborum vitae impedit!
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta dolore cupiditate debitis sunt architecto quod, 
+                    hic reiciendis cumque aut qui natus! Incidunt rem ipsam fugiat harum ab laborum vitae impedit!
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta dolore cupiditate debitis sunt architecto quod, 
+                    hic reiciendis cumque aut qui natus! Incidunt rem ipsam fugiat harum ab laborum vitae impedit!
+                </p>
+                <div id="fleche">
+                    <button class="bouton-modif">^</button>
+                    <button class="bouton-modif">^</button>
+                </div>
+                <a href="" class="bouton-modif"><img src="design/image/poubelle.png" alt="mémorial national prison de montluc" id="poubelle"></button></a>  <!-- Lié au pop up -->
+            </section>
 
-        <!-- boutons -->
-        <section>
-            <button class=button-rouge>Supprimer</button>
-            <button class=button-vert>Valider</button>
-        </section>
-    </form>
+            <section class=flex-row>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta dolore cupiditate debitis sunt architecto quod, 
+                    hic reiciendis cumque aut qui natus! Incidunt rem ipsam fugiat harum ab laborum vitae impedit!
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta dolore cupiditate debitis sunt architecto quod, 
+                    hic reiciendis cumque aut qui natus! Incidunt rem ipsam fugiat harum ab laborum vitae impedit!
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta dolore cupiditate debitis sunt architecto quod, 
+
+                </p>
+                <div id="fleche">
+                    <button class="bouton-modif">^</button>
+                    <button class="bouton-modif">^</button>
+                </div>
+                <a href="" class="bouton-modif"><img src="design/image/poubelle.png" alt="mémorial national prison de montluc" id="poubelle"></button></a>  <!-- Lié au pop up -->
+            </section>
+
+            <section class=flex-row>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta dolore cupiditate debitis sunt architecto quod, 
+                    hic reiciendis cumque aut qui natus! Incidunt rem ipsam fugiat harum ab laborum vitae impedit!
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta dolore cupiditate debitis sunt architecto quod, 
+                    hic reiciendis cumque aut qui natus! Incidunt rem ipsam fugiat harum ab laborum vitae impedit!
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta dolore cupiditate debitis sunt architecto quod, 
+
+                </p>
+                <div id="fleche">
+                    <button class="bouton-modif">^</button>
+                    <button class="bouton-modif">^</button>
+                </div>
+                <a href="" class="bouton-modif"><img src="design/image/poubelle.png" alt="mémorial national prison de montluc" id="poubelle"></button></a>  <!-- Lié au pop up -->
+            </section>
+
+            <section class=flex-row>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta dolore cupiditate debitis sunt architecto quod, 
+                    hic reiciendis cumque aut qui natus! Incidunt rem ipsam fugiat harum ab laborum vitae impedit!
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta dolore cupiditate debitis sunt architecto quod, 
+                    hic reiciendis cumque aut qui natus! Incidunt rem ipsam fugiat harum ab laborum vitae impedit!
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta dolore cupiditate debitis sunt architecto quod, 
+
+                </p>
+                <div id="fleche">
+                    <button class="bouton-modif">^</button>
+                    <button class="bouton-modif">^</button>
+                </div>
+                <a href="" class="bouton-modif"><img src="design/image/poubelle.png" alt="mémorial national prison de montluc" id="poubelle"></button></a>  <!-- Lié au pop up -->
+            </section>
+
+        </form>
+    </article>
+    <!-- boutons -->
+    <section class="last-button">
+        <button class=button-rouge>Annuler</button>
+        <button class=button-vert>Valider</button>
+    </section>
 </article>
