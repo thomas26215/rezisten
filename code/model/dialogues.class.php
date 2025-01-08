@@ -134,7 +134,8 @@ class Dialog
     //FIXME: ICI IL FAUT CHANGER LA METHODE CAR DEUX ARGUMENTS 
     public static function delete($id, $idStory){
         if($id > 0 && $idStory > 0){
-            return DAO::getInstance()->deleteDatas("dialogues",$id,$idStory);
+            $ids[] = [$id , $idStory];
+            return DAO::getInstance()->deleteDatas("dialogues",$ids);
         }
         throw new Exception("Le dialogue ".$id."n'existe pas pour l'histoire ".$idStory);
     }

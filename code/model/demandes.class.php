@@ -86,7 +86,7 @@ class Demande {
     }
     public static function delete($id_utilisateur): bool {
         if ($id_utilisateur > 0) {
-            return DAO::getInstance()->deleteRelatedData("demandes", ["id_utilisateur" => (int)$id_utilisateur]);
+            return DAO::getInstance()->deleteDatas("demandes", ["id_utilisateur" => (int)$id_utilisateur]);
         }
         return false;
     }
