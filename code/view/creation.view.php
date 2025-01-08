@@ -37,7 +37,7 @@
 
                 <div>
                     <label for="personnages">Personnages :</label>
-                    <a href="./login.view.php"><button class=button-gris>Consulter les personnages</button></a>
+                    <a href="./consulterPersonnage.view.php"><button class=button-gris>Consulter les personnages</button></a>
                 </div>
 
             </section>
