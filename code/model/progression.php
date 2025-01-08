@@ -105,7 +105,9 @@ if($historyId < 1) {
     }
 
     public static function delete(int $id_utilisateur, int $id_history) {
-        //TODO: Compléter une fois que le DAO est modifié
+        if($id_utilisateur > 0 && $id_history > 0){
+            return DAO::getInstance()->deleteRelatedData("progression", ["id_utilisateur" => (int)$id_utilisateur, "id_history" => (int)$id_history]);
+        }
     }
 
 

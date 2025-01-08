@@ -45,6 +45,7 @@ class User {
         return $this->surname;
     }
 
+    //FIXME: vérifier que la personne a plus de 16 ans .
     public function getBirthDate() {
         return $this->birth_date; // Correction du nom de la variable
     }

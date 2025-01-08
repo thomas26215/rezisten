@@ -13,7 +13,7 @@ class Story
     private Chapter $chapter;
     private User $creator;
     private Place $place;
-    private string $background;
+    private string $background; //chemin d'accès a l'image de fond
     private bool $visibility;
 
     private DAO $dao;
@@ -141,7 +141,7 @@ class Story
     // Supprimer une histoire en connaissant son id
     public static function delete($id){
         if($id > 0){ // Vérification de la possible existence de l'id
-            return DAO::getInstance()->deleteRelatedData("histoires",$id);
+            return DAO::getInstance()->deleteDatasById("histoires",$id);
         }
         return false; // Echec si id invalide ou inexistant
 

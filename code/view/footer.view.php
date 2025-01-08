@@ -1,12 +1,13 @@
-
 <head>
     <link rel="stylesheet" type="text/css" href="./design/footer.css">
     <link rel="stylesheet" type="text/css" href="./design/global.css">
 </head>
 
 
-<footer>
-    <img src="./design/image/logoCoupe.png" alt="logo Rézisten">
+<footer class="flex-row">
+    <a href="./main.view.php">
+        <img class="img" src="./design/image/logoCoupe.png" alt="logo Rézisten">
+    </a>
     <article>
         <section>Crédit :
             <ul>

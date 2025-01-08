@@ -64,6 +64,24 @@ class Apparitions{
     }
 
     public function update() {
-        if($this-> === NULL || $this->)
+        if($this->history === NULL || $this->history->getId()){
+            throw new Exception("Impossible de mettre à jour la demande : L'utilisateur est invalide");
+        }
+        if($this->character === NULL || $this->character->getId()) {
+            throw new Exception("Impossible de mettre à jour la demande : L'utilisateur est invalide");
+        }
+        if($this->dao->update("apparitions", [
+            "id_histoire" => $this->getHistory()->getId(),
+            "id_perso" => $this->getCharacter()->getId()
+        ], ["id_histoire" => (int)$this->getHistory()->getId(), (int)$this->getCharacter()->getId()])) {
+            return true;
+        }
+        return false;
+    }
+
+    public function delete($id_history, $id_character){
+        if($id_character > 0 && id_history > 0){
+            return DAO::getInstance()->deleteRelatedData("apparitions", ["id_histoire" => $id_history, "id_perso" => $id_history]);
+        }
     }
 }
