@@ -45,11 +45,6 @@ body{
   grid-area: footer;
 }
 
-
-/*pour les élément*/ 
-
-/*bouron pour consulter les personnages*/
-
 button{
   width: 300px;
   max-width: none !important;
@@ -57,7 +52,9 @@ button{
   margin-top: 25%;
 }
 
-div{
+.container > section.header div{
+  margin-right: 1.5%;
+  margin-left: 1.5%;
   display :flex;
 }
 
@@ -68,7 +65,9 @@ div{
 
 label{
   align-self: center;
+  text-align: right;
   margin-right: 10px;
+  min-width: 150px;
 }
 
 
