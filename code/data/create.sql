@@ -17,7 +17,7 @@ CREATE TABLE UTILISATEURS (
 --Table des demandes de créateurs
 CREATE TABLE DEMANDES(
     id_utilisateur INTEGER PRIMARY KEY,         -- Référence un utilisateur de la table UTILISATEURS
-    doc VARCHAR(50),                  -- Nom d'un fichier image qui contient la carte d'identité de la personne
+    doc VARCHAR(50) NOT NULL,                  -- Nom d'un fichier image qui contient la carte d'identité de la personne
     FOREIGN KEY (id_utilisateur) REFERENCES UTILISATEURS(id)
 );
 
@@ -82,7 +82,7 @@ CREATE TABLE APPARITIONS(
 -- Table des questions associées aux histoires
 CREATE TABLE QUESTIONS (
     id_histoire INTEGER,                    -- Référence à l'identifiant de l'histoire associée
-    question VARCHAR(100) NOT NULL,         -- Question liée à l'histoire
+    question VARCHAR(200) NOT NULL,         -- Question liée à l'histoire
     reponse VARCHAR(50) NOT NULL,           -- Réponse à la question
     type CHAR CHECK (type IN('g','s')),     -- Type de question ('g' pour générale, 's' pour spécifique)
     PRIMARY KEY(id_histoire,type),
