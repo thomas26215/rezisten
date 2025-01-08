@@ -1,0 +1,34 @@
+.content section{
+    display: flex;
+    margin: 20px;
+}
+
+.input-superpose{
+    display: flex;
+    align-self: flex-start;
+    flex-direction: column;
+    /*width: max-content;*/
+}
+
+.input-superpose label{
+    align-self: flex-start;
+}
+
+.input-superpose textarea{
+    width: 100%;
+    height: 10vh;
+
+}
+
+
+.content form :last-child{ /* Pour la partie du dialogue */
+    justify-content: space-around;
+}
+
+.content button{
+    font-size: small;
+    margin: 0%;
+    padding: 10px;
+    width: 100px !important;
+    height: auto; /* Permet au bouton de s'ajuster verticalement */
+}

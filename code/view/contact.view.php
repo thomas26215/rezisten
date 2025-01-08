@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">    
         <meta charset="utf-8">
         <title>Rézisten</title>
         <meta name="author" content="Groupe 11" />
         <link rel="stylesheet" type="text/css" href="./design/contact.css">
     </head>
     <body> 
+        <?php include_once("./header.view.php")?>
         <main>
             <h1>Nous contacter</h1>
             <form action="" method="post"> <!-- TO DO : conpléter le php (Thomas) -->

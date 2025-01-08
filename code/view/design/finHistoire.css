@@ -2,18 +2,24 @@ body {
     background-image: var(--background-histoire);
 }
 
-main{
+main {
     min-height: calc(100vh - var(--height-header));
+    gap: 20px;
 }
 
-.img-milieu{
+.img-milieu {
     border: solid 5px var(--noir);
     min-width: 500px;
     max-width: 500px;
 
 }
 
-span{
-    color:var(--bleu);
+p {
+    max-width: 80vw;
+    text-align: center; 
+}
+
+span {
+    color: var(--bleu);
     text-decoration: underline;
 }

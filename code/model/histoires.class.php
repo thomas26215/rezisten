@@ -13,7 +13,7 @@ class Story
     private Chapter $chapter;
     private User $creator;
     private Place $place;
-    private string $background;
+    private string $background; //chemin d'accès a l'image de fond
     private bool $visibility;
 
     private DAO $dao;
@@ -52,9 +52,9 @@ class Story
         return $this->place;
     }
     public function getBackground(){
-        return self::bgURL.$this->background;
+        return $this->background;
     }
-    public function getVisility(){
+    public function getVisibility(){
         return $this->visibility;
     }
 
@@ -102,7 +102,7 @@ class Story
     }
 
     // Accéder aux données d'une histoire à partir de son id
-    public static function read($id) : Story{
+    public static function read($id) : Story|null{
         $dao = DAO::getInstance();
 
         //Récupère les données de l'histoire depuis la base
@@ -141,7 +141,7 @@ class Story
     // Supprimer une histoire en connaissant son id
     public static function delete($id){
         if($id > 0){ // Vérification de la possible existence de l'id
-            return DAO::getInstance()->deleteRelatedData("histoires",$id);
+            return DAO::getInstance()->deleteDatasById("histoires",$id);
         }
         return false; // Echec si id invalide ou inexistant
 

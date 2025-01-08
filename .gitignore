@@ -10,7 +10,6 @@ testdb/rezisten.db
 /code/data/database.db
 ### Eclipse ###
 .metadata
-bin/
 tmp/
 *.tmp
 *.bak
