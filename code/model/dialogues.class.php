@@ -12,16 +12,20 @@ class Dialog
     private Character $speaker;
     private string $content;
     private bool $bonus;
+    private string $dubbing;
 
     private DAO $dao;
 
+    const audioURL = "192.168.14.118/rezisten/doublageDialogue/";
 
-    public function __construct(int $id, story $story, Character $speaker, string $content, bool $bonus){
+
+    public function __construct(int $id, story $story, Character $speaker, string $content, bool $bonus, string $dubbing){
         $this->id = $id;
         $this->story = $story;
         $this->speaker = $speaker;
         $this->content = $content;
         $this->bonus = $bonus;
+        $this->dubbing = $dubbing;
         $this->dao = DAO::getInstance();
     }
 
@@ -41,6 +45,9 @@ class Dialog
     public function getBonus(){
         return $this->bonus;
     }
+    public function getDubbing(){
+        return $this->dubbing;
+    }
 
 
     /* Setters */
@@ -58,6 +65,9 @@ class Dialog
     }
     public function setBonus(bool $bonus){
         $this->bonus = $bonus;
+    }
+    public function setDubbing(string $dubbing){
+        $this->dubbing = $dubbing;
     }
     
     /* Méthodes CRUD et utilitaire sur les dialogs */
@@ -81,7 +91,8 @@ class Dialog
                 $story,
                 $speaker,
                 $dialogs[$i]['contenu'],
-                $dialogs[$i]['bonus']
+                $dialogs[$i]['bonus'],
+                $dialogs[$i]['doublage']
             );
             array_push($listdialogs,$d);
         }
@@ -108,7 +119,8 @@ class Dialog
             "id_histoire" => $this->story->getId(),
             "interlocuteur" => $this->speaker->getId(),
             "contenu" => $this->content,
-            "bonus" => $this->bonus
+            "bonus" => $this->bonus,
+            "doublage" => $this->dubbing
         ])){
             return true;
         }
@@ -126,7 +138,8 @@ class Dialog
             "id_histoire" => $this->story->getId(),
             "interlocuteur" => $this->speaker->getId(),
             "contenu" => $this->content,
-            "bonus" => $this->bonus
+            "bonus" => $this->bonus,
+            "doublage" => $this->dubbing
         ], ["id" => $this->id, "id_histoire" => $this->story->getId()]);
     }
 
@@ -134,8 +147,7 @@ class Dialog
     //FIXME: ICI IL FAUT CHANGER LA METHODE CAR DEUX ARGUMENTS 
     public static function delete($id, $idStory){
         if($id > 0 && $idStory > 0){
-            $ids[] = [$id , $idStory];
-            return DAO::getInstance()->deleteDatas("dialogues",$ids);
+            return DAO::getInstance()->deleteDatas("dialogues", ["id" => $id, "id_histoire" => $idStory]);
         }
         throw new Exception("Le dialogue ".$id."n'existe pas pour l'histoire ".$idStory);
     }
