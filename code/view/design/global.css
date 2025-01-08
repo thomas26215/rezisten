@@ -29,8 +29,6 @@ main, body {
     background-size: cover;
     /* Pour que l'image couvre tout l'élément main */
     background-repeat: no-repeat;
-    /* Pour éviter la répétition de l'image */
-    background-position: center;
     /* Pour centrer l'image */
     overflow-x: hidden;
 }

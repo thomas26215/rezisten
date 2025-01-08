@@ -2,7 +2,6 @@
 <html lang="fr">
 
 <head>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rézisten</title>
@@ -19,49 +18,43 @@
         <section class="container">
 
             <section class="menu">
-                <a href="./consulterPersonnage.view.php"><button class=button-gris>Consulter un personnage</button></a>
+                <a href="./consulterPersonnage.view.php"><button >Consulter un personnage</button></a>
                 <a href="./ajouterPersonnage.view.php"><button class=button-gris>Ajouter un personnage</button></a>
-                <a href="./modifierPersonnage.view.php"><button>Modifier un personnage</button></a>
+                <a href="./modifierPersonnage.view.php"><button class=button-gris>Modifier un personnage</button></a>
                 <a href="./supprimerPersonnage.view.php"><button class=button-gris>Supprimer un personnage</button></a>
             </section>
 
         
                 <article class="content">
                     
-                    <h2 class="titre">Modifier un personnage</h2>
+                    <h2 class="titre">Consulter un personnage</h2>
 
                     <div class="articleContainer">
                         <div class="personnage">
-                            <label for="personnage">Personnage à modifier : </label>
+                            <label for="personnage">Personnage à Consulter : </label>
                             <select name="personnage">
                                 <option value="A">Jean</option><!-- mettre un foreache -->
                                 <option value="B">a</option>
                                 <option value="-">b</option>
                             </select>
                         </div>
-                        <div class="noms">
+
+                        <div class="supContainer">
                             <div>
-                                <label for="prenom">Prénom</label>
-                                <input maxlength="15" type="text" placeholder="Pierre">
+                                <p style="font-weight: bold;">Prénom :  </p>
+                                <p>Jean</p>
                             </div>
                             <div>
-                                <label for="nom">Nom</label>
-                                <input maxlength="25" type="text" placeholder="Dupont">
+                                <p style="font-weight: bold;">Nom :  </p>
+                                <p>Gaillard</p>
                             </div>
                         </div>
 
-                        <div class="image">
-                            <div class="imageChoisi">
-                                <p>Image</p>
-                                <input type="file" id="photoUpload" name="photo" accept="image/*" style="display: none;">
-                                <img id="photoSend" src="./design/image/upload.png" alt="">
-                                <span id="fileName">Pas de fichier ajoutée</span>
-                            </div>
-    
-                            <div class="imageUser">
-                                <img id="img" src="#" alt="Image preview" style="display: none; max-width: 240px;">
-                            </div>
+                        <div class="supContainer">
+                            <img src="design/image/milicien.png" alt="" style="max-width: 240px;">
+                            
                         </div>
+                        
                     </div>
                     
                 </article>

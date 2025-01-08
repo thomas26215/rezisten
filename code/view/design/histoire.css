@@ -1,6 +1,6 @@
 body {
     background-image: var(--background-histoire);
-    
+
 }
 
 h1 {
@@ -13,14 +13,10 @@ article {
     border: 2px solid var(--noir);
     margin-right: 12em;
     margin-left: 12em;
-
+    width: 80vw;
+    height: max-content;
 }
 
-article.image {
-    background-image: url(./image/image_test.png);
-    background-size: 1920px;
-
-}
 
 article li {
     display: flex;
@@ -41,10 +37,52 @@ article li ul {
         1px 1px 0 white;
 }
 
-article li ul img {
+
+.fond-container {
     position: relative;
-    top: 5px;
+    height: max-content;
+    overflow: hidden;
+    /* Assure que tout reste dans le conteneur */
+    text-align: center;
+    /* Centrer le contenu horizontalement */
 }
+
+.fond {
+    width: 100%;
+    height: auto;
+}
+
+.fond-container img {
+    margin: 0;
+    padding: 0;
+    display: block;
+    /* Empêche l'espace lié à l'affichage inline par défaut des images */
+}
+
+
+.personnages {
+    position: absolute;
+    bottom: 0;
+    /* Ajustez selon votre besoin */
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-evenly;
+    /* Espace égal entre les personnages */
+    align-items: flex-end;
+    /* Aligner les personnages au bas */
+}
+
+.parle,
+.parle-pas {
+    width: 50%;
+    /* Ajustez la taille des personnages */
+}
+
+.parle-pas {
+    opacity: 0.6;
+}
+
 
 article section {
     border: 2px solid var(--noir);
@@ -60,7 +98,6 @@ img.logo {
     height: auto;
 
 }
-
 
 h2.speaker {
     position: relative;
@@ -118,4 +155,5 @@ h2.speaker::before {
 
 .text {
     animation: blink 0.8s steps(1) infinite;
+    padding: 10px;
 }

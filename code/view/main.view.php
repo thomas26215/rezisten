@@ -18,7 +18,7 @@
             <a href="./chapitre.view.php">
                 <button class="button-gris" type="submit">Lire les histoires</button>
             </a>
-            <a href="./ajouterDialogue.view.php" class="bloque">
+            <a href="./Creation.view.php" class="bloque">
                 <button class="button-gris" type="submit">Créer une histoire <img src="./design/image/cadenas.png" alt="(Bloqué)"></button>
                 <div class="msgCreateur">Vous devez être créateur pour accéder à cette fonctionnalité : faites une demande sur votre profil</div>
             </a>
