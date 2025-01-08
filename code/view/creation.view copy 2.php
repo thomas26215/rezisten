@@ -36,12 +36,12 @@
 
                 <div>
                     <label for="personnages">Personnages :</label>
-                    <a href="./login.view.php"><button class=button-gris>Consulter les personnages</button></a>
+                    <a href="./consulterPersonnage.view.php"><button class=button-gris>Consulter les personnages</button></a>
                 </div>
 
             </section>
 
-            <section class="menu">
+            <section class="flex-col sect-droite">
                 <a href="./ajouterDialogue.view.php"><button>Ajouter un dialogue</button></a>
                 <a href="./ajouterQuestion.view.php"><button class=button-gris>Ajouter une question</button></a>
                 <a href="./afficherHistoire.view.php"><button class=button-gris>Afficher toute l'histoire</button></a>
@@ -49,9 +49,9 @@
 
             <?php
             /* CHANGER EN FONCTION DE CONTROLEUR */
-            /*include_once 'ajouterDialogue.view.php';*/ 
+            include_once 'ajouterDialogue.view.php';
             /*include_once 'ajouterQuestion.view.php'; */
-            include_once 'ajouterQuestion.view.php';
+            /*include_once 'afficherHistoire.view.php';*/
             ?>
 
             <section class="footer">
