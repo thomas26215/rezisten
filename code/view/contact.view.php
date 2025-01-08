@@ -7,6 +7,7 @@
         <link rel="stylesheet" type="text/css" href="./design/contact.css">
     </head>
     <body> 
+        <?php include_once("./header.view.php")?>
         <main>
             <h1>Nous contacter</h1>
             <form action="" method="post"> <!-- TO DO : conpléter le php (Thomas) -->
