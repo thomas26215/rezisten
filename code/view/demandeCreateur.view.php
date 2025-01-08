@@ -11,7 +11,7 @@
     <main>
         <h1>Demande créateur</h1>
         
-        <form action="">
+        <form action="post">
             <div class="infos">
                 <div>
                     <label for="nom">Nom <span>*</span>: </label>
@@ -24,7 +24,7 @@
             </div>
             <p class="texte">Merci de nous envoyer des documents pour prouver vos compétences afin de pouvoir écrire et publier vos histoires.</p>
             <button id="photoSend" class="button-gris">Ajouter des documents</button>
-            <input type="file" id="photoUpload" name="photo" accept="image/*" style="display: none;">
+            <input type="file" id="photoUpload" name="photo" style="display: none;">
             <p id="fileName">Pas de document ajoutée</p>
             <button class="envoyer">Envoyer la demande</button>
         </form>
