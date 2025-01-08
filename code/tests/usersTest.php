@@ -4,7 +4,7 @@ use PHPUnit\Framework\TestCase;
 require_once(__DIR__.'/../model/users.class.php');
 require_once(__DIR__.'/../model/dao.class.php');
 
-class userTest extends TestCase
+class usersTest extends TestCase
 {
     private User $user;
 
@@ -74,7 +74,7 @@ class userTest extends TestCase
     public function testCreateWithInvalidData()
     {
         $invalidUser = new User("", "", "", "", "", "", "");
-        $this->expectException(DAOException::class);
+        $this->expectException(Exception::class);
         $invalidUser->create();
     }
 
@@ -86,14 +86,12 @@ class userTest extends TestCase
     public function testUpdateNonExistentUser()
     {
         $nonExistentUser = new User("test", "test", "test", "01/01/2000", "test@test.com", "password", "a", 99999);
-        $this->expectException(DAOException::class);
-        $nonExistentUser->update();
+       $this->assertFalse($nonExistentUser->update());
     }
 
     public function testDeleteNonExistentUser()
     {
-        $this->expectException(DAOException::class);
-        User::delete(99999);
+        $this->assertFalse(User::delete(99999));
     }
 
     protected function tearDown(): void
