@@ -75,8 +75,8 @@ class Question {
 
     public static function read(int $id_histoire) {
         $dao = DAO::getInstance();
-        $quetionDatas = $dao->getColumnWithParameters("questions", ["id_histoire" => (int)$id_histoire]);
-        if($quetionDatas) {
+        $questionDatas = $dao->getColumnWithParameters("questions", ["id_histoire" => (int)$id_histoire]);
+        if($questionDatas) {
             $newHistory = Story::read($id_histoire);
             $questionData = $questionDatas[0];
             return new Question(
@@ -98,7 +98,7 @@ class Question {
             "question" => $this->question,
             "reponse" => $this->answer,
             "type" => $this->type,
-        ], ["id_histoire" => (int)$this->user->getId(), "type" => $this->type])) {
+        ], ["id_histoire" => (int)$this->history->getId(), "type" => $this->type])) {
             return true;
         }
         return false;

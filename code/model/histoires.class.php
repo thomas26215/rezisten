@@ -13,7 +13,7 @@ class Story
     private Chapter $chapter;
     private User $creator;
     private Place $place;
-    private string $background;
+    private string $background; //chemin d'accès a l'image de fond
     private bool $visibility;
 
     private DAO $dao;

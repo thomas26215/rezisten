@@ -2,38 +2,12 @@
 
 // Accès aux classes
 
+use PhpParser\Node\Expr\Print_;
 
-require_once(__DIR__.'/../model/histoires.class.php');
+require_once(__DIR__.'/../model/lieux.class.php');
 require_once(__DIR__.'/../model/dao.class.php');
 
-/* try {
-    // Test de création d'un lieu
-
-    $histoire = new History("Titre" ,"chapitre" ,"Brabar", "place" , "background",false);
-
- */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+try {
 
 
 
@@ -107,3 +81,4 @@ require_once(__DIR__.'/../model/dao.class.php');
     exit("\nErreur: ".$e->getMessage()."\n");
 }
 ?>
+
