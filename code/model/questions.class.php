@@ -73,16 +73,16 @@ class Question {
         }
     }
 
-    public static function read(int $id_histoire) {
+    public static function read(int $id_histoire , string $type) {
         $dao = DAO::getInstance();
-        $questionDatas = $dao->getColumnWithParameters("questions", ["id_histoire" => (int)$id_histoire]);
+        $questionDatas = $dao->getColumnWithParameters("questions", ["id_histoire" => (int)$id_histoire , "type" => (string)$type]);
         if($questionDatas) {
             $newHistory = Story::read($id_histoire);
             $questionData = $questionDatas[0];
             return new Question(
                 $newHistory,
-                $questionData["id_histoire"],
                 $questionData["question"],
+                $questionData["reponse"],
                 $questionData["type"]
             );
         }
