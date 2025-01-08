@@ -120,7 +120,7 @@ try {
             print("Test de la méthode delete : ");
                 $idToDelete = $questions->getHistory()->getId();
 
-                if (!Question::delete($idToDelete)) {
+                if (!Question::delete($idToDelete ,$questions->getType())) {
                     throw new Exception("Échec de la suppression de la question");
                 }
 
