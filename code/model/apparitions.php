@@ -7,7 +7,7 @@ require_once(__DIR__ . "/")
 class Apparitions{
     private History $history;
     private Character $character;
-    private DAO $dao
+    private DAO $dao;
 
     public function __construct(History $history, Character $character){
         $this->history = $history;
