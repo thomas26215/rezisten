@@ -23,13 +23,10 @@ include_once(__DIR__. '/histoireTest.php');
 print("\ntest des Questions : \n");
 include_once(__DIR__. '/questionTest.php');
 
-<<<<<<< HEAD
 print("\ntest des Dialogues : \n");
 include_once(__DIR__.'/dialoguesTest.php');
 
-=======
-print("\ntest des Apparitions : \n");
-include_once(__DIR__. '/apparitionTest.php');
->>>>>>> d49ccb0 (modif : RunnerTest)
+print("\ntest des Dialogues : \n");
+include_once(__DIR__.'/apparitionTest.php');
 
 ?>
