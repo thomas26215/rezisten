@@ -4,7 +4,7 @@ use PHPUnit\Framework\TestCase;
 require_once(__DIR__.'/../model/users.class.php');
 require_once(__DIR__.'/../model/dao.class.php');
 
-class UserTest extends TestCase
+class userTest extends TestCase
 {
     private User $user;
 
