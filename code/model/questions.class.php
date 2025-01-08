@@ -15,7 +15,7 @@ class Question {
         $this->question = $question;
         $this->answer = $answer;
         $this->type = $type;
-        $this->dao = new DAO();
+        $this->dao = DAO::getInstance();
 }
 
     /* --- Getters --- */

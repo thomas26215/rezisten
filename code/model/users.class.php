@@ -12,160 +12,169 @@ class User {
     private string $password;
     private string $role;
     
-
     private DAO $dao;
 
     public function __construct(string $username, string $first_name, string $surname, string $birth_date, string $mail, string $password, string $role, int $id = -1) {
-        $this->id = -1; // ID sera défini lors de l'insertion dans la base de données
+        $this->id = $id;
         $this->username = $username;
         $this->first_name = $first_name;
         $this->surname = $surname;
         $this->birth_date = $birth_date;
         $this->mail = $mail;
-        $this->password = password_hash($password, PASSWORD_DEFAULT); // Hash le mot de passe
+        $this->password = password_hash($password, PASSWORD_DEFAULT);
         $this->role = $role;
-        $this->dao = DAO::getInstance(); // Initialiser DAO
+        $this->dao = DAO::getInstance();
     }
 
     /* --- Getters --- */
 
-    public function getId() {
+    public function getId(): int {
         return $this->id;
     }
 
-    public function getUsername() {
+    public function getUsername(): string {
         return $this->username;
     }
 
-    public function getFirstName() {
+    public function getFirstName(): string {
         return $this->first_name;
     }
 
-    public function getSurname() {
+    public function getSurname(): string {
         return $this->surname;
     }
 
-    //FIXME: vérifier que la personne a plus de 16 ans .
-    public function getBirthDate() {
-        return $this->birth_date; // Correction du nom de la variable
+    public function getBirthDate(): string {
+        return $this->birth_date;
     }
 
-    public function getMail() {
+    public function getMail(): string {
         return $this->mail;
     }
 
-    public function getPassword() {
-        return $this->password; // Ne pas exposer le mot de passe en clair
+    public function getPassword(): string {
+        return $this->password;
     }
 
-    public function getRole(){
+    public function getRole(): string {
         return $this->role;
     }
 
     /* --- Setters --- */
 
-    public function setId(int $id) {
-        $this->id = $id; // Correction pour assigner l'ID
+    public function setId(int $id): void {
+        $this->id = $id;
     }
 
-    public function setUsername(string $username) {
-        $this->username = $username; // Correction pour assigner le username
+    public function setUsername(string $username): void {
+        $this->username = $username;
     }
 
-    public function setFirstName(string $firstname) {
-        $this->first_name = $firstname; // Correction pour assigner le prénom
+    public function setFirstName(string $firstname): void {
+        $this->first_name = $firstname;
     }
 
-    public function setSurname(string $surname) {
-        $this->surname = $surname; // Correction pour assigner le nom
+    public function setSurname(string $surname): void {
+        $this->surname = $surname;
     }
 
-    public function setBirthDate(string $birth_date) {
-        $this->birth_date = $birth_date; // Correction pour assigner la date de naissance
+    // ! Le format de la date de naissance doit être jj:mm:aaaa
+    public function setBirthDate(string $birth_date): void {
+        if($birth_date <= 16) {
+            $this->birth_date = $birth_date;
+        }else{
+            throw Exception("L'utilisateur doit avoir plus de 16 ans !");
+        }
     }
 
-    public function setMail(string $mail) {
-        $this->mail = $mail; // Correction pour assigner l'email
+    public function setMail(string $mail): void {
+        $this->mail = $mail;
     }
 
-    public function setPassword(string $password) {
-        // Hash le mot de passe avant de l'assigner
+    public function setPassword(string $password): void {
         $this->password = password_hash($password, PASSWORD_DEFAULT);
     }
 
-    public function setRole(string $role){
+    public function setRole(string $role): void {
         $this->role = $role;
     }
 
     /* --- Méthodes CRUD --- */
 
-    // Créer un nouvel utilisateur dans la base de données
-    public function create() {
-        // Insérer l'utilisateur dans la base de données et récupérer l'ID généré
-        if ($this->dao->insertRelatedData("utilisateurs", [
-            "pseudo" => $this->username,
-            "prenom" => $this->first_name,
-            "nom" => $this->surname,
-            "datenaiss" => $this->birth_date,
-            "mail" => $this->mail,
-            "mot_de_passe" => $this->password,
-            "role" => $this->role,
-        ])) {
-            // Récupérer l'ID généré et l'assigner à l'objet User
-            var_dump($this->dao->getLastInsertId("utilisateurs")[0]["last_id"]);
-            $this->setId($this->dao->getLastInsertId("utilisateurs")[0]["last_id"]);
-            return true; // Insertion réussie
+    
+    public function create(): bool {
+        try {
+            if ($this->dao->insertRelatedData("utilisateurs", [
+                "pseudo" => $this->username,
+                "prenom" => $this->first_name,
+                "nom" => $this->surname,
+                "datenaiss" => $this->birth_date,
+                "mail" => $this->mail,
+                "mot_de_passe" => $this->password,
+                "role" => $this->role,
+            ])) {
+                $lastId = $this->dao->getLastInsertId("utilisateurs");
+                if (!empty($lastId) && isset($lastId[0]["last_id"])) {
+                    $this->setId($lastId[0]["last_id"]);
+                    return true;
+                }
+            }
+            return false;
+        } catch (PDOException $e) {
+            throw $e;
         }
-        
-        return false; // Échec de l'insertion
     }
 
-//FIXME: ajouter le type de retour
-
-    // Lire un utilisateur par ID
-    public static function read($id) {
-        $dao = DAO::getInstance();
-        // Récupérer les données de l'utilisateur depuis la base de données
-        if ($userData = $dao->getColumnWithParameters("utilisateurs", ["id" => (int)$id])) {
-            return new User(
-                $userData[0]["pseudo"],
-                $userData[0]["prenom"],
-                $userData[0]["nom"],
-                $userData[0]["datenaiss"],
-                $userData[0]["mail"],
-                "",
-                $userData[0]["role"],
-                $userData[0]["id"]
-            );
+    public static function read(int $id): ?User {
+        try {
+            $dao = DAO::getInstance();
+            $userData = $dao->getColumnWithParameters("utilisateurs", ["id" => $id]);
+            if (!empty($userData)) {
+                return new User(
+                    $userData[0]["pseudo"],
+                    $userData[0]["prenom"],
+                    $userData[0]["nom"],
+                    $userData[0]["datenaiss"],
+                    $userData[0]["mail"],
+                    "",
+                    $userData[0]["role"],
+                    $userData[0]["id"]
+                );
+            }
+            return null;
+        } catch (DAOException $e) {
+            throw new DAOException("Erreur lors de la lecture de l'utilisateur : " . $e->getMessage());
         }
-        
-        return null; // Utilisateur non trouvé
     }
 
-    // Mettre à jour un utilisateur existant
-    public function update() {
-        if ($this->id !== -1) { // Vérifier que l'utilisateur a un ID valide
+    public function update(): bool {
+        if ($this->id === -1) {
+            throw new DAOException("Impossible de mettre à jour un utilisateur sans ID valide.");
+        }
+        try {
             return $this->dao->update("utilisateurs", [
                 "pseudo" => $this->username,
                 "prenom" => $this->first_name,
                 "nom" => $this->surname,
                 "datenaiss" => $this->birth_date,
                 "mail" => $this->mail,
-                "mot_de_passe" => password_hash($this->password, PASSWORD_DEFAULT), // Hash le nouveau mot de passe si modifié
+                "mot_de_passe" => $this->password,
                 "role" => $this->role,
-            ], ["id" => (int)$this->id]);
+            ], ["id" => $this->id]) > 0;
+        } catch (DAOException $e) {
+            throw new DAOException("Erreur lors de la mise à jour de l'utilisateur : " . $e->getMessage());
         }
-        
-        return false; // Échec si l'ID n'est pas valide
     }
 
-    // Supprimer un utilisateur par ID
-    public static function delete($id) {
-        if ($id > 0) {
-            return DAO::getInstance()->deleteDatasById("utilisateurs", $id);
+    public static function delete(int $id): bool {
+        if ($id <= 0) {
+            throw new DAOException("ID d'utilisateur invalide pour la suppression.");
         }
-        
-        return false;
+        try {
+            return DAO::getInstance()->deleteDatasById("utilisateurs", $id);
+        } catch (DAOException $e) {
+            throw new DAOException("Erreur lors de la suppression de l'utilisateur : " . $e->getMessage());
+        }
     }
 }
 

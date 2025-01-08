@@ -2,6 +2,8 @@
 <html lang="fr">
 
 <head>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">    
+    <link rel="icon" href="favicon.ico" type="image/x-icon">    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rézisten</title>
@@ -47,8 +49,9 @@
             </section>
 
             <?php
-            /* CHANGER EN FONCTION DE CONTROLEUR */
-            include_once 'ajouterDialogue.view.php'; 
+            /* CHANGER EN FONCTION DE CONTROLEUR 
+            /*include_once 'ajouterDialogue.view.php'; */
+            include_once 'ajouterQuestion.view.php';
             ?>
 
             <section class="footer">

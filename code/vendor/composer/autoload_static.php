@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit99c728a38c5865d8e13e954286e4a199
+class ComposerStaticInite375f55657b3016b52c43c8d20fd1011
 {
     public static $files = array (
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
@@ -12,9 +12,9 @@ class ComposerStaticInit99c728a38c5865d8e13e954286e4a199
     );
 
     public static $prefixLengthsPsr4 = array (
-        'S' => 
+        'T' => 
         array (
-            'Sae\\Code\\' => 9,
+            'Thomas\\Code\\' => 12,
         ),
         'P' => 
         array (
@@ -27,7 +27,7 @@ class ComposerStaticInit99c728a38c5865d8e13e954286e4a199
     );
 
     public static $prefixDirsPsr4 = array (
-        'Sae\\Code\\' => 
+        'Thomas\\Code\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
@@ -1150,6 +1150,7 @@ class ComposerStaticInit99c728a38c5865d8e13e954286e4a199
         'SebastianBergmann\\Comparator\\ExceptionComparator' => __DIR__ . '/..' . '/sebastian/comparator/src/ExceptionComparator.php',
         'SebastianBergmann\\Comparator\\Factory' => __DIR__ . '/..' . '/sebastian/comparator/src/Factory.php',
         'SebastianBergmann\\Comparator\\MockObjectComparator' => __DIR__ . '/..' . '/sebastian/comparator/src/MockObjectComparator.php',
+        'SebastianBergmann\\Comparator\\NumberComparator' => __DIR__ . '/..' . '/sebastian/comparator/src/NumberComparator.php',
         'SebastianBergmann\\Comparator\\NumericComparator' => __DIR__ . '/..' . '/sebastian/comparator/src/NumericComparator.php',
         'SebastianBergmann\\Comparator\\ObjectComparator' => __DIR__ . '/..' . '/sebastian/comparator/src/ObjectComparator.php',
         'SebastianBergmann\\Comparator\\ResourceComparator' => __DIR__ . '/..' . '/sebastian/comparator/src/ResourceComparator.php',
@@ -1255,9 +1256,9 @@ class ComposerStaticInit99c728a38c5865d8e13e954286e4a199
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit99c728a38c5865d8e13e954286e4a199::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit99c728a38c5865d8e13e954286e4a199::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit99c728a38c5865d8e13e954286e4a199::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInite375f55657b3016b52c43c8d20fd1011::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInite375f55657b3016b52c43c8d20fd1011::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInite375f55657b3016b52c43c8d20fd1011::$classMap;
 
         }, null, ClassLoader::class);
     }

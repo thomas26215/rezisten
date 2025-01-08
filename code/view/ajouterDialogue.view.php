@@ -1,4 +1,5 @@
 <head>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">    
     <link rel="stylesheet" href="./design/ajouterDialogue.css">
 </head>
 <article class="content">

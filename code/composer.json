@@ -1,9 +1,8 @@
 {
-    "name": "sae/code",
-    "description": "Le composer servira aux besoins de la SAE",
+    "name": "thomas/code",
     "autoload": {
         "psr-4": {
-            "Sae\\Code\\": "src/"
+            "Thomas\\Code\\": "src/"
         }
     },
     "authors": [
