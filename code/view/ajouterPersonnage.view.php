@@ -19,25 +19,16 @@
 
             <section class="menu">
                 <a href="./consulterPersonnage.view.php"><button class=button-gris>Consulter un personnage</button></a>
-                <a href="./ajouterPersonnage.view.php"><button class=button-gris>Ajouter un personnage</button></a>
-                <a href="./modifierPersonnage.view.php"><button>Modifier un personnage</button></a>
+                <a href="./ajouterPersonnage.view.php"><button >Ajouter un personnage</button></a>
+                <a href="./modifierPersonnage.view.php"><button class=button-gris>Modifier un personnage</button></a>
                 <a href="./supprimerPersonnage.view.php"><button class=button-gris>Supprimer un personnage</button></a>
             </section>
-
-        
+       
                 <article class="content">
                     
-                    <h2 class="titre">Modifier un personnage</h2>
+                    <h2 class="titre">Ajouter un personnage</h2>
 
                     <div class="articleContainer">
-                        <div class="personnage">
-                            <label for="personnage">Personnage à modifier : </label>
-                            <select name="personnage">
-                                <option value="A">Jean</option><!-- mettre un foreache -->
-                                <option value="B">a</option>
-                                <option value="-">b</option>
-                            </select>
-                        </div>
                         <div class="noms">
                             <div>
                                 <label for="prenom">Prénom</label>
