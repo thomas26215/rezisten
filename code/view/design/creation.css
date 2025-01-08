@@ -1,4 +1,4 @@
-body{
+body {
   background-image: var(--background-histoire);
   width: 100vw;
   font-size: larger;
@@ -11,26 +11,33 @@ body{
     "header header"
     "menu content"
     "footer footer";
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 1fr 2fr;
   gap: 5px;
 
   padding: 5px;
+
 }
-.container > section {
+
+.container>section {
   padding: 10px;
 }
-.container > section.header {
-   display: flex;
+
+.container>section.header {
+  display: flex;
   justify-content: space-around;
   grid-area: header;
   text-align: center;
   max-height: 50px;
 }
-.container > section.menu {
+
+.container>section.menu {
   grid-area: menu;
   margin-left: -10vw;
+  max-width: 40vw;
+  min-width: 40vw;
 }
-.container > article.content {
+
+.container>article.content {
   grid-area: content;
   background-color: var(--beige);
   height: 95%;
@@ -38,32 +45,35 @@ body{
   margin-left: -5%;
   margin-top: 50px;
   border: 2px solid var(--noir);
+  max-width: 60vw;
+  min-width: 60vw;
 }
-.container > section.footer {
+
+.container>section.footer {
   display: flex;
   justify-content: space-around;
   grid-area: footer;
 }
 
-button{
+button {
   width: 300px;
   max-width: none !important;
   height: 60px;
   margin-top: 25%;
 }
 
-.container > section.header div{
+.container>section.header div {
   margin-right: 1.5%;
   margin-left: 1.5%;
-  display :flex;
+  display: flex;
 }
 
-#info{
+#info {
   max-height: 50px;
   margin-left: 20%;
 }
 
-label{
+label {
   align-self: center;
   text-align: right;
   margin-right: 10px;
@@ -108,6 +118,6 @@ h2.titre::before {
 
 
 /*premier boutton*/
-.container > section.header  button{
+.container>section.header button {
   margin-top: 0%;
 }
