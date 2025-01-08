@@ -1,9 +1,6 @@
 body {
     background-image: var(--background-histoire);
-    ;
-    background-size: cover;
-    font-family: 'Courier New', Courier, monospace;
-
+    
 }
 
 h1 {
@@ -44,6 +41,11 @@ article li ul {
         1px 1px 0 white;
 }
 
+article li ul img {
+    position: relative;
+    top: 5px;
+}
+
 article section {
     border: 2px solid var(--noir);
     background-color: var(--beige);
@@ -62,8 +64,8 @@ img.logo {
 
 h2.speaker {
     position: relative;
-    right: 2.5em;
-    bottom: 1em;
+    right: 4.2em;
+    bottom: 1.2em;
     width: 8em;
 
     margin: 0;

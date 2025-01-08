@@ -48,6 +48,7 @@
     </article>
 
 </body>
+    <script src="./js/dyslexique.js"></script>
 <script src="./js/machineAEcrire.js"></script>
 
 </html>

@@ -59,5 +59,19 @@
             </section>
         </section>
 </body>
+    <script src="./js/dyslexique.js"></script>
+    <script>
+        // Vérifiez si le mode dyslexique est activé dans le localStorage
+        if (localStorage.getItem('dyslexique') === 'true') {
+            document.body.classList.add('dyslexique');
+        }
+
+        // Ajoutez un écouteur d'événement au bouton pour basculer le mode dyslexique
+        document.getElementById('toggleDyslexique').addEventListener('click', function() {
+            document.body.classList.toggle('dyslexique');
+            // Stockez la préférence dans le localStorage
+            localStorage.setItem('dyslexique', document.body.classList.contains('dyslexique'));
+        });
+    </script>
 
 </html>

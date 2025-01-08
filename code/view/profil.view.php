@@ -30,16 +30,15 @@
 
             <div>
                 <label for="mail">Adresse mail : </label>
-                <input type="email" name="mail" id="mail" placeholder="jean@jaimail.com">
+                <input type="email" name="mail" id="mail" placeholder="jean@gmail.com">
             </div>
 
             <button class="valider button-vert">Valider</button>
         </form>
 
         <div class="buttons">
-            <a href="">
-                <button class="button-gris">Mode dyslexique</button>
-            </a>
+            <button class="" id="toggleDyslexique">Mode dyslexique</button>
+
             <a href="demandeCreateur.view.php">
                 <button class="button-gris">Faire la demande d'être créateur</button>
             </a>
@@ -50,5 +49,6 @@
     </main>
     <?php include_once("footer.view.php") ?>
 </body>
+<script src="./js/dyslexique.js"></script>
 
 </html>

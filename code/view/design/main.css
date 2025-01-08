@@ -11,6 +11,9 @@ main {
     width: 100%;
     flex: 1;
     /* Prend toute la place disponible */
+    gap: 20px;
+
+    padding: 15px;
 }
 
 button {

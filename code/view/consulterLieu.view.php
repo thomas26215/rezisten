@@ -31,7 +31,9 @@
             <h3 >Description : </h2>
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima praesentium optio pariatur, non provident et illum asperiores! Autem consectetur beatae earum perferendis! Qui iusto minus corrupti voluptates earum deserunt illum.</p>
         </div>
+        <?php include_once 'APImap.view.php'; ?>
     </main>
     <?php include_once 'footer.view.php'; ?>
 </body>
+    <script src="./js/dyslexique.js"></script>
 </html>

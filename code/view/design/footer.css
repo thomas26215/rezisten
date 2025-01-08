@@ -8,7 +8,6 @@ footer{
 footer>article{
     background-color: var(--bleu);
     display: flex;
-    font-family: 'Courier New', Courier, monospace;
     justify-content: space-around;
     width: 100%;
     padding: 0%;

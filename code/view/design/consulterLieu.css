@@ -38,3 +38,8 @@ h3 {
     flex-direction: column;
     margin-top: 2rem;
 }
+
+#map {
+    height: 450px;
+    width: 600px;
+}

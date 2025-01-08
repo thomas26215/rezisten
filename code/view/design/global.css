@@ -20,6 +20,11 @@ html, body {
     min-height: 100vh;
 }
 
+.dyslexique, .dyslexique * {
+    font-family: var(--dyslexique) !important;
+}
+
+
 main, body {
     background-size: cover;
     /* Pour que l'image couvre tout l'élément main */
@@ -69,6 +74,9 @@ button::before {
     /* La même forme que la div */
     z-index: -1;
     /* Placer la bordure derrière le bouton */
+}
+button:hover{
+    transform: scale(1.1);
 }
 
 .button-beige::before {
