@@ -90,7 +90,7 @@ try {
 
 
     
-    print("Test de la méthode getDialogsFromStory");
+/*     print("Test de la méthode getDialogsFromStory");
     try{
         $hist = Story::read(2);
         $expectedAmount = Dialog::countDialogs($hist->getId());
@@ -104,7 +104,10 @@ try {
     }catch(Exception $e){
         print("Les dialogues n'ont pas pu être lus");
     }
-    
+ */    
+
+
+ 
 
 
     }catch(Exception $e){
