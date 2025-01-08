@@ -41,17 +41,21 @@ class Demande {
     /* --- Méthodes CRUD --- */
 
     public function create(): bool {
-        $userId = $this->user->getId();
-        if ($userId < 1) {
-            throw new Exception("Impossible de créer une demande : Aucun utilisateur ne correspond à l'id fourni");
-        }
-        if ($this->dao->insertRelatedData("demandes", [
-            "id_utilisateur" => $userId,
-            "doc" => $this->document,
-        ])) {
-            return true;
-        } else {
-            return false;
+        try {
+            $userId = $this->user->getId();
+            if ($userId < 1) {
+                throw new Exception("Impossible de créer une demande : Aucun utilisateur ne correspond à l'id fourni");
+            }
+            if ($this->dao->insertRelatedData("demandes", [
+                "id_utilisateur" => $userId,
+                "doc" => $this->document,
+            ])) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch(PDOException $e) {
+            throw $e;
         }
     }
 
