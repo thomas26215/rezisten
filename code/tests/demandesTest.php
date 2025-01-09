@@ -35,7 +35,7 @@ class demandesTest extends TestCase {
 
     public function testCreate() {
         $this->assertTrue($this->user->create());
-    $this->assertTrue($this->demande->create(), "Échec de la création de la demande");
+        $this->assertTrue($this->demande->create(), "Échec de la création de la demande");
         $this->assertEquals($this->user, $this->demande->getUser());
     }
 
@@ -65,85 +65,29 @@ class demandesTest extends TestCase {
         $this->assertNull(Demande::read($this->user->getId()));
     }
 
+    public function testReadNonExistenceDemande() {
+        $this->assertNull(Demande::read(99999));
+    } 
+
+    public function testUpdateNonExistenceDemande() {
+        $this->user->create();
+        $this->demande->create();
+
+        $tempId = $this->demande->getUser()->getId();
+        $this->demande->getUser()->setId(99999);
+        
+        $this->assertFalse($this->demande->update());
+        $this->demande->getUser()->setId($tempId);
+    }
+
     protected function tearDown(): void {
         if($this->user->getId() > 0) {
             User::delete($this->user->getId());
         }
-        if($this->demande->getUser()->getId() > 0) {
-            Demande::delete($this->demande->getUser()->getId());
-        }
+        Demande::delete(99999);
+        
     }
 }
-/*
-    
-
-    
-        // Test de la méthode create
-        print("Test de la méthode create : ");
-        $newuser->create();
-
-
-        if (!$demande->create()) {
-            throw new Exception("Échec de la création de la demande");
-        }
-
-        print("OK\n");
-
-                // Test de la méthode read
-                print("Test de la méthode read : ");
-                $readDemande = Demande::read($demande->getUser()->getId());
-                if (!$readDemande || $readDemande->getDocument() !== $demande->getDocument()) {
-                    throw new Exception("Échec de la lecture de la demande");
-                }
-                print("OK\n");
-        
-
-        //Test de la méthode update
-        print("Test de la méthode update : ");
-        $demande->setDocument("docModifié");
-
-        if (!$demande->update()) {
-            throw new Exception("Échec de la mise à jour de la demande");
-        }
-
-
-        $updatedDemande = Demande::read($demande->getUser()->getId());
-        if ($updatedDemande->getDocument() !== "docModifié") {
-            throw new Exception("La mise à jour n'a pas été effectuée correctement");
-        }
-
-
-        print("OK\n");
-
-
-        /* print("Test de la méthode delete : ");
-        $idToDelete = $demande->getUser()->getId();
-
-        if (!Demande::delete($idToDelete)) {
-            throw new Exception("Échec de la suppression du lieu");
-        }
-    
-        // Vérifier que le lieu a bien été supprimé
-        $deletedDemande = Demande::read($idToDelete);
-        if ($deletedDemande !== null) {
-            throw new Exception("La demande n'a pas été supprimée correctement");
-        }
-        print("OK\n");
-    
-
-
- */
-
-
-
-
-
-/*
-        $newuser->delete($newuser->getId());
-
-} catch (Exception $e) {
-    exit("\nErreur: ".$e->getMessage()."\n");
-}*/
 ?>
 
 

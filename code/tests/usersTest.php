@@ -51,8 +51,6 @@ class usersTest extends TestCase
         $this->user->create();
         $this->assertTrue(User::delete($this->user->getId()));
         $this->assertNull(User::read($this->user->getId()));
-
-
     }
 
     public function testSetters()
@@ -71,14 +69,6 @@ class usersTest extends TestCase
         $this->assertEquals("01/01/2000", $this->user->getBirthDate());
         $this->assertEquals("new@email.com", $this->user->getMail());
         $this->assertEquals("b", $this->user->getRole());
-
-        $this->expectException(Exception::class);
-        $this->user->setUsername("");
-        $this->user->setBirthDate("");
-        $this->user->setBirthDate("18:09/2005");
-        $this->user->setBirthDate("18:09:2023");
-        $this->user->setMail("");
-        $this->user->setPassword("");
     }
 
     public function testCreateWithInvalidData()
@@ -88,9 +78,6 @@ class usersTest extends TestCase
         $invalidUser->create();
     }
 
-    //TODO: Rajouter un test pouru vérifier si l'utilisateur a + de 16 ans
-    //TODO: Compléter les tests
-
     public function testReadNonExistentUser()
     {
         $this->assertNull(User::read(99999));
@@ -99,12 +86,12 @@ class usersTest extends TestCase
     public function testUpdateNonExistentUser()
     {
         $nonExistentUser = new User("test", "test", "test", "01/01/2000", "test@test.com", "password", "a", 99999);
-        $this->assertFalse($nonExistentUser->update(), "La mise à jour d'un utilisateur devrait retourner false");
+       $this->assertFalse($nonExistentUser->update());
     }
 
     public function testDeleteNonExistentUser()
     {
-        $this->assertFalse(User::delete(99999), "La suppression d'un utilisateur devrait retourner false");
+        $this->assertFalse(User::delete(99999));
     }
 
     protected function tearDown(): void

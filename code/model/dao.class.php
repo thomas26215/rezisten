@@ -141,6 +141,10 @@ class DAO {
     public function deleteDatasByIdAndType($table, $Id, $type) {
         return $this->deleteDatas($table, ['id_histoire' => $Id , 'type' => $type]);
     }
+    public function deleteDatasByIds($table, $Idhistoire, $idPerso) {
+        return $this->deleteDatas($table, ['id_histoire' => $Idhistoire , 'id_perso' => $idPerso]);
+    }
+
 
     /**
      * Supprime des données d'une table en fonction des conditions spécifiées.

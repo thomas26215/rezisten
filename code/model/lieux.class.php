@@ -120,7 +120,7 @@ class Place {
                 "description" => $this->description,
                 "commune" => $this->city,
                 "coordonnee" => $this->coordinates,
-            ], ["id" => (int)$this->id]);
+            ], ["id" => (int)$this->id]) > 0;
         }
         return false;
     }

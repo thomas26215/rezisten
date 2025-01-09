@@ -8,7 +8,6 @@
     <title>Rézisten</title>
     <link rel="stylesheet" href="./design/global.css">
     <link rel="stylesheet" href="./design/creation.css">
-    <link rel="stylesheet" href="./design/popup.css">
 </head>
 
 <body>
@@ -50,24 +49,20 @@
 
             <?php
             /* CHANGER EN FONCTION DE CONTROLEUR */
-            /*include_once 'ajouterDialogue.view.php';*/ 
+            include_once 'ajouterDialogue.view.php';
             /*include_once 'ajouterQuestion.view.php'; */
-            include_once 'afficherHistoire.view.php';
+            /*include_once 'afficherHistoire.view.php';*/
             ?>
 
             <section class="footer">
-                <a href="#"><button id="dialogQuitter" class=button-rouge>Quitter</button></a>
+                <a href="./ajouterDialogue.view.php"><button class=button-rouge>Quitter</button></a>
                 <a href="./ajouterQuestion.view.php"><button>Sauvegarder</button></a>
 
-                <a href="#"><button id="dialogPublier" class=button-vert>Publier</button></a>
+                <a href="./afficherHistoire.view.php"><button class=button-vert>Publier</button></a>
             </section>
-            
-            <?php include_once 'popup.view.php'; ?>
         </section>
-        <script src="./js/popup.js"></script>
 </body>
     <script src="./js/dyslexique.js"></script>
-    
     <script>
         // Vérifiez si le mode dyslexique est activé dans le localStorage
         if (localStorage.getItem('dyslexique') === 'true') {

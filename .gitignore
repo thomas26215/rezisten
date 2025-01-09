@@ -7,7 +7,7 @@
 # DataBase
 
 testdb/rezisten.db
-/database.db
+data/database.db
 ### Eclipse ###
 .metadata
 tmp/
