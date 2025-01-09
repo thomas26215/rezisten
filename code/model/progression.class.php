@@ -1,17 +1,17 @@
 <?php
 
-require_once(__DIR__ . "/da.class.php");
+require_once(__DIR__ . "/dao.class.php");
 require_once(__DIR__ . "/utilisateurs.class.php");
 require_once(__DIR__ . "/histoires.class.php");
 
 class Progression {
     private User $user;
-    private History $history;
+    private Story $story;
 private bool $status;
     private $dao;
-    public function __construct(User $user, History $history, bool $status) {
+    public function __construct(User $user, Story $story, bool $status) {
         $this->setUser($user);
-        $this->setHistory($history);
+        $this->setHistory($story);
         $this->setStatus($status);
     }
 
@@ -21,8 +21,8 @@ private bool $status;
         return $this->user;
     }
 
-    public function getHistory(): History {
-        return $this->history;
+    public function getHistory(): Story {
+        return $this->story;
     }
 
     public function getStatus(): bool {
@@ -38,11 +38,11 @@ private bool $status;
         $this->user = $user;
     }
 
-    public function setHistory(History $history): void {
-        if ($history === NULL) {
+    public function setHistory(Story $story): void {
+        if ($story === NULL) {
             throw new Exception("L'histoire ne peut pas être null");
         }
-        $this->history = $history;
+        $this->story = $story;
     }
 
     public function setStatus(bool $status): void {
@@ -51,9 +51,9 @@ private bool $status;
 
     /* --- Méthodes CRUD --- */
 
-    public function create(): boolean {
+    public function create(): bool {
         $userId = $this->user->getId();
-        $historyId = $this->history->getId();
+        $historyId = $this->story->getId();
 
         if($userId < 1) {
             throw new Exception("Impossible de créer une demande : Aucun utilisateur ne correspond à l'id fournit");
@@ -63,7 +63,7 @@ if($historyId < 1) {
         }
         if($this->dao->insertRelatedData("progression", [
             "id_utilisateur" => $userId,
-            "id_hist" => historyId,
+            "id_hist" => $historyId,
             "statut" => $this->status,
         ])) {
             return true;
@@ -72,13 +72,13 @@ if($historyId < 1) {
         }
     }
 
-    public static function read(int $user_id, int $history_id) {
+    public static function read(int $user_id, int $story_id) {
         $dao = DAO::getInstance();
-        $progressionDatas = $dao->getColumnWithParameters("progression", ["id_utilisateur" => $user_id, "id_hist" => $history_id]);
-        if(progressionDatas){
+        $progressionDatas = $dao->getColumnWithParameters("progression", ["id_utilisateur" => $user_id, "id_hist" => $story_id]);
+        if($progressionDatas){
             $progressionData = $progressionDatas[0];
-            $newUser = User::read($id_user);
-            $newHistory = History::read($id_history);
+            $newUser = User::read($user_id);
+            $newHistory = Story::read($story_id);
             return new Progression(
                 $newUser,
                 $newHistory,
@@ -92,7 +92,7 @@ if($historyId < 1) {
         if($this->user === NULL || $this->user->getId() < 1) {
             throw new Exception("Impossible de mettre à jour la progression : L'utilisateur est invalide");
         }
-        if($this->history === NULL || $this->history->getId() < 1) {
+        if($this->story === NULL || $this->story->getId() < 1) {
             throw new Exception("Impossible de mettre à jour la progression : L'histoire est invalide est invalide");
         }
         if($this->dao->update("progression", [

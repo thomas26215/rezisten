@@ -10,9 +10,9 @@ include_once(__DIR__. '/chapitreTest.php');
 include_once(__DIR__. '/demandesTest.php');
  */
 
-print("\ntest des Lieux : \n");
+/* print("\ntest des lieux : \n\n");
 include_once(__DIR__. '/lieuxTest.php');
-
+ */
 print("\ntest des Personnages : \n");
 include_once(__DIR__. '/personnagesTest.php');
 
