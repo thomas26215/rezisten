@@ -145,44 +145,6 @@ try {
             
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 } catch (Exception $e) {
     exit("\nErreur: ".$e->getMessage()."\n");
 }

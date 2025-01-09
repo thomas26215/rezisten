@@ -84,7 +84,7 @@ class Character {
             return $this->dao->update("personnages", [
                 "prenom" => $this->first_name,
                 "img" => $this->image,
-            ], ["id" => (int)$this->id]);
+            ], ["id" => (int)$this->id]) > 0;
         }
         return false;
     }

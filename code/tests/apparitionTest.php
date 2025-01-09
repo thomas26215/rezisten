@@ -94,7 +94,7 @@ try {
     print("OK\n");
 
 
-
+//FIXME: test update veut pas marcher
 
 /*         //Test de la méthode update
     print("Test de la méthode update : ");

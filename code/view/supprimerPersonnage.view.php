@@ -7,10 +7,12 @@
     <title>Rézisten</title>
     <link rel="stylesheet" href="./design/global.css">
     <link rel="stylesheet" href="./design/personnagePages.css">
+    <link rel="stylesheet" href="./design/popup.css">
 </head>
 
 <body>
     <?php include_once 'headerHistoire.view.php'; ?>
+    
     <main class="flex-col">
 
         <h1>Vos personnages</h1>
@@ -53,22 +55,23 @@
                         <div class="supContainer">
                             <img src="design/image/milicien.png" alt="" style="max-width: 240px;">
                             <div class="supprimer">
-                                <button class="button-rouge">Supprimer</button>
+                                <button id="dialogPublier" class="button-rouge">Supprimer</button>
                             </div>
                         </div>
-                        
+                        <?php include_once 'popup.view.php'; ?>
                     </div>
                     
                 </article>
 
                 <section class="footer">
-                    <a href="./ajouterDialogue.view.php"><button class=button-rouge>Quitter</button></a>
+                    <a href="#"><button id="dialogQuitter" class=button-rouge>Quitter</button></a>
                     <a href="./ajouterQuestion.view.php"><button>Sauvegarder</button></a>
                 </section>
             
         
         </section>
 </body>
+    <script src="./js/popup.js"></script>
     <script src="./js/dyslexique.js"></script>
     <script src="./js/photoSelect.js"></script>
 </html>
