@@ -68,7 +68,7 @@ class Question {
 
     /* --- Méthodes CRUD --- */
 
-    public function create(){
+    public function create(): bool {
         $historyId = $this->history->getId();
         if($historyId < 1) {
             throw new Exception("Impossible de créer une demande : Aucun utilisateur ne correspond à l'id fourni");
@@ -85,7 +85,7 @@ class Question {
         }
     }
 
-    public static function read(int $id_histoire , string $type) {
+    public static function read(int $id_histoire , string $type): ?Question {
         $dao = DAO::getInstance();
         $questionDatas = $dao->getColumnWithParameters("questions", ["id_histoire" => (int)$id_histoire , "type" => (string)$type]);
         if($questionDatas) {
@@ -101,32 +101,24 @@ class Question {
         return null;
     }
 
-    public function update() {
+    public function update(): bool {
         if ($this->history === NULL){
             throw new Exception("Impossible de mettre à jour la question : L'utilisateur est invalide");
         }
-        if($this->dao->update("questions", [
+        return ($this->dao->update("questions", [
             "id_histoire" => $this->history->getId(),
             "question" => $this->question,
             "reponse" => $this->answer,
             "type" => $this->type,
-        ], ["id_histoire" => (int)$this->history->getId(), "type" => $this->type])) {
-            return true;
-        }
-        return false;
+        ], ["id_histoire" => (int)$this->history->getId(), "type" => $this->type])) > 0;
     }
 
-    public static function delete($id , $type){
-        if($id > 0){ // Vérification de la possible existence de l'id
+    public static function delete($id , $type): bool {
+        if($id > 0){
             return DAO::getInstance()->deleteDatasByIdAndType("questions",$id ,$type);
         }
-        return false; // Echec si id invalide ou inexistant
+        return false;
 
-    }
-
-    
-
-}
-
+    }}
 ?>
 

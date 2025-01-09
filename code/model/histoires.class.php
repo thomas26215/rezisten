@@ -38,7 +38,7 @@ class Story
         return $this->id;
     }
 
-    public function getTitle(): int {
+    public function getTitle(): string {
         return $this->title;
     }
 
@@ -54,7 +54,7 @@ class Story
         return $this->place;
     }
 
-    public function getBackground(): bool {
+    public function getBackground(): string {
         return $this->background;
     }
 
@@ -103,9 +103,8 @@ class Story
 
     /* Méthodes CRUD et utilitaires sur la BDD */
 
-    // Création d'une histoire dans la base de données
     public function create(): bool {
-        //Insertion dans la base en récupérant l'ID généré
+        
         if($this->dao->insertRelatedData("histoires", [
             "titre" => $this->title,
             "numchap" => $this->chapter->getNumchap(),

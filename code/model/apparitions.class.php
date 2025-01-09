@@ -18,24 +18,25 @@ class Apparitions{
 
     /* --- Getters --- */
 
-    public function getHistory() {
+    public function getHistory(): Story {
         return $this->history;
     }
 
-    public function getCharacter() {
+    public function getCharacter(): Character {
         return $this->character;
     }
 
-    public function setHistory(Story $history) {
+    public function setHistory(Story $history): void {
         $this->history = $history;
     }
-    public function setCharacter(Character $character) {
+
+    public function setCharacter(Character $character): void {
         $this->character = $character;
     }
 
     /* --- Méthodes CRUD --- */
 
-    public function create(){
+    public function create(): bool{
         $historyId = $this->history->getId();
         $characterId = $this->character->getId();
         if($historyId < 1 || $characterId < 1){
@@ -51,7 +52,7 @@ class Apparitions{
         }
     }
 
-    public static function read($id_history, $id_character) {
+    public static function read($id_history, $id_character): ?Apparitions {
         $dao = DAO::getInstance();
         $apparitionData = $dao->getColumnWithParameters("apparitions", ["id_histoire" => $id_history, "id_perso" => $id_character]);
         if($apparitionData) {
@@ -65,9 +66,7 @@ class Apparitions{
         return null;
     }
 
-
-//FIXME: Thomas, y'a rien qui marche ca me pete les couilles cette classe de con qui veut pas marcher eoifjjziufnzenfniupznfuizenfuioeia ae fnauf nuien feiaon faeoiu fbeabf ofeau f
-    public function update() {
+    public function update(): bool {
         if ($this->history === null || $this->history->getId() <= 0) {
             throw new Exception("Impossible de mettre à jour l'apparition : L'histoire est invalide");
         }
@@ -85,7 +84,7 @@ class Apparitions{
     
     
     
-    public static function delete($id_history, $id_character){
+    public static function delete($id_history, $id_character): bool{
         if($id_character > 0 && $id_history > 0){
             return DAO::getInstance()->deleteDatasByIds("apparitions", $id_history, $id_character);
         }

@@ -80,6 +80,10 @@ class demandesTest extends TestCase {
         $this->demande->getUser()->setId($tempId);
     }
 
+    public deleteNonExistentPlace() {
+        $this->assertFalse(Demande::delete(99999));
+    }
+
     protected function tearDown(): void {
         if($this->user->getId() > 0) {
             User::delete($this->user->getId());

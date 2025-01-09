@@ -11,7 +11,7 @@ try {
 
     // Test de création d'une progression
 
-    $user = new User("prapra","brayan","bils","27/06/2023","bilsbrayan@gmail.com","2706","a");
+    $user = new User("prapra","brayan","bils","27/06/2000","bilsbrayan@gmail.com","2706","a");
     $chapitre = new Chapter(69,"la tete a toto");
     $chapitre->create();
     $lieu = new Place("iut","établissement","enfer","grenoble","0.0");

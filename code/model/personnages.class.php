@@ -59,7 +59,6 @@ class Character {
             "prenom" => $this->first_name,
             "img" => $this->image,
         ])){
-            //TODO: Quand je récupère le dernier ID et qu'il n'y a aucune ligne dans la BDD, est ce que ça vérifie dans le dao si ça renvoie 0 s'il n'y a aucune ligne ?
             $this->setId($this->dao->getLastInsertId("personnages")[0]["last_id"]);
             return true;
         }
@@ -86,8 +85,8 @@ class Character {
                 "img" => $this->image,
             ], ["id" => (int)$this->id]) > 0;
         }
-        return false;
     }
+
     public static function delete($id): bool {
         if($id > 0){
             return DAO::getInstance()->deleteDatasById("personnages", $id);

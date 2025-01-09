@@ -36,6 +36,7 @@ class lieuxTest extends TestCase {
 
     public function testCreate() {
         $this->assertTrue($this->place->create());
+        $this->assertGreaterThan(0, $this->place->getId());
     }
 
     public function testRead() {
@@ -61,9 +62,18 @@ class lieuxTest extends TestCase {
 
     }
 
-    public function testReadNonExistencePlace() {
+    public function testReadNonExistentPlace() {
         $this->assertNull(Place::read(99999));
     } 
+
+    public function testUpdateNonExistentPlace() {
+        $nonExistentPlace = new Place("iut" ,"batiment" ,"Endoit où l'on a cours", "38000" , "0.0", 99999);
+        $this->assertFalse($nonExistentPlace->update());
+    }
+
+    public function testDeleteNonExistentPlace() {
+        $this->assertFalse(Place::delete(99999));
+    }
 
     
 

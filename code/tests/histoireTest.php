@@ -1,144 +1,128 @@
 <?php
 
-// Accès aux classes
+use PHPUnit\Framework\TestCase;
 
+require_once(__DIR__ . '/../model/histoires.class.php');
+require_once(__DIR__ . '/../model/dao.class.php');
+require_once(__DIR__ . '/../model/chapitres.class.php');
+require_once(__DIR__ . '/../model/lieux.class.php');
 
-require_once(__DIR__.'/../model/histoires.class.php');
-require_once(__DIR__.'/../model/dao.class.php');
+class histoireTest extends TestCase
+{
+    private Story $story;
+    private User $user;
+    private Chapter $chapter;
+    private Place $place;
 
-try {
-    // Test de création d'une histoire
+    protected function setUp(): void
+    {
+        $this->user = new User("Doe", "John", "johndoe", "1990/01/01", "johndoe@example.com", "password123", "a");
+        $this->user->create();
 
-    $user = new User("prapra","brayan","bils","27/06/2023","bilsbrayan@gmail.com","2706","a");
-    $chapitre = new Chapter(69,"la tete a toto");
-    $lieu = new Place("iut","établissement","enfer","grenoble","0.0");
-    $histoire = new Story("Titre" ,$chapitre ,$user, $lieu , "background",false);
-    
+        $this->chapter = new Chapter(1, "Introduction");
+        $this->chapter->create();
 
+        $this->place = new Place("Library", "building", "10 Main St", "Springfield", "45.0");
+        $this->place->create();
 
+        $this->story = new Story(
+            "A Great Story",
+            $this->chapter,
+            $this->user,
+            $this->place,
+            "background.jpg",
+            false
+        );
+    }
 
-    // Test des getters
-    print("Test des getters : ");
-    $testGetters = [
-        ['method' => 'getTitle', 'expected' => "Titre"],
-        ['method' => 'getChapter', 'expected' => $chapitre],
-        ['method' => 'getCreator', 'expected' => $user],
-        ['method' => 'getPlace', 'expected' => $lieu],
-        ['method' => 'getVisibility', 'expected' => false],
-        ['method' => 'getBackground', 'expected' => "background"]];
-
-        foreach ($testGetters as $test) {
-            $value = $histoire->{$test['method']}();
-            $expected = $test['expected'];
-            if ($value != $expected) {
-                throw new Exception("{$test['method']} incorrect : '$value', attendu '$expected'");
-            }
+    protected function tearDown(): void
+    {
+        if ($this->story->getId() > 0) {
+            $this->story->delete($this->story->getId());
         }
-        
-            
-        print("Getters OK\n");
+        if ($this->chapter->getNumchap() > 0) {
+            $this->chapter->delete($this->chapter->getNumchap());
+        }
+        if ($this->place->getId() > 0) {
+            $this->place->delete($this->place->getId());
+        }
+        if ($this->user->getId() > 0) {
+            $this->user->delete($this->user->getId());
+        }
+    }
 
+    public function testGetters(): void
+    {
+        $this->assertEquals("A Great Story", $this->story->getTitle());
+        $this->assertEquals($this->chapter, $this->story->getChapter());
+        $this->assertEquals($this->user, $this->story->getUser());
+        $this->assertEquals($this->place, $this->story->getPlace());
+        $this->assertEquals("background.jpg", $this->story->getBackground());
+        $this->assertFalse($this->story->getVisibility());
+    }
 
-
-             // Test des setters
-     print("Test des setters : ");
-
-        //définition de nouvelle variable, pour les setters
-        $newUser = $user;
-        $newUser->setFirstName("brayanModifié");
+    public function testSetters(): void
+    {
+        $newUser = new User("Smith", "Jane", "janesmith", "1985/05/15", "janesmith@example.com", "mypassword", "a");
         $newUser->create();
 
-        $newChapitre = $chapitre ;
-        $newChapitre->setNumchap(24);
-        $newChapitre->create();
+        $newChapter = new Chapter(2, "Conclusion");
+        $newChapter->create();
 
-        $newLieu = $lieu ;
-        $newLieu->setName("iutModifié");
-        $newLieu->create();
+        $newPlace = new Place("Park", "outdoor", "Central Park", "New York", "40.0");
+        $newPlace->create();
 
-        $histoire->setTitle("NewTitle");
-        $histoire->setChapter($newChapitre);
-        $histoire->setCreator($newUser);
-        $histoire->setPlace($newLieu);
-        $histoire->setBackground("NewBackground");
-        $histoire->setVisibility(true);
-        
-        if ( $histoire->getTitle() !== "NewTitle" ||
-            $histoire->getChapter() !== $newChapitre ||
-            $histoire->getCreator() !== $newUser ||
-            $histoire->getPlace() !== $newLieu ||
-            $histoire->getBackground() !== "NewBackground" ||
-            $histoire->getVisibility() !== true )
-            {   
-                throw new Exception("Les setters n'ont pas fonctionné correctement");
-            }
-            print("OK\n");
+        $this->story->setTitle("An Updated Story");
+        $this->story->setChapter($newChapter);
+        $this->story->setUser($newUser);
+        $this->story->setPlace($newPlace);
+        $this->story->setBackground("updated_background.jpg");
+        $this->story->setVisibility(true);
 
+        $this->assertEquals("An Updated Story", $this->story->getTitle());
+        $this->assertEquals($newChapter, $this->story->getChapter());
+        $this->assertEquals($newUser, $this->story->getUser());
+        $this->assertEquals($newPlace, $this->story->getPlace());
+        $this->assertEquals("updated_background.jpg", $this->story->getBackground());
+        $this->assertTrue($this->story->getVisibility());
 
-
-
-        // Test de la méthode create
-            print("Test de la méthode create : ");
-            
-            if (!$histoire->create()) {
-                throw new Exception("Échec de la création d'une histoire");
-            }
-
-            print("OK\n");
-
-
-
-        // Test de la méthode read
-            print("Test de la méthode read : ");
-
-            $readHistoire = Story::read($histoire->getId());
-            if (!$readHistoire|| $readHistoire->getTitle() !== $histoire->getTitle()) {
-                throw new Exception("Échec de la lecture de l'histoire");
-            }
-            print("OK\n");
-
-
-        //Test de la méthode update
-            print("Test de la méthode update : ");
-            $histoire->setTitle("TitreModifié");
-            
-            if (!$histoire->update()) {
-                throw new Exception("Échec de la mise à jour de l'histoire");
-            }
-
-            
-            $updatedHistoire = Story::read($histoire->getId());
-            if ($updatedHistoire->getTitle() !== "TitreModifié") {
-                throw new Exception("La mise à jour n'a pas été effectuée correctement");
-            }
-
-            print("OK\n");
-
-    // Test de la méthode delete
-    print("Test de la méthode delete : ");
-    $idToDelete = $histoire->getId();
-
-    if (!Story::delete($idToDelete)) {
-        throw new Exception("Échec de la suppression de l'histoire");
+        $newUser->delete($newUser->getId());
+        $newChapter->delete($newChapter->getNumchap());
+        $newPlace->delete($newPlace->getId());
     }
 
-    // Vérifier que l'histoire a bien été supprimé
-    $deletedHistoire = Story::read($idToDelete);
-    if ($deletedHistoire !== null) {
-        throw new Exception("L'histoire n'a pas été supprimé correctement");
+    public function testCreate(): void
+    {
+        $this->assertTrue($this->story->create());
+        $this->assertGreaterThan(0, $this->story->getId());
     }
-    print("OK\n");
 
+    public function testRead(): void
+    {
+        $this->story->create();
+        $readStory = Story::read($this->story->getId());
+        $this->assertNotNull($readStory);
+        $this->assertEquals($this->story->getTitle(), $readStory->getTitle());
+    }
 
+    public function testUpdate(): void
+    {
+        $this->story->create();
+        $this->story->setTitle("Updated Title");
+        $this->assertTrue($this->story->update());
 
+        $updatedStory = Story::read($this->story->getId());
+        $this->assertEquals("Updated Title", $updatedStory->getTitle());
+    }
 
-print("Suppression des valeurs de test de la base de données \n");
-$newChapitre->delete($newChapitre->getNumchap());
-$newLieu->delete($newLieu->getId());
-$newUser->delete($newUser->getId());
+    public function testDelete(): void
+    {
+        $this->story->create();
+        $idToDelete = $this->story->getId();
+        $this->assertTrue(Story::delete($idToDelete));
 
-
-} catch (Exception $e) {
-    exit("\nErreur: ".$e->getMessage()."\n");
+        $deletedStory = Story::read($idToDelete);
+        $this->assertNull($deletedStory);
+    }
 }
-?>
+
