@@ -155,7 +155,7 @@ try {
 
 
     }catch(Exception $e){
-        print("Les tests ont eu une erreur fatale");
+        echo $e->getMessage();
     }
 
     print("\nSuppression des valeurs de test de la base de données \n");
