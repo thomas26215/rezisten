@@ -66,7 +66,7 @@ article li ul {
 }
 
 
-.personnages {
+.personnages { /* METTRE UN MAX-WIDTH 80% ?*/
     position: absolute;
     bottom: 0;
     /* Ajustez selon votre besoin */
@@ -77,12 +77,15 @@ article li ul {
     /* Espace égal entre les personnages */
     align-items: flex-end;
     /* Aligner les personnages au bas */
+   
 }
 
 .parle,
 .parle-pas {
-    width: 50%;
     /* Ajustez la taille des personnages */
+    width: 50%;
+    max-width: 600px;
+    height: 50%;
 }
 
 .parle-pas {
@@ -93,6 +96,8 @@ article li ul {
 article section {
     border: 2px solid var(--noir);
     background-color: var(--beige);
+    position: relative;
+    padding-bottom: 10px;
 }
 
 article section p {
@@ -107,36 +112,34 @@ img.logo {
 
 
 h2.speaker {
-    position: absolute;
-    left: 4.5%;
-    bottom: 10%;
-    width: 8em;
-
-    margin: 0;
-    /* Centrer horizontalement */
-    background-color: var(--noir);
+    font-size: 150%;
+    margin: 0%;
     /* Couleur de fond */
-    padding: 1% 5%;
-
-    border: none;
+    background-color: var(--noir);
+    width:15vw;
+    clip-path: polygon(0% 0%, 90% 0%, 100% 50%, 90% 100%, 0% 100%);
     color: var(--beige-ecriture);
-    clip-path: polygon(28% 0%, 72% 0%, 80% 50%, 72% 100%, 28% 100%, 28% 50%);
+    text-align: left;
+    padding-left: 1vw !important;
+    min-width: 100px;
+
+    position: absolute;
+    top: -32px;
+    left: -2px !important;
+    padding: 15px 5px;
 }
 
 h2.speaker::before {
     content: '';
     /* Créer un élément avant le bouton */
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
     background-color: var(--bleu);
-    /* Couleur de fond de la bordure */
-    clip-path: polygon(30% 7%, 70% 7%, 78% 50%, 70% 93%, 30% 93%, 30% 50%);
-    /* La même forme que la div */
-    z-index: -10;
-    /* Placer la bordure derrière le bouton */
+    z-index: -1;
+    clip-path: polygon(2% 10%, 88% 10%, 96.5% 50%, 88% 90%, 2% 90%);
 }
 
 .speaker.question::before {
@@ -151,6 +154,7 @@ h2.speaker::before {
     /* Curseur clignotant */
     white-space: wrap;
     overflow: hidden;
+    margin-top: 20px;
 }
 
 @keyframes blink {
