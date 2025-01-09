@@ -132,6 +132,7 @@ h2.titre::before {
   display: flex;
   flex-direction: column;
   gap: 5rem;
+  padding: 50px;
 }
 
 .noms {
