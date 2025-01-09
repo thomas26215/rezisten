@@ -18,7 +18,6 @@ class Dialog
 
     const audioURL = "192.168.14.118/rezisten/doublageDialogue/";
 
-
     public function __construct(int $id, Story $story, Character $speaker, string $content, bool $bonus, string $dubbing){
         $this->setId($id);
         $this->setStory($story);
@@ -30,51 +29,108 @@ class Dialog
     }
 
     /* Getters */
-    public function getId(){
-        return $this->id;
+
+    public function getId(): int {
+        retrn $this->id;
     }
-    public function getStory(){
+
+    public function getStory(): Story {
         return $this->story;
     }
-    public function getSpeaker(){
+
+    public function getSpeaker():  Character {
         return $this->speaker;
     }
-    public function getContent(){
+
+    public function getContent(): string {
         return $this->content;
     }
-    public function getBonus(){
+
+    public function getBonus(): bool {
         return $this->bonus;
     }
-    public function getDubbing(){
+
+    public function getDubbing(): string {
         return $this->dubbing;
     }
 
-
     /* Setters */
-    public function setId(int $id){
+
+    public function setId(int $id): bool {
         $this->id = $id;
     }
-    public function setStory(story $story){
+
+    public function setStory(story $story): bool {
         $this->story = $story;
     }
-    public function setSpeaker(Character $speaker){
+
+    public function setSpeaker(Character $speaker) : bool{
         $this->speaker = $speaker;
     }
-    public function setContent(string $content){
+
+    public function setContent(string $content) : bool{
         $this->content = $content;
     }
-    public function setBonus(bool $bonus){
+
+    public function setBonus(bool $bonus): bool{
+        if($bonus == "") {
+            throw new Exception("Le bonus ne peut pas être vide")
+        }
         $this->bonus = $bonus;
     }
-    public function setDubbing(string $dubbing){
+
+    public function setDubbing(string $dubbing): bool{
         $this->dubbing = $dubbing;
     }
+
     
     /* Méthodes CRUD et utilitaire sur les dialogs */
 
+    public function create(): bool {
+        try {
+            $storyId = $this->story->getId();
+            if($this->id < 0 || $storyId < 0) {
+                throw new Exception("Impossible de créer un dialogue : Aucun utilisateur ne correspond à l'id fournit");
+            }
+            if($this->dao->insertRelatedData("dialogues", [
+                "id" => $this->id,
+                "id_histoire" => $this->story->getId(),
+                "interlocuteur" => $this->speaker->getId(),
+                "contenu" => $this->content,
+                "bonus" => $this->bonus,
+                "doublage" => $this->dubbing
+            ])){
+                return true;
+            } else {
+                return false;
+            }
+        } catch(PDOException $e) {
+            throw $e;
+        }
+    }
 
-    // Récupère tous les dialogues en amont de la question d'une histoire
-    public static function getDialogsBeforeQuestion(int $idStory) : array{
+    public function update(): bool {
+        if($this->id > 0 || $this->id)
+        return $this->dao->update("dialogues", [
+            "id" => $this->id,
+            "id_histoire" => $this->story->getId(),
+            "interlocuteur" => $this->speaker->getId(),
+            "contenu" => $this->content,
+            "bonus" => $this->bonus,
+            "doublage" => $this->dubbing
+        ], ["id" => $this->id, "id_histoire" => $this->story->getId()]) > 0;
+    }
+
+    public static function delete($id, $idStory){
+        if($this->id < 0 && $this->story->getId() < 0){
+            throw new Exception("Impossible ")
+        }
+            return DAO::getInstance()->deleteDatas("dialogues", ["id" => $id, "id_histoire" => $idStory]);
+        }
+        throw new Exception("Le dialogue ".$id."n'existe pas pour l'histoire ".$idStory);
+    }
+
+    public static function getDialogsBeforeQuestion(int $idStory): array{
         $dao = DAO::getInstance();
         $dialogsBeforeQuestion = array();
 
@@ -113,9 +169,7 @@ class Dialog
 
     }*/
 
-
-    // Récupère tous les dialogues bonus d'une histoire
-    public static function getDialogsBonusAfterQuestion(int $idStory) : array{
+    public static function getBonusDialogsAfterQuestion(int $idStory): array{
         $dao = DAO::getInstance();
         $dialogsBonus = array();
 
@@ -143,8 +197,7 @@ class Dialog
         return $dialogsBonus;
     }
 
-    //Récupère les dialogues n'étants pas liés au bonus (fin classique)
-    public static function getDialogsClassicAfterQuestion(int $idStory) : array{
+    public static function getClassicDialogsAfterQuestion(int $idStory): array{
         $dao = DAO::getInstance();
         $dialogsClassic = array();
 
@@ -172,45 +225,7 @@ class Dialog
         return $dialogsClassic;
     }
 
-    // Ajout d'un dialogue à la base 
-    public function create(){
-        if($this->dao->insertRelatedData("dialogues", [
-            "id" => $this->id,
-            "id_histoire" => $this->story->getId(),
-            "interlocuteur" => $this->speaker->getId(),
-            "contenu" => $this->content,
-            "bonus" => $this->bonus,
-            "doublage" => $this->dubbing
-        ])){
-            return true;
-        }
-        throw new Exception("Le dialogue n'a pas pu être créé");
-    }
 
-    // Pas de méthode read car utile dans aucun cas d'utilisation
-    
-
-
-    // Modification d'un dialogue en connaissant son id et son story
-    public function update(){
-        return $this->dao->update("dialogues", [
-            "id" => $this->id,
-            "id_histoire" => $this->story->getId(),
-            "interlocuteur" => $this->speaker->getId(),
-            "contenu" => $this->content,
-            "bonus" => $this->bonus,
-            "doublage" => $this->dubbing
-        ], ["id" => $this->id, "id_histoire" => $this->story->getId()]);
-    }
-
-
-    //FIXME: ICI IL FAUT CHANGER LA METHODE CAR DEUX ARGUMENTS 
-    public static function delete($id, $idStory){
-        if($id > 0 && $idStory > 0){
-            return DAO::getInstance()->deleteDatas("dialogues", ["id" => $id, "id_histoire" => $idStory]);
-        }
-        throw new Exception("Le dialogue ".$id."n'existe pas pour l'histoire ".$idStory);
-    }
 }
 
 

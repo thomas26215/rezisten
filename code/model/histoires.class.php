@@ -11,7 +11,7 @@ class Story
     private int $id;
     private string $title;
     private Chapter $chapter;
-    private User $creator;
+    private User $user;
     private Place $place;
     private string $background; //chemin d'accès a l'image de fond
     private bool $visibility;
@@ -22,11 +22,11 @@ class Story
 
 
 
-    public function __construct(string $title, chapter $chapter, User $creator, Place $place, string $background, bool $visibility, int $id = -1){
+    public function __construct(string $title, chapter $chapter, User $user, Place $place, string $background, bool $visibility, int $id = -1){
         $this->setId($id);
         $this->setTitle($title);
         $this->setChapter($chapter);
-        $this->setCreator($creator);
+        $this->setUser($user);
         $this->setPlace($place);
         $this->setBackground($background);
         $this->setVisibility($visibility);
@@ -34,59 +34,69 @@ class Story
     }
 
     /* Getters */
-    public function getId(){
+    public function getId(): int {
         return $this->id;
     }
 
-    public function getTitle(){
+    public function getTitle(): int {
         return $this->title;
     }
 
-    public function getChapter(){
+    public function getChapter(): Chapter {
         return $this->chapter;
     }
-    public function getCreator(){
-        return $this->creator;
+
+    public function getUser(): User {
+        return $this->user;
     }
-    public function getPlace(){
+
+    public function getPlace(): Place {
         return $this->place;
     }
-    public function getBackground(){
+
+    public function getBackground(): bool {
         return $this->background;
     }
-    public function getVisibility(){
+
+    public function getVisibility(): bool {
         return $this->visibility;
     }
 
     /* Setter */
-    public function setId(int $id){
+    public function setId(int $id): void {
         $this->id = $id;
     }
-    public function setTitle(string $title) {
+
+    public function setTitle(string $title): void {
         if($title == "") {
             throw new Exception("Le titre ne peut pas être vide");
         }
         $this->title = $title;
     }
-    public function setChapter(chapter $chapter){
+
+    public function setChapter(chapter $chapter): void {
         if($chapter == "") {
             throw new Exception("Le numéro de chapitre ne peut pas être vide");
         }
         $this->chapter = $chapter;
     }
-    public function setCreator(User $creator){
-        $this->creator = $creator;
+
+    public function setuser(User $user): void {
+        $this->user = $user;
     }
-    public function setPlace(place $place){
+
+    public function setPlace(place $place): void {
         $this->place = $place;
     }
-    public function setBackground(string $background){
+
+    public function setBackground(string $background): void {
         if($background == "") {
             throw new Exception("Le background ne peut pas être vide");
         }
         $this->background = $background;
     }
-    public function setVisibility(bool $visibility){
+
+    public function setVisibility(bool $visibility): void{
         $this->visibility = $visibility;
     }
 
@@ -94,12 +104,12 @@ class Story
     /* Méthodes CRUD et utilitaires sur la BDD */
 
     // Création d'une histoire dans la base de données
-    public function create(){
+    public function create(): bool {
         //Insertion dans la base en récupérant l'ID généré
         if($this->dao->insertRelatedData("histoires", [
             "titre" => $this->title,
             "numchap" => $this->chapter->getNumchap(),
-            "createur" => $this->creator->getId(),
+            "createur" => $this->user->getId(),
             "id_lieu" => $this->place->getId(),
             "background" => $this->background,
             "visible" => $this->visibility
@@ -111,19 +121,19 @@ class Story
     }
 
     // Accéder aux données d'une histoire à partir de son id
-    public static function read($id) : Story|null{
+    public static function read($id): ?Story {
         $dao = DAO::getInstance();
 
         //Récupère les données de l'histoire depuis la base
         if($historyDatas = $dao->getColumnWithParameters("histoires", [ "id" => (int)$id])){
             $historyData = $historyDatas[0];
             $chapter = Chapter::read($historyData['numchap']);
-            $creator = User::read($historyData['createur']);
+            $user = User::read($historyData['createur']);
             $place = Place::read($historyData['id_lieu']);
             return new Story(
                 $historyData['titre'],
                 $chapter,
-                $creator,
+                $user,
                 $place,
                 $historyData['background'],
                 $historyData['visible'],
@@ -134,22 +144,22 @@ class Story
     }
 
     // Mettre à jour une histoire existante
-    public function update(){
-        if($this->id != -1){ // Vérifie que l'ID est valide
-            return $this->dao->update("histoires",[
-                "titre" => $this->title,
-                "numchap" => $this->chapter->getNumchap(),
-                "createur" => $this->creator->getId(),
-                "id_lieu" => $this->place->getId(),
-                "background" => $this->background,
-                "visible" => $this->visibility
-            ], ["id" => (int)$this->id]);
+    public function update(): bool {
+        if($this->id < 1 || $this->id === NULL) {
+            throw new Exception("Impossible de mettre à jour la demande : L'histoire est invalide");
         }
-        return false; // Echec si ID invalide
+        return $this->dao->update("histoires",[
+            "titre" => $this->title,
+            "numchap" => $this->chapter->getNumchap(),
+            "createur" => $this->user->getId(),
+            "id_lieu" => $this->place->getId(),
+            "background" => $this->background,
+            "visible" => $this->visibility
+        ], ["id" => (int)$this->id]) > 0;
     }
 
     // Supprimer une histoire en connaissant son id
-    public static function delete($id){
+    public static function delete($id): bool{
         if($id > 0){ // Vérification de la possible existence de l'id
             return DAO::getInstance()->deleteDatasById("histoires",$id);
         }

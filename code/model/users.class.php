@@ -15,14 +15,14 @@ class User {
     private DAO $dao;
 
     public function __construct(string $username, string $first_name, string $surname, string $birth_date, string $mail, string $password, string $role, int $id = -1) {
-        $this->id = $id;
-        $this->username = $username;
-        $this->first_name = $first_name;
-        $this->surname = $surname;
-        $this->birth_date = $birth_date;
-        $this->mail = $mail;
-        $this->password = password_hash($password, PASSWORD_DEFAULT);
-        $this->role = $role;
+        $this->setId($id);
+        $this->setUsername($username);
+        $this->setFirstName($first_name);
+        $this->setSurname($surname);
+        $this->setBirthDate($birth_date);
+        $this->setMail($mail);
+        $this->setPassword(password_hash($password, PASSWORD_DEFAULT));
+        $this->setRole($role);
         $this->dao = DAO::getInstance();
     }
 
@@ -159,7 +159,7 @@ class User {
 
     public function update(): bool {
         if ($this->id === -1) {
-            throw new DAOException("Impossible de mettre à jour un utilisateur sans ID valide.");
+            throw new Exception("Impossible de mettre à jour un utilisateur sans ID valide.");
         }
         return $this->dao->update("utilisateurs", [
             "pseudo" => $this->username,

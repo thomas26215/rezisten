@@ -15,24 +15,22 @@ class Chapter
         $this->dao = DAO::getInstance(); // Initialise le dao pour les futures méthodes
     }
 
-    /* Ensemble des Getters */
-    public function getNumchap(){
+    public function getNumchap(): int{
         return $this->numchap;
     }
 
-    public function getTitle(){
+    public function getTitle(): string{
         return $this->title;
     }
 
-    /* Ensemble des setters */
-    public function setNumchap(int $numchap){
+    public function setNumchap(int $numchap): void{
         if($numchap == "") {
             throw new Exception("Le chapitre ne peut pas être vide");
         }
         $this->numchap = $numchap;
     }
 
-    public function setTitle(string $title){
+    public function setTitle(string $title): void{
         if($title == "") {
             throw new Exception("Le titre ne peut pas être vide");
         }
@@ -42,7 +40,7 @@ class Chapter
 
     /* Méthodes CRUD et utilitaires sur la BDD */
 
-    public static function readAllchapters() : array {
+    public static function readAllchapters(): array {
         $dao = DAO::getInstance();
         $listchap = array();
         $chapters = $dao->getColumnWithParameters("chapitres", []);
@@ -57,23 +55,18 @@ class Chapter
 
     }
 
-    // Méthode de création d'un nouveau chapitre dans la BDD
-    public function create(){
-        // Insérer le chapitre dans la base et vérifier si cela fonctionne
+    public function create(): bool{
         if($this->dao->insertRelatedData("chapitres", [ 
             "numchap" => $this->numchap,
             "titre" => $this->title
         ])){
             return true;
         }
-        // Insertion échouée
         return false;
     }
 
-    // Lecture d'un chapitre connaissant son numéro
-    public static function read($id){
+    public static function read($id): ?Chapter{
         $dao = DAO::getInstance();
-        // Lecture des données depuis la base
         if($chap = $dao->getColumnWithParameters("chapitres", ["numchap" => (int)$id])){
             $chapData = $chap[0];
             return new Chapter(
@@ -84,15 +77,13 @@ class Chapter
         return null;
     }
 
-    // Modification d'un chapitre dans la base de données 
-    public function update(){
+    public function update(): bool{
         return $this->dao->update("chapitres", [
             "numchap" => $this->numchap,
             "titre" => $this->title
-        ], ["numchap" => $this->numchap]);
+        ], ["numchap" => $this->numchap]) > 0;
     }
 
-    // Suppresion du chapitre si celui-ci existe dans la base de données
     public static function delete($num_chapter){
         if($num_chapter > 0){
             return DAO::getInstance()->deleteDatas("chapitres", ["numchap" => $num_chapter]);

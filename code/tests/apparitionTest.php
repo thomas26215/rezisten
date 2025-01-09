@@ -10,7 +10,7 @@ require_once(__DIR__.'/../model/dao.class.php');
 try {
     // Test de création d'un lieu
 
-    $user = new User("prapra","brayan","bils","27/06/2023","bilsbrayan@gmail.com","2706","a");
+    $user = new User("prapra","brayan","bils","27/06/2000","bilsbrayan@gmail.com","2706","a");
     $user->create();
     $chapitre = new Chapter(69,"la tete a toto");
     $chapitre->create();
@@ -96,26 +96,28 @@ try {
 
 //FIXME: test update veut pas marcher
 
-/*         //Test de la méthode update
     print("Test de la méthode update : ");
 
-    $updatedHistoire = new Story("UpdatedTitre" ,$chapitre ,$user, $lieu , "background",false);
+    $updatedHistoire = new Story("UpdatedTitre", $chapitre, $user, $lieu, "background", false);
     $updatedHistoire->create();
+
+    $summon->setHistory($updatedHistoire);
 
     if (!$summon->update()) {
         throw new Exception("Échec de la mise à jour de l'apparition");
     }
-    
+
     $updatedSummon = Apparitions::read($updatedHistoire->getId(), $summon->getCharacter()->getId());
     if ($updatedSummon === null) {
         throw new Exception("Impossible de lire l'apparition mise à jour");
     }
     if ($updatedSummon->getHistory()->getId() !== $updatedHistoire->getId()) {
         throw new Exception("La mise à jour n'a pas été effectuée correctement");
-    }    print("OK\n");
+    }
+    print("OK\n");
 
 
- */
+ 
 
 
             // Test de la méthode delete

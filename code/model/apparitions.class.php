@@ -74,15 +74,11 @@ class Apparitions{
         if ($this->character === null || $this->character->getId() <= 0) {
             throw new Exception("Impossible de mettre à jour l'apparition : Le personnage est invalide");
         }        
-        $result = $this->dao->update("apparitions", 
+        return $this->dao->update("apparitions", 
         [
-            "id_histoire" => $this->getHistory()->getId()
-        ], 
-        [
+            "id_histoire" => $this->getHistory()->getId(),
             "id_perso" => $this->getCharacter()->getId()
-        ]
-    );        
-        return $result ? true : false;
+        ], ["id_perso" => (int)$this->getCharacter()->getId()]) > 0;
     }    
     
     
