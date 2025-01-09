@@ -97,7 +97,7 @@ h2.titre {
   margin: 0%;
   /* Couleur de fond */
   background-color: var(--noir);
-  width:15vw;
+  width:20vw;
   clip-path: polygon(0% 0%, 90% 0%, 100% 50%, 90% 100%, 0% 100%);
   color: var(--beige-ecriture);
   text-align: left;
