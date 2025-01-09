@@ -106,13 +106,15 @@ try {
         throw new Exception("Le chapitre n'a pas été supprimé correctement");
     }
     print("OK\n");
-
-
  
 
 
     } catch (Exception $e) {
         exit("\nErreur: ".$e->getMessage()."\n");
     }
+
+
+
+
     ?>
 

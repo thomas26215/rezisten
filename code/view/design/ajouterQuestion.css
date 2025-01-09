@@ -24,10 +24,3 @@
     justify-content: space-around;
 }
 
-.content button{
-    font-size: small;
-    margin: 0%;
-    padding: 10px;
-    width: 100px !important;
-    height: auto; /* Permet au bouton de s'ajuster verticalement */
-}

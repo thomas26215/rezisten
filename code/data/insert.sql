@@ -13,8 +13,8 @@ INSERT INTO CHAPITRES(numchap,titre) values(0,'Prologue'),
 
 
 --Création d'une hisoitr pour le prologue et deux pour le chapitre 1
-INSERT INTO HISTOIRES(titre,numchap,createur,id_lieu,background) values('Un jour de septembre',0,4,8,'hist0_bg.webp'),
-('Une rencontre fortuite',0,4,2,'hist1_bg.webp');
+INSERT INTO HISTOIRES(titre,numchap,createur,id_lieu,background,visible) values('Un jour de septembre',0,4,8,'hist0_bg.webp',true),
+('Une rencontre fortuite',0,4,2,'hist1_bg.webp',true);
 
 
 --Création de deux personnages participants au prologue
