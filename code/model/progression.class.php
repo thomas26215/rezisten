@@ -1,18 +1,20 @@
 <?php
 
 require_once(__DIR__ . "/dao.class.php");
-require_once(__DIR__ . "/utilisateurs.class.php");
+require_once(__DIR__ . "/users.class.php");
 require_once(__DIR__ . "/histoires.class.php");
 
 class Progression {
     private User $user;
     private Story $story;
-private bool $status;
+private bool $statut;
     private $dao;
-    public function __construct(User $user, Story $story, bool $status) {
+    public function __construct(User $user, Story $story, bool $statut) {
         $this->setUser($user);
         $this->setHistory($story);
-        $this->setStatus($status);
+        $this->setStatus($statut);
+        $this->dao = DAO::getInstance();
+
     }
 
     /* --- Getters --- */
@@ -26,7 +28,7 @@ private bool $status;
     }
 
     public function getStatus(): bool {
-        return $this->status;
+        return $this->statut;
     }
 
     /* --- Setters --- */
@@ -45,8 +47,8 @@ private bool $status;
         $this->story = $story;
     }
 
-    public function setStatus(bool $status): void {
-        $this->status = $status;
+    public function setStatus(bool $statut): void {
+        $this->statut = $statut;
     }
 
     /* --- Méthodes CRUD --- */
@@ -61,10 +63,10 @@ private bool $status;
 if($historyId < 1) {
             throw new Exception("Impossible de créer une demande : Aucune histoire ne correspond à l'id fournit");
         }
-        if($this->dao->insertRelatedData("progression", [
+        if($this->dao->insertRelatedData("PROGRESSION", [
             "id_utilisateur" => $userId,
             "id_hist" => $historyId,
-            "statut" => $this->status,
+            "statut" => $this->statut,
         ])) {
             return true;
         } else {
@@ -82,7 +84,7 @@ if($historyId < 1) {
             return new Progression(
                 $newUser,
                 $newHistory,
-                $progressionData["status"]
+                $progressionData["statut"]
             );
         }
         return null;
