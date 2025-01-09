@@ -31,7 +31,7 @@ class Dialog
     /* Getters */
 
     public function getId(): int {
-        retrn $this->id;
+        return $this->id;
     }
 
     public function getStory(): Story {
@@ -74,7 +74,7 @@ class Dialog
 
     public function setBonus(bool $bonus): bool{
         if($bonus == "") {
-            throw new Exception("Le bonus ne peut pas être vide")
+            throw new Exception("Le bonus ne peut pas être vide");
         }
         $this->bonus = $bonus;
     }
@@ -123,12 +123,11 @@ class Dialog
 
     public static function delete($id, $idStory){
         if($this->id < 0 && $this->story->getId() < 0){
-            throw new Exception("Impossible ")
+            throw new Exception("Impossible ");
         }
             return DAO::getInstance()->deleteDatas("dialogues", ["id" => $id, "id_histoire" => $idStory]);
         }
-        throw new Exception("Le dialogue ".$id."n'existe pas pour l'histoire ".$idStory);
-    }
+    
 
     public static function getDialogsBeforeQuestion(int $idStory): array{
         $dao = DAO::getInstance();
