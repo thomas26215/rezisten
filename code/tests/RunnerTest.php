@@ -3,7 +3,7 @@
 /* print("\ntest des users : \n\n");
 include_once(__DIR__. '/usersTest.php');
  */
-print("\ntest des chapitres : \n\n"  );
+print("\ntest des chapitres : \n"  );
 include_once(__DIR__. '/chapitreTest.php');
 
 /* print("\ntest des demandes : \n");
