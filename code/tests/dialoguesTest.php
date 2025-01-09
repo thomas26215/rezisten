@@ -53,8 +53,8 @@ try {
 
     print("Test des setters : ");
 
-        $newStory = new Story("début",$chapitre,$createur,$lieu,"newbg.png",true);
-        $newSpeaker = new Character("michel","michel.png");
+        $newStory = Story::read(2);
+        $newSpeaker = Character::read(2);
 
         $dialogue->setId(2);
         $dialogue->setStory($newStory);
@@ -155,8 +155,14 @@ try {
 
 
     }catch(Exception $e){
-        print("test");
+        echo $e->getMessage();
     }
+
+    print("\nSuppression des valeurs de test de la base de données \n");
+    $dialogue->delete($dialogue->getId(),$dialogue->getStory()->getId());
+    foreach($dialogs as $d):
+        $d->delete($d->getId(),$d->getStory()->getId());
+    endforeach;
 
 
 

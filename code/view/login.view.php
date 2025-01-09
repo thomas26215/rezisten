@@ -1,23 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">    
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
   <meta charset="utf-8">
   <title>Se connecter</title>
-  <link rel="stylesheet" href="../design/style.css">
+  <link rel="stylesheet" href="./design/login.css">
 </head>
+
 <body>
   <main>
-    <form action="login.ctrl.php" method="post">
-      <label>Adresse mail : </label>
-      <input type="text" name="mail_adress">
-      <label>Mot de passe : </label>
-      <input type="password" name="password">
-      <button type="submit" name="submit" value="login">Login</button>
-      <button type="submit" name="submit" value="password">Forgotten password? </button>
-      <button type="submit" name="submit" value="new">Create new Account</button>
-    </form>
+   
   </main>
 </body>
-    <script src="./js/dyslexique.js"></script>
+<script src="./js/dyslexique.js"></script>
+
 </html>
