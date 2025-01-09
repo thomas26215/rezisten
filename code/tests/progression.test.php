@@ -12,7 +12,6 @@ try {
     // Test de création d'une progression
 
     $user = new User("prapra","brayan","bils","27/06/2023","bilsbrayan@gmail.com","2706","a");
-    $user->create();
     $chapitre = new Chapter(69,"la tete a toto");
     $chapitre->create();
     $lieu = new Place("iut","établissement","enfer","grenoble","0.0");
@@ -49,7 +48,7 @@ try {
              $newHistoire->create();
 
              $newUser = $user;
-             $newUser->setFirstName("BrayanModifié");
+             $newUser->setMail("bilsbrayanModifié@gmail.com");
              $newUser->create();
 
             
@@ -69,8 +68,29 @@ try {
             print("OK\n");
 
 
+        // Test de la méthode create
+            print("Test de la méthode create : ");
+                    
+            if (!$progress->create()) {
+                throw new Exception("Échec de la création d'une progression");
+            }
+
+        print("OK\n");
 
 
+
+        // Test de la méthode read
+        print("Test de la méthode read : ");
+
+            $readProgress = Progression::read($progress->getUser()->getId() , $progress->getHistory()->getId());
+            if (!$readProgress) {
+                throw new Exception("Échec de la lecture de la progression : Question non trouvée");
+            }
+            if (!$readProgress|| $readProgress->getHistory()->getId()!== $progress->getHistory()->getId()) {
+                throw new Exception("Échec de la lecture de la progression : Les ids ne correspondent pas. 
+                Attendu : '{$progress->getHistory()->getId()}', Obtenu : '{$readProgress->getHistory()->getId()}'");
+        }
+        print("OK\n");
 
 
 
