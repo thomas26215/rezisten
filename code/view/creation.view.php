@@ -42,7 +42,7 @@
 
             </section>
 
-            <section class="flex-col sect-droite">
+            <section class="flex-col ">
                 <a href="./ajouterDialogue.view.php"><button>Ajouter un dialogue</button></a>
                 <a href="./ajouterQuestion.view.php"><button class=button-gris>Ajouter une question</button></a>
                 <a href="./afficherHistoire.view.php"><button class=button-gris>Afficher toute l'histoire</button></a>
