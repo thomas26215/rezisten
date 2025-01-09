@@ -1,0 +1,65 @@
+body {
+    background-image: var(--background-drapeau);
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    font-size: 50px;
+}
+
+.infos {
+    background-color: var(--beige);
+    border: 3px solid var(--noir);
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: center;
+    padding: 2rem 4rem;
+    gap: 2rem;
+    margin: 2rem;
+}
+
+.infos label {
+    font-size: 27px;
+    font-weight: bold;
+}
+
+.infos input {
+    height: 30px;
+    width: 14rem;
+}
+
+.connecter {
+    height: 5.5rem;
+    width: 30rem;
+    max-width: none;
+    font-size: 34px;
+    margin: 3rem;
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    margin: 2rem;
+}
+
+.button {
+    height: 3rem;
+    width: 16rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8rem;
+}
