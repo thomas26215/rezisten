@@ -20,6 +20,10 @@
             <a href="./login.view.php"><button>Se connecter</button></a>
             <a href="./createAccount.view.php"><button>Créer un compte</button></a>
         </div>
+        <form action="mainNonConnecte.ctrl.php" method="post">
+            <input type="text" name="test" value="1">
+            <button type="submit"> test</button>
+        </form>
     </main>
     <?php include_once 'footer.view.php'; ?>
 
