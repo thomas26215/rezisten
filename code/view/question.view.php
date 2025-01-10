@@ -12,7 +12,7 @@
 <body>
 
     <?php include_once 'headerHistoire.view.php'; ?>
-    <main class="flex-col">
+    <main >
         <h1>$Chapitre 1 : Histoire 2 : Sabotage</h1>
         <!--Remplacer après, de façon a récupérer les informations en fonction de l'histoire  -->
 
@@ -31,7 +31,7 @@
 
                 <h2 class="speaker question"> $Type Question </h2>
 
-                <button>Consulter le lieux</button>
+                <button class="consulter-lieux">Consulter le lieux</button>
 
                 <p class="text"> $TextQuestion En chantier, je m'appelle teuse. Et toi ture. Et lui C'est cateur. Et
                     voici le père
@@ -48,8 +48,6 @@
                     <button class="autreQuestion button-gris"> <a href="#"> Accéder a la question $(simple/Complexe)</a>
                     </button>
                 </div>
-
-
             </section>
         </article>
 
