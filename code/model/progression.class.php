@@ -7,7 +7,7 @@ require_once(__DIR__ . "/histoires.class.php");
 class Progression {
     private User $user;
     private Story $story;
-private bool $statut;
+    private bool $statut;
     private $dao;
     public function __construct(User $user, Story $story, bool $statut) {
         $this->setUser($user);
@@ -74,7 +74,7 @@ if($historyId < 1) {
         }
     }
 
-    public static function read(int $user_id, int $story_id) {
+    public static function read(int $user_id, int $story_id): ?Progression {
         $dao = DAO::getInstance();
         $progressionDatas = $dao->getColumnWithParameters("progression", ["id_utilisateur" => $user_id, "id_hist" => $story_id]);
         if($progressionDatas){
@@ -90,7 +90,7 @@ if($historyId < 1) {
         return null;
     }
 
-    public function update() {
+    public function update(): bool {
         if($this->user === NULL || $this->user->getId() < 1) {
             throw new Exception("Impossible de mettre à jour la progression : L'utilisateur est invalide");
         }
@@ -106,7 +106,7 @@ if($historyId < 1) {
         return false;
     }
 
-    public static function delete(int $id_utilisateur, int $id_history) {
+    public static function delete(int $id_utilisateur, int $id_history): bool {
         if($id_utilisateur > 0 && $id_history > 0){
             return DAO::getInstance()->deleteRelatedData("progression", ["id_utilisateur" => (int)$id_utilisateur, "id_history" => (int)$id_history]);
         }

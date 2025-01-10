@@ -73,8 +73,8 @@ class usersTest extends TestCase
 
     public function testCreateWithInvalidData()
     {
-        $invalidUser = new User("", "", "", "", "", "", "");
         $this->expectException(Exception::class);
+        $invalidUser = new User("", "", "", "", "", "", "");
         $invalidUser->create();
     }
 
@@ -86,7 +86,7 @@ class usersTest extends TestCase
     public function testUpdateNonExistentUser()
     {
         $nonExistentUser = new User("test", "test", "test", "01/01/2000", "test@test.com", "password", "a", 99999);
-       $this->assertFalse($nonExistentUser->update());
+        $this->assertFalse($nonExistentUser->update());
     }
 
     public function testDeleteNonExistentUser()

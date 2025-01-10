@@ -7,14 +7,14 @@ error_reporting(E_ALL);
 
 
 //On utilise la variable globale $_REQUEST car on envoie des formulaires en GET et en POST
-$ctrl = $_REQUEST['redirection'] ?? 'main';
+$ctrl = $_REQUEST['ctrl'] ?? 'main';
 
 //Nécessaire de compléter quand on crée une vue pour vérifier que la vue appelée existe bien
-const CTRLS = array('');
+const CTRLS = array('mainNonConnecte');
 
 //TODO: Gestion des sessions avec session_start();
 
-
+ 
 
 //Génération du chemin de fichier
 $path = "controler/" . $ctrl . ".ctrl.php";

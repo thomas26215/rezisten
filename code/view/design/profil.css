@@ -79,7 +79,6 @@ form div input {
 
 .buttons {
     display: flex;
-    margin-bottom: 3rem;
     align-items: center;
     justify-content: center;
     gap: 5rem;
@@ -88,5 +87,10 @@ form div input {
 .buttons a button {
     height: 6rem;
     width: 25rem;
+    margin: 0 !important;
 }
 
+#toggleDyslexique{
+    margin: 0 !important;
+    height: 6rem ;
+}

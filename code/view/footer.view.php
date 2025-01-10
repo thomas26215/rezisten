@@ -1,13 +1,13 @@
 <head>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">    
-    <link rel="stylesheet" type="text/css" href="./design/footer.css">
-    <link rel="stylesheet" type="text/css" href="./design/global.css">
+    <link rel="icon" href="./view/favicon.ico" type="image/x-icon">    
+    <link rel="stylesheet" type="text/css" href="./view/design/footer.css">
+    <link rel="stylesheet" type="text/css" href="./view/design/global.css">
 </head>
 
 
 <footer class="flex-row">
     <a href="./main.view.php">
-        <img class="img" src="./design/image/logoCoupe.png" alt="logo Rézisten">
+        <img class="img" src="./view/design/image/logoCoupe.png" alt="logo Rézisten">
     </a>
     <article>
         <section>Crédit :

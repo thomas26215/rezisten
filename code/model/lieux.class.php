@@ -10,8 +10,6 @@ class Place {
     private int $id;
     private DAO $dao;
     
-    
-
     public function __construct(string $name, string $place_type, string $description, string $city, string $coordinates, int $id = -1) {
         $this->setName($name);
         $this->setPlaceType($place_type);
@@ -80,7 +78,7 @@ class Place {
 
     /* --- Méthodes CRUD --- */
 
-    public function create() {
+    public function create(): bool {
         if($this->dao->insertRelatedData("lieux", [
             "nom" => $this->name,
             "type_lieu" => $this->place_type,
@@ -96,7 +94,7 @@ class Place {
         }return false;
     }
 
-    public static function read($id){
+    public static function read($id): ?Place {
         $dao = DAO::getInstance();
         if($lieuData = $dao->getColumnWithParameters("lieux", ["id" => (int)$id])){
             return new Place(
@@ -111,7 +109,7 @@ class Place {
         return null;
     }
 
-    public function update(){
+    public function update(): bool {
         if($this->id !== -1){
             
             return $this->dao->update("lieux", [
@@ -124,7 +122,7 @@ class Place {
         }
         return false;
     }
-    public static function delete($id){
+    public static function delete($id) : bool{
         if($id > 0){
             return DAO::getInstance()->deleteDatasById("lieux", $id);
             

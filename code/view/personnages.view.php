@@ -27,10 +27,10 @@
 
 
             <?php
-           /* include_once 'consulterPersonnage.view.php';
-            include_once 'ajouterPersonnage.view.php';
-            include_once 'modifierPersonnage.view.php';*/
-            include_once 'supprimerPersonnage.view.php'; ?>
+           /* include_once 'consulterPersonnage.view.php';*/
+            include_once 'ajouterPersonnage.view.php';/*
+            include_once 'modifierPersonnage.view.php';
+            include_once 'supprimerPersonnage.view.php';*/ ?>
             <section class="footer">
                 <a href="#"><button id="dialogQuitter" class=button-rouge>Quitter</button></a>
                 <a href="./ajouterQuestion.view.php"><button>Sauvegarder</button></a>

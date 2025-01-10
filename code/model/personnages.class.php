@@ -54,19 +54,18 @@ class Character {
 
     /* --- Méthodes CRUD --- */
 
-    public function create(){
+    public function create(): bool {
         if($this->dao->insertRelatedData("personnages", [
             "prenom" => $this->first_name,
             "img" => $this->image,
         ])){
-            //TODO: Quand je récupère le dernier ID et qu'il n'y a aucune ligne dans la BDD, est ce que ça vérifie dans le dao si ça renvoie 0 s'il n'y a aucune ligne ?
             $this->setId($this->dao->getLastInsertId("personnages")[0]["last_id"]);
             return true;
         }
         return false;
     }
 
-    public static function read(int $id){
+    public static function read(int $id): ?Character {
         $dao = DAO::getInstance();
         if($characterData = $dao->getColumnWithParameters("personnages", ["id" => $id])){
             $characterDatas = $characterData[0];
@@ -79,16 +78,16 @@ class Character {
         return null;
     }
 
-    public function update(){
+    public function update(): bool {
         if($this->id !== -1){
             return $this->dao->update("personnages", [
                 "prenom" => $this->first_name,
                 "img" => $this->image,
             ], ["id" => (int)$this->id]) > 0;
         }
-        return false;
     }
-    public static function delete($id){
+
+    public static function delete($id): bool {
         if($id > 0){
             return DAO::getInstance()->deleteDatasById("personnages", $id);
         }

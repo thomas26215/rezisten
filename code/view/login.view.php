@@ -5,7 +5,7 @@
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <meta charset="utf-8">
   <title>Se connecter</title>
-  <link rel="stylesheet" href="./design/login.css">
+  <link rel="stylesheet" href="./view/design/login.css">
 </head>
 
 <body>
