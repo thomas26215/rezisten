@@ -1,7 +1,3 @@
-body {
-    margin: 0%;
-}
-
 footer {
     background-color: var(--beige);
 }
@@ -11,11 +7,8 @@ footer>article {
     display: flex;
     justify-content: space-around;
     width: 100%;
-    padding: 0%;
-    height: 1%;
     border: none;
-    max-height: var(--height-footer);
-    ;
+    height: var(--height-footer);
 
 }
 
@@ -28,13 +21,14 @@ img.img {
 
 }
 
-
+#first-a{
+    max-height: var(--height-footer);
+}
 
 footer>article>section,
 footer>article>section a {
     color: var(--beige-ecriture);
     font-size: large;
-    margin: 3%;
 }
 
 footer>section ul {

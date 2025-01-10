@@ -27,7 +27,7 @@
         <button class="connecter">Se connecter</button>
       </a>
       <div class="buttons">
-        <a href="#">
+        <a href="motdepasseoublie.view.php">
           <button class="button-gris button">Mot de passe oublié</button>
         </a>
         <a href="./createAccount.view.php">
