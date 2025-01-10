@@ -1,8 +1,8 @@
 -- Création de 3 utilisateurs illustrant chacun un rôle spécifique.
-INSERT INTO UTILISATEURS(pseudo,prenom,nom,datenaiss,mail,mot_de_passe,role) VALUES('tritri','tristan','font','2005-06-14','tritri@gmail.com','1945lo1234','j'),
-('aiel','quentin','pingouin','2005-10-12','aiel.gaming@gmail.com','lepgm2024du','j'),
-('jeanm','jean','mejean','1978-10-31','jean.mejean@gmail.com','12hist34prof ','c'),
-('admin_rezisten','admin','admin','1999-09-12','admin.rezisten@rezisten.fr','jesuisadmin2025','a');
+INSERT INTO UTILISATEURS(pseudo,prenom,nom,datenaiss,mail,mot_de_passe,role) VALUES('tritri','tristan','font','14/06/2005','tritri@gmail.com','1945lo1234','j'),
+('aiel','quentin','pingouin','12/10/2000','aiel.gaming@gmail.com','lepgm2024du','j'),
+('jeanm','jean','mejean','10/08/1978','jean.mejean@gmail.com','12hist34prof ','c'),
+('admin_rezisten','admin','admin','12/06/1999','admin.rezisten@rezisten.fr','jesuisadmin2025','a');
 
 -- Ajout d'une demande de créateur
 INSERT INTO DEMANDES VALUES(2,'aiel-id.png');
@@ -19,15 +19,15 @@ INSERT INTO HISTOIRES(titre,numchap,createur,id_lieu,background,visible) values(
 
 --Création de deux personnages participants au prologue
 INSERT INTO PERSONNAGES(prenom,img) values('Raymond','raymond.webp'), --1
-('Pierre','pierre.webp'),   --2
-('Jean','jean.webp'),       --3
-('André','andre.webp'),     --4
-('David','david.webp'),     --5
-('Michel','michel.webp'),   --6
-('Marie','marie.webp'),     --7
-('Milicien','milicien.webp'), --8
-('Inconnu','inconnu.webp'),   --9
-('Narrateur','narrateur.webp'); --10
+('Pierre','pierre'),   --2
+('Jean','jean'),       --3
+('André','andre'),     --4
+('David','david'),     --5
+('Michel','michel'),   --6
+('Marie','marie'),     --7
+('Milicien','milicien'), --8
+('Inconnu','inconnu'),   --9
+('Narrateur','narrateur'); --10
 
 
 
@@ -62,7 +62,7 @@ VALUES
 
 --Dialogues liés à la question simple
 (20, 1, 10, 'Pierre commence alors à manipuler la radio pendant un long moment. Jusqu''à ce que quelqu''un l''interrompe soudainement.', false,'none'),
-(21, 1, 5, 'Attends !', false),
+(21, 1, 5, 'Attends !', false,'211'),
 (22, 1, 3, 'Je crois que j’ai entendu quelque chose moi aussi, reviens en arrière.', false,'none'),
 (23, 1, 3, 'La radio grésille jusqu''à ce que retentissent des mots que nous n’oublierions jamais.', false,'none'),
 (24, 1, 9, 'Malgré nos efforts, nous avons été submergés par la force terrestre et aérienne de l''ennemi...', false,'none'),

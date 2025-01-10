@@ -16,37 +16,40 @@
     <?php include_once './view/headerHistoire.view.php'; ?>
     <main class="flex-col">
         
-        <h1>Chapitre <?=$idChap?> : Histoire <?=$idStory?> : Sabotage</h1>
+        <h1>Chapitre <?=$idChap?> : Histoire <?=$idStory?> : <?= $story->getTitle()?></h1>
         <!--Remplacer après, de façon a récupérer les informations en fonction de l'histoire  -->
 
 
         <article class="fond-container">
             <img class="fond" src="./view/design/image/image_test.png" alt="Fond">
             <div class="personnages">
-                <img class="parle" src="./view/design/image/milicien.png" alt="milicien">
-                <img class="parle-pas" src="./view/design/image/resistant.png" alt="resistant">
+                <img class="parle" src="<?= $imgSpeaker ?>" alt="<?=$speaker->getFirstName()?>">
+                <img class="parle-pas" src="<?=$prevSpeaker?>" alt="resistant">
             </div>
         </article>
 
         <article id="test">
             <section> <!-- Pour la zone de texte -->
 
-                <h2 class="speaker"> Michel </h2>
+                <h2 class="speaker"> <?= $speaker->getFirstName() ?> </h2>
 
-                <p class="text"> En chantier, je m'appelle teuse. Et toi ture. Et lui C'est cateur. Et voici le père
-                    Sécuteur.
-                    Et la Mère Cedes. Il y a aussi le frère Jaques. Et enfin Vibro ma soeur. Et Moi sonnoneuse.</p>
+                <p class="text"> <?= $dialogs[$idDialog]->getContent() ?></p>
                 <form action="?" method="get">
                     <div class="flex-row">
-                        <input type="hidden" name="idStory" value="<?=$idStory?>">
-                        <input type="hidden" name="idChap" value="<?=$idChap?>">
-                        <button class="before button-gris" type="submit" name="action" value="prevDial"> < Précédent </button> <!-- changer les href car je sais pas quoi mettre comme lien -->
-                        <button class="next button-gris" type="submit" name="action" value="nextDial"> Suivant ></button>
+                        <input type="hidden" name="idStory" value="<?= $idStory ?>">
+                        <input type="hidden" name="idChap" value="<?= $idChap ?>">
                         <input type="hidden" name="ctrl" value="histoire">
-            
-            
-                     </div>
+                        <input type="hidden" name="idDialog" id="idDialogInput" value="<?= $idDialog ?>">
+
+                        <button class="before button-gris" type="submit" onclick="document.getElementById('idDialogInput').value = <?= $idDialog - 1 ?>">
+                        < Précédent </button>
+
+                        <button class="next button-gris" type="submit" onclick="document.getElementById('idDialogInput').value = <?= $idDialog + 1 ?>">
+                        Suivant ></button>
+                    </div>
                 </form>
+
+                
                 
 
 
