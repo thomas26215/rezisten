@@ -2,6 +2,7 @@
 
 // Accès aux classes
 
+use PHPUnit\Framework\TestCase;
 use PhpParser\Node\Expr\Print_;
 
 require_once(__DIR__.'/../model/questions.class.php');
