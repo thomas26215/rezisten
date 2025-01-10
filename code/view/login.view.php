@@ -9,7 +9,7 @@
 </head>
 
 <body>
-  <?php include_once 'header.view.php'; ?>
+  <?php include_once './view/header.view.php'; ?>
   <main>
     <h1>Se connecter</h1>
     <form action="">
@@ -23,22 +23,22 @@
           <input type="password" name="password" id="password" placeholder="*******">
         </div>
       </div>
-      <a href="./main.view.php">
+      <a href="./view/main.view.php">
         <button class="connecter">Se connecter</button>
       </a>
       <div class="buttons">
-        <a href="motdepasseoublie.view.php">
+        <a href="./view/motdepasseoublie.view.php">
           <button class="button-gris button">Mot de passe oublié</button>
         </a>
-        <a href="./createAccount.view.php">
+        <a href="./view/createAccount.view.php">
           <button class="button-gris button">Créer un compte</button>
         </a>
       </div>
     </form>
     
   </main>
-  <?php include_once 'footer.view.php'; ?>
+  <?php include_once './view/footer.view.php'; ?>
 </body>
-<script src="./js/dyslexique.js"></script>
+<script src="./view/js/dyslexique.js"></script>
 
 </html>

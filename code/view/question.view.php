@@ -54,7 +54,7 @@
     </main>
 
 </body>
-<script src="./js/dyslexique.js"></script>
-<script src="./js/machineAEcrire.js"></script>
+<script src="./view/js/dyslexique.js"></script>
+<script src="./view/js/machineAEcrire.js"></script>
 
 </html>

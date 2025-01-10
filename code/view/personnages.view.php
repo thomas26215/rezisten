@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <?php include_once 'headerHistoire.view.php'; ?>
+    <?php include_once './view/headerHistoire.view.php'; ?>
 
     <main class="flex-col">
 
@@ -39,8 +39,8 @@
 
         </section>
 </body>
-<script src="./js/popup.js"></script>
-<script src="./js/dyslexique.js"></script>
-<script src="./js/photoSelect.js"></script>
+<script src="./view/js/popup.js"></script>
+<script src="./view/js/dyslexique.js"></script>
+<script src="./view/js/photoSelect.js"></script>
 
 </html>

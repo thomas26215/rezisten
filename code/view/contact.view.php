@@ -8,7 +8,7 @@
         <link rel="stylesheet" type="text/css" href="./view/design/contact.css">
     </head>
     <body> 
-        <?php include_once("./header.view.php")?>
+        <?php include_once("./view/header.view.php")?>
         <main>
             <h1>Nous contacter</h1>
             <form action="" method="post"> <!-- TO DO : conpléter le php (Thomas) -->
@@ -31,6 +31,6 @@
             </form>
         </main>
     </body>
-    <script src="./js/dyslexique.js"></script>
-    <?php include_once("footer.view.php"); ?>
+    <script src="./view/js/dyslexique.js"></script>
+    <?php include_once("./view/footer.view.php"); ?>
 </html>

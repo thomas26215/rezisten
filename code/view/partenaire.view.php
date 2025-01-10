@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <?php include_once("header.view.php"); ?>
+    <?php include_once("./view/header.view.php"); ?>
     <main class="flex-col">
         <h1>Nos partenaires</h1>
         <ul>
@@ -68,8 +68,8 @@
             </li>
         </ul>
     </main>
-    <?php include_once("footer.view.php"); ?>
+    <?php include_once("./view/footer.view.php"); ?>
 </body>
-    <script src="./js/dyslexique.js"></script>
+    <script src="./view/js/dyslexique.js"></script>
 
 </html>

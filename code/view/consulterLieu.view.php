@@ -5,17 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consulter le lieu</title>
-    <link rel="stylesheet" href="design/consulterLieu.css">
+    <link rel="stylesheet" href="./view/design/consulterLieu.css">
 </head>
 <body>
-    <?php include_once 'header.view.php'; ?>
+    <?php include_once './view/header.view.php'; ?>
     <main>
         <h1>Consulter le lieu</h1>
 
         <h2>Mémorial national Prison de Montluc</h2>
 
         <div class="infoContainer">
-            <img src="design/image/memorial.jpeg" alt="mémorial national prison de montluc">
+            <img src="./view/design/image/memorial.jpeg" alt="mémorial national prison de montluc">
             <div class="info">
                 <div>
                     <h3>Type de lieu : </h2>
@@ -34,7 +34,7 @@
         </div>
         <?php include_once 'APImap.view.php'; ?>
     </main>
-    <?php include_once 'footer.view.php'; ?>
+    <?php include_once './view/footer.view.php'; ?>
 </body>
-    <script src="./js/dyslexique.js"></script>
+    <script src="./view/js/dyslexique.js"></script>
 </html>

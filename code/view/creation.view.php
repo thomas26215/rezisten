@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <?php include_once 'headerHistoire.view.php'; ?>
+    <?php include_once './view/headerHistoire.view.php'; ?>
     <main class="flex-col">
 
         <h1>Création d'histoire</h1>
