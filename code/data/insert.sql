@@ -19,15 +19,15 @@ INSERT INTO HISTOIRES(titre,numchap,createur,id_lieu,background,visible) values(
 
 --Création de deux personnages participants au prologue
 INSERT INTO PERSONNAGES(prenom,img) values('Raymond','raymond.webp'), --1
-('Pierre','pierre.webp'),   --2
-('Jean','jean.webp'),       --3
-('André','andre.webp'),     --4
-('David','david.webp'),     --5
-('Michel','michel.webp'),   --6
-('Marie','marie.webp'),     --7
-('Milicien','milicien.webp'), --8
-('Inconnu','inconnu.webp'),   --9
-('Narrateur','narrateur.webp'); --10
+('Pierre','pierre'),   --2
+('Jean','jean'),       --3
+('André','andre'),     --4
+('David','david'),     --5
+('Michel','michel'),   --6
+('Marie','marie'),     --7
+('Milicien','milicien'), --8
+('Inconnu','inconnu'),   --9
+('Narrateur','narrateur'); --10
 
 
 
