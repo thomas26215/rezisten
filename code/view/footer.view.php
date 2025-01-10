@@ -6,10 +6,10 @@
 
 
 <footer class="flex-row">
-    <a href="./main.view.php">
+    <a id="first-a"href="./main.view.php">
         <img class="img" src="./view/design/image/logoCoupe.png" alt="logo Rézisten">
     </a>
-    <article>
+    <article class="flex-row">
         <section>Crédit :
             <ul>
                 <li><a href="https://fr.freepik.com/" target="_blank">Freepik</a></li>

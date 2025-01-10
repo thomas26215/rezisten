@@ -6,15 +6,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil</title>
-    <link rel="stylesheet" href="design/profil.css">
+    <link rel="stylesheet" href="./view/design/profil.css">
 </head>
 
 <body>
-    <?php include_once("header.view.php") ?>
+    <?php include_once("./view/header.view.php") ?>
     <main>
         <div class="container">
             <div class="profilHead">
-                <img src="design/image/photoProfil.jpg" alt="photo profil">
+                <img src="./view/design/image/photoProfil.jpg" alt="photo profil">
                 <p>Jano</p>
             </div>
 
@@ -48,8 +48,8 @@
             </a>
         </div>
     </main>
-    <?php include_once("footer.view.php") ?>
+    <?php include_once("./view/footer.view.php") ?>
 </body>
-<script src="./js/dyslexique.js"></script>
+<script src="./view/js/dyslexique.js"></script>
 
 </html>

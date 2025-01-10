@@ -52,7 +52,7 @@
                     <button class="bouton-modif">^</button>
                     <button class="bouton-modif">^</button>
                 </div>
-                <a href="" class="bouton-modif"><img src="design/image/poubelle.png" alt="mémorial national prison de montluc" id="poubelle"></button></a>  <!-- Lié au pop up -->
+                <a href="" class="bouton-modif"><img src="./view/design/image/poubelle.png" alt="mémorial national prison de montluc" id="poubelle"></button></a>  <!-- Lié au pop up -->
             </section>
 
             <section class=flex-row>
@@ -68,7 +68,7 @@
                     <button class="bouton-modif">^</button>
                     <button class="bouton-modif">^</button>
                 </div>
-                <a href="" class="bouton-modif"><img src="design/image/poubelle.png" alt="mémorial national prison de montluc" id="poubelle"></button></a>  <!-- Lié au pop up -->
+                <a href="" class="bouton-modif"><img src="./view/design/image/poubelle.png" alt="mémorial national prison de montluc" id="poubelle"></button></a>  <!-- Lié au pop up -->
             </section>
 
             <section class=flex-row>
@@ -84,7 +84,7 @@
                     <button class="bouton-modif">^</button>
                     <button class="bouton-modif">^</button>
                 </div>
-                <a href="" class="bouton-modif"><img src="design/image/poubelle.png" alt="mémorial national prison de montluc" id="poubelle"></button></a>  <!-- Lié au pop up -->
+                <a href="" class="bouton-modif"><img src="./view/design/image/poubelle.png" alt="mémorial national prison de montluc" id="poubelle"></button></a>  <!-- Lié au pop up -->
             </section>
 
         </form>

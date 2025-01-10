@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mes histoires</title>
-    <link rel="stylesheet" href="design/mesHistoires.css">
-    <link rel="stylesheet" href="design/global.css">
+    <link rel="stylesheet" href="./view/design/mesHistoires.css">
+    <link rel="stylesheet" href="./view/design/global.css">
 </head>
 <body>
     <?php include_once("headerHistoire.view.php")?>
@@ -18,15 +18,15 @@
             <div class="container">
                 <p>Titre</p>
                 <div >
-                    <img class="modif" src="design/image/modifier.png" alt="Modifier">
-                    <img class="poubelle" src="design/image/poubelle.png" alt="supprimer">
+                    <img class="modif" src="./view/design/image/modifier.png" alt="Modifier">
+                    <img class="poubelle" src="./view/design/image/poubelle.png" alt="supprimer">
                 </div>
             </div>
             <div class="container">
                 <p>Titre</p>
                 <div>
-                    <img src="design/image/modifier.png" alt="Modifier">
-                    <img src="design/image/poubelle.png" alt="supprimer">
+                    <img src="./view/design/image/modifier.png" alt="Modifier">
+                    <img src="./view/design/image/poubelle.png" alt="supprimer">
                 </div>
             </div>
         </div>
@@ -35,15 +35,15 @@
             <div class="container">
                 <p>Titre</p>
                 <div>
-                    <img src="design/image/modifier.png" alt="Modifier">
-                    <img src="design/image/poubelle.png" alt="supprimer">
+                    <img src="./view/design/image/modifier.png" alt="Modifier">
+                    <img src="./view/design/image/poubelle.png" alt="supprimer">
                 </div>
             </div>
             <div class="container">
                 <p>Titre</p>
                 <div>
-                    <img src="design/image/modifier.png" alt="Modifier">
-                    <img src="design/image/poubelle.png" alt="supprimer">
+                    <img src="./view/design/image/modifier.png" alt="Modifier">
+                    <img src="./view/design/image/poubelle.png" alt="supprimer">
                 </div>
             </div>
             
@@ -53,5 +53,5 @@
         </a>
     </main>
 </body>
-    <script src="./js/dyslexique.js"></script>
+    <script src="./view/js/dyslexique.js"></script>
 </html>

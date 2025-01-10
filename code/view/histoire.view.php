@@ -13,7 +13,7 @@
 
 <body>
 
-    <?php include_once 'headerHistoire.view.php'; ?>
+    <?php include_once './view/headerHistoire.view.php'; ?>
     <main class="flex-col">
         
         <h1>Chapitre <?=$idChap?> : Histoire <?=$idStory?> : Sabotage</h1>

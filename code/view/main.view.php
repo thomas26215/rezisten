@@ -11,7 +11,7 @@
 
 <body>
     <main>
-        <?php include_once 'headerHistoire.view.php'; ?>
+        <?php include_once './view/headerHistoire.view.php'; ?>
 
         <div id="maindiv" class="flex-col">
             <img id="logo" src="./view/design/image/logo.png" alt="Logo">
@@ -29,7 +29,7 @@
         </div>
 
     </main>
-    <?php include_once 'footer.view.php'; ?>
+    <?php include_once './view/footer.view.php'; ?>
 </body>
-    <script src="./js/dyslexique.js"></script>
+    <script src="./view/js/dyslexique.js"></script>
 </html>

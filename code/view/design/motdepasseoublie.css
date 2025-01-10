@@ -1,0 +1,79 @@
+body {
+    background-image: var(--background-histoire);
+}
+
+h1 {
+    font-size: 50px;
+}
+
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: calc(100vh - var(--height-header) - var(--height-footer));
+}
+
+form {
+    background-color: var(--beige);
+    border: 3px solid var(--noir);
+    padding: 2rem 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.email {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.email label {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.email input {
+    height: 2rem;
+    width: 15rem;
+    
+}
+
+.texte {
+    width: 400px;
+    text-align: center;
+    font-size: 20px;
+}
+
+form a {
+    color: var(--noir);
+    text-decoration: underline;
+}
+
+button {
+    height: 4rem;
+}
+
+span {
+    color: var(--rouge);
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center !important;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: center;
+    gap: 2rem;
+}

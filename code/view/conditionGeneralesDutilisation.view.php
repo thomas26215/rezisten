@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <?php include './header.view.php'; ?>
+    <?php include './view/header.view.php'; ?>
     <main>
         <h1>CONDITIONS GÉNÉRALES D’UTILISATION</h1>
         <p>En vigueur au 08/10/2024</p>
@@ -226,7 +226,7 @@
             Contactez-nous » du site.
         </p>
     </main>
-    <?php include './footer.view.php'; ?>
+    <?php include './view/footer.view.php'; ?>
 </body>
 
 </html>

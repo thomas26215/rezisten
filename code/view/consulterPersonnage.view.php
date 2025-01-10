@@ -24,7 +24,7 @@
         </div>
 
         <div class="supContainer">
-            <img src="design/image/milicien.png" alt="" style="max-width: 240px;">
+            <img src="./view/design/image/milicien.png" alt="" style="max-width: 240px;">
 
         </div>
 

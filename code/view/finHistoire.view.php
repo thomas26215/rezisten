@@ -8,12 +8,12 @@ $nomLieuEspaceEnPlus = "prison de Montluc";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fin histoire</title>
-    <link rel="stylesheet" href="design/finHistoire.css">
-    <link rel="stylesheet" href="design/global.css">
+    <link rel="stylesheet" href="./view/design/finHistoire.css">
+    <link rel="stylesheet" href="./view/design/global.css">
 </head>
 
 <body>
-    <?php include_once 'headerHistoire.view.php'; ?>
+    <?php include_once './view/headerHistoire.view.php'; ?>
     <main class="flex-col">
         <h1>Vous avez terminé l’Histoire</h1>
         <p>$DescriptionLieu ,  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -26,6 +26,6 @@ $nomLieuEspaceEnPlus = "prison de Montluc";
         </a>
     </main>
 </body>
-    <script src="./js/dyslexique.js"></script>
+    <script src="./view/js/dyslexique.js"></script>
 
 </html>
