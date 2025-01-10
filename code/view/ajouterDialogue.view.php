@@ -6,14 +6,27 @@
     <div>
         <h2 class="titre"> Ajouter un dialogue </h2>
     </div>
-    <form action="">
-        <!-- personnage -->
+    <form action="creation" method="get">
+        <!-- personnage 
         <section>
             <label for="personnage">Personnage qui parle : </label>
             <select name="nom">
-                <option value="A">Pierre</option><!-- mettre un foreache -->
+                <option value="A">Pierre</option>
                 <option value="B">Paul</option>
                 <option value="-">Jaques</option>
+            </select>
+        </section>
+        
+
+        
+        -->
+
+        <section>
+            <label for="personnage">Personnage qui parle : </label>
+            <select name="nom">
+                <?php foreach ($personnages as $perso) : ?>
+                <option value="A"><?= $perso?></option>
+                <?php endforeach; ?>
             </select>
         </section>
 
@@ -26,7 +39,7 @@
         <!-- boutons -->
         <section>
             <button class=button-rouge>Supprimer</button>
-            <button class=button-vert>Valider</button>
+            <button class=button-vert >Valider</button>
         </section>
     </form>
 </article>

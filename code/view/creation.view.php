@@ -25,16 +25,19 @@
             <section class="header">
                 <div>
                     <label for="titre">Titre : </label>
-                    <input type="text" id="objet" name="objet" value="" required placeholder="Sabotage">
+                    <input type="text" id="objet" name="objet" value=<?= $titre ?> required placeholder="Sabotage">
                 </div>
 
                 <div>
                     <label for="lieux">Lieux : </label>
                     <select name="example">
-                        <option value="A">Prison</option><!-- mettre un foreache -->
-                        <option value="B">Cimetiere</option>
-                        <option value="-">Camps de concentration</option>
+                        <?php foreach ($lieux as $lieu) : ?>
+                        <option value="A">
+                            <?= $lieu?>
+                        </option>
+                        <?php endforeach; ?>
                     </select>
+
                     <a href="./consulterLieu.view.php"><img src="./view/design/image/info.png" alt="informations"
                             id="info"></a>
                 </div>
@@ -46,33 +49,28 @@
 
             </section>
 
-<!--       <input type="hidden" name="ctrl" value="choisirCategorie">
-      <button type="submit">
-        Choisir une catégorie
-      </button>
-    </form> 
-            <form method=post class="flex-col ">  
-                <input type="hidden" name="article" value="ajouterDialogue">
-                <button>Ajouter un dialogue</button>
-
-                <input type="hidden" name="article" value="ajouterQuestion">
-                <button type="submit" class=button-gris>Ajouter une question</button>
-
-                <input type="hidden" name="article" value="afficherHistoire">
-                <button class=button-gris>Afficher toute l'histoire</button>
-            </form>
-            -->
-
             <section class="flex-col ">
-                <form method=post><input type="hidden" name="article" value="ajouterDialogue"><button>Ajouter un dialogue</button></form>
-                <form method=post><input type="hidden" name="article" value="ajouterQuestion"><button class=button-gris>Ajouter une question</button></form>
-                <form method=post><input type="hidden" name="article" value="afficherHistoire"><button class=button-gris>Afficher toute l'histoire</button></form>
+                <form method=get>
+                    <input type="hidden" name="ctrl" value="creation">
+                    <input type="hidden" name="article" value="ajouterDialogue">
+                    <button class=button-gris>Ajouter un dialogue</button>
+                </form>
+                <form method=get>
+                    <input type="hidden" name="ctrl" value="creation">
+                    <input type="hidden" name="article" value="ajouterQuestion">
+                    <button class=button-gris>Ajouter une question</button>
+                </form>
+                <form method=get>
+                    <input type="hidden" name="ctrl" value="creation">
+                    <input type="hidden" name="article" value="afficherHistoire">
+                    <button class=button-gris>Afficher toute l'histoire</button>
+                </form>
             </section> 
 
-
             <?php
-            include_once $lien;
+                include_once $lien;
             ?>
+            
 
             <section class="footer">
                 <a href="#"><button id="dialogQuitter" class=button-rouge>Quitter</button></a>

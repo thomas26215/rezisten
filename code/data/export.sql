@@ -22,7 +22,7 @@ SET row_security = off;
 
 INSERT INTO chapitres VALUES (0, 'Prologue');
 INSERT INTO chapitres VALUES (1, 'L''heure de résister');
-
+INSERT INTO chapitres VALUES (100, 'Chapitres des créateurs');
 
 --
 -- Data for Name: lieux; Type: TABLE DATA; Schema: public; Owner: superrezi

@@ -121,6 +121,6 @@ a {
 }
 
 select, input, textarea{
-    background-color: white;
+    background-color: var(--beige-ecriture);
     border: 1px solid var(--noir);
 }
