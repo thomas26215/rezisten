@@ -3,12 +3,79 @@
 // Accès aux classes
 
 use PHPUnit\Framework\TestCase;
-use PhpParser\Node\Expr\Print_;
 
 require_once(__DIR__.'/../model/questions.class.php');
 require_once(__DIR__.'/../model/dao.class.php');
 
-try {
+
+class questionTest extends TestCase {
+    private User $user;
+    private Chapter $chapter;
+    private Place $place;
+    private Story $story;
+    private Question $question;
+    
+    protected function setUp(): void {
+        $this->user = new User("prapra","brayan","bils","24/08/2005","bilsbrayan@gmail.com","2706","a");
+        $this->chapter = new Chapter(69,"Il faut un titre");
+        $this->place = new Place("iut" , "batiment" , "endroit pour les cours" , "grenoble", "0.0");
+        $this->story = new Story("Une histoire" , $this->chapter , $this->user , $this->place , "un fond" , true);
+        $this->question = new Question($this->story,"une question","la reponse","g");
+
+    }
+
+
+    public function testGetters()  {
+        $this->assertEquals($this->story, $this->question->getHistory());
+        $this->assertEquals("une question", $this->question->getQuestion());
+        $this->assertEquals("la reponse", $this->question->getAnswer());
+        $this->assertEquals("g", $this->question->getType());
+    }
+/* 
+    public function testSetters() {
+        $this->question->setUser($this->user);
+        $this->question->setDocument("document");
+
+        $this->assertEquals($this->user, $this->question->getUser());
+        $this->assertEquals("document", $this->question->getDocument());
+
+        $this->expectException(Exception::class);
+        $this->question->setDocument("");
+    }
+
+
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+/* try {
 
 
     // Test de création d'une questions
@@ -149,5 +216,5 @@ try {
 } catch (Exception $e) {
     exit("\nErreur: ".$e->getMessage()."\n");
 }
-?>
+ */?>
 
