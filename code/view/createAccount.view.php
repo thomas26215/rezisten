@@ -18,7 +18,7 @@
         <form action="post">
             <div class="form">
                 <div class="labelInput">
-                    <label for="pseudo">Pseudonyme <span>*</span> : </label>
+                    <label for="pseudo">Pseudonyme<span>*</span> : </label>
                     <input type="text" placeholder="Jano" name="pseudo" id="pseudo" required>
                 </div>
 
@@ -31,19 +31,19 @@
                     <input type="text" name="prenom" id="prenom" placeholder="Gaillard">
                 </div>
                 <div class="labelInput">
-                    <label for="date">Date de naissance <span>*</span> : </label>
+                    <label for="date">Date de naissance<span>*</span> : </label>
                     <input type="date" name="date" id="date" required>
                 </div>
                 <div class="labelInput">
-                    <label for="mail">Adresse mail <span>*</span> : </label>
+                    <label for="mail">Adresse mail<span>*</span> : </label>
                     <input type="email" name="mail" id="mail" placeholder="jean@jaimail.com" required>
                 </div>
                 <div class="labelInput">
-                    <label for="password">Mot de passe <span>*</span> : </label>
+                    <label for="password">Mot de passe<span>*</span> : </label>
                     <input type="password" name="password" id="password" placeholder="********" required>
                 </div>
                 <div class="labelInput">
-                    <label for="confirmpass">Confirmer votre mot de passe <span>*</span> : </label>
+                    <label for="confirmpass">Confirmer votre mot de passe<span>*</span> : </label>
                     <input type="password" name="confirmpass" id="confirmpass" required>
                 </div>
                 <div class="labelInput">
