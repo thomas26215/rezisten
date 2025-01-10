@@ -81,8 +81,9 @@ class User {
         $this->surname = $surname;
     }
 
-    // ! Le format de la date de naissance doit être jj/mm/aaaa
+    // ! Le format de la date de naissance doit être jj-mm-aaaa
     public function setBirthDate(string $birth_date): void {
+<<<<<<< HEAD
         // if($birth_date === ""){
         //     throw new Exception("La date de naissance ne peut pas être null");
         // }
@@ -93,6 +94,18 @@ class User {
         // if((int)date("Y")-(int)$array[2] < 16){
         //     throw new Exception("L'utilisateur doit avoir + que 16 ans");
         // }
+=======
+        if($birth_date === ""){
+            throw new Exception("La date de naissance ne peut pas être null");
+        }
+        $array = explode("-", $birth_date);
+        if(count($array) != 3) {
+            throw new Exception("La date d'anniversaire n'est pas de bon format");
+        }
+        if((int)date("Y")-(int)$array[2] < 16){
+            throw new Exception("L'utilisateur doit avoir + que 16 ans");
+        }
+>>>>>>> c71277f (Ajout du modèle et test checkEmail)
         $this->birth_date = $birth_date;
     }
 
@@ -174,7 +187,7 @@ class User {
 
     public static function delete(int $id): bool {
         if ($id <= 0) {
-            throw new DAOException("ID d'utilisateur invalide pour la suppression.");
+            throw new Exception("ID d'utilisateur invalide pour la suppression.");
         }
         return DAO::getInstance()->deleteDatasById("utilisateurs", $id);
     }

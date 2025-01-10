@@ -16,7 +16,7 @@ class histoireTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->user = new User("Doe", "John", "johndoe", "1990/01/01", "johndoe@example.com", "password123", "a");
+        $this->user = new User("Doe", "John", "johndoe", "1990-01-01", "johndoe@example.com", "password123", "a");
         $this->user->create();
 
         $this->chapter = new Chapter(1, "Introduction");
@@ -63,7 +63,7 @@ class histoireTest extends TestCase
 
     public function testSetters(): void
     {
-        $newUser = new User("Smith", "Jane", "janesmith", "1985/05/15", "janesmith@example.com", "mypassword", "a");
+        $newUser = new User("Smith", "Jane", "janesmith", "1985-05-15", "janesmith@example.com", "mypassword", "a");
         $newUser->create();
 
         $newChapter = new Chapter(2, "Conclusion");
