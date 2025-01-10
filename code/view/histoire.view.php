@@ -16,7 +16,7 @@ $nom="Michel";
 <body>
 
     <?php include_once 'headerHistoire.view.php'; ?>
-    <main class="flex-col">
+    <main>
         <h1>$Chapitre 1 : Histoire 2 : Sabotage</h1>
         <!--Remplacer après, de façon a récupérer les informations en fonction de l'histoire  -->
 
@@ -29,29 +29,29 @@ $nom="Michel";
             </div>
         </article>
 
-        <article>
-
+        <article id="test">
             <section> <!-- Pour la zone de texte -->
 
                 <h2 class="speaker"> <?= $nom ?> </h2>
 
                 <p class="text"> En chantier, je m'appelle teuse. Et toi ture. Et lui C'est cateur. Et voici le père
                     Sécuteur.
-                    Et la Mère Cedes. Il y a aussi le frère Jaques. Et enfin Vibro ma soeur. Et Moi sonnoneuse.</p>
+                    Et la Mère Cedes. Il y a aussi le frère Jaques. Et enfin Vibro ma soeur. Et Moi sonnoneuse.
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi harum, numquam repellat voluptate qui fugiat similique quod. Inventore veniam, cupiditate quasi aliquam beatae asperiores provident excepturi. Quasi unde doloremque corrupti.
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt quasi unde quos at laboriosam doloremque, dicta esse iusto, veniam quod excepturi non fuga a harum corporis, vitae doloribus animi modi.
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, maxime rerum? Voluptas, dolore in, autem totam sint deleniti explicabo odit, molestiae modi itaque fugiat nam error ipsa rem libero nihil.
+                </p>
                 <div class="flex-row">
                     <button class="before button-gris"> <a href="#">
                             < Précédent </a> </button> <!-- changer les href car je sais pas quoi mettre comme lien -->
                     <button class="next button-gris"> <a href="#"> Suivant > </a> </button>
                 </div>
-
-
+                
             </section>
         </article>
 
     </main>
-
 </body>
 <script src="./js/dyslexique.js"></script>
 <script src="./js/machineAEcrire.js"></script>
-
 </html>
