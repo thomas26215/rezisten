@@ -1,4 +1,5 @@
 <?php
+
 use PHPUnit\Framework\TestCase;
 
 require_once(__DIR__.'/../model/users.class.php');
@@ -27,6 +28,11 @@ class usersTest extends TestCase
     {
         $this->assertTrue($this->user->create());
         $this->assertGreaterThan(0, $this->user->getId());
+
+        // Vérification des données dans la base
+        $readUser = User::read($this->user->getId());
+        $this->assertInstanceOf(User::class, $readUser);
+        $this->assertEquals($this->user->getUsername(), $readUser->getUsername());
     }
 
     public function testRead()
@@ -96,8 +102,7 @@ class usersTest extends TestCase
 
     protected function tearDown(): void
     {
-        // Nettoyer la base de données après chaque test si nécessaire
-        if ($this->user->getId() > 0) {
+        if (isset($this->user) && $this->user->getId() > 0) {
             User::delete($this->user->getId());
         }
     }
