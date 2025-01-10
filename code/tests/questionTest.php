@@ -16,7 +16,7 @@ class questionTest extends TestCase {
     private Question $question;
     
     protected function setUp(): void {
-        $this->user = new User("prapra","brayan","bils","24/08/2005","bilsbrayan@gmail.com","2706","a");
+        $this->user = new User("prapra","brayan","bils","24-08-2005","bilsbrayan@gmail.com","2706","a");
         $this->chapter = new Chapter(69,"Il faut un titre");
         $this->place = new Place("iut" , "batiment" , "endroit pour les cours" , "grenoble", "0.0");
         $this->story = new Story("Une histoire" , $this->chapter , $this->user , $this->place , "un fond" , true);

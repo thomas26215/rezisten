@@ -6,13 +6,14 @@ require_once(__DIR__ . '/../model/histoires.class.php');
 require_once(__DIR__ . '/../model/dao.class.php');
 require_once(__DIR__ . '/../model/chapitres.class.php');
 require_once(__DIR__ . '/../model/lieux.class.php');
+require_once(__DIR__ . '/../model/users.class.php');
 
 class histoireTest extends TestCase
 {
-    private Story $story;
     private User $user;
     private Chapter $chapter;
     private Place $place;
+    private Story $story;
 
     protected function setUp(): void
     {
@@ -25,29 +26,22 @@ class histoireTest extends TestCase
         $this->place = new Place("Library", "building", "10 Main St", "Springfield", "45.0");
         $this->place->create();
 
-        $this->story = new Story(
-            "A Great Story",
-            $this->chapter,
-            $this->user,
-            $this->place,
-            "background.jpg",
-            false
-        );
+        $this->story = new Story("A Great Story", $this->chapter, $this->user, $this->place, "background.jpg", false);
     }
 
     protected function tearDown(): void
     {
         if ($this->story->getId() > 0) {
-            $this->story->delete($this->story->getId());
+            Story::delete($this->story->getId());
         }
         if ($this->chapter->getNumchap() > 0) {
-            $this->chapter->delete($this->chapter->getNumchap());
+            Chapter::delete($this->chapter->getNumchap());
         }
         if ($this->place->getId() > 0) {
-            $this->place->delete($this->place->getId());
+            Place::delete($this->place->getId());
         }
         if ($this->user->getId() > 0) {
-            $this->user->delete($this->user->getId());
+            User::delete($this->user->getId());
         }
     }
 
@@ -124,5 +118,16 @@ class histoireTest extends TestCase
         $deletedStory = Story::read($idToDelete);
         $this->assertNull($deletedStory);
     }
+
+    public function testReadNonExistentStory(): void
+    {
+        $this->assertNull(Story::read(99999));
+    }
+
+    public function testDeleteNonExistentStory(): void
+    {
+        $this->assertFalse(Story::delete(99999));
+    }
 }
 
+?>
