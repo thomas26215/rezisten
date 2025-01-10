@@ -68,31 +68,42 @@ class Apparitions{
 
     public function update(): bool {
         if ($this->history === null || $this->history->getId() <= 0) {
+            error_log("Histoire invalide");
             return false;
         }
         if ($this->character === null || $this->character->getId() <= 0) {
+            error_log("Personnage invalide");
             return false;
         }
-        
-        // Vérifiez d'abord si l'apparition existe
+    
+        // Vérifier si l'histoire existe
+        $existingHistory = Story::read($this->history->getId());
+        if ($existingHistory === null) {
+            error_log("Histoire non trouvée");
+            return false;
+        }
+    
         $existingApparition = $this->dao->getColumnWithParameters("apparitions", [
-            "id_histoire" => $this->getHistory()->getId(),
             "id_perso" => $this->getCharacter()->getId()
         ]);
-        
+    
         if (empty($existingApparition)) {
-            return false; // L'apparition n'existe pas, donc la mise à jour échoue
+            error_log("Apparition non trouvée");
+            return false;
         }
-        
-        $result = $this->dao->update("apparitions", 
-        [
-            "id_histoire" => $this->getHistory()->getId(),
+    
+        $result = $this->dao->update("apparitions", [
+            "id_histoire" => $this->getHistory()->getId()
         ], [
             "id_perso" => $this->getCharacter()->getId()
         ]);
-        
-        return $result > 0;
+    
+    
+        // Permettre 0 comme résultat valide si rien n'a changé
+        return $result !== false;
     }
+        
+    
                 
     
     
