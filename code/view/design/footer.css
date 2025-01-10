@@ -15,14 +15,16 @@ footer>article {
 img.img {
     background-color: var(--beige);
     width: max-content;
-    height: auto;
-    padding-bottom: 0%;
+    height: 145px;
+    padding-bottom: 0;
     max-height: var(--height-footer);
 
 }
 
 #first-a{
     max-height: var(--height-footer);
+    display: flex;
+    justify-content: end;
 }
 
 footer>article>section,
