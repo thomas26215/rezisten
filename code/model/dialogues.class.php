@@ -10,23 +10,22 @@ class Dialog
     private Story $story;
     private Character $speaker;
     private string $content;
-    private bool $bonus;
+    private bool $bonus; // Assurez-vous que cette propriété est initialisée
     private string $dubbing;
 
     private DAO $dao;
 
     const audioURL = "192.168.14.118/rezisten/doublageDialogue/";
 
-    public function __construct(int $id, Story $story, Character $speaker, string $content, bool $bonus, string $dubbing){
-        $this->setId($id);
-        $this->setStory($story);
-        $this->setSpeaker($speaker);
-        $this->setContent($content);
-        $this->setBonus($bonus);
-        $this->setDubbing($dubbing);
+    public function __construct(int $id, Story $story, Character $speaker, string $content, bool $bonus = false, string $dubbing = '') {
+        $this->id = $id;
+        $this->story = $story;
+        $this->speaker = $speaker;
+        $this->content = $content;
+        $this->bonus = $bonus; // Assurez-vous que cette propriété est bien initialisée
+        $this->dubbing = $dubbing; // Assurez-vous que cette propriété est bien initialisée
         $this->dao = DAO::getInstance();
     }
-
     /* Getters */
     public function getId(): int {
         return $this->id;
@@ -45,42 +44,38 @@ class Dialog
     }
 
     public function getBonus(): bool {
-        return $this->bonus;
+        return $this->bonus; // Accès sécurisé
     }
 
     public function getDubbing(): string {
-        return $this->dubbing;
+        return $this->dubbing; // Accès sécurisé
     }
 
     /* Setters */
-    public function setId(int $id): bool {
+    public function setId(int $id): void {
         $this->id = $id;
-        return true;
     }
 
-    public function setStory(Story $story): bool {
+    public function setStory(Story $story): void {
         $this->story = $story;
-        return true;
     }
 
-    public function setSpeaker(Character $speaker): bool {
+    public function setSpeaker(Character $speaker): void {
         $this->speaker = $speaker;
-        return true;
     }
 
-    public function setContent(string $content): bool {
+    public function setContent(string $content): void {
         $this->content = $content;
-        return true;
     }
 
-    public function setBonus(bool $bonus): bool{
-        return true;
+    public function setBonus(bool $bonus): void {
+        $this->bonus = $bonus; // Assurez-vous que cette propriété est bien initialisée
     }
 
-    public function setDubbing(string $dubbing): bool {
+    public function setDubbing(string $dubbing): void {
         $this->dubbing = $dubbing;
-        return true;
     }
+
 
     /* Méthodes CRUD et utilitaire sur les dialogs */
 
@@ -126,8 +121,11 @@ class Dialog
 
     public static function read(int $id, int $idStory): ?Dialog {
         $dao = DAO::getInstance();
-        $result = $dao->getColumnWithParameters("dialogues", ["id" => $id, "id_histoire" => $idStory])[0];
-        if ($result) {
+        $results = $dao->getColumnWithParameters("dialogues", ["id" => $id, "id_histoire" => $idStory]);
+    
+        // Vérifiez si le tableau n'est pas vide avant d'accéder à l'index 0
+        if (!empty($results)) {
+            $result = $results[0]; // Accédez au premier élément uniquement si le tableau n'est pas vide
             return new Dialog(
                 $result['id'],
                 Story::read($result['id_histoire']),
@@ -137,9 +135,9 @@ class Dialog
                 $result['doublage']
             );
         }
-        return null;
+        return null; // Retournez null si aucun résultat n'est trouvé
     }
-
+    
     public static function getDialogsBeforeQuestion(int $idStory): array {
         $dao = DAO::getInstance();
         $dialogsBeforeQuestion = array();
