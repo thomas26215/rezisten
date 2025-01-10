@@ -19,16 +19,36 @@
 
         <section class="container">
             <section class="flex-col menu">
-                <a href="./consulterPersonnage.view.php"><button class=button-gris>Consulter un personnage</button></a>
-                <a href="./ajouterPersonnage.view.php"><button class=button-gris>Ajouter un personnage</button></a>
-                <a href="./modifierPersonnage.view.php"><button class=button-gris>Modifier un personnage</button></a>
-                <a href="./supprimerPersonnage.view.php"><button>Supprimer un personnage</button></a>
+                <form action="get">
+                    <input type="hidden" name="ctrl" value="personnages">
+                    <input type="hidden" name="article" value="consulterPersonnage">
+                    
+                    <button class=button-gris>Consulter un personnage</button>
+                </form>
+                <form action="get">
+                    <input type="hidden" name="ctrl" value="personnages">
+                    <input type="hidden" name="article" value="ajouterPersonnage">
+                    
+                    <button class=button-gris>Ajouter un personnage</button>
+                </form>
+                <form action="get">
+                    <input type="hidden" name="ctrl" value="personnages">
+                    <input type="hidden" name="article" value="modifierPersonnage">
+                    
+                    <button class=button-gris>Modifier un personnage</button>
+                </form>
+                <form action="get">
+                    <input type="hidden" name="ctrl" value="personnages">
+                    <input type="hidden" name="article" value="supprimerPersonnage">
+                    
+                    <button>Supprimer un personnage</button>
+                </form>
             </section>
 
 
             <?php
            /* include_once 'consulterPersonnage.view.php';*/
-            include_once 'ajouterPersonnage.view.php';/*
+            include_once $lien;/*
             include_once 'modifierPersonnage.view.php';
             include_once 'supprimerPersonnage.view.php';*/ ?>
             <section class="footer">
