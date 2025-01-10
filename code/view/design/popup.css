@@ -4,7 +4,7 @@ dialog {
     width: 360px;
 }
 
-.container {
+.containerDialog {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -20,13 +20,14 @@ dialog {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    margin-top: none;
 }
 
 #dialog h2 {
     text-align: center;
 }
 
-::backdrop {
+dialog::backdrop {
     background-color: var(--noir);
     opacity: 0.4;
 }

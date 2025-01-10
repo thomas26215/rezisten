@@ -15,7 +15,7 @@
 
         <div id="maindiv" class="flex-col">
             <img id="logo" src="./design/image/logo.png" alt="Logo">
-            <a href="./chapitre.view.php">
+            <a href="./listeChapitre.view.php?ctrl=listeChapitre">
                 <button class="button-gris" type="submit">Lire les histoires</button>
             </a>
             <a href="./Creation.view.php" class="bloque">

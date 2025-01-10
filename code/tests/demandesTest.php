@@ -35,7 +35,7 @@ class demandesTest extends TestCase {
 
     public function testCreate() {
         $this->assertTrue($this->user->create());
-    $this->assertTrue($this->demande->create(), "Échec de la création de la demande");
+        $this->assertTrue($this->demande->create(), "Échec de la création de la demande");
         $this->assertEquals($this->user, $this->demande->getUser());
     }
 
@@ -65,13 +65,31 @@ class demandesTest extends TestCase {
         $this->assertNull(Demande::read($this->user->getId()));
     }
 
+    public function testReadNonExistenceDemande() {
+        $this->assertNull(Demande::read(99999));
+    } 
+
+    public function testUpdateNonExistenceDemande() {
+        $this->user->create();
+        $this->demande->create();
+
+        $tempId = $this->demande->getUser()->getId();
+        $this->demande->getUser()->setId(99999);
+        
+        $this->assertFalse($this->demande->update());
+        $this->demande->getUser()->setId($tempId);
+    }
+
+    public deleteNonExistentPlace() {
+        $this->assertFalse(Demande::delete(99999));
+    }
+
     protected function tearDown(): void {
         if($this->user->getId() > 0) {
             User::delete($this->user->getId());
         }
-        if($this->demande->getUser()->getId() > 0) {
-            Demande::delete($this->demande->getUser()->getId());
-        }
+        Demande::delete(99999);
+        
     }
 }
 ?>

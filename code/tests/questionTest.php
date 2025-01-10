@@ -2,6 +2,7 @@
 
 // Accès aux classes
 
+use PHPUnit\Framework\TestCase;
 use PhpParser\Node\Expr\Print_;
 
 require_once(__DIR__.'/../model/questions.class.php');
@@ -12,7 +13,7 @@ try {
 
     // Test de création d'une questions
 
-    $user = new User("prapra","brayan","bils","27/06/2023","bilsbrayan@gmail.com","2706","a");
+    $user = new User("prapra","brayan","bils","27/06/2000","bilsbrayan@gmail.com","2706","a");
     $user->create();
     $chapitre = new Chapter(69,"la tete a toto");
     $chapitre->create();
@@ -143,44 +144,6 @@ try {
             $chapitre->delete($chapitre->getNumchap());
             
             
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 } catch (Exception $e) {

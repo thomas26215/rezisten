@@ -1,3 +1,6 @@
+<?php
+$nom="Michel";
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -30,7 +33,7 @@
 
             <section> <!-- Pour la zone de texte -->
 
-                <h2 class="speaker"> $Name1 </h2>
+                <h2 class="speaker"> <?= $nom ?> </h2>
 
                 <p class="text"> En chantier, je m'appelle teuse. Et toi ture. Et lui C'est cateur. Et voici le père
                     Sécuteur.

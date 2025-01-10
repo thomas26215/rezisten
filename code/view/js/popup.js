@@ -1,9 +1,14 @@
-const openButton = document.getElementById("ouvrirDialog");
+const openQuitter = document.getElementById("dialogQuitter");
+const openPublier = document.getElementById("dialogPublier");
 const dialog = document.getElementById("dialog");
 const closeButtonPublier = document.getElementById("fermerPublier");
 const closeButtonRevenir = document.getElementById("fermerRevenir");
 
-openButton.addEventListener("click", () => {
+openQuitter.addEventListener("click", () => {
+  dialog.showModal();
+});
+
+openPublier.addEventListener("click", () => {
   dialog.showModal();
 });
 

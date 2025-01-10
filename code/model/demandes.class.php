@@ -79,14 +79,12 @@ class Demande {
         if ($this->user === NULL || $this->user->getId() < 1) {
             throw new Exception("Impossible de mettre à jour la demande : L'utilisateur est invalide");
         }
-        if ($this->dao->update("demandes", [
+        return$this->dao->update("demandes", [
             "doc" => $this->document,
             "id_utilisateur" => $this->user->getId()
-        ], ["id_utilisateur" => (int)$this->user->getId()])) {
-            return true;
-        }
-        return false;
+        ], ["id_utilisateur" => (int)$this->user->getId()]) > 0;
     }
+
     public static function delete($id_utilisateur): bool {
         if ($id_utilisateur > 0) {
             return DAO::getInstance()->deleteDatas("demandes", ["id_utilisateur" => (int)$id_utilisateur]);

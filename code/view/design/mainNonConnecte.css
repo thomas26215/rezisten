@@ -6,7 +6,8 @@ main {
 }
 
 button {
-    width: 400px
+    width: max-content;
+    padding: 10px 20px !important;
 }
 
 
@@ -19,6 +20,10 @@ button {
     left: 50px;
 }
 
-#logo{
-    width:500px ;
+#logo {
+    width: 500px;
+}
+
+.div-button {
+    width: 100%;
 }

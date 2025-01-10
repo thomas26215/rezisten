@@ -16,10 +16,13 @@
             <img id="logo" src="./design/image/logo.png" alt="Logo Rézisten">
         </div>
         <h1>Vivez la résistance à la française !</h1>
-        <div class="flex-row">
+        <div class="flex-row div-button">
             <a href="./login.view.php"><button>Se connecter</button></a>
             <a href="./createAccount.view.php"><button>Créer un compte</button></a>
         </div>
+        <form action="mainNonConnecte.ctrl.php" method="post">
+            <button type="submit" name="action" value="connect">Se connecter</button>
+        </form>
     </main>
     <?php include_once 'footer.view.php'; ?>
 
