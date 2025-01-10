@@ -1,3 +1,7 @@
+<?php
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -42,17 +46,32 @@
 
             </section>
 
+<!--       <input type="hidden" name="ctrl" value="choisirCategorie">
+      <button type="submit">
+        Choisir une catégorie
+      </button>
+    </form> 
+            <form method=post class="flex-col ">  
+                <input type="hidden" name="article" value="ajouterDialogue">
+                <button>Ajouter un dialogue</button>
+
+                <input type="hidden" name="article" value="ajouterQuestion">
+                <button type="submit" class=button-gris>Ajouter une question</button>
+
+                <input type="hidden" name="article" value="afficherHistoire">
+                <button class=button-gris>Afficher toute l'histoire</button>
+            </form>
+            -->
+
             <section class="flex-col ">
-                <a href="./ajouterDialogue.view.php"><button>Ajouter un dialogue</button></a>
-                <a href="./ajouterQuestion.view.php"><button class=button-gris>Ajouter une question</button></a>
-                <a href="./afficherHistoire.view.php"><button class=button-gris>Afficher toute l'histoire</button></a>
-            </section>
+                <form method=post><input type="hidden" name="article" value="ajouterDialogue"><button>Ajouter un dialogue</button></form>
+                <form method=post><input type="hidden" name="article" value="ajouterQuestion"><button class=button-gris>Ajouter une question</button></form>
+                <form method=post><input type="hidden" name="article" value="afficherHistoire"><button class=button-gris>Afficher toute l'histoire</button></form>
+            </section> 
+
 
             <?php
-            /* CHANGER EN FONCTION DE CONTROLEUR */
-            /*include_once 'ajouterDialogue.view.php';*/ 
-            /*include_once 'ajouterQuestion.view.php'; */
-            include_once 'afficherHistoire.view.php';
+            include_once $lien;
             ?>
 
             <section class="footer">
