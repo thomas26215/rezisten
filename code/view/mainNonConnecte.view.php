@@ -21,8 +21,7 @@
             <a href="./createAccount.view.php"><button>Créer un compte</button></a>
         </div>
         <form action="mainNonConnecte.ctrl.php" method="post">
-            <input type="text" name="test" value="1">
-            <button type="submit"> test</button>
+            <button type="submit" name="action" value="connect">Se connecter</button>
         </form>
     </main>
     <?php include_once 'footer.view.php'; ?>
