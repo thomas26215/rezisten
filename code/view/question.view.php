@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Question</title>
-    <link rel="stylesheet" type="text/css" href="./design/histoire.css">
-    <link rel="stylesheet" type="text/css" href="./design/global.css">
+    <link rel="stylesheet" type="text/css" href="./view/design/histoire.css">
+    <link rel="stylesheet" type="text/css" href="./view/design/global.css">
 </head>
 
 <body>
@@ -18,10 +18,10 @@
 
 
         <article class="fond-container">
-            <img class="fond" src="./design/image/image_test.png" alt="Fond">
+            <img class="fond" src="./view/design/image/image_test.png" alt="Fond">
             <div class="personnages">
-                <img class="parle" src="./design/image/milicien.png" alt="milicien">
-                <img class="parle-pas" src="./design/image/resistant.png" alt="resistant">
+                <img class="parle" src="./view/design/image/milicien.png" alt="milicien">
+                <img class="parle-pas" src="./view/design/image/resistant.png" alt="resistant">
             </div>
         </article>
 

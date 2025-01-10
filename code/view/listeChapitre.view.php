@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chapitre</title>
-    <link rel="stylesheet" href="./design/chapitre.css">
+    <link rel="stylesheet" href="./view/design/chapitre.css">
 </head>
 
 <body>
@@ -19,7 +19,7 @@
         </a>
         <a class="bloque" href="$Chapitre2">
             <button class="button-gris" type="submit">Chapitre $numChapitre <img class="img-button"
-                    src="./design/image/cadenas.png" alt="(Bloqué)">
+                    src="./view/design/image/cadenas.png" alt="(Bloqué)">
             </button>
             <div class="msgCreateur">Terminer le chapitre $numChapitre </div>
         </a>
@@ -28,7 +28,7 @@
         </a>
         <a>
             <button class="button-bleu" type="submit">Recommencer tout <img class="img-button"
-                    src="./design/image/recommencer.png" alt="(Reload)"> </button>
+                    src="./view/design/image/recommencer.png" alt="(Reload)"> </button>
         </a>
     </main>
     <?php include_once 'footer.view.php'; ?>

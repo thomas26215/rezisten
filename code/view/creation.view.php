@@ -6,9 +6,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rézisten</title>
-    <link rel="stylesheet" href="./design/global.css">
-    <link rel="stylesheet" href="./design/creation.css">
-    <link rel="stylesheet" href="./design/popup.css">
+    <link rel="stylesheet" href="./view/design/global.css">
+    <link rel="stylesheet" href="./view/design/creation.css">
+    <link rel="stylesheet" href="./view/design/popup.css">
 </head>
 
 <body>
@@ -31,7 +31,7 @@
                         <option value="B">Cimetiere</option>
                         <option value="-">Camps de concentration</option>
                     </select>
-                    <a href="./consulterLieu.view.php"><img src="./design/image/info.png" alt="informations"
+                    <a href="./consulterLieu.view.php"><img src="./view/design/image/info.png" alt="informations"
                             id="info"></a>
                 </div>
 

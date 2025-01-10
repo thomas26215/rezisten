@@ -2,16 +2,16 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">    
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="./design/headerHistoire.css">
+   <link rel="stylesheet" href="./view/design/headerHistoire.css">
 </head>
 
 <header>
    <a href="./main.view.php" class="home">
-      <img src="./design/image/home.png" alt="home">
+      <img src="./view/design/image/home.png" alt="home">
       <p>Accueil</p>
    </a>
    <a href="./profil.view.php" class="user">
-      <img src="./design/image/photoProfil.jpg" alt="user">
+      <img src="./view/design/image/photoProfil.jpg" alt="user">
       <p class="nomUser">Jano</p>
    </a>
 </header>

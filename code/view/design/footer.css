@@ -28,7 +28,9 @@ img.img {
 
 }
 
-
+a{
+    max-height: var(--height-footer);
+}
 
 footer>article>section,
 footer>article>section a {

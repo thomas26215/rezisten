@@ -18,7 +18,7 @@ $nomLieuEspaceEnPlus = "prison de Montluc";
         <h1>Vous avez terminé l’Histoire</h1>
         <p>$DescriptionLieu ,  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
             tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-        <img class="img-milieu" src="./design/image/test_lieux.png" alt="">
+        <img class="img-milieu" src="./view/design/image/test_lieux.png" alt="">
         <p>Aller visiter le <a href="https://www.google.com/search?client=firefox-b-d&q=<?= $nomLieuEspaceEnPlus ?>"
                 target="_blank"><span>lieu</span></a></p>
         <a href="">
