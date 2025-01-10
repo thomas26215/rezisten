@@ -14,7 +14,7 @@ class apparitionTest extends TestCase {
     private Apparitions $summon;
 
     protected function setUp(): void {
-        $this->user = new User("prapra", "brayan", "bils", "27/06/2000", "bilsbrayan@gmail.com", "2706", "a");
+        $this->user = new User("prapra", "brayan", "bils", "24-08-2005", "bilsbrayan@gmail.com", "2706", "a");
         $this->chapter = new Chapter(69, "la tete a toto");
         $this->place = new Place("iut", "établissement", "enfer", "grenoble", "0.0");
         $this->story = new Story("Titre", $this->chapter, $this->user, $this->place, "background", false);
@@ -64,19 +64,30 @@ class apparitionTest extends TestCase {
         $this->user->create();
         $this->chapter->create();
         $this->place->create();
-        $this->story->create();
-        $this->character->create();
-
+        $this->assertTrue($this->story->create(), "Échec de la création de l'histoire originale");
+        $this->assertTrue($this->character->create(), "Échec de la création du personnage");
+    
         $this->assertTrue($this->summon->create(), "Échec de la création de l'apparition");
         
+        // Créer une nouvelle histoire avec un ID différent
         $updatedStory = new Story("UpdatedTitre", $this->chapter, $this->user, $this->place, "background", false);
-        $updatedStory->create();
+        $this->assertTrue($updatedStory->create(), "Échec de la création de la nouvelle histoire");
+        
+        // Vérifiez que les IDs sont différents
+        $this->assertNotEquals($this->story->getId(), $updatedStory->getId(), "Les IDs des histoires devraient être différents");
+        
+        $originalHistoryId = $this->summon->getHistory()->getId();
         $this->summon->setHistory($updatedStory);
         
-        $this->assertTrue($this->summon->update());
+        $updateResult = $this->summon->update();
+        $this->assertTrue($updateResult, "La mise à jour a échoué");
+        
         $updatedSummon = Apparitions::read($updatedStory->getId(), $this->summon->getCharacter()->getId());
-        $this->assertEquals($updatedStory->getId(), $updatedSummon->getHistory()->getId());
+        $this->assertNotNull($updatedSummon, "L'apparition mise à jour n'a pas été trouvée");
+        $this->assertEquals($updatedStory->getId(), $updatedSummon->getHistory()->getId(), "L'ID de l'histoire n'a pas été mis à jour correctement");
+        $this->assertNotEquals($originalHistoryId, $updatedSummon->getHistory()->getId(), "L'ID de l'histoire n'a pas changé");
     }
+    
 
     public function testDelete() {
         $this->user->create();
@@ -117,7 +128,14 @@ class apparitionTest extends TestCase {
         $this->assertNotNull($unchangedSummon, "L'apparition originale devrait toujours exister");
         $this->assertEquals($originalSummon->getHistory()->getId(), $unchangedSummon->getHistory()->getId(), "L'ID de l'histoire ne devrait pas avoir changé");
     }
-        
+            
+
+
+
+
+
+
+
     protected function tearDown(): void {
         if ($this->user->getId() > 0) {
             User::delete($this->user->getId());

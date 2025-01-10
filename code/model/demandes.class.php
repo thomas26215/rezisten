@@ -79,7 +79,7 @@ class Demande {
         if ($this->user === NULL || $this->user->getId() < 1) {
             throw new Exception("Impossible de mettre à jour la demande : L'utilisateur est invalide");
         }
-        return$this->dao->update("demandes", [
+        return $this->dao->update("demandes", [
             "doc" => $this->document,
             "id_utilisateur" => $this->user->getId()
         ], ["id_utilisateur" => (int)$this->user->getId()]) > 0;
