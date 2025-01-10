@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Condition Général d'Utilisation</title>
-    <link rel="stylesheet" href="./design/CGU.css">
+    <link rel="stylesheet" href="./view/design/CGU.css">
 </head>
 
 <body>

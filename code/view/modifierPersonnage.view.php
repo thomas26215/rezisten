@@ -26,7 +26,7 @@
             <div class="imageChoisi">
                 <p>Image</p>
                 <input type="file" id="photoUpload" name="photo" accept="image/*" style="display: none;">
-                <img id="photoSend" src="./design/image/upload.png" alt="">
+                <img id="photoSend" src="./view/design/image/upload.png" alt="">
                 <span id="fileName">Pas de fichier ajoutée</span>
             </div>
 

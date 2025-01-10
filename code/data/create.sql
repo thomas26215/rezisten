@@ -102,20 +102,6 @@ CREATE TABLE PROGRESSION (
 );
 
 
-CREATE TABLE verifications_email (
-id INTEGER PRIMARY KEY AUTOINCREMENT,
-utilisateur_id INTEGER NOT NULL,
-token VARCHAR(255) NOT NULL UNIQUE,
-date_expiration DATETIME NOT NULL DEFAULT (datetime('now', '+30 minutes')),
-FOREIGN KEY (utilisateur_id) REFERENCES utilisateurs(id)
-); 
 
-CREATE TABLE recuperation_mot_de_passe (
-id INTEGER PRIMARY KEY AUTOINCREMENT,
-utilisateur_id INTEGER NOT NULL,
-token VARCHAR(255) NOT NULL UNIQUE,
-date_expiration DATETIME NOT NULL DEFAULT (datetime('now', '+30 minutes')),
-FOREIGN KEY (utilisateur_id) REFERENCES utilisateurs(id)
-);
 
 

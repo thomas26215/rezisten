@@ -1,6 +1,6 @@
 <head>
     <link rel="icon" href="favicon.ico" type="image/x-icon">    
-    <link rel="stylesheet" href="./design/ajouterQuestion.css">
+    <link rel="stylesheet" href="./view/design/ajouterQuestion.css">
 </head>
 <article class="content">
     <div>

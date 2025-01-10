@@ -53,15 +53,15 @@ class Question {
     }
 
     public function setAnswer(string $answer): void {
-        if(empty($answer)) {
+        if(empty($answer) ) {
             throw new Exception("La réponse ne peut pas être vide");
         }
         $this->answer = $answer;
     }
 
     public function setType(string $type): void {
-        if(empty($type)) {
-            throw new Exception("Le type ne peut pas être vide");
+        if(empty($type || ($type !="g" && $type !="s" ))) {
+            throw new Exception("Le type ne peut pas être vide et doit etre égale a g ou s");
         }
         $this->type = $type;
     }
@@ -71,7 +71,7 @@ class Question {
     public function create(): bool {
         $historyId = $this->history->getId();
         if($historyId < 1) {
-            throw new Exception("Impossible de créer une demande : Aucun utilisateur ne correspond à l'id fourni");
+            throw new Exception("Impossible de créer une question : Aucune histoire ne correspond à l'id fourni");
         }
         if($this->dao->insertRelatedData("questions", [
             "id_histoire" => $historyId,
@@ -85,14 +85,18 @@ class Question {
         }
     }
 
-    public static function read(int $id_histoire , string $type): ?Question {
+    public static function read(int $id_histoire, string $type): ?Question {
         $dao = DAO::getInstance();
-        $questionDatas = $dao->getColumnWithParameters("questions", ["id_histoire" => (int)$id_histoire , "type" => (string)$type]);
+        $questionDatas = $dao->getColumnWithParameters("questions", ["id_histoire" => (int)$id_histoire, "type" => (string)$type]);
         if($questionDatas) {
-            $newHistory = Story::read($id_histoire);
             $questionData = $questionDatas[0];
+            $story = Story::read($id_histoire);
+            if (!$story) {
+                error_log("Histoire non trouvée pour l'ID : $id_histoire");
+                return null;
+            }
             return new Question(
-                $newHistory,
+                $story,
                 $questionData["question"],
                 $questionData["reponse"],
                 $questionData["type"]
@@ -100,10 +104,11 @@ class Question {
         }
         return null;
     }
+    
 
     public function update(): bool {
         if ($this->history === NULL){
-            throw new Exception("Impossible de mettre à jour la question : L'utilisateur est invalide");
+            throw new Exception("Impossible de mettre à jour la question : L'histpire est invalide");
         }
         return ($this->dao->update("questions", [
             "id_histoire" => $this->history->getId(),

@@ -3,46 +3,29 @@ body {
     max-height: calc(100vh - var(--height-header));
 }
 
-main {
+main { /* pas de flex car apres le texte passe au dessus de l'image */
     max-height: calc(100vh - var(--height-header));
 
 }
 
 h1 {
-    text-align: center;
     max-width: 70vw;
+    margin-left: 50vw;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
 }
 
 article {
     text-align: center;
     display: block;
     border: 2px solid var(--noir);
-    margin-right: 12em;
-    margin-left: 12em;
     width: 80vw;
+    margin-right: auto;
+    margin-left: auto;
     height: max-content;
+
 }
-
-
-article li {
-    display: flex;
-}
-
-article li ul {
-    display: inline-block;
-    width: 40%;
-    vertical-align: top;
-    margin: auto;
-    margin-top: 5em;
-    color: var(--noir);
-    /* Couleur du texte */
-    text-shadow:
-        -1px -1px 0 white,
-        1px -1px 0 white,
-        -1px 1px 0 white,
-        1px 1px 0 white;
-}
-
 
 .fond-container {
     position: relative;
@@ -55,12 +38,14 @@ article li ul {
 
 .fond {
     width: 100%;
-    height: auto;
+    height: 65vh; /*permet de définir la hauteur de l'image sans la déformer*/
+    object-fit: cover;
 }
 
 .fond-container img {
     margin: 0;
     padding: 0;
+    height: 65vh;
     display: block;
     /* Empêche l'espace lié à l'affichage inline par défaut des images */
 }
@@ -77,15 +62,12 @@ article li ul {
     /* Espace égal entre les personnages */
     align-items: flex-end;
     /* Aligner les personnages au bas */
-   
 }
 
 .parle,
 .parle-pas {
     /* Ajustez la taille des personnages */
-    width: 50%;
-    max-width: 600px;
-    height: 50%;
+    height: 85%;
 }
 
 .parle-pas {
@@ -97,21 +79,15 @@ article section {
     border: 2px solid var(--noir);
     background-color: var(--beige);
     position: relative;
-    padding-bottom: 10px;
+    padding-bottom: 10px;   
 }
 
 article section p {
-    text-align: left;
+    text-align: justify;
+    
 }
 
-img.logo {
-    max-width: 8em;
-    height: auto;
-
-}
-
-
-h2.speaker {
+h2.speaker { /* Essayer la taile en em (la taille de police de l'élément parent) ?*/ 
     font-size: 150%;
     margin: 0%;
     /* Couleur de fond */
@@ -150,28 +126,10 @@ h2.speaker::before {
 .text {
     font-size: 1.5em;
     color: #333;
-    border-right: 2px solid black;
-    /* Curseur clignotant */
+    padding: 10px;
     white-space: wrap;
     overflow: hidden;
     margin-top: 20px;
-}
-
-@keyframes blink {
-
-    0%,
-    100% {
-        border-color: transparent;
-    }
-
-    50% {
-        border-color: black;
-    }
-}
-
-.text {
-    animation: blink 0.8s steps(1) infinite;
-    padding: 10px;
 }
 
 .lieux {

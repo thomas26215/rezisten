@@ -30,7 +30,7 @@ class demandesTest extends TestCase {
         $this->assertEquals("document", $this->demande->getDocument());
 
         $this->expectException(Exception::class);
-        $this->demande->setDocument("");
+        $this->demande->setDocument(document: "");
     }
 
     public function testCreate() {
@@ -80,7 +80,7 @@ class demandesTest extends TestCase {
         $this->demande->getUser()->setId($tempId);
     }
 
-    public deleteNonExistentPlace() {
+    public function deleteNonExistentPlace() {
         $this->assertFalse(Demande::delete(99999));
     }
 
