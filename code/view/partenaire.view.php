@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <title>Rézisten</title>
     <meta name="author" content="Groupe 11" />
-    <link rel="stylesheet" type="text/css" href="./design/partenaire.css">
+    <link rel="stylesheet" type="text/css" href="./view/design/partenaire.css">
 </head>
 
 <body>
@@ -17,7 +17,7 @@
             <li>
                 <h2>Auvergne-Rhône-Alpes</h2>
                 <article>
-                    <img src="./design/image/photoProfil.jpg" alt="logo Auvergne-Rhône-Alpes">
+                    <img src="./view/design/image/photoProfil.jpg" alt="logo Auvergne-Rhône-Alpes">
                     <section>
                         <p>
                             La région Auvergne-Rhône-Alpes vous accompagne dans la découvertes des hauts lieux de la
@@ -30,7 +30,7 @@
             <li>
                 <h2>Mémorial de la Résistance en Vercors</h2>
                 <article>
-                    <img src="./design/image/photoProfil.jpg" alt="logo Mémorial de la résistance en Vercors">
+                    <img src="./view/design/image/photoProfil.jpg" alt="logo Mémorial de la résistance en Vercors">
                     <section>
                         <p>
                             Le Mémorial de la résistance retrace la vie pendant la guerre des valeureux résistants qui
@@ -43,7 +43,7 @@
             <li>
                 <h2>Le Mémorial Jean Moulin</h2>
                 <article>
-                    <img src="./design/image/photoProfil.jpg" alt="logo du Mémorial Jean Moulin">
+                    <img src="./view/design/image/photoProfil.jpg" alt="logo du Mémorial Jean Moulin">
                     <section>
                         <p>
                             Le Mémorial Jean Moulin est, avec la prison de Montluc et le Centre d’histoire de la
