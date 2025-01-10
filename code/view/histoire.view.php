@@ -23,15 +23,15 @@
         <article class="fond-container">
             <img class="fond" src="./view/design/image/image_test.png" alt="Fond">
             <div class="personnages">
-                <img class="parle" src="./view/design/image/milicien.png" alt="milicien">
-                <img class="parle-pas" src="./view/design/image/resistant.png" alt="resistant">
+                <img class="parle" src="<?= $imgSpeaker ?>" alt="<?=$speaker->getFirstName()?>">
+                <img class="parle-pas" src="<?=$prevSpeaker?>" alt="resistant">
             </div>
         </article>
 
         <article id="test">
             <section> <!-- Pour la zone de texte -->
 
-                <h2 class="speaker"> <?= $dialogs[$idDialog]->getSpeaker()->getFirstName() ?> </h2>
+                <h2 class="speaker"> <?= $speaker->getFirstName() ?> </h2>
 
                 <p class="text"> <?= $dialogs[$idDialog]->getContent() ?></p>
                 <form action="?" method="get">
