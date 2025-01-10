@@ -6,6 +6,8 @@ include_once('./framework/view.fw.php');
 $idChap = $_GET['idChap'];
 $idStory = $_GET['idStory'];
 
+$story = Histoire::read($idStory);
+
 
 $view = new View();
 
