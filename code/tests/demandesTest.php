@@ -30,7 +30,7 @@ class demandesTest extends TestCase {
         $this->assertEquals("document", $this->demande->getDocument());
 
         $this->expectException(Exception::class);
-        $this->demande->setDocument("");
+        $this->demande->setDocument(document: "");
     }
 
     public function testCreate() {
