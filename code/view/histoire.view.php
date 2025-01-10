@@ -15,7 +15,7 @@
 
     <?php include_once './view/headerHistoire.view.php'; ?>
     <main class="flex-col">
-        
+        <audio src="<?=$dub?>" autoplay></audio>
         <h1>Chapitre <?=$idChap?> : Histoire <?=$idStory?> : <?= $story->getTitle()?></h1>
         <!--Remplacer après, de façon a récupérer les informations en fonction de l'histoire  -->
 
@@ -32,8 +32,7 @@
             <section> <!-- Pour la zone de texte -->
 
                 <h2 class="speaker"> <?= $speaker->getFirstName() ?> </h2>
-
-                <p class="text"> <?= $dialogs[$idDialog]->getContent() ?></p>
+                <p class="text"> <?= $dialog->getContent() ?></p>
                 <form action="?" method="get">
                     <div class="flex-row">
                         <input type="hidden" name="idStory" value="<?= $idStory ?>">

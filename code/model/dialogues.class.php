@@ -128,7 +128,7 @@ class Dialog
             $result = $results[0]; // Accédez au premier élément uniquement si le tableau n'est pas vide
             return new Dialog(
                 $result['id'],
-                Story::read($result['id_histoire']),
+                Story::read($idStory),
                 Character::read($result['interlocuteur']),
                 $result['contenu'],
                 $result['bonus'],
@@ -137,6 +137,7 @@ class Dialog
         }
         return null; // Retournez null si aucun résultat n'est trouvé
     }
+
     
     public static function getDialogsBeforeQuestion(int $idStory): array {
         $dao = DAO::getInstance();
