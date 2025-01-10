@@ -74,9 +74,6 @@ class Dialog
     }
 
     public function setBonus(bool $bonus): bool{
-        if($bonus == "") {
-            throw new Exception("Le bonus ne peut pas être vide");
-        }
         return true;
     }
 

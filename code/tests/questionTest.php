@@ -69,27 +69,56 @@ class questionTest extends TestCase {
         $this->assertEquals("g", $readQuestion->getType());
     }
     
+    public function testUpdate() {
+        $this->user->create();
+        $this->chapter->create();
+        $this->place->create();
+        $this->story->create();
+
+        $this->question->create();
+        $this->question->setAnswer("newAnswer");
+        
+        $this->assertTrue($this->question->update());
+        $updatedQuestion = Question::read($this->question->getHistory()->getId(), "g");
+        $this->assertEquals("newAnswer", $updatedQuestion->getAnswer());
+    }
+
+    public function testDelete() {
+        $this->user->create();
+        $this->chapter->create();
+        $this->place->create();
+        $this->story->create();
+        
+        $this->question->create();
+
+        $this->assertNotNull(Question::read($this->question->getHistory()->getId(), "g"));
+        $this->assertTrue(Question::delete($this->question->getHistory()->getId(), "g"));
+        $this->assertNull(Question::read($this->question->getHistory()->getId(), "g"));
+    }
 
 
+    public function testReadNonExistenceDemande() {
+        $this->assertNull(Question::read(99999,"s"));
+    } 
 
 
+    public function testUpdateNonExistenceDemande() {
+        $this->user->create();
+        $this->chapter->create();
+        $this->place->create();
+        $this->story->create();
+        $this->question->create();
 
+        $tempId = $this->question->getHistory()->getId();
+        $this->question->getHistory()->setId(99999);
+        
+        $this->assertFalse($this->question->update());
+        $this->question->getHistory()->setId($tempId);
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public function deleteNonExistentPlace() {
+        $this->assertFalse(Question::delete(99999,"s"));
+    }
 
     protected function tearDown(): void {
         if($this->user->getId() > 0) {
