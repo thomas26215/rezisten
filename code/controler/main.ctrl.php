@@ -1,9 +1,9 @@
 <?php
 
 include_once('framework/view.fw.php');
-try{
+try {
     include_once('model/dao.class.php');
-}catch(Exception $e){
+} catch (Exception $e) {
     var_dump($e->getMessage());
 }
 
