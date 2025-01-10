@@ -83,10 +83,7 @@ class User {
 
     // ! Le format de la date de naissance doit être jj-mm-aaaa
     public function setBirthDate(string $birth_date): void {
-<<<<<<< HEAD
-=======
 
->>>>>>> 24f86fa (Ajout du modèle et du test de récupération de mot de passe)
         if($birth_date === ""){
             throw new Exception("La date de naissance ne peut pas être null");
         }
