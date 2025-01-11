@@ -1,5 +1,6 @@
 <head>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">    
+        <link rel="icon" href="./view/favicon.ico" type="image/x-icon">
+    
     <link rel="stylesheet" href="./view/design/afficherHistoire.css">
 </head>
 <article class="content"> 

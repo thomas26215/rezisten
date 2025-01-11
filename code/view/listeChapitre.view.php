@@ -2,7 +2,8 @@
 <html lang="fr">
 
 <head>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+        <link rel="icon" href="./view/favicon.ico" type="image/x-icon">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chapitre</title>
@@ -17,9 +18,9 @@
         <?php foreach ($chapitres as $chapitre): ?>
             <?php
             $numChapitre = $chapitre->getNumchap();
-            $Chapitre = "index.php?idChap=$numChapitre&ctrl=listeHistoire&numChapitre=$numChapitre";
+            $lien = "index.php?idChap=$numChapitre&ctrl=listeHistoire";
             ?>
-            <a href="<?= $Chapitre ?>">
+            <a href="<?= $lien ?>">
                 <button class="button-gris" type="submit">
                     Chapitre <?= $numChapitre ?> 
                     <img class="img-button" src="./view/design/image/cadenas.png" alt="(Bloqué)">

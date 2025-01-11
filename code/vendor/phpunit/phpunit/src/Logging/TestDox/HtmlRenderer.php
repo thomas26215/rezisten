@@ -25,7 +25,8 @@ final readonly class HtmlRenderer
 <!doctype html>
 <html lang="en">
     <head>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">    
+        <link rel="icon" href="./view/favicon.ico" type="image/x-icon">
+    
         <meta charset="utf-8"/>
         <title>Test Documentation</title>
         <style>
