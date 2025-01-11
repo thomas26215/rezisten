@@ -9,12 +9,11 @@ body {
 
 main {
     flex: 1;
-
 }
 
 .img-button {
     position: relative;
-    top:7px;
+    top: 7px;
 }
 
 button {
@@ -30,25 +29,30 @@ button {
     width: 500px;
 }
 
+.story-form {
+    position: relative;
+}
+
 .msgCreateur {
     display: none;
     max-width: 200px;
     max-height: 200px;
-    background-color: var(--gris);
-    position: absolute;
-    bottom: 300px;
-    /* Ajustez cette valeur selon vos besoins */
-    right: 350px;
+    background-color: var(--rouge);
+    position:absolute;
+    top: 0;
+    left: 50%;
     transform: translateX(-50%);
     color: var(--noir);
     opacity: 0.9;
+    border: solid 3px var(--noir);
     border-radius: 25px;
     padding: 10px;
     z-index: 10;
     /* Pour s'assurer que la pop-up est au-dessus des autres éléments */
 }
 
-a.bloque:hover .msgCreateur,
-a.bloque:focus .msgCreateur {
+button.bloque:hover + .msgCreateur,
+button.bloque:focus + .msgCreateur,
+.msgCreateur:hover  {
     display: block;
 }
