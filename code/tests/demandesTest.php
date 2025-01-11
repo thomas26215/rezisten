@@ -13,7 +13,7 @@ class demandesTest extends TestCase {
     private Demande $demande;
 
     protected function setUp(): void {
-        $this->user = new User("prapra","brayan","bils","24/08/2005","bilsbrayan@gmail.com","2706","a");
+        $this->user = new User("prapra","brayan","bils","24-08-2005","bilsbrayan@gmail.com","2706","a");
         $this->demande = new Demande($this->user,"acces");
     }
 

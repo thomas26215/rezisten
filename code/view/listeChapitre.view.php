@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <?php include_once 'headerHistoire.view.php'; ?>
+    <?php include_once './view/headerHistoire.view.php'; ?>
 
     <main class="flex-col">
         <h1>Les Chapitres</h1>
@@ -36,9 +36,9 @@
                     src="./view/design/image/recommencer.png" alt="(Reload)"> </button>
         </a>
     </main>
-    <?php include_once 'footer.view.php'; ?>
+    <?php include_once './view/footer.view.php'; ?>
 
 </body>
-<script src="./js/dyslexique.js"></script>
+    <script src="./view/js/dyslexique.js"></script>
 
 </html>

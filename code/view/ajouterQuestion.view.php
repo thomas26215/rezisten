@@ -7,23 +7,14 @@
         <h2 class="titre"> Ajouter une question</h2>
     </div>
     <form action="">
-        <!-- personnage -->
-        <section>
-            <label for="personnage">Personnage qui parle : </label>
-            <select name="nom">
-                <option value="A">Pierre</option><!-- mettre un foreache -->
-                <option value="B">Paul</option>
-                <option value="-">Jaques</option>
-            </select>
-        </section>
 
-        <!-- dialogue -->
+        <!-- Question -->
         <section class="input-superpose">
             <label for="question">Entrez la question : </label>
             <textarea name="question" id="question"></textarea>
         </section>
 
-        <!-- dialogue -->
+        <!-- Réponse -->
         <section class="input-superpose">
             <label for="reponse">Entrez la réponse : </label>
             <textarea name="reponse" id="reponse"></textarea>

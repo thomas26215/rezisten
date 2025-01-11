@@ -10,7 +10,7 @@ error_reporting(E_ALL);
 $ctrl = $_REQUEST['ctrl'] ?? 'main';
 
 //Nécessaire de compléter quand on crée une vue pour vérifier que la vue appelée existe bien
-const CTRLS = array('mainNonConnecte','histoire','listeChapitre',"listeHistoire");
+const CTRLS = array('mainNonConnecte','histoire','listeChapitre',"listeHistoire",'creation', 'personnages');
 
 //TODO: Gestion des sessions avec session_start();
 

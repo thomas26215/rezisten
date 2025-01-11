@@ -8,17 +8,17 @@ require_once(__DIR__ . "/lieux.class.php");
 
 class Story
 {
-    private int $id;
+    private int $id; // creer automatiquement
     private string $title;
     private Chapter $chapter;
     private User $user;
     private Place $place;
     private string $background; //chemin d'accès a l'image de fond
-    private bool $visibility;
+    private bool $visibility; 
 
     private DAO $dao;
 
-    const bgURL = "https://192.168.14.118/imagesRezisten/histBackground/";
+    const bgURL = "https://192.168.14.118/imagesRezisten/histBackground/"; //pour les test ?
 
 
 

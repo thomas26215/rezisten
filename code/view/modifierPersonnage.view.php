@@ -6,9 +6,9 @@
         <div class="personnage">
             <label for="personnage">Personnage à modifier : </label>
             <select name="personnage">
-                <option value="A">Jean</option><!-- mettre un foreache -->
-                <option value="B">a</option>
-                <option value="-">b</option>
+                <?php foreach ($character as $chara){  ?>
+                <option value=""><?=$chara ?></option>
+                <?php } ?>
             </select>
         </div>
         <div class="noms">
@@ -16,10 +16,7 @@
                 <label for="prenom">Prénom</label>
                 <input maxlength="15" type="text" placeholder="Pierre">
             </div>
-            <div>
-                <label for="nom">Nom</label>
-                <input maxlength="25" type="text" placeholder="Dupont">
-            </div>
+           
         </div>
 
         <div class="image">

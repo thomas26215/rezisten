@@ -95,21 +95,22 @@ if($historyId < 1) {
             throw new Exception("Impossible de mettre à jour la progression : L'utilisateur est invalide");
         }
         if($this->story === NULL || $this->story->getId() < 1) {
-            throw new Exception("Impossible de mettre à jour la progression : L'histoire est invalide est invalide");
+            throw new Exception("Impossible de mettre à jour la progression : L'histoire est invalide");
         }
-        if($this->dao->update("progression", [
-            "id_utilisateur" => $this->getUser()->getId(),
-            "id_hist" => $this->getHistory()->getId()
-        ], ["id_utilisateur" => (int)$this->user->getId()])) {
-            return true;
-        }
-        return false;
+        return $this->dao->update("progression", [
+            "statut" => $this->statut
+        ], [
+            "id_utilisateur" => (int)$this->user->getId(),
+            "id_hist" => (int)$this->story->getId()
+        ]) > 0;
     }
 
+    
     public static function delete(int $id_utilisateur, int $id_history): bool {
         if($id_utilisateur > 0 && $id_history > 0){
-            return DAO::getInstance()->deleteRelatedData("progression", ["id_utilisateur" => (int)$id_utilisateur, "id_history" => (int)$id_history]);
+            return DAO::getInstance()->deleteDatas("progression", ["id_utilisateur" => (int)$id_utilisateur, "id_hist" => (int)$id_history]);
         }
+        return false;
     }
 
 

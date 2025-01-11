@@ -6,25 +6,22 @@
         <div class="personnage">
             <label for="personnage">Personnage à Consulter : </label>
             <select name="personnage">
-                <option value="A">Jean</option><!-- mettre un foreache -->
-                <option value="B">a</option>
-                <option value="-">b</option>
+                <?php foreach ($character as $chara){  ?>
+                <option value=""><?=$chara ?></option>
+                <?php } ?>
             </select>
         </div>
 
         <div class="supContainer">
             <div>
                 <p style="font-weight: bold;">Prénom : </p>
-                <p>Jean</p>
+                <p><?= $character->getFirstName();?></p>
             </div>
-            <div>
-                <p style="font-weight: bold;">Nom : </p>
-                <p>Gaillard</p>
-            </div>
+            
         </div>
 
         <div class="supContainer">
-            <img src="design/image/milicien.png" alt="" style="max-width: 240px;">
+            <img src="<?= $character->getImage();?>" alt="" style="max-width: 240px;">
 
         </div>
 

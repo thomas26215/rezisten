@@ -1,3 +1,7 @@
+<?php
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -12,7 +16,7 @@
 </head>
 
 <body>
-    <?php include_once 'headerHistoire.view.php'; ?>
+    <?php include_once './view/headerHistoire.view.php'; ?>
     <main class="flex-col">
 
         <h1>Création d'histoire</h1>
@@ -21,16 +25,19 @@
             <section class="header">
                 <div>
                     <label for="titre">Titre : </label>
-                    <input type="text" id="objet" name="objet" value="" required placeholder="Sabotage">
+                    <input type="text" id="objet" name="objet" value=<?= $titre ?> required placeholder="Sabotage">
                 </div>
 
                 <div>
                     <label for="lieux">Lieux : </label>
                     <select name="example">
-                        <option value="A">Prison</option><!-- mettre un foreache -->
-                        <option value="B">Cimetiere</option>
-                        <option value="-">Camps de concentration</option>
+                        <?php foreach ($lieux as $lieu) : ?>
+                        <option value="A">
+                            <?= $lieu?>
+                        </option>
+                        <?php endforeach; ?>
                     </select>
+
                     <a href="./consulterLieu.view.php"><img src="./view/design/image/info.png" alt="informations"
                             id="info"></a>
                 </div>
@@ -43,17 +50,27 @@
             </section>
 
             <section class="flex-col ">
-                <a href="./ajouterDialogue.view.php"><button>Ajouter un dialogue</button></a>
-                <a href="./ajouterQuestion.view.php"><button class=button-gris>Ajouter une question</button></a>
-                <a href="./afficherHistoire.view.php"><button class=button-gris>Afficher toute l'histoire</button></a>
-            </section>
+                <form method=get>
+                    <input type="hidden" name="ctrl" value="creation">
+                    <input type="hidden" name="article" value="ajouterDialogue">
+                    <button class=button-gris>Ajouter un dialogue</button>
+                </form>
+                <form method=get>
+                    <input type="hidden" name="ctrl" value="creation">
+                    <input type="hidden" name="article" value="ajouterQuestion">
+                    <button class=button-gris>Ajouter une question</button>
+                </form>
+                <form method=get>
+                    <input type="hidden" name="ctrl" value="creation">
+                    <input type="hidden" name="article" value="afficherHistoire">
+                    <button class=button-gris>Afficher toute l'histoire</button>
+                </form>
+            </section> 
 
             <?php
-            /* CHANGER EN FONCTION DE CONTROLEUR */
-            /*include_once 'ajouterDialogue.view.php';*/ 
-            /*include_once 'ajouterQuestion.view.php'; */
-            include_once 'afficherHistoire.view.php';
+                include_once $lien;
             ?>
+            
 
             <section class="footer">
                 <a href="#"><button id="dialogQuitter" class=button-rouge>Quitter</button></a>
