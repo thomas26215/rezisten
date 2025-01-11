@@ -2,7 +2,7 @@
 <html lang="fr">
 
 <head>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">    
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chapitre</title>
@@ -14,15 +14,20 @@
 
     <main class="flex-col">
         <h1>Les Chapitres</h1>
-        <a href="$Chapitre1">
-            <button class="button-gris" type="submit">Chapitre $numChapitre</button>
-        </a>
-        <a class="bloque" href="$Chapitre2">
-            <button class="button-gris" type="submit">Chapitre $numChapitre <img class="img-button"
-                    src="./view/design/image/cadenas.png" alt="(Bloqué)">
-            </button>
-            <div class="msgCreateur">Terminer le chapitre $numChapitre </div>
-        </a>
+        <?php foreach ($chapitres as $chapitre): ?>
+            <?php
+            $numChapitre = $chapitre->getNumchap();
+            $Chapitre = "index.php?idChap=$numChapitre&ctrl=listeHistoire&numChapitre=$numChapitre";
+            ?>
+            <a href="<?= $Chapitre ?>">
+                <button class="button-gris" type="submit">
+                    Chapitre <?= $numChapitre ?> 
+                    <img class="img-button" src="./view/design/image/cadenas.png" alt="(Bloqué)">
+                </button>
+            </a>
+
+        <?php endforeach; ?>
+
         <a>
             <button class="button-gris" type="submit">Chapitres des créateurs</button>
         </a>
@@ -34,6 +39,6 @@
     <?php include_once 'footer.view.php'; ?>
 
 </body>
-    <script src="./js/dyslexique.js"></script>
+<script src="./js/dyslexique.js"></script>
 
 </html>

@@ -62,6 +62,16 @@ class Story
         return $this->visibility;
     }
 
+    public static function getNumberStory(int $idChapter): int { //TODO: A tester
+        $dao = DAO::getInstance();
+        $result = $dao->getColumnWithParameters(
+            "histoires",         // Table
+            ["numchap" => $idChapter] // Condition
+        );
+    
+        return count($result);
+    }    
+
     /* Setter */
     public function setId(int $id): void {
         $this->id = $id;

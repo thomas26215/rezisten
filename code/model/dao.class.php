@@ -70,7 +70,7 @@ class DAO {
      * @param array $columns Les colonnes à récupérer (par défaut, toutes les colonnes).
      * @return array La liste des données récupérées.
      * @throws PDOException Si une erreur de base de données se produit.
-     * @note $dao->getColumnWithParameters("users", ["id" => 11]);
+     * @note $dao->getColumnWithParameters("users", ["id" => 11, "nom" => "caca"], ["titre", "id"]);
      */
     public function getColumnWithParameters($table, $parameters, $columns = ['*']) {
         try {

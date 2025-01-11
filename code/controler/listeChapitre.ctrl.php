@@ -1,24 +1,11 @@
 <?php
-//Includes
-include_once(__DIR__.'model/chapitres.class.php');
-include_once(__DIR__.'framework/view.fw.php');
+include_once('./model/chapitres.class.php');
+include_once('./framework/view.fw.php');
 
-
-//Récupération des données utilisateurs
-
-
-
-
-//Récupération depuis le modèle
-$chapitres = Chapitre::readAllchapters();
-
-
-
-
+$chapitres = Chapter::readAllchapters();
 
 $view = new View();
-$view->assign('chapitres',$chapitres);
+
+$view->assign('chapitres', $chapitres);
 $view->display('listeChapitre');
-
-
 ?>

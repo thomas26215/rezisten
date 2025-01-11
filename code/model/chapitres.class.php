@@ -38,6 +38,9 @@ class Chapter
     }
 
 
+
+
+
     /* Méthodes CRUD et utilitaires sur la BDD */
 
     public static function readAllchapters(): array {
