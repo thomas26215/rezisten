@@ -23,19 +23,13 @@
                 <input type="hidden" name="idChap" value="<?= $idChap + 1 ?>">
                 <input type="hidden" name="idStory" value="<?= $storie->getId() ?>">
                 <input type="hidden" name="idDialog" value="1">
-                <button class="button-gris" type="submit"><?= $storie->getTitle() ?></button>
+                <button class="button-gris" type="submit">
+                    <?= $storie->getTitle() ?>
+                    <img class="img-button" src="./view/design/image/cadenas.png" alt="(Bloqué)">
+                </button>
+                <div class="msgCreateur">Terminer l’histoire précédente</div>
             </form>
         <?php endforeach; ?>
-
-
-
-
-        <a class="bloque">
-            <button class="button-gris" type="submit">$nomHistoire <img class="img-button"
-                    src="./view/design/image/cadenas.png" alt="(Bloqué)">
-            </button>
-            <div class="msgCreateur">Terminer l’histoire précédente</div>
-        </a>
 
     </main>
     <?php include_once './view/footer.view.php'; ?>

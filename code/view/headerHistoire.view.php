@@ -7,11 +7,11 @@
 </head>
 
 <header>
-   <a href="./view/main.view.php" class="home">
+   <a href="./index.php?ctrl=main" class="home">
       <img src="./view/design/image/home.png" alt="home">
       <p>Accueil</p>
    </a>
-   <a href="./view/profil.view.php" class="user">
+   <a href="./index.php?ctrl=profil" class="user">
       <img src="./view/design/image/photoProfil.jpg" alt="user">
       <p class="nomUser">Jano</p>
    </a>

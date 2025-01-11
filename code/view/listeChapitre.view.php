@@ -29,7 +29,7 @@
 
         <?php endforeach; ?>
 
-        <a>
+        <a href="index.php?ctrl=listeHistoire&idChap=100">
             <button class="button-gris" type="submit">Chapitres des créateurs</button>
         </a>
         <a>
