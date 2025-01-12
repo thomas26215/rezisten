@@ -21,7 +21,7 @@ img.img {
 
 }
 
-#first-a{
+#first-a {
     max-height: var(--height-footer);
     display: flex;
     justify-content: end;
@@ -35,4 +35,8 @@ footer>article>section a {
 
 footer>section ul {
     text-align: left;
+}
+
+li>a {
+    width: fit-content;
 }

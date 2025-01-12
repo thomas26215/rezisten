@@ -10,15 +10,15 @@
         <img class="img" src="./view/design/image/logoCoupe.png" alt="logo Rézisten">
     </a>
     <article class="flex-row">
-        <section>Crédit :
+        <section>Crédits :
             <ul>
                 <li><a href="https://fr.freepik.com/" target="_blank">Freepik</a></li>
-                <li><a href="https://charactercreator.org/" target="_blank">Personnages</a></li>
+                <li><a href="https://charactercreator.org/" target="_blank">charactercreator</a></li>
             </ul>
         </section>
-        <section><a href="./conditionGeneralesDutilisation.view.php">Condition générales d'utilisation</a></section>
+        <section><a href="./conditionGeneralesDutilisation.view.php">Conditions générales d'utilisation</a></section>
         <!-- TO DO : changer les liens pour les bonnes pages-->
-        <section><a href="./partenaire.view.php">Partenaire</a></section>
+        <section><a href="./partenaire.view.php">Partenaires</a></section>
         <section><a href="./contact.view.php">Contactez-nous</a></section>
     </article>
 </footer>
