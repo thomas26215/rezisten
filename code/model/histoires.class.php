@@ -200,7 +200,7 @@ class Story
         return count($result);
     }
 
-    public static function getStoryIdsByChapter(int $idChapter): array {
+    public static function getStoryIdsByChapter(int $idChapter): array {//TODO: A tester
         $dao = DAO::getInstance();
         $results = $dao->getColumnWithParameters("histoires", ["numchap" => $idChapter], ["id"]);
         return array_column($results, 'id');
