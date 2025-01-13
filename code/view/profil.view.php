@@ -41,7 +41,7 @@
         <div class="buttons">
             <button class="" id="toggleDyslexique">Mode dyslexique</button>
 
-            <a href="demandeCreateur.view.php">
+            <a href="index.php?ctrl=demandeCreateur">
                 <button class="button-gris">Faire la demande d'être créateur</button>
             </a>
             <a href="">
