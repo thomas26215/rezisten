@@ -237,8 +237,8 @@ INSERT INTO APPARITIONS VALUES
 (2,10);
 
 --Création des questions pour prologue
-INSERT INTO QUESTIONS(id_histoire,question,reponse,type) values(1,'À quelle date a débutée les attaques allemandes ? (date complète jj/mm/aaaa)','01/09/1939','g'),
-(1,'Quel évènement a marqué le lieu où se trouve nos personnages ?','6 juillet 1944 76 maquisards furent éxecutés','s');
+INSERT INTO QUESTIONS(id_histoire,question,reponse,type) values(1,'Combien de jours ont passés entre la prise de la Pologne et la déclaration de la Guerre ?','2','g'),
+(1,'Le 6 juillet 1944, combien de maquisards furent éxecutés là où se trouvent nos héros ?','76','s');
 
 --Pour l'histoire 1 chapitre 1
 INSERT INTO QUESTIONS(id_histoire,question,reponse,type) values(2,'En quel année fût ériger le camp que fuient nos héros ?','1939','g'),
