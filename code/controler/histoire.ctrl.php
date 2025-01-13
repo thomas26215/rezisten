@@ -15,6 +15,10 @@ $audioURL = "http://localhost:8080/rezisten/doublageDialogue/histoire".$idStory.
 
 $dialog = Dialog::read($idDialog,$idStory);
 
+if($dialog->getContent() == "limquestion"){
+    $question = Question::read(1,)
+}
+
 $speaker = $dialog->getSpeaker();
 $imgSpeaker = $imgURL.$speaker->getImage();
 $story = Story::read($idStory);
