@@ -13,8 +13,8 @@ $idDialog = $_GET['idDialog'];
 $prevSpeaker = $_GET['prevSpeaker'] ?? "none";
 
 
-$imgURL = "http://localhost:8080/rezisten/imgPersonnage/";
-$audioURL = "http://localhost:8080/rezisten/doublageDialogue/histoire".$idStory."/";
+$imgURL = "https://localhost:8080/rezisten/imgPersonnage/";
+$audioURL = "https://localhost:8080/rezisten/doublageDialogue/histoire".$idStory."/";
 
 $dialog = Dialog::read($idDialog,$idStory);
 
