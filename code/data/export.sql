@@ -271,8 +271,8 @@ INSERT INTO progression VALUES (2, 1, false);
 -- Data for Name: questions; Type: TABLE DATA; Schema: public; Owner: superrezi
 --
 
-INSERT INTO questions VALUES (1, 'À quelle date a débutée les attaques allemandes ? (date complète jj/mm/aaaa)', '01/09/1939', 'g');
-INSERT INTO questions VALUES (1, 'Quel évènement a marqué le lieu où se trouve nos personnages ?', '6 juillet 1944 76 maquisards furent éxecutés', 's');
+INSERT INTO questions VALUES (1, 'Combien de jours ont passés entre la prise de la Pologne et la déclaration de la Guerre ?', '2', 'g');
+INSERT INTO questions VALUES (1, 'Le 6 juillet 1944, combien de maquisards furent éxecutés là où se trouvent nos héros ?', '76', 's');
 INSERT INTO questions VALUES (2, 'En quel année fût ériger le camp que fuient nos héros ?', '1939', 'g');
 INSERT INTO questions VALUES (2, 'Ce camp fût un camp de travail intensif dès juillet 1942. Combien de prisonniers étaient encore
 internés en mars 1943 ? ', '70', 's');
