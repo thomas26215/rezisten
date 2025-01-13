@@ -121,7 +121,7 @@ class Dialog
 
     public static function read(int $id, int $idStory): ?Dialog {
         $dao = DAO::getInstance();
-        $results = $dao->getColumnWithParameters("dialogues", ["id" => $id, "id_histoire" => $idStory,"bonus" => "false"]);
+        $results = $dao->getColumnWithParameters("dialogues", ["id" => $id, "id_histoire" => $idStory,"bonus" => "0"]);
     
         // Vérifiez si le tableau n'est pas vide avant d'accéder à l'index 0
         if (!empty($results)) {

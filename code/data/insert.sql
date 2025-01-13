@@ -22,7 +22,7 @@ INSERT INTO HISTOIRES(titre,numchap,createur,id_lieu,background,visible) values(
 
 
 --Création de deux personnages participants au prologue
-INSERT INTO PERSONNAGES(prenom,img) values('Raymond','raymond.webp'), --1
+INSERT INTO PERSONNAGES(prenom,img) values('Raymond','raymond'), --1
 ('Pierre','pierre'),   --2
 ('Jean','jean'),       --3
 ('André','andre'),     --4

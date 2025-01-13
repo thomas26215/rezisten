@@ -20,8 +20,6 @@
         <article class="fond-container">
             <img class="fond" src="./view/design/image/image_test.png" alt="Fond">
             <div class="personnages">
-                <img class="parle" src="./view/design/image/milicien.png" alt="milicien">
-                <img class="parle-pas" src="./view/design/image/resistant.png" alt="resistant">
             </div>
         </article>
 
