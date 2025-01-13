@@ -140,7 +140,7 @@ class Dialog
 
     public static function readBonusDialogs(int $id, int $idStory): ?Dialog {
         $dao = DAO::getInstance();
-        $results = $dao->getColumnWithParameters("dialogues", ["id" => $id, "id_histoire" => $idStory,"bonus" => "true"]);
+        $results = $dao->getColumnWithParameters("dialogues", ["id" => $id, "id_histoire" => $idStory,"bonus" => "1"]);
     
         // Vérifiez si le tableau n'est pas vide avant d'accéder à l'index 0
         if (!empty($results)) {
@@ -159,7 +159,7 @@ class Dialog
 
     public static function readFirstBonus(int $idStory): int {
         $dao = DAO::getInstance();
-        $results = $dao->getColumnWithParameters("dialogues", ["id_histoire" => $idStory,"bonus" => "true"]);
+        $results = $dao->getColumnWithParameters("dialogues", ["id_histoire" => $idStory,"bonus" => "1"]);
     
         // Vérifiez si le tableau n'est pas vide avant d'accéder à l'index 0
         if (!empty($results)) {
