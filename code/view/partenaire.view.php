@@ -18,7 +18,7 @@
             <li>
                 <h2>Auvergne-Rhône-Alpes</h2>
                 <article>
-                    <img src="./view/design/image/photoProfil.jpg" alt="logo Auvergne-Rhône-Alpes">
+                    <img src="./view/design/image/logo_region.png" alt="logo Auvergne-Rhône-Alpes">
                     <section>
                         <p>
                             La région Auvergne-Rhône-Alpes vous accompagne dans la découvertes des hauts lieux de la
@@ -31,7 +31,7 @@
             <li>
                 <h2>Mémorial de la Résistance en Vercors</h2>
                 <article>
-                    <img src="./view/design/image/photoProfil.jpg" alt="logo Mémorial de la résistance en Vercors">
+                    <img src="./view/design/image/memorial.jpeg" alt="logo Mémorial de la résistance en Vercors">
                     <section>
                         <p>
                             Le Mémorial de la résistance retrace la vie pendant la guerre des valeureux résistants qui
