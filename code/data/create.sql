@@ -57,8 +57,7 @@ CREATE TABLE PERSONNAGES(
     prenom varchar(50) NOT NULL,    -- Prenom du personnage
     createur INTEGER,
     img varchar(50) NOT NULL,        -- Nom de l'image (le modèle) du personnage stockée ailleurs
-    FOREIGN KEY (createur) REFERENCES UTILISATEURS(id),
-
+    FOREIGN KEY (createur) REFERENCES UTILISATEURS(id)
 );
 
 -- Table des dialogues associés aux histoires
