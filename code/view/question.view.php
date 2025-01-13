@@ -41,7 +41,6 @@
                                     <input type="number" name="answer" id="answer">
                                 </label>
                                 <input type="hidden" name="ctrl" value="question">
-                                <input type="hidden" name="questionType" value="<?=$question->getType()?>">
                                 <input type="hidden" name="action" value="answer">
                                 <button class="repondre button-vert"> Répondre </button> 
                             </form>
@@ -50,7 +49,6 @@
 
                             <form action="?">
                                 <input type="hidden" name="action" value="change">
-                                <input type="hidden" name="questionType" value="<?=$question->getType()?>">
                                 <input type="hidden" name="ctrl" value="question">
                                 <button class="autreQuestion button-gris"> Accéder à l'autre question</button>
                             </form>
