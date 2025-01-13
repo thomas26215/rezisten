@@ -71,7 +71,7 @@ INSERT INTO histoires VALUES (4, 'De chaleureuses retrouvailles', 2, 4, 8, 'hist
 -- Data for Name: personnages; Type: TABLE DATA; Schema: public; Owner: superrezi
 --
 
-INSERT INTO personnages VALUES (1, 'Raymond', 'raymond.webp');
+INSERT INTO personnages VALUES (1, 'Raymond', 'raymond');
 INSERT INTO personnages VALUES (2, 'Pierre', 'pierre');
 INSERT INTO personnages VALUES (3, 'Jean', 'jean');
 INSERT INTO personnages VALUES (4, 'André', 'andre');
