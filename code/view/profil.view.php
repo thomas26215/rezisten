@@ -16,7 +16,7 @@
         <div class="container">
             <div class="profilHead">
                 <img src="./view/design/image/photoProfil.jpg" alt="photo profil">
-                <p><?= $username ?></p>
+                <p><?= $pseudo ?></p>
             </div>
 
             <a href="main.view.php">
@@ -27,7 +27,7 @@
         <form action="post">
             <div>
                 <label for="pseudo">Pseudo : </label>
-                <input type="text" name="pseudo" id="pseudo" placeholder=<?= $username ?>>
+                <input type="text" name="pseudo" id="pseudo" placeholder=<?= $pseudo ?>>
             </div>
 
             <div>
