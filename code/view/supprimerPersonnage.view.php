@@ -18,19 +18,18 @@
         
     </form>
 
-    <?php if (isset($selectedCharacter)) { ?>
         <div class="supContainer">
             <div>
                 <p style="font-weight: bold;">Prénom : </p>
-                <p><?= htmlspecialchars($selectedCharacter->getFirstName()) ?></p>
+                <p><?= $selectedCharacter?->getFirstName() ?? " "; ?></p>
             </div>
         </div>
 
         <div class="supContainer">
-            <img src="<?= $imgURL . $selectedCharacter->getImage() ?>"
-                alt="<?= htmlspecialchars($selectedCharacter->getFirstName()) ?>" style="max-width: 240px;">
+            <img src="<?= $imgURL . $selectedCharacter?->getImage() ?? "img"?>"
+                alt="<?= $selectedCharacter?->getFirstName() ?? "Jean"; ?>" style="max-width: 240px;">
+             <button type="button" id="dialogPublier" class="button-rouge">Supprimer</button>
             <div class="supprimer">
-                <button type="button" id="dialogPublier" class="button-rouge">Supprimer</button>
                 <form method="post" action="index.php?ctrl=personnages&article=supprimerPersonnage">
                     <input type="hidden" name="ctrl" value="personnages">
                     <input type="hidden" name="characterId" value="<?= $selectedCharacter->getId() ?>">
@@ -39,7 +38,7 @@
 
                     <dialog id="dialog">
                         <div class="containerDialog">
-                            <h2>Voulez vous supprimer <?= htmlspecialchars($selectedCharacter->getFirstName()) ?> ?</h2>
+                            <h2>Voulez vous supprimer <?= $selectedCharacter?->getFirstName() ?? "Jean"; ?> ?</h2>
                             <div>
                                 
                                 <button id="fermerPublier" name="fermer" class="button-vert">
@@ -54,7 +53,7 @@
                 </form>
             </div>
         </div>
-    <?php } ?>
+
 
     <script>
         var submitSupprimer = document.getElementById("supprimerInput");
