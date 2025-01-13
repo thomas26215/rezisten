@@ -21,7 +21,7 @@ $view = new View();
 $story = Story::read($idStory);
 
 if($dialog->getContent() == "limquestion"){
-    $question = Question::read($idStory,'g');
+    $question = Question::read($idStory,'s');
     session_start();
     $_SESSION['idStory'] = $idStory;
     $_SESSION['idDialog'] = $idDialog;
@@ -33,7 +33,7 @@ if($dialog->getContent() == "limquestion"){
 
 $idChap = $story->getChapter()->getNumchap();
 $speaker = $dialog->getSpeaker();
-$imgSpeaker = $imgURL.$speaker->getImage();
+$imgSpeaker = $imgURL.$speaker->getImage().".webp";
 $dub = $audioURL.$dialog->getDubbing().".WAV";
 
 
