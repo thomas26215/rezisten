@@ -38,6 +38,7 @@
                         <input type="hidden" name="idStory" value="<?= $idStory ?>">
                         <input type="hidden" name="ctrl" value="histoire">
                         <input type="hidden" name="idDialog" id="idDialogInput" value="<?= $idDialog ?>">
+                        <input type="hidden" name="prevSpeaker" value="<?=$speaker->getImage()?>">
 
                         <button class="before button-gris" type="submit" onclick="document.getElementById('idDialogInput').value = <?= max($idDialog -1, 1) ?>">
                         < Précédent </button>

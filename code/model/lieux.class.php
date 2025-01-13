@@ -109,6 +109,28 @@ class Place {
         return null;
     }
 
+    public static function readAll(): ? array {
+        $dao = DAO::getInstance();
+        $result=array();
+        if($lieuData = $dao->getColumnWithParameters("lieux",[])){
+            $i=0;
+            while(isset($lieuData[$i])){
+                $places =  new Place(
+                    $lieuData[$i]["nom"],
+                    $lieuData[$i]["type_lieu"] ?? $lieuData[$i]["type_lieu"] ?? null,
+                    $lieuData[$i]["description"],
+                    $lieuData[$i]["commune"],
+                    $lieuData[$i]["coordonnee"],
+                    (int)$lieuData[$i]["id"]);
+                $result[] = $places->getName();
+                $i++;
+            }
+            return $result;
+        }else {
+            return null;
+        }
+    }
+
     public function update(): bool {
         if($this->id !== -1){
             

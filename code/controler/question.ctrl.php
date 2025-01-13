@@ -8,7 +8,6 @@ include_once('./model/dialogues.class.php');
 
 $action = $_GET['action'];
 $view = new View();
-session_start();
 
 $audioURL = "http://localhost:8080/rezisten/doublageDialogue/histoire".$_SESSION['idStory']."/";
 $imgURL = "http://localhost:8080/rezisten/imgPersonnage/";
@@ -17,11 +16,15 @@ $imgURL = "http://localhost:8080/rezisten/imgPersonnage/";
 $story = Story::read($_SESSION['idStory']);
 
 if($action === "change"){
-    if($_GET['questionType'] === "spécifique"){
+    
+    if($_SESSION['difficulty'] === "spécifique"){
+        $_SESSION['difficulty'] = "générique";
         $question = Question::read($_SESSION['idStory'],'g');
     }else{
+        $_SESSION['difficulty'] = "spécifique";
         $question = Question::read($_SESSION['idStory'],'s');
     }
+
     $view->assign('story',$story);
     $view->assign('question',$question);
     $view->display('question');
@@ -29,17 +32,22 @@ if($action === "change"){
 elseif($action == "answer"){
     $answer = $_GET['answer'];
     
-    if($_GET['questionType'] == "générique"){
-        $question = Question::read($_SESSION['idStory'],'g');
-    }else{
-        $question = Question::read($_SESSION['idStory'],'s');
-    }
-
+    $questionType = ($_SESSION['difficulty'] == "générique") ? 'g' : 's';
+    $question = Question::read($_SESSION['idStory'],$questionType);
+    
     if($answer == $question->getAnswer()){
 
-        $_SESSION['difficulty'] = ($_GET['questionType'] == "générique") ? "générique" : "spécifique";
+        $difficulty = $_SESSION['difficulty'];
+
+        if($difficulty === "générique"){
+            $idDialog = $_SESSION['idDialog']+1;
+        }else{
+            $idDialog = Dialog::readFirstBonus($_SESSION['idStory']);
+        }
+
+
         $story = Story::read($_SESSION['idStory']);
-        $dialog = Dialog::read($_SESSION['idDialog']+1,$_SESSION['idStory']);
+        $dialog = Dialog::read($idDialog,$_SESSION['idStory']);
         $speaker = $dialog->getSpeaker();
         $dub = $audioURL.$dialog->getDubbing().".WAV";
         $imgSpeaker = $imgURL.$speaker->getImage()."webp";

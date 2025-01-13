@@ -1,17 +1,20 @@
 <?php
 
 require_once(__DIR__ . "/dao.class.php");
+require_once(__DIR__ . "/users.class.php");
 
 class Character {
     private int $id;
     private string $first_name;
     private string $image;
+    private User $creator;
     private DAO $dao;
 
-    public function __construct(string $first_name, string $image, int $id = -1) {
+    public function __construct(string $first_name, string $image, User $creator, int $id = -1) {
         $this->setId($id);
         $this->setFirstName($first_name);
         $this->setImage($image);
+        $this->setCreator($creator);
         $this->dao = DAO::getInstance();
     }
 
@@ -26,6 +29,10 @@ class Character {
 
     public function getImage(): string {
         return $this->image;
+    }
+
+    public function getCreator() : User {
+        return $this->creator;
     }
 
     // Setters
@@ -51,6 +58,13 @@ class Character {
         $this->image = $image;
     }
 
+    public function setCreator(User $creator) : void {
+        if(empty($creator)){
+            throw new Exception("Le créateurne peut pas être vide");
+        }
+        $this->creator = $creator;
+    }
+
 
     /* --- Méthodes CRUD --- */
 
@@ -72,10 +86,28 @@ class Character {
             return new Character(
                 $characterDatas["prenom"],
                 $characterDatas["img"],
+                User::read($characterDatas["createur"]),
                 $characterDatas["id"]
             );
         }
         return null;
+    }
+
+    public static function readCharactersOfUser(int $userId) : array {
+        $dao = DAO::getInstance();
+        $listCharacters = array();
+        
+        $characters = $dao->getColumnWithParameters("personnages",["createur" => $userId]);
+        if(empty($characters)){
+            throw new Exception("aucun personnage trouvé");
+        }
+
+        for($i = 0 ; $i < sizeof() ; $i++){
+            $creat = User::read($characters[$i]['createur']);
+            $c = new Character($characters[$i]["prenom"],$characters[$i]["img"],$creat,$characters[$i]["id"]);
+            array_push($listCharacters,$c);
+        }
+        return $listCharacters;
     }
 
     public function update(): bool {
@@ -83,6 +115,7 @@ class Character {
             return $this->dao->update("personnages", [
                 "prenom" => $this->first_name,
                 "img" => $this->image,
+                "createur" => $this->createur,
             ], ["id" => (int)$this->id]) > 0;
         }
     }

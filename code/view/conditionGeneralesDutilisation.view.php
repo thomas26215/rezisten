@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Condition Général d'Utilisation</title>
-    <link rel="stylesheet" href="./view/design/CGU.css">
+    <link rel="stylesheet" href="./design/CGU.css">
 </head>
 
 <body>
-    <?php include './view/header.view.php'; ?>
+    <?php include './headerPageSpeciales.view.php'; ?>
     <main>
         <h1>CONDITIONS GÉNÉRALES D’UTILISATION</h1>
         <p>En vigueur au 08/10/2024</p>
@@ -226,7 +226,7 @@
             Contactez-nous » du site.
         </p>
     </main>
-    <?php include './view/footer.view.php'; ?>
+    <?php include './footerPageSpeciales.view.php'; ?>
 </body>
 
 </html>

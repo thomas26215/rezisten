@@ -1,5 +1,4 @@
 <?php
-
 ?>
 
 <!DOCTYPE html>
@@ -24,9 +23,24 @@
 
         <section class="container">
             <section class="header">
+
+
+
+            
                 <div>
                     <label for="titre">Titre : </label>
-                    <input type="text" id="objet" name="objet" value=<?= $titre ?> required placeholder="Sabotage">
+                    
+                    <form action="creation" method="get">
+                        <input type="hidden" name="ctrl" value="creation">
+
+                        <input type="text" name="titre" value=<?= $titre ?> required placeholder="Sabotage">
+                        
+                        <input type="hidden" name="id" value=<?= $id ?>  >
+                        <input type="hidden" name="sauvegarder" value="sauvegarder">
+                        <button>Sauvegarder</button>
+
+                    
+                    </form>
                 </div>
 
                 <div>
@@ -54,16 +68,19 @@
                 <form method=get>
                     <input type="hidden" name="ctrl" value="creation">
                     <input type="hidden" name="article" value="ajouterDialogue">
+                    <input type="hidden" name="id" value=<?= $id ?>  >
                     <button class=button-gris>Ajouter un dialogue</button>
                 </form>
                 <form method=get>
                     <input type="hidden" name="ctrl" value="creation">
                     <input type="hidden" name="article" value="ajouterQuestion">
+                    <input type="hidden" name="id" value=<?= $id ?>  >
                     <button class=button-gris>Ajouter une question</button>
                 </form>
                 <form method=get>
                     <input type="hidden" name="ctrl" value="creation">
                     <input type="hidden" name="article" value="afficherHistoire">
+                    <input type="hidden" name="id" value=<?= $id ?>  >
                     <button class=button-gris>Afficher toute l'histoire</button>
                 </form>
             </section> 
@@ -74,10 +91,17 @@
             
 
             <section class="footer">
-                <a href="#"><button id="dialogQuitter" class=button-rouge>Quitter</button></a>
-                <a href="./ajouterQuestion.view.php"><button>Sauvegarder</button></a>
+                <form method=get>
+                    <input type="hidden" name="ctrl" value="mesHistoires">
+                    <button class=button-rouge>Quitter</button>
+                </form>
 
-                <a href="#"><button id="dialogPublier" class=button-vert>Publier</button></a>
+
+                <form method=get>
+                    <input type="hidden" name="ctrl" value="mesHistoires">
+                    <input type="hidden" name="footer" value="publie">
+                    <button class=button-vert>Publier</button>
+                </form>
             </section>
             
             <?php include_once 'popup.view.php'; ?>

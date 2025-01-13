@@ -2,23 +2,24 @@
 <html lang="fr">
 
 <head>
-        <link rel="icon" href="./view/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="./favicon.ico" type="image/x-icon">
     
     <meta charset="utf-8">
     <title>Rézisten</title>
     <meta name="author" content="Groupe 11" />
-    <link rel="stylesheet" type="text/css" href="./view/design/partenaire.css">
+    <link rel="stylesheet" type="text/css" href="./design/partenaire.css">
+    <link rel="stylesheet" type="text/css" href="./design/global.css">
 </head>
 
 <body>
-    <?php include_once("./view/header.view.php"); ?>
+    <?php include_once("./headerPageSpeciales.view.php"); ?>
     <main class="flex-col">
         <h1>Nos partenaires</h1>
         <ul>
             <li>
                 <h2>Auvergne-Rhône-Alpes</h2>
                 <article>
-                    <img src="./view/design/image/photoProfil.jpg" alt="logo Auvergne-Rhône-Alpes">
+                    <img src="./design/image/logo_region.png" alt="logo Auvergne-Rhône-Alpes">
                     <section>
                         <p>
                             La région Auvergne-Rhône-Alpes vous accompagne dans la découvertes des hauts lieux de la
@@ -31,7 +32,7 @@
             <li>
                 <h2>Mémorial de la Résistance en Vercors</h2>
                 <article>
-                    <img src="./view/design/image/photoProfil.jpg" alt="logo Mémorial de la résistance en Vercors">
+                    <img src="./design/image/memorial.jpeg" alt="logo Mémorial de la résistance en Vercors">
                     <section>
                         <p>
                             Le Mémorial de la résistance retrace la vie pendant la guerre des valeureux résistants qui
@@ -44,7 +45,7 @@
             <li>
                 <h2>Le Mémorial Jean Moulin</h2>
                 <article>
-                    <img src="./view/design/image/photoProfil.jpg" alt="logo du Mémorial Jean Moulin">
+                    <img src="./design/image/photoProfil.jpg" alt="logo du Mémorial Jean Moulin">
                     <section>
                         <p>
                             Le Mémorial Jean Moulin est, avec la prison de Montluc et le Centre d’histoire de la
@@ -69,8 +70,8 @@
             </li>
         </ul>
     </main>
-    <?php include_once("./view/footer.view.php"); ?>
+    <?php include_once("./footerPageSpeciales.view.php"); ?>
 </body>
-    <script src="./view/js/dyslexique.js"></script>
+    <script src="./js/dyslexique.js"></script>
 
 </html>

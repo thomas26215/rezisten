@@ -8,6 +8,7 @@ require_once(__DIR__.'/../model/dao.class.php');
 class lieuxTest extends TestCase {
     private Place $place;
 
+
     protected function setUp(): void {
         $this->place = new Place("iut" ,"batiment" ,"Endoit où l'on a cours", "38000" , "0.0");
     }
@@ -45,6 +46,13 @@ class lieuxTest extends TestCase {
         $this->assertInstanceOf(Place::class, $readPlace);
         $this->assertEquals($this->place->getId(), $readPlace->getId());
     }
+
+    public function testReadAll() {
+        $readPlaces = Place::readAll();
+        var_dump ($readPlaces);
+        $this->assertEquals(count($readPlaces) ,15 );
+    }
+
 
     public function testUpdate() {
         $this->place->create();

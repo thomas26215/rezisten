@@ -121,7 +121,7 @@ class Dialog
 
     public static function read(int $id, int $idStory): ?Dialog {
         $dao = DAO::getInstance();
-        $results = $dao->getColumnWithParameters("dialogues", ["id" => $id, "id_histoire" => $idStory]);
+        $results = $dao->getColumnWithParameters("dialogues", ["id" => $id, "id_histoire" => $idStory,"bonus" => "0"]);
     
         // Vérifiez si le tableau n'est pas vide avant d'accéder à l'index 0
         if (!empty($results)) {
@@ -137,6 +137,40 @@ class Dialog
         }
         return null; // Retournez null si aucun résultat n'est trouvé
     }
+
+    public static function readBonusDialogs(int $id, int $idStory): ?Dialog {
+        $dao = DAO::getInstance();
+        $results = $dao->getColumnWithParameters("dialogues", ["id" => $id, "id_histoire" => $idStory,"bonus" => "1"]);
+    
+        // Vérifiez si le tableau n'est pas vide avant d'accéder à l'index 0
+        if (!empty($results)) {
+            $result = $results[0]; // Accédez au premier élément uniquement si le tableau n'est pas vide
+            return new Dialog(
+                $result['id'],
+                Story::read($idStory),
+                Character::read($result['interlocuteur']),
+                $result['contenu'],
+                $result['bonus'],
+                $result['doublage']
+            );
+        }
+        return null; // Retournez null si aucun résultat n'est trouvé
+    }
+
+    public static function readFirstBonus(int $idStory): int {
+        $dao = DAO::getInstance();
+        $results = $dao->getColumnWithParameters("dialogues", ["id_histoire" => $idStory,"bonus" => "1"]);
+    
+        // Vérifiez si le tableau n'est pas vide avant d'accéder à l'index 0
+        if (!empty($results)) {
+            $result = $results[0]; // Accédez au premier élément uniquement si le tableau n'est pas vide
+            return $result['id'];
+        }
+        return 0; // Retournez null si aucun résultat n'est trouvé
+    }
+
+    
+    
 
     
     public static function getDialogsBeforeQuestion(int $idStory): array {
