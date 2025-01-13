@@ -56,8 +56,9 @@ CREATE TABLE PERSONNAGES(
     id SERIAL PRIMARY KEY,          -- Identifiant du personnage pour faciliter l'unicité des n-uplets
     prenom varchar(50) NOT NULL,    -- Prenom du personnage
     createur INTEGER,
+    img varchar(50) NOT NULL,        -- Nom de l'image (le modèle) du personnage stockée ailleurs
     FOREIGN KEY (createur) REFERENCES UTILISATEURS(id),
-    img varchar(50) NOT NULL        -- Nom de l'image (le modèle) du personnage stockée ailleurs
+
 );
 
 -- Table des dialogues associés aux histoires
