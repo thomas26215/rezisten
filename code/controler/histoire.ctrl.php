@@ -23,7 +23,6 @@ $story = Story::read($idStory);
 
 if($dialog->getContent() == "limquestion"){
     $question = Question::read($idStory,'s');
-    session_start();
     $_SESSION['idStory'] = $idStory;
     $_SESSION['idDialog'] = $idDialog;
     $_SESSION['difficulty'] = "spécifique";
