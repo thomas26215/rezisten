@@ -10,6 +10,7 @@ include_once('./model/chapitres.class.php');
 // Récupération des données de la query string
 $idStory = $_GET['idStory'];
 $idDialog = $_GET['idDialog'];
+$prevSpeaker = $_GET['prevSpeaker'] ?? "none";
 
 
 $imgURL = "http://localhost:8080/rezisten/imgPersonnage/";
@@ -35,9 +36,9 @@ $idChap = $story->getChapter()->getNumchap();
 $speaker = $dialog->getSpeaker();
 $imgSpeaker = $imgURL.$speaker->getImage().".webp";
 $dub = $audioURL.$dialog->getDubbing().".WAV";
+$prevSpeaker = $imgURL.$prevSpeaker.".webp";
 
-
-
+$view->assign('prevSpeaker',$prevSpeaker);
 $view->assign('dub',$dub);
 $view->assign('imgSpeaker',$imgSpeaker);
 $view->assign('speaker',$speaker);

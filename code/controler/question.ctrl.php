@@ -17,10 +17,10 @@ $imgURL = "http://localhost:8080/rezisten/imgPersonnage/";
 $story = Story::read($_SESSION['idStory']);
 
 if($action === "change"){
-    if($_GET['questionType'] === "spécifique"){
-        $question = Question::read($_SESSION['idStory'],'g');
-    }else{
+    if($_GET['questionType'] === "générique"){
         $question = Question::read($_SESSION['idStory'],'s');
+    }else{
+        $question = Question::read($_SESSION['idStory'],'g');
     }
     $view->assign('story',$story);
     $view->assign('question',$question);
