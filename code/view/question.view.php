@@ -45,7 +45,7 @@
                                 <button class="repondre button-vert"> Répondre </button> 
                             </form>
                     
-                            
+                            <p style="color: red; font-weight: bold; font-size: 1.2em;"><?=$error?></p>
 
                             <form action="?">
                                 <input type="hidden" name="action" value="change">

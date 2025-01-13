@@ -32,6 +32,7 @@ if($action === "change"){
         $question = Question::read($_SESSION['idStory'],'s');
     }
 
+    $view->assign('error','');
     $view->assign('story',$story);
     $view->assign('question',$question);
     $view->display('question');
@@ -76,7 +77,12 @@ elseif($action == "answer"){
 
     //FIXME : GERER LE CAS OU C'EST INCORRECT    
     }else{
-
+        $story = Story::read($_SESSION['idStory']);
+        $question = Question::read($_SESSION['idStory'],$questionType);
+        $view->assign('error','Réponse incorrecte, réessayez !');
+        $view->assign('story',$story);
+        $view->assign('question',$question);
+        $view->display('question');
     }
 }
 
