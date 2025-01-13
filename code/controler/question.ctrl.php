@@ -9,8 +9,8 @@ include_once('./model/dialogues.class.php');
 $action = $_GET['action'];
 $view = new View();
 
-$audioURL = "http://localhost:8080/rezisten/doublageDialogue/histoire".$_SESSION['idStory']."/";
-$imgURL = "http://localhost:8080/rezisten/imgPersonnage/";
+$audioURL = "https://localhost:8080/rezisten/doublageDialogue/histoire".$_SESSION['idStory']."/";
+$imgURL = "https://localhost:8080/rezisten/imgPersonnage/";
 
 
 $story = Story::read($_SESSION['idStory']);
@@ -41,16 +41,19 @@ elseif($action == "answer"){
 
         if($difficulty === "générique"){
             $idDialog = $_SESSION['idDialog']+1;
+            $dialog = Dialog::read($idDialog,$_SESSION['idStory']);
         }else{
-            $idDialog = Dialog::readFirstBonus($_SESSION['idStory']);
+            $idDialog = Dialog::readFirstBonus(1);
+            $dialog = Dialog::readBonusDialog($idDialog,$_SESSION['idStory']);
         }
 
 
         $story = Story::read($_SESSION['idStory']);
-        $dialog = Dialog::read($idDialog,$_SESSION['idStory']);
+        //$dialog = Dialog::read($idDialog,$_SESSION['idStory']);
+
         $speaker = $dialog->getSpeaker();
         $dub = $audioURL.$dialog->getDubbing().".WAV";
-        $imgSpeaker = $imgURL.$speaker->getImage()."webp";
+        $imgSpeaker = $imgURL.$speaker->getImage().".webp";
 
         $view->assign('dub',$dub);
         $view->assign('imgSpeaker',$imgSpeaker);
