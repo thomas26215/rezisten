@@ -97,7 +97,7 @@ class Character {
     public static function readAllCharacters() : array{
         $dao = DAO::getInstance();
         $listCharacters = array();
-        $characters = $dao->getColumnWithParameters("personnages");
+        $characters = $dao->getColumnWithParameters("personnages",[]);
         if(empty($characters)){
             throw new Exception("aucun personnage trouvé");
         }
