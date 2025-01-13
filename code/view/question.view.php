@@ -13,7 +13,7 @@
 
     <?php include_once 'headerHistoire.view.php'; ?>
     <main >
-        <h1>$Chapitre 1 : Histoire 2 : Sabotage</h1>
+        <h1>Chapitre <?=$story->getChapter()->getNumchap()?> : Histoire <?=$story->getId()?> : <?=$story->getTitle()?></h1>
         <!--Remplacer après, de façon a récupérer les informations en fonction de l'histoire  -->
 
 
