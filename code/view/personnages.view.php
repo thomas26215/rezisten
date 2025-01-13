@@ -19,38 +19,36 @@
 
         <section class="container">
             <section class="flex-col menu">
-                <form action="get">
+                <form method="get" action="index.php">
                     <input type="hidden" name="ctrl" value="personnages">
                     <input type="hidden" name="article" value="consulterPersonnage">
-                    
-                    <button class=button-gris>Consulter un personnage</button>
+
+                    <button id="consulter" class="button-gris">Consulter un personnage</button>
                 </form>
-                <form action="get">
+                <form method="get" action="index.php">
                     <input type="hidden" name="ctrl" value="personnages">
                     <input type="hidden" name="article" value="ajouterPersonnage">
-                    
-                    <button class=button-gris>Ajouter un personnage</button>
+
+                    <button id="ajouter" class="button-gris">Ajouter un personnage</button>
                 </form>
-                <form action="get">
+                <form method="get" action="index.php">
                     <input type="hidden" name="ctrl" value="personnages">
                     <input type="hidden" name="article" value="modifierPersonnage">
-                    
-                    <button class=button-gris>Modifier un personnage</button>
+
+                    <button id="modifier" class="button-gris">Modifier un personnage</button>
                 </form>
-                <form action="get">
+                <form method="get" action="index.php">
                     <input type="hidden" name="ctrl" value="personnages">
                     <input type="hidden" name="article" value="supprimerPersonnage">
-                    
-                    <button>Supprimer un personnage</button>
+
+                    <button  class="button-gris" id="supprimer">Supprimer un personnage</button>
                 </form>
             </section>
 
 
             <?php
-           /* include_once 'consulterPersonnage.view.php';*/
-            include_once $lien;/*
-            include_once 'modifierPersonnage.view.php';
-            include_once 'supprimerPersonnage.view.php';*/ ?>
+           
+            include_once $lien; ?>
             <section class="footer">
                 <a href="#"><button id="dialogQuitter" class=button-rouge>Quitter</button></a>
                 <a href="./ajouterQuestion.view.php"><button>Sauvegarder</button></a>
@@ -62,5 +60,24 @@
 <script src="./view/js/popup.js"></script>
 <script src="./view/js/dyslexique.js"></script>
 <script src="./view/js/photoSelect.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var currentUrl = window.location.search;
+        var supprimer = document.getElementById("supprimer");
+        var modifier = document.getElementById("modifier");
+        var ajouter = document.getElementById("ajouter");
+        var consulter = document.getElementById("consulter");
+
+        if (currentUrl.includes('article=supprimerPersonnage')) {
+        supprimer.classList.remove("button-gris");
+        } else if (currentUrl.includes('article=modifierPersonnage')) {
+            modifier.classList.remove("button-gris");
+        } else if (currentUrl.includes('article=ajouterPersonnage')) {
+            ajouter.classList.remove("button-gris");
+        } else if (currentUrl.includes('article=consulterPersonnage')) {
+            consulter.classList.remove("button-gris");
+    }
+    });
+</script>
 
 </html>

@@ -2,12 +2,15 @@
 
     <h2 class="titre">Consulter un personnage</h2>
 
-    <div class="articleContainer">
+    <form method="post" action="index.php?ctrl=personnages&article=consulterPersonnage" class="articleContainer">
         <div class="personnage">
+            <input type="hidden" name="ctrl" value="personnages">
+            <input type="hidden" name="action" value="selectCharacter">
             <label for="personnage">Personnage à Consulter : </label>
-            <select name="personnage">
-                <?php foreach ($character as $chara){  ?>
-                <option value=""><?=$chara ?></option>
+            <select name="selectedCharacter" id="personnage" onchange="this.form.submit()">
+                <option value="">Sélectionnez un personnage</option>
+                <?php foreach ($characters as $char) { ?>
+                    <option value="<?= $char->getId() ?>"><?= $char->getFirstName() ?></option>
                 <?php } ?>
             </select>
         </div>
@@ -15,16 +18,19 @@
         <div class="supContainer">
             <div>
                 <p style="font-weight: bold;">Prénom : </p>
-                <p><?= $character->getFirstName();?></p>
+                <p><?= $selectedCharacter?->getFirstName() ?? "Jean"; ?></p>
             </div>
-            
+
         </div>
 
         <div class="supContainer">
-            <img src="<?= $character->getImage();?>" alt="" style="max-width: 240px;">
+            <img src="<?= $imgURL . $selectedCharacter?->getImage() ?? "img"?>"
+                alt="<?=$selectedCharacter?->getFirstName() ?? "Jean"; ?>" style="max-width: 240px;">
+
 
         </div>
+        <input type="hidden" name="article" value="consulterPersonnage">
 
-    </div>
+    </form>
 
 </article>

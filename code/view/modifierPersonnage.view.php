@@ -2,21 +2,24 @@
 
     <h2 class="titre">Modifier un personnage</h2>
 
-    <div class="articleContainer">
+    <form method="post" action="index.php?ctrl=personnages&article=modifierPersonnage" class="articleContainer">
         <div class="personnage">
             <label for="personnage">Personnage à modifier : </label>
-            <select name="personnage">
-                <?php foreach ($character as $chara){  ?>
-                <option value=""><?=$chara ?></option>
+            <input type="hidden" name="ctrl" value="personnages">
+            <input type="hidden" name="action" value="selectCharacter">
+            <select name="selectedCharacter" id="personnage" onchange="this.form.submit()">
+                <option value="">Sélectionnez un personnage</option>
+                <?php foreach ($characters as $char) { ?>
+                    <option value="<?= $char->getId() ?>"><?= htmlspecialchars($char->getFirstName()) ?></option>
                 <?php } ?>
             </select>
         </div>
         <div class="noms">
             <div>
                 <label for="prenom">Prénom</label>
-                <input maxlength="15" type="text" placeholder="Pierre">
+                <input maxlength="15" type="text" placeholder="<?= $selectedCharacter?->getFirstName() ?? "Jean"; ?>">
             </div>
-           
+
         </div>
 
         <div class="image">
@@ -28,9 +31,10 @@
             </div>
 
             <div class="imageUser">
-                <img id="img" src="#" alt="Image preview" style="display: none; max-width: 240px;">
+                <img id="img" src="<?= $imgURL . $selectedCharacter?->getImage() ?? "img"; ?>"
+                    alt="<?= $selectedCharacter?->getFirstName() ?? "Jean"; ?>" style=" max-width: 240px;">
             </div>
         </div>
-    </div>
+    </form>
 
 </article>
