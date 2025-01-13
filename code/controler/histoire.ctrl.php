@@ -22,8 +22,10 @@ $story = Story::read($idStory);
 
 if($dialog->getContent() == "limquestion"){
     $question = Question::read($idStory,'g');
-    $_SESSION['story'] = $story;
-
+    session_start();
+    $_SESSION['idStory'] = $idStory;
+    $_SESSION['idDialog'] = $idDialog;
+    
     $view->assign('story',$story);
     $view->assign('question',$question);
     $view->display('question');
@@ -42,7 +44,6 @@ $view->assign('speaker',$speaker);
 $view->assign('dialog',$dialog);
 $view->assign('idDialog',$idDialog);
 $view->assign('story',$story);
-$view->assign('idChap',$idChap);
 $view->assign('idStory',$idStory);
 $view->display('histoire');
 

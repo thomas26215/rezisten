@@ -39,11 +39,11 @@
 
                 <div class="flex-row">
                             <form class="flex-row" action="?">
-                                <label for="reponse">Réponse :
-                                    <input type="number" name="reponse" id="reponse">
-
+                                <label for="answer">Réponse :
+                                    <input type="number" name="answer" id="answer">
                                 </label>
                                 <input type="hidden" name="ctrl" value="question">
+                                <input type="hidden" name="questionType" value="<?=$question->getType()?>">
                                 <input type="hidden" name="action" value="answer">
                                 <button class="repondre button-vert"> Répondre </button> 
                             </form>
