@@ -20,9 +20,11 @@ SET row_security = off;
 -- Data for Name: chapitres; Type: TABLE DATA; Schema: public; Owner: superrezi
 --
 
-INSERT INTO  chapitres VALUES (0, 'Prologue');
+INSERT INTO chapitres VALUES (0, 'Prologue');
 INSERT INTO chapitres VALUES (1, 'L''heure de résister');
-INSERT INTO chapitres VALUES (100, 'Chapitres des créateurs');
+INSERT INTO chapitres VALUES (2, 'Au coeur de la tragédie');
+INSERT INTO chapitres VALUES (100, 'Workshop');
+
 
 --
 -- Data for Name: lieux; Type: TABLE DATA; Schema: public; Owner: superrezi
@@ -59,8 +61,10 @@ INSERT INTO utilisateurs VALUES (4, 'admin_rezisten', 'admin', 'admin', '1999-06
 -- Data for Name: histoires; Type: TABLE DATA; Schema: public; Owner: superrezi
 --
 
-INSERT INTO histoires VALUES (1, 'Un jour de septembre', 0, 4, 8, 'hist0_bg.webp', true);
-INSERT INTO histoires VALUES (2, 'Une rencontre fortuite', 0, 4, 2, 'hist1_bg.webp', true);
+INSERT INTO histoires VALUES (1, 'Un jour de septembre', 0, 4, 8, 'hist0_bg', true);
+INSERT INTO histoires VALUES (2, 'Une rencontre fortuite', 1, 4, 2, 'hist1_bg', true);
+INSERT INTO histoires VALUES (3, 'Sabotage', 1, 4, 6, 'hist2èbg', true);
+INSERT INTO histoires VALUES (4, 'De chaleureuses retrouvailles', 2, 4, 8, 'hist3_bg', true);
 
 
 --
@@ -68,15 +72,15 @@ INSERT INTO histoires VALUES (2, 'Une rencontre fortuite', 0, 4, 2, 'hist1_bg.we
 --
 
 INSERT INTO personnages VALUES (1, 'Raymond', 'raymond.webp');
-INSERT INTO personnages VALUES (2, 'Pierre', 'pierre.webp');
-INSERT INTO personnages VALUES (3, 'Jean', 'jean.webp');
-INSERT INTO personnages VALUES (4, 'André', 'andre.webp');
-INSERT INTO personnages VALUES (5, 'David', 'david.webp');
-INSERT INTO personnages VALUES (6, 'Michel', 'michel.webp');
-INSERT INTO personnages VALUES (7, 'Marie', 'marie.webp');
-INSERT INTO personnages VALUES (8, 'Milicien', 'milicien.webp');
-INSERT INTO personnages VALUES (9, 'Inconnu', 'inconnu.webp');
-INSERT INTO personnages VALUES (10, 'Narrateur', 'narrateur.webp');
+INSERT INTO personnages VALUES (2, 'Pierre', 'pierre');
+INSERT INTO personnages VALUES (3, 'Jean', 'jean');
+INSERT INTO personnages VALUES (4, 'André', 'andre');
+INSERT INTO personnages VALUES (5, 'David', 'david');
+INSERT INTO personnages VALUES (6, 'Michel', 'michel');
+INSERT INTO personnages VALUES (7, 'Marie', 'marie');
+INSERT INTO personnages VALUES (8, 'Milicien', 'milicien');
+INSERT INTO personnages VALUES (9, 'Inconnu', 'inconnu');
+INSERT INTO personnages VALUES (10, 'Narrateur', 'narrateur');
 
 
 --
@@ -250,6 +254,9 @@ INSERT INTO dialogues VALUES (87, 2, 8, 'Fouillez la maison ! Et vous !', true, 
 INSERT INTO dialogues VALUES (88, 2, 8, '.    .    .', true, '882');
 INSERT INTO dialogues VALUES (89, 2, 8, 'Vous allez venir avec nous.', true, '892');
 INSERT INTO dialogues VALUES (90, 2, 3, 'Il semblerait que je n’ai plus qu’à espérer que Raymond ait réussi à s’enfuir avec les Vasseurs.', true, '902');
+INSERT INTO dialogues VALUES (1, 3, 2, 'Le train arrive dépêche toi !', false, '13');
+INSERT INTO dialogues VALUES (2, 3, 4, 'Voilà le pont, commençons les préparatifs, il faut placer des explosifs !', false, '13');
+INSERT INTO dialogues VALUES (1, 4, 10, 'Déjà quelques mois que André et Pierre n''ont plus de nouvelles de leurs amis Jean et Raymond.', false, '14');
 
 
 --
@@ -264,8 +271,8 @@ INSERT INTO progression VALUES (2, 1, false);
 -- Data for Name: questions; Type: TABLE DATA; Schema: public; Owner: superrezi
 --
 
-INSERT INTO questions VALUES (1, 'À quelle date a débutée les attaques allemandes ? (date complète jj/mm/aaaa)', '01/09/1939', 'g');
-INSERT INTO questions VALUES (1, 'Quel évènement a marqué le lieu où se trouve nos personnages ?', '6 juillet 1944 76 maquisards furent éxecutés', 's');
+INSERT INTO questions VALUES (1, 'Combien de jours ont passés entre la prise de la Pologne et la déclaration de la Guerre ?', '2', 'g');
+INSERT INTO questions VALUES (1, 'Le 6 juillet 1944, combien de maquisards furent éxecutés là où se trouvent nos héros ?', '76', 's');
 INSERT INTO questions VALUES (2, 'En quel année fût ériger le camp que fuient nos héros ?', '1939', 'g');
 INSERT INTO questions VALUES (2, 'Ce camp fût un camp de travail intensif dès juillet 1942. Combien de prisonniers étaient encore
 internés en mars 1943 ? ', '70', 's');
@@ -289,7 +296,7 @@ SELECT pg_catalog.setval('apparitions_id_perso_seq', 1, false);
 -- Name: histoires_id_seq; Type: SEQUENCE SET; Schema: public; Owner: superrezi
 --
 
-SELECT pg_catalog.setval('histoires_id_seq', 2, true);
+SELECT pg_catalog.setval('histoires_id_seq', 4, true);
 
 
 --

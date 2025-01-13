@@ -16,7 +16,7 @@
     <?php include_once './view/headerHistoire.view.php'; ?>
     <main class="flex-col">
         <audio src="<?=$dub?>" autoplay></audio>
-        <h1>Chapitre <?=$idChap?> : Histoire <?=$idStory?> : <?= $story->getTitle()?></h1>
+        <h1>Chapitre <?=$story->getChapter()->getNumchap()?> : Histoire <?=$story->getId()?> : <?= $story->getTitle()?></h1>
         <!--Remplacer après, de façon a récupérer les informations en fonction de l'histoire  -->
 
 
@@ -36,11 +36,10 @@
                 <form action="?" method="get">
                     <div class="flex-row">
                         <input type="hidden" name="idStory" value="<?= $idStory ?>">
-                        <input type="hidden" name="idChap" value="<?= $idChap ?>">
                         <input type="hidden" name="ctrl" value="histoire">
                         <input type="hidden" name="idDialog" id="idDialogInput" value="<?= $idDialog ?>">
 
-                        <button class="before button-gris" type="submit" onclick="document.getElementById('idDialogInput').value = <?= $idDialog - 1 ?>">
+                        <button class="before button-gris" type="submit" onclick="document.getElementById('idDialogInput').value = <?= max($idDialog -1, 1) ?>">
                         < Précédent </button>
 
                         <button class="next button-gris" type="submit" onclick="document.getElementById('idDialogInput').value = <?= $idDialog + 1 ?>">
