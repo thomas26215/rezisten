@@ -2,6 +2,7 @@
 include_once('./model/histoires.class.php');
 include_once('./framework/view.fw.php');
 include_once('./model/dialogues.class.php');
+include_once('./model/questions.class.php');
 
 
 
@@ -15,8 +16,13 @@ $audioURL = "http://localhost:8080/rezisten/doublageDialogue/histoire".$idStory.
 
 $dialog = Dialog::read($idDialog,$idStory);
 
+$view = new View();
+
 if($dialog->getContent() == "limquestion"){
-    $question = Question::read(1,)
+    $question = Question::read($idStory,'g');
+
+    $view->assign('question',$question);
+    $view->display('question');
 }
 
 $speaker = $dialog->getSpeaker();
@@ -25,7 +31,6 @@ $story = Story::read($idStory);
 $dub = $audioURL.$dialog->getDubbing().".WAV";
 
 
-$view = new View();
 
 $view->assign('dub',$dub);
 $view->assign('imgSpeaker',$imgSpeaker);
