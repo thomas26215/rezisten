@@ -42,7 +42,7 @@ elseif($action == "answer"){
         $dialog = Dialog::read($_SESSION['idDialog']+1,$_SESSION['idStory']);
         $speaker = $dialog->getSpeaker();
         $dub = $audioURL.$dialog->getDubbing().".WAV";
-        $imgSpeaker = $imgURL.$speaker->getImage();
+        $imgSpeaker = $imgURL.$speaker->getImage()."webp";
 
         $view->assign('dub',$dub);
         $view->assign('imgSpeaker',$imgSpeaker);
