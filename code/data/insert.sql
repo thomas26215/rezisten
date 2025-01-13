@@ -9,12 +9,16 @@ INSERT INTO DEMANDES VALUES(2,'aiel-id.png');
 
 --Création des deux premiers chapitres de l'histoire
 INSERT INTO CHAPITRES(numchap,titre) values(0,'Prologue'),
-(1,'L''heure de résister');
+(1,'L''heure de résister'),
+(2,'Au coeur de la tragédie'),
+(100,'Workshop');
 
 
 --Création d'une hisoitr pour le prologue et deux pour le chapitre 1
-INSERT INTO HISTOIRES(titre,numchap,createur,id_lieu,background,visible) values('Un jour de septembre',0,4,8,'hist0_bg.webp',true),
-('Une rencontre fortuite',0,4,2,'hist1_bg.webp',true);
+INSERT INTO HISTOIRES(titre,numchap,createur,id_lieu,background,visible) values('Un jour de septembre',0,4,8,'hist0_bg',true),
+('Une rencontre fortuite',1,4,2,'hist1_bg',true),
+('Sabotage',1,4,6,'hist2èbg',true),
+('De chaleureuses retrouvailles',2,4,8,'hist3_bg',true);
 
 
 --Création de deux personnages participants au prologue
@@ -205,7 +209,12 @@ peur tandis que les formes des miliciens se dessinent dans le noir.',true,'792')
 
 
 --Dialogues de l'histoire 2 chapitre 1
+INSERT INTO DIALOGUES(id,id_histoire,interlocuteur,contenu,bonus, doublage) VALUES 
+(1,3,2,'Le train arrive dépêche toi !',false,'13'),
+(2,3,4,'Voilà le pont, commençons les préparatifs, il faut placer des explosifs !',false,'13');
 
+INSERT INTO DIALOGUES(id,id_histoire,interlocuteur,contenu,bonus, doublage) VALUES 
+(1,4,10,'Déjà quelques mois que André et Pierre n''ont plus de nouvelles de leurs amis Jean et Raymond.',false,'14');
 
 --Apparitions du prologue
 INSERT INTO APPARITIONS values

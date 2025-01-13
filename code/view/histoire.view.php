@@ -40,7 +40,7 @@
                         <input type="hidden" name="ctrl" value="histoire">
                         <input type="hidden" name="idDialog" id="idDialogInput" value="<?= $idDialog ?>">
 
-                        <button class="before button-gris" type="submit" onclick="document.getElementById('idDialogInput').value = <?= $idDialog - 1 ?>">
+                        <button class="before button-gris" type="submit" onclick="document.getElementById('idDialogInput').value = <?= max($idDialog -1, 1) ?>">
                         < Précédent </button>
 
                         <button class="next button-gris" type="submit" onclick="document.getElementById('idDialogInput').value = <?= $idDialog + 1 ?>">

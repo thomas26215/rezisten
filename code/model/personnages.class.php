@@ -93,6 +93,23 @@ class Character {
         }
         return false;
     }
+
+    public static function readAllCharacters() : array{
+        $dao = DAO::getInstance();
+        $listCharacters = array();
+        $characters = $dao->getColumnWithParameters("personnages",[]);
+        if(empty($characters)){
+            throw new Exception("aucun personnage trouvé");
+        }
+
+        for($i = 0 ; $i < sizeof($characters) ; $i++){
+            $c = new Character($characters[$i]['prenom'],$characters[$i]['img'],$characters[$i]['id']);
+            array_push($listCharacters,$c);
+        }
+
+        return $listCharacters;
+        
+    }
 }
 ?>
 

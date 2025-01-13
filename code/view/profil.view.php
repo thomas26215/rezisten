@@ -16,7 +16,7 @@
         <div class="container">
             <div class="profilHead">
                 <img src="./view/design/image/photoProfil.jpg" alt="photo profil">
-                <p>Jano</p>
+                <p><?= $username ?></p>
             </div>
 
             <a href="main.view.php">
@@ -27,12 +27,12 @@
         <form action="post">
             <div>
                 <label for="pseudo">Pseudo : </label>
-                <input type="text" name="pseudo" id="pseudo" placeholder="jeang">
+                <input type="text" name="pseudo" id="pseudo" placeholder=<?= $username ?>>
             </div>
 
             <div>
                 <label for="mail">Adresse mail : </label>
-                <input type="email" name="mail" id="mail" placeholder="jean@gmail.com">
+                <input type="email" name="mail" id="mail" placeholder=<?= $mail ?>>
             </div>
 
             <button class="valider button-vert">Valider</button>

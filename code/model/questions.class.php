@@ -33,7 +33,11 @@ class Question {
     }
 
     public function getType(): string {
-        return $this->type;
+        if($this->type == 's'){
+            return "spécifique";
+        }else{
+            return "générique";
+        }
     }
 
     /* --- Setters --- */
