@@ -6,14 +6,22 @@ include_once('./model/histoires.class.php');
 include_once('./model/chapitres.class.php');
 include_once('./model/users.class.php');
 
+$lieux = Place::readAll();
+
+
+
 //vérification création
 if(!isset($_GET['id'])){
+    
     $histoire = new Story("Titre",
                           Chapter::read(100),
                           User::read(4), //changer par id de cette user)
                           Place::read(1),
                           "../view/design/image/background_story.png",
                           false    );
+
+
+
     $histoire->create();  
     $id = $histoire->getId();
 }
@@ -23,19 +31,14 @@ else{
     $histoire = Story::read($id);
     if (isset($_GET['titre']))
     {$histoire->setTitle($_GET['titre']) ; // ajouterDialogue ou ajouterQuestion ou afficherHistoire
+    $histoire->setPlace(Place::read($_GET['lieu']));
     }
 }
 
 //Récupération des données utilisateurs
-$idUser="hf";
+$idUser=4;
 
 //Récupération depuis le modèle
-
-//$lieux = Place::readAll();
-$lieux1=new Place("elgise de chépluöu","cimetiere","ceci est une description","Romans","02145852255522");
-$lieux = array("1", "2");
-
-
 $personnages = array('Paul', 'Pierre','Jaques','Michel');
 
 //Récupération des varibles
