@@ -13,11 +13,11 @@ if (isset($_POST['pseudo'])) {
     $user->update();
 }
 
-$username = $user->getUsername();
+$pseudo = $user->getUsername();
 $mail = $user->getMail();
 
 $view = new View();
-$view->assign('username', $username);
+$view->assign('pseudo', $pseudo);
 $view->assign('mail', $mail);
 $view->display('profil');
 ?>
