@@ -47,8 +47,8 @@
                     <label for="lieux">Lieux : </label>
                     <select name="lieu">
                         <?php foreach ($lieux as $lieu) : ?>
-                        <option value=<?= $lieu->getId()?>>
-                            <?= $lieu->getName()?>
+                        <option value=<?= $lieu/* ->getId() */?>>
+                            <?= $lieu/* ->getName() */?>
                         </option>
                         <?php endforeach; ?>
                     </select>

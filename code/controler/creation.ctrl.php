@@ -5,9 +5,12 @@ include_once('./model/lieux.class.php');
 include_once('./model/histoires.class.php');
 include_once('./model/chapitres.class.php');
 include_once('./model/users.class.php');
+include_once('./model/dialogues.class.php');
+include_once('./model/personnages.class.php');
+include_once('./model/questions.class.php');
 
-$lieux = Place::readAll();
-
+//$lieux = Place::readAll();
+$lieux=array("1","2");
 
 
 //vérification création
@@ -40,6 +43,13 @@ $idUser=4;
 
 //Récupération depuis le modèle
 $personnages = array('Paul', 'Pierre','Jaques','Michel');
+$iddialog = 1;
+$dialogues [] = Question::read(1 , "g");
+while(null !== (Dialog::read($iddialog,1))){
+    $dialogues[] = Dialog::read($iddialog,1);
+    $iddialog ++;
+}
+
 
 //Récupération des varibles
 $article = $_GET['article'] ?? "ajouterDialogue"; // ajouterDialogue ou ajouterQuestion ou afficherHistoire
@@ -52,6 +62,15 @@ $lien="./view/".$article.".view.php";
 if(isset($_GET['sauvegarder'])){
     $histoire->update();
 }
+//supprimer un dialogue en appuyant sur la pitite poubelle
+
+if(isset($_GET['idDialogue'])){
+    if ($_GET['typeDialogue']){
+         Dialog::delete($_GET['idDialogue'],$histoire->getId());
+    } else{
+        Question::delete($_GET['idDialogue'],$histoire->getId());
+    }
+}
 
 //chapitre -> chapitre des créateurs
 
@@ -61,6 +80,8 @@ $view->assign('titre',Story::read($histoire->getId())->getTitle());
 $view->assign('id',$histoire->getId());
 $view->assign('lieux',$lieux);
 $view->assign('lien',$lien);
+$view->assign('dialogues' , $dialogues);
 $view->assign('personnages', $personnages); //pour ajouter dialogue
 $view->display('creation');
+
 ?>
