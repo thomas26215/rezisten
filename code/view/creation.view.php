@@ -81,6 +81,7 @@
 
                 <form method=get>
                     <input type="hidden" name="ctrl" value="creation">
+                    <input type="hidden" name="id" value=<?= $id ?>  >
                     <input type="hidden" name="sauvegarder" value="sauvegarder">
                     <button>Sauvegarder</button>
                 </form>

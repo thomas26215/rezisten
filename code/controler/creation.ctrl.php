@@ -6,6 +6,23 @@ include_once('./model/histoires.class.php');
 include_once('./model/chapitres.class.php');
 include_once('./model/users.class.php');
 
+//vérification création
+if(!isset($_GET['id'])){
+    $histoire = new Story("Titre",
+                          Chapter::read(100),
+                          User::read(4), //changer par id de cette user)
+                          Place::read(1),
+                          "../view/design/image/background_story.png",
+                          false    );
+    $histoire->create();  
+    $id = $histoire->getId();
+}
+else{
+    $id = $_GET['id'];
+    var_dump($_GET['titre']);
+    $histoire = Story::read($id);
+    $histoire->setTitle($_GET['titre']) ; // ajouterDialogue ou ajouterQuestion ou afficherHistoire
+}
 
 //Récupération des données utilisateurs
 $idUser="hf";
@@ -20,9 +37,7 @@ $personnages = array('Paul', 'Pierre','Jaques','Michel');
 
 //Récupération des varibles
 $article = $_GET['article'] ?? "ajouterDialogue"; // ajouterDialogue ou ajouterQuestion ou afficherHistoire
-$id = $_GET['id']; // passer en Post
-$histoire = Histoire::read($id);
-$histoire->setTitle($_GET['titre']) ; // ajouterDialogue ou ajouterQuestion ou afficherHistoire
+
 
 //Autres variables
 $lien="./view/".$article.".view.php";
@@ -34,10 +49,10 @@ if(isset($_GET['sauvegarder'])){
 
 //chapitre -> chapitre des créateurs
 
-
 //Créer la vue
 $view = new View();
-$view->assign('titre',Story::read($histoire->getId()));
+$view->assign('titre',Story::read($histoire->getId())->getTitle());
+$view->assign('id',$histoire->getId());
 $view->assign('lieux',$lieux);
 $view->assign('lien',$lien);
 $view->assign('personnages', $personnages); //pour ajouter dialogue
