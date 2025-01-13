@@ -17,9 +17,8 @@
         </div>
         <h1>Vivez la résistance à la française !</h1>
         <form action="index.php" method="get">
-            <button type="submit" name="action" value="login">Se connecter</button>
-            <button type="submit" name="action" value="createAccount">Créer un compte</button>
-            <input type="hidden" name="ctrl" value="mainNonConnecte">
+            <button type="submit" name="ctrl" value="loginAccount">Se connecter</button>
+            <button type="submit" name="ctrl" value="createAccount">Créer un compte</button>
     </form>
     </main>
     <?php include_once './view/footer.view.php'; ?>

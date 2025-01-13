@@ -26,6 +26,7 @@ if($dialog->getContent() == "limquestion"){
     session_start();
     $_SESSION['idStory'] = $idStory;
     $_SESSION['idDialog'] = $idDialog;
+    $_SESSION['difficulty'] = "spécifique";
     
     $view->assign('story',$story);
     $view->assign('question',$question);

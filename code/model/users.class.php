@@ -14,14 +14,18 @@ class User {
     
     private DAO $dao;
 
-    public function __construct(string $username, string $first_name, string $surname, string $birth_date, string $mail, string $password, string $role, int $id = -1) {
+    public function __construct(string $username, string $first_name, string $surname, string $birth_date, string $mail, string $password, string $role, bool $transformInHashedPassword, int $id = -1) {
         $this->setId($id);
         $this->setUsername($username);
         $this->setFirstName($first_name);
         $this->setSurname($surname);
         $this->setBirthDate($birth_date);
         $this->setMail($mail);
-        $this->setPassword(password_hash($password, PASSWORD_DEFAULT));
+        if($transformInHashedPassword) {
+            $this->setPassword($password);
+        } else {
+            $this->setPasswordWithouthHashing($password);
+        }
         $this->setRole($role);
         $this->dao = DAO::getInstance();
     }
@@ -111,6 +115,13 @@ class User {
         $this->password = password_hash($password, PASSWORD_DEFAULT);
     }
 
+    public function setPasswordWithouthHashing(string $password): void {
+        if($password === "") {
+            throw new Exception("Le mot de passe ne peut pas être vide");
+        }
+        $this->password = $password;
+    }
+
     public function setRole(string $role): void {
         if($role === "") {
             throw new Exception("Le rôle ne peut pas être null");
@@ -120,24 +131,27 @@ class User {
 
     /* --- Méthodes CRUD --- */
 
-    
+   //TODO: Modifier test
     public function create(): bool {
-        if ($this->dao->insertRelatedData("utilisateurs", [
-            "pseudo" => $this->username,
-            "prenom" => $this->first_name,
-            "nom" => $this->surname,
-            "datenaiss" => $this->birth_date,
-            "mail" => $this->mail,
-            "mot_de_passe" => $this->password,
-            "role" => $this->role,
-        ])) {
-            $lastId = $this->dao->getLastInsertId("utilisateurs");
-            if (!empty($lastId) && isset($lastId[0]["last_id"])) {
-                $this->setId($lastId[0]["last_id"]);
-                return true;
+        try {
+            if ($this->dao->insertRelatedData("utilisateurs", [
+                "pseudo" => $this->username,
+                "prenom" => $this->first_name,
+                "nom" => $this->surname,
+                "datenaiss" => $this->birth_date,
+                "mail" => $this->mail,
+                "mot_de_passe" => $this->password,
+                "role" => $this->role,
+            ])) {
+                $lastId = $this->dao->getLastInsertId("utilisateurs");
+                if (!empty($lastId) && isset($lastId[0]["last_id"])) {
+                    $this->setId($lastId[0]["last_id"]);
+                    return true;
+                }
             }
+        } catch(PDOException $e) {
+            throw $e;
         }
-        return false;
     }
 
     public static function read(int $id): ?User {
@@ -150,9 +164,30 @@ class User {
                 $userData[0]["nom"],
                 $userData[0]["datenaiss"],
                 $userData[0]["mail"],
-                "",
+                $userData[0]["mot_de_passe"],
                 $userData[0]["role"],
+                false,
                 $userData[0]["id"]
+            );
+        }
+        return null;
+    }
+
+    //TODO: Ajouter test
+    public static function readWithMail(string $mail): ?User {
+        $dao = DAO::getInstance();
+        $userData = $dao->getColumnWithParameters("utilisateurs", ["mail" => $mail]);
+        if (!empty($userData)) {
+            return new User(
+                $userData[0]["pseudo"],
+                $userData[0]["prenom"],
+                $userData[0]["nom"],
+                $userData[0]["datenaiss"],
+                $userData[0]["mail"],
+                $userData[0]["mot_de_passe"],
+                $userData[0]["role"],
+                false,
+                $userData[0]["id"],
             );
         }
         return null;
