@@ -22,16 +22,16 @@ INSERT INTO HISTOIRES(titre,numchap,createur,id_lieu,background,visible) values(
 
 
 --Création de deux personnages participants au prologue
-INSERT INTO PERSONNAGES(prenom,img) values('Raymond','raymond'), --1
-('Pierre','pierre'),   --2
-('Jean','jean'),       --3
-('André','andre'),     --4
-('David','david'),     --5
-('Michel','michel'),   --6
-('Marie','marie'),     --7
-('Milicien','milicien'), --8
-('Inconnu','inconnu'),   --9
-('Narrateur','narrateur'); --10
+INSERT INTO PERSONNAGES(prenom,img,createur) values('Raymond','raymond',4), --1
+('Pierre','pierre',4),   --2
+('Jean','jean',4),       --3
+('André','andre',4),     --4
+('David','david',4),     --5
+('Michel','michel',4),   --6
+('Marie','marie',4),     --7
+('Milicien','milicien',4), --8
+('Inconnu','inconnu',4),   --9
+('Narrateur','narrateur',4); --10
 
 
 

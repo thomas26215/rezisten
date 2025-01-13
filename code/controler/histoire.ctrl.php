@@ -7,7 +7,7 @@ include_once('./model/chapitres.class.php');
 
 
 
-// Récupération des données de la query string
+// Récupération des données de la query string et initialisation de variables
 $idStory = $_GET['idStory'];
 $idDialog = $_GET['idDialog'];
 $prevSpeaker = $_GET['prevSpeaker'] ?? "none";
@@ -21,9 +21,9 @@ $dialog = Dialog::read($idDialog,$idStory);
 $view = new View();
 $story = Story::read($idStory);
 
+// Si le dialogue repère est détecté on bascule sur la question en appelant la vue avec les bonnes données
 if($dialog->getContent() == "limquestion"){
     $question = Question::read($idStory,'s');
-    session_start();
     $_SESSION['idStory'] = $idStory;
     $_SESSION['idDialog'] = $idDialog;
     $_SESSION['difficulty'] = "spécifique";
@@ -32,6 +32,8 @@ if($dialog->getContent() == "limquestion"){
     $view->assign('question',$question);
     $view->display('question');
 }
+
+//Sinon on met à jour les données sur le dialogue et les personnages incluent dans ce passage.
 
 $idChap = $story->getChapter()->getNumchap();
 $speaker = $dialog->getSpeaker();
@@ -52,7 +54,3 @@ $view->display('histoire');
 
 
 ?>
-
-<script>
-    const audioURL = <?= $dub ?>
-</script>

@@ -2,7 +2,7 @@
 <html lang="fr">
 
 <head>
-        <link rel="icon" href="./view/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="./favicon.ico" type="image/x-icon">
     
     <meta charset="utf-8">
     <title>Rézisten</title>
@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <?php include_once("./header.view.php"); ?>
+    <?php include_once("./headerPageSpeciales.view.php"); ?>
     <main class="flex-col">
         <h1>Nos partenaires</h1>
         <ul>
@@ -70,7 +70,7 @@
             </li>
         </ul>
     </main>
-    <?php include_once("./footer.view.php"); ?>
+    <?php include_once("./footerPageSpeciales.view.php"); ?>
 </body>
     <script src="./js/dyslexique.js"></script>
 
