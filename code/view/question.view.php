@@ -20,8 +20,6 @@
         <article class="fond-container">
             <img class="fond" src="./view/design/image/image_test.png" alt="Fond">
             <div class="personnages">
-                <img class="parle" src="./view/design/image/milicien.png" alt="milicien">
-                <img class="parle-pas" src="./view/design/image/resistant.png" alt="resistant">
             </div>
         </article>
 
@@ -43,16 +41,14 @@
                                     <input type="number" name="answer" id="answer">
                                 </label>
                                 <input type="hidden" name="ctrl" value="question">
-                                <input type="hidden" name="questionType" value="<?=$question->getType()?>">
                                 <input type="hidden" name="action" value="answer">
                                 <button class="repondre button-vert"> Répondre </button> 
                             </form>
                     
-                            
+                            <p style="color: red; font-weight: bold; font-size: 1.2em;"><?=$error?></p>
 
                             <form action="?">
                                 <input type="hidden" name="action" value="change">
-                                <input type="hidden" name="questionType" value="<?=$question->getType()?>">
                                 <input type="hidden" name="ctrl" value="question">
                                 <button class="autreQuestion button-gris"> Accéder à l'autre question</button>
                             </form>

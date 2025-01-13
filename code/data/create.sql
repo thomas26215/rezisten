@@ -55,7 +55,9 @@ CREATE TABLE HISTOIRES (
 CREATE TABLE PERSONNAGES(
     id SERIAL PRIMARY KEY,          -- Identifiant du personnage pour faciliter l'unicité des n-uplets
     prenom varchar(50) NOT NULL,    -- Prenom du personnage
-    img varchar(50) NOT NULL        -- Nom de l'image (le modèle) du personnage stockée ailleurs
+    createur INTEGER,
+    img varchar(50) NOT NULL,        -- Nom de l'image (le modèle) du personnage stockée ailleurs
+    FOREIGN KEY (createur) REFERENCES UTILISATEURS(id)
 );
 
 -- Table des dialogues associés aux histoires

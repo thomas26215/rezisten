@@ -54,7 +54,9 @@ CREATE TABLE HISTOIRES (
 CREATE TABLE PERSONNAGES(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     prenom VARCHAR(50) NOT NULL,
-    img VARCHAR(50) NOT NULL
+    createur INTEGER,
+    img VARCHAR(50) NOT NULL,
+    FOREIGN KEY (createur) REFERENCES UTILISATEURS(id)
 );
 
 -- Table des dialogues associés aux histoires
