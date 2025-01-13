@@ -19,9 +19,11 @@ if(!isset($_GET['id'])){
 }
 else{
     $id = $_GET['id'];
-    var_dump($_GET['titre']);
+    //var_dump($_GET['titre']);
     $histoire = Story::read($id);
-    $histoire->setTitle($_GET['titre']) ; // ajouterDialogue ou ajouterQuestion ou afficherHistoire
+    if (isset($_GET['titre']))
+    {$histoire->setTitle($_GET['titre']) ; // ajouterDialogue ou ajouterQuestion ou afficherHistoire
+    }
 }
 
 //Récupération des données utilisateurs
@@ -30,6 +32,7 @@ $idUser="hf";
 //Récupération depuis le modèle
 
 //$lieux = Place::readAll();
+$lieux1=new Place("elgise de chépluöu","cimetiere","ceci est une description","Romans","02145852255522");
 $lieux = array("1", "2");
 
 
