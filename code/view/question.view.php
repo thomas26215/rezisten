@@ -38,15 +38,16 @@
 
 
                 <div class="flex-row">
-                    <div class="flex-column">
-                            <form action="?">
-                                <label for="reponse">Réponse :</label>
+                            <form class="flex-row" action="?">
+                                <label for="reponse">Réponse :
+                                    <input type="number" name="reponse" id="reponse">
+
+                                </label>
                                 <input type="hidden" name="ctrl" value="question">
                                 <input type="hidden" name="action" value="answer">
-                                <input type="number" name="reponse" id="reponse">
                                 <button class="repondre button-vert"> Répondre </button> 
                             </form>
-                    </div>
+                    
                             
 
                             <form action="?">
