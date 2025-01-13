@@ -8,7 +8,7 @@ include_once('./model/dialogues.class.php');
 
 $action = $_GET['action'];
 $view = new View();
-    
+
 $audioURL = "http://localhost:8080/rezisten/doublageDialogue/histoire".$_SESSION['idStory']."/";
 $imgURL = "http://localhost:8080/rezisten/imgPersonnage/";
 
