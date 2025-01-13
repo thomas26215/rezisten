@@ -10,6 +10,7 @@ $selectedCharacter = null;
 $_POST['fermer'] = false;
 
 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['action']) && $_POST['action'] === 'selectCharacter' && isset($_POST['selectedCharacter'])) {
         $selectedCharacterId = (int)$_POST['selectedCharacter'];
@@ -43,6 +44,7 @@ $lien = "./view/" . $article . ".view.php";
 $view = new View();
 $view->assign('lien', $lien);
 $view->assign('imgURL', $imgURL);
+$view->assign('creator', $creator);
 $view->assign('characters', $characters);
 $view->assign('selectedCharacter', $selectedCharacter);
 if (isset($errorMessage)) {
