@@ -5,7 +5,7 @@
 <head>
     <link rel="icon" href="./view/favicon.ico" type="image/x-icon">
     <meta charset="utf-8">
-    <title>Rézisten</title>
+    <title><?=$story->getTitle()?></title>
     <meta name="author" content="Brayan" />
     <link rel="stylesheet" type="text/css" href="./view/design/histoire.css">
     <link rel="stylesheet" type="text/css" href="./view/design/global.css">
