@@ -15,11 +15,11 @@
             <div class="infos">
                 <div>
                     <label for="nom">Nom <span>*</span>: </label>
-                    <input id="nom" name="nom" type="text" placeholder="Jean">
+                    <input id="nom" name="nom" type="text" placeholder=<?= $nom ?>>
                 </div>
                 <div>
                     <label for="prenom">Prénom <span>*</span>: </label>
-                    <input id="prenom" name="prenom" type="text" placeholder="Jean">
+                    <input id="prenom" name="prenom" type="text" placeholder=<?= $prenom ?>>
                 </div>
             </div>
             <p class="texte">Merci de nous envoyer des documents pour prouver vos compétences afin de pouvoir écrire et publier vos histoires.</p>
