@@ -10,7 +10,7 @@ INSERT INTO DEMANDES VALUES(2,'aiel-id.png');
 --Création des deux premiers chapitres de l'histoire
 INSERT INTO CHAPITRES(numchap,titre) values(0,'Prologue'),
 (1,'L''heure de résister'),
-(2,'Au coeur de la tragédie')
+(2,'Au coeur de la tragédie'),
 (100,'Workshop');
 
 
@@ -210,11 +210,11 @@ peur tandis que les formes des miliciens se dessinent dans le noir.',true,'792')
 
 --Dialogues de l'histoire 2 chapitre 1
 INSERT INTO DIALOGUES(id,id_histoire,interlocuteur,contenu,bonus, doublage) VALUES 
-(1,3,2,'Le train arrive dépêche toi !'),
-(2,3,4,'Voilà le pont, commençons les préparatifs, il faut placer des explosifs !');
+(1,3,2,'Le train arrive dépêche toi !',false,'13'),
+(2,3,4,'Voilà le pont, commençons les préparatifs, il faut placer des explosifs !',false,'13');
 
 INSERT INTO DIALOGUES(id,id_histoire,interlocuteur,contenu,bonus, doublage) VALUES 
-(1,4,10,'Déjà quelques mois que André et Pierre n''ont plus de nouvelles de leurs amis Jean et Raymond.');
+(1,4,10,'Déjà quelques mois que André et Pierre n''ont plus de nouvelles de leurs amis Jean et Raymond.',false,'14');
 
 --Apparitions du prologue
 INSERT INTO APPARITIONS values
