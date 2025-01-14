@@ -27,12 +27,7 @@ foreach ($storyIds as $storyId) {
         }
     }
 }
-foreach ($stories as $storie) {
 
-    var_dump($storie->getId());
-    var_dump($user);
-    var_dump(Progression::read($user, $storie->getId()));
-}
 // Assignation à la vue
 $view = new View();
 $view->assign('nomChap', $nomChap);
