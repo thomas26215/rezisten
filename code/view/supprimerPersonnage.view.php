@@ -34,17 +34,17 @@
                     <input type="hidden" name="ctrl" value="personnages">
                     <input type="hidden" name="characterId" value="<?= $selectedCharacter->getId() ?>">
                     <input type="hidden" name="article" value="supprimerPersonnage">
-                    <input id="supprimerInput" type="hidden" name="fermer" value="true">
+                    <input id="supprimerInput" type="hidden" name="fermer" value="false">
 
                     <dialog id="dialog">
                         <div class="containerDialog">
                             <h2>Voulez vous supprimer <?= $selectedCharacter?->getFirstName() ?? "Jean"; ?> ?</h2>
                             <div>
                                 
-                                <button id="fermerPublier" name="fermer" class="button-vert">
+                                <button type="submit" id="fermerPublier" name="fermer" class="button-vert">
                                     Supprimer personnage
                                 </button>
-                                <button id="fermerRevenir" class="button-rouge">
+                                <button  type="button" id="fermerRevenir" class="button-rouge">
                                     Revenir 
                                 </button>
                             </div>
@@ -54,13 +54,12 @@
             </div>
         </div>
 
-
     <script>
         var submitSupprimer = document.getElementById("supprimerInput");
         var submitButton = document.getElementById("fermerPublier");
 
         submitButton.addEventListener("click", () => {
-            submitSupprimer.value == "true";
+            submitSupprimer.value = "true";
         });
     </script>
     

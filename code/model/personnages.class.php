@@ -136,7 +136,8 @@ class Character {
         }
 
         for($i = 0 ; $i < sizeof($characters) ; $i++){
-            $c = new Character($characters[$i]['prenom'],$characters[$i]['img'],$characters[$i]['id']);
+            $creat = User::read($characters[$i]['createur']);
+            $c = new Character($characters[$i]['prenom'],$characters[$i]['img'],$creat,$characters[$i]['id']);
             array_push($listCharacters,$c);
         }
 

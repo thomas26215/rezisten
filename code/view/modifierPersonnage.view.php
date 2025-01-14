@@ -14,27 +14,37 @@
                 <?php } ?>
             </select>
         </div>
-        <div class="noms">
-            <div>
-                <label for="prenom">Prénom</label>
-                <input maxlength="15" type="text" placeholder="<?= $selectedCharacter?->getFirstName() ?? "Jean"; ?>">
+
+        </form>
+        <form method="post" action="index.php?ctrl=personnages&article=modifierPersonnage">
+            <input type="hidden" name="ctrl" value="personnages">
+            <input type="hidden" name="action" value="updateCharacter">
+            <input type="hidden" name="characterId" value="<?= $selectedCharacter->getId() ?>">
+
+            <div class="noms">
+                <div>
+                    <label for="prenom">Prénom</label>
+                    <input maxlength="15" type="text" placeholder="<?= $selectedCharacter?->getFirstName() ?? "Jean"; ?>">
+                </div>
+
             </div>
 
-        </div>
+            <div class="image">
+                <div class="imageChoisi">
+                    <p>Image</p>
+                    <input type="file" id="photoUpload" name="photo" accept="image/*" style="display: none;">
+                    <img id="photoSend" src="./view/design/image/upload.png" alt="">
+                    <span id="fileName">Pas de fichier ajoutée</span>
+                </div>
 
-        <div class="image">
-            <div class="imageChoisi">
-                <p>Image</p>
-                <input type="file" id="photoUpload" name="photo" accept="image/*" style="display: none;">
-                <img id="photoSend" src="./view/design/image/upload.png" alt="">
-                <span id="fileName">Pas de fichier ajoutée</span>
+                <div class="imageUser">
+                    <img id="img" src="<?= $imgURL . $selectedCharacter?->getImage() ?? "img"; ?>"
+                        alt="<?= $selectedCharacter?->getFirstName() ?? "Jean"; ?>" style=" max-width: 240px;">
+                </div>
             </div>
 
-            <div class="imageUser">
-                <img id="img" src="<?= $imgURL . $selectedCharacter?->getImage() ?? "img"; ?>"
-                    alt="<?= $selectedCharacter?->getFirstName() ?? "Jean"; ?>" style=" max-width: 240px;">
-            </div>
-        </div>
-    </form>
+            <button type="submit" class="button-vert">Enregistrer les modifications</button>
+        </form>
+    
 
 </article>

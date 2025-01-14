@@ -46,13 +46,11 @@
             </section>
 
 
-            <?php
-           
-            include_once $lien; ?>
-            <section class="footer">
-                <a href="#"><button id="dialogQuitter" class=button-rouge>Quitter</button></a>
-                <a href="./ajouterQuestion.view.php"><button>Sauvegarder</button></a>
-            </section>
+            <?php include_once $lien; ?>
+            <form action="index.php" method="get" class="footer">
+                <button type="submit" name="ctrl" value="creation" id="dialogQuitter" class=button-rouge>Quitter</button>
+                <button type="submit" name="ctrl" value="personnages">Sauvegarder</button>
+            </form>
 
 
         </section>
