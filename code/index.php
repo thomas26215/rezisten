@@ -12,12 +12,7 @@ const CTRLS = array('loginAccount', 'createAccount', 'authentification', 'mainNo
 // Démarre la session
 session_start();
 
-// Vérifie si une session est active et affiche l'ID utilisateur
-if (isset($_SESSION["user_id"])) {
-    echo "ID utilisateur : " . htmlspecialchars($_SESSION["user_id"]);
-} else {
-    echo "Pas de session";
-}
+
 
 // On utilise la variable globale $_REQUEST pour récupérer 'ctrl' en GET ou POST
 $ctrl = $_REQUEST['ctrl'] ?? '';
