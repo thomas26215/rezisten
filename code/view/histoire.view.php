@@ -39,9 +39,14 @@
                         <input type="hidden" name="ctrl" value="histoire">
                         <input type="hidden" name="idDialog" id="idDialogInput" value="<?= $idDialog ?>">
                         <input type="hidden" name="prevSpeaker" value="<?=$speaker->getImage()?>">
-
-                        <button class="before button-gris" type="submit" onclick="document.getElementById('idDialogInput').value = <?= max($idDialog -1, 1) ?>">
-                        < Précédent </button>
+                        <?php if($idDialog == $firstbonus || $_SESSION['lastDialog'] == $idDialog-1){ ?>
+                            <button class="before button-gris">Pas de dialogue précédent</button>
+                        <?php }
+                        else{?>
+                         <button class="before button-gris" type="submit" onclick="document.getElementById('idDialogInput').value = <?= max($idDialog -1, 1) ?>">
+                         < Précédent </button>
+                        <?php } ?>
+                       
 
                         <button class="next button-gris" type="submit" onclick="document.getElementById('idDialogInput').value = <?= $idDialog + 1 ?>">
                         Suivant ></button>
