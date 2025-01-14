@@ -2,7 +2,9 @@
 
 include_once('framework/view.fw.php');
 include_once('model/users.class.php');
+include_once('model/histoires.class.php');
 include_once('model/progression.class.php');
+include_once('model/recuperationMotDePasse.class.php');
 include_once('model/verificationEmail.class.php');
 include_once('model/composer/sendMail.utilitaire.php');
 
@@ -44,12 +46,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['auth'])) {
                 $user->create();
                 $sendMail = new EmailSender();
                 $checkEmail = CheckEmail::generate($user->getId());
-                $sendMail->welcome($user->checkEmail(), $checkEmail->getToken());
+                $sendMail->welcome($user->getMail(), $checkEmail->getToken());
                 echo "Compte créé avec succès pour " . $formData['username'];
                 // Initialisation de la progression
-                $progression = Progression::read($user->getId(), 1);
-                $progression->setStatus(1);
-                $progression->update();
+                $progression = new Progression($user, Story::read(1), true);
+                $progression->create();
                 // Réinitialiser le formulaire après un succès
                 $formData = array_fill_keys(array_keys($formData), '');
                 $formData['check'] = false;

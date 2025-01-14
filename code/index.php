@@ -5,7 +5,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 // On utilise la variable globale $_REQUEST car on envoie des formulaires en GET et en POST
-$ctrl = $_REQUEST['ctrl'] ?? 'mainNonConnecte';
+$ctrl = $_REQUEST['ctrl'] ?? '';
 
 //Nécessaire de compléter quand on crée une vue pour vérifier que la vue appelée existe bien
 const CTRLS = array('loginAccount', 'createAccount', 'authentification', 'mainNonConnecte', 'main','mesHistoires', 'histoire','question', 'listeChapitre', "listeHistoire", 'creation', 'personnages', 'profil', 'demandeCreateur', 'consulterLieu', 'motdepasseoublie', 'changermotdepasse');
@@ -16,6 +16,8 @@ session_start();
 
 // On utilise la variable globale $_REQUEST pour récupérer 'ctrl' en GET ou POST
 $ctrl = $_REQUEST['ctrl'] ?? '';
+
+echo $_SESSION['user_id'];
 
 // Vérification si $ctrl est vide
 if (empty($ctrl)) {
