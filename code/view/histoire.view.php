@@ -24,7 +24,7 @@
             <img class="fond" src="./view/design/image/image_test.png" alt="Fond">
             <div class="personnages">
                 <img class="parle" src="<?= $imgSpeaker ?>" alt="<?=$speaker->getFirstName()?>">
-                <img class="parle-pas" src="<?=$prevSpeaker?>" alt="resistant">
+                <img class="parle-pas" src="<?=$prevSpeaker?>" alt="">
             </div>
         </article>
 

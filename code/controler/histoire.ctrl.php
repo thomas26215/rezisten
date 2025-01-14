@@ -19,6 +19,7 @@ $prevSpeaker = $_GET['prevSpeaker'] ?? "none";
 
 $imgURL = "https://localhost:8080/rezisten/imgPersonnage/";
 $audioURL = "https://localhost:8080/rezisten/doublageDialogue/histoire".$idStory."/";
+$placeURL = "https://localhost:8080/rezisten/imgLieux/";
 
 $dialog = Dialog::read($idDialog,$idStory);
 $view = new View();
@@ -42,8 +43,11 @@ if ($dialog === null) {
     }
 
     $place = $story->getPlace();
+    $imgPlace = $placeURL.$place->getId().".webp";
+    $view->assign('imgPlace',$imgPlace);
     $view->assign('story', $story);
     $view->assign('place', $place);
+    $view->assign('idChap',$story->getChapter()->getNumchap());
     $view->display('finHistoire');
 } elseif($dialogPrev != null && $dialog->getBonus() != $dialogPrev->getBonus() && $_SESSION['difficulty'] == "générique") {
     // Sinon il faut s'assurer qu'on est pas dans le cas du dialogue numéro 1, que le dialogue demandé est  bonus sachant que le dialogue d'avant est non bonus
@@ -58,8 +62,11 @@ if ($dialog === null) {
                 $progression->create();
             }
         $place = $story->getPlace();
+        $imgPlace = $placeURL.$place->getId().".webp";
+        $view->assign('imgPlace',$imgPlace);
         $view->assign('story', $story);
         $view->assign('place', $place);
+        $view->assign('idChap',$story->getChapter()->getNumchap());
         $view->display('finHistoire');
     
 }
