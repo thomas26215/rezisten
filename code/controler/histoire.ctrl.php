@@ -23,10 +23,9 @@ $audioURL = "https://localhost:8080/rezisten/doublageDialogue/histoire".$idStory
 $dialog = Dialog::read($idDialog,$idStory);
 $view = new View();
 
-
 $firstBonus = Dialog::readFirstBonus($idStory);
 
-if($dialog->getId() > 1 && $dialog->getId() != $firstBonus){
+
     if($dialog == null || $dialog->getBonus() != Dialog::read($idDialog-1,$idStory)->getBonus()){
         if(!Progression::read($_SESSION['user_id'],$_SESSION['idStory']+1)){
             $progression = new Progression(User::read($_SESSION['user_id']),Story::read($_SESSION['idStory']+1),true);
@@ -36,7 +35,6 @@ if($dialog->getId() > 1 && $dialog->getId() != $firstBonus){
         $view->display('finHistoire');
     }
     
-}
 
 $story = Story::read($idStory);
 
