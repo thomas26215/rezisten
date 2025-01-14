@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <link rel="icon" href="./view/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="./favicon.ico" type="image/x-icon">
     
         <meta charset="utf-8">
         <title>Rézisten</title>
         <meta name="author" content="Groupe 11" />
-        <link rel="stylesheet" type="text/css" href="./view/design/contact.css">
+        <link rel="stylesheet" type="text/css" href="./design/contact.css">
     </head>
     <body> 
-        <?php include_once("./view/header.view.php")?>
+        <?php include_once("./headerPageSpeciales.view.php")?>
         <main>
             <h1>Nous contacter</h1>
             <form action="" method="post"> <!-- TO DO : conpléter le php (Thomas) -->
@@ -32,6 +32,6 @@
             </form>
         </main>
     </body>
-    <script src="./view/js/dyslexique.js"></script>
-    <?php include_once("./view/footer.view.php"); ?>
+    <script src="./js/dyslexique.js"></script>
+    <?php include_once("./footerPageSpeciales.view.php"); ?>
 </html>

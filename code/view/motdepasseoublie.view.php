@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mot de passe oublié</title>
     <link rel="stylesheet" href="./view/design/motdepasseoublie.css">
-    
 </head>
 <body>
     <?php include_once("./view/header.view.php")?>
@@ -13,15 +12,24 @@
         <h1>Mot de passe oublié</h1>
         <p class="texte">Veuillez saisir votre email de connexion afin de recevoir le lien de réinitialisation de votre mot de passe.</p>
     
-        <form action="">
+        <?php
+        if (isset($message)) {
+            echo "<p class='success'>$message</p>";
+        }
+        if (isset($error)) {
+            echo "<p class='error'>$error</p>";
+        }
+        ?>
+
+        <form method="POST" action="?ctrl=motdepasseoublie">
             <div class="email">
                 <label for="email">Email <span>*</span>: </label>
-                <input placeholder="Saisir votre email" type="email" name="email" id="email">
+                <input placeholder="adresse mail" type="email" name="email" id="email" required>
             </div>
             
             <div class="buttons">
-                <button>Demander un nouveau mot de passe</button>
-                <a href="login.view.php">Retour à la page de connexion</a>
+                <button type="submit" name="send">Demander un nouveau mot de passe</button>
+                <a href="index.php">Retour à la page de connexion</a>
             </div>
         </form>
     </main>

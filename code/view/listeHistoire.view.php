@@ -18,7 +18,7 @@
             <h2>Les Histoires</h2>
         </div>
         <?php foreach ($stories as $storie): ?>
-            <form method="get" class="story-form">
+            <form method="get" class="story-form" action="?">
                 <input type="hidden" name="ctrl" value="histoire">
                 <input type="hidden" name="idChap" value="<?= $idChap ?>">
                 <input type="hidden" name="idStory" value="<?= $storie->getId() ?>">

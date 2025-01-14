@@ -50,8 +50,33 @@ class lieuxTest extends TestCase {
     public function testReadAll() {
         $readPlaces = Place::readAll();
         var_dump ($readPlaces);
-        $this->assertEquals(count($readPlaces) ,15 );
+        $this->assertEquals(count($readPlaces) ,17 );
     }
+    public function testReadAllReturnsArray()
+{
+    $places = Place::readAll();
+    $this->assertIsArray($places);
+}
+
+public function testReadAllContainsCorrectData()
+{
+    // Créer quelques lieux de test
+    $place1 = new Place("Test Place 1", "Type 1", "Description 1", "City 1", "Coordinates 1");
+    $place2 = new Place("Test Place 2", "Type 2", "Description 2", "City 2", "Coordinates 2");
+    $place1->create();
+    $place2->create();
+
+    $places = Place::readAll();
+
+    // Vérifier que les lieux créés sont dans le résultat
+    $this->assertContains($place1->getName(), $places);
+    $this->assertContains($place2->getName(), $places);
+
+    // Nettoyer les données de test
+    Place::delete($place1->getId());
+    Place::delete($place2->getId());
+}
+
 
 
     public function testUpdate() {
