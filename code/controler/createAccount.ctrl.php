@@ -42,6 +42,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['auth'])) {
                 $user = new User($formData['username'], $formData['first_name'], $formData['surname'], $formData['date'], $formData['email'], $formData['password'], 'j', true);
                 $user->create();
                 echo "Compte créé avec succès pour " . $formData['username'];
+                // Initialisation de la progression
+                $progression = Progression::read($user->getId(), 1);
+                $progression->setStatus(1);
                 // Réinitialiser le formulaire après un succès
                 $formData = array_fill_keys(array_keys($formData), '');
                 $formData['check'] = false;

@@ -27,7 +27,6 @@ if (file_exists($path)) {
     // Charger le contrôleur
     require_once($path);
 } else {
-    // Gérer le cas où le fichier du contrôleur n'existe pas
     http_response_code(404); // Envoie un code de réponse 404 Not Found
     die("Fichier de contrôleur non trouvé.");
 }
