@@ -1,9 +1,11 @@
+# Projet Rezisten
+
 <dl>
 <dt>Chef·fe projet</dt>
 <dd>FONTANIERE Tristan</dd>
 <dt>Membres</dt>
 <dd>
-- 
+
 - PEGUIN Quentin
 - VENOUIL Thomas
 - ARNAUD Sophie
@@ -16,17 +18,15 @@
 
 ## Table des matières 
 
--  [Introduction](#Introduction)
-- [Objectifs](#Objectifs)
-- [Technologies utilisées](#Technologies-utilisées)
-- [Fonctionnalités](#Fonctionnalités)
-- [Installation](# Installation)
-- [Utilisation](# Utilisation)
-- [Idées](# Idées)
-- [Droits d'auteur](# Droits-d'auteur)
-- [Contact](# Contact)
-
-
+- [Introduction](#introduction)
+- [Objectifs](#objectifs)
+- [Technologies utilisées](#technologies-utilisées)
+- [Fonctionnalités](#fonctionnalités)
+- [Installation](#installation)
+- [Utilisation](#utilisation)
+- [Idées](#idées)
+- [Droits d'auteur](#droits-dauteur)
+- [Contact](#contact)
 
 ## Introduction
 
@@ -35,8 +35,6 @@ Notre application permet aux utilisateurs de :
 - Découvrir l'histoire locale de manière ludique
 - Apprendre sur des événements comme la résistance du Vercors et l'histoire de Jean Moulin
 
-
-
 ## Objectifs
 
 - **Revaloriser le patrimoine culturel** lié à la Seconde Guerre mondiale
@@ -44,21 +42,17 @@ Notre application permet aux utilisateurs de :
 - Transformer l'apprentissage historique en une expérience interactive
 - Encourager les jeunes à visiter des sites historiques
 
-
-
 ## Technologies utilisées
 
 - **HTML** : Structure du contenu web.
 - **CSS** : Style et mise en page.
 - **PHP** : Traitement côté serveur et gestion des bases de données.
 - **Javascript** pour les interactions utilisateur et quelques éléments ajoutant une attractivité visuelle au site (animations,...).
-- **PostgreSQL** Système de gestion de base de données pour stocker les informations des utilisateurs et des séances .
-
-
+- **PostgreSQL** Système de gestion de base de données pour stocker les informations des utilisateurs et des séances.
 
 ## Fonctionnalités
 
-#### Pour les utilisateurs
+### Pour les utilisateurs
 
 **Immersion narrative**
 
@@ -74,7 +68,7 @@ Notre application permet aux utilisateurs de :
 
 - Découvrez des lieux historiques réels liés aux récits
 
-#### Pour les créateurs de contenu
+### Pour les créateurs de contenu
 
 **Création d'histoires**
 
@@ -86,46 +80,47 @@ Notre application permet aux utilisateurs de :
 - Processus de révision pour assurer la qualité et l'exactitude historique
 - Possibilité de partager vos créations avec la communauté
 
-
 ## Installation
+
 Pour installer le projet localement, suivez ces étapes :
 
-​1. Clonez le dépôt :
- ```Shell
-   git clone https://github.com/votre-utilisateur/votre-repo.git
+1. Clonez le dépôt :
+```bash
+git clone https://github.com/votre-utilisateur/votre-repo.git
 ```
+
 2. Accédez au répertoire du projet :
-```Shel
-   cd votre-repo
+```bash
+cd votre-repo
 ```
+
 3. Configurez votre serveur local pour exécuter les fichiers PHP.
-// A changer car on doit passer sur postgres je crois
-4. Importez la base de données depuis le fichier ```export.sql``` dans votre gestionnaire .
 
-
+4. Importez la base de données depuis le fichier `export.sql` dans votre gestionnaire.
 
 ## Utilisation
-1. Lancez votre serveur local.
-2. Ouvrez votre navigateur et accédez à ```http://localhost/votre-repo```.
-3. Connectez-vous avec :
-- identifiants : RezistenTest 
-- mot de passe bnw92ambm3aib37hzax8 
-pour commencer à utiliser l'application .
 
+1. Lancez votre serveur local.
+2. Ouvrez votre navigateur et accédez à `http://localhost/votre-repo`.
+3. Connectez-vous avec :
+   - identifiants : RezistenTest 
+   - mot de passe : bnw92ambm3aib37hzax8 
+   pour commencer à utiliser l'application.
 
 ## Idées
-Voici des idées que nous pensons intégrer par la suites :
-- Un système social, plus précisément pouvoir ajouter ses amis, et voir où ils en sont dans leurs histoires, mais également les histoires qu'ils ont pu partager
-- Un système de vote, grâce au quel on pourrait mettre en avant les histoires que les gens ont le plus aimés.
 
+Voici des idées que nous pensons intégrer par la suite :
+- Un système social, plus précisément pouvoir ajouter ses amis, et voir où ils en sont dans leurs histoires, mais également les histoires qu'ils ont pu partager
+- Un système de vote, grâce auquel on pourrait mettre en avant les histoires que les gens ont le plus aimées.
 
 ## Droits d'auteur
-Ce projet est protégé par les droits d'auteur. Tous les droits sont réservés à **[L’édition de ce site est assurée par Tristan FONTANIERE, Quentin PEGUIN, Sophie ARNAUD, Thomas VENOUIL, Maria Luiza CELUSNIAK DE SOUZA, Brayan BILS, Elouan JOANNIC, étudiants à l’IUT2 de Grenoble.]**. Aucune partie de ce projet ne peut être reproduite, distribuée ou modifiée sans l'autorisation écrite préalable du titulaire des droits.
+
+Ce projet est protégé par les droits d'auteur. Tous les droits sont réservés à **L'édition de ce site est assurée par Tristan FONTANIERE, Quentin PEGUIN, Sophie ARNAUD, Thomas VENOUIL, Maria Luiza CELUSNIAK DE SOUZA, Brayan BILS, Elouan JOANNIC, étudiants à l'IUT2 de Grenoble.** Aucune partie de ce projet ne peut être reproduite, distribuée ou modifiée sans l'autorisation écrite préalable du titulaire des droits.
 
 ## Contact
+
 Pour toute question ou suggestion, n'hésitez pas à me contacter :
 - **Nom** : Rezisten
 - **Email** : rezisten.contact@gmail.com
 
-
-Merci d'avoir consulté ce README ! J'espère que vous apprécierez le développement et l'utilisation de cette application web
+Merci d'avoir consulté ce README ! J'espère que vous apprécierez le développement et l'utilisation de cette application web.
