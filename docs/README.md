@@ -1,3 +1,5 @@
+## Équipe Groupe 11
+
 <dl>
 <dt>Chef·fe projet</dt>
 <dd>FONTANIERE Tristan</dd>
@@ -16,15 +18,15 @@
 
 ## Table des matières 
 
--  [Introduction](#Introduction)
+- [Introduction](#Introduction)
 - [Objectifs](#Objectifs)
 - [Technologies utilisées](#Technologies-utilisées)
 - [Fonctionnalités](#Fonctionnalités)
-- [Installation](# Installation)
-- [Utilisation](# Utilisation)
-- [Idées](# Idées)
-- [Droits d'auteur](# Droits-d'auteur)
-- [Contact](# Contact)
+- [Installation](#Installation)
+- [Utilisation](#Utilisation)
+- [Idées](#Idées)
+- [Droits d'auteur](#Droits-d'auteur)
+- [Contact](#Contact)
 
 
 
