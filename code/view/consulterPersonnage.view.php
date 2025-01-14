@@ -10,7 +10,7 @@
             <select name="selectedCharacter" id="personnage" onchange="this.form.submit()">
                 <option value="">Sélectionnez un personnage</option>
                 <?php foreach ($characters as $char) { ?>
-                    <option value="<?= $char->getId() ?>"><?= $char->getFirstName() ?></option>
+                    <option value="<?= $char?->getId() ?? 0 ?>"><?= $char?->getFirstName() ?? "Jean"?></option>
                 <?php } ?>
             </select>
         </div>

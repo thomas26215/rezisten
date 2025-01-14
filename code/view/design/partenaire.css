@@ -1,37 +1,40 @@
 body{
+    background-image: var(--background-drapeau);
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+h1{
     text-align: center;
-    background-image: var(--background-drapeau);
+    width: 100%;
 }
 
-body>ul>li>h2{
+main {
+    align-items: center;
+}
+
+body>main>ul>li{
+    width: 70%;
+    margin: auto;
+}
+
+body>main>ul>li>h2{
     text-align: left;
 }
 
-body>ul{
-    margin-left: 20%;
-    margin-right: 20%;
-}
-
-body>ul>li>article{
-    display: flex;
-}
-
-body ul li article img {
-    width: 200px;
-    height: 150px;
-    object-fit: cover;
+.partenaire-img{
+    width: 8vw;
     object-position: center;
-    margin-right: 5%;
-    max-width: 150px;
-    min-width: 100px;
+    margin-right: 5%; 
 }
 
-body>ul>li>article>section{
+body>main>ul>li>article>section{
     text-align: left;
 }
 
-body>ul>li>article>section>p{
-    text-align: justify;
+.partenaire-texte{
+    text-align: justify ;
 }
