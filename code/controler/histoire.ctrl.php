@@ -20,6 +20,7 @@ $prevSpeaker = $_GET['prevSpeaker'] ?? "none";
 $imgURL = "https://localhost:8080/rezisten/imgPersonnage/";
 $audioURL = "https://localhost:8080/rezisten/doublageDialogue/histoire".$idStory."/";
 $placeURL = "https://localhost:8080/rezisten/imgLieux/";
+$backgroundURL = "http://localhost:8080/rezisten/backgroundHistoire/";
 
 $dialog = Dialog::read($idDialog,$idStory);
 $view = new View();
@@ -27,6 +28,7 @@ $story = Story::read($idStory);
 
 $firstBonus = Dialog::readFirstBonus($idStory);
 $dialogPrev = Dialog::read($idDialog - 1, $idStory);
+
 
 
 if ($dialog === null) {
@@ -89,6 +91,26 @@ if($dialog->getContent() == "limquestion"){
 }
 
 //Sinon on met à jour les données sur le dialogue et les personnages incluent dans ce passage.
+// On gère aussi le background en fonction de l'avancée
+
+$dialogLimit = Dialog::readLimit($idStory);
+function imageExists($url) {
+    $headers = @get_headers($url);
+    return $headers && strpos($headers[0], '200') !== false;
+}
+
+$background1 = $backgroundURL . "hist_" . $story->getId() . "bg1.webp";
+$background2 = $backgroundURL . "hist_" . $story->getId() . "bg2.webp";
+
+// Choix du background
+if ($dialog->getId() > $dialogLimit && imageExists($background2)) {
+    $background = $background2;
+} elseif (imageExists($background1)) {
+    $background = $background1;
+} else {
+    // Si aucune des images n'existe, définis un background par défaut
+    $background = $backgroundURL . "default_bg.webp";
+}
 
 $idChap = $story->getChapter()->getNumchap();
 $speaker = $dialog->getSpeaker();
@@ -100,6 +122,7 @@ if($prevSpeaker != $speaker->getImage()){
     $prevSpeaker = "none.webp";
 }
 
+$view->assign('background',$background);
 $view->assign('firstbonus',$firstBonus);
 $view->assign('prevSpeaker',$prevSpeaker);
 $view->assign('dub',$dub);
