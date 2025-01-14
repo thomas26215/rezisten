@@ -3,7 +3,7 @@
 include_once('framework/view.fw.php');
 include_once('model/users.class.php');
 include_once('model/progression.class.php');
-include_once('model/recuperationMotDePasse.class.php');
+include_once('model/verificationEmail.class.php');
 include_once('model/composer/sendMail.utilitaire.php');
 
 $errors = [];
@@ -49,6 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['auth'])) {
                 // Initialisation de la progression
                 $progression = Progression::read($user->getId(), 1);
                 $progression->setStatus(1);
+                $progression->update();
                 // Réinitialiser le formulaire après un succès
                 $formData = array_fill_keys(array_keys($formData), '');
                 $formData['check'] = false;
