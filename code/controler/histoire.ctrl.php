@@ -22,6 +22,7 @@ $audioURL = "https://localhost:8080/rezisten/doublageDialogue/histoire".$idStory
 
 $dialog = Dialog::read($idDialog,$idStory);
 $view = new View();
+$story = Story::read($idStory);
 
 $firstBonus = Dialog::readFirstBonus($idStory);
 
@@ -31,12 +32,14 @@ $firstBonus = Dialog::readFirstBonus($idStory);
             $progression = new Progression(User::read($_SESSION['user_id']),Story::read($_SESSION['idStory']+1),true);
             $progression->create();
         }
-       
+        $place = $story->getPlace();
+        
+        $view->assign('story',$story);
+        $view->assign('place',$place);
         $view->display('finHistoire');
     }
     
 
-$story = Story::read($idStory);
 
 // Si le dialogue repère est détecté on bascule sur la question en appelant la vue avec les bonnes données
 if($dialog->getContent() == "limquestion"){

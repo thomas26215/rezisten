@@ -16,9 +16,9 @@ $nomLieuEspaceEnPlus = "prison de Montluc";
 <body>
     <?php include_once './view/headerHistoire.view.php'; ?>
     <main class="flex-col">
-        <h1>Vous avez terminé l’Histoire</h1>
-        <p>$DescriptionLieu ,  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+        <h1>Vous avez terminé l’Histoire <?=$story->getId()?> : <?=$story->getTitle()?> !</h1>
+        <h2>Voici quelques informations sur le lieu qui vous était présenté : <?=$place->getName()?></h2>
+        <p><?=$place->getDescription()?></p>
         <img class="img-milieu" src="./view/design/image/test_lieux.png" alt="">
         <p>Aller visiter le <a href="https://www.google.com/search?client=firefox-b-d&q=<?= $nomLieuEspaceEnPlus ?>"
                 target="_blank"><span>lieu</span></a></p>
