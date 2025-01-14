@@ -1,3 +1,8 @@
+<?php
+   include_once('./model/users.class.php');
+?>
+
+
 <head>
         <link rel="icon" href="./view/favicon.ico" type="image/x-icon">
     
@@ -13,6 +18,6 @@
    </a>
    <a href="./index.php?ctrl=profil" class="user">
       <img src="./view/design/image/photoProfil.jpg" alt="user">
-      <p class="nomUser">Jano</p>
+      <p class="nomUser"><?= (User::read((int)$_SESSION['user_id']))->getUsername()?></p> <!-- affichage du pseudo du user -->
    </a>
 </header>

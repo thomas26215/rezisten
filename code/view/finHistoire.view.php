@@ -16,15 +16,18 @@ $nomLieuEspaceEnPlus = "prison de Montluc";
 <body>
     <?php include_once './view/headerHistoire.view.php'; ?>
     <main class="flex-col">
-        <h1>Vous avez terminé l’Histoire</h1>
-        <p>$DescriptionLieu ,  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-        <img class="img-milieu" src="./view/design/image/test_lieux.png" alt="">
-        <p>Aller visiter le <a href="https://www.google.com/search?client=firefox-b-d&q=<?= $nomLieuEspaceEnPlus ?>"
+        <h1>Vous avez terminé l’Histoire <?=$story->getId()?> : <?=$story->getTitle()?> !</h1>
+        <h2>Voici quelques informations sur le lieu qui vous était présenté : <?=$place->getName()?></h2>
+        <p><?=$place->getDescription()?></p>
+        <img class="img-milieu" src="<?=$imgPlace?>" alt="">
+        <p>Allez visiter le <a href="https://www.google.com/search?client=firefox-b-d&q=<?= $place->getName() ?>"
                 target="_blank"><span>lieu</span></a></p>
-        <a href="">
-            <button>Histoire Suivante -></button>
-        </a>
+        <form action="?" method="get">
+                <input type="hidden" name="ctrl" value="histoire">
+                <input type="hidden" name="idStory" value="<?= $story->getId()+1 ?>">
+                <input type="hidden" name="idDialog" value="1">
+            <button type="submit">Histoire suivante -></button>
+        </form>
     </main>
 </body>
     <script src="./view/js/dyslexique.js"></script>

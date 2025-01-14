@@ -62,6 +62,23 @@ class CheckEmail {
         $this->expirationDate = $expirationDate;
     }
 
+    public static function generate(int $userId){
+        $user = User::read($userId);
+        if (!$user) {
+            throw new Exception("Utilisateur non trouvé");
+        }
+        
+        $token = self::genererChaineAleatoire(10); // Appel statique
+        $checkEmail = new CheckEmail($user, $token);
+        
+        if($checkEmail->create()) {
+            return CheckEmail::read($userId);
+        } else {
+            throw new Exception("Impossible de créer la récupération de mot de passe");
+        }
+    }
+
+
     /* --- Méthodes CRUD --- */
 
     public function create(): bool {
@@ -112,6 +129,14 @@ class CheckEmail {
             return DAO::getInstance()->deleteDatas("verifications_email", ["utilisateur_id" => $userId]);
         }
         return false;
+    }
+    public static function genererChaineAleatoire(int $longueur = 10): string {
+        $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $chaineAleatoire = '';
+        for ($i = 0; $i < $longueur; $i++) {
+            $chaineAleatoire .= $caracteres[rand(0, strlen($caracteres) - 1)];
+        }
+        return $chaineAleatoire;
     }
 }
 

@@ -34,7 +34,7 @@
             </div>
             <button class="connecter">Se connecter</button>
             <div class="buttons">
-                <a href="./view/motdepasseoublie.view.php">   <!--TODO: Modifier le ligne-->
+                <a href="index.php?ctrl=motdepasseoublie">   <!--TODO: Modifier le ligne-->
                     <button type="button" class="button-gris button">Mot de passe oublié</button>
                 </a>
                 <a href="index.php?ctrl=createAccount">

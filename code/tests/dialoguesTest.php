@@ -22,10 +22,10 @@ class dialoguesTest extends TestCase {
 
     protected function setUp(): void {
         $this->chapter = new Chapter(1, "Comment rater son école d'art");
-        $this->creator = new User("prapra", "brayan", "bils", "24-08-2005", "bilsbrayan@gmail.com", "2706", "a");
+        $this->creator = new User("prapra", "brayan", "bils", "24-08-2005", "bilsbrayan@gmail.com", "2706", "a",true);
         $this->place = new Place("iut", "batiment", "Endroit où l'on a cours", "38000", "0.0");
         $this->story = new Story("Titre", $this->chapter, $this->creator, $this->place, "background", false);
-        $this->character = new Character("pierre", "chemin");
+        $this->character = new Character("pierre", "chemin",$this->creator);
         $this->dialog = new Dialog(1, $this->story, $this->character, "Bonjour", false, "11.mp3");    
     }
 
@@ -39,7 +39,7 @@ class dialoguesTest extends TestCase {
 
     public function testSetters() {
         $newStory = new Story("Nouveau titre", $this->chapter, $this->creator, $this->place, "new_background", true);
-        $newCharacter = new Character("jean", "nouveau_chemin");
+        $newCharacter = new Character("jean", "nouveau_chemin",$this->creator);
 
         $this->dialog->setStory($newStory);
         $this->dialog->setSpeaker($newCharacter);

@@ -11,23 +11,21 @@ class Story
     private int $id; // creer automatiquement
     private string $title;
     private Chapter $chapter;
-    private User $user;
+    private ?User $user; // Permettre à user d'être null
     private Place $place;
-    private string $background; //chemin d'accès a l'image de fond
+    private string $background; // chemin d'accès à l'image de fond
     private bool $visibility;
 
     private DAO $dao;
 
-    const bgURL = "https://192.168.14.118/imagesRezisten/histBackground/"; //pour les test ?
+    const bgURL = "https://192.168.14.118/imagesRezisten/histBackground/"; // pour les tests ?
 
-
-
-    public function __construct(string $title, chapter $chapter, User $user, Place $place, string $background, bool $visibility, int $id = -1)
+    public function __construct(string $title, Chapter $chapter, ?User $user, Place $place, string $background, bool $visibility, int $id = -1)
     {
         $this->setId($id);
         $this->setTitle($title);
         $this->setChapter($chapter);
-        $this->setUser($user);
+        $this->setUser($user); // Utiliser setUser qui gère null
         $this->setPlace($place);
         $this->setBackground($background);
         $this->setVisibility($visibility);
@@ -50,7 +48,7 @@ class Story
         return $this->chapter;
     }
 
-    public function getUser(): User
+    public function getUser(): ?User // Permettre à getUser de retourner null
     {
         return $this->user;
     }
@@ -70,8 +68,6 @@ class Story
         return $this->visibility;
     }
 
-
-
     /* Setter */
     public function setId(int $id): void
     {
@@ -86,7 +82,7 @@ class Story
         $this->title = $title;
     }
 
-    public function setChapter(chapter $chapter): void
+    public function setChapter(Chapter $chapter): void
     {
         if ($chapter == "") {
             throw new Exception("Le numéro de chapitre ne peut pas être vide");
@@ -94,12 +90,13 @@ class Story
         $this->chapter = $chapter;
     }
 
-    public function setuser(User $user): void
+    public function setUser(?User $user): void // Permettre à user d'être null
     {
+        // Aucune vérification nécessaire si user peut être null
         $this->user = $user;
     }
 
-    public function setPlace(place $place): void
+    public function setPlace(Place $place): void
     {
         $this->place = $place;
     }
@@ -117,8 +114,7 @@ class Story
         $this->visibility = $visibility;
     }
 
-
-    /* Méthodes CRUD et utilitaires sur la BDD */
+   /* Méthodes CRUD et utilitaires sur la BDD */
 
     public function create(): bool
     {
@@ -212,8 +208,8 @@ class Story
         $results = $dao->getColumnWithParameters("histoires", [], ["id"]);
         return array_column($results, 'id');
     }
-}
 
+}
 
 
 ?>

@@ -115,7 +115,7 @@ class Character {
             return $this->dao->update("personnages", [
                 "prenom" => $this->first_name,
                 "img" => $this->image,
-                "createur" => $this->createur,
+                "createur" => $this->creator,
             ], ["id" => (int)$this->id]) > 0;
         }
     }
@@ -135,8 +135,10 @@ class Character {
             throw new Exception("aucun personnage trouvé");
         }
 
-        for($i = 0; $i < sizeof($characters)-1 ; $i++){
+        for($i = 0; $i < sizeof($characters)-1; $i++){
+            var_dump($characters[$i]);
             $creat = User::read($characters[$i]['createur']);
+           
             $c = new Character($characters[$i]['prenom'],$characters[$i]['img'],$creat,$characters[$i]['id']);
             array_push($listCharacters,$c);
         }
