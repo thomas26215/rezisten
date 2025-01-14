@@ -46,9 +46,9 @@
 
                     <div class="flex-row">
                         <label for="lieux">Lieux : </label>
-                        <select id="lieux">
+                        <select id="lieux" name="lieux">
                             <?php foreach ($lieux as $lieu): ?>
-                                <option value="<?= $lieu->getId() ?>">
+                                <option value="<?= $lieu->getId() ?>" <?= $lieu->getId() == $histoire->getPlace()->getId() ? 'selected' : '' ?>>
                                     <?= $lieu->getName() ?>
                                 </option>
                             <?php endforeach; ?>
@@ -61,7 +61,7 @@
                 </form>
                 <div>
                     <label for="personnages">Personnages :</label>
-                    <a href="./consulterPersonnage.view.php"><button class=button-gris>Consulter les
+                    <a href="./index.php?ctrl=personnages"><button class=button-gris>Consulter les
                             personnages</button></a>
                 </div>
 
