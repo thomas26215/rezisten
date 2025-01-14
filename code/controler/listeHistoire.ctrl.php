@@ -5,8 +5,7 @@ include_once('./model/progression.class.php');
 include_once('./model/users.class.php');
 include_once('./framework/view.fw.php');
 
-$user = User::read($_SESSION["user_id"]);
-
+$user = $_SESSION["user_id"];
 
 $idChap = $_GET['idChap'];
 $nomChap = Chapter::read($idChap)->getTitle();
@@ -20,10 +19,12 @@ $progressions = [];
 
 foreach ($storyIds as $storyId) {
     $story = Story::read($storyId);
-    if ($story !== null) {
+    if ($story !== null && $story->getVisibility() !== false) {
         $stories[] = $story;
-        $progression = Progression::read($user->getId(), $storyId);
-        $progressions[$storyId] = $progression ? $progression->getStatus() : false;
+        $progression = Progression::read($user, $storyId);
+        if ($progression !== null) {
+            $progressions[$storyId] = $progression;
+        }
     }
 }
 

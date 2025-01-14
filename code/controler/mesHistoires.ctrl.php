@@ -4,7 +4,7 @@ include_once('./framework/view.fw.php');
 include_once('./model/users.class.php');
 include_once('./model/histoires.class.php');
 
-$user = User::read(3);
+$user = $_SESSION['user_id'];
 
 // Vérifier si une action de suppression est demandée
 if (isset($_GET['action']) && $_GET['action'] === 'delete' && isset($_GET['id'])) {
@@ -22,7 +22,7 @@ $allStoryIds = Story::getAllStoryIds(); // Utilisation de la méthode getAllStor
 
 foreach ($allStoryIds as $storyId) {
     $story = Story::read($storyId);
-    if ($story !== null && $story->getUser()->getId() == $user->getId()) {
+    if ($story !== null && $story->getUser()->getId() == $user) {
         if ($story->getVisibility() == false) {
             $publishedStories[] = $story;
         } else {
@@ -32,7 +32,7 @@ foreach ($allStoryIds as $storyId) {
 }
 
 $view = new View();
-$view->assign("publishedStories", $publishedStories);
+$view->assign("publishedStories", value: $publishedStories);
 $view->assign("savedStories", $savedStories);
 $view->display("mesHistoires");
 

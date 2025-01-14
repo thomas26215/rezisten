@@ -122,7 +122,7 @@ class Place {
                     $lieuData[$i]["commune"],
                     $lieuData[$i]["coordonnee"],
                     (int)$lieuData[$i]["id"]);
-                $result[] = $places->getName();
+                $result[] = $places;
                 $i++;
             }
             return $result;

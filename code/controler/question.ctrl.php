@@ -16,6 +16,7 @@ $audioURL = "https://localhost:8080/rezisten/doublageDialogue/histoire".$_SESSIO
 $imgURL = "https://localhost:8080/rezisten/imgPersonnage/";
 
 
+
 $story = Story::read($_SESSION['idStory']);
 
 
@@ -40,6 +41,7 @@ if($action === "change"){
 // Autre cas de la soumission d'une réponse. On récupère la question en fonction de la difficulté choisie et on vérifie si la réponse est correcte.
 elseif($action == "answer"){
     $answer = $_GET['answer'];
+    $firstbonus = Dialog::readFirstBonus($_SESSION['idStory']);
     
     $questionType = ($_SESSION['difficulty'] == "générique") ? 'g' : 's';
     $question = Question::read($_SESSION['idStory'],$questionType);
@@ -65,6 +67,7 @@ elseif($action == "answer"){
         $dub = $audioURL.$dialog->getDubbing().".WAV";
         $imgSpeaker = $imgURL.$speaker->getImage().".webp";
 
+        $view->assign('firstbonus',$firstbonus);
         $view->assign('dub',$dub);
         $view->assign('imgSpeaker',$imgSpeaker);
         $view->assign('speaker',$speaker);
