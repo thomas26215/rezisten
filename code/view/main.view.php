@@ -36,7 +36,7 @@
                 <a href="./index.php?ctrl=creation">
                     <button class="button-gris" type="submit">Créer une histoire</button>
                 </a>
-                <a href="./index.php?crtl=mesHistoires">
+                <a href="./index.php?ctrl=mesHistoires">
                     <button class="button-gris" type="submit">Consulter mes histoires </button>
                 </a>
             <?php endif; ?>

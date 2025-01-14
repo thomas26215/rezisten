@@ -31,3 +31,11 @@ dialog::backdrop {
     background-color: var(--noir);
     opacity: 0.4;
 }
+
+button{
+    padding: 1rem 2rem;
+}
+
+.button-grp{
+    width: 100%;
+}

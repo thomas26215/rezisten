@@ -1,5 +1,4 @@
 <?php
-session_start(); // Démarrez la session au début du script
 
 include_once('framework/view.fw.php');
 include_once('model/users.class.php');

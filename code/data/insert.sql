@@ -11,7 +11,7 @@ INSERT INTO DEMANDES VALUES(2,'aiel-id.png');
 INSERT INTO CHAPITRES(numchap,titre) values(0,'Prologue'),
 (1,'L''heure de résister'),
 (2,'Au coeur de la tragédie'),
-(100,'Workshop');
+(100,'Chapitre créateurs');
 
 
 --Création d'une hisoitr pour le prologue et deux pour le chapitre 1

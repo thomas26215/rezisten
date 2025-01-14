@@ -27,11 +27,11 @@
                 </div>
                 <form method="GET">
                     <!-- faire un if, pour que si c'est une instance of Question, ca envoie les bonnes infos pour le ctrl -->
-                <input type="hidden" name="ctrl" value="creation">
-                <input type="hidden" name="article" value="afficherHistoire">
-                <input type="hidden" name="idDialogue" value= <?= $dialogue->getId() ?> >
-                <input type="hidden" name="typeDialogue" value=<?= $dialogue instanceof Dialog ?>>
-                <img src="./view/design/image/poubelle.png" alt="poubelle" id="poubelle"></button>  <!-- Lié au pop up -->
+                    <input type="hidden" name="ctrl" value="creation">
+                    <input type="hidden" name="article" value="afficherHistoire">
+                    <input type="hidden" name="idDialogue" value= <?= $dialogue->getId() ?> >
+                    <input type="hidden" name="typeDialogue" value=<?= $dialogue instanceof Dialog ?>>
+                    <img src="./view/design/image/poubelle.png" alt="poubelle" id="poubelle"></button>  <!-- Lié au pop up -->
                 </form>
             
             </section>

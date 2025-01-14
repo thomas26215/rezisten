@@ -4,6 +4,9 @@ include_once('./framework/view.fw.php');
 include_once('./model/dialogues.class.php');
 include_once('./model/questions.class.php');
 include_once('./model/chapitres.class.php');
+include_once('./model/progression.class.php');
+include_once('./model/users.class.php');
+
 
 
 
@@ -17,10 +20,21 @@ $imgURL = "https://localhost:8080/rezisten/imgPersonnage/";
 $audioURL = "https://localhost:8080/rezisten/doublageDialogue/histoire".$idStory."/";
 
 $dialog = Dialog::read($idDialog,$idStory);
-
 $view = new View();
+
+
+if($dialog == null || $dialog->getBonus() != Dialog::read($idDialog-1,$idStory)->getBonus()){
+    if(!Progression::read($_SESSION['user_id'],$_SESSION['idStory']+1)){
+        $progression = new Progression(User::read($_SESSION['user_id']),Story::read($_SESSION['idStory']+1),true);
+        $progression->create();
+    }
+   
+    $view->display('finHistoire');
+}
+
 $story = Story::read($idStory);
 
+var_dump($_SESSION);
 // Si le dialogue repère est détecté on bascule sur la question en appelant la vue avec les bonnes données
 if($dialog->getContent() == "limquestion"){
     $question = Question::read($idStory,'s');
@@ -28,6 +42,7 @@ if($dialog->getContent() == "limquestion"){
     $_SESSION['idDialog'] = $idDialog;
     $_SESSION['difficulty'] = "spécifique";
     
+    $view->assign('error','');
     $view->assign('story',$story);
     $view->assign('question',$question);
     $view->display('question');
@@ -39,7 +54,11 @@ $idChap = $story->getChapter()->getNumchap();
 $speaker = $dialog->getSpeaker();
 $imgSpeaker = $imgURL.$speaker->getImage().".webp";
 $dub = $audioURL.$dialog->getDubbing().".WAV";
-$prevSpeaker = $imgURL.$prevSpeaker.".webp";
+if($prevSpeaker != $speaker->getImage()){
+    $prevSpeaker = $imgURL.$prevSpeaker.".webp";
+}else{
+    $prevSpeaker = "none.webp";
+}
 
 $view->assign('prevSpeaker',$prevSpeaker);
 $view->assign('dub',$dub);

@@ -5,7 +5,7 @@ include_once('./model/progression.class.php');
 include_once('./model/users.class.php');
 include_once('./framework/view.fw.php');
 
-$user = User::read(1);
+$user = User::read($_SESSION["user_id"]);
 
 
 $idChap = $_GET['idChap'];

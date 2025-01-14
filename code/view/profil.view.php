@@ -18,10 +18,9 @@
                 <img src="./view/design/image/photoProfil.jpg" alt="photo profil">
                 <p><?= $pseudo ?></p>
             </div>
-
-            <a href="main.view.php">
-                <button class="deconnect button-rouge">Se déconnecter</button>
-            </a>
+            <form class="non-style" method="post" action="?ctrl=profil">
+                <button class="deconnect button-rouge" name="disconnect">Se déconnecter</button>
+            </form>
         </div>
 
         <form action="post">
