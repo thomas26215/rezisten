@@ -9,6 +9,8 @@ $characters = Character::readAllCharacters();
 $selectedCharacter = null;
 $message = null;
 
+var_dump($characters);
+
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -16,8 +18,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $selectedCharacterId = (int)$_POST['selectedCharacter'];
         $selectedCharacter = Character::read($selectedCharacterId);
         
-    }  elseif ($_GET['article'] === 'ajouterPersonnage' && isset($_POST['characterId'])) {
-        
+    }  elseif (isset($_POST['action']) && $_POST['action'] === 'ajouterCharacter' && isset($_POST['characterId'])) {
+        try {
+            // Retrieve form data
+            $firstName = trim($_POST['prenom'] ?? '');
+            $uploadedImage = $_FILES['photoUpload'] ?? "null.png";
+    
+            // Validate inputs
+            if (empty($firstName)) {
+                throw new Exception("Le prénom ne peut pas être vide.");
+            }
+            var_dump($firstName);
+            if ($uploadedImage && $uploadedImage['error'] === UPLOAD_ERR_OK) {
+                // Define upload path
+                $uploadDirectory = './view/design/image/imageUser';
+                $fileName = basename($uploadedImage['name']);
+                $filePath = $uploadDirectory . $fileName;
+    
+
+                // Move uploaded file
+                if (!move_uploaded_file($uploadedImage['tmp_name'], $filePath)) {
+                    throw new Exception("Erreur lors du téléchargement de l'image.");
+                }
+    
+                $imageName = $fileName; // Store the filename in the database
+            } else {
+                throw new Exception("Aucune image valide n'a été téléchargée.");
+            }
+    
+            // Create new Character instance
+            $userId = $_SESSION['user_id'] ?? null; // Check for logged-in user
+            $creator = $userId ? User::read($userId) : User::read(4); // Assuming the user ID is stored in the session
+            if (!$creator) {
+                throw new Exception("Créateur introuvable.");
+            }
+    
+            $newCharacter = new Character($firstName, $imageName, $creator);
+    
+            // Save to the database
+            $newCharacter->create();
+        } catch (Exception $e) {
+            $errorMessage = $e->getMessage();
+        }
     } elseif (isset($_POST['action']) && $_POST['action'] === 'updateCharacter' && isset($_POST['characterId'])) {
         
         // Update the character
@@ -46,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $errorMessage = "Personnage introuvable.";
             }
         }
-    }elseif (isset($_POST['characterId'])) {
+    }elseif (isset($_POST['action']) && $_POST['action'] === 'supprimerPersonnage' && isset($_POST['characterId'])) {
         // Deletion logic triggered by form submission
         $characterIdToDelete = (int)$_POST['characterId'];
 
