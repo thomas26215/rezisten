@@ -136,7 +136,7 @@ class Character {
         }
 
         for($i = 0; $i < sizeof($characters)-1; $i++){
-            var_dump($characters[$i]['createur']);
+            var_dump($characters[$i]);
             $creat = User::read($characters[$i]['createur']);
            
             $c = new Character($characters[$i]['prenom'],$characters[$i]['img'],$creat,$characters[$i]['id']);
