@@ -8,6 +8,7 @@
 
 testdb/rezisten.db
 code/data/database.db
+code/data/insertQuentin.sql
 ### Eclipse ###
 .metadata
 tmp/
