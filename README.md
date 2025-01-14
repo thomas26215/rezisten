@@ -46,15 +46,15 @@ Il est vivement déconseillé de modifier le fichier `.gitattributes`.
 
 ## Table des matières 
 
-- ##### [Introduction](#Introduction)
-- ##### [Objectifs](#Objectifs)
-- ##### [Technologies utilisées](#Technologies utilisées)
-- ##### [Fonctionnalités](#Fonctionnalités)
-- ##### [Installation](# Installation)
-- ##### [Utilisation](# Utilisation)
-- ##### [Idées](# Idées)
-- ##### [Droits d'auteur](# Droits-d'auteur)
-- ##### [Contact](# Contact)
+-  [Introduction](#Introduction)
+- [Objectifs](#Objectifs)
+- [Technologies utilisées](#Technologies-utilisées)
+- [Fonctionnalités](#Fonctionnalités)
+- [Installation](# Installation)
+- [Utilisation](# Utilisation)
+- [Idées](# Idées)
+- [Droits d'auteur](# Droits-d'auteur)
+- [Contact](# Contact)
 
 
 
