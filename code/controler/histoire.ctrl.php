@@ -17,9 +17,16 @@ $imgURL = "https://localhost:8080/rezisten/imgPersonnage/";
 $audioURL = "https://localhost:8080/rezisten/doublageDialogue/histoire".$idStory."/";
 
 $dialog = Dialog::read($idDialog,$idStory);
-
 $view = new View();
+
+
+if($dialog == null || $dialog->getBonus() != Dialog::read($idDialog-1,$idStory)->getBonus()){
+    $view->display('finHistoire');
+}
+
 $story = Story::read($idStory);
+
+var_dump($_SESSION);
 
 // Si le dialogue repère est détecté on bascule sur la question en appelant la vue avec les bonnes données
 if($dialog->getContent() == "limquestion"){
