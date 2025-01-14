@@ -71,7 +71,7 @@ elseif($action == "answer"){
         $view->assign('dialog',$dialog);
         $view->assign('story',$story);
         $view->assign('idStory',$_SESSION['idStory']);
-        $view->assign('idDialog',$_SESSION['idDialog']);
+        $view->assign('idDialog',$idDialog);
 
         $view->display('histoire');
 

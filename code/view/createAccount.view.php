@@ -61,7 +61,9 @@
                 </div>
             </div>
             <button class="creer" type="submit" name="auth" value="create">Créer mon compte</button>
-            <button class="connecter button-gris" name="auth" value="login">Se connecter</button>
+        </form>
+        <form>
+            <button style="height: 50px;" class="connecter button-gris" name="ctrl" value="loginAccount">Se connecter</button>
         </form>
     </div>
     <?php include_once("./view/footer.view.php"); ?>

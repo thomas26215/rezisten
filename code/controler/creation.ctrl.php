@@ -9,12 +9,11 @@ include_once('./model/dialogues.class.php');
 include_once('./model/personnages.class.php');
 include_once('./model/questions.class.php');
 
-//$lieux = Place::readAll();
-$lieux=array("1","2");
+$lieux = Place::readAll();
 
 
 //vérification création
-if(!isset($_GET['id'])){
+if(!isset($_GET['id'])){ //si l'histoire n'existe pas
     
     $histoire = new Story("Titre",
                           Chapter::read(100),
@@ -22,9 +21,6 @@ if(!isset($_GET['id'])){
                           Place::read(1),
                           "../view/design/image/background_story.png",
                           false    );
-
-
-
     $histoire->create();  
     $id = $histoire->getId();
 }
@@ -39,7 +35,7 @@ else{
 }
 
 //Récupération des données utilisateurs
-$idUser=4;
+$idUser=4; //----------------------------a modifier----------------------------
 
 //Récupération depuis le modèle
 $personnages = array('Paul', 'Pierre','Jaques','Michel');
