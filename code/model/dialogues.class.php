@@ -121,7 +121,8 @@ class Dialog
 
     public static function read(int $id, int $idStory): ?Dialog {
         $dao = DAO::getInstance();
-        $results = $dao->getColumnWithParameters("dialogues", ["id" => $id, "id_histoire" => $idStory,"bonus" => "0"]);
+        //FIXME : la valeur de bonus est à changer en fonction du SGBD
+        $results = $dao->getColumnWithParameters("dialogues", ["id" => $id, "id_histoire" => $idStory]);
     
         // Vérifiez si le tableau n'est pas vide avant d'accéder à l'index 0
         if (!empty($results)) {
@@ -138,7 +139,7 @@ class Dialog
         return null; // Retournez null si aucun résultat n'est trouvé
     }
 
-    public static function readBonusDialogs(int $id, int $idStory): ?Dialog {
+    public static function readBonusDialog(int $id, int $idStory): ?Dialog {
         $dao = DAO::getInstance();
         $results = $dao->getColumnWithParameters("dialogues", ["id" => $id, "id_histoire" => $idStory,"bonus" => "1"]);
     
@@ -159,12 +160,12 @@ class Dialog
 
     public static function readFirstBonus(int $idStory): int {
         $dao = DAO::getInstance();
-        $results = $dao->getColumnWithParameters("dialogues", ["id_histoire" => $idStory,"bonus" => "1"]);
+        // FIXME : sur postgres passer sur "true" au lieu de 1
+        $results = $dao->getColumnWithParameters("dialogues", ["id_histoire" => $idStory,"bonus" => 1]);
     
         // Vérifiez si le tableau n'est pas vide avant d'accéder à l'index 0
         if (!empty($results)) {
-            $result = $results[0]; // Accédez au premier élément uniquement si le tableau n'est pas vide
-            return $result['id'];
+            return $results[0]['id']; // Accédez au premier élément uniquement si le tableau n'est pas vide
         }
         return 0; // Retournez null si aucun résultat n'est trouvé
     }

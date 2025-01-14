@@ -30,12 +30,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($errors)) {
         // Assurez-vous que la méthode readWithMail() retourne un objet utilisateur ou null
         $user = User::readWithMail($formData['email']);
-        echo $user->getPassword() . " ";
-        echo $formData['password'];
         
         // Vérifiez si l'utilisateur existe et que le mot de passe est correct
         if ($user && password_verify($formData['password'], $user->getPassword())) { // Assurez-vous que getPassword() existe
             $_SESSION['user_id'] = $user->getId(); // Assurez-vous que cette méthode existe
+            echo $_SESSION['user_id'];
             $_SESSION['username'] = $user->getUsername(); // Assurez-vous que cette méthode existe
             header("Location: index.php?ctrl=main");
             exit();

@@ -1,58 +1,115 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-        <link rel="icon" href="./view/favicon.ico" type="image/x-icon">
-    
+    <link rel="icon" href="./view/favicon.ico" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mes histoires</title>
+    <title>Mes Histoires</title>
     <link rel="stylesheet" href="./view/design/mesHistoires.css">
-    <link rel="stylesheet" href="./view/design/global.css">
-</head>
-<body>
-    <?php include_once("headerHistoire.view.php")?>
-    <main>
-        <h1>Mes histoires</h1>
+    <link rel="stylesheet" href="./view/design/popup.css">
 
-        <div class="histoires">
-            <p class="titres">Publiées : </p>
-            <div class="container">
-                <p>Titre</p>
-                <div >
-                    <img class="modif" src="./view/design/image/modifier.png" alt="Modifier">
-                    <img class="poubelle" src="./view/design/image/poubelle.png" alt="supprimer">
-                </div>
+</head>
+
+<body>
+    <?php include_once './view/headerHistoire.view.php'; ?>
+
+    <main class="flex-col">
+        <h1>Mes Histoires</h1>
+
+        <?php if (!empty($publishedStories)): ?>
+            <div class="histoires">
+                <p class="titres">Publiées :</p>
+                <?php foreach ($publishedStories as $story): ?>
+                    <div class="container">
+                        <p><?= htmlspecialchars($story->getTitle()) ?></p>
+                        <div class="flex-row">
+                            <a href="index.php?ctrl=creation&id=<?= $story->getId() ?>">
+                                <img class="modif" src="./view/design/image/modifier.png" alt="Modifier">
+                            </a>
+                            <a href="#" class="delete-button" data-story-id="<?= $story->getId() ?>">
+                                <img class="poubelle" src="./view/design/image/poubelle.png" alt="Supprimer">
+                            </a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
             </div>
-            <div class="container">
-                <p>Titre</p>
-                <div>
-                    <img src="./view/design/image/modifier.png" alt="Modifier">
-                    <img src="./view/design/image/poubelle.png" alt="supprimer">
-                </div>
+        <?php endif; ?>
+
+        <?php if (!empty($savedStories)): ?>
+            <div class="histoires after">
+                <p class="titres">Sauvegardées :</p>
+                <?php foreach ($savedStories as $story): ?>
+                    <div class="container">
+                        <p><?= htmlspecialchars($story->getTitle()) ?></p>
+                        <div class="flex-row">
+                            <a href="index.php?ctrl=creation&id=<?= $story->getId() ?>">
+                                <img class="modif" src="./view/design/image/modifier.png" alt="Modifier">
+                            </a>
+                            <a href="#" class="delete-button" data-story-id="<?= $story->getId() ?>">
+                                <img class="poubelle" src="./view/design/image/poubelle.png" alt="Supprimer">
+                            </a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
             </div>
-        </div>
-        <div class="histoires after">
-            <p class="titres">Sauvegardées : </p>
-            <div class="container">
-                <p>Titre</p>
-                <div>
-                    <img src="./view/design/image/modifier.png" alt="Modifier">
-                    <img src="./view/design/image/poubelle.png" alt="supprimer">
-                </div>
-            </div>
-            <div class="container">
-                <p>Titre</p>
-                <div>
-                    <img src="./view/design/image/modifier.png" alt="Modifier">
-                    <img src="./view/design/image/poubelle.png" alt="supprimer">
-                </div>
-            </div>
-            
-        </div>
-        <a href="ajouterDialogue.view.php">
-            <button class="creer">Créer une histoire</button>
+        <?php endif; ?>
+
+        <?php if (empty($publishedStories) && empty($savedStories)): ?>
+            <p>Vous n'avez créé aucune histoire.</p>
+        <?php endif; ?>
+
+        <a href="./index.php?ctrl=creation">
+            <button class="creer" type="submit">Créer une histoire</button>
         </a>
+
     </main>
-</body>
+    <?php include_once './view/footer.view.php'; ?>
+
+    <!-- Pop-up de confirmation de suppression -->
+    <dialog id="delete-dialog">
+        <div class="containerDialog">
+            <h2>Voulez vous publier votre histoire ?</h2>
+            <div class="flex-row button-grp">
+                <button id="confirm-delete" class="button-vert">
+                    Supprimer
+                </button>
+                <button id="cancel-delete" class="button-rouge">
+                    Annuler
+                </button>
+            </div>
+        </div>
+    </dialog>
+
+
     <script src="./view/js/dyslexique.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const deleteButtons = document.querySelectorAll('.delete-button');
+            const deleteDialog = document.getElementById('delete-dialog');
+            const confirmDeleteButton = document.getElementById('confirm-delete');
+            const cancelDeleteButton = document.getElementById('cancel-delete');
+            let storyIdToDelete = null;
+
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    storyIdToDelete = this.getAttribute('data-story-id');
+                    deleteDialog.showModal();
+                });
+            });
+
+            confirmDeleteButton.addEventListener('click', function () {
+                if (storyIdToDelete) {
+                    window.location.href = `index.php?ctrl=mesHistoires&action=delete&id=${storyIdToDelete}`;
+                }
+            });
+
+            cancelDeleteButton.addEventListener('click', function () {
+                deleteDialog.close();
+            });
+        });
+    </script>
+</body>
+
 </html>

@@ -5,8 +5,8 @@
 <html lang="fr">
 
 <head>
-        <link rel="icon" href="./view/favicon.ico" type="image/x-icon">
-    
+    <link rel="icon" href="./view/favicon.ico" type="image/x-icon">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rézisten</title>
@@ -26,40 +26,43 @@
 
 
 
-            
-                <div>
-                    <label for="titre">Titre : </label>
-                    
-                    <form action="creation" method="get">
+
+                <form action="creation" method="get" class="flex-row">
+                    <div class="flex-row">
+                        <label for="titre">Titre : </label>
+
+
                         <input type="hidden" name="ctrl" value="creation">
 
                         <input type="text" name="titre" value=<?= $titre ?> required placeholder="Sabotage">
-                        
-                        <input type="hidden" name="id" value=<?= $id ?>  >
+
+                        <input type="hidden" name="id" value=<?= $id ?>>
                         <input type="hidden" name="sauvegarder" value="sauvegarder">
-                        <button>Sauvegarder</button>
 
-                    
-                    </form>
-                </div>
 
-                <div>
-                    <label for="lieux">Lieux : </label>
-                    <select name="example">
-                        <?php foreach ($lieux as $lieu) : ?>
-                        <option value="A">
-                            <?= $lieu?>
-                        </option>
-                        <?php endforeach; ?>
-                    </select>
 
-                    <a href="./consulterLieu.view.php"><img src="./view/design/image/info.png" alt="informations"
-                            id="info"></a>
-                </div>
 
+                    </div>
+
+                    <div class="flex-row">
+                        <label for="lieux">Lieux : </label>
+                        <select id="lieux">
+                            <?php foreach ($lieux as $lieu): ?>
+                                <option value="<?= $lieu->getId() ?>">
+                                    <?= $lieu->getName() ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                        <a href="./consulterLieu.view.php"><img src="./view/design/image/info.png" alt="informations"
+                                id="info"></a>
+                    </div>
+                    <input type="hidden" name="id_lieu" id="id_lieu" value="">
+                    <button>Sauvegarder</button>
+                </form>
                 <div>
                     <label for="personnages">Personnages :</label>
-                    <a href="./consulterPersonnage.view.php"><button class=button-gris>Consulter les personnages</button></a>
+                    <a href="./consulterPersonnage.view.php"><button class=button-gris>Consulter les
+                            personnages</button></a>
                 </div>
 
             </section>
@@ -68,27 +71,27 @@
                 <form method=get>
                     <input type="hidden" name="ctrl" value="creation">
                     <input type="hidden" name="article" value="ajouterDialogue">
-                    <input type="hidden" name="id" value=<?= $id ?>  >
+                    <input type="hidden" name="id" value=<?= $id ?>>
                     <button class=button-gris>Ajouter un dialogue</button>
                 </form>
                 <form method=get>
                     <input type="hidden" name="ctrl" value="creation">
                     <input type="hidden" name="article" value="ajouterQuestion">
-                    <input type="hidden" name="id" value=<?= $id ?>  >
+                    <input type="hidden" name="id" value=<?= $id ?>>
                     <button class=button-gris>Ajouter une question</button>
                 </form>
                 <form method=get>
                     <input type="hidden" name="ctrl" value="creation">
                     <input type="hidden" name="article" value="afficherHistoire">
-                    <input type="hidden" name="id" value=<?= $id ?>  >
+                    <input type="hidden" name="id" value=<?= $id ?>>
                     <button class=button-gris>Afficher toute l'histoire</button>
                 </form>
-            </section> 
+            </section>
 
             <?php
-                include_once $lien;
+            include_once $lien;
             ?>
-            
+
 
             <section class="footer">
                 <form method=get>
@@ -103,25 +106,39 @@
                     <button class=button-vert>Publier</button>
                 </form>
             </section>
-            
+
             <?php include_once 'popup.view.php'; ?>
         </section>
         <script src="./js/popup.js"></script>
 </body>
-    <script src="./js/dyslexique.js"></script>
-    
-    <script>
-        // Vérifiez si le mode dyslexique est activé dans le localStorage
-        if (localStorage.getItem('dyslexique') === 'true') {
-            document.body.classList.add('dyslexique');
-        }
+<script src="./js/dyslexique.js"></script>
 
-        // Ajoutez un écouteur d'événement au bouton pour basculer le mode dyslexique
-        document.getElementById('toggleDyslexique').addEventListener('click', function() {
-            document.body.classList.toggle('dyslexique');
-            // Stockez la préférence dans le localStorage
-            localStorage.setItem('dyslexique', document.body.classList.contains('dyslexique'));
-        });
-    </script>
+<script>
+    // Vérifiez si le mode dyslexique est activé dans le localStorage
+    if (localStorage.getItem('dyslexique') === 'true') {
+        document.body.classList.add('dyslexique');
+    }
+
+    // Ajoutez un écouteur d'événement au bouton pour basculer le mode dyslexique
+    document.getElementById('toggleDyslexique').addEventListener('click', function () {
+        document.body.classList.toggle('dyslexique');
+        // Stockez la préférence dans le localStorage
+        localStorage.setItem('dyslexique', document.body.classList.contains('dyslexique'));
+    });
+</script>
+<script>
+    // Fonction pour mettre à jour le champ caché
+    function updateHiddenField() {
+        document.getElementById('id_lieu').value = document.getElementById('lieux').value;
+    }
+
+    // Exécuter au chargement de la page
+    window.onload = function () {
+        updateHiddenField();
+        document.getElementById('lieux').addEventListener('change', updateHiddenField);
+    };
+</script>
+
+
 
 </html>

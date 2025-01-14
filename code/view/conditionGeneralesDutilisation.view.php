@@ -39,7 +39,7 @@
         <p>
             L’édition de ce site est assurée par Tristan FONTANIERE, Quentin PEGUIN, Sophie ARNAUD, Thomas VENOUIL,
             Maria
-            Luiza CELUSNIAK DE SOUZA, Bryan BILS, Elouan JOANNIC, étudiants à l’IUT2 de Grenoble.
+            Luiza CELUSNIAK DE SOUZA, Brayan BILS, Elouan JOANNIC, étudiants à l’IUT2 de Grenoble.
         </p>
 
         <h2>ARTICLE 2: ACCÈS AU SITE</h2>

@@ -4,40 +4,96 @@ include_once('./framework/view.fw.php');
 include_once('./model/dialogues.class.php');
 include_once('./model/questions.class.php');
 include_once('./model/chapitres.class.php');
+include_once('./model/progression.class.php');
+include_once('./model/users.class.php');
 
 
 
-// Récupération des données de la query string
+
+// Récupération des données de la query string et initialisation de variables
 $idStory = $_GET['idStory'];
 $idDialog = $_GET['idDialog'];
 $prevSpeaker = $_GET['prevSpeaker'] ?? "none";
+
 
 
 $imgURL = "https://localhost:8080/rezisten/imgPersonnage/";
 $audioURL = "https://localhost:8080/rezisten/doublageDialogue/histoire".$idStory."/";
 
 $dialog = Dialog::read($idDialog,$idStory);
-
 $view = new View();
 $story = Story::read($idStory);
 
+$firstBonus = Dialog::readFirstBonus($idStory);
+$dialogPrev = Dialog::read($idDialog - 1, $idStory);
+
+
+if ($dialog === null) {
+    // S'il n'y a plus de dialogue => fin avec bonus, on met à jour la progression si besoin en vérifiant qu'on est bien sur une fin bonus
+    if ($idDialog >= Dialog::readFirstBonus($idStory)) {
+        if (!Progression::read($_SESSION['user_id'], $_SESSION['idStory'] + 1)) {
+            $progression = new Progression(
+                User::read($_SESSION['user_id']),
+                Story::read($_SESSION['idStory'] + 1),
+                true
+            );
+            $progression->create();
+        }
+    }
+
+    $place = $story->getPlace();
+    $view->assign('story', $story);
+    $view->assign('place', $place);
+    $view->display('finHistoire');
+} elseif($dialogPrev != null && $dialog->getBonus() != $dialogPrev->getBonus() && $_SESSION['difficulty'] == "générique") {
+    // Sinon il faut s'assurer qu'on est pas dans le cas du dialogue numéro 1, que le dialogue demandé est  bonus sachant que le dialogue d'avant est non bonus
+    // et que la difficulté est bien celle générique, ensuite on réalise les mêmes opérations concernant la progression
+
+            if (!Progression::read($_SESSION['user_id'], $_SESSION['idStory'] + 1)) {
+                $progression = new Progression(
+                    User::read($_SESSION['user_id']),
+                    Story::read($_SESSION['idStory'] + 1),
+                    true
+                );
+                $progression->create();
+            }
+        $place = $story->getPlace();
+        $view->assign('story', $story);
+        $view->assign('place', $place);
+        $view->display('finHistoire');
+    
+}
+
+    
+
+
+// Si le dialogue repère est détecté on bascule sur la question en appelant la vue avec les bonnes données
 if($dialog->getContent() == "limquestion"){
     $question = Question::read($idStory,'s');
     $_SESSION['idStory'] = $idStory;
     $_SESSION['idDialog'] = $idDialog;
     $_SESSION['difficulty'] = "spécifique";
+    $_SESSION['lastDialog'] = $idDialog;
     
+    $view->assign('error','');
     $view->assign('story',$story);
     $view->assign('question',$question);
     $view->display('question');
 }
 
+//Sinon on met à jour les données sur le dialogue et les personnages incluent dans ce passage.
+
 $idChap = $story->getChapter()->getNumchap();
 $speaker = $dialog->getSpeaker();
 $imgSpeaker = $imgURL.$speaker->getImage().".webp";
 $dub = $audioURL.$dialog->getDubbing().".WAV";
-$prevSpeaker = $imgURL.$prevSpeaker.".webp";
+if($prevSpeaker != $speaker->getImage()){
+    $prevSpeaker = $imgURL.$prevSpeaker.".webp";
+}else{
+    $prevSpeaker = "none.webp";
+}
 
+$view->assign('firstbonus',$firstBonus);
 $view->assign('prevSpeaker',$prevSpeaker);
 $view->assign('dub',$dub);
 $view->assign('imgSpeaker',$imgSpeaker);
@@ -51,7 +107,3 @@ $view->display('histoire');
 
 
 ?>
-
-<script>
-    const audioURL = <?= $dub ?>
-</script>

@@ -8,19 +8,6 @@
         <h2 class="titre"> Ajouter un dialogue </h2>
     </div>
     <form action="creation" method="get">
-        <!-- personnage 
-        <section>
-            <label for="personnage">Personnage qui parle : </label>
-            <select name="nom">
-                <option value="A">Pierre</option>
-                <option value="B">Paul</option>
-                <option value="-">Jaques</option>
-            </select>
-        </section>
-        
-
-        
-        -->
 
         <section>
             <label for="personnage">Personnage qui parle : </label>

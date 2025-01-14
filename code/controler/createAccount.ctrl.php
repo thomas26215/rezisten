@@ -1,9 +1,9 @@
 <?php
-session_start(); // Démarrez la session au début du script
 
 include_once('framework/view.fw.php');
 include_once('model/users.class.php');
-
+include_once('model/recuperationMotDePasse.class.php');
+include_once('model/composer/sendMail.utilitaire.php');
 
 $errors = [];
 $formData = [
@@ -41,6 +41,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['auth'])) {
                 // Traitement pour la création de compte
                 $user = new User($formData['username'], $formData['first_name'], $formData['surname'], $formData['date'], $formData['email'], $formData['password'], 'j', true);
                 $user->create();
+                $sendMail = new EmailSender();
+                $checkEmail = CheckEmail::generate($user->getId());
+                $sendMail->welcome($user->checkEmail(), $checkEmail->getToken());
                 echo "Compte créé avec succès pour " . $formData['username'];
                 // Initialisation de la progression
                 $progression = Progression::read($user->getId(), 1);

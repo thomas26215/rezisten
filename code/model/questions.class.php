@@ -2,6 +2,7 @@
 
 require_once(__DIR__ . "/dao.class.php");
 require_once(__DIR__ . "/histoires.class.php");
+require_once(__DIR__ . "/personnages.class.php");
 
 class Question {
     private Story $history;
@@ -23,8 +24,15 @@ class Question {
     public function getHistory(): Story {
         return $this->history;
     }
+    public function getSpeaker(): Character { //utiliser pour afficherHistoire.view.php
+        return new Character("Narrateur : Question","null");
+    }
+
 
     public function getQuestion(): string {
+        return $this->question;
+    }
+    public function getContent(): string {
         return $this->question;
     }
 

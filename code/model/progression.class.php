@@ -59,19 +59,6 @@ class Progression
         $this->statut = $statut;
     }
 
-    public static function areAllStoriesUnlocked(int $userId, int $chapterId): bool /* Pas testé, faite par quentin */
-    //TODO: A tester
-    {
-        $storyIds = Story::getStoryIdsByChapter($chapterId);
-        foreach ($storyIds as $storyId) {
-            $progression = self::read($userId, $storyId);
-            if (!$progression || !$progression->getStatus()) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     /* --- Méthodes CRUD --- */
 
     public function create(): bool
@@ -139,7 +126,18 @@ class Progression
         }
         return false;
     }
-
+    public static function areAllStoriesUnlocked(int $userId, int $chapterId): bool /* Pas testé, faite par quentin */
+    //TODO: A tester
+    {
+        $storyIds = Story::getStoryIdsByChapter($chapterId);
+        foreach ($storyIds as $storyId) {
+            $progression = self::read($userId, $storyId);
+            if (!$progression || !$progression->getStatus()) {
+                return false;
+            }
+        }
+        return true;
+    }
 
 }
 

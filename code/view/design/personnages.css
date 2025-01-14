@@ -4,10 +4,10 @@ body {
   font-size: larger;
 }
 
-/*
+
   main{
     min-height: calc(100vh - var(--height-header));
-  }*/
+  }
 
 
 /* Pour la disposition de la page*/
@@ -163,6 +163,7 @@ h2.titre::before {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 1rem;
   width: 20%;
 }
@@ -170,6 +171,10 @@ h2.titre::before {
 .imageChoisi img {
   height: 70px;
   width: 70px;
+}
+
+.imageChoisi span {
+  text-align: center;
 }
 
 .imageUser {
@@ -199,4 +204,14 @@ h2.titre::before {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.supContainer img {
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--noir);
+  height: 250px;
+  width: 250px;
 }
