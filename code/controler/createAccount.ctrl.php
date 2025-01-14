@@ -2,6 +2,7 @@
 
 include_once('framework/view.fw.php');
 include_once('model/users.class.php');
+include_once('model/progression.class.php');
 include_once('model/recuperationMotDePasse.class.php');
 include_once('model/composer/sendMail.utilitaire.php');
 
