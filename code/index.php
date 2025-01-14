@@ -8,7 +8,7 @@ error_reporting(E_ALL);
 $ctrl = $_REQUEST['ctrl'] ?? 'mainNonConnecte';
 
 //Nécessaire de compléter quand on crée une vue pour vérifier que la vue appelée existe bien
-const CTRLS = array('loginAccount', 'createAccount', 'authentification', 'mainNonConnecte', 'main','mesHistoires', 'histoire','question', 'listeChapitre', "listeHistoire", 'creation', 'personnages', 'profil', 'demandeCreateur', 'consulterLieu');
+const CTRLS = array('loginAccount', 'createAccount', 'authentification', 'mainNonConnecte', 'main','mesHistoires', 'histoire','question', 'listeChapitre', "listeHistoire", 'creation', 'personnages', 'profil', 'demandeCreateur', 'consulterLieu', 'motdepasseoublie', 'changermotdepasse');
 // Démarre la session
 session_start();
 

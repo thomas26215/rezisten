@@ -62,6 +62,23 @@ class CheckEmail {
         $this->expirationDate = $expirationDate;
     }
 
+    public static function generate(int $userId){
+        $user = User::read($userId);
+        if (!$user) {
+            throw new Exception("Utilisateur non trouvé");
+        }
+        
+        $token = self::genererChaineAleatoire(10); // Appel statique
+        $checkEmail = new CheckEmail($user, $token);
+        
+        if($checkEmail->create()) {
+            return CheckEmail::read($userId);
+        } else {
+            throw new Exception("Impossible de créer la récupération de mot de passe");
+        }
+    }
+
+
     /* --- Méthodes CRUD --- */
 
     public function create(): bool {

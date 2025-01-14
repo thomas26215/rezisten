@@ -63,6 +63,23 @@ class PasswordRecuperation {
         $this->expirationDate = $expirationDate;
     }
 
+    public static function generate(int $userId){
+        $user = User::read($userId);
+        if (!$user) {
+            throw new Exception("Utilisateur non trouvé");
+        }
+        PasswordRecuperation::delete($userId);
+        
+        $token = self::genererChaineAleatoire(10); // Appel statique
+        $passwordRecuperation = new PasswordRecuperation($user, $token);
+        
+        if($passwordRecuperation->create()) {
+            return $passwordRecuperation;
+        } else {
+            throw new Exception("Impossible de créer la récupération de mot de passe");
+        }
+    }
+
     /* --- Méthodes CRUD --- */
 
     public function create(): bool {
@@ -113,6 +130,15 @@ class PasswordRecuperation {
             return DAO::getInstance()->deleteDatas("recuperation_mot_de_passe", ["utilisateur_id" => $userId]);
         }
         return false;
+    }
+
+    public static function genererChaineAleatoire(int $longueur = 10): string {
+        $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $chaineAleatoire = '';
+        for ($i = 0; $i < $longueur; $i++) {
+            $chaineAleatoire .= $caracteres[rand(0, strlen($caracteres) - 1)];
+        }
+        return $chaineAleatoire;
     }
 }
 
