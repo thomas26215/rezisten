@@ -9,15 +9,33 @@ $ctrl = $_REQUEST['ctrl'] ?? 'mainNonConnecte';
 
 //Nécessaire de compléter quand on crée une vue pour vérifier que la vue appelée existe bien
 const CTRLS = array('loginAccount', 'createAccount', 'authentification', 'mainNonConnecte', 'main','mesHistoires', 'histoire','question', 'listeChapitre', "listeHistoire", 'creation', 'personnages', 'profil', 'demandeCreateur', 'consulterLieu');
+// Démarre la session
+session_start();
+
+// Vérifie si une session est active et affiche l'ID utilisateur
+if (isset($_SESSION["user_id"])) {
+    echo "ID utilisateur : " . htmlspecialchars($_SESSION["user_id"]);
+} else {
+    echo "Pas de session";
+}
+
+// On utilise la variable globale $_REQUEST pour récupérer 'ctrl' en GET ou POST
+$ctrl = $_REQUEST['ctrl'] ?? '';
+
+// Vérification si $ctrl est vide
+if (empty($ctrl)) {
+    // Si $_SESSION['user_id'] est null, rediriger vers mainNonConnecte, sinon vers main
+    $ctrl = empty($_SESSION['user_id']) ? 'mainNonConnecte' : 'main';
+}
 
 // Vérification que le contrôleur demandé existe
 if (!in_array($ctrl, CTRLS)) {
-    // Gérer le cas où le contrôleur n'existe pas, par exemple rediriger vers une page d'erreur ou un contrôleur par défaut
+    // Gérer le cas où le contrôleur n'existe pas
     http_response_code(404); // Envoie un code de réponse 404 Not Found
-    die("Contrôleur non trouvé : " . $ctrl); // Affiche un message d'erreur
+    die("Contrôleur non trouvé : " . htmlspecialchars($ctrl)); // Affiche un message d'erreur
 }
 
-// Génération du chemin de fichier
+// Génération du chemin de fichier pour le contrôleur
 $path = "controler/" . $ctrl . ".ctrl.php";
 
 // Vérification que le fichier existe avant de l'inclure
@@ -27,7 +45,7 @@ if (file_exists($path)) {
 } else {
     // Gérer le cas où le fichier du contrôleur n'existe pas
     http_response_code(404); // Envoie un code de réponse 404 Not Found
-    die("Fichier de contrôleur non trouvé.");
+    die("Fichier de contrôleur non trouvé : " . htmlspecialchars($path)); // Affiche un message d'erreur
 }
 ?>
 

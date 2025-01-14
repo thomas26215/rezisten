@@ -15,7 +15,6 @@ main {
 .container {
     display: flex;
     justify-content: center;
-
 }
 
 .container a {
@@ -47,7 +46,7 @@ main {
     color: var(--noir);
 }
 
-form {
+form:not(.non-style) {
     background-color: var(--beige);
     display: flex;
     flex-direction: column;
@@ -72,7 +71,6 @@ form div input {
     border: 2px solid var(--noir);
 }
 
-
 .valider {
     margin-top: 1rem;
 }
@@ -90,7 +88,8 @@ form div input {
     margin: 0 !important;
 }
 
-#toggleDyslexique{
+#toggleDyslexique {
     margin: 0 !important;
-    height: 6rem ;
+    height: 6rem;
 }
+
