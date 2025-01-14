@@ -9,6 +9,10 @@ include_once('./model/dialogues.class.php');
 include_once('./model/personnages.class.php');
 include_once('./model/questions.class.php');
 
+//Récupération des données utilisateurs
+$idUser=$_SESSION['user_id'];
+
+//récupération du modèle
 $lieux = Place::readAll();
 
 
@@ -30,12 +34,9 @@ else{
     $histoire = Story::read($id);
     if (isset($_GET['titre']))
     {$histoire->setTitle($_GET['titre']) ; // ajouterDialogue ou ajouterQuestion ou afficherHistoire
-    $histoire->setPlace(Place::read($_GET['lieu']));
+    $histoire->setPlace(Place::read($_GET['id_lieu']));
     }
 }
-
-//Récupération des données utilisateurs
-$idUser=4; //----------------------------a modifier----------------------------
 
 //Récupération depuis le modèle
 $personnages = array('Paul', 'Pierre','Jaques','Michel');
