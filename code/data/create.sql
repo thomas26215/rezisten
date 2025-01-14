@@ -103,7 +103,20 @@ CREATE TABLE PROGRESSION (
     PRIMARY KEY (id_utilisateur, id_hist)          -- Clé primaire composite pour garantir l'unicité par utilisateur et histoire 
 );
 
+CREATE TABLE verifications_email (
+    id SERIAL PRIMARY KEY,
+    utilisateur_id INTEGER NOT NULL,
+    token VARCHAR(255) NOT NULL UNIQUE,
+    date_expiration TIMESTAMP NOT NULL DEFAULT (CURRENT_TIMESTAMP + INTERVAL '30 minutes'),
+    CONSTRAINT fk_utilisateur_email FOREIGN KEY (utilisateur_id) REFERENCES utilisateurs(id)
+);
 
-
+CREATE TABLE recuperation_mot_de_passe (
+    id SERIAL PRIMARY KEY,
+    utilisateur_id INTEGER NOT NULL,
+    token VARCHAR(255) NOT NULL UNIQUE,
+    date_expiration TIMESTAMP NOT NULL DEFAULT (CURRENT_TIMESTAMP + INTERVAL '30 minutes'),
+    CONSTRAINT fk_utilisateur_recuperation FOREIGN KEY (utilisateur_id) REFERENCES utilisateurs(id)
+);
 
 

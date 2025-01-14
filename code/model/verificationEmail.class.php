@@ -130,5 +130,13 @@ class CheckEmail {
         }
         return false;
     }
+    public static function genererChaineAleatoire(int $longueur = 10): string {
+        $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $chaineAleatoire = '';
+        for ($i = 0; $i < $longueur; $i++) {
+            $chaineAleatoire .= $caracteres[rand(0, strlen($caracteres) - 1)];
+        }
+        return $chaineAleatoire;
+    }
 }
 
