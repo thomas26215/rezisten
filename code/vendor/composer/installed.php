@@ -3,7 +3,7 @@
         'name' => 'thomas/code',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => 'c8232ef8615ffebdc163aa5bdceeadf690f34b7b',
+        'reference' => '55384c6a715dcbc4bde529045427b9825b0672f2',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -45,6 +45,15 @@
             'install_path' => __DIR__ . '/../phar-io/version',
             'aliases' => array(),
             'dev_requirement' => true,
+        ),
+        'phpmailer/phpmailer' => array(
+            'pretty_version' => 'v6.9.3',
+            'version' => '6.9.3.0',
+            'reference' => '2f5c94fe7493efc213f643c23b1b1c249d40f47e',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../phpmailer/phpmailer',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'phpunit/php-code-coverage' => array(
             'pretty_version' => '11.0.8',
@@ -256,7 +265,7 @@
         'thomas/code' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'c8232ef8615ffebdc163aa5bdceeadf690f34b7b',
+            'reference' => '55384c6a715dcbc4bde529045427b9825b0672f2',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
