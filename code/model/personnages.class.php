@@ -94,7 +94,7 @@ class Character {
         return null;
     }
 
-    public static function readCharactersOfUser(int $userId) : array {
+/*     public static function readCharactersOfUser(int $userId) : array {
         $dao = DAO::getInstance();
         $listCharacters = array();
         
@@ -110,15 +110,15 @@ class Character {
         }
         return $listCharacters;
     }
-
+ */
     public function update(): bool {
         if($this->id !== -1){
             return $this->dao->update("personnages", [
                 "prenom" => $this->first_name,
                 "img" => $this->image,
-                "createur" => $this->creator,
+                "createur" => $this->creator->getId(),
             ], ["id" => (int)$this->id]) > 0;
-        }
+        }return false ;
     }
 
     public static function delete($id): bool {
