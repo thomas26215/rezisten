@@ -136,8 +136,7 @@ class Character {
             throw new Exception("aucun personnage trouvé");
         }
 
-        for($i = 0; $i < sizeof($characters)-1; $i++){
-            var_dump($characters[$i]);
+        for($i = 0; $i < sizeof($characters); $i++){
             $creat = User::read($characters[$i]['createur']);
            
             $c = new Character($characters[$i]['prenom'],$characters[$i]['img'],$creat,$characters[$i]['id']);

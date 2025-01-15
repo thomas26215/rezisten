@@ -5,9 +5,9 @@ body {
 }
 
 
-  main{
-    min-height: calc(100vh - var(--height-header));
-  }
+main {
+  min-height: calc(100vh - var(--height-header));
+}
 
 
 /* Pour la disposition de la page*/
@@ -36,7 +36,7 @@ body {
   max-height: 50px;
 }
 
-.menu{
+.menu {
   grid-area: menu;
   min-width: 34vw;
   max-width: 34vw;
@@ -97,7 +97,7 @@ h2.titre {
   margin: 0%;
   /* Couleur de fond */
   background-color: var(--noir);
-  width:20vw;
+  width: 20vw;
   clip-path: polygon(0% 0%, 90% 0%, 100% 50%, 90% 100%, 0% 100%);
   color: var(--beige-ecriture);
   text-align: left;
@@ -131,7 +131,6 @@ h2.titre::before {
 .articleContainer {
   display: flex;
   flex-direction: column;
-  gap: 5rem;
   padding: 50px;
 }
 
