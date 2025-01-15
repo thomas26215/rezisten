@@ -15,27 +15,39 @@
                 if ($dialogue instanceof Dialog): ?>
 
                     <section>
-                        <label for="personnage">Personnage qui parle :
-                            <?= $dialogue->getSpeaker()->getFirstName() ?? "questions" ?></label>
+                        <label for="personnage">
+                            <?php if ($dialogue->getContent() !== 'limquestion'): ?>
+                                Personnage qui parle : <?= $dialogue->getSpeaker()->getFirstName() ?? "questions" ?></label>
+                        <?php else: ?>
+                            <h4>POSITION DE LA QUESTION</h4>
+                        <?php endif; ?>
+
                     </section>
                     <!-- il faut que le premier n'est pas de fleche vers le haut et que le dernier n'est pas de fleche vers le bas -->
                     <section class=flex-row>
                         <p>
-                            <?= $dialogue->getContent() ?>
+                            <?php if ($dialogue->getContent() !== 'limquestion'): ?>
+                                <?= $dialogue->getContent() ?>
+                            <?php else: ?>
+                                Flèche pour déplacer la position de la question ->
+                            <?php endif; ?>
+
                         </p>
                         <div id="fleche">
                             <button class="bouton-modif">^</button>
                             <button class="bouton-modif bouton-bas">^</button>
                         </div>
-                        <form method="GET" action="index.php?ctrl=personnages&article=afficherHistoire">
-                            <input type="hidden" name="ctrl" value="creation">
-                            <input type="hidden" name="article" value="afficherHistoire">
-                            <input type="hidden" name="id" value="<?= $histoire->getId() ?>">
-                            <input type="hidden" name="idDialogue" value="<?= $dialogue->getId() ?>">
-                            <input type="hidden" name="typeDialogue" value="dialogue">
-                            <button type="submit" name="delete" value="delete"><img src="./view/design/image/poubelle.png"
-                                    alt="poubelle" id="poubelle"></button>
-                        </form>
+                        <?php if ($dialogue->getContent() !== 'limquestion'): ?>
+                            <form method="GET" action="index.php?ctrl=personnages&article=afficherHistoire">
+                                <input type="hidden" name="ctrl" value="creation">
+                                <input type="hidden" name="article" value="afficherHistoire">
+                                <input type="hidden" name="id" value="<?= $histoire->getId() ?>">
+                                <input type="hidden" name="idDialogue" value="<?= $dialogue->getId() ?>">
+                                <input type="hidden" name="typeDialogue" value="dialogue">
+                                <button type="submit" name="delete" value="delete" class="poub"><img
+                                        src="./view/design/image/poubelle.png" alt="poubelle" id="poubelle"></button>
+                            </form>
+                        <?php endif; ?>
 
                     </section>
                 <?php elseif ($dialogue instanceof Question): ?>
@@ -50,10 +62,6 @@
                         <p>
                             <?= $dialogue->getAnswer() ?>
                         </p>
-                        <div id="fleche">
-                            <button class="bouton-modif">^</button>
-                            <button class="bouton-modif bouton-bas">^</button>
-                        </div>
 
                         <form method="GET" action="index.php?ctrl=personnages&article=afficherHistoire">
                             <input type="hidden" name="ctrl" value="creation">
@@ -61,8 +69,8 @@
                             <input type="hidden" name="id" value="<?= $histoire->getId() ?>">
                             <input type="hidden" name="idDialogue" value="<?= $dialogue->getHistory()->getId() ?>">
                             <input type="hidden" name="typeDialogue" value="question">
-                            <button type="submit" name="delete" value="delete"><img src="./view/design/image/poubelle.png"
-                                    alt="poubelle" id="poubelle"></button>
+                            <button type="submit" name="delete" value="delete" class="poub"><img
+                                    src="./view/design/image/poubelle.png" alt="poubelle" id="poubelle"></button>
                         </form>
 
                     </section>

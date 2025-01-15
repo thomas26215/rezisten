@@ -10,7 +10,7 @@
             <select name="selectedCharacter" id="personnage" onchange="this.form.submit()">
                 <option value="">Sélectionnez un personnage</option>
                 <?php foreach ($characters as $char) { ?>
-                    <option value="<?= $char?->getId() ?? 0 ?>"><?= $char?->getFirstName() ?? "Jean"?></option>
+                    <option value="<?= $char?->getId() ?? 0 ?>"><?= $char?->getFirstName() ?? "Jean" ?></option>
                 <?php } ?>
             </select>
         </div>
@@ -24,8 +24,16 @@
         </div>
 
         <div class="supContainer">
-            <img src="<?= $imgURL . $selectedCharacter?->getImage() ?? "img"?>"
-                alt="<?=$selectedCharacter?->getFirstName() ?? "Jean"; ?>" style="max-width: 240px;">
+            <?php
+            $imgSrc = '';
+            if ($selectedCharacter && $selectedCharacter->getCreator()->getId() == 4) {
+                $imgSrc = $imgURL . ($selectedCharacter->getImage() ?? "default") . ".webp";
+            } else if ($selectedCharacter) {
+                $imgSrc = './view/design/image/imageUser/' . ($selectedCharacter->getImage() ?? "default");
+            }
+            ?>
+            <img src="<?= $imgSrc ?>" alt="<?= $selectedCharacter?->getFirstName() ?? "Jean"; ?>"
+            alt="<?= $selectedCharacter?->getFirstName() ?? "Jean"; ?>" style="max-width: 240px;">
 
 
         </div>
