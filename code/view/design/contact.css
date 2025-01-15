@@ -1,10 +1,12 @@
 body{
     display: flex;
     flex-direction: column;
-    text-align: center;
-    font-size: larger;
     background-image: var(--background-drapeau);
     background-size:1920px ;
+}
+
+main{
+    text-align: center;
 }
 
 h1{

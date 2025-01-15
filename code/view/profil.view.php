@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <?php include_once("./view/header.view.php") ?>
+    <?php include_once("./view/headerProfile.view.php") ?>
     <main>
         <div class="container">
             <div class="profilHead">
@@ -23,7 +23,8 @@
             </form>
         </div>
 
-        <form action="post">
+        <form method="post" action="?ctrl=profil">
+
             <div>
                 <label for="pseudo">Pseudo : </label>
                 <input type="text" name="pseudo" id="pseudo" placeholder=<?= $pseudo ?>>
