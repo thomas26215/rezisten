@@ -18,7 +18,6 @@ $_SESSION['lastDialog'] = $idDialog;
 
 
 
-
 $imgURL = "https://localhost:8080/rezisten/imgPersonnage/";
 $audioURL = "https://localhost:8080/rezisten/doublageDialogue/histoire".$idStory."/";
 $placeURL = "https://localhost:8080/rezisten/imgLieux/";
@@ -32,9 +31,9 @@ $dialog = Dialog::read($idDialog,$idStory);
 $view = new View();
 $story = Story::read($idStory);
 
+
 $firstBonus = Dialog::readFirstBonus($idStory);
 $dialogPrev = Dialog::read($idDialog - 1, $idStory);
-
 
 
 if ($dialog === null) {
