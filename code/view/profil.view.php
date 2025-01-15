@@ -13,6 +13,7 @@
 <body>
     <?php include_once("./view/headerProfile.view.php") ?>
     <main>
+
         <div class="container">
             <div class="profilHead">
                 <img src="./view/design/image/photoProfil.jpg" alt="photo profil">
@@ -22,6 +23,14 @@
                 <button class="deconnect button-rouge" name="disconnect">Se déconnecter</button>
             </form>
         </div>
+
+        <?php if (!empty($errors)): ?>
+            <div class="errors">
+                <?php foreach ($errors as $error): ?>
+                    <p><?php echo htmlspecialchars($error); ?></p>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
 
         <form method="post" action="?ctrl=profil">
 

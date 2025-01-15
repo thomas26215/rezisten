@@ -118,7 +118,7 @@ if($dialog->getContent() == "limquestion"){
 // On gère aussi le background en fonction de l'avancée
 
 
-
+$dialLimit = Dialog::readLimit($idStory);
 
 $idChap = $story->getChapter()->getNumchap();
 $speaker = $dialog->getSpeaker();
@@ -130,6 +130,7 @@ if($prevSpeaker != $speaker->getImage()){
     $prevSpeaker = "none.webp";
 }
 
+$view->assign('dialLimit',$dialLimit);
 $view->assign('background',$background);
 $view->assign('firstbonus',$firstBonus);
 $view->assign('prevSpeaker',$prevSpeaker);

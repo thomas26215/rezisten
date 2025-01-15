@@ -94,13 +94,13 @@ if (isset($_GET['article']) && $_GET['article'] === 'ajouterQuestion' && isset($
     // Vérifier si un dialogue "limquestion" existe déjà
     $limquestionExists = false;
     $existingDialogues = Dialog::readAllByStory($histoire->getId());
-    for($i=1; $i<=$existingDialogues; $i++){
-        if(Dialog::read($i,$histoire->getId())->getContent() === 'limquestion'){
+    for ($i = 1; $i <= $existingDialogues; $i++) {
+        if (Dialog::read($i, $histoire->getId())->getContent() === 'limquestion') {
             $limquestionExists = true;
             break;
         }
     }
-    
+
 
     // Ajouter un dialogue contenant "limquestion" si aucun n'existe
     if (!$limquestionExists) {
@@ -125,6 +125,52 @@ if (isset($_GET['article']) && $_GET['article'] === 'ajouterQuestion' && isset($
     exit();
 }
 
+// supprimer un dialogue en appuyant sur la petite poubelle
+if (isset($_GET['delete']) && $_GET['delete'] === 'delete' && isset($_GET['idDialogue'])) {
+    $idDialogue = $_GET['idDialogue'];
+    $typeDialogue = $_GET['typeDialogue'] ?? 'dialogue';
+
+
+    try {
+        if ($typeDialogue === 'dialogue') {
+            /* $dialogue = Dialog::read(4, 102);
+            var_dump($dialogue);
+            $dialogue->update(40);*/
+            $dialogue = Dialog::read($idDialogue,$histoire->getId() );
+            
+            if ($dialogue) {
+                if (Dialog::delete($idDialogue, $histoire->getId())) {
+                    echo "Dialogue ID " . $idDialogue . " deleted successfully.<br>";
+                } else {
+                    throw new Exception("Failed to delete Dialogue ID " . $idDialogue);
+                }
+                // Mettre à jour les IDs des dialogues après suppression
+                Dialog::updateAfterDeletion($idDialogue,$histoire->getId() );
+            } else {
+                throw new Exception("Dialogue not found.");
+            }
+        } else {
+            $question = Question::read($idDialogue, 'g');
+            var_dump($question); // Debug: Check the fetched question
+
+            if ($question) {
+                if (Question::delete($idDialogue, $histoire->getId())) {
+                    echo "Question ID " . $idDialogue . " deleted successfully.<br>";
+                } else {
+                    throw new Exception("Failed to delete Question ID " . $idDialogue);
+                }
+            } else {
+                throw new Exception("Question not found.");
+            }
+        }
+
+        // Redirection après la suppression du dialogue
+        //header("Location: creation?ctrl=creation&article=afficherHistoire&id=" . $histoire->getId());
+        exit();
+    } catch (Exception $e) {
+        echo "Error: " . $e->getMessage();
+    }
+}
 
 // Récupération depuis le modèle
 $personnages = Character::readAllCharacters();
@@ -134,6 +180,7 @@ while (null !== (Dialog::read($iddialog, idStory: $id))) {
     $dialogues[] = Dialog::read($iddialog, $id);
     $iddialog++;
 }
+
 
 // Récupération des variables
 $article = $_GET['article'] ?? "ajouterDialogue"; // ajouterDialogue ou ajouterQuestion ou afficherHistoire
@@ -146,14 +193,7 @@ if (isset($_GET['sauvegarder'])) {
     $histoire->update();
 }
 
-// supprimer un dialogue en appuyant sur la petite poubelle
-if (isset($_GET['idDialogue'])) {
-    if ($_GET['typeDialogue']) {
-        Dialog::delete($_GET['idDialogue'], $histoire->getId());
-    } else {
-        Question::delete($_GET['idDialogue'], $histoire->getId());
-    }
-}
+
 
 // Créer la vue
 $view = new View();
