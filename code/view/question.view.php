@@ -29,7 +29,11 @@
 
                 <h2 class="speaker question"> Question <?= $question->getType() ?> </h2>
 
-                <button class="consulter-lieux">Consulter le lieux</button>
+                <form action="?">
+                    <input type="hidden" name="ctrl" value="question">
+                    <input type="hidden" name="action" value="lookPlace">
+                    <button class="consulter-lieux">Consulter le lieux</button>
+                </form>
 
                 <p class="text"> <?=$question->getQuestion()?>
                 </p>

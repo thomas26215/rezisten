@@ -88,6 +88,8 @@ elseif($action == "answer"){
         $view->assign('question',$question);
         $view->display('question');
     }
+}elseif($action == "lookPlace"){
+    $view->display('consulterLieu');
 }
 
 
