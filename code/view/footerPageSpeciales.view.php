@@ -6,7 +6,7 @@
 
 
 <footer class="flex-row">
-    <a id="first-a"href="./main.view.php">
+    <a id="first-a"href="./../index.php">
         <img class="img" src="./design/image/logoCoupe.png" alt="logo Rézisten">
     </a>
     <article class="flex-row">

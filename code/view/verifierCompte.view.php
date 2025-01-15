@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vérifier Compte</title>
     <link rel="stylesheet" href="./view/design/motdepasseoublie.css">
-    
 </head>
 <body>
     <?php include_once("./view/header.view.php")?>
@@ -13,7 +12,7 @@
         <h1>Vérifier Compte</h1>
         <p class="texte">Veuillez saisir votre email de connexion afin de recevoir le lien de réinitialisation de votre mot de passe.</p>
     
-        <form action="">
+        <form class="motdepasse" action="">
             <div class="email">
                 <label for="email">Code de vérification <span>*</span>: </label>
                 <input placeholder="Saisir votre code de vérification" type="code" name="code" id="code">

@@ -17,7 +17,6 @@ session_start();
 // On utilise la variable globale $_REQUEST pour récupérer 'ctrl' en GET ou POST
 $ctrl = $_REQUEST['ctrl'] ?? '';
 
-echo $_SESSION['user_id'];
 
 // Vérification si $ctrl est vide
 if (empty($ctrl)) {

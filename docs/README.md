@@ -110,7 +110,7 @@ Pour installer le projet localement, suivez ces étapes :
 1. Lancez votre serveur local.
 2. Ouvrez votre navigateur et accédez à ```http://localhost/votre-repo```.
 3. Connectez-vous avec :
-- identifiants : RezistenTest 
+- identifiants : rezisten.contact@gmail.com 
 - mot de passe bnw92ambm3aib37hzax8 
 pour commencer à utiliser l'application .
 

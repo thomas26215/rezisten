@@ -72,6 +72,7 @@ class Character {
         if($this->dao->insertRelatedData("personnages", [
             "prenom" => $this->first_name,
             "img" => $this->image,
+            "createur" => $this->creator->getId()
         ])){
             $this->setId($this->dao->getLastInsertId("personnages")[0]["last_id"]);
             return true;
