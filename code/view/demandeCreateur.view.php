@@ -25,7 +25,7 @@
             <p class="texte">Merci de nous envoyer des documents pour prouver vos compétences afin de pouvoir écrire et publier vos histoires.</p>
             <div class="image">
                 <div class="imageChoisi">
-                    <p>Document</p>
+                    <h2>Votre document : </h2>
                     <input type="file" id="photoUpload" name="photoUpload" accept=".pdf,.doc,.docx,image/*" style="display: none;">
                     <button type="button" id="photoSend" class="button-gris">Ajouter des documents</button>
                     <span id="fileName">Pas de document ajouté</span>
