@@ -14,6 +14,8 @@ session_start();
 
 
 
+
+
 // On utilise la variable globale $_REQUEST pour récupérer 'ctrl' en GET ou POST
 $ctrl = $_REQUEST['ctrl'] ?? '';
 

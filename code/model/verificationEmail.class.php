@@ -78,6 +78,11 @@ class CheckEmail {
         }
     }
 
+    
+    public static function isUserCodeDefined(int $id): bool {
+        return CheckEmail::read($id) !== null;
+    }
+
 
     /* --- Méthodes CRUD --- */
 

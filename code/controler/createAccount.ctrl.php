@@ -49,9 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['auth'])) {
                 // Traitement pour la création de compte
                 $user = new User($formData['username'], $formData['first_name'], $formData['surname'], $formData['date'], $formData['email'], $formData['password'], 'j', true);
                 $user->create();
-                $sendMail = new EmailSender();
                 $checkEmail = CheckEmail::generate($user->getId());
-                $sendMail->welcome($user->getMail(), $checkEmail->getToken());
                 echo "Compte créé avec succès pour " . $formData['username'];
                 // Initialisation de la progression
                 $progression = new Progression($user, Story::read(1), true);
@@ -60,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['auth'])) {
                 $formData = array_fill_keys(array_keys($formData), '');
                 $formData['check'] = false;
                 //Redirection vers index.php
-                header("Location: index.php?ctrl=loginAccount");
+                header("Location: index.php?ctrl=emailEnvoye&userId=" . $user->getId());
             } catch (Exception $e) {
                 if($e->getCode() == '23000') {
                     echo("Le nom d'utilisateur ou l'adresse mail que vous utilisez existe déjà");
