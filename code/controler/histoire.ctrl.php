@@ -14,13 +14,19 @@ include_once('./model/users.class.php');
 $idStory = $_GET['idStory'];
 $idDialog = $_GET['idDialog'];
 $prevSpeaker = $_GET['prevSpeaker'] ?? "none";
+$_SESSION['lastDialog'] = $idDialog;
+
 
 
 
 $imgURL = "https://localhost:8080/rezisten/imgPersonnage/";
 $audioURL = "https://localhost:8080/rezisten/doublageDialogue/histoire".$idStory."/";
 $placeURL = "https://localhost:8080/rezisten/imgLieux/";
-$backgroundURL = "http://localhost:8080/rezisten/backgroundHistoire/";
+$backgroundURL = "https://localhost:8080/rezisten/backgroundHistoire/";
+$dialogsChangeBG = [
+    1 => "",
+    2 => "Nous y sommes ?"
+];
 
 $dialog = Dialog::read($idDialog,$idStory);
 $view = new View();
@@ -43,6 +49,7 @@ if ($dialog === null) {
             $progression->create();
         }
     }
+    unset($_SESSION['background']);
 
     $place = $story->getPlace();
     $imgPlace = $placeURL.$place->getId().".webp";
@@ -63,6 +70,8 @@ if ($dialog === null) {
                 );
                 $progression->create();
             }
+            unset($_SESSION['background']);
+
         $place = $story->getPlace();
         $imgPlace = $placeURL.$place->getId().".webp";
         $view->assign('imgPlace',$imgPlace);
@@ -72,8 +81,23 @@ if ($dialog === null) {
         $view->display('finHistoire');
     
 }
+// Gestion du background
+$background = $backgroundURL."hist_".$idStory."bg1.webp";
+// Permet de vérifier quel background est stocké dans la session si on change subitement d'histoire
+$bgSession = explode('_',$_SESSION['background']);
 
-    
+// S'il existe un background dans la session qui correspond à un background de l'histoire actuelle on l'affiche
+if(isset($_SESSION['background']) && $_SESSION['background'] != '' && $bgSession[1] == $idStory ){
+    $background = $_SESSION['background'];
+}else{
+    // Sinon on le créé dans le cas où on a atteint un dialogue de changement précisé dans $dialogsChangeBG
+    if(isset($dialogsChangeBG[$idStory]) && $dialogsChangeBG[$idStory] == $dialog->getContent()){
+        $background = $backgroundURL."hist_".$idStory."bg2.webp";
+    }
+}
+$_SESSION['background'] = $background;
+
+
 
 
 // Si le dialogue repère est détecté on bascule sur la question en appelant la vue avec les bonnes données
@@ -82,8 +106,8 @@ if($dialog->getContent() == "limquestion"){
     $_SESSION['idStory'] = $idStory;
     $_SESSION['idDialog'] = $idDialog;
     $_SESSION['difficulty'] = "spécifique";
-    $_SESSION['lastDialog'] = $idDialog;
     
+    $view->assign('background',$background);
     $view->assign('error','');
     $view->assign('story',$story);
     $view->assign('question',$question);
@@ -93,25 +117,8 @@ if($dialog->getContent() == "limquestion"){
 //Sinon on met à jour les données sur le dialogue et les personnages incluent dans ce passage.
 // On gère aussi le background en fonction de l'avancée
 
-$dialogLimit = Dialog::readLimit($idStory);
 
-function imageExists($url) {
-    $headers = @get_headers($url);
-    return $headers && strpos($headers[0], '200') !== false;
-}
-
-$background1 = $backgroundURL . "hist_" . $story->getId() . "bg1.webp";
-$background2 = $backgroundURL . "hist_" . $story->getId() . "bg2.webp";
-
-// Choix du background
-if ($dialog->getId() > $dialogLimit && imageExists($background2)) {
-    $background = $background2;
-} elseif (imageExists($background1)) {
-    $background = $background1;
-} else {
-    // Si aucune des images n'existe, définis un background par défaut
-    $background = $backgroundURL . "default_bg.webp";
-}
+$dialLimit = Dialog::readLimit($idStory);
 
 $idChap = $story->getChapter()->getNumchap();
 $speaker = $dialog->getSpeaker();
@@ -123,6 +130,7 @@ if($prevSpeaker != $speaker->getImage()){
     $prevSpeaker = "none.webp";
 }
 
+$view->assign('dialLimit',$dialLimit);
 $view->assign('background',$background);
 $view->assign('firstbonus',$firstBonus);
 $view->assign('prevSpeaker',$prevSpeaker);

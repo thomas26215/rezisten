@@ -3,6 +3,10 @@ body{
 }
 
 main{
-    padding: 1em;
-
+    width: 70%;
+    margin : auto !important;
+    text-align: justify ;
+}
+h1{
+    text-align: center;
 }

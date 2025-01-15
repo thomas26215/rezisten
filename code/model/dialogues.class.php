@@ -10,7 +10,7 @@ class Dialog
     private Story $story;
     private Character $speaker;
     private string $content;
-    private bool $bonus; // Assurez-vous que cette propriété est initialisée
+    private bool $bonus;
     private string $dubbing;
 
     private DAO $dao;
@@ -23,10 +23,11 @@ class Dialog
         $this->story = $story;
         $this->speaker = $speaker;
         $this->content = $content;
-        $this->bonus = $bonus; // Assurez-vous que cette propriété est bien initialisée
-        $this->dubbing = $dubbing; // Assurez-vous que cette propriété est bien initialisée
+        $this->bonus = $bonus;
+        $this->dubbing = $dubbing;
         $this->dao = DAO::getInstance();
     }
+
     /* Getters */
     public function getId(): int
     {
@@ -50,12 +51,12 @@ class Dialog
 
     public function getBonus(): bool
     {
-        return $this->bonus; // Accès sécurisé
+        return $this->bonus;
     }
 
     public function getDubbing(): string
     {
-        return $this->dubbing; // Accès sécurisé
+        return $this->dubbing;
     }
 
     /* Setters */
@@ -81,7 +82,7 @@ class Dialog
 
     public function setBonus(bool $bonus): void
     {
-        $this->bonus = $bonus; // Assurez-vous que cette propriété est bien initialisée
+        $this->bonus = $bonus;
     }
 
     public function setDubbing(string $dubbing): void
@@ -89,45 +90,70 @@ class Dialog
         $this->dubbing = $dubbing;
     }
 
-
     /* Méthodes CRUD et utilitaire sur les dialogs */
 
     public function create(): bool
     {
         try {
             $storyId = $this->story->getId();
-            if (
-                $this->dao->insertRelatedData("dialogues", [
-                    "id" => $this->id,
-                    "id_histoire" => $storyId,
-                    "interlocuteur" => $this->speaker->getId(),
-                    "contenu" => $this->content,
-                    "bonus" => $this->bonus,
-                    "doublage" => $this->dubbing
-                ])
-            ) {
-                return true;
-            }
-            return false;
+            return $this->dao->insertRelatedData("dialogues", [
+                "id" => $this->id,
+                "id_histoire" => $storyId,
+                "interlocuteur" => $this->speaker->getId(),
+                "contenu" => $this->content,
+                "bonus" => $this->bonus,
+                "doublage" => $this->dubbing
+            ]);
         } catch (PDOException $e) {
             throw $e;
         }
     }
 
-    public function update(): bool
+
+    public function update(int $newId = 0): bool
     {
         if ($this->id <= 0) {
             return false;
         }
-        return $this->dao->update("dialogues", [
-            "id" => $this->id,
-            "id_histoire" => $this->story->getId(),
-            "interlocuteur" => $this->speaker->getId(),
-            "contenu" => $this->content,
-            "bonus" => $this->bonus,
-            "doublage" => $this->dubbing
-        ], ["id" => $this->id, "id_histoire" => $this->story->getId()]) > 0;
+
+        $updateId = ($newId != 0) ? $newId : $this->id;
+
+        // Commencer une transaction
+        $this->dao->getDb()->beginTransaction();
+
+        try {
+            // Supprimer l'ancien enregistrement
+            $this->dao->deleteDatas("dialogues", [
+                "id" => $this->id,
+                "id_histoire" => $this->story->getId()
+            ]);
+
+            // Insérer le nouvel enregistrement
+            $result = $this->dao->insertRelatedData("dialogues", [
+                "id" => $updateId,
+                "id_histoire" => $this->story->getId(),
+                "interlocuteur" => $this->speaker->getId(),
+                "contenu" => $this->content,
+                "bonus" => $this->bonus,
+                "doublage" => $this->dubbing
+            ]);
+
+            // Valider la transaction
+            $this->dao->getDb()->commit();
+
+            // Mettre à jour l'ID de l'objet si l'opération a réussi
+            if ($result) {
+                $this->id = $updateId;
+            }
+
+            return $result;
+        } catch (Exception $e) {
+            // En cas d'erreur, annuler la transaction
+            $this->dao->getDb()->rollBack();
+            throw $e;
+        }
     }
+
 
     public static function delete($id, $idStory): bool
     {
@@ -140,55 +166,53 @@ class Dialog
     public static function read(int $id, int $idStory): ?Dialog
     {
         $dao = DAO::getInstance();
-        //FIXME : la valeur de bonus est à changer en fonction du SGBD
         $results = $dao->getColumnWithParameters("dialogues", ["id" => $id, "id_histoire" => $idStory]);
 
-        // Vérifiez si le tableau n'est pas vide avant d'accéder à l'index 0
+
+
         if (!empty($results)) {
-            $result = $results[0]; // Accédez au premier élément uniquement si le tableau n'est pas vide
+            $result = $results[0];
             return new Dialog(
                 $result['id'],
                 Story::read($idStory),
                 Character::read($result['interlocuteur']),
                 $result['contenu'],
-                $result['bonus'],
+                filter_var($result['bonus'], FILTER_VALIDATE_BOOLEAN),
                 $result['doublage']
             );
         }
-        return null; // Retournez null si aucun résultat n'est trouvé
+        return null;
     }
+
 
     public static function readBonusDialog(int $id, int $idStory): ?Dialog
     {
         $dao = DAO::getInstance();
-        $results = $dao->getColumnWithParameters("dialogues", ["id" => $id, "id_histoire" => $idStory, "bonus" => "1"]);
+        $results = $dao->getColumnWithParameters("dialogues", ["id" => $id, "id_histoire" => $idStory, "bonus" => true]);
 
-        // Vérifiez si le tableau n'est pas vide avant d'accéder à l'index 0
         if (!empty($results)) {
-            $result = $results[0]; // Accédez au premier élément uniquement si le tableau n'est pas vide
+            $result = $results[0];
             return new Dialog(
                 $result['id'],
                 Story::read($idStory),
                 Character::read($result['interlocuteur']),
                 $result['contenu'],
-                $result['bonus'],
+                (bool) $result['bonus'],
                 $result['doublage']
             );
         }
-        return null; // Retournez null si aucun résultat n'est trouvé
+        return null;
     }
 
     public static function readFirstBonus(int $idStory): int
     {
         $dao = DAO::getInstance();
-        // FIXME : sur postgres passer sur "true" au lieu de 1
-        $results = $dao->getColumnWithParameters("dialogues", ["id_histoire" => $idStory, "bonus" => 1]);
+        $results = $dao->getColumnWithParameters("dialogues", ["id_histoire" => $idStory, "bonus" => true]);
 
-        // Vérifiez si le tableau n'est pas vide avant d'accéder à l'index 0
         if (!empty($results)) {
-            return $results[0]['id']; // Accédez au premier élément uniquement si le tableau n'est pas vide
+            return $results[0]['id'];
         }
-        return 0; // Retournez null si aucun résultat n'est trouvé
+        return 0;
     }
 
     public static function readLimit(int $idStory): int {
@@ -219,7 +243,7 @@ class Dialog
         }
 
         $i = 0;
-        while ($i < sizeof($dialogs) && $dialogs[$i]['contenu'] !== 'limquestion') {
+        while ($i < count($dialogs) && $dialogs[$i]['contenu'] !== 'limquestion') {
             $story = Story::read($idStory);
             $speaker = Character::read($dialogs[$i]['interlocuteur']);
             $d = new Dialog(
@@ -227,10 +251,10 @@ class Dialog
                 $story,
                 $speaker,
                 $dialogs[$i]['contenu'],
-                $dialogs[$i]['bonus'],
+                (bool) $dialogs[$i]['bonus'],
                 $dialogs[$i]['doublage']
             );
-            array_push($dialogsBeforeQuestion, $d);
+            $dialogsBeforeQuestion[] = $d;
             $i++;
         }
         return $dialogsBeforeQuestion;
@@ -246,19 +270,19 @@ class Dialog
             throw new Exception("Aucun dialogue trouvé");
         }
 
-        for ($i = 0; $i < sizeof($dialogs); $i++) {
-            if ($dialogs[$i]['bonus'] === "true") {
+        foreach ($dialogs as $dialog) {
+            if ($dialog['bonus'] === true) {
                 $story = Story::read($idStory);
-                $speaker = Character::read($dialogs[$i]['interlocuteur']);
+                $speaker = Character::read($dialog['interlocuteur']);
                 $d = new Dialog(
-                    $dialogs[$i]['id'],
+                    $dialog['id'],
                     $story,
                     $speaker,
-                    $dialogs[$i]['contenu'],
-                    $dialogs[$i]['bonus'],
-                    $dialogs[$i]['doublage']
+                    $dialog['contenu'],
+                    (bool) $dialog['bonus'],
+                    $dialog['doublage']
                 );
-                array_push($dialogsBonus, $d);
+                $dialogsBonus[] = $d;
             }
         }
         return $dialogsBonus;
@@ -274,33 +298,33 @@ class Dialog
             throw new Exception("Aucun dialogue trouvé");
         }
 
-        for ($i = 0; $i < sizeof($dialogs); $i++) {
-            if ($dialogs[$i]['bonus'] === "false") {
+        foreach ($dialogs as $dialog) {
+            if ($dialog['bonus'] === false) {
                 $story = Story::read($idStory);
-                $speaker = Character::read($dialogs[$i]['interlocuteur']);
+                $speaker = Character::read($dialog['interlocuteur']);
                 $d = new Dialog(
-                    $dialogs[$i]['id'],
+                    $dialog['id'],
                     $story,
                     $speaker,
-                    $dialogs[$i]['contenu'],
-                    $dialogs[$i]['bonus'],
-                    $dialogs[$i]['doublage']
+                    $dialog['contenu'],
+                    (bool) $dialog['bonus'],
+                    $dialog['doublage']
                 );
-                array_push($dialogsClassic, $d);
+                $dialogsClassic[] = $d;
             }
         }
         return $dialogsClassic;
     }
 
-    // Méthode countDialogs
     public static function countDialogs(int $idStory): int
     {
         $dao = DAO::getInstance();
         $result = $dao->getColumnWithParameters("dialogues", ["id_histoire" => $idStory]);
         return count($result);
     }
-    public static function readAllByStory(int $storyId): int
-    {//TO-DO a TESTER 
+
+    public static function readAllByStory(int $storyId): array
+    {
         $dao = DAO::getInstance();
         $results = $dao->getColumnWithParameters('dialogues', ['id_histoire' => $storyId]);
         $dialogues = [];
@@ -310,11 +334,53 @@ class Dialog
                 Story::read($result['id_histoire']),
                 Character::read($result['interlocuteur']),
                 $result['contenu'],
-                $result['bonus'],
+                (bool) $result['bonus'],
                 $result['doublage']
             );
         }
-        return count($dialogues);
+        return $dialogues;
+    }
+    public static function updateAfterDeletion($idDeleted, $idStory)
+    {
+        $dao = DAO::getInstance();
+
+
+        // Étape 1 : Récupérer tous les dialogues triés par ID croissant
+        $dialogues = $dao->getColumnWithParameters(
+            'dialogues',
+            ['id_histoire' => $idStory],
+            ['id']
+        );
+
+
+        // Vérifiez si aucun dialogue n'est trouvé
+        if (empty($dialogues)) {
+            return false;
+        }
+
+        $newId = 1; // ID initial après suppression
+
+        foreach ($dialogues as $dialogue) {
+            $dialog= Dialog::read($dialogue["id"],$idStory);
+            $currentId = $dialogue['id'];
+
+            if ($currentId == $idDeleted) {
+                continue;
+            }
+
+            if ($currentId != $newId) {
+                $dialog->update($newId);
+
+                // Vérifiez si la mise à jour a échoué
+                if ($dialog->getId() !== $newId) {
+                    return false;
+                }
+            } 
+
+            $newId++; // Incrémenter le nouvel ID attendu
+        }
+
+        return true;
     }
 }
 ?>

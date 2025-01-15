@@ -1,7 +1,7 @@
 -- Table des utilisateurs
 CREATE TABLE UTILISATEURS (
     id SERIAL PRIMARY KEY,  -- Identifiant unique auto-incrémenté pour chaque utilisateur
-    pseudo VARCHAR(20) NOT NULL UNIQUE,   -- Nom d'utilisateur unique
+    pseudo VARCHAR(20) NOT NULL,   -- Nom d'utilisateur unique
     prenom VARCHAR(50),                      -- Prénom de l'utilisateur
     nom VARCHAR(50),                      -- Nom de famille de l'utilisateur
     datenaiss DATE NOT NULL,                -- Date de naissance de l'utilisateur

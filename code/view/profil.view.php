@@ -11,8 +11,9 @@
 </head>
 
 <body>
-    <?php include_once("./view/header.view.php") ?>
+    <?php include_once("./view/headerProfile.view.php") ?>
     <main>
+
         <div class="container">
             <div class="profilHead">
                 <img src="./view/design/image/photoProfil.jpg" alt="photo profil">
@@ -23,7 +24,16 @@
             </form>
         </div>
 
-        <form action="post">
+        <?php if (!empty($errors)): ?>
+            <div class="errors">
+                <?php foreach ($errors as $error): ?>
+                    <p><?php echo htmlspecialchars($error); ?></p>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+
+        <form method="post" action="?ctrl=profil">
+
             <div>
                 <label for="pseudo">Pseudo : </label>
                 <input type="text" name="pseudo" id="pseudo" placeholder=<?= $pseudo ?>>

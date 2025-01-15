@@ -12,62 +12,25 @@
 </head>
 
 <body>
-    <div id="map"></div>
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <script>
-        // Initialiser la carte
-        var map = L.map('map').setView([<?php $COORDONNEEX ?>,<? $COORDONNEEY /*On peux tout mettre en 1 je pense demander a Quentin*/ ?>], 13);
+<script>
+    // Récupérer les coordonnées transmises par le fichier principal
+    var lat = <?php echo $latitude; ?>;
+    var lon = <?php echo $longitude; ?>;
 
-        // Ajouter les tuiles de la carte (OpenStreetMap)
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
+    // Initialisation de la carte centrée sur les coordonnées obtenues
+    var map = L.map('map').setView([lat, lon], 13);
 
-        // Ajouter un marqueur pour les coordonnées spécifiées
-        L.marker([<?php $COORDONNEEX ?>,<? $COORDONNEEY /*On peux tout mettre en 1 je pense demander a Quentin*/ ?>]).addTo(map)
-            .bindPopup("L'emplacement du lieu")
-            .openPopup();
-    </script>
+    // Ajouter les tuiles OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Ajouter un marqueur à la position (lat, lon) et ajouter un popup
+    L.marker([lat, lon]).addTo(map)
+        .bindPopup("Emplacement du lieu")
+        .openPopup();
+</script>
+
 </body>
-    <script src="./js/dyslexique.js"></script>
-    <script>
-        // Vérifiez si le mode dyslexique est activé dans le localStorage
-        if (localStorage.getItem('dyslexique') === 'true') {
-            document.body.classList.add('dyslexique');
-        }
-
-        // Ajoutez un écouteur d'événement au bouton pour basculer le mode dyslexique
-        document.getElementById('toggleDyslexique').addEventListener('click', function() {
-            document.body.classList.toggle('dyslexique');
-            // Stockez la préférence dans le localStorage
-            localStorage.setItem('dyslexique', document.body.classList.contains('dyslexique'));
-        });
-    </script>
-    <script>
-        // Vérifiez si le mode dyslexique est activé dans le localStorage
-        if (localStorage.getItem('dyslexique') === 'true') {
-            document.body.classList.add('dyslexique');
-        }
-
-        // Ajoutez un écouteur d'événement au bouton pour basculer le mode dyslexique
-        document.getElementById('toggleDyslexique').addEventListener('click', function() {
-            document.body.classList.toggle('dyslexique');
-            // Stockez la préférence dans le localStorage
-            localStorage.setItem('dyslexique', document.body.classList.contains('dyslexique'));
-        });
-    </script>
-    <script>
-        // Vérifiez si le mode dyslexique est activé dans le localStorage
-        if (localStorage.getItem('dyslexique') === 'true') {
-            document.body.classList.add('dyslexique');
-        }
-
-        // Ajoutez un écouteur d'événement au bouton pour basculer le mode dyslexique
-        document.getElementById('toggleDyslexique').addEventListener('click', function() {
-            document.body.classList.toggle('dyslexique');
-            // Stockez la préférence dans le localStorage
-            localStorage.setItem('dyslexique', document.body.classList.contains('dyslexique'));
-        });
-    </script>
-
+   
 </html>
