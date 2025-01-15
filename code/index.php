@@ -4,6 +4,8 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+require_once("./model/users.class.php");
+
 // On utilise la variable globale $_REQUEST car on envoie des formulaires en GET et en POST
 $ctrl = $_REQUEST['ctrl'] ?? '';
 
@@ -13,6 +15,12 @@ const CTRLS = array('loginAccount', 'createAccount', 'authentification', 'mainNo
 session_start();
 
 
+if(isset($_SESSION["user_id"])) {
+    if(User::read($_SESSION["user_id"]) == null) {
+        session_destroy();
+        session_start();
+    }
+}
 
 
 
