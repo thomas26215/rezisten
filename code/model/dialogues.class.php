@@ -28,7 +28,7 @@ class Dialog
         $this->dao = DAO::getInstance();
     }
 
-    /* Getters */
+    /* Getters  :*/
     public function getId(): int
     {
         return $this->id;

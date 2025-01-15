@@ -108,8 +108,7 @@ class Character
         return null;
     }
 
-    public static function readCharactersOfUser(int $userId): array
-    {
+/*     public static function readCharactersOfUser(int $userId) : array {
         $dao = DAO::getInstance();
         $listCharacters = array();
 
@@ -129,6 +128,9 @@ class Character
     public function update(): bool
     {
         if ($this->id !== -1) {
+ */
+    public function update(): bool {
+        if($this->id !== -1){
             return $this->dao->update("personnages", [
                 "prenom" => $this->first_name,
                 "img" => $this->image,

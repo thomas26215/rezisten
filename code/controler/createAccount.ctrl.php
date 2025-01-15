@@ -39,6 +39,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['auth'])) {
         if (!$formData['check']) {
             $errors[] = "Vous devez accepter les Conditions Générales d'Utilisation.";
         }
+        $birthdate = DateTime::createFromFormat('Y-m-d', $formData['date']);
+        $now = new DateTime();
+        if (!$birthdate || $now->diff($birthdate)->y < 16) {
+            $errors[] = "Vous devez avoir au moins 16 ans pour créer un compte.";
+        }
         if (empty($errors)) {
             try {
                 // Traitement pour la création de compte

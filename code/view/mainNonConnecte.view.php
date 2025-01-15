@@ -2,7 +2,7 @@
 <html lang="fr">
 
 <head>
-    <link rel="icon" href="./view/favicon.ico" type="image/x-icon">    
+    <link rel="icon" href="./view/favicon.ico" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil</title>
@@ -19,11 +19,11 @@
         <form action="index.php" method="get">
             <button type="submit" name="ctrl" value="loginAccount">Se connecter</button>
             <button type="submit" name="ctrl" value="createAccount">Créer un compte</button>
-    </form>
+        </form>
     </main>
     <?php include_once './view/footer.view.php'; ?>
 
 </body>
-    <script src="./view/js/dyslexique.js"></script>
+<script src="./view/js/dyslexique.js"></script>
 
 </html>
