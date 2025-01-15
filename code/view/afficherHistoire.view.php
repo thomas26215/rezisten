@@ -31,29 +31,36 @@
                         </p>
                         <div id="fleche">
                             <?php if ($index > 0): ?>
-                                <form method="POST" action="index.php?ctrl=creation&article=afficherHistoire&id=<?= $histoire->getId() ?>&action=moveUp">
+                                <form method="GET" action="index.php">
+                                    <input type="hidden" name="ctrl" value="creation">
+                                    <input type="hidden" name="article" value="afficherHistoire">
                                     <input type="hidden" name="id" value="<?= $histoire->getId() ?>">
+                                    <input type="hidden" name="action" value="moveUp">
                                     <input type="hidden" name="idDialogue" value="<?= $dialogue->getId() ?>">
                                     <button type="submit" class="bouton-modif">^</button>
                                 </form>
                             <?php endif; ?>
                             <?php if ($index < count($dialogues) - 1): ?>
-                                <form method="POST" action="index.php?ctrl=creation&article=afficherHistoire&id=<?= $histoire->getId() ?>&action=moveDown">
+                                <form method="GET" action="index.php">
+                                    <input type="hidden" name="ctrl" value="creation">
+                                    <input type="hidden" name="article" value="afficherHistoire">
                                     <input type="hidden" name="id" value="<?= $histoire->getId() ?>">
+                                    <input type="hidden" name="action" value="moveDown">
                                     <input type="hidden" name="idDialogue" value="<?= $dialogue->getId() ?>">
                                     <button type="submit" class="bouton-modif bouton-bas">^</button>
                                 </form>
                             <?php endif; ?>
                         </div>
                         <?php if ($dialogue->getContent() !== 'limquestion'): ?>
-                            <form method="GET" action="index.php?ctrl=personnages&article=afficherHistoire">
+                            <form method="GET" action="index.php">
                                 <input type="hidden" name="ctrl" value="creation">
                                 <input type="hidden" name="article" value="afficherHistoire">
                                 <input type="hidden" name="id" value="<?= $histoire->getId() ?>">
                                 <input type="hidden" name="idDialogue" value="<?= $dialogue->getId() ?>">
                                 <input type="hidden" name="typeDialogue" value="dialogue">
-                                <button type="submit" name="delete" value="delete" class="poub"><img
-                                        src="./view/design/image/poubelle.png" alt="poubelle" id="poubelle"></button>
+                                <button type="submit" name="delete" value="delete" class="poub">
+                                    <img src="./view/design/image/poubelle.png" alt="poubelle" id="poubelle">
+                                </button>
                             </form>
                         <?php endif; ?>
                     </section>

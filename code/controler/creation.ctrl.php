@@ -178,15 +178,15 @@ if (isset($_GET['delete']) && $_GET['delete'] === 'delete' && isset($_GET['idDia
     }
 }
 // Déplacer un dialogue vers le haut
-if (isset($_POST['action']) && $_POST['action'] === 'moveUp' && isset($_POST['idDialogue'])) {
-    $idDialogue = $_POST['idDialogue'];
+if (isset($_GET['action']) && $_GET['action'] === 'moveUp' && isset($_GET['idDialogue'])) {
+    $idDialogue = $_GET['idDialogue'];
     $dialogue = Dialog::read($idDialogue, $histoire->getId());
 
     if ($dialogue) {
         $previousDialogue = Dialog::read($idDialogue - 1, $histoire->getId());
         if ($previousDialogue) {
-            // Update IDs after move
-            Dialog::updateAfterMove($dialogue->getId(), $histoire->getId(), "haut");
+            // Échanger les IDs des dialogues
+            Dialog::swapDialogIds($dialogue->getId(), $previousDialogue->getId(), $histoire->getId());
         }
     }
 
@@ -196,28 +196,24 @@ if (isset($_POST['action']) && $_POST['action'] === 'moveUp' && isset($_POST['id
 }
 
 // Déplacer un dialogue vers le bas
-if (isset($_POST['action']) && $_POST['action'] === 'moveDown' && isset($_POST['idDialogue'])) {
-    $idDialogue = $_POST['idDialogue'];
+if (isset($_GET['action']) && $_GET['action'] === 'moveDown' && isset($_GET['idDialogue'])) {
+    $idDialogue = $_GET['idDialogue'];
     $dialogue = Dialog::read($idDialogue, $histoire->getId());
 
     if ($dialogue) {
         $nextDialogue = Dialog::read($idDialogue + 1, $histoire->getId());
         if ($nextDialogue) {
-            // Update IDs after move
-            Dialog::updateAfterMove($dialogue->getId(), $histoire->getId(), "bas");
-            echo "Moved dialogue ID " . $dialogue->getId() . " down.<br>";
-        } else {
-            echo "Next dialogue not found.<br>";
+            // Échanger les IDs des dialogues
+            Dialog::swapDialogIds($dialogue->getId(), $nextDialogue->getId(), $histoire->getId());
         }
-    } else {
-        echo "Dialogue not found.<br>";
     }
 
     // Redirection après le déplacement
-    header("Location: creation?ctrl=creation&article=afficherHistoire&id=" . $histoire->getId());
+    $redirectUrl = "creation?ctrl=creation&article=afficherHistoire&id=" . $histoire->getId();
+    error_log("Redirection vers : " . $redirectUrl); // Ajoutez cette ligne pour déboguer l'URL
+    header("Location: " . $redirectUrl);
     exit();
 }
-
 
 // Récupération depuis le modèle
 $personnages = Character::readAllCharacters();

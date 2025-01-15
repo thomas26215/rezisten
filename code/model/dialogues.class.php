@@ -384,55 +384,39 @@ class Dialog
         return true;
     }
     /**
-     * Update the IDs of dialogs after moving one up or down.
+     * Swap the IDs of dialogs after moving one up or down.
      *
      * @param int $idMoved The ID of the moved dialog.
      * @param int $idStory The ID of the story.
      * @return void
      */
-    public static function updateAfterMove(int $idMoved, int $idStory, string $sens): void
+  
+    public static function swapDialogIds(int $id1, int $id2, int $idStory): bool
     {
         $dao = DAO::getInstance();
-    
-        // Retrieve all dialogs sorted by ID
-        $dialogues = $dao->getColumnWithParameters("dialogues", ["id_histoire" => $idStory], ["id"]);
-    
-        // Check if no dialogs are found
-        if (empty($dialogues)) {
-            echo "No dialogues found for story ID " . $idStory . ".<br>";
-            return;
-        }
-    
-        // Determine the new ID for the moved dialog
-        $newId = ($sens === "haut") ? $idMoved - 1 : $idMoved + 1;
-    
-        // Ensure the new ID is within valid range
-        if ($newId < 1 || $newId > count($dialogues)) {
-            echo "New ID " . $newId . " is out of range.<br>";
-            return;
-        }
-    
-        // Begin transaction
-        $dao->getDb()->beginTransaction();
-    
+
+        // Commencer une transaction
+
         try {
-            // Update the moved dialog to the new ID
-            $dialogMoved = Dialog::read($idMoved, $idStory);
-            $dialogMoved->update($newId);
-            echo "Updated moved dialogue ID " . $idMoved . " to new ID " . $newId . ".<br>";
-    
-            // Update the dialog that was at the new ID to the old ID of the moved dialog
-            $dialogReplaced = Dialog::read($newId, $idStory);
-            $dialogReplaced->update($idMoved);
-            echo "Updated replaced dialogue ID " . $newId . " to old ID " . $idMoved . ".<br>";
-    
-            // Commit transaction
-            $dao->getDb()->commit();
+            // Lire les deux dialogues
+            $dialog1 = Dialog::read($id1, $idStory);
+            $dialog2 = Dialog::read($id2, $idStory);
+
+            if ($dialog1 && $dialog2) {
+                // Échanger les IDs
+                $dialog2->update(100000000000);
+                $dialog1->update($id2);
+                $dialog2->update($id1);
+
+                // Valider la transaction
+                return true;
+            } else {
+                throw new Exception("Un ou les deux dialogues n'ont pas été trouvés.");
+            }
         } catch (Exception $e) {
-            // Rollback transaction in case of error
-            $dao->getDb()->rollBack();
-            echo "Error: " . $e->getMessage() . "<br>";
+            // En cas d'erreur, annuler la transaction
             throw $e;
         }
-    }}
+    }
+}
 ?>
