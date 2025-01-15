@@ -1,58 +1,73 @@
 <article class="content">
     <h2 class="titre">Supprimer un personnage</h2>
 
-    <form method="post" action="index.php?ctrl=personnages&article=supprimerPersonnage" class="articleContainer">
-        <input type="hidden" name="ctrl" value="personnages">
-        <input type="hidden" name="action" value="selectCharacter">
-        <div class="personnage">
-            <label for="personnage">Personnage à supprimer : </label>
-            <select name="selectedCharacter" id="personnage" onchange="this.form.submit()">
-                <option value="">Sélectionnez un personnage</option>
-                <?php foreach ($characters as $char) { ?>
-                    <option value="<?= $char->getId() ?>"><?= htmlspecialchars($char->getFirstName()) ?></option>
-                <?php } ?>
-            </select>
-        </div>
-        <input type="hidden" name="article" value="supprimerPersonnage">
+    <div class="articleContainer">
 
-        
-    </form>
-
-        <div class="supContainer">
-            <div>
-                <p style="font-weight: bold;">Prénom : </p>
-                <p><?= $selectedCharacter?->getFirstName() ?? " "; ?></p>
+        <form method="post" action="index.php?ctrl=personnages&article=supprimerPersonnage" class="articleContainer">
+            <input type="hidden" name="ctrl" value="personnages">
+            <input type="hidden" name="action" value="selectCharacter">
+            <div class="personnage">
+                <label for="personnage">Personnage à supprimer : </label>
+                <select name="selectedCharacter" id="personnage" onchange="this.form.submit()">
+                    <option value="">Sélectionnez un personnage</option>
+                    <?php foreach ($characters as $char) { ?>
+                        <option value="<?= $char?->getId() ?? 0 ?>"><?= htmlspecialchars($char->getFirstName()) ?></option>
+                    <?php } ?>
+                </select>
             </div>
-        </div>
+            <input type="hidden" name="article" value="supprimerPersonnage">
 
-        <div class="supContainer">
-            <img src="<?= $imgURL . $selectedCharacter?->getImage() ?? "img"?>"
-                alt="<?= $selectedCharacter?->getFirstName() ?? "Jean"; ?>" style="max-width: 240px;">
-             <button type="button" id="dialogPublier" class="button-rouge">Supprimer</button>
-            <div class="supprimer">
-                <form method="post" action="index.php?ctrl=personnages&article=supprimerPersonnage">
-                    <input type="hidden" name="ctrl" value="personnages">
-                    <input type="hidden" name="characterId" value="<?= $selectedCharacter->getId() ?>">
-                    <input type="hidden" name="article" value="supprimerPersonnage">
-                    <input id="supprimerInput" type="hidden" name="fermer" value="false">
 
-                    <dialog id="dialog">
-                        <div class="containerDialog">
-                            <h2>Voulez vous supprimer <?= $selectedCharacter?->getFirstName() ?? "Jean"; ?> ?</h2>
-                            <div>
-                                
-                                <button type="submit" id="fermerPublier" name="fermer" class="button-vert">
-                                    Supprimer personnage
-                                </button>
-                                <button  type="button" id="fermerRevenir" class="button-rouge">
-                                    Revenir 
-                                </button>
+        </form>
+
+        <?php if ($selectedCharacter): ?>
+            <div class="supContainer">
+                <div>
+                    <p style="font-weight: bold;">Prénom : </p>
+                    <p><?= $selectedCharacter?->getFirstName() ?? " "; ?></p>
+                </div>
+            </div>
+
+            <div class="supContainer">
+                <?php
+                $imgSrc = '';
+                if ($selectedCharacter && $selectedCharacter->getCreator()->getId() == 4) {
+                    $imgSrc = $imgURL . ($selectedCharacter->getImage() ?? "default") . ".webp";
+                } else if ($selectedCharacter) {
+                    $imgSrc = './view/design/image/imageUser/' . ($selectedCharacter->getImage() ?? "default");
+                }
+                ?>
+                <img src="<?= $imgSrc ?>" alt="<?= $selectedCharacter?->getFirstName() ?? "Jean"; ?>"
+                    alt="<?= $selectedCharacter?->getFirstName() ?? "Jean"; ?>" style="max-width: 240px;">
+                <button type="button" id="dialogPublier" class="button-rouge">Supprimer</button>
+                <div class="supprimer">
+                    <form method="post" action="index.php?ctrl=personnages&article=supprimerPersonnage">
+                        <input type="hidden" name="ctrl" value="personnages">
+                        <input type="hidden" name="characterId" value="<?= $selectedCharacter->getId() ?>">
+                        <input type="hidden" name="action" value="supprimerPersonnage">
+                        <input id="supprimerInput" type="hidden" name="fermer" value="false">
+
+                        <dialog id="dialog">
+                            <div class="containerDialog">
+                                <h2>Voulez vous supprimer <?= $selectedCharacter?->getFirstName() ?? "Jean"; ?> ?</h2>
+                                <div>
+
+                                    <button type="submit" id="fermerPublier" name="fermer" class="button-vert">
+                                        Supprimer personnage
+                                    </button>
+                                    <button type="button" id="fermerRevenir" class="button-rouge">
+                                        Revenir
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    </dialog>
-                </form>
+                        </dialog>
+                    </form>
+                </div>
             </div>
-        </div>
+        <?php else: ?>
+            <p>Aucun personnage sélectionné. Veuillez en choisir un dans la liste.</p>
+        <?php endif; ?>
+    </div>
 
     <script>
         var submitSupprimer = document.getElementById("supprimerInput");
@@ -62,5 +77,5 @@
             submitSupprimer.value = "true";
         });
     </script>
-    
+
 </article>
