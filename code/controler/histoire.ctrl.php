@@ -49,6 +49,7 @@ if ($dialog === null) {
             $progression->create();
         }
     }
+    unset($_SESSION['background']);
 
     $place = $story->getPlace();
     $imgPlace = $placeURL.$place->getId().".webp";
@@ -69,6 +70,8 @@ if ($dialog === null) {
                 );
                 $progression->create();
             }
+            unset($_SESSION['background']);
+
         $place = $story->getPlace();
         $imgPlace = $placeURL.$place->getId().".webp";
         $view->assign('imgPlace',$imgPlace);
@@ -77,6 +80,17 @@ if ($dialog === null) {
         $view->assign('idChap',$story->getChapter()->getNumchap());
         $view->display('finHistoire');
     
+}
+// Gestion du background
+$background = $backgroundURL."hist_".$idStory."bg1.webp";
+
+if(isset($_SESSION['background']) && $_SESSION['background'] != ''){
+    $background = $_SESSION['background'];
+}else{
+    if(isset($dialogsChangeBG[$idStory]) && $dialogsChangeBG[$idStory] == $dialog->getContent()){
+        $background = $backgroundURL."hist_".$idStory."bg2.webp";
+        $_SESSION['background'] = $background;
+    }
 }
 
     
@@ -89,6 +103,7 @@ if($dialog->getContent() == "limquestion"){
     $_SESSION['idDialog'] = $idDialog;
     $_SESSION['difficulty'] = "spécifique";
     
+    $view->assign('background',$background);
     $view->assign('error','');
     $view->assign('story',$story);
     $view->assign('question',$question);
@@ -98,15 +113,7 @@ if($dialog->getContent() == "limquestion"){
 //Sinon on met à jour les données sur le dialogue et les personnages incluent dans ce passage.
 // On gère aussi le background en fonction de l'avancée
 
-$background = $backgroundURL."hist_".$idStory."bg1.webp";
-if(isset($_SESSION['background']) && $_SESSION['background'] != ''){
-    $background = $_SESSION['background'];
-}else{
-    if(isset($dialogsChangeBG[$idStory]) && $dialogsChangeBG[$idStory] == $dialog->getContent()){
-        $background = $backgroundURL."hist_".$idStory."bg2.webp";
-        $_SESSION['background'] = $background;
-    }
-}
+
 
 
 $idChap = $story->getChapter()->getNumchap();

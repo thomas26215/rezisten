@@ -18,7 +18,7 @@
 
 
         <article class="fond-container">
-            <img class="fond" src="./view/design/image/image_test.png" alt="Fond">
+            <img class="fond" src="<?=$background?>" alt="Fond">
             <div class="personnages">
             </div>
         </article>
@@ -41,6 +41,7 @@
                                     <input type="number" name="answer" id="answer">
                                 </label>
                                 <input type="hidden" name="ctrl" value="question">
+                                <input type="hidden" name="background" value="<?=$background?>">
                                 <input type="hidden" name="action" value="answer">
                                 <button class="repondre button-vert"> Répondre </button> 
                             </form>

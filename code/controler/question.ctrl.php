@@ -67,6 +67,7 @@ elseif($action == "answer"){
         $dub = $audioURL.$dialog->getDubbing().".WAV";
         $imgSpeaker = $imgURL.$speaker->getImage().".webp";
 
+        $view->assign('background',$_GET['background']);
         $view->assign('firstbonus',$firstbonus);
         $view->assign('dub',$dub);
         $view->assign('imgSpeaker',$imgSpeaker);
