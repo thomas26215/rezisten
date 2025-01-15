@@ -2,6 +2,7 @@
 
 include_once('framework/view.fw.php');
 include_once('model/users.class.php');
+include_once('model/verificationEmail.class.php');
 
 $errors = [];
 $formData = [
@@ -30,16 +31,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($errors)) {
         // Assurez-vous que la méthode readWithMail() retourne un objet utilisateur ou null
         $user = User::readWithMail($formData['email']);
-        
-        // Vérifiez si l'utilisateur existe et que le mot de passe est correct
-        if ($user && password_verify($formData['password'], $user->getPassword())) { // Assurez-vous que getPassword() existe
-            $_SESSION['user_id'] = $user->getId(); // Assurez-vous que cette méthode existe
-            echo $_SESSION['user_id'];
-            $_SESSION['username'] = $user->getUsername(); // Assurez-vous que cette méthode existe
+
+        if (!$user || !password_verify($formData['password'], $user->getPassword())) {
+            $errors[] = "Email ou mot de passe incorrect";
+        } elseif (CheckEmail::isUserCodeDefined($user->getId())) {
+            $checkEmail = CheckEmail::generate($user->getId());
+            header("Location: index.php?ctrl=emailEnvoye&userId=" . $user->getId());
+        } else {
+            $_SESSION['user_id'] = $user->getId();
+            $_SESSION['username'] = $user->getUsername();
             header("Location: index.php?ctrl=main");
             exit();
-        } else {
-            $errors[] = "Email ou mot de passe incorrect.";
         }
     }
 }
@@ -48,6 +50,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $view = new View();
 $view->assign('formData', $formData);
 $view->assign('errors', $errors);
-$view->display('login'); // Assurez-vous que 'login' correspond à votre vue
+$view->display('login');
 ?>
 

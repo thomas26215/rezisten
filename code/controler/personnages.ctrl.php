@@ -70,38 +70,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Update the character
         $characterIdToModify = (int) $_POST['characterId'];
         $character = Character::read($characterIdToModify);
-        $newFirstName = trim($_POST['firstName'] ?? $character->getFirstName());
-        $newImage = $_FILES['photo'] ?? $character->getImage();
-
+        $newFirstName = trim($_POST['firstName']);
+        $newImage = $_FILES['photoUpload'] ?? $character->getImage();
         // Validate inputs
         if (empty($newFirstName)) {
-            $errorMessage = "Le prénom ne peut pas être vide.";
-        } else {
-            $character = Character::read($characterIdToModify);
-            if ($character) {
+            $newFirstName = $character->getFirstName();
+        }
+        $character = Character::read($characterIdToModify);
+        var_dump($newImage);
+        if ($character) {
 
-                if ($newImage && is_array($newImage) && $newImage['error'] === UPLOAD_ERR_OK) {
-                    // Define upload path
-                    $uploadDirectory = './view/design/image/imageUser/';
-                    $fileName = basename($newImage['name']);
-                    $filePath = $uploadDirectory . $fileName;
+            if ($newImage && is_array($newImage)) {
+                // Define upload path
+                $uploadDirectory = './view/design/image/imageUser/';
+                $fileName = basename($newImage['name']);
+                $filePath = $uploadDirectory . $fileName;
 
-                    // Move uploaded file
-                    if (!move_uploaded_file($newImage['tmp_name'], $filePath)) {
-                        throw new Exception("Erreur lors du téléchargement de l'image.");
-                    }
-                    $imageName = $fileName; // mettre fichier dans la db
-                    $character->setImage($newImage['name']);
+                // Move uploaded file
+                if (!move_uploaded_file($newImage['tmp_name'], $filePath)) {
+                    throw new Exception("Erreur lors du téléchargement de l'image.");
                 }
-
-                $character->setFirstName($newFirstName);
-                $character->update();
-
-
-
-                $characters = Character::readAllCharacters(); // update list
-
+                $imageName = $fileName; // mettre fichier dans la db
             }
+
+            $character->setImage($newImage['name']);
+            $character->setFirstName($newFirstName);
+            $character->update();
+
+
+
+            $characters = Character::readAllCharacters(); // update list
+
+
 
 
         }

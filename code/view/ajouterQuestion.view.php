@@ -14,13 +14,13 @@
         <!-- Question -->
         <section class="input-superpose">
             <label for="question">Entrez la question : </label>
-            <textarea name="question" id="question"></textarea>
+            <textarea name="question" id="question" required></textarea>
         </section>
 
         <!-- Réponse -->
         <section class="input-superpose">
             <label for="reponse">Entrez la réponse : </label>
-            <input type="number" name="reponse" id="reponse"></input>
+            <input type="number" name="reponse" id="reponse" required></input>
         </section>
 
         <!-- boutons -->

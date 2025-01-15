@@ -3,6 +3,7 @@
 
 require_once(__DIR__ . "/dao.class.php");
 require_once(__DIR__ . "/users.class.php");
+require_once(__DIR__ . "/composer/sendMail.utilitaire.php");
 
 class PasswordRecuperation {
     private int $id;

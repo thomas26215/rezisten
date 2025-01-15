@@ -1,14 +1,15 @@
 <?php
+// Fichier: model/checkEmail.class.php
 
 require_once(__DIR__ . "/dao.class.php");
 require_once(__DIR__ . "/users.class.php");
+require_once(__DIR__ . "/composer/sendMail.utilitaire.php");
 
 class CheckEmail {
     private int $id;
     private User $user;
     private string $token;
     private string $expirationDate;
-
     private DAO $dao;
 
     public function __construct(User $user, string $token, string $expirationDate = "00-00-00", int $id = -1) {
@@ -47,7 +48,6 @@ class CheckEmail {
         $this->user = $user;
     }
 
-    // Le token doit faire 10 caractères
     public function setToken(string $token): void {
         if($token == "") {
             throw new Exception("Impossible de mettre le token car vide");
@@ -61,23 +61,6 @@ class CheckEmail {
     public function setExpirationDate(string $expirationDate): void {
         $this->expirationDate = $expirationDate;
     }
-
-    public static function generate(int $userId){
-        $user = User::read($userId);
-        if (!$user) {
-            throw new Exception("Utilisateur non trouvé");
-        }
-        
-        $token = self::genererChaineAleatoire(10); // Appel statique
-        $checkEmail = new CheckEmail($user, $token);
-        
-        if($checkEmail->create()) {
-            return CheckEmail::read($userId);
-        } else {
-            throw new Exception("Impossible de créer la récupération de mot de passe");
-        }
-    }
-
 
     /* --- Méthodes CRUD --- */
 
@@ -130,7 +113,35 @@ class CheckEmail {
         }
         return false;
     }
-    public static function genererChaineAleatoire(int $longueur = 10): string {
+
+    /* --- Méthodes utilitaires --- */
+
+    public static function generate(int $userId): ?CheckEmail {
+        $user = User::read($userId);
+        if (!$user) {
+            throw new Exception("Utilisateur non trouvé");
+        }
+        CheckEmail::delete($userId);
+        
+        $token = self::genererChaineAleatoire(10);
+        $checkEmail = new CheckEmail($user, $token);
+        
+        if($checkEmail->create()) {
+            var_dump($checkEmail->getUser()->getId());
+            $emailSender =  new EmailSender();
+            $emailSender->welcome($checkEmail->getUser()->getMail(), $checkEmail->getToken());
+
+            return CheckEmail::read($userId);
+        } else {
+            throw new Exception("Impossible de créer la vérification d'email");
+        }
+            }
+
+    public static function isUserCodeDefined(int $id): bool {
+        return CheckEmail::read($id) !== null;
+    }
+
+    private static function genererChaineAleatoire(int $longueur = 10): string {
         $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $chaineAleatoire = '';
         for ($i = 0; $i < $longueur; $i++) {
@@ -139,4 +150,5 @@ class CheckEmail {
         return $chaineAleatoire;
     }
 }
+?>
 

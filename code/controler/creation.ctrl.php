@@ -56,12 +56,12 @@ if (isset($_GET['article']) && $_GET['article'] === 'ajouterDialogue' && isset($
         $existingDialogues = Dialog::readAllByStory($histoire->getId());
         $lastDialogueId = 0;
         if (!empty($existingDialogues)) {
-            $lastDialogueId = $existingDialogues;
+            $lastDialogueId = sizeof($existingDialogues);
         }
 
         // Insérer le nouveau dialogue avec un ID incrémenté
-        $newDialogueId = $lastDialogueId + 1;
-        $dialogue = new Dialog($newDialogueId, $histoire, $personnage, $texte);
+        (int)$newDialogueId = (int)$lastDialogueId + 1;
+        $dialogue = new Dialog((int)$newDialogueId, $histoire, $personnage, $texte);
         $dialogue->create();
 
         // Redirection après l'ajout du dialogue
@@ -157,9 +157,9 @@ if (isset($_GET['delete']) && $_GET['delete'] === 'delete' && isset($_GET['idDia
                     foreach ($existingDialogues as $dialogue) {
                         if ($dialogue && $dialogue->getContent() === 'limquestion') {
                             Dialog::delete($dialogue->getId(), $histoire->getId());
-                        } else {
-                            throw new Exception("Failed to delete Dialogue ID " . $idDialogue);
-                        }
+                            Dialog::updateAfterDeletion($dialogue->getId(), $histoire->getId());
+
+                        } 
 
                     }
                 } else {
