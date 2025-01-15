@@ -2,8 +2,8 @@
 <html lang="fr">
 
 <head>
-        <link rel="icon" href="./view/favicon.ico" type="image/x-icon">
-    
+    <link rel="icon" href="./view/favicon.ico" type="image/x-icon">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil</title>
@@ -13,15 +13,15 @@
 <body>
     <?php include_once("./view/headerProfile.view.php") ?>
     <main>
-
+        <form class="non-style" method="post" action="?ctrl=profil">
+            <button class="deconnect button-rouge" name="disconnect">Se déconnecter</button>
+        </form>
         <div class="container">
             <div class="profilHead">
                 <img src="./view/design/image/photoProfil.jpg" alt="photo profil">
                 <p><?= $pseudo ?></p>
             </div>
-            <form class="non-style" method="post" action="?ctrl=profil">
-                <button class="deconnect button-rouge" name="disconnect">Se déconnecter</button>
-            </form>
+
         </div>
 
         <?php if (!empty($errors)): ?>
