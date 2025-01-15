@@ -83,17 +83,21 @@ if ($dialog === null) {
 }
 // Gestion du background
 $background = $backgroundURL."hist_".$idStory."bg1.webp";
+// Permet de vérifier quel background est stocké dans la session si on change subitement d'histoire
+$bgSession = explode('_',$_SESSION['background']);
 
-if(isset($_SESSION['background']) && $_SESSION['background'] != ''){
+// S'il existe un background dans la session qui correspond à un background de l'histoire actuelle on l'affiche
+if(isset($_SESSION['background']) && $_SESSION['background'] != '' && $bgSession[1] == $idStory ){
     $background = $_SESSION['background'];
 }else{
+    // Sinon on le créé dans le cas où on a atteint un dialogue de changement précisé dans $dialogsChangeBG
     if(isset($dialogsChangeBG[$idStory]) && $dialogsChangeBG[$idStory] == $dialog->getContent()){
         $background = $backgroundURL."hist_".$idStory."bg2.webp";
-        $_SESSION['background'] = $background;
     }
 }
+$_SESSION['background'] = $background;
 
-    
+
 
 
 // Si le dialogue repère est détecté on bascule sur la question en appelant la vue avec les bonnes données
