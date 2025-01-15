@@ -43,3 +43,7 @@ h3 {
     height: 450px;
     width: 600px;
 }
+
+.infoContainer img{
+    height: 20em;    
+}
