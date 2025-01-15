@@ -23,9 +23,14 @@
                 </div>
             </div>
             <p class="texte">Merci de nous envoyer des documents pour prouver vos compétences afin de pouvoir écrire et publier vos histoires.</p>
-            <button id="photoSend" class="button-gris">Ajouter des documents</button>
-            <input type="file" id="photoUpload" name="photo" style="display: none;">
-            <p id="fileName">Pas de document ajoutée</p>
+            <div class="image">
+            <div class="imageChoisi">
+                <p>Image</p>
+                <input type="file" id="photoUpload" name="photoUpload" accept="image/*" style="display: none;">
+                <img id="photoSend" src="./view/design/image/upload.png" alt="">
+                <span id="fileName">Pas de document ajoutée</span>
+            </div>
+
             <button class="envoyer">Envoyer la demande</button>
         </form>
         
