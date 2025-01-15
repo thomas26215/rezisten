@@ -94,6 +94,7 @@ if($dialog->getContent() == "limquestion"){
 // On gère aussi le background en fonction de l'avancée
 
 $dialogLimit = Dialog::readLimit($idStory);
+
 function imageExists($url) {
     $headers = @get_headers($url);
     return $headers && strpos($headers[0], '200') !== false;
