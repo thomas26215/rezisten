@@ -49,7 +49,6 @@ if ($dialog === null) {
             $progression->create();
         }
     }
-    unset($_SESSION['background']);
 
     $place = $story->getPlace();
     $imgPlace = $placeURL.$place->getId().".webp";
@@ -70,7 +69,6 @@ if ($dialog === null) {
                 );
                 $progression->create();
             }
-            unset($_SESSION['background']);
 
         $place = $story->getPlace();
         $imgPlace = $placeURL.$place->getId().".webp";
@@ -84,10 +82,12 @@ if ($dialog === null) {
 // Gestion du background
 $background = $backgroundURL."hist_".$idStory."bg1.webp";
 // Permet de vérifier quel background est stocké dans la session si on change subitement d'histoire
-$bgSession = explode('_',$_SESSION['background']);
+if(isset($_SESSION['background'])){
+    $bgSession = explode('_',$_SESSION['background']);
+}
 
 // S'il existe un background dans la session qui correspond à un background de l'histoire actuelle on l'affiche
-if(isset($_SESSION['background']) && $_SESSION['background'] != '' && $bgSession[1] == $idStory ){
+if( isset($_SESSION['background']) && $_SESSION['background'] != '' && $bgSession[1] == $idStory ){
     $background = $_SESSION['background'];
 }else{
     // Sinon on le créé dans le cas où on a atteint un dialogue de changement précisé dans $dialogsChangeBG
