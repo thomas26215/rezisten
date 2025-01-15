@@ -60,8 +60,8 @@ if (isset($_GET['article']) && $_GET['article'] === 'ajouterDialogue' && isset($
         }
 
         // Insérer le nouveau dialogue avec un ID incrémenté
-        (int)$newDialogueId = (int)$lastDialogueId + 1;
-        $dialogue = new Dialog((int)$newDialogueId, $histoire, $personnage, $texte);
+        (int) $newDialogueId = (int) $lastDialogueId + 1;
+        $dialogue = new Dialog((int) $newDialogueId, $histoire, $personnage, $texte);
         $dialogue->create();
 
         // Redirection après l'ajout du dialogue
@@ -159,7 +159,7 @@ if (isset($_GET['delete']) && $_GET['delete'] === 'delete' && isset($_GET['idDia
                             Dialog::delete($dialogue->getId(), $histoire->getId());
                             Dialog::updateAfterDeletion($dialogue->getId(), $histoire->getId());
 
-                        } 
+                        }
 
                     }
                 } else {
@@ -177,6 +177,47 @@ if (isset($_GET['delete']) && $_GET['delete'] === 'delete' && isset($_GET['idDia
         echo "Error: " . $e->getMessage();
     }
 }
+// Déplacer un dialogue vers le haut
+if (isset($_POST['action']) && $_POST['action'] === 'moveUp' && isset($_POST['idDialogue'])) {
+    $idDialogue = $_POST['idDialogue'];
+    $dialogue = Dialog::read($idDialogue, $histoire->getId());
+
+    if ($dialogue) {
+        $previousDialogue = Dialog::read($idDialogue - 1, $histoire->getId());
+        if ($previousDialogue) {
+            // Update IDs after move
+            Dialog::updateAfterMove($dialogue->getId(), $histoire->getId(), "haut");
+        }
+    }
+
+    // Redirection après le déplacement
+    header("Location: creation?ctrl=creation&article=afficherHistoire&id=" . $histoire->getId());
+    exit();
+}
+
+// Déplacer un dialogue vers le bas
+if (isset($_POST['action']) && $_POST['action'] === 'moveDown' && isset($_POST['idDialogue'])) {
+    $idDialogue = $_POST['idDialogue'];
+    $dialogue = Dialog::read($idDialogue, $histoire->getId());
+
+    if ($dialogue) {
+        $nextDialogue = Dialog::read($idDialogue + 1, $histoire->getId());
+        if ($nextDialogue) {
+            // Update IDs after move
+            Dialog::updateAfterMove($dialogue->getId(), $histoire->getId(), "bas");
+            echo "Moved dialogue ID " . $dialogue->getId() . " down.<br>";
+        } else {
+            echo "Next dialogue not found.<br>";
+        }
+    } else {
+        echo "Dialogue not found.<br>";
+    }
+
+    // Redirection après le déplacement
+    header("Location: creation?ctrl=creation&article=afficherHistoire&id=" . $histoire->getId());
+    exit();
+}
+
 
 // Récupération depuis le modèle
 $personnages = Character::readAllCharacters();

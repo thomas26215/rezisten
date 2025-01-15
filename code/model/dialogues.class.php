@@ -28,7 +28,7 @@ class Dialog
         $this->dao = DAO::getInstance();
     }
 
-    /* Getters  :*/
+    /* Getters */
     public function getId(): int
     {
         return $this->id;
@@ -215,19 +215,20 @@ class Dialog
         return 0;
     }
 
-    public static function readLimit(int $idStory): int {
+    public static function readLimit(int $idStory): int
+    {
         $dao = DAO::getInstance();
         // FIXME : sur postgres passer sur "true" au lieu de 1
-        $results = $dao->getColumnWithParameters("dialogues", ["id_histoire" => $idStory,"contenu" => "limquestion"]);
-    
+        $results = $dao->getColumnWithParameters("dialogues", ["id_histoire" => $idStory, "contenu" => "limquestion"]);
+
         // Vérifiez si le tableau n'est pas vide avant d'accéder à l'index 0
         if (!empty($results)) {
             return $results[0]['id']; // Accédez au premier élément uniquement si le tableau n'est pas vide
         }
         return 0; // Retournez null si aucun résultat n'est trouvé
     }
-    
-    
+
+
 
 
 
@@ -361,7 +362,7 @@ class Dialog
         $newId = 1; // ID initial après suppression
 
         foreach ($dialogues as $dialogue) {
-            $dialog= Dialog::read($dialogue["id"],$idStory);
+            $dialog = Dialog::read($dialogue["id"], $idStory);
             $currentId = $dialogue['id'];
 
             if ($currentId == $idDeleted) {
@@ -375,12 +376,63 @@ class Dialog
                 if ($dialog->getId() !== $newId) {
                     return false;
                 }
-            } 
+            }
 
             $newId++; // Incrémenter le nouvel ID attendu
         }
 
         return true;
     }
-}
+    /**
+     * Update the IDs of dialogs after moving one up or down.
+     *
+     * @param int $idMoved The ID of the moved dialog.
+     * @param int $idStory The ID of the story.
+     * @return void
+     */
+    public static function updateAfterMove(int $idMoved, int $idStory, string $sens): void
+    {
+        $dao = DAO::getInstance();
+    
+        // Retrieve all dialogs sorted by ID
+        $dialogues = $dao->getColumnWithParameters("dialogues", ["id_histoire" => $idStory], ["id"]);
+    
+        // Check if no dialogs are found
+        if (empty($dialogues)) {
+            echo "No dialogues found for story ID " . $idStory . ".<br>";
+            return;
+        }
+    
+        // Determine the new ID for the moved dialog
+        $newId = ($sens === "haut") ? $idMoved - 1 : $idMoved + 1;
+    
+        // Ensure the new ID is within valid range
+        if ($newId < 1 || $newId > count($dialogues)) {
+            echo "New ID " . $newId . " is out of range.<br>";
+            return;
+        }
+    
+        // Begin transaction
+        $dao->getDb()->beginTransaction();
+    
+        try {
+            // Update the moved dialog to the new ID
+            $dialogMoved = Dialog::read($idMoved, $idStory);
+            $dialogMoved->update($newId);
+            echo "Updated moved dialogue ID " . $idMoved . " to new ID " . $newId . ".<br>";
+    
+            // Update the dialog that was at the new ID to the old ID of the moved dialog
+            $dialogReplaced = Dialog::read($newId, $idStory);
+            $dialogReplaced->update($idMoved);
+            echo "Updated replaced dialogue ID " . $newId . " to old ID " . $idMoved . ".<br>";
+    
+            // Commit transaction
+            $dao->getDb()->commit();
+        } catch (Exception $e) {
+            // Rollback transaction in case of error
+            $dao->getDb()->rollBack();
+            echo "Error: " . $e->getMessage() . "<br>";
+            throw $e;
+        }
+    }}
 ?>
