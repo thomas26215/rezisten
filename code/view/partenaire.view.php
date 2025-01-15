@@ -22,7 +22,7 @@
                     <img src="./design/image/logo_region.png" alt="logo Auvergne-Rhône-Alpes" class="partenaire-img">
                     <section>
                         <p class="partenaire-texte">
-                            La région Auvergne-Rhône-Alpes vous accompagne dans la découvertes des hauts lieux de la
+                            La région Auvergne-Rhône-Alpes vous accompagne dans la découverte des hauts lieux de la
                             résistance de la région.
                         </p>
                         <a href="https://www.auvergnerhonealpes.fr/">Voir le site web</a>
@@ -35,7 +35,7 @@
                     <img src="./design/image/memorialVercors.png" alt="logo Mémorial de la résistance en Vercors" class="partenaire-img">
                     <section>
                         <p class="partenaire-texte">
-                            Le Mémorial de la résistance retrace la vie pendant la guerre des valeureux résistants qui
+                            Le mémorial de la Résistance retrace la vie pendant la guerre des valeureux résistants qui
                             se sont cachés sur ce plateau du Vercors.
                         </p>
                         <a href="https://www.parc-du-vercors.fr/resistance/home">Voir le site web</a>
@@ -43,12 +43,12 @@
                 </article>
             </li>
             <li>
-                <h2>Le Mémorial prison de Montluc</h2>
+                <h2>Mémorial prison de Montluc</h2>
                 <article class="flex-row">
                     <img src="./design/image/memorial.jpeg" alt="logo du Mémorial Jean Moulin" class="partenaire-img">
                     <section>
                         <p class="partenaire-texte">
-                            Le Mémorial Jean Moulin est, avec la prison de Montluc et le Centre d’histoire de la
+                            Le mémorial Jean Moulin est, avec la prison de Montluc et le Centre d’histoire de la
                             Résistance et de la déportation,
                             l’un des 3 hauts lieux commémoratifs consacrés à la Seconde Guerre mondiale dans la
                             Métropole de Lyon.

@@ -5,12 +5,17 @@ main {
     min-height: calc(100vh - var(--height-footer));
 }
 
-button {
-    width: max-content;
-    padding: 10px 20px !important;
+form{
+    display: flex;
+    gap: 10%;
 }
 
-
+button {
+    /* width: max-content; */
+    width: 20vw;
+    min-width: 150px;
+    padding: 10px 20px !important;
+}
 
 .title {
     font-size: 2em;

@@ -55,6 +55,9 @@ button {
     /* Forme du bouton */
     font-size: 20px;
     cursor: pointer;
+
+
+    
 }
 
 button::before {

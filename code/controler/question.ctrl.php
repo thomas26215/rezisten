@@ -69,6 +69,7 @@ elseif($action == "answer"){
         $imgSpeaker = $imgURL.$speaker->getImage().".webp";
         $dialLimit = Dialog::readLimit($_SESSION['idStory']);
 
+        $view->assign('prevSpeaker',$_SESSION['prevSpeaker']);
         $view->assign('dialLimit',$dialLimit);
         $view->assign('background',$_GET['background']);
         $view->assign('firstbonus',$firstbonus);

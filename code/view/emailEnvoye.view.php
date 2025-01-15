@@ -12,8 +12,8 @@
     <main>
         <form method="post" class="formContainer">
             <h1>Email Envoyé</h1>
-            <p class="texte">Nous avons envoyé un email d'activation à </p>
-            <p class="texte">*mail de l'utilisateur*</p>
+            <p class="texte" style="margin-bottom: 0px">Nous avons envoyé un email d'activation à </p>
+            <h2 style="margin-top: 0px;"><?=$email?></h2>
         
             <?php
             if (isset($message)) {
@@ -23,15 +23,8 @@
                 echo "<p class='error'>$error</p>";
             }
             ?>
-
             <div class="formContainer">
-                <p class="texte">Merci de renseigner le code ici :</p>
-                <a href="">Page de vérification</a>
-            </div>
-
-            <div class="formContainer">
-                <p>Vous n'avez pas reçu l'e-mail ?</p>
-                <a class="lienVerif" href="">Renvoyer l'e-mail de vérification</a>
+                <button style="color: red; margin-top: 80px;" class="lienVerif" name="send" value="newCode">Renvoyer l'e-mail de vérification</button>
             </div>
         </form>
     </main>

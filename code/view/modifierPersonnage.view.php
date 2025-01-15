@@ -27,8 +27,8 @@
 
                 <div class="noms">
                     <div>
-                        <label for="prenom">Prénom</label>
-                        <input maxlength="15" type="text"
+                        <label for="firstName">Prénom</label>
+                        <input id="firstName" name="firstName" maxlength="15" type="text"
                             placeholder="<?= $selectedCharacter?->getFirstName() ?? "Jean"; ?>">
                     </div>
 
@@ -37,8 +37,8 @@
                 <div class="image">
                     <div class="imageChoisi">
                         <p>Image</p>
-                        <input type="file" id="photoUpload" name="photo" accept="image/*" style="display: none;">
-                        <img id="photoSend" src="./view/design/image/upload.png" alt="">
+                        <input type="file" id="photoUpload" name="photoUpload" accept="image/*" style="display: none;">
+                        <img id="photoSend"  src="./view/design/image/upload.png" alt="">
                         <span id="fileName">Pas de fichier ajoutée</span>
                     </div>
 

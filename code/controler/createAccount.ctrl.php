@@ -39,14 +39,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['auth'])) {
         if (!$formData['check']) {
             $errors[] = "Vous devez accepter les Conditions Générales d'Utilisation.";
         }
+        $birthdate = DateTime::createFromFormat('Y-m-d', $formData['date']);
+        $now = new DateTime();
+        if (!$birthdate || $now->diff($birthdate)->y < 16) {
+            $errors[] = "Vous devez avoir au moins 16 ans pour créer un compte.";
+        }
         if (empty($errors)) {
             try {
                 // Traitement pour la création de compte
                 $user = new User($formData['username'], $formData['first_name'], $formData['surname'], $formData['date'], $formData['email'], $formData['password'], 'j', true);
                 $user->create();
-                $sendMail = new EmailSender();
                 $checkEmail = CheckEmail::generate($user->getId());
-                $sendMail->welcome($user->getMail(), $checkEmail->getToken());
                 echo "Compte créé avec succès pour " . $formData['username'];
                 // Initialisation de la progression
                 $progression = new Progression($user, Story::read(1), true);
@@ -55,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['auth'])) {
                 $formData = array_fill_keys(array_keys($formData), '');
                 $formData['check'] = false;
                 //Redirection vers index.php
-                header("Location: index.php?ctrl=loginAccount");
+                header("Location: index.php?ctrl=emailEnvoye&userId=" . $user->getId());
             } catch (Exception $e) {
                 if($e->getCode() == '23000') {
                     echo("Le nom d'utilisateur ou l'adresse mail que vous utilisez existe déjà");

@@ -28,7 +28,7 @@ foreach ($storyIds as $storyId) {
     }
 }
 
-// Assignation à la vue
+// Assignation à la vue :
 $view = new View();
 $view->assign('nomChap', $nomChap);
 $view->assign('idChap', $idChap);
