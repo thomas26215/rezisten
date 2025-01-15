@@ -11,7 +11,7 @@
 <body>
     <?php include './headerPageSpeciales.view.php'; ?>
     <main>
-        <h1>CONDITIONS GÉNÉRALES D’UTILISATION</h1>
+        <h1>Conditions Générales d’utilisation</h1>
         <p>En vigueur au 08/10/2024</p>
         <p>
             Les présentes conditions générales d’utilisation (dites « CGU ») ont pour objet l’encadrement juridique des
@@ -72,7 +72,11 @@
             et
             son âge.
         </p>
-        <p>
+        <p>premier dialogue demande son dialoque precedent
+
+si pas bon format lors du changement d’email probleme d’erreur
+
+    meme pb lors de la creation ?
             Pour accéder aux services, l’utilisateur doit ensuite s’identifier à l’aide de son identifiant et de son mot
             de
             passe.
@@ -90,13 +94,11 @@
             ou suspension de service, même sans préavis.
         </p>
         <p>
-            L’utilisateur a la possibilité de contacter l’administration par messagerie électronique dans la rubrique «
-            Contactez-nous ».
-        </p>
+            L’utilisateur a la possibilité de contacter l’administration par messpremier dialogue demande son dialoque precedent
 
-        <h2>ARTICLE 3 : COLLECTE DES DONNÉES</h2>
-        <p>
-            L’administration assure à l’utilisateur une collecte et traitement d’informations personnelles dans le
+si pas bon format lors du changement d’email probleme d’erreur
+
+    meme pb lors de la creation ?informations personnelles dans le
             respect
             de la vie privée conformément à la loi n°78-17 du 6 janvier 1978 relative à l’informatique, aux fichiers et
             aux
