@@ -2,9 +2,10 @@
 
     <h2 class="titre">Ajouter un personnage</h2>
 
-    <form method="post" action="index.php?ctrl=personnages&article=ajouterPersonnage" class="articleContainer">
+    <form method="post" action="index.php?ctrl=personnages&article=ajouterPersonnage" class="articleContainer" enctype="multipart/form-data">
         <input type="hidden" name="ctrl" value="personnages">
         <input type="hidden" name="article" value="ajouterPersonnage">
+        <input type="hidden" name="action" value="ajouterCharacter">
 
         <div class="noms">
             <div>

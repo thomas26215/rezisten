@@ -1,24 +1,31 @@
 <?php
 //Includes
-include_once('model/personnages.class.php');
+include_once('./model/personnages.class.php');
+include_once('./model/users.class.php');
 include_once('framework/view.fw.php');
 
 $imgURL = "http://localhost:8080/rezisten/imgPersonnage/";
 
 $characters = Character::readAllCharacters();
 $selectedCharacter = null;
-$message = null;
+$errorMessage = null;
+if (isset($errorMessage)) {
+    $view->assign('errorMessage', $errorMessage);
+}
 
-var_dump($characters);
-
-
+if(isset($_SESSION['user_id'])){
+    $idUser = $_SESSION['user_id'];
+}else{
+    $idUser = 4;
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['action']) && $_POST['action'] === 'selectCharacter' && isset($_POST['selectedCharacter'])) {
         $selectedCharacterId = (int)$_POST['selectedCharacter'];
         $selectedCharacter = Character::read($selectedCharacterId);
         
-    }  elseif (isset($_POST['action']) && $_POST['action'] === 'ajouterCharacter' && isset($_POST['characterId'])) {
+    }  
+    if (isset($_POST['action']) && $_POST['action'] === 'ajouterCharacter')  {
         try {
             // Retrieve form data
             $firstName = trim($_POST['prenom'] ?? '');
@@ -28,10 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (empty($firstName)) {
                 throw new Exception("Le prénom ne peut pas être vide.");
             }
-            var_dump($firstName);
             if ($uploadedImage && $uploadedImage['error'] === UPLOAD_ERR_OK) {
                 // Define upload path
-                $uploadDirectory = './view/design/image/imageUser';
+                $uploadDirectory = './view/design/image/imageUser/';
                 $fileName = basename($uploadedImage['name']);
                 $filePath = $uploadDirectory . $fileName;
     
@@ -46,13 +52,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 throw new Exception("Aucune image valide n'a été téléchargée.");
             }
     
+            var_dump($idUser);
             // Create new Character instance
-            $userId = $_SESSION['user_id'] ?? null; // Check for logged-in user
-            $creator = $userId ? User::read($userId) : User::read(4); // Assuming the user ID is stored in the session
-            if (!$creator) {
-                throw new Exception("Créateur introuvable.");
+            $creator = User::read($idUser); // Assuming the user ID is stored in the session
+            var_dump(User::read($idUser));
+            if ($creator === null) {
+                $errorMessage="Creator ne peut pas être null";
             }
-    
             $newCharacter = new Character($firstName, $imageName, $creator);
     
             // Save to the database
@@ -60,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } catch (Exception $e) {
             $errorMessage = $e->getMessage();
         }
-    } elseif (isset($_POST['action']) && $_POST['action'] === 'updateCharacter' && isset($_POST['characterId'])) {
+    } elseif (isset($_POST['action']) && $_POST['article'] === 'updateCharacter' && isset($_POST['characterId'])) {
         
         // Update the character
         $characterIdToModify = (int)$_POST['characterId'];
@@ -88,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $errorMessage = "Personnage introuvable.";
             }
         }
-    }elseif (isset($_POST['action']) && $_POST['action'] === 'supprimerPersonnage' && isset($_POST['characterId'])) {
+    }elseif (isset($_POST['action']) && $_POST['article'] === 'supprimerPersonnage' && isset($_POST['characterId'])) {
         // Deletion logic triggered by form submission
         $characterIdToDelete = (int)$_POST['characterId'];
 

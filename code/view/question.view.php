@@ -18,7 +18,7 @@
 
 
         <article class="fond-container">
-            <img class="fond" src="./view/design/image/image_test.png" alt="Fond">
+            <img class="fond" src="<?=$background?>" alt="Fond">
             <div class="personnages">
             </div>
         </article>
@@ -29,7 +29,11 @@
 
                 <h2 class="speaker question"> Question <?= $question->getType() ?> </h2>
 
-                <button class="consulter-lieux">Consulter le lieux</button>
+                <form action="?">
+                    <input type="hidden" name="ctrl" value="question">
+                    <input type="hidden" name="action" value="lookPlace">
+                    <button class="consulter-lieux">Consulter le lieux</button>
+                </form>
 
                 <p class="text"> <?=$question->getQuestion()?>
                 </p>
@@ -41,6 +45,7 @@
                                     <input type="number" name="answer" id="answer">
                                 </label>
                                 <input type="hidden" name="ctrl" value="question">
+                                <input type="hidden" name="background" value="<?=$background?>">
                                 <input type="hidden" name="action" value="answer">
                                 <button class="repondre button-vert"> Répondre </button> 
                             </form>

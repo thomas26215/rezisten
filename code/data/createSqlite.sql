@@ -1,7 +1,7 @@
 -- Table des utilisateurs
 CREATE TABLE UTILISATEURS (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    pseudo VARCHAR(20) NOT NULL UNIQUE,
+    pseudo VARCHAR(20) NOT NULL,
     prenom VARCHAR(50),
     nom VARCHAR(50),
     datenaiss DATE NOT NULL,

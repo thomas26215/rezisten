@@ -21,7 +21,7 @@
         }
         ?>
 
-        <form method="POST" action="?ctrl=motdepasseoublie">
+        <form method="POST" action="?ctrl=motdepasseoublie" class="motdepasse">
             <div class="email">
                 <label for="email">Email <span>*</span>: </label>
                 <input placeholder="adresse mail" type="email" name="email" id="email" required>

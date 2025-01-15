@@ -72,6 +72,7 @@ class Character {
         if($this->dao->insertRelatedData("personnages", [
             "prenom" => $this->first_name,
             "img" => $this->image,
+            "createur" => $this->creator->getId()
         ])){
             $this->setId($this->dao->getLastInsertId("personnages")[0]["last_id"]);
             return true;
@@ -136,7 +137,7 @@ class Character {
         }
 
         for($i = 0; $i < sizeof($characters)-1; $i++){
-            var_dump($characters[$i]['createur']);
+            var_dump($characters[$i]);
             $creat = User::read($characters[$i]['createur']);
            
             $c = new Character($characters[$i]['prenom'],$characters[$i]['img'],$creat,$characters[$i]['id']);

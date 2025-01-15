@@ -1,31 +1,35 @@
-.content article{
+.content article {
     overflow: auto;
     height: 500px;
 }
 
-.content section{
+.content section {
     display: flex;
     margin: 20px;
     margin-right: 0%;
 }
 
-.content p{
+.content p {
     max-width: 60vw;
     text-align: justify;
 }
 
 /*Pour les boutons*/
-.content form :last-child{
+.content form :last-child {
     justify-content: space-around;
 }
 
 
-.content>article>form>section>div>:last-child{/* fleche du bas pour changer l'ordre des dialogues*/
+.bouton-bas {
+    /* fleche du bas pour changer l'ordre des dialogues*/
     transform: rotate(180deg);
 }
-.content>article>form>section>div>:last-child:hover{ /* fleche du bas pour changer l'ordre des dialogues*/
+
+.bouton-bas:hover {
+    /* fleche du bas pour changer l'ordre des dialogues*/
     transform: rotate(180deg) scale(1.1);
 }
+
 .bouton-modif {
     width: 50px !important;
     clip-path: none;
@@ -33,36 +37,34 @@
     color: var(--noir);
 }
 
-.bouton-modif:hover{
-    transform: scale(1.1);
-}
 
-.bouton-modif::before{
+.bouton-modif::before {
     clip-path: none;
     background: none;
-}  
+}
 
-#poubelle{
+#poubelle {
     align-self: center;
     width: 50px;
     height: 50px;
 }
 
-#fleche{
+#fleche {
     align-self: center;
 }
 
-#fleche button{
+#fleche button {
     font-weight: bold;
     font-size: larger;
 }
 
-.flex-row{
+.flex-row {
     justify-content: space-evenly;
 }
 
-.last-button{
+.last-button {
     position: sticky;
-    top: 0; /* L'élément se colle en haut de la fenêtre */
+    top: 0;
+    /* L'élément se colle en haut de la fenêtre */
     justify-content: space-around;
 }

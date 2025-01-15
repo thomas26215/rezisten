@@ -14,7 +14,7 @@ main {
     height: calc(100vh - var(--height-header) - var(--height-footer));
 }
 
-form {
+.motdepasse {
     background-color: var(--beige);
     border: 3px solid var(--noir);
     padding: 2rem 4rem;
@@ -76,4 +76,17 @@ span {
     align-items: end;
     justify-content: center;
     gap: 2rem;
+}
+
+.lienVerif {
+    color: var(--noir);
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
