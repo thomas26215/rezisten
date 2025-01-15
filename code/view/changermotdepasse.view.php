@@ -25,7 +25,7 @@
             </div>
         <?php endif; ?>
 
-        <form action="" method="POST">
+        <form action="" method="POST" class="motdepasse">
             <div class="formContainer">
                 <div class="email">
                     <label for="email">Email <span>*</span>: </label>

@@ -8,7 +8,10 @@ $imgURL = "http://localhost:8080/rezisten/imgPersonnage/";
 
 $characters = Character::readAllCharacters();
 $selectedCharacter = null;
-$message = null;
+$errorMessage = null;
+if (isset($errorMessage)) {
+    $view->assign('errorMessage', $errorMessage);
+}
 
 if(isset($_SESSION['user_id'])){
     $idUser = $_SESSION['user_id'];
@@ -53,6 +56,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Create new Character instance
             $creator = User::read($idUser); // Assuming the user ID is stored in the session
             var_dump(User::read($idUser));
+            if ($creator === null) {
+                $errorMessage="Creator ne peut pas être null";
+            }
             $newCharacter = new Character($firstName, $imageName, $creator);
     
             // Save to the database
