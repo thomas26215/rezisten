@@ -38,17 +38,6 @@
 
                     <div class="inputs flex-col">
                         <label for="lieux">Lieux : </label>
-                        <div class="inputsRow">
-                            <select id="lieux" name="lieux">
-                                <?php foreach ($lieux as $lieu): ?>
-                                    <option value="<?= $lieu->getId() ?>" <?= $lieu->getId() == $histoire->getPlace()->getId() ? 'selected' : '' ?>>
-                                        <?= $lieu->getName() ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </select>
-                            <a href="./consulterLieu.view.php"><img src="./view/design/image/info.png"
-                                    alt="informations" id="info"></a>
-                        </div>
                         <select id="lieux" name="lieux">
                             <?php foreach ($lieux as $lieu): ?>
                                 <option value="<?= $lieu->getId() ?>" <?= $lieu->getId() == $histoire->getPlace()->getId() ? 'selected' : '' ?>>
