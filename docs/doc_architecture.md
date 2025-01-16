@@ -85,4 +85,6 @@ Ce script est : /usr/local/bin/dump_database. Il y a également dans ce dossier 
 Si tout se passe bien votre serveur base de données est prêt. Il faut simplement modifier model/dao.class.php et modifier les caractéristiques de connexion dans l'entête de la classe. Par exemple modifier l'utilisateur, le mot de passe ou autre.  
 
 ### C- Installer les fichiers utilisés par l'application
+Pour ce qui est des images et fichiers audios utilisés, nous avons décidé de les mettre sur le serveur postgres pour alléger l'application. Vous pouvez très bien configurer un autre serveur web qui contiendra uniquement ces fichiers. Le dossier à mettre sur le serveur web est rendus/rezisten/, il contient les images et fichiers audios qui sont mis à jour régulièrement grâce à un script.
+Il faudra par la suite modifier dans le code tous les endroits où sont utilisés l'adresse : https://192.168.14.118/rezisten/x pour donner le bon lien. Pour cela vous avez le script rendus/code/docs/update_links qui s'occupe de remplacer tous ces liens. Si une image ou un fichier audio ne charge pas, vérifiez à la main que le lien demandé mène bien quelque part.
 
