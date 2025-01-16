@@ -55,7 +55,7 @@ button {
     /* Forme du bouton */
     font-size: 20px;
     cursor: pointer;
-
+    transition: transform 0.15s ease-in-out;
 }
 
 button::before {
@@ -126,7 +126,7 @@ select, input, textarea{
     border: 1px solid var(--noir);
 }
 
-.error{
+.text-error{
     font-weight: bold;
     color: var(--rouge);
 }

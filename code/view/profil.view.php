@@ -27,7 +27,7 @@
         <?php if (!empty($errors)): ?>
             <div class="errors">
                 <?php foreach ($errors as $error): ?>
-                    <p class="error"><?php echo htmlspecialchars($error); ?></p>
+                    <p class="text-error"><?php echo htmlspecialchars($error); ?></p>
                 <?php endforeach; ?>
             </div>
         <?php endif; ?>

@@ -24,25 +24,50 @@ p {
 
 .home {
     font-size: 9px;
+    transition: transform 0.15s ease-in-out;
+    position: relative;
 }
 
-.home :hover {
-    opacity: 0.4;
+.home:hover {
+    transform: scale(1.1);
+}
+
+.accueil-text {
+    display: none;
+    position: absolute;
+    bottom: -20px;
+}
+
+.home:hover .accueil-text {
+    display: block;
 }
 
 .user {
+    margin-top: 5%;
     font-size: 16px;
     font-weight: bold;
+    position: relative;
+    display: inline-block;
 }
 
-.user img {
+.user > img {
     height: 100px;
     padding: 0;
-    position: relative;
-    top: 25px;
+    transition: transform 0.15s ease-in-out;
+}
+
+.user > img:hover {
+    transform: scale(1.1);
 }
 
 .nomUser {
-    position: relative;
-    top: 28px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -40px;
+    transition: transform 0.15s ease-in-out;
+}
+
+.user:hover .nomUser {
+    transform: translateX(-50%) translateY(10px);
 }
