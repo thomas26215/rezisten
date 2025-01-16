@@ -56,7 +56,22 @@ Pour ce faire suivez les commandes suivantes :
 cd /var/www/html
 git clone [lien_https_du_dossier_au_dessus]
 
-Entrez vos identifiants gricad
+Entrez vos identifiants gricad. Normalement le dossier "rendus" existe dans /var/www/html maintenant.
+Il faut déplacer les données à la racine du site donc utiliser la commande : scp rendus/* .
+Si toutes les données du site sont maintenant dans "html", vous pouvez utiliser la commande rm -r rendus/. Le site est maintenant prêt.
+En accédant à https://[ip_votre_serveur] vous devriez être envoyé vers l'index qui affiche "Se connecter" ou "Créer un compte".
 
 
 	
+### B- Installer la BDD
+Maintenant que le serveur web est prêt, il faut lui permettre d'accéder aux données. Sur le même serveur ou sur un serveur distant, installez postgres. Faites la configuration voulue de /etc/postgresql/15/main/postgresql.conf, notamment concernant le paramètre listen_addresses.
+Vous pouvez mettre ce paramètre de la façon suivante : listen_addresses = '*'. Nous limiterons les adresses ip dans le prochain fichier de configuration.
+Il faut maintenant ouvrir /etc/postgresql/15/main/pg_hba.conf, je conseille d'utiliser la configuration comme sur la capture suivante, **bien remplacer l'IPv4 par celle de votre serveur**.
+
+
+
+\i create.sql
+set datestyle = 'ISO, European';
+\copy lieux (nom, type_lieu, description, commune, coordonnee) FROM 'test.csv' DELIMITER ':' CSV HEADER;
+\i insert.sql
+
