@@ -65,13 +65,24 @@ En accédant à https://[ip_votre_serveur] vous devriez être envoyé vers l'ind
 	
 ### B- Installer la BDD
 Maintenant que le serveur web est prêt, il faut lui permettre d'accéder aux données. Sur le même serveur ou sur un serveur distant, installez postgres. Faites la configuration voulue de /etc/postgresql/15/main/postgresql.conf, notamment concernant le paramètre listen_addresses.
-Vous pouvez mettre ce paramètre de la façon suivante : listen_addresses = '*'. Nous limiterons les adresses ip dans le prochain fichier de configuration.
+Vous pouvez mettre ce paramètre de la façon suivante : listen_addresses = '*'. Nous limiterons les adresses ip dans le prochain fichier de configuration.  
 Il faut maintenant ouvrir /etc/postgresql/15/main/pg_hba.conf, je conseille d'utiliser la configuration comme sur la capture suivante, **bien remplacer l'IPv4 par celle de votre serveur**.
 
 ![Config pg_hba](./config_pg_hba.png)
 
-\i create.sql
-set datestyle = 'ISO, European';
-\copy lieux (nom, type_lieu, description, commune, coordonnee) FROM 'test.csv' DELIMITER ':' CSV HEADER;
-\i insert.sql
+On peut alors redémarrer postgres pour appliquer la configuration : systemctl reload postgresql.  
+Il va maintenant falloir créer l'utilisateur que vous voulez utiliser, le fichier que nous utiliserons après pour exporter la base est prévu pour que l'utilisateur s'appelle superrezi mais vous pouvez le changer. Voici les commandes à utiliser :  
+su - postgres
+psql 
+CREATE USER superrezi WITH SUPERUSER PASSWORD '[votre_mot_de_passe]';  
+
+Nous utilisons ici un superuser ce qui peut être assez dangereux, mais comme les ip sont limitées il est presque impossible que cela pose quelconque problème. Maintenant vous pouvez utiliser le fichier qui est fourni dans le dépôt git : data/dump.sql. Récupérez ce fichier dans le homedir du user postgres. 
+Ensuitez reconnectez vous à la base, changez le format des dates avec la commande : set datestyle = 'ISO, European'; 
+Ensuite on peut créer la base avec les données appropriées, utilisez simplement la commande : \i dump.sql.  
+Toutes les tables devraient être créées avec les données initiales. Dans le cas où les données seraient modifiées, un script tourne une fois par semaine pour recréer ce fichier dump.sql et mettre à jour les données.
+Ce script est : /usr/local/bin/dump_database. Il y a également dans ce dossier le script, update_files qui met à jour les images stockées. Vous pouvez configurer ces scripts dans crontab ou list-timers en suivant un guide adapté sur internet.
+
+Si tout se passe bien votre serveur base de données est prêt. Il faut simplement modifier model/dao.class.php et modifier les caractéristiques de connexion dans l'entête de la classe. Par exemple modifier l'utilisateur, le mot de passe ou autre.  
+
+### C- Installer les fichiers utilisés par l'application
 
