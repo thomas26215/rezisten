@@ -72,19 +72,83 @@ Il faut maintenant ouvrir /etc/postgresql/15/main/pg_hba.conf, je conseille d'ut
 
 On peut alors redémarrer postgres pour appliquer la configuration : systemctl reload postgresql.  
 Il va maintenant falloir créer l'utilisateur que vous voulez utiliser, le fichier que nous utiliserons après pour exporter la base est prévu pour que l'utilisateur s'appelle superrezi mais vous pouvez le changer. Voici les commandes à utiliser :  
-su - postgres
-psql 
+su - postgres  
+psql   
 CREATE USER superrezi WITH SUPERUSER PASSWORD '[votre_mot_de_passe]';  
 
 Nous utilisons ici un superuser ce qui peut être assez dangereux, mais comme les ip sont limitées il est presque impossible que cela pose quelconque problème. Maintenant vous pouvez utiliser le fichier qui est fourni dans le dépôt git : data/dump.sql. Récupérez ce fichier dans le homedir du user postgres. 
 Ensuitez reconnectez vous à la base, changez le format des dates avec la commande : set datestyle = 'ISO, European'; 
 Ensuite on peut créer la base avec les données appropriées, utilisez simplement la commande : \i dump.sql.  
 Toutes les tables devraient être créées avec les données initiales. Dans le cas où les données seraient modifiées, un script tourne une fois par semaine pour recréer ce fichier dump.sql et mettre à jour les données.
-Ce script est : /usr/local/bin/dump_database. Il y a également dans ce dossier le script, update_files qui met à jour les images stockées. Vous pouvez configurer ces scripts dans crontab ou list-timers en suivant un guide adapté sur internet.
+Ce script est : /rendus/code/docs/dump_database. Vous pouvez configurer ce scrips dans crontab ou list-timers en suivant un guide adapté sur internet.  
+
+Nous mettons à jour régulièrement le fichier issu de ce script, le script lui-même est disponible dans rendus/code/docs mais pour des raisons de sécurité nous n'envoyons pas automatiquement les nouvelles versions
+du fichier sur le dépôt git.
 
 Si tout se passe bien votre serveur base de données est prêt. Il faut simplement modifier model/dao.class.php et modifier les caractéristiques de connexion dans l'entête de la classe. Par exemple modifier l'utilisateur, le mot de passe ou autre.  
 
 ### C- Installer les fichiers utilisés par l'application
-Pour ce qui est des images et fichiers audios utilisés, nous avons décidé de les mettre sur le serveur postgres pour alléger l'application. Vous pouvez très bien configurer un autre serveur web qui contiendra uniquement ces fichiers. Le dossier à mettre sur le serveur web est rendus/rezisten/, il contient les images et fichiers audios qui sont mis à jour régulièrement grâce à un script.
+Pour ce qui est des images et fichiers audios utilisés, nous avons décidé de les mettre sur le serveur postgres pour alléger l'application. Vous pouvez très bien configurer un autre serveur web qui contiendra uniquement ces fichiers. Le dossier à mettre sur le serveur web est rendus/rezisten/, il contient les images et fichiers audios.  
 Il faudra par la suite modifier dans le code tous les endroits où sont utilisés l'adresse : https://192.168.14.118/rezisten/x pour donner le bon lien. Pour cela vous avez le script rendus/code/docs/update_links qui s'occupe de remplacer tous ces liens. Si une image ou un fichier audio ne charge pas, vérifiez à la main que le lien demandé mène bien quelque part.
+
+Vous pouvez ensuite placer le dossier où vous le souhaitez mais de manière classique nous proposons :  
+https://[ip_machine]/rezisten/  
+Les liens sont gérés ensuite dans le code.
+
+## 2- Résumé 
+Pour clarifier tout cela, voici un schéma des structures des deux serveurs avec les fichiers contenus
+#### Serveur web
+/
+|
+|-etc
+|   |-systemd
+|   |	|-system 
+|   |	    |
+|   |	    |-security-rezisten.service
+|   |	    |-security-rezisten.timer
+|   |
+|   |-apache2 => config de apache
+|
+|
+|
+|	    	
+|
+|-usr
+|  |-local
+|      |-bin
+| 	  |-security-rezisten => script maj de sécurité
+|
+|-var
+|  |-www
+|     |-html => contient le code de l'application
+
+#### Serveur Base de donnée et images
+/
+| 
+|-etc 
+|   |-systemd   
+|   |   |-system
+|   |       |
+|   |       |-security-rezisten.service => màj de sécurité
+|   |       |-security-rezisten.timer
+|   |       |-dump_database.service => màj de la base de donnée
+|   |       |-dump_database.timer 
+|   |
+|   |-apache2 => config de apache
+|   |
+|   |-postgresql
+|         |-15  => configuration de postgresql15
+|
+|
+|-usr
+|  |-local
+|      |-bin
+|         |-security-rezisten => script maj de sécurité
+|         |-dump_database => script mettant à jour la base de donnée
+|
+|-var   
+|  |-www    
+|     |-html
+         |-rezisten => contient images et fichiers audios
+
 
