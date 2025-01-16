@@ -132,7 +132,7 @@ button.poub{
 }
 
 button.poub::before{
-  background-color: none !important;
+  background-color: var(--beige) !important;
 }
 
 .containerBox {

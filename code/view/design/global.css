@@ -56,8 +56,6 @@ button {
     font-size: 20px;
     cursor: pointer;
 
-
-    
 }
 
 button::before {
@@ -126,4 +124,9 @@ a {
 select, input, textarea{
     background-color: var(--beige-ecriture);
     border: 1px solid var(--noir);
+}
+
+.error{
+    font-weight: bold;
+    color: var(--rouge);
 }

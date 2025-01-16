@@ -28,7 +28,7 @@ class Dialog
         $this->dao = DAO::getInstance();
     }
 
-    /* Getters  :*/
+    /* Getters */
     public function getId(): int
     {
         return $this->id;
@@ -215,19 +215,20 @@ class Dialog
         return 0;
     }
 
-    public static function readLimit(int $idStory): int {
+    public static function readLimit(int $idStory): int
+    {
         $dao = DAO::getInstance();
         // FIXME : sur postgres passer sur "true" au lieu de 1
-        $results = $dao->getColumnWithParameters("dialogues", ["id_histoire" => $idStory,"contenu" => "limquestion"]);
-    
+        $results = $dao->getColumnWithParameters("dialogues", ["id_histoire" => $idStory, "contenu" => "limquestion"]);
+
         // Vérifiez si le tableau n'est pas vide avant d'accéder à l'index 0
         if (!empty($results)) {
             return $results[0]['id']; // Accédez au premier élément uniquement si le tableau n'est pas vide
         }
         return 0; // Retournez null si aucun résultat n'est trouvé
     }
-    
-    
+
+
 
 
 
@@ -361,7 +362,7 @@ class Dialog
         $newId = 1; // ID initial après suppression
 
         foreach ($dialogues as $dialogue) {
-            $dialog= Dialog::read($dialogue["id"],$idStory);
+            $dialog = Dialog::read($dialogue["id"], $idStory);
             $currentId = $dialogue['id'];
 
             if ($currentId == $idDeleted) {
@@ -375,12 +376,47 @@ class Dialog
                 if ($dialog->getId() !== $newId) {
                     return false;
                 }
-            } 
+            }
 
             $newId++; // Incrémenter le nouvel ID attendu
         }
 
         return true;
+    }
+    /**
+     * Swap the IDs of dialogs after moving one up or down.
+     *
+     * @param int $idMoved The ID of the moved dialog.
+     * @param int $idStory The ID of the story.
+     * @return void
+     */
+  
+    public static function swapDialogIds(int $id1, int $id2, int $idStory): bool
+    {
+        $dao = DAO::getInstance();
+
+        // Commencer une transaction
+
+        try {
+            // Lire les deux dialogues
+            $dialog1 = Dialog::read($id1, $idStory);
+            $dialog2 = Dialog::read($id2, $idStory);
+
+            if ($dialog1 && $dialog2) {
+                // Échanger les IDs
+                $dialog2->update(100000000000);
+                $dialog1->update($id2);
+                $dialog2->update($id1);
+
+                // Valider la transaction
+                return true;
+            } else {
+                throw new Exception("Un ou les deux dialogues n'ont pas été trouvés.");
+            }
+        } catch (Exception $e) {
+            // En cas d'erreur, annuler la transaction
+            throw $e;
+        }
     }
 }
 ?>

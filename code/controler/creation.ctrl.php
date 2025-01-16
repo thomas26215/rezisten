@@ -56,12 +56,12 @@ if (isset($_GET['article']) && $_GET['article'] === 'ajouterDialogue' && isset($
         $existingDialogues = Dialog::readAllByStory($histoire->getId());
         $lastDialogueId = 0;
         if (!empty($existingDialogues)) {
-            $lastDialogueId = $existingDialogues;
+            $lastDialogueId = sizeof($existingDialogues);
         }
 
         // Insérer le nouveau dialogue avec un ID incrémenté
-        $newDialogueId = $lastDialogueId + 1;
-        $dialogue = new Dialog($newDialogueId, $histoire, $personnage, $texte);
+        (int) $newDialogueId = (int) $lastDialogueId + 1;
+        $dialogue = new Dialog((int) $newDialogueId, $histoire, $personnage, $texte);
         $dialogue->create();
 
         // Redirection après l'ajout du dialogue
@@ -157,8 +157,8 @@ if (isset($_GET['delete']) && $_GET['delete'] === 'delete' && isset($_GET['idDia
                     foreach ($existingDialogues as $dialogue) {
                         if ($dialogue && $dialogue->getContent() === 'limquestion') {
                             Dialog::delete($dialogue->getId(), $histoire->getId());
-                        } else {
-                            throw new Exception("Failed to delete Dialogue ID " . $idDialogue);
+                            Dialog::updateAfterDeletion($dialogue->getId(), $histoire->getId());
+
                         }
 
                     }
@@ -176,6 +176,43 @@ if (isset($_GET['delete']) && $_GET['delete'] === 'delete' && isset($_GET['idDia
     } catch (Exception $e) {
         echo "Error: " . $e->getMessage();
     }
+}
+// Déplacer un dialogue vers le haut
+if (isset($_GET['action']) && $_GET['action'] === 'moveUp' && isset($_GET['idDialogue'])) {
+    $idDialogue = $_GET['idDialogue'];
+    $dialogue = Dialog::read($idDialogue, $histoire->getId());
+
+    if ($dialogue) {
+        $previousDialogue = Dialog::read($idDialogue - 1, $histoire->getId());
+        if ($previousDialogue) {
+            // Échanger les IDs des dialogues
+            Dialog::swapDialogIds($dialogue->getId(), $previousDialogue->getId(), $histoire->getId());
+        }
+    }
+
+    // Redirection après le déplacement
+    header("Location: creation?ctrl=creation&article=afficherHistoire&id=" . $histoire->getId());
+    exit();
+}
+
+// Déplacer un dialogue vers le bas
+if (isset($_GET['action']) && $_GET['action'] === 'moveDown' && isset($_GET['idDialogue'])) {
+    $idDialogue = $_GET['idDialogue'];
+    $dialogue = Dialog::read($idDialogue, $histoire->getId());
+
+    if ($dialogue) {
+        $nextDialogue = Dialog::read($idDialogue + 1, $histoire->getId());
+        if ($nextDialogue) {
+            // Échanger les IDs des dialogues
+            Dialog::swapDialogIds($dialogue->getId(), $nextDialogue->getId(), $histoire->getId());
+        }
+    }
+
+    // Redirection après le déplacement
+    $redirectUrl = "creation?ctrl=creation&article=afficherHistoire&id=" . $histoire->getId();
+    error_log("Redirection vers : " . $redirectUrl); // Ajoutez cette ligne pour déboguer l'URL
+    header("Location: " . $redirectUrl);
+    exit();
 }
 
 // Récupération depuis le modèle

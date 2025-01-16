@@ -106,6 +106,7 @@ if($dialog->getContent() == "limquestion"){
     $_SESSION['idDialog'] = $idDialog;
     $_SESSION['difficulty'] = "spécifique";
     
+
     $view->assign('background',$background);
     $view->assign('error','');
     $view->assign('story',$story);
@@ -128,6 +129,8 @@ if($prevSpeaker != $speaker->getImage()){
 }else{
     $prevSpeaker = "none.webp";
 }
+
+$_SESSION['prevSpeaker'] = $prevSpeaker;    
 
 $view->assign('dialLimit',$dialLimit);
 $view->assign('background',$background);
