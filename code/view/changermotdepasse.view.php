@@ -31,10 +31,19 @@
                     <label for="email">Email <span>*</span>: </label>
                     <input placeholder="Saisir votre email" type="email" name="email" id="email" required>
                 </div>
-                <div class="email">
-                    <label for="code">Code reçu par mail <span>*</span>: </label>
-                    <input placeholder="Code" type="text" name="code" id="code" required>
-                </div>
+
+                <?php if ($mode === 'forget'): ?>
+                    <div class="email">
+                        <label for="code">Code reçu par mail <span>*</span>: </label>
+                        <input placeholder="Code" type="text" name="code" id="code" required>
+                    </div>
+                <?php elseif ($mode === 'authentified'): ?>
+                    <div class="email">
+                        <label for="old_password">Ancien mot de passe <span>*</span>: </label>
+                        <input placeholder="*****" type="password" name="old_password" id="old_password" required>
+                    </div>
+                <?php endif; ?>
+
                 <div class="email">
                     <label for="new_password">Nouveau mot de passe <span>*</span>: </label>
                     <input placeholder="*****" type="password" name="new_password" id="new_password" required>
@@ -54,3 +63,4 @@
     <?php include_once("footer.view.php")?>
 </body>
 </html>
+
