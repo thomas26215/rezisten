@@ -65,12 +65,12 @@ class CheckEmail {
     /* --- Méthodes CRUD --- */
 
     public function create(): bool {
-        if($this->dao->insertRelatedData("verifications_email", [
+        if($this->dao->insert("verifications_email", [
             "utilisateur_id" => $this->user->getId(),
             "token" => $this->getToken(),
             "date_expiration" => $this->getExpirationDate(),
         ])) {
-            $lastId = $this->dao->getLastInsertId("verifications_email");
+            $lastId = $this->dao->getLastId("verifications_email");
             if(!empty($lastId) && isset($lastId[0]["last_id"])) {
                 $this->setId((int)$lastId[0]["last_id"]);
                 return true;
@@ -81,7 +81,7 @@ class CheckEmail {
 
     public static function read(int $userId): ?CheckEmail {
         $dao = DAO::getInstance();
-        $checkData = $dao->getColumnWithParameters("verifications_email", ["utilisateur_id" => $userId]);
+        $checkData = $dao->getWithParameters("verifications_email", ["utilisateur_id" => $userId]);
         if(!empty($checkData) && isset($checkData[0])) {
             $user = User::read($userId);
             if ($user !== null) {
@@ -109,7 +109,7 @@ class CheckEmail {
 
     public static function delete(int $userId): bool {
         if($userId > 0) {
-            return DAO::getInstance()->deleteDatas("verifications_email", ["utilisateur_id" => $userId]);
+            return DAO::getInstance()->delete("verifications_email", ["utilisateur_id" => $userId]);
         }
         return false;
     }

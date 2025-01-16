@@ -94,7 +94,7 @@ class Question
             throw new Exception("Impossible de créer une question : Aucune histoire ne correspond à l'id fourni");
         }
         if (
-            $this->dao->insertRelatedData("questions", [
+            $this->dao->insert("questions", [
                 "id_histoire" => $historyId,
                 "question" => $this->question,
                 "reponse" => $this->answer,
@@ -110,7 +110,7 @@ class Question
     public static function read(int $id_histoire, string $type): ?Question
     {
         $dao = DAO::getInstance();
-        $questionDatas = $dao->getColumnWithParameters("questions", ["id_histoire" => (int) $id_histoire, "type" => (string) $type]);
+        $questionDatas = $dao->getWithParameters("questions", ["id_histoire" => (int) $id_histoire, "type" => (string) $type]);
         if ($questionDatas) {
             $questionData = $questionDatas[0];
             $story = Story::read($id_histoire);

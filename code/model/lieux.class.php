@@ -79,14 +79,14 @@ class Place {
     /* --- Méthodes CRUD --- */
 
     public function create(): bool {
-        if($this->dao->insertRelatedData("lieux", [
+        if($this->dao->insert("lieux", [
             "nom" => $this->name,
             "type_lieu" => $this->place_type,
             "description" => $this->description,
             "commune" => $this->city,
             "coordonnee" => $this->coordinates,
         ])) {
-            $lastId = $this->dao->getLastInsertId("lieux");
+            $lastId = $this->dao->getLastId("lieux");
         if (isset($lastId[0]["last_id"]) && is_numeric($lastId[0]["last_id"])) {
             $this->setId((int)$lastId[0]["last_id"]);
             return true;
@@ -96,7 +96,7 @@ class Place {
 
     public static function read($id): ?Place {
         $dao = DAO::getInstance();
-        if($lieuData = $dao->getColumnWithParameters("lieux", ["id" => (int)$id])){
+        if($lieuData = $dao->getWithParameters("lieux", ["id" => (int)$id])){
             return new Place(
                 $lieuData[0]["nom"],
                 $lieuData[0]["type_lieu"],
@@ -112,7 +112,7 @@ class Place {
     public static function readAll(): ? array {
         $dao = DAO::getInstance();
         $result=array();
-        if($lieuData = $dao->getColumnWithParameters("lieux",[])){
+        if($lieuData = $dao->getWithParameters("lieux",[])){
             $i=0;
             while(isset($lieuData[$i])){
                 $places =  new Place(

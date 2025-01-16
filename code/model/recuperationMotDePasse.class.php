@@ -84,12 +84,12 @@ class PasswordRecuperation {
     /* --- Méthodes CRUD --- */
 
     public function create(): bool {
-        if($this->dao->insertRelatedData("recuperation_mot_de_passe", [
+        if($this->dao->insert("recuperation_mot_de_passe", [
             "utilisateur_id" => $this->user->getId(),
             "token" => $this->getToken(),
             "date_expiration" => $this->getExpirationDate(),
         ])) {
-            $lastId = $this->dao->getLastInsertId("recuperation_mot_de_passe");
+            $lastId = $this->dao->getLastId("recuperation_mot_de_passe");
             if(!empty($lastId) && isset($lastId[0]["last_id"])) {
                 $this->setId((int)$lastId[0]["last_id"]);
                 return true;
@@ -100,7 +100,7 @@ class PasswordRecuperation {
 
     public static function read(int $userId): ?PasswordRecuperation {
         $dao = DAO::getInstance();
-        $checkData = $dao->getColumnWithParameters("recuperation_mot_de_passe", ["utilisateur_id" => $userId]);
+        $checkData = $dao->getWithParameters("recuperation_mot_de_passe", ["utilisateur_id" => $userId]);
         if(!empty($checkData) && isset($checkData[0])) {
             $user = User::read($userId);
             if ($user !== null) {
@@ -128,7 +128,7 @@ class PasswordRecuperation {
 
     public static function delete(int $userId): bool {
         if($userId > 0) {
-            return DAO::getInstance()->deleteDatas("recuperation_mot_de_passe", ["utilisateur_id" => $userId]);
+            return DAO::getInstance()->delete("recuperation_mot_de_passe", ["utilisateur_id" => $userId]);
         }
         return false;
     }

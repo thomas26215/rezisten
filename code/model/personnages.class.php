@@ -81,13 +81,13 @@ class Character
     public function create(): bool
     {
         if (
-            $this->dao->insertRelatedData("personnages", [
+            $this->dao->insert("personnages", [
                 "prenom" => $this->first_name,
                 "img" => $this->image,
                 "createur" => $this->creator->getId()
             ])
         ) {
-            $this->setId($this->dao->getLastInsertId("personnages")[0]["last_id"]);
+            $this->setId($this->dao->getLastId("personnages")[0]["last_id"]);
             return true;
         }
         return false;
@@ -96,7 +96,7 @@ class Character
     public static function read(int $id): ?Character
     {
         $dao = DAO::getInstance();
-        if ($characterData = $dao->getColumnWithParameters("personnages", ["id" => $id])) {
+        if ($characterData = $dao->getWithParameters("personnages", ["id" => $id])) {
             $characterDatas = $characterData[0];
             return new Character(
                 $characterDatas["prenom"],
@@ -152,7 +152,7 @@ class Character
     {
         $dao = DAO::getInstance();
         $listCharacters = array();
-        $characters = $dao->getColumnWithParameters("personnages", []);
+        $characters = $dao->getWithParameters("personnages", []);
         if (empty($characters)) {
             throw new Exception("aucun personnage trouvé");
         }
