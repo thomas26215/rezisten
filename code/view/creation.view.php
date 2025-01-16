@@ -49,6 +49,18 @@
                             <a href="./consulterLieu.view.php"><img src="./view/design/image/info.png"
                                     alt="informations" id="info"></a>
                         </div>
+                        <select id="lieux" name="lieux">
+                            <?php foreach ($lieux as $lieu): ?>
+                                <option value="<?= $lieu->getId() ?>" <?= $lieu->getId() == $histoire->getPlace()->getId() ? 'selected' : '' ?>>
+                                    <?= $lieu->getName() ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+
+                    <a href="./index.php?ctrl=consulterLieu&id=<?= $histoire->getPlace()->getId() ?>">
+                        <img src="./view/design/image/info.png" alt="informations" id="info">
+                    </a>
+
                     </div>
 
                     <input type="hidden" name="id_lieu" id="id_lieu" value="">
