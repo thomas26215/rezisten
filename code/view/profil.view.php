@@ -27,7 +27,7 @@
         <?php if (!empty($errors)): ?>
             <div class="errors">
                 <?php foreach ($errors as $error): ?>
-                    <p class="error"><?php echo htmlspecialchars($error); ?></p>
+                    <p class="text-error"><?php echo htmlspecialchars($error); ?></p>
                 <?php endforeach; ?>
             </div>
         <?php endif; ?>
@@ -53,7 +53,7 @@
             <a href="index.php?ctrl=demandeCreateur">
                 <button class="button-gris">Faire la demande d'être créateur</button>
             </a>
-            <a href="">
+            <a href="index.php?ctrl=changermotdepasse&mode=authentified">
                 <button class="button-gris">Modifier mon mot de passe</button>
             </a>
         </div>

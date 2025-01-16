@@ -76,8 +76,6 @@ form {
     margin: 1rem 0rem;
 }
 
-.cond {
-    color: #0051db;
-    text-decoration: underline;
+.link {
     display: inline;
 }

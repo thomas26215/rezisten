@@ -21,7 +21,7 @@ if(isset($_SESSION["user_id"])) {
 const CTRLS = array('loginAccount', 'createAccount', 'authentification', 'mainNonConnecte', 'main','mesHistoires', 'histoire','question', 'listeChapitre', "listeHistoire", 'creation', 'personnages', 'profil', 'demandeCreateur', 'consulterLieu', 'motdepasseoublie', 'changermotdepasse', 'emailEnvoye', 'verifierCompte');
 
 // Définir les contrôleurs accessibles sans connexion
-const PUBLIC_CTRLS = array('loginAccount', 'createAccount', 'authentification', 'mainNonConnecte', 'motdepasseoublie', 'emailEnvoye', 'verifierCompte');
+const PUBLIC_CTRLS = array('loginAccount', 'createAccount', 'authentification', 'mainNonConnecte', 'motdepasseoublie', 'emailEnvoye', 'verifierCompte', 'changermotdepasse');
 
 // Récupérer le contrôleur demandé
 $ctrl = $_REQUEST['ctrl'] ?? '';

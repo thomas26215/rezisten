@@ -22,7 +22,7 @@ if (!isset($_GET['id'])) { // si l'histoire n'existe pas
         Chapter::read(100),
         User::read($idUser), // changer par id de cette user
         Place::read(1),
-        "../view/design/image/background_story.png",
+        "default_background.webp",
         false
     );
     $histoire->create();
@@ -178,9 +178,52 @@ if (isset($_GET['delete']) && $_GET['delete'] === 'delete' && isset($_GET['idDia
     }
 }
 // Déplacer un dialogue vers le haut
+<<<<<<< Updated upstream
 if (isset($_GET['action']) && $_GET['action'] === 'moveUp' && isset($_GET['idDialogue'])) {
     $idDialogue = $_GET['idDialogue'];
     $dialogue = Dialog::read($idDialogue, $histoire->getId());
+=======
+if (isset($_POST['action']) && $_POST['action'] === 'moveUp' && isset($_POST['idDialogue'])) {
+    $idDialogue = $_POST['idDialogue'];
+    $dialogue = Dialog::read($idDialogue, $histoire->getId());
+
+    if ($dialogue) {
+        $previousDialogue = Dialog::read($idDialogue - 1, $histoire->getId());
+        if ($previousDialogue) {
+            // Update IDs after move
+            Dialog::updateAfterMove($dialogue->getId(), $histoire->getId(), "haut");
+        }
+    }
+
+    // Redirection après le déplacement
+    header("Location: creation?ctrl=creation&article=afficherHistoire&id=" . $histoire->getId());
+    exit();
+}
+
+// Déplacer un dialogue vers le bas
+if (isset($_POST['action']) && $_POST['action'] === 'moveDown' && isset($_POST['idDialogue'])) {
+    $idDialogue = $_POST['idDialogue'];
+    $dialogue = Dialog::read($idDialogue, $histoire->getId());
+
+    if ($dialogue) {
+        $nextDialogue = Dialog::read($idDialogue + 1, $histoire->getId());
+        if ($nextDialogue) {
+            // Update IDs after move
+            Dialog::updateAfterMove($dialogue->getId(), $histoire->getId(), "bas");
+            echo "Moved dialogue ID " . $dialogue->getId() . " down.<br>";
+        } else {
+            echo "Next dialogue not found.<br>";
+        }
+    } else {
+        echo "Dialogue not found.<br>";
+    }
+
+    // Redirection après le déplacement
+    header("Location: creation?ctrl=creation&article=afficherHistoire&id=" . $histoire->getId());
+    exit();
+}
+
+>>>>>>> Stashed changes
 
     if ($dialogue) {
         $previousDialogue = Dialog::read($idDialogue - 1, $histoire->getId());
@@ -214,7 +257,14 @@ if (isset($_GET['action']) && $_GET['action'] === 'moveDown' && isset($_GET['idD
     header("Location: " . $redirectUrl);
     exit();
 }
-
+// Vérification de la publication
+if (isset($_GET['footer']) && $_GET['footer'] === 'publie') {
+    $histoire->setVisibility(true);
+    $histoire->update();
+    // Redirection après la publication
+    header("Location: creation?ctrl=creation&article=afficherHistoire&id=" . $histoire->getId());
+    exit();
+}
 // Récupération depuis le modèle
 $personnages = Character::readAllCharacters();
 $iddialog = 1;

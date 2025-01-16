@@ -85,8 +85,5 @@
 
         </form>
     </article>
-    <section class="last-button">
-        <button class=button-rouge>Annuler</button>
-        <button class=button-vert>Valider</button>
-    </section>
+
 </article>

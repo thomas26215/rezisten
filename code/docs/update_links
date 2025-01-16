@@ -1,0 +1,25 @@
+#!/bin/dash
+if [ "$1" ]
+then
+	new_addr="$1"
+else
+	echo "Vous devez préciser votre nouvelle adresse ip utilisée"
+	exit 1
+fi
+
+directory="/home/tritri/Documents/SAE3.01-git/rendus/code/docs"
+# Vérifie si le répertoire existe
+if [ ! -d "$directory" ]; then
+    echo "Le répertoire $directory n'existe pas."
+    exit 1
+fi
+
+# Parcourir tous les fichiers du répertoire et ses sous-répertoires
+find "$directory" -type f | while read -r file; do
+    # Remplacer l'adresse IP dans chaque fichier
+    sed -i "s/192\.168\.14\.118/$new_addr/g" "$file"
+    echo "Modifié : $file"
+done
+
+echo "Remplacement terminé."
+

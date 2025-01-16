@@ -9,6 +9,6 @@
 <header>
    <a href="./index.php?ctrl=main" class="home">
       <img src="./view/design/image/home.png" alt="home">
-      <p>Accueil</p>
+      <p class="accueil-text">Accueil</p>
    </a>
 </header>
