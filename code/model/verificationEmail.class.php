@@ -149,6 +149,13 @@ class CheckEmail {
         }
         return $chaineAleatoire;
     }
+
+    public function checkAndDeleteCode(string $token) {
+        if($this->token !== $token) {
+            throw new Exception("Invalid mail or token");
+        }
+        CheckEmail::delete($this->user->getId());
+    }
 }
 ?>
 

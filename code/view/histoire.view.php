@@ -9,6 +9,26 @@
     <meta name="author" content="Brayan" />
     <link rel="stylesheet" type="text/css" href="./view/design/histoire.css">
     <link rel="stylesheet" type="text/css" href="./view/design/global.css">
+    <style>
+        .texte-machine {
+            font-family: 'Courier New', Courier, monospace;
+            white-space: nowrap; /* Évite les retours à la ligne */
+            overflow: hidden;   /* Masque le texte qui n'est pas encore affiché */
+            border-right: 2px solid black; /* Curseur clignotant */
+            display: inline-block;
+            animation: blink 0.7s steps(1) infinite;
+        }
+
+        /* Animation pour le curseur clignotant */
+        @keyframes blink {
+            0%, 50% {
+                border-color: black;
+            }
+            51%, 100% {
+                border-color: transparent;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -39,7 +59,7 @@
                         <input type="hidden" name="ctrl" value="histoire">
                         <input type="hidden" name="idDialog" id="idDialogInput" value="<?= $idDialog ?>">
                         <input type="hidden" name="prevSpeaker" value="<?=$speaker->getImage()?>">
-                        <?php if($idDialog == $firstbonus || $_SESSION['lastDialog'] == $idDialog-1 || $dialog->getId() == $dialLimit+1){ ?>
+                        <?php if($idDialog == $firstbonus || $_SESSION['lastDialog'] == $idDialog-1){ ?>
                             <button class="before button-gris">Pas de dialogue précédent</button>
                         <?php }
                         else{?>

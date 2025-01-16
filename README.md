@@ -41,3 +41,6 @@ Tout document textuel dans un autre format ne sera pas considéré.**
 Les deux fichiers `.gitattributes` et `.gitignore` sont liés à la configuration de git.<br>
 Vous pouvez modifier le fichier `.gitignore` en fonction des technologies utilisées et de l'organisation du dépôt choisie.<br>
 Il est vivement déconseillé de modifier le fichier `.gitattributes`.
+
+## Fichiers de documentation spécifique
+docs/doc_architecture.md contient toutes les informations sur l'architecture serveur et les différents moyens de connexion
