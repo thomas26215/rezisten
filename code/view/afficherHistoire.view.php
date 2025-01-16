@@ -30,7 +30,7 @@
                             <?php endif; ?>
                         </p>
                         <div id="fleche">
-                            <?php if ($index > 0): ?>
+                            <?php if ($index > 1): ?>
                                 <form method="GET" action="index.php">
                                     <input type="hidden" name="ctrl" value="creation">
                                     <input type="hidden" name="article" value="afficherHistoire">
@@ -88,8 +88,5 @@
 
         </form>
     </article>
-    <section class="last-button">
-        <button class=button-rouge>Annuler</button>
-        <button class=button-vert>Valider</button>
-    </section>
+
 </article>

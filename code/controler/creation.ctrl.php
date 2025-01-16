@@ -214,7 +214,14 @@ if (isset($_GET['action']) && $_GET['action'] === 'moveDown' && isset($_GET['idD
     header("Location: " . $redirectUrl);
     exit();
 }
-
+// Vérification de la publication
+if (isset($_GET['footer']) && $_GET['footer'] === 'publie') {
+    $histoire->setVisibility(true);
+    $histoire->update();
+    // Redirection après la publication
+    header("Location: creation?ctrl=creation&article=afficherHistoire&id=" . $histoire->getId());
+    exit();
+}
 // Récupération depuis le modèle
 $personnages = Character::readAllCharacters();
 $iddialog = 1;

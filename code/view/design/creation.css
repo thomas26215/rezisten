@@ -6,12 +6,7 @@ body {
 
 /* Pour la disposition de la page*/
 .container {
-  display: grid;
-  grid-template-areas:
-    "header header"
-    "menu content"
-    "footer footer";
-  grid-template-columns: 1fr 2fr;
+ 
   gap: 5px;
 
   padding: 5px 3vw ;
@@ -25,13 +20,11 @@ body {
 .container>section.header {
   display: flex;
   justify-content: space-around;
-  grid-area: header;
   text-align: center;
   max-height: 50px;
 }
 
 .container>article.content {
-  grid-area: content;
   background-color: var(--beige);
   height: 95%;
   border: 2px solid var(--noir);
@@ -43,7 +36,6 @@ body {
 .container>section.footer {
   display: flex;
   justify-content: space-around;
-  grid-area: footer;
 }
 
 button {
@@ -140,5 +132,10 @@ button.poub{
 }
 
 button.poub::before{
-  background-color: none !important;
+  background-color: var(--beige) !important;
+}
+
+.containerBox {
+  display: flex;
+  flex-direction: column;
 }
