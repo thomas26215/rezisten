@@ -3,9 +3,6 @@
     <link rel="stylesheet" href="./view/design/ajouterQuestion.css">
 </head>
 <article class="content">
-    <div>
-        <h2 class="titre"> Ajouter une question</h2>
-    </div>
     <form action="creation" method="get">
         <input type="hidden" name="ctrl" value="creation">
         <input type="hidden" name="article" value="ajouterQuestion">

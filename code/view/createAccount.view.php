@@ -56,7 +56,7 @@
                 </div>
                 <div class="labelInput">
                     <input type="checkbox" name="check" id="check" <?php echo $formData['check'] ? 'checked' : ''; ?>>
-                    <label for="check">En cochant cette case, j'ai lu et accepte les <a class="cond" href="./view/conditionGeneralesDutilisation.view.php">Conditions
+                    <label for="check">En cochant cette case, j'ai lu et accepte les <a class="link" href="./view/conditionGeneralesDutilisation.view.php">Conditions
                             Générales d'Utilisation</a></label>
                 </div>
             </div>

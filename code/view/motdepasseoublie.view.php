@@ -7,21 +7,20 @@
     <link rel="stylesheet" href="./view/design/motdepasseoublie.css">
 </head>
 <body>
-    <?php include_once("./view/header.view.php")?>
+    <?php include_once("./view/header.view.php") ?>
     <main>
         <h1>Mot de passe oublié</h1>
         <p class="texte">Veuillez saisir votre email de connexion afin de recevoir le lien de réinitialisation de votre mot de passe.</p>
     
-        <?php
-        if (isset($message)) {
-            echo "<p class='success'>$message</p>";
-        }
-        if (isset($error)) {
-            echo "<p class='error'>$error</p>";
-        }
-        ?>
+        <?php if (!empty($message)): ?>
+            <p class="success"><?php echo htmlspecialchars($message); ?></p>
+        <?php endif; ?>
+        
+        <?php if (!empty($error)): ?>
+            <p class="error"><?php echo htmlspecialchars($error); ?></p>
+        <?php endif; ?>
 
-        <form method="POST" action="?ctrl=motdepasseoublie" class="motdepasse">
+        <form method="POST" class="motdepasse">
             <div class="email">
                 <label for="email">Email <span>*</span>: </label>
                 <input placeholder="adresse mail" type="email" name="email" id="email" required>
@@ -33,6 +32,7 @@
             </div>
         </form>
     </main>
-    <?php include_once("./view/footer.view.php")?>
+    <?php include_once("./view/footer.view.php") ?>
 </body>
 </html>
+

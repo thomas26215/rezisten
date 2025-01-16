@@ -3,9 +3,6 @@
     <link rel="stylesheet" href="./view/design/afficherHistoire.css">
 </head>
 <article class="content">
-    <div>
-        <h2 class="titre"> Afficher toute l'histoire</h2>
-    </div>
     <article>
         <form action="">
 
@@ -88,8 +85,5 @@
 
         </form>
     </article>
-    <section class="last-button">
-        <button class=button-rouge>Annuler</button>
-        <button class=button-vert>Valider</button>
-    </section>
+
 </article>

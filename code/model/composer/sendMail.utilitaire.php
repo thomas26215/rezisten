@@ -122,7 +122,7 @@ class EmailSender {
                     
                     <p>Une fois qu'il a ce code, il pourra t'aider à réinitialiser ton mot de passe.</p>
 
-                    <a href="{$link}" style="display:block;background-color:#33553d;color:white;padding:10px;text-decoration:none;text-align:center;">
+                    <a href="http://localhost/rendus/code/index.php?ctrl=changermotdepasse" style="display:block;background-color:#33553d;color:white;padding:10px;text-decoration:none;text-align:center;">
                     RÉINITIALISER MON MOT DE PASSE</a>
                 </div>
                 

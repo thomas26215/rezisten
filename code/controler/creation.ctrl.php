@@ -22,7 +22,7 @@ if (!isset($_GET['id'])) { // si l'histoire n'existe pas
         Chapter::read(100),
         User::read($idUser), // changer par id de cette user
         Place::read(1),
-        "../view/design/image/background_story.png",
+        "default_background.webp",
         false
     );
     $histoire->create();
@@ -214,7 +214,14 @@ if (isset($_GET['action']) && $_GET['action'] === 'moveDown' && isset($_GET['idD
     header("Location: " . $redirectUrl);
     exit();
 }
-
+// Vérification de la publication
+if (isset($_GET['footer']) && $_GET['footer'] === 'publie') {
+    $histoire->setVisibility(true);
+    $histoire->update();
+    // Redirection après la publication
+    header("Location: creation?ctrl=creation&article=afficherHistoire&id=" . $histoire->getId());
+    exit();
+}
 // Récupération depuis le modèle
 $personnages = Character::readAllCharacters();
 $iddialog = 1;
