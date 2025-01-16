@@ -32,10 +32,6 @@ class Question
     {
         return $this->question;
     }
-    public function getContent(): string
-    {
-        return $this->question;
-    }
 
     public function getAnswer(): string
     {
@@ -44,11 +40,7 @@ class Question
 
     public function getType(): string
     {
-        if ($this->type == 's') {
-            return "spécifique";
-        } else {
-            return "générique";
-        }
+        return ($this->type === 's') ? "spécifique" : "générique";
     }
 
     /* --- Setters --- */
@@ -56,7 +48,7 @@ class Question
     public function setHistory(Story $history): void
     {
         if (empty($history)) {
-            throw new Exception("L'histoire ne peut pas être vide");
+            throw new InvalidArgumentException("L'histoire ne peut pas être vide.");
         }
         $this->history = $history;
     }
@@ -64,7 +56,7 @@ class Question
     public function setQuestion(string $question): void
     {
         if (empty($question)) {
-            throw new Exception("La question ne peut pas être vide");
+            throw new InvalidArgumentException("La question ne peut pas être vide.");
         }
         $this->question = $question;
     }
@@ -72,83 +64,105 @@ class Question
     public function setAnswer(string $answer): void
     {
         if (empty($answer)) {
-            throw new Exception("La réponse ne peut pas être vide");
+            throw new InvalidArgumentException("La réponse ne peut pas être vide.");
         }
         $this->answer = $answer;
     }
 
     public function setType(string $type): void
     {
-        if (empty($type || ($type != "g" && $type != "s"))) {
-            throw new Exception("Le type ne peut pas être vide et doit etre égale a g ou s");
+        if (empty($type) || ($type !== "g" && $type !== "s")) {
+            throw new InvalidArgumentException("Le type doit être 'g' ou 's'.");
         }
         $this->type = $type;
     }
 
     /* --- Méthodes CRUD --- */
 
-    public function create(): bool
+    public function create(): void
     {
         $historyId = $this->history->getId();
         if ($historyId < 1) {
-            throw new Exception("Impossible de créer une question : Aucune histoire ne correspond à l'id fourni");
+            throw new RuntimeException("Impossible de créer une question : Aucune histoire ne correspond à l'ID fourni.");
         }
-        if (
-            $this->dao->insert("questions", [
+
+        try {
+            if (!$this->dao->insert("questions", [
                 "id_histoire" => $historyId,
                 "question" => $this->question,
                 "reponse" => $this->answer,
                 "type" => $this->type,
-            ])
-        ) {
-            return true;
-        } else {
-            return false;
+            ])) {
+                throw new RuntimeException("Échec de l'insertion de la question dans la base de données.");
+            }
+        } catch (PDOException $e) {
+            throw new RuntimeException("Erreur lors de la création de la question : " . $e->getMessage(), 0, $e);
         }
     }
 
     public static function read(int $id_histoire, string $type): ?Question
     {
-        $dao = DAO::getInstance();
-        $questionDatas = $dao->getWithParameters("questions", ["id_histoire" => (int) $id_histoire, "type" => (string) $type]);
-        if ($questionDatas) {
-            $questionData = $questionDatas[0];
-            $story = Story::read($id_histoire);
-            if (!$story) {
-                error_log("Histoire non trouvée pour l'ID : $id_histoire");
-                return null;
+        try {
+            $dao = DAO::getInstance();
+            $questionDatas = $dao->getWithParameters("questions", ["id_histoire" => (int)$id_histoire, "type" => (string)$type]);
+
+            if ($questionDatas) {
+                $questionData = $questionDatas[0];
+                $story = Story::read($id_histoire);
+                if (!$story) {
+                    error_log("Histoire non trouvée pour l'ID : " . $id_histoire);
+                    return null;
+                }
+                return new Question(
+                    $story,
+                    (string)$questionData["question"],
+                    (string)$questionData["reponse"],
+                    (string)$questionData["type"]
+                );
             }
-            return new Question(
-                $story,
-                $questionData["question"],
-                $questionData["reponse"],
-                $questionData["type"]
-            );
+            return null; // Pas d'exception ici, car cela peut être un cas valide.
+        } catch (PDOException $e) {
+            throw new RuntimeException("Erreur lors de la lecture de la question : " . $e->getMessage(), 0, $e);
         }
-        return null;
     }
 
-
-    public function update(): bool
+    public function update(): void
     {
-        if ($this->history === NULL) {
-            throw new Exception("Impossible de mettre à jour la question : L'histpire est invalide");
+        if ($this->history === null) {
+            throw new RuntimeException("Impossible de mettre à jour la question : L'histoire est invalide.");
         }
-        return ($this->dao->update("questions", [
-            "id_histoire" => $this->history->getId(),
-            "question" => $this->question,
-            "reponse" => $this->answer,
-            "type" => $this->type,
-        ], ["id_histoire" => (int) $this->history->getId(), "type" => $this->type])) > 0;
-    }
 
-    public static function delete($id, $type): bool
-    {
-        if ($id > 0) {
-            return DAO::getInstance()->deleteDatasByIdAndType("questions", $id, $type);
-        }
-        return false;
+        try {
+            if ($this->dao->update("questions", [
+                "id_histoire" => $this->history->getId(),
+                "question" => $this->question,
+                "reponse" => $this->answer,
+                "type" => $this->type,
+            ], [
+                "id_histoire" => (int)$this->history->getId(),
+                "type" => (string)$this->type
+            ]) === 0) {
+                throw new RuntimeException("Aucune donnée n'a été mise à jour dans la base de données.");
+            }
+        } catch (PDOException e) { 
+           throw new RuntimeException("Erreur lors de la mise à jour de la question : " . e.getMessage(), 0, e); 
+       } 
+   }
 
-    }
+   public static function delete(int $id, string $type): void
+   {
+       if ($id <= 0) {
+           throw new InvalidArgumentException("L'ID doit être supérieur à zéro.");
+       }
+       
+       try { 
+           if (!DAO::getInstance()->deleteDatasByIdAndType("questions", (int)$id, (string)$type)) { 
+               throw new RuntimeException("Échec de la suppression de la question dans la base de données."); 
+           } 
+       } catch (PDOException e) { 
+           throw new RuntimeException("Erreur lors de la suppression de la question : " . e.getMessage(), 0, e); 
+       } 
+   }
 }
 ?>
+

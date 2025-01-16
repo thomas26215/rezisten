@@ -1,24 +1,23 @@
 <?php
+
 require_once(__DIR__ . "/dao.class.php");
 require_once(__DIR__ . "/users.class.php");
 require_once(__DIR__ . "/chapitres.class.php");
 require_once(__DIR__ . "/lieux.class.php");
 
-
-
 class Story
 {
-    private int $id; // creer automatiquement
+    private int $id; // Créé automatiquement
     private string $title;
     private Chapter $chapter;
     private ?User $user; // Permettre à user d'être null
     private Place $place;
-    private string $background; // chemin d'accès à l'image de fond
+    private string $background; // Chemin d'accès à l'image de fond
     private bool $visibility;
 
     private DAO $dao;
 
-    const bgURL = "https://192.168.14.118/imagesRezisten/histBackground/"; // pour les tests ?
+    const bgURL = "https://192.168.14.118/imagesRezisten/histBackground/"; // Pour les tests ?
 
     public function __construct(string $title, Chapter $chapter, ?User $user, Place $place, string $background, bool $visibility, int $id = -1)
     {
@@ -32,7 +31,8 @@ class Story
         $this->dao = DAO::getInstance();
     }
 
-    /* Getters */
+    /* --- Getters --- */
+    
     public function getId(): int
     {
         return $this->id;
@@ -68,24 +68,28 @@ class Story
         return $this->visibility;
     }
 
-    /* Setter */
+    /* --- Setters --- */
+
     public function setId(int $id): void
     {
+        if ($id < 0) {
+            throw new InvalidArgumentException("L'ID doit être supérieur ou égal à 0.");
+        }
         $this->id = $id;
     }
 
     public function setTitle(string $title): void
     {
-        if ($title == "") {
-            throw new Exception("Le titre ne peut pas être vide");
+        if (empty($title)) {
+            throw new InvalidArgumentException("Le titre ne peut pas être vide.");
         }
         $this->title = $title;
     }
 
     public function setChapter(Chapter $chapter): void
     {
-        if ($chapter == "") {
-            throw new Exception("Le numéro de chapitre ne peut pas être vide");
+        if ($chapter === null) {
+            throw new InvalidArgumentException("Le chapitre ne peut pas être nul.");
         }
         $this->chapter = $chapter;
     }
@@ -98,14 +102,22 @@ class Story
 
     public function setPlace(Place $place): void
     {
+        if ($place === null) {
+            throw new InvalidArgumentException("Le lieu ne peut pas être nul.");
+        }
         $this->place = $place;
     }
 
     public function setBackground(string $background): void
     {
-        if ($background == "") {
-            throw new Exception("Le background ne peut pas être vide");
+        if (empty($background)) {
+            throw new InvalidArgumentException("Le background ne peut pas être vide.");
         }
+        // Optionnel : ajouter une validation pour le format du chemin d'accès à l'image
+        // if (!filter_var($background, FILTER_VALIDATE_URL)) {
+        //     throw new InvalidArgumentException("Le format du background est invalide.");
+        // }
+        
         $this->background = $background;
     }
 
@@ -114,102 +126,143 @@ class Story
         $this->visibility = $visibility;
     }
 
-   /* Méthodes CRUD et utilitaires sur la BDD */
+   /* --- Méthodes CRUD et utilitaires sur la BDD --- */
 
-    public function create(): bool
-    {
+   public function create(): void
+   {
+       try {
+           if (!$this->dao->insertRelatedData("histoires", [
+               "titre" =>  $this->title,
+               "numchap" =>  $this->chapter->getNumchap(),
+               "createur" =>  $this->user ? $this->user->getId() : null,
+               "id_lieu" =>  $this->place->getId(),
+               "background" =>  $this->background,
+               "visible" =>  $this->visibility,
+           ])) {
+               throw new RuntimeException("Échec de l'insertion de l'histoire dans la base de données.");
+           }
+           // Récupérer l'ID de la dernière insertion
+           $lastId = $this->dao->getLastInsertId("histoires")[0]['last_id'];
+           if ($lastId) {
+               $this->setId((int)$lastId);
+           } else {
+               throw new RuntimeException("Échec de la récupération du dernier ID inséré.");
+           }
+       } catch (PDOException $e) {
+           throw new RuntimeException("Erreur lors de la création de l'histoire : " . $e->getMessage(), 0, $e);
+       }
+   }
 
-        if (
-            $this->dao->insertRelatedData("histoires", [
-                "titre" => $this->title,
-                "numchap" => $this->chapter->getNumchap(),
-                "createur" => $this->user->getId(),
-                "id_lieu" => $this->place->getId(),
-                "background" => $this->background,
-                "visible" => $this->visibility
-            ])
-        ) {
-            $this->setId($this->dao->getLastInsertId("histoires")[0]['last_id']);
-            return true;
-        }
-        return false;
-    }
+   // Accéder aux données d'une histoire à partir de son id
+   public static function read(int $id): ?Story
+   {
+       if ($id <= 0) {
+           throw new InvalidArgumentException("L'ID doit être supérieur à zéro.");
+       }
 
-    // Accéder aux données d'une histoire à partir de son id
-    public static function read($id): ?Story
-    {
-        $dao = DAO::getInstance();
+       try {
+           $dao = DAO::getInstance();
+           if ($historyDatas = $dao->getColumnWithParameters("histoires", ["id" => (int)$id])) {
+               $historyData = $historyDatas[0];
+               $chapter = Chapter::read($historyData['numchap']);
+               $user = User::read($historyData['createur']);
+               $place = Place::read($historyData['id_lieu']);
+               return new Story(
+                   (string)$historyData['titre'],
+                   $chapter,
+                   $user,
+                   $place,
+                   (string)$historyData['background'],
+                   (bool)$historyData['visible'],
+                   (int)$historyData['id']
+               );
+           }
+           return null; // Pas d'exception ici, car cela peut être un cas valide
+       } catch (PDOException $e) {
+           throw new RuntimeException("Erreur lors de la lecture de l'histoire : " . $e->getMessage(), 0,  $e);
+       }
+   }
 
-        //Récupère les données de l'histoire depuis la base
-        if ($historyDatas = $dao->getColumnWithParameters("histoires", ["id" => (int) $id])) {
-            $historyData = $historyDatas[0];
-            $chapter = Chapter::read($historyData['numchap']);
-            $user = User::read($historyData['createur']);
-            $place = Place::read($historyData['id_lieu']);
-            return new Story(
-                $historyData['titre'],
-                $chapter,
-                $user,
-                $place,
-                $historyData['background'],
-                $historyData['visible'],
-                $historyData['id']
-            );
-        }
-        return null;
-    }
+   // Mettre à jour une histoire existante
+   public function update(): void
+   {
+       if ($this->id < 1) {
+           throw new RuntimeException("Impossible de mettre à jour l'histoire : L'histoire est invalide.");
+       }
+       
+       try {
+           if ($this->dao->update("histoires", [
+               "titre" =>  $this->title,
+               "numchap" =>  $this->chapter->getNumchap(),
+               "createur" =>  $this->user ?  $this->user->getId() : null,
+               "id_lieu" =>  $this->place->getId(),
+               "background" =>  $this->background,
+               "visible" =>  $this->visibility,
+           ], ["id" => (int)$this->id]) === 0) {
+               throw new RuntimeException("Aucune donnée n'a été mise à jour dans la base de données.");
+           }
+       } catch (PDOException e) {
+           throw new RuntimeException("Erreur lors de la mise à jour de l'histoire : " . e.getMessage(), 0, e);
+       }
+   }
 
-    // Mettre à jour une histoire existante
-    public function update(): bool
-    {
-        if ($this->id < 1 || $this->id === NULL) {
-            throw new Exception("Impossible de mettre à jour la demande : L'histoire est invalide");
-        }
-        return $this->dao->update("histoires", [
-            "titre" => $this->title,
-            "numchap" => $this->chapter->getNumchap(),
-            "createur" => $this->user->getId(),
-            "id_lieu" => $this->place->getId(),
-            "background" => $this->background,
-            "visible" => $this->visibility
-        ], ["id" => (int) $this->id]) > 0;
-    }
+   // Supprimer une histoire en connaissant son id
+   public static function delete(int $id): void
+   {
+       if ($id <= 0) { // Vérification de la possible existence de l'id
+           throw new InvalidArgumentException("L'ID doit être supérieur à zéro.");
+       }
 
-    // Supprimer une histoire en connaissant son id
-    public static function delete($id): bool
-    {
-        if ($id > 0) { // Vérification de la possible existence de l'id
-            return DAO::getInstance()->deleteDatasById("histoires", $id);
-        }
-        return false; // Echec si id invalide ou inexistant
+       try { 
+           if (!DAO::getInstance()->deleteDatasById("histoires", (int)$id)) { 
+               throw new RuntimeException("Échec de la suppression de l'histoire dans la base de données."); 
+           } 
+       } catch (PDOException e) { 
+           throw new RuntimeException("Erreur lors de la suppression de l'histoire : " . e.getMessage(), 0, e); 
+       } 
+   }
 
-    }
+   public static function getNumberStory(int $idChapter): int 
+   { 
+       try { 
+           if ($idChapter <= 0) { 
+               throw new InvalidArgumentException("L'ID du chapitre doit être supérieur à zéro."); 
+           } 
 
-    public static function getNumberStory(int $idChapter): int
-    { //TODO: A tester
-        $dao = DAO::getInstance();
-        $result = $dao->getColumnWithParameters(
-            "histoires",         // Table
-            ["numchap" => $idChapter] // Condition
-        );
+           return count(DAO::getInstance()->getColumnWithParameters( 
+               "histoires",         // Table 
+               ["numchap" => (int)$idChapter] // Condition 
+           ));
+       } catch (PDOException e) { 
+           throw new RuntimeException("Erreur lors du comptage des histoires : " . e.getMessage(), 0, e); 
+       } 
+   } 
 
-        return count($result);
-    }
+   public static function getStoryIdsByChapter(int $idChapter): array 
+   { 
+       try { 
+           if ($idChapter <= 0) { 
+               throw new InvalidArgumentException("L'ID du chapitre doit être supérieur à zéro."); 
+           } 
 
-    public static function getStoryIdsByChapter(int $idChapter): array
-    {//TODO: A tester
-        $dao = DAO::getInstance();
-        $results = $dao->getColumnWithParameters("histoires", ["numchap" => $idChapter], ["id"]);
-        return array_column($results, 'id');
-    }
-    public static function getAllStoryIds(): array
-    {//TODO: A tester
-        $dao = DAO::getInstance();
-        $results = $dao->getColumnWithParameters("histoires", [], ["id"]);
-        return array_column($results, 'id');
-    }
+           return array_column(DAO::getInstance()->getColumnWithParameters( 
+               "histoires", ["numchap" => (int)$idChapter], ["id"] 
+           ), 'id'); 
+       } catch (PDOException e) { 
+           throw new RuntimeException("Erreur lors de la récupération des IDs d'histoires par chapitre : " . e.getMessage(), 0, e); 
+       } 
+   } 
 
+   public static function getAllStoryIds(): array 
+   { 
+       try { 
+           return array_column(DAO::getInstance()->getColumnWithParameters( 
+               "histoires", [], ["id"]), 'id'); 
+       } catch (PDOException e) { 
+           throw new RuntimeException("Erreur lors de la récupération des IDs d'histoires : " . e.getMessage(), 0, e); 
+       } 
+   }
 }
 
-
 ?>
+

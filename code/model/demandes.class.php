@@ -6,12 +6,11 @@ require_once(__DIR__ . "/users.class.php");
 class Demande {
     private User $user;
     private string $document;
-
     private DAO $dao;
 
     public function __construct(User $user, string $document) {
-        if ($user === NULL) {
-            throw new Exception("L'utilisateur ne peut pas être null");
+        if ($user === null) {
+            throw new InvalidArgumentException("L'utilisateur ne peut pas être null");
         }
         $this->setUser($user);
         $this->setDocument($document);
@@ -31,40 +30,46 @@ class Demande {
     /* --- Setters --- */
 
     public function setUser(User $user): void {
+        if ($user === null) {
+            throw new InvalidArgumentException("L'utilisateur ne peut pas être null");
+        }
         $this->user = $user;
     }
 
     public function setDocument(string $document): void {
-        if($document === "") {
-            throw new Exception("Le document ne peut pas être vide");
+        if (empty($document)) {
+            throw new InvalidArgumentException("Le document ne peut pas être vide");
         }
         $this->document = $document;
     }
 
     /* --- Méthodes CRUD --- */
 
-    public function create(): bool {
+    public function create(): void {
         try {
             $userId = $this->user->getId();
             if ($userId < 1) {
-                throw new Exception("Impossible de créer une demande : Aucun utilisateur ne correspond à l'id fourni");
+                throw new RuntimeException("Impossible de créer une demande : Aucun utilisateur ne correspond à l'id fourni");
             }
-            if ($this->dao->insertRelatedData("demandes", [
+            if (!$this->dao->insertRelatedData("demandes", [
                 "id_utilisateur" => $userId,
                 "doc" => $this->document,
             ])) {
-                return true;
-            } else {
-                return false;
+                throw new RuntimeException("Échec de l'insertion de la demande dans la base de données");
             }
-        } catch(PDOException $e) {
-            throw $e;
+        } catch (PDOException $e) {
+            throw new RuntimeException("Erreur lors de la création de la demande : " . $e->getMessage(), 0, $e);
         }
     }
 
-    public static function read($id_utilisateur): ?Demande {
+    public static function read(int $id_utilisateur): ?Demande {
+        if ($id_utilisateur <= 0) {
+            throw new InvalidArgumentException("L'ID utilisateur doit être supérieur à zéro.");
+        }
+
         $dao = DAO::getInstance();
-        $demandeData = $dao->getColumnWithParameters("demandes", ["id_utilisateur" => (int)$id_utilisateur]);
+        $demandeData = $dao->getColumnWithParameters("demandes", ["id_utilisateur" => $id_utilisateur]);
+        
         if ($demandeData) {
             $newUser = User::read($id_utilisateur);
             return new Demande(
@@ -72,24 +77,31 @@ class Demande {
                 $demandeData[0]["doc"]
             );
         }
-        return null;
+        
+        return null; // Pas d'exception ici, car cela peut être un cas valide
     }
 
-    public function update(): bool {
-        if ($this->user === NULL || $this->user->getId() < 1) {
-            throw new Exception("Impossible de mettre à jour la demande : L'utilisateur est invalide");
+    public function update(): void {
+        if ($this->user === null || $this->user->getId() < 1) {
+            throw new RuntimeException("Impossible de mettre à jour la demande : L'utilisateur est invalide");
         }
-        return $this->dao->update("demandes", [
+
+        if ($this->dao->update("demandes", [
             "doc" => $this->document,
             "id_utilisateur" => $this->user->getId()
-        ], ["id_utilisateur" => (int)$this->user->getId()]) > 0;
+        ], ["id_utilisateur" => (int)$this->user->getId()]) === 0) {
+            throw new RuntimeException("Aucune demande n'a été mise à jour dans la base de données");
+        }
     }
 
-    public static function delete($id_utilisateur): bool {
-        if ($id_utilisateur > 0) {
-            return DAO::getInstance()->deleteDatas("demandes", ["id_utilisateur" => (int)$id_utilisateur]);
+    public static function delete(int $id_utilisateur): void {
+        if ($id_utilisateur <= 0) {
+            throw new InvalidArgumentException("L'ID utilisateur doit être supérieur à zéro.");
         }
-        return false;
+
+        if (!DAO::getInstance()->deleteDatas("demandes", ["id_utilisateur" => (int)$id_utilisateur])) {
+            throw new RuntimeException("Échec de la suppression de la demande dans la base de données");
+        }
     }
 }
 
