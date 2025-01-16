@@ -98,57 +98,56 @@ Les liens sont gérés ensuite dans le code.
 ## 2- Résumé 
 Pour clarifier tout cela, voici un schéma des structures des deux serveurs avec les fichiers contenus
 #### Serveur web
-/
-|
-|-etc
-|   |-systemd
-|   |	|-system 
-|   |	    |
-|   |	    |-security-rezisten.service
-|   |	    |-security-rezisten.timer
-|   |
-|   |-apache2 => config de apache
-|
-|
-|
-|	    	
-|
-|-usr
-|  |-local
-|      |-bin
-| 	  |-security-rezisten => script maj de sécurité
-|
-|-var
-|  |-www
-|     |-html => contient le code de l'application
+/  
+|  
+|-etc  
+|   |-systemd  
+|   |	|-system   
+|   |	    |  
+|   |	    |-security-rezisten.service  
+|   |	    |-security-rezisten.timer  
+|   |  
+|   |-apache2 => config de apache  
+|  
+|  
+|             	    	
+|  
+|-usr  
+|  |-local  
+|      |-bin  
+| 	  |-security-rezisten => script maj de sécurité  
+|  
+|-var  
+|  |-www  
+|     |-html => contient le code de l'application  
 
 #### Serveur Base de donnée et images
-/
-| 
-|-etc 
+/  
+|   
+|-etc   
 |   |-systemd   
-|   |   |-system
-|   |       |
-|   |       |-security-rezisten.service => màj de sécurité
-|   |       |-security-rezisten.timer
-|   |       |-dump_database.service => màj de la base de donnée
-|   |       |-dump_database.timer 
-|   |
-|   |-apache2 => config de apache
-|   |
-|   |-postgresql
-|         |-15  => configuration de postgresql15
-|
-|
-|-usr
-|  |-local
-|      |-bin
-|         |-security-rezisten => script maj de sécurité
-|         |-dump_database => script mettant à jour la base de donnée
-|
+|   |   |-system  
+|   |       |  
+|   |       |-security-rezisten.service => màj de sécurité  
+|   |       |-security-rezisten.timer   
+|   |       |-dump_database.service => màj de la base de donnée  
+|   |       |-dump_database.timer   
+|   |  
+|   |-apache2 => config de apache  
+|   |  
+|   |-postgresql  
+|         |-15  => configuration de postgresql15  
+|  
+|  
+|-usr  
+|  |-local  
+|      |-bin  
+|         |-security-rezisten => script maj de sécurité  
+|         |-dump_database => script mettant à jour la base de donnée  
+|  
 |-var   
 |  |-www    
-|     |-html
-         |-rezisten => contient images et fichiers audios
+|     |-html  
+         |-rezisten => contient images et fichiers audios  
 
 
