@@ -4,8 +4,6 @@ INSERT INTO UTILISATEURS(pseudo,prenom,nom,datenaiss,mail,mot_de_passe,role) VAL
 ('jeanm','jean','mejean','10/08/1978','jean.mejean@gmail.com','12hist34prof ','c'),
 ('admin_rezisten','admin','admin','12/06/1999','admin.rezisten@rezisten.fr','jesuisadmin2025','a');
 
--- Ajout d'une demande de créateur
-INSERT INTO DEMANDES VALUES(2,'aiel-id.png');
 
 --Création des deux premiers chapitres de l'histoire
 INSERT INTO CHAPITRES(numchap,titre) values(0,'Prologue'),
@@ -244,15 +242,6 @@ INSERT INTO QUESTIONS(id_histoire,question,reponse,type) values(1,'Combien de jo
 INSERT INTO QUESTIONS(id_histoire,question,reponse,type) values(2,'En quel année fût ériger le camp que fuient nos héros ?','1939','g'),
 (2,'Ce camp fût un camp de travail intensif dès juillet 1942. Combien de prisonniers étaient encore
 internés en mars 1943 ? ','70','s');
-
-
-
-
---Spécification de la progression du joueur 'tritri'
-INSERT INTO PROGRESSION(id_utilisateur,id_hist,statut) values(1,1,'t');
-
-
-INSERT INTO PROGRESSION(id_utilisateur,id_hist,statut) values(2,1,'f');
 
 
 
