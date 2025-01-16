@@ -51,7 +51,7 @@ class DAO {
      * @throws Exception Si une erreur se produit lors de la préparation ou exécution de la requête SQL.
      * @note Exemple d'utilisation : $dao->insertRelatedData("users", ["username" => "thomas26215", "prenom" => "Thomas", ...]);
      */
-    public function insertRelatedData($table, $datas) {
+    public function insert($table, $datas) {
         try {
             $this->setUtilitaire("", $datas);
             list($columns, $placeholders) = $this->daoUtilitaire->buildQueryParts();
@@ -72,7 +72,7 @@ class DAO {
      * @throws PDOException Si une erreur de base de données se produit.
      * @note $dao->getColumnWithParameters("users", ["id" => 11, "nom" => "toto"], ["titre", "id"]);
      */
-    public function getColumnWithParameters($table, $parameters, $columns = ['*']) {
+    public function getWithParameters($table, $parameters, $columns = ['*']) {
         try {
             $this->setUtilitaire("", $parameters);
             $selectColumns = implode(', ', $columns);
@@ -90,7 +90,7 @@ class DAO {
         }
     }
 
-    public function getLastInsertId(string $table){
+    public function getLastId(string $table){
         try{
             $query = "SELECT MAX(id) AS last_id FROM $table";
             $this->setUtilitaire($query);
@@ -154,7 +154,7 @@ class DAO {
      * @return bool Retourne true si la suppression réussit, false sinon.
      * @throws Exception Si les conditions sont vides.
      */
-    public function deleteDatas($table, array $conditions) {
+    public function delete($table, array $conditions) {
         if (empty($conditions)) {
             throw new Exception("Les conditions ne peuvent pas être vides.");
         }
