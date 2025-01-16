@@ -1,6 +1,6 @@
 <article class="content">
 
-    <form method="post" action="index.php?ctrl=personnages&article=ajouterPersonnage" class="articleContainer" enctype="multipart/form-data">
+    <form method="post" action="index.php?ctrl=personnages&article=ajouterPersonnage&id=<?= $id ?>" class="articleContainer" enctype="multipart/form-data">
         <input type="hidden" name="ctrl" value="personnages">
         <input type="hidden" name="article" value="ajouterPersonnage">
         <input type="hidden" name="action" value="ajouterCharacter">

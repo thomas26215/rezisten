@@ -38,28 +38,33 @@
 
                     <div class="inputs flex-col">
                         <label for="lieux">Lieux : </label>
-                        <div class="flex-row inputsRow">
-                            <select id="lieux" name="lieux">
-                                <?php foreach ($lieux as $lieu): ?>
-                                    <option value="<?= $lieu->getId() ?>" <?= $lieu->getId() == $histoire->getPlace()->getId() ? 'selected' : '' ?>>
-                                        <?= $lieu->getName() ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </select>
-                            <a href="./consulterLieu.view.php"><img src="./view/design/image/info.png"
-                                    alt="informations" id="info"></a>
-                        </div>
+                        <select id="lieux" name="lieux">
+                            <?php foreach ($lieux as $lieu): ?>
+                                <option value="<?= $lieu->getId() ?>" <?= $lieu->getId() == $histoire->getPlace()->getId() ? 'selected' : '' ?>>
+                                    <?= $lieu->getName() ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+
+                    <a href="./index.php?ctrl=consulterLieu&id=<?= $histoire->getPlace()->getId() ?>">
+                        <img src="./view/design/image/info.png" alt="informations" id="info">
+                    </a>
+
                     </div>
-                    <div class="inputs flex-col">
-                        <label for="personnages">Personnages :</label>
-                        <a  href="./index.php?ctrl=personnages"><button class="personnage button-gris">Consulter les
-                                personnages</button></a>
-                    </div>
+
                     <input type="hidden" name="id_lieu" id="id_lieu" value="">
                     <button>Sauvegarder</button>
                 </form>
 
-
+                <div class="inputs flex-col">
+                    <label for="personnages">Personnages :</label>
+                    <a href="./index.php?ctrl=personnages&id=<?= $id ?>">
+                        <button class="personnage button-gris">Gérer
+                            les
+                            personnages
+                        </button>
+                    </a>
+                </div>
             </section>
 
             <div class="containerBox">
@@ -96,10 +101,16 @@
                     </form>
 
 
-                    <form method=get>
-                        <input type="hidden" name="ctrl" value="mesHistoires">
+
+                    <form method="get">
+                        <input type="hidden" name="ctrl" value="creation">
                         <input type="hidden" name="footer" value="publie">
-                        <button class=button-vert>Publier</button>
+                        <input type="hidden" name="id" value="<?= $id ?>">
+                        <button class="button-vert"><?php if ($histoire->getVisibility() == true): ?>
+                                Mettre en privé
+                            <?php else: ?>
+                                Publier
+                            <?php endif ?></button>
                     </form>
                 </section>
             </div>

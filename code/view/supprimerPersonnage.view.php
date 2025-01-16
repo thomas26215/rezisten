@@ -1,9 +1,8 @@
 <article class="content">
-    <h2 class="titre">Supprimer un personnage</h2>
 
     <div class="articleContainer">
 
-        <form method="post" action="index.php?ctrl=personnages&article=supprimerPersonnage" class="articleContainer">
+        <form method="post" action="index.php?ctrl=personnages&article=supprimerPersonnage&id=<?= $id ?>" class="articleContainer">
             <input type="hidden" name="ctrl" value="personnages">
             <input type="hidden" name="action" value="selectCharacter">
             <div class="personnage">
@@ -41,7 +40,7 @@
                     alt="<?= $selectedCharacter?->getFirstName() ?? "Jean"; ?>" style="max-width: 240px;">
                 <button type="button" id="dialogPublier" class="button-rouge">Supprimer</button>
                 <div class="supprimer">
-                    <form method="post" action="index.php?ctrl=personnages&article=supprimerPersonnage">
+                    <form method="post" action="index.php?ctrl=personnages&article=supprimerPersonnage&id=<?= $id ?>">
                         <input type="hidden" name="ctrl" value="personnages">
                         <input type="hidden" name="characterId" value="<?= $selectedCharacter->getId() ?>">
                         <input type="hidden" name="action" value="supprimerPersonnage">
