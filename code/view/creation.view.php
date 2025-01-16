@@ -57,8 +57,12 @@
 
                 <div class="inputs flex-col">
                     <label for="personnages">Personnages :</label>
-                    <a href="./index.php?ctrl=personnages"><button class="personnage button-gris">Gérer les
-                            personnages</button></a>
+                    <a href="./index.php?ctrl=personnages&id=<?= $id ?>">
+                        <button class="personnage button-gris">Gérer
+                            les
+                            personnages
+                        </button>
+                    </a>
                 </div>
             </section>
 
@@ -96,10 +100,16 @@
                     </form>
 
 
-                    <form method=get>
-                        <input type="hidden" name="ctrl" value="mesHistoires">
+
+                    <form method="get">
+                        <input type="hidden" name="ctrl" value="creation">
                         <input type="hidden" name="footer" value="publie">
-                        <button class=button-vert>Publier</button>
+                        <input type="hidden" name="id" value="<?= $id ?>">
+                        <button class="button-vert"><?php if ($histoire->getVisibility() == true): ?>
+                                Mettre en privé
+                            <?php else: ?>
+                                Publier
+                            <?php endif ?></button>
                     </form>
                 </section>
             </div>

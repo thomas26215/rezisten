@@ -2,7 +2,7 @@
 
     <div class="articleContainer">
 
-        <form method="post" action="index.php?ctrl=personnages&article=modifierPersonnage" class="articleContainer"
+        <form method="post" action="index.php?ctrl=personnages&article=modifierPersonnage&id=<?= $id ?>" class="articleContainer"
             enctype="multipart/form-data">
             <div class="personnage">
                 <label for="personnage">Personnage à modifier : </label>
@@ -18,7 +18,7 @@
 
         </form>
         <?php if ($selectedCharacter): ?>
-            <form method="post" action="index.php?ctrl=personnages&article=modifierPersonnage"
+            <form method="post" action="index.php?ctrl=personnages&article=modifierPersonnage&id=<?= $id ?>"
                 enctype="multipart/form-data" class="articleContainer">
                 <input type="hidden" name="ctrl" value="personnages">
                 <input type="hidden" name="action" value="updateCharacter">
