@@ -1,5 +1,4 @@
 <article class="content">
-    <h2 class="titre">Supprimer un personnage</h2>
 
     <div class="articleContainer">
 

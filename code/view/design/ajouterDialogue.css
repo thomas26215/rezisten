@@ -22,3 +22,8 @@ textarea{ /* Pour la partie du dialogue */
 .content form :last-child{ /* Pour la partie du dialogue */
     justify-content: space-around;
 }
+
+.content form {
+    justify-content: space-between !important;
+    align-items: initial !important;
+}

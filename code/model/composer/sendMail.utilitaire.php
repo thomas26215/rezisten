@@ -22,11 +22,11 @@ class EmailSender {
         $this->mail->isSMTP();
         $this->mail->Host = "smtp.gmail.com";
         $this->mail->SMTPAuth = true;
-        $this->mail->Username = "venouilthomas123456@gmail.com";
-        $this->mail->Password = "fvmb zele kayh ynej";
+        $this->mail->Username = "rezisten.contact@gmail.com";
+        $this->mail->Password = "ovvs sfdd yuiq lpkv";
         $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $this->mail->Port = 587;
-        $this->mail->setFrom("venouilthomas123456@gmail.com", "rezisten");
+        $this->mail->setFrom("rezisten.contact@gmail.com", "rezisten");
     }
 
     public function setDestination(string $destination) {

@@ -1,6 +1,5 @@
 <article class="content">
 
-    <h2 class="titre">Modifier un personnage</h2>
     <div class="articleContainer">
 
         <form method="post" action="index.php?ctrl=personnages&article=modifierPersonnage" class="articleContainer"

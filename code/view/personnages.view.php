@@ -17,8 +17,8 @@
 
         <h1>Vos personnages</h1>
 
-        <section class="container">
-            <section class="flex-col menu">
+        <section class="container flex-col">
+            <section class="flex-row menu">
                 <form method="get" action="index.php">
                     <input type="hidden" name="ctrl" value="personnages">
                     <input type="hidden" name="article" value="consulterPersonnage">
@@ -45,13 +45,12 @@
                 </form>
             </section>
 
-
-            <?php include_once $lien; ?>
-            <form action="index.php" method="get" class="footer">
-                <button type="submit" name="ctrl" value="creation" id="dialogQuitter" class=button-rouge>Quitter</button>
-            </form>
-
-
+            <div class="flex-col">
+                <?php include_once $lien; ?>
+                <form action="index.php" method="get" class="footer">
+                    <button type="submit" name="ctrl" value="creation" id="dialogQuitter" class=button-rouge>Quitter</button>
+                </form>
+            </div>
         </section>
 </body>
 <script src="./view/js/popup.js"></script>
