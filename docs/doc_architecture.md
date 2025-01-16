@@ -1,7 +1,7 @@
 # Architecture serveur de l'application
 L'application utilise deux machines serveurs, des machines virtuelles présentes sur assr ayant pour ip respectives :
-192.168.14.118 : serveur postgres et dépot des images.
-192.168.14.126 : héberge le serveur apache contenant l'application.
+192.168.14.118 : serveur postgres et dépot des images.  
+192.168.14.126 : héberge le serveur apache contenant l'application.  
 
 ### Spécifications du serveur web
 La configuration du serveur se trouve dans un fichier spécifique : /etc/apache2/sites-available/rezisten.conf
@@ -9,13 +9,13 @@ La configuration du serveur se trouve dans un fichier spécifique : /etc/apache2
 
 ### Spécifications du serveur postgres/images
 La base de donnée est accessible en local et depuis le serveur web uniquement. Etant donnée les mesures de sécurité
-un seul utilisateur peut accéder à la base de donnée dont voici les identifiants : 
-user : superrezi
-password : 2o*R4ZisT3n%25
-
-La base de donnée a pour nom rezisten, deux commandes peuvent y accéder : 
-psql -h 192.168.14.118 -U superrezi rezisten => depuis le serveur web
-psql -h localhost -U superrezi rezisten  => en local
+un seul utilisateur peut accéder à la base de donnée dont voici les identifiants :   
+user : superrezi  
+password : 2o*R4ZisT3n%25  
+  
+La base de donnée a pour nom rezisten, deux commandes peuvent y accéder :   
+psql -h 192.168.14.118 -U superrezi rezisten => depuis le serveur web  
+psql -h localhost -U superrezi rezisten  => en local  
 
 
 
@@ -36,9 +36,9 @@ Au minimum 1 serveur et au maximum 3 serveurs sont requis. Il y a 3 structures p
 
 ### A- Installer le serveur web
 Une fois apache installé, il faudra créer un fichier de configuration lié au dossier /var/www/html (on suppose que seule cette application tourne sur le serveur web)
-Voici les commandes à suivre : 
-cd /etc/apache2/sites-available/
-cat default-ssl.conf >> rezisten.conf 
+Voici les commandes à suivre :   
+cd /etc/apache2/sites-available/  
+cat default-ssl.conf >> rezisten.conf   
 
 Il faudra ensuite éditer ce fichier en remplaçant ServerAdmin par l'e-mail de votre choix.
 On suppose, pour des raisons de sécurité, que ce site tournera en https uniquement, il faut alors remplacer ":80" par ":443"
