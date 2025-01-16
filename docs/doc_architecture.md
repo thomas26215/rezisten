@@ -1,5 +1,5 @@
 # Architecture serveur de l'application
-L'application utilise deux machines serveurs, des machines virtuelles présentes sur assr ayant pour ip respectives :
+L'application utilise deux machines serveurs, des machines virtuelles présentes sur assr ayant pour ip respectives :  
 192.168.14.118 : serveur postgres et dépot des images.  
 192.168.14.126 : héberge le serveur apache contenant l'application.  
 
@@ -45,23 +45,23 @@ On suppose, pour des raisons de sécurité, que ce site tournera en https unique
 
 Les règles SSLCertificateFile et SSLCertificateKeyFile doivent être remplacés par les chemins absolus de votre certificat et de votre clé (Se référer à un guide pour réaliser un certificat autosigné).
 
-Une fois ce fichier complété, il faut activer le site avec :
-a2ensite rezisten.conf
-systemctl restart apache2
+Une fois ce fichier complété, il faut activer le site avec :  
+a2ensite rezisten.conf  
+systemctl restart apache2  
 
 Si tout s'est bien passé, vous pouvez accéder à votre site avec : https://[votreip] qui devrait afficher le fichier index.html
 
 Il faut ensuite récupérer les données du site sur le dépôt git avec le lien : https://gricad-gitlab.univ-grenoble-alpes.fr/iut2-info-stud/2024-s3/s3.01/team-11/rendus.git
 Pour ce faire suivez les commandes suivantes : 
-cd /var/www/html
-git clone [lien_https_du_dossier_au_dessus]
+cd /var/www/html  
+git clone [lien_https_du_dossier_au_dessus]  
+scp rendus/code/index.php .  
+scp -r rendus/code/* .  
+rm index.html  
+rm -r rendus/  
 
-Entrez vos identifiants gricad. Normalement le dossier "rendus" existe dans /var/www/html maintenant.
-Il faut déplacer les données à la racine du site donc utiliser la commande : scp rendus/* .
-Si toutes les données du site sont maintenant dans "html", vous pouvez utiliser la commande rm -r rendus/. Le site est maintenant prêt.
+Entrez vos identifiants gricad. Normalement le dossier "rendus" existe dans /var/www/html maintenant. Le dossier doit seulemnent contenir les fichiers et sous-dossiers présents dans rendus/code/ initialement
 En accédant à https://[ip_votre_serveur] vous devriez être envoyé vers l'index qui affiche "Se connecter" ou "Créer un compte".
-
-
 	
 ### B- Installer la BDD
 Maintenant que le serveur web est prêt, il faut lui permettre d'accéder aux données. Sur le même serveur ou sur un serveur distant, installez postgres. Faites la configuration voulue de /etc/postgresql/15/main/postgresql.conf, notamment concernant le paramètre listen_addresses.
