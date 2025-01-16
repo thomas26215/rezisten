@@ -100,11 +100,12 @@ Les liens sont gérés ensuite dans le code.
 Pour clarifier tout cela, voici une liste des fichiers et/ou dossiers nécessaires au fonctionnement de l'application sur chaque serveur.
 
 #### Serveur web
-**/etc/apache2/sites-available/rezisten.conf** => configuration apache du serveur
+**/etc/apache2/sites-available/rezisten.conf** => configuration apache du serveur  
 	      **/sites-enabled**
 #FIXME : AJOUTER UNE IMAGE ICI
 **/var/www/html/** => contient le code de l'application récupéré sur le dépôt git
 
 #### Serveur Base de donnée et images
-**/etc/postgresql/15/main/pg_hba.conf**  => configuration de postgres (voir illustrations plus haut)
+**/etc/postgresql/15/main/pg_hba.conf**  => configuration de postgres (voir illustrations plus haut)  
 		         **/postgres.conf**
+**/var/www/html/rezisten/** => contient les images et fichiers audios des histoires et de l'application en général
