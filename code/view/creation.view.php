@@ -38,7 +38,7 @@
 
                     <div class="inputs flex-col">
                         <label for="lieux">Lieux : </label>
-                        <div class="flex-row inputsRow">
+                        <div class="inputsRow">
                             <select id="lieux" name="lieux">
                                 <?php foreach ($lieux as $lieu): ?>
                                     <option value="<?= $lieu->getId() ?>" <?= $lieu->getId() == $histoire->getPlace()->getId() ? 'selected' : '' ?>>
@@ -50,16 +50,16 @@
                                     alt="informations" id="info"></a>
                         </div>
                     </div>
-                    <div class="inputs flex-col">
-                        <label for="personnages">Personnages :</label>
-                        <a  href="./index.php?ctrl=personnages"><button class="personnage button-gris">Consulter les
-                                personnages</button></a>
-                    </div>
+
                     <input type="hidden" name="id_lieu" id="id_lieu" value="">
                     <button>Sauvegarder</button>
                 </form>
 
-
+                <div class="inputs flex-col">
+                    <label for="personnages">Personnages :</label>
+                    <a href="./index.php?ctrl=personnages"><button class="personnage button-gris">Gérer les
+                            personnages</button></a>
+                </div>
             </section>
 
             <div class="containerBox">

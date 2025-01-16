@@ -9,7 +9,6 @@ body {
   display: flex;
   height: max-content;
   gap: 5px;
-
   padding: 5px 3vw ;
 
 }
@@ -18,9 +17,8 @@ body {
   display: flex;
   flex-direction: column;
   text-align: center;
-  justify-content: space-between;
   align-items: center;
-  gap: 2rem;
+  gap: 5rem;
   width: 34vw;
   height: 80vh;
 }

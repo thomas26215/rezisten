@@ -3,7 +3,7 @@
     <link rel="stylesheet" href="./view/design/ajouterDialogue.css">
 </head>
 <article class="content"> 
-    <form action="creation" method="get">
+    <form class="flex-col" action="creation" method="get">
         <input type="hidden" name="ctrl" value="creation">
         <input type="hidden" name="article" value="ajouterDialogue">
         <input type="hidden" name="id" value="<?= $histoire->getId() ?>">
@@ -18,7 +18,7 @@
         </section>
 
         <!-- dialogue -->
-        <section>
+        <section class="flex-col">
             <label for="dialogue">Entrez le texte du dialogue : </label>
             <textarea name="dialogue" id="dialogue"></textarea>
         </section>
