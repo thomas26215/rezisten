@@ -32,8 +32,20 @@
 
                     <div class="inputs flex-col">
                         <label for="titre">Titre : </label>
+<<<<<<< HEAD
                         <input id="titre" type="text" name="titre" value="<?= $titre ?>" required
                             placeholder="Sabotage">
+=======
+
+
+                        <input  type="hidden" name="ctrl" value="creation">
+
+                        <input id="titre" type="text" name="titre" value="<?= $titre ?>" required placeholder="Sabotage">
+
+                        <input type="hidden" name="id" value=<?= $id ?>>
+                        <input type="hidden" name="sauvegarder" value="sauvegarder">
+
+>>>>>>> 18cbac0fb26ec4325590a05495da58413d9eedf5
                     </div>
 
                     <div class="inputs flex-col">
