@@ -9,6 +9,7 @@ $imgURL = "http://localhost:8080/rezisten/imgPersonnage/";
 $characters = Character::readAllCharacters();
 $selectedCharacter = null;
 $errorMessage = null;
+$message = null;
 if (isset($errorMessage)) {
     $view->assign('errorMessage', $errorMessage);
 }
@@ -52,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 throw new Exception("Aucune image valide n'a été téléchargée.");
             }
 
-            // Create new Character instance
+            // Create new Character 
             $creator = User::read($idUser); // Assuming the user ID is stored in the session
 
             if ($creator === null) {
@@ -66,55 +67,64 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errorMessage = $e->getMessage();
         }
     } elseif (isset($_POST['action']) && $_POST['action'] === 'updateCharacter' && isset($_POST['characterId'])) {
-
         // Update the character
         $characterIdToModify = (int) $_POST['characterId'];
         $character = Character::read($characterIdToModify);
         $newFirstName = trim($_POST['firstName']);
-        $newImage = $_FILES['photoUpload'] ?? $character->getImage();
+        $newImageFile = $_FILES['photoUpload'];
+        $newImage = $newImageFile['name'];
+
+        // si personnage pas crée par l'utilisateur il ne peut pas le modifier
+        if ($character->getCreator()->getId() != $idUser) {
+            $errorMessage = "Vous ne pouvez pas modifier ce personnage.";
+        }
+
         // Validate inputs
         if (empty($newFirstName)) {
             $newFirstName = $character->getFirstName();
         }
+        if (empty($newImage)) {
+            $newImage = $character->getImage();
+        }
         $character = Character::read($characterIdToModify);
-        var_dump($newImage);
         if ($character) {
 
-            if ($newImage && is_array($newImage)) {
-                // Define upload path
-                $uploadDirectory = './view/design/image/imageUser/';
-                $fileName = basename($newImage['name']);
-                $filePath = $uploadDirectory . $fileName;
-
-                // Move uploaded file
-                if (!move_uploaded_file($newImage['tmp_name'], $filePath)) {
-                    throw new Exception("Erreur lors du téléchargement de l'image.");
+            if (!empty($newImageFile['name'])) {
+                if ($newImageFile && is_array($newImageFile)) {
+                    // Define upload path
+                    $uploadDirectory = './view/design/image/imageUser/';
+                    $fileName = basename($newImage);
+                    $filePath = $uploadDirectory . $fileName;
+                    // Move uploaded file
+                    if (!move_uploaded_file($newImageFile['tmp_name'], $filePath)) {
+                        throw new Exception("Erreur lors du téléchargement de l'image.");
+                    }
+                    $imageName = $fileName; // mettre fichier dans la db
                 }
-                $imageName = $fileName; // mettre fichier dans la db
             }
 
-            $character->setImage($newImage['name']);
             $character->setFirstName($newFirstName);
-            $character->update();
 
+            $character->setImage($newImage);
 
-
-            $characters = Character::readAllCharacters(); // update list
-
-
-
-
+            if (!isset($errorMessage)) {
+                $character->update();
+                $characters = Character::readAllCharacters(); // update list
+            }
         }
     } elseif (isset($_POST['action']) && $_POST['action'] === 'supprimerPersonnage' && isset($_POST['characterId'])) {
         // Deletion logic triggered by form submission
         $characterIdToDelete = (int) $_POST['characterId'];
-        var_dump($characterIdToDelete);
+        $character = Character::read($characterIdToDelete);
+        if ($character->getCreator()->getId() != $idUser) {
+            $errorMessage = "Vous ne pouvez pas modifier ce personnage.";
+        }
 
-        if (Character::delete($characterIdToDelete)) {
-            $message = "Le personnage a été supprimé avec succès.";
-            $characters = Character::readAllCharacters(); // Refresh character list
-        } else {
-            $message = "Erreur lors de la suppression du personnage.";
+        if (!isset($errorMessage)) {
+            if (Character::delete($characterIdToDelete)) {
+                $message = "Le personnage a été supprimé avec succès.";
+                $characters = Character::readAllCharacters(); // Refresh character list
+            }
         }
     }
 }
@@ -133,5 +143,6 @@ $view->assign('selectedCharacter', $selectedCharacter);
 if (isset($errorMessage)) {
     $view->assign('errorMessage', $errorMessage);
 }
+$view->assign('message', $message);
 $view->display('personnages');
 ?>

@@ -51,7 +51,7 @@
                             $imgSrc = './view/design/image/imageUser/' . ($selectedCharacter->getImage() ?? "default");
                         }
                         ?>
-                        <img src="<?= $imgSrc ?>" alt="<?= $selectedCharacter?->getFirstName() ?? "Jean"; ?>"
+                        <img id="img" src="<?= $imgSrc ?>" alt="<?= $selectedCharacter?->getFirstName() ?? "Jean"; ?>"
                             alt="<?= $selectedCharacter?->getFirstName() ?? "Jean"; ?>" style="max-width: 240px;">
                     </div>
                 </div>
@@ -59,8 +59,15 @@
                 <button type="submit" class="button-vert">Enregistrer les modifications</button>
             </form>
         <?php else: ?>
+            <p><?= $message?></p>
+            <?php if (isset($errorMessage)) {
+            ?> <p><?= $errorMessage?></p><?php
+        }
+        ?>
             <p>Aucun personnage sélectionné. Veuillez en choisir un dans la liste.</p>
         <?php endif; ?>
+        
+
     </div>
 
 </article>
