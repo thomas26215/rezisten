@@ -64,7 +64,11 @@
                     </form>
                 </div>
             </div>
-        <?php else: ?>
+            <?php else: ?>
+            <p><?= $message?></p>
+            <?php if (isset($errorMessage)) {
+            ?> <p><?= $errorMessage?></p><?php
+        }?>
             <p>Aucun personnage sélectionné. Veuillez en choisir un dans la liste.</p>
         <?php endif; ?>
     </div>

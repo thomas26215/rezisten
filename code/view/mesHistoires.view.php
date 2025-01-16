@@ -19,7 +19,7 @@
 
         <?php if (!empty($publishedStories)): ?>
             <div class="histoires">
-                <p class="titres">Publiées :</p>
+                <p class="titres">Sauvegardées :</p>
                 <?php foreach ($publishedStories as $story): ?>
                     <div class="container">
                         <p><?= htmlspecialchars($story->getTitle()) ?></p>
@@ -38,7 +38,7 @@
 
         <?php if (!empty($savedStories)): ?>
             <div class="histoires after">
-                <p class="titres">Sauvegardées :</p>
+                <p class="titres">Publiées :</p>
                 <?php foreach ($savedStories as $story): ?>
                     <div class="container">
                         <p><?= htmlspecialchars($story->getTitle()) ?></p>
