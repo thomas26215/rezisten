@@ -104,7 +104,7 @@ button:hover{
 
 a {
     text-decoration: none;
-    color: white;
+    color: var(--beige-ecriture);
 }
 
 .flex-row {
@@ -129,4 +129,9 @@ select, input, textarea{
 .text-error{
     font-weight: bold;
     color: var(--rouge);
+}
+
+.link{
+    color: #0051db;
+    text-decoration: underline;
 }

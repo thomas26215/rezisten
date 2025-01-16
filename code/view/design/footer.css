@@ -21,6 +21,10 @@ img.img {
 
 }
 
+footer a{
+    text-decoration: underline;
+}
+
 #first-a {
     max-height: var(--height-footer);
     display: flex;
@@ -39,4 +43,5 @@ footer>section ul {
 
 li>a {
     width: fit-content;
+    
 }
