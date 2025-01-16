@@ -10,19 +10,17 @@ require_once("./model/users.class.php");
 $ctrl = $_REQUEST['ctrl'] ?? '';
 
 //Nécessaire de compléter quand on crée une vue pour vérifier que la vue appelée existe bien
-const CTRLS = array('loginAccount', 'createAccount', 'authentification', 'mainNonConnecte', 'main','mesHistoires', 'histoire','question', 'listeChapitre', "listeHistoire", 'creation', 'personnages', 'profil', 'demandeCreateur', 'consulterLieu', 'motdepasseoublie', 'changermotdepasse', 'emailEnvoye');
+const CTRLS = array('loginAccount', 'createAccount', 'authentification', 'mainNonConnecte', 'main','mesHistoires', 'histoire','question', 'listeChapitre', "listeHistoire", 'creation', 'personnages', 'profil', 'demandeCreateur', 'consulterLieu', 'motdepasseoublie', 'changermotdepasse', 'emailEnvoye', 'verifierCompte');
 // Démarre la session
-session_start();
-
 
 if(isset($_SESSION["user_id"])) {
     if(User::read($_SESSION["user_id"]) == null) {
         session_destroy();
-        session_start();
     }
 }
 
 
+session_start();
 
 // On utilise la variable globale $_REQUEST pour récupérer 'ctrl' en GET ou POST
 $ctrl = $_REQUEST['ctrl'] ?? '';
