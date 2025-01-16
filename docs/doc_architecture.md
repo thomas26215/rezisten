@@ -37,8 +37,8 @@ Au minimum 1 serveur et au maximum 3 serveurs sont requis. Il y a 3 structures p
 ### A- Installer le serveur web
 Une fois apache installé, il faudra créer un fichier de configuration lié au dossier /var/www/html (on suppose que seule cette application tourne sur le serveur web)
 Voici les commandes à suivre :   
-cd /etc/apache2/sites-available/  
-cat default-ssl.conf >> rezisten.conf   
+`cd /etc/apache2/sites-available/  `
+`cat default-ssl.conf >> rezisten.conf`   
 
 Il faudra ensuite éditer ce fichier en remplaçant ServerAdmin par l'e-mail de votre choix.
 On suppose, pour des raisons de sécurité, que ce site tournera en https uniquement, il faut alors remplacer ":80" par ":443"
@@ -46,19 +46,19 @@ On suppose, pour des raisons de sécurité, que ce site tournera en https unique
 Les règles SSLCertificateFile et SSLCertificateKeyFile doivent être remplacés par les chemins absolus de votre certificat et de votre clé (Se référer à un guide pour réaliser un certificat autosigné).
 
 Une fois ce fichier complété, il faut activer le site avec :  
-a2ensite rezisten.conf  
-systemctl restart apache2  
+`a2ensite rezisten.conf`  
+`systemctl restart apache2`  
 
 Si tout s'est bien passé, vous pouvez accéder à votre site avec : https://[votreip] qui devrait afficher le fichier index.html
 
 Il faut ensuite récupérer les données du site sur le dépôt git avec le lien : https://gricad-gitlab.univ-grenoble-alpes.fr/iut2-info-stud/2024-s3/s3.01/team-11/rendus.git
 Pour ce faire suivez les commandes suivantes : 
-cd /var/www/html  
-git clone [lien_https_du_dossier_au_dessus]  
-scp rendus/code/index.php .  
-scp -r rendus/code/* .  
-rm index.html  
-rm -r rendus/  
+`cd /var/www/html`  
+`git clone [lien_https_du_dossier_au_dessus]`  
+`scp rendus/code/index.php .`  
+`scp -r rendus/code/* .`  
+`rm index.html`  
+`rm -r rendus/`  
 
 Entrez vos identifiants gricad. Normalement le dossier "rendus" existe dans /var/www/html maintenant. Le dossier doit seulemnent contenir les fichiers et sous-dossiers présents dans rendus/code/ initialement
 En accédant à https://[ip_votre_serveur] vous devriez être envoyé vers l'index qui affiche "Se connecter" ou "Créer un compte".
@@ -70,14 +70,15 @@ Il faut maintenant ouvrir /etc/postgresql/15/main/pg_hba.conf, je conseille d'ut
 
 ![Config pg_hba](./config_pg_hba.png)
 
-On peut alors redémarrer postgres pour appliquer la configuration : systemctl reload postgresql.  
+On peut alors redémarrer postgres pour appliquer la configuration : `systemctl reload postgresql.`  
 Il va maintenant falloir créer l'utilisateur que vous voulez utiliser, le fichier que nous utiliserons après pour exporter la base est prévu pour que l'utilisateur s'appelle superrezi mais vous pouvez le changer. Voici les commandes à utiliser :  
-su - postgres  
-psql   
-CREATE USER superrezi WITH SUPERUSER PASSWORD '[votre_mot_de_passe]';  
+`su - postgres`  
+`psql`   
+`CREATE USER superrezi WITH SUPERUSER PASSWORD '[votre_mot_de_passe]';`  
 
-Nous utilisons ici un superuser ce qui peut être assez dangereux, mais comme les ip sont limitées il est presque impossible que cela pose quelconque problème. Maintenant vous pouvez utiliser le fichier qui est fourni dans le dépôt git : data/dump.sql. Récupérez ce fichier dans le homedir du user postgres. 
-Ensuitez reconnectez vous à la base, changez le format des dates avec la commande : set datestyle = 'ISO, European'; 
+Nous utilisons ici un superuser ce qui peut être assez dangereux, mais comme les ip sont limitées il est presque impossible que cela pose quelconque problème. Maintenant vous pouvez utiliser le fichier qui est fourni dans le dépôt git : data/dump.sql.  
+Récupérez ce fichier dans le homedir du user postgres. 
+Ensuitez reconnectez vous à la base, changez le format des dates avec la commande : `set datestyle = 'ISO, European';`   
 Ensuite on peut créer la base avec les données appropriées, utilisez simplement la commande : \i dump.sql.  
 Toutes les tables devraient être créées avec les données initiales. Dans le cas où les données seraient modifiées, un script tourne une fois par semaine pour recréer ce fichier dump.sql et mettre à jour les données.
 Ce script est : /rendus/code/docs/dump_database. Vous pouvez configurer ce scrips dans crontab ou list-timers en suivant un guide adapté sur internet.  
