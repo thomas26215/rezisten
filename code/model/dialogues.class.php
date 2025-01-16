@@ -377,6 +377,7 @@ class Dialog
                     return false;
                 }
             }
+            
 
             $newId++; // Incrémenter le nouvel ID attendu
         }

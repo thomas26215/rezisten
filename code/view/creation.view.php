@@ -28,12 +28,10 @@
                     <div class="flex-row">
                         <label for="titre">Titre : </label>
 
-                        <input type="hidden" name="ctrl" value="creation">
 
-                        <input type="hidden" name="ctrl" value="creation">
+                        <input  type="hidden" name="ctrl" value="creation">
 
-                        <input id="titre" type="text" name="titre" value="<?= $titre ?>" required
-                            placeholder="Sabotage">
+                        <input id="titre" type="text" name="titre" value="<?= $titre ?>" required placeholder="Sabotage">
 
                         <input type="hidden" name="id" value=<?= $id ?>>
                         <input type="hidden" name="sauvegarder" value="sauvegarder">
