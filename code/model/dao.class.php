@@ -136,13 +136,13 @@ class DAO {
      * @return bool Retourne true si la suppression réussit, false sinon.
      */
     public function deleteDatasById($table, $userId) {
-        return $this->deleteDatas($table, ['id' => $userId]);
+        return $this->delete($table, ['id' => $userId]);
     }
     public function deleteDatasByIdAndType($table, $Id, $type) {
-        return $this->deleteDatas($table, ['id_histoire' => $Id , 'type' => $type]);
+        return $this->delete($table, ['id_histoire' => $Id , 'type' => $type]);
     }
     public function deleteDatasByIds($table, $Idhistoire, $idPerso) {
-        return $this->deleteDatas($table, ['id_histoire' => $Idhistoire , 'id_perso' => $idPerso]);
+        return $this->delete($table, ['id_histoire' => $Idhistoire , 'id_perso' => $idPerso]);
     }
 
 
