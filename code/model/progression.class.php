@@ -125,14 +125,14 @@ class Progression
             ]) === 0) {
                 throw new RuntimeException("Aucune donnée n'a été mise à jour dans la base de données.");
             }
-        } catch (PDOException e) { 
-           throw new RuntimeException("Erreur lors de la mise à jour de la progression : " . e.getMessage(), 0, e); 
+        } catch (PDOException $e) { 
+           throw new RuntimeException("Erreur lors de la mise à jour de la progression : " . $e.getMessage(), 0, $e); 
        } 
    }
 
-   public static function delete(int $id_utilisateur, int $id_history): void
+   public static function delete(int $id_utilisateur, int $id_history): void
    {
-       if ($id_utilisateur <= 0 || $id_history <= 0) { 
+       if ($id_utilisateur <= 0 || $id_history <= 0) { 
            throw new InvalidArgumentException("Les IDs doivent être supérieurs à zéro."); 
        } 
 
@@ -140,28 +140,28 @@ class Progression
            if (!DAO::getInstance()->delete("progression", ["id_utilisateur" => (int)$id_utilisateur, "id_hist" => (int)$id_history])) { 
                throw new RuntimeException("Échec de la suppression de la progression dans la base de données."); 
            } 
-       } catch (PDOException e) { 
-           throw new RuntimeException("Erreur lors de la suppression de la progression : " . e.getMessage(), 0, e); 
+       } catch (PDOException $e) { 
+           throw new RuntimeException("Erreur lors de la suppression de la progression : " . $e.getMessage(), 0, e); 
        } 
    }
 
-   public static function areAllStoriesUnlocked(int $userId, int $chapterId): bool /* Pas testé */
+   public static function areAllStoriesUnlocked(int $userId, int $chapterId): bool /* Pas testé */
    //TODO: A tester
    {
        try { 
            // Récupérer les IDs des histoires dans le chapitre donné.
            $storyIds = Story::getStoryIdsByChapter($chapterId); 
 
-           foreach ($storyIds as $storyId) { 
+           foreach ($storyIds as $storyId) { 
                // Vérifier si chaque histoire est débloquée.
-               $progression = self::read($userId, $storyId); 
+               $progression = self::read($userId, $storyId); 
                if (!$progression || !$progression->getStatus()) { 
                    return false; 
                } 
            } 
 
            return true; // Toutes les histoires sont débloquées.
-       } catch (PDOException e) { 
+       } catch (PDOException $e) { 
            throw new RuntimeException("Erreur lors de la vérification des histoires débloquées : " . e.getMessage(), 0, e); 
        } 
    }

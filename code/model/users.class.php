@@ -133,8 +133,12 @@ class User {
         if (empty($role)) {
             throw new InvalidArgumentException("Le rôle ne peut pas être vide.");
         }
+        if ($role !== 'j' && $role !== 'a' && $role !== 'c') {
+            throw new InvalidArgumentException("Le rôle doit être 'j', 'a', ou 'c'. Cependant, le rôle donné est '" . $role . "'");
+        }
         $this->role = $role;
     }
+
 
     /* --- Méthodes CRUD --- */
 
@@ -154,13 +158,13 @@ class User {
                 throw new RuntimeException("Échec de l'insertion de l'utilisateur dans la base de données.");
             }
 
-            $lastId = $this->dao->getLastInsertId("utilisateurs");
+            $lastId = $this->dao->getLastId("utilisateurs");
             if (empty($lastId) || !isset($lastId[0]["last_id"])) {
                 throw new RuntimeException("Impossible de récupérer l'ID de l'utilisateur créé.");
             }
 
             $this->setId($lastId[0]["last_id"]);
-        } catch(PDOException $e) {
+        } catch(Exception $e) {
             throw new RuntimeException("Erreur lors de la création de l'utilisateur : " . $e->getMessage());
         }
     }
@@ -183,7 +187,7 @@ class User {
                 false,
                 $userData[0]["id"]
             );
-        } catch(PDOException $e) {
+        } catch(Exception $e) {
             throw new RuntimeException("Erreur lors de la lecture de l'utilisateur : " . $e->getMessage());
         }
     }
@@ -206,7 +210,7 @@ class User {
                 false,
                 $userData[0]["id"]
             );
-        } catch(PDOException $e) {
+        } catch(Exception $e) {
             throw new RuntimeException("Erreur lors de la lecture de l'utilisateur : " . $e->getMessage());
         }
     }
@@ -229,7 +233,7 @@ class User {
             if ($result <= 0) {
                 throw new RuntimeException("Aucune mise à jour effectuée pour l'utilisateur avec l'ID : " . $this->getId());
             }
-        } catch(PDOException $e) {
+        } catch(Exception $e) {
             throw new RuntimeException("Erreur lors de la mise à jour de l'utilisateur : " . $e->getMessage());
         }
     }
@@ -243,7 +247,7 @@ class User {
             if (!$result) {
                 throw new RuntimeException("Aucun utilisateur supprimé avec l'ID : $id");
             }
-        } catch(PDOException $e) {
+        } catch(Exception $e) {
             throw new RuntimeException("Erreur lors de la suppression de l'utilisateur : " . $e->getMessage());
         }
     }

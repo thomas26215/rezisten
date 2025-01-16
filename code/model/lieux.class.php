@@ -175,33 +175,33 @@ class Place {
 
         try {
             if ($this->dao->update("lieux", [
-                "nom" =>  $this->name,
-                "type_lieu" =>  $this->place_type,
-                "description" =>  $this->description,
-                "commune" =>  $this->city,
-                "coordonnee" =>  $this->coordinates,
+                "nom" =>  $this->name,
+                "type_lieu" =>  $this->place_type,
+                "description" =>  $this->description,
+                "commune" =>  $this->city,
+                "coordonnee" =>  $this->coordinates,
             ], ["id" => (int)$this->id]) === 0) {
                 throw new RuntimeException("Aucune donnée n'a été mise à jour dans la base de données");
             }
             
-        } catch (PDOException $e) {
-            throw new RuntimeException("Erreur lors de la mise à jour du lieu : " . $e->getMessage(), 0, $e);
-        }
-    }
+        } catch (PDOException $e) {
+            throw new RuntimeException("Erreur lors de la mise à jour du lieu : " . $e->getMessage(), 0, $e);
+        }
+    }
 
-    public static function delete(int $id): void{
-        if ($id <= 0) { 
-            throw new InvalidArgumentException("L'ID doit être supérieur à zéro.");
-        }
+    public static function delete(int $id): void{
+        if ($id <= 0) { 
+            throw new InvalidArgumentException("L'ID doit être supérieur à zéro.");
+        }
 
-        try { 
-            if (!DAO::getInstance()->deleteDatasById("lieux", $id)) { 
-                throw new RuntimeException("Échec de la suppression du lieu dans la base de données");
-            }
-        } catch (PDOException $e) { 
-            throw new RuntimeException("Erreur lors de la suppression du lieu : " . $e->getMessage(), 0, $e);
-        }
-    }
+        try { 
+            if (!DAO::getInstance()->deleteDatasById("lieux", $id)) { 
+                throw new RuntimeException("Échec de la suppression du lieu dans la base de données");
+            }
+        } catch (PDOException $e) { 
+            throw new RuntimeException("Erreur lors de la suppression du lieu : " . $e->getMessage(), 0, $e);
+        }
+    }
 }
 
 ?>

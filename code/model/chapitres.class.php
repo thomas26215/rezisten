@@ -27,9 +27,6 @@ class Chapter
     /* --- Setters --- */
 
     public function setNumChap(int $numchap): void {
-        if ($numchap <= 0) {
-            throw new InvalidArgumentException("Le numéro de chapitre doit être supérieur à zéro.");
-        }
         $this->numchap = $numchap;
     }
 
@@ -47,7 +44,7 @@ class Chapter
         $listChapters = [];
         
         try {
-            $chapters = $dao->getColumnWithParameters("chapitres", []);
+            $chapters = $dao->getWithParameters("chapitres", []);
             foreach ($chapters as $chapData) {
                 $listChapters[] = new Chapter(
                     (int)$chapData['numchap'],
@@ -62,7 +59,7 @@ class Chapter
 
     public function create(): void {
         try {
-            if (!$this->dao->insertRelatedData("chapitres", [
+            if (!$this->dao->insert("chapitres", [
                 "numchap" => $this->numchap,
                 "titre" => $this->title
             ])) {
@@ -74,13 +71,9 @@ class Chapter
     }
 
     public static function read(int $id): ?Chapter {
-        if ($id <= 0) {
-            throw new InvalidArgumentException("L'ID doit être supérieur à zéro.");
-        }
-
         try {
             $dao = DAO::getInstance();
-            if ($chap = $dao->getColumnWithParameters("chapitres", ["numchap" => (int)$id])) {
+            if ($chap = $dao->getWithParameters("chapitres", ["numchap" => (int)$id])) {
                 return new Chapter(
                     (int)$chap[0]['numchap'],
                     (string)$chap[0]['titre']
@@ -110,7 +103,7 @@ class Chapter
         }
 
         try {
-            if (!DAO::getInstance()->deleteDatas("chapitres", ["numchap" => (int)$num_chapter])) {
+            if (!DAO::getInstance()->delete("chapitres", ["numchap" => (int)$num_chapter])) {
                 throw new RuntimeException("Échec de la suppression du chapitre dans la base de données.");
             }
         } catch (PDOException $e) {

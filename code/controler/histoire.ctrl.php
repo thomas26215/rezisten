@@ -88,8 +88,9 @@ function url_exists($url) {
     ]);
 
     $headers = @get_headers($url, 0, $context);
-    return strpos($headers[0], '200') !== false;
+    return $headers && strpos($headers[0], '200') !== false;
 }
+
 // Gestion du background
 $background = $backgroundURL."hist_".$idStory."bg1.webp";
 

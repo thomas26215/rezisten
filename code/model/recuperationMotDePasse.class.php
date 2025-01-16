@@ -123,12 +123,12 @@ class PasswordRecuperation {
             ], ["id" => (int)$this->id]) === 0) {
                 throw new RuntimeException("Aucune donnée n'a été mise à jour dans la base de données.");
             }
-        } catch (PDOException e) { 
-           throw new RuntimeException("Erreur lors de la mise à jour de la récupération de mot de passe : " . e.getMessage(), 0, e); 
+        } catch (PDOException $e) { 
+           throw new RuntimeException("Erreur lors de la mise à jour de la récupération de mot de passe : " . $e.getMessage(), 0, $e); 
        } 
    }
 
-   public static function delete(int $userId): void {
+   public static function delete(int $userId): void {
        if ($userId <= 0) { 
            throw new InvalidArgumentException("L'ID utilisateur doit être supérieur à zéro."); 
        } 
@@ -137,14 +137,14 @@ class PasswordRecuperation {
            if (!DAO::getInstance()->delete("recuperation_mot_de_passe", ["utilisateur_id" => (int)$userId])) { 
                throw new RuntimeException("Échec de la suppression de la récupération de mot de passe dans la base de données."); 
            } 
-       } catch (PDOException e) { 
-           throw new RuntimeException("Erreur lors de la suppression de la récupération de mot de passe : " . e.getMessage(), 0, e); 
+       } catch (PDOException $e) { 
+           throw new RuntimeException("Erreur lors de la suppression de la récupération de mot de passe : " . $e.getMessage(), 0, $e); 
        } 
    }
 
    /* --- Méthodes utilitaires --- */
 
-   public static function generate(int $userId): ?PasswordRecuperation {
+   public static function generate(int $userId): ?PasswordRecuperation {
        try { 
            // Vérifier si l'utilisateur existe
            if (!$user = User::read($userId)) { 
@@ -157,27 +157,27 @@ class PasswordRecuperation {
            // Générer un nouveau token
            $token = self::generateRandomString(10);
            // Créer une nouvelle instance
-           $passwordRecuperation = new PasswordRecuperation($user, $token);
+           $passwordRecuperation = new PasswordRecuperation($user, $token);
 
            // Créer l'entrée dans la base de données
            if ($passwordRecuperation->create()) { 
                // Envoyer l'email
-               (new EmailSender())->sendRecoveryEmail($passwordRecuperation->getUser()->getMail(), $passwordRecuperation->getToken());
+               (new EmailSender())->sendRecoveryEmail($passwordRecuperation->getUser()->getMail(), $passwordRecuperation->getToken());
                return self::read($userId); 
            } else { 
                throw new RuntimeException("Impossible de créer la récupération de mot de passe."); 
            } 
-       } catch (RuntimeException $e) { 
-           throw new RuntimeException("Erreur lors de la génération du token : " . $e.getMessage(), 0, $e); 
+       } catch (RuntimeException $e) { 
+           throw new RuntimeException("Erreur lors de la génération du token : " . $e.getMessage(), 0, $e); 
        } 
    }
 
-   private static function generateRandomString(int $length = 10): string { 
-       return substr(str_shuffle(str_repeat('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / 62))), 1, $length); 
+   private static function generateRandomString(int $length = 10): string { 
+       return substr(str_shuffle(str_repeat('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / 62))), 1, $length); 
    }
 
-   public function checkAndDeleteCode(string $token): void { 
-       if ($this->token !== $token) { 
+   public function checkAndDeleteCode(string $token): void { 
+       if ($this->token !== $token) { 
            throw new RuntimeException("Code invalide."); 
        } 
        self::delete($this->user->getId()); 

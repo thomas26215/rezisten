@@ -144,8 +144,8 @@ class Question
             ]) === 0) {
                 throw new RuntimeException("Aucune donnée n'a été mise à jour dans la base de données.");
             }
-        } catch (PDOException e) { 
-           throw new RuntimeException("Erreur lors de la mise à jour de la question : " . e.getMessage(), 0, e); 
+        } catch (PDOException $e) { 
+           throw new RuntimeException("Erreur lors de la mise à jour de la question : " . $e.getMessage(), 0, $e); 
        } 
    }
 
@@ -159,7 +159,7 @@ class Question
            if (!DAO::getInstance()->deleteDatasByIdAndType("questions", (int)$id, (string)$type)) { 
                throw new RuntimeException("Échec de la suppression de la question dans la base de données."); 
            } 
-       } catch (PDOException e) { 
+       } catch (PDOException $e) { 
            throw new RuntimeException("Erreur lors de la suppression de la question : " . e.getMessage(), 0, e); 
        } 
    }

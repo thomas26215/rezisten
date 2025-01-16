@@ -166,7 +166,7 @@ class Dialog
     public static function read(int $id, int $idStory): ?Dialog
     {
         $dao = DAO::getInstance();
-        $results = $dao->getColumnWithParameters("dialogues", ["id" => $id, "id_histoire" => $idStory]);
+        $results = $dao->getWithParameters("dialogues", ["id" => $id, "id_histoire" => $idStory]);
 
 
 
@@ -207,7 +207,7 @@ class Dialog
     public static function readFirstBonus(int $idStory): int
     {
         $dao = DAO::getInstance();
-        $results = $dao->getColumnWithParameters("dialogues", ["id_histoire" => $idStory, "bonus" => true]);
+        $results = $dao->getWithParameters("dialogues", ["id_histoire" => $idStory, "bonus" => true]);
 
         if (!empty($results)) {
             return $results[0]['id'];
@@ -219,7 +219,7 @@ class Dialog
     {
         $dao = DAO::getInstance();
         // FIXME : sur postgres passer sur "true" au lieu de 1
-        $results = $dao->getColumnWithParameters("dialogues", ["id_histoire" => $idStory, "contenu" => "limquestion"]);
+        $results = $dao->getWithParameters("dialogues", ["id_histoire" => $idStory, "contenu" => "limquestion"]);
 
         // Vérifiez si le tableau n'est pas vide avant d'accéder à l'index 0
         if (!empty($results)) {

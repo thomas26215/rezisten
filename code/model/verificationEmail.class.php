@@ -123,12 +123,12 @@ class CheckEmail {
             ], ["id" => (int)$this->id]) === 0) {
                 throw new RuntimeException("Aucune donnée n'a été mise à jour dans la base de données.");
             }
-        } catch (PDOException e) { 
-           throw new RuntimeException("Erreur lors de la mise à jour de la vérification d'email : " . e.getMessage(), 0, e); 
+        } catch (PDOException $e) { 
+           throw new RuntimeException("Erreur lors de la mise à jour de la vérification d'email : " . $e.getMessage(), 0, $e); 
        } 
    }
 
-   public static function delete(int $userId): void {
+   public static function delete(int $userId): void {
        if ($userId <= 0) { 
            throw new InvalidArgumentException("L'ID utilisateur doit être supérieur à zéro."); 
        } 
@@ -137,47 +137,60 @@ class CheckEmail {
            if (!DAO::getInstance()->delete("verifications_email", ["utilisateur_id" => (int)$userId])) { 
                throw new RuntimeException("Échec de la suppression de la vérification d'email dans la base de données."); 
            } 
-       } catch (PDOException e) { 
-           throw new RuntimeException("Erreur lors de la suppression de la vérification d'email : " . e.getMessage(), 0, e); 
+       } catch (PDOException $e) { 
+           throw new RuntimeException("Erreur lors de la suppression de la vérification d'email : " . $e.getMessage(), 0, $e); 
        } 
    }
 
    /* --- Méthodes utilitaires --- */
 
-   public static function generate(int $userId): ?CheckEmail {
-       try { 
-           // Vérifier si l'utilisateur existe
-           if (!$user = User::read($userId)) { 
-               throw new RuntimeException("Utilisateur non trouvé."); 
-           } 
+   public static function isUserCodeDefined(int $id): bool {
+        return CheckEmail::read($id) !== null;
+    }
 
-           // Supprimer les anciennes vérifications
-           self::delete($userId);
-           
-           // Générer un nouveau token
-           $token = self::generateRandomString(10);
-           // Créer une nouvelle instance
-           $checkEmail = new CheckEmail($user, $token);
+   
 
-           // Créer l'entrée dans la base de données
-           if ($checkEmail->create()) { 
-               // Envoyer l'email
-               (new EmailSender())->welcome($checkEmail->getUser()->getMail(), $checkEmail->getToken());
-               return self::read($userId); 
-           } else { 
-               throw new RuntimeException("Impossible de créer la vérification d'email."); 
-           } 
-       } catch (RuntimeException $e) { 
-           throw new RuntimeException("Erreur lors de la génération du token : " . $e.getMessage(), 0, $e); 
-       } 
+
+    public static function generate(int $userId): ?CheckEmail {
+        try { 
+            // Vérifier si l'utilisateur existe
+            $user = User::read($userId);
+            if (!$user) { 
+                throw new RuntimeException("Utilisateur non trouvé."); 
+            } 
+
+            // Supprimer les anciennes vérifications
+            try {
+                self::delete($userId);
+            } catch (RuntimeException $e) {
+                // Ignorer l'erreur si la suppression échoue
+                // On pourrait ajouter un log ici si nécessaire
+            }
+
+            // Générer un nouveau token
+            $token = self::generateRandomString(10);
+            
+            // Créer une nouvelle instance
+            $checkEmail = new CheckEmail($user, $token);
+
+            // Créer la vérification et envoyer l'email
+            $checkEmail->create();
+            (new EmailSender())->welcome($user->getMail(), $token);
+            
+            return self::read($userId);
+
+        } catch (RuntimeException $e) { 
+            throw new RuntimeException("Erreur lors de la génération du token : " . $e->getMessage(), 0, $e); 
+        } 
+    }
+
+
+   private static function generateRandomString(int $length = 10): string { 
+       return substr(str_shuffle(str_repeat('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / 62))), 1, $length); 
    }
 
-   private static function generateRandomString(int $length = 10): string { 
-       return substr(str_shuffle(str_repeat('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / 62))), 1, $length); 
-   }
-
-   public function checkAndDeleteCode(string $token): void { 
-       if ($this->token !== $token) { 
+   public function checkAndDeleteCode(string $token): void { 
+       if ($this->token !== $token) { 
            throw new RuntimeException("Code email invalide."); 
        } 
        self::delete($this->user->getId()); 
