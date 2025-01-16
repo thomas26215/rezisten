@@ -65,7 +65,7 @@ if (isset($_GET['article']) && $_GET['article'] === 'ajouterDialogue' && isset($
         $dialogue->create();
 
         // Redirection après l'ajout du dialogue
-        header("Location: creation?ctrl=creation&article=ajouterDialogue&id=" . $histoire->getId());
+        header("Location: index.php?ctrl=creation&article=ajouterDialogue&id=" . $histoire->getId());
         exit();
     } else {
         // Handle the case where the character is not found
