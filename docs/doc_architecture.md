@@ -79,7 +79,7 @@ Il va maintenant falloir créer l'utilisateur que vous voulez utiliser, le fichi
 Nous utilisons ici un superuser ce qui peut être assez dangereux, mais comme les ip sont limitées il est presque impossible que cela pose quelconque problème. Maintenant vous pouvez utiliser le fichier qui est fourni dans le dépôt git : data/dump.sql.  
 Récupérez ce fichier dans le homedir du user postgres. 
 Ensuitez reconnectez vous à la base, changez le format des dates avec la commande : `set datestyle = 'ISO, European';`   
-Ensuite on peut créer la base avec les données appropriées, utilisez simplement la commande : \i dump.sql.  
+Ensuite on peut créer la base avec les données appropriées, utilisez simplement la commande : `\i dump.sql;`  
 Toutes les tables devraient être créées avec les données initiales. Dans le cas où les données seraient modifiées, un script tourne une fois par semaine pour recréer ce fichier dump.sql et mettre à jour les données.
 Ce script est : /rendus/code/docs/dump_database. Vous pouvez configurer ce scrips dans crontab ou list-timers en suivant un guide adapté sur internet.  
 
@@ -90,65 +90,21 @@ Si tout se passe bien votre serveur base de données est prêt. Il faut simpleme
 
 ### C- Installer les fichiers utilisés par l'application
 Pour ce qui est des images et fichiers audios utilisés, nous avons décidé de les mettre sur le serveur postgres pour alléger l'application. Vous pouvez très bien configurer un autre serveur web qui contiendra uniquement ces fichiers. Le dossier à mettre sur le serveur web est rendus/rezisten/, il contient les images et fichiers audios.  
-Il faudra par la suite modifier dans le code tous les endroits où sont utilisés l'adresse : https://192.168.14.118/rezisten/x pour donner le bon lien. Pour cela vous avez le script rendus/code/docs/update_links qui s'occupe de remplacer tous ces liens. Si une image ou un fichier audio ne charge pas, vérifiez à la main que le lien demandé mène bien quelque part.
+Il faudra par la suite modifier dans le code tous les endroits où est utilisée l'adresse : https://192.168.14.118/rezisten/x pour donner le bon lien. Pour cela vous avez le script rendus/code/docs/update_links qui s'occupe de remplacer tous ces liens. Si une image ou un fichier audio ne charge pas, vérifiez à la main que le lien demandé mène bien quelque part.
 
-Vous pouvez ensuite placer le dossier où vous le souhaitez mais de manière classique nous proposons :  
+Vous pouvez ensuite placer le dossier où vous le souhaitez mais de manière classique nous proposons d'accéder aux images et audios avec :  
 https://[ip_machine]/rezisten/  
 Les liens sont gérés ensuite dans le code.
 
 ## 2- Résumé 
-Pour clarifier tout cela, voici un schéma des structures des deux serveurs avec les fichiers contenus
+Pour clarifier tout cela, voici une liste des fichiers et/ou dossiers nécessaires au fonctionnement de l'application sur chaque serveur.
+
 #### Serveur web
-/  
-|  
-|-etc  
-|   |-systemd  
-|   |	|-system   
-|   |	    |  
-|   |	    |-security-rezisten.service  
-|   |	    |-security-rezisten.timer  
-|   |  
-|   |-apache2 => config de apache  
-|  
-|  
-|             	    	
-|  
-|-usr  
-|  |-local  
-|      |-bin  
-| 	  |-security-rezisten => script maj de sécurité  
-|  
-|-var  
-|  |-www  
-|     |-html => contient le code de l'application  
+**/etc/apache2/sites-available/rezisten.conf** => configuration apache du serveur
+	      **/sites-enabled**
+#FIXME : AJOUTER UNE IMAGE ICI
+**/var/www/html/** => contient le code de l'application récupéré sur le dépôt git
 
 #### Serveur Base de donnée et images
-/  
-|   
-|-etc   
-|   |-systemd   
-|   |   |-system  
-|   |       |  
-|   |       |-security-rezisten.service => màj de sécurité  
-|   |       |-security-rezisten.timer   
-|   |       |-dump_database.service => màj de la base de donnée  
-|   |       |-dump_database.timer   
-|   |  
-|   |-apache2 => config de apache  
-|   |  
-|   |-postgresql  
-|         |-15  => configuration de postgresql15  
-|  
-|  
-|-usr  
-|  |-local  
-|      |-bin  
-|         |-security-rezisten => script maj de sécurité  
-|         |-dump_database => script mettant à jour la base de donnée  
-|  
-|-var   
-|  |-www    
-|     |-html  
-         |-rezisten => contient images et fichiers audios  
-
-
+**/etc/postgresql/15/main/pg_hba.conf**  => configuration de postgres (voir illustrations plus haut)
+		         **/postgres.conf**
