@@ -68,6 +68,7 @@ Maintenant que le serveur web est prêt, il faut lui permettre d'accéder aux do
 Vous pouvez mettre ce paramètre de la façon suivante : listen_addresses = '*'. Nous limiterons les adresses ip dans le prochain fichier de configuration.
 Il faut maintenant ouvrir /etc/postgresql/15/main/pg_hba.conf, je conseille d'utiliser la configuration comme sur la capture suivante, **bien remplacer l'IPv4 par celle de votre serveur**.
 
+![alt text](./config_pg_hba)
 
 
 \i create.sql
