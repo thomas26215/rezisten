@@ -49,8 +49,11 @@
                                 </option>
                             <?php endforeach; ?>
                         </select>
-                        <a href="./consulterLieu.view.php"><img src="./view/design/image/info.png" alt="informations"
-                                id="info"></a>
+
+                    <a href="./index.php?ctrl=consulterLieu&id=<?= $histoire->getPlace()->getId() ?>">
+                        <img src="./view/design/image/info.png" alt="informations" id="info">
+                    </a>
+
                     </div>
                     <input type="hidden" name="id_lieu" id="id_lieu" value="">
                     <button>Sauvegarder</button>
