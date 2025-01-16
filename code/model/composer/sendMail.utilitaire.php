@@ -22,11 +22,11 @@ class EmailSender {
         $this->mail->isSMTP();
         $this->mail->Host = "smtp.gmail.com";
         $this->mail->SMTPAuth = true;
-        $this->mail->Username = "venouilthomas123456@gmail.com";
-        $this->mail->Password = "fvmb zele kayh ynej";
+        $this->mail->Username = "rezisten.contact@gmail.com";
+        $this->mail->Password = "ovvs sfdd yuiq lpkv";
         $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $this->mail->Port = 587;
-        $this->mail->setFrom("venouilthomas123456@gmail.com", "rezisten");
+        $this->mail->setFrom("rezisten.contact@gmail.com", "rezisten");
     }
 
     public function setDestination(string $destination) {
@@ -122,7 +122,7 @@ class EmailSender {
                     
                     <p>Une fois qu'il a ce code, il pourra t'aider à réinitialiser ton mot de passe.</p>
 
-                    <a href="{$link}" style="display:block;background-color:#33553d;color:white;padding:10px;text-decoration:none;text-align:center;">
+                    <a href="http://localhost/rendus/code/index.php?ctrl=changermotdepasse" style="display:block;background-color:#33553d;color:white;padding:10px;text-decoration:none;text-align:center;">
                     RÉINITIALISER MON MOT DE PASSE</a>
                 </div>
                 

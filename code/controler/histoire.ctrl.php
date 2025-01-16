@@ -78,8 +78,24 @@ if ($dialog === null) {
         $view->display('finHistoire');
     
 }
+
+function url_exists($url) {
+    $context = stream_context_create([
+        "ssl" => [
+            "verify_peer" => false,
+            "verify_peer_name" => false
+        ]
+    ]);
+
+    $headers = @get_headers($url, 0, $context);
+    return strpos($headers[0], '200') !== false;
+}
 // Gestion du background
 $background = $backgroundURL."hist_".$idStory."bg1.webp";
+
+if(!url_exists($background)){
+    $background = $backgroundURL."default_background.webp";
+}
 // Permet de vérifier quel background est stocké dans la session si on change subitement d'histoire
 if(isset($_SESSION['background'])){
     $bgSession = explode('_',$_SESSION['background']);

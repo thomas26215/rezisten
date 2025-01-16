@@ -1,7 +1,5 @@
 <article class="content">
 
-    <h2 class="titre">Consulter un personnage</h2>
-
     <form method="post" action="index.php?ctrl=personnages&article=consulterPersonnage" class="articleContainer">
         <div class="personnage">
             <input type="hidden" name="ctrl" value="personnages">

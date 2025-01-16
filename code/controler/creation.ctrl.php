@@ -22,7 +22,7 @@ if (!isset($_GET['id'])) { // si l'histoire n'existe pas
         Chapter::read(100),
         User::read($idUser), // changer par id de cette user
         Place::read(1),
-        "../view/design/image/background_story.png",
+        "default_background.webp",
         false
     );
     $histoire->create();
