@@ -24,10 +24,7 @@
         <section class="container">
             <section class="header">
 
-
-
-
-                <form action="creation" method="get" class="flex-row">
+            <form action="creation" method="get" class="flex-row">
                     <div class="flex-row">
                         <label for="titre">Titre : </label>
 
@@ -38,9 +35,6 @@
 
                         <input type="hidden" name="id" value=<?= $id ?>>
                         <input type="hidden" name="sauvegarder" value="sauvegarder">
-
-
-
 
                     </div>
 
@@ -110,6 +104,7 @@
             <?php include_once 'popup.view.php'; ?>
         </section>
         <script src="./js/popup.js"></script>
+    </main>
 </body>
 <script src="./js/dyslexique.js"></script>
 
@@ -138,7 +133,4 @@
         document.getElementById('lieux').addEventListener('change', updateHiddenField);
     };
 </script>
-
-
-
 </html>
