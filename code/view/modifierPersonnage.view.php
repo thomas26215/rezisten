@@ -2,7 +2,7 @@
 
     <div class="articleContainer">
 
-        <form method="post" action="index.php?ctrl=personnages&article=modifierPersonnage&id=<?= $id ?>" class="articleContainer"
+        <form method="post" action="index.php?ctrl=personnages&article=modifierPersonnage&id=<?= $id ?>" class=""
             enctype="multipart/form-data">
             <div class="personnage">
                 <label for="personnage">Personnage à modifier : </label>

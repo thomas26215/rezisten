@@ -2,7 +2,8 @@
 
     <div class="articleContainer">
 
-        <form method="post" action="index.php?ctrl=personnages&article=supprimerPersonnage&id=<?= $id ?>" class="articleContainer">
+        <form method="post" action="index.php?ctrl=personnages&article=supprimerPersonnage&id=<?= $id ?>"
+            class="">
             <input type="hidden" name="ctrl" value="personnages">
             <input type="hidden" name="action" value="selectCharacter">
             <div class="personnage">
@@ -27,7 +28,7 @@
                 </div>
             </div>
 
-            <div class="supContainer">
+            <div class="supContainer imageButton">
                 <?php
                 $imgSrc = '';
                 if ($selectedCharacter && $selectedCharacter->getCreator()->getId() == 4) {
@@ -63,11 +64,12 @@
                     </form>
                 </div>
             </div>
-            <?php else: ?>
-            <p><?= $message?></p>
+        <?php else: ?>
+            <p><?= $message ?></p>
             <?php if (isset($errorMessage)) {
-            ?> <p><?= $errorMessage?></p><?php
-        }?>
+                ?>
+                <p><?= $errorMessage ?></p><?php
+            } ?>
             <p>Aucun personnage sélectionné. Veuillez en choisir un dans la liste.</p>
         <?php endif; ?>
     </div>

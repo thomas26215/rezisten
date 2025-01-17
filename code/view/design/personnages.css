@@ -41,6 +41,12 @@ section.header {
   max-width: 60vw;
   margin: 0;
   height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  box-sizing: border-box;
+  padding: 50px;
 }
 
 section.footer {
@@ -86,7 +92,10 @@ section.header button {
 .articleContainer {
   display: flex;
   flex-direction: column;
+  gap: 2rem;
+  height: 60vh;
   padding: 50px;
+  box-sizing: border-box;
 }
 
 .noms {
@@ -176,4 +185,8 @@ section.header button {
 
 .bottomContainer {
   gap: 2rem;
+}
+
+.imageButton {
+  gap: 3rem;
 }
