@@ -11,9 +11,9 @@ include_once('./model/users.class.php');
 
 
 // Récupération des données de la query string et initialisation de variables
-$idStory = $_GET['idStory'];
-$idDialog = $_GET['idDialog'];
-$prevSpeaker = $_GET['prevSpeaker'] ?? "none";
+$idStory = htmlspecialchars($_GET['idStory']);
+$idDialog = htmlspecialchars($_GET['idDialog']);
+$prevSpeaker = htmlspecialchars($_GET['prevSpeaker']) ?? "none";
 $_SESSION['lastDialog'] = $idDialog;
 
 var_dump($_GET);

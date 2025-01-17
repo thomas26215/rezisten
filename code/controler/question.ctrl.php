@@ -8,7 +8,7 @@ include_once('./model/dao.class.php');
 include_once('./model/dialogues.class.php');
 
 
-$action = $_GET['action'];
+$action = htmlspecialchars($_GET['action']);
 $view = new View();
 
 // Liens vers les audios/images, à modifier en fonction de l'emplacement
@@ -41,7 +41,7 @@ if ($action === "change") {
 }
 // Autre cas de la soumission d'une réponse. On récupère la question en fonction de la difficulté choisie et on vérifie si la réponse est correcte.
 elseif ($action == "answer") {
-    $answer = $_GET['answer'];
+    $answer = htmlspecialchars($_GET['answer']);
     $firstbonus = Dialog::readFirstBonus($_SESSION['idStory']);
 
     $questionType = ($_SESSION['difficulty'] == "générique") ? 'g' : 's';
@@ -71,7 +71,7 @@ elseif ($action == "answer") {
 
         $view->assign('prevSpeaker', $_SESSION['prevSpeaker']);
         $view->assign('dialLimit', $dialLimit);
-        $view->assign('background', $_GET['background']);
+        $view->assign('background', htmlspecialchars($_GET['background']));
         $view->assign('firstbonus', $firstbonus);
         $view->assign('dub', $dub);
         $view->assign('imgSpeaker', $imgSpeaker);
