@@ -16,7 +16,6 @@
 textarea{ /* Pour la partie du dialogue */
     height: 20vh;
     width: 55vw;
-
 }
 
 .content form :last-child{ /* Pour la partie du dialogue */
