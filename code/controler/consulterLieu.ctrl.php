@@ -2,7 +2,7 @@
 include_once('./model/lieux.class.php');
 include_once('framework/view.fw.php');
 
-$id=$_GET['id'];
+$id=htmlspecialchars($_GET['id']);
 $place = Place::read($id); // mettre l'id du lieu en foction de l'histoire
 
 $coordinates = explode(',',$place->getCoordinates());

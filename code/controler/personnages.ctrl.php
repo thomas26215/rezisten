@@ -4,7 +4,7 @@ include_once('./model/personnages.class.php');
 include_once('./model/users.class.php');
 include_once('framework/view.fw.php');
 
-$id = $_GET['id'];
+$id=htmlspecialchars($_GET['id']);
 
 $imgURL = "http://localhost:8080/rezisten/imgPersonnage/";
 
@@ -135,7 +135,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$article = $_GET['article'] ?? 'consulterPersonnage';
+$article = htmlspecialchars($_GET['article']) ?? 'consulterPersonnage';
 
 //Autres variables
 $lien = "./view/" . $article . ".view.php";

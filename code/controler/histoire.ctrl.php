@@ -11,11 +11,10 @@ include_once('./model/users.class.php');
 
 
 // Récupération des données de la query string et initialisation de variables
-$idStory = $_GET['idStory'];
-$idDialog = $_GET['idDialog'];
-$prevSpeaker = $_GET['prevSpeaker'] ?? "none";
+$idStory = htmlspecialchars($_GET['idStory']);
+$idDialog = htmlspecialchars($_GET['idDialog']);
+$prevSpeaker = htmlspecialchars($_GET['prevSpeaker']) ?? "none";
 $_SESSION['lastDialog'] = $idDialog;
-
 
 
 $imgURL = "https://localhost:8080/rezisten/imgPersonnage/";
@@ -122,7 +121,7 @@ if($story->getChapter()->getNumchap() != 100){
         $view->display('question');
 }
 
-}else{
+}elseif($dialog->getContent() == "limquestion"){
     $question = Question::read($idStory,'g');
     $_SESSION['idStory'] = $idStory;
     $_SESSION['idDialog'] = $idDialog;
