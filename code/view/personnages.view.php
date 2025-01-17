@@ -100,66 +100,67 @@
     });
 
 
-    /* pop-up supprimer */
-    //
-    const openSupprimer = document.getElementById("supprimerOuvrir");
-    const fermerSupprmier = document.getElementById("fermerSupprimer");
-    const revenirSupprimer = document.getElementById("revenirSupprimer");
-    const idDialogue1 = document.getElementById("dialogSupprimer");
-    //
-    /* Ouvir */
-    openSupprimer.addEventListener("click", () => {
-        idDialogue1.showModal();
-    });
-    /* ferme */
-    fermerSupprmier.addEventListener("click", () => {
-        idDialogue1.close();
-    });
-    /* Action + ferme */
-    revenirSupprimer.addEventListener("click", () => {
-        idDialogue1.close();
-    });
+    document.addEventListener('DOMContentLoaded', function () {
+        // Supprimer personnage
+        var supprimerOuvrir = document.getElementById('supprimerOuvrir');
+        var dialogSupprimer = document.getElementById('dialogSupprimer');
+        var fermerSupprimer = document.getElementById('fermerSupprimer');
+        var revenirSupprimer = document.getElementById('revenirSupprimer');
 
-    /* pop-up modifier */
-    //
-    const openModifier = document.getElementById("modifierOuvrir");
-    const fermerModifier = document.getElementById("fermerModifier");
-    const revenirModifier = document.getElementById("revenirModifier");
-    const idDialogue2 = document.getElementById("dialogModifier");
-    //
-    /* Ouvir */
-    openModifier.addEventListener("click", () => {
-        console.log("test");
-        idDialogue2.showModal();
-    });
-    /* ferme */
-    fermerModifier.addEventListener("click", () => {
-        idDialogue2.close();
-    });
-    /* Action + ferme */
-    revenirModifier.addEventListener("click", () => {
-        idDialogue2.close();
-    });
-    /* Pop-up Ajouter*/
-    const openAjouter = document.getElementById("ajouterOuvrir");
-    const fermerAjouter = document.getElementById("fermerAjouter");
-    const RevenirAjouter = document.getElementById("revenirAjouter");
-    const idDialogue3 = document.getElementById("dialogAjouter");
-    //
+        if (supprimerOuvrir && dialogSupprimer && fermerSupprimer && revenirSupprimer) {
+            supprimerOuvrir.addEventListener('click', function () {
+                dialogSupprimer.showModal();
+            });
 
-    /* Ouvir */
-    openAjouter.addEventListener("click", () => {
-        idDialogue3.showModal();
-    });
-    /* ferme */
-    fermerAjouter.addEventListener("click", () => {
-        idDialogue3.close();
-    });
-    /* Action + ferme */
-    RevenirAjouter.addEventListener("click", () => {
-        idDialogue3.close();
-    });
+            fermerSupprimer.addEventListener('click', function () {
+                dialogSupprimer.close();
+            });
 
+            revenirSupprimer.addEventListener('click', function () {
+                dialogSupprimer.close();
+            });
+        }
+
+        // Ajouter personnage
+        var ajouterOuvrir = document.getElementById('ajouterOuvrir');
+        var dialogAjouter = document.getElementById('dialogAjouter');
+        var fermerAjouter = document.getElementById('fermerAjouter');
+        var revenirAjouter = document.getElementById('revenirAjouter');
+
+        if (ajouterOuvrir && dialogAjouter && fermerAjouter && revenirAjouter) {
+            ajouterOuvrir.addEventListener('click', function () {
+                dialogAjouter.showModal();
+            });
+
+            fermerAjouter.addEventListener('click', function () {
+                dialogAjouter.close();
+            });
+
+            revenirAjouter.addEventListener('click', function () {
+                dialogAjouter.close();
+            });
+        }
+
+        // Modifier personnage
+        var modifierOuvrir = document.getElementById('modifierOuvrir');
+        var dialogModifier = document.getElementById('dialogModifier');
+        var fermerModifier = document.getElementById('fermerModifier');
+        var revenirModifier = document.getElementById('revenirModifier');
+
+        if (modifierOuvrir && dialogModifier && fermerModifier && revenirModifier) {
+            modifierOuvrir.addEventListener('click', function () {
+                dialogModifier.showModal();
+            });
+
+            fermerModifier.addEventListener('click', function () {
+                dialogModifier.close();
+            });
+
+            revenirModifier.addEventListener('click', function () {
+                dialogModifier.close();
+            });
+        }
+    });
 </script>
 <script src="./view/js/popup.js"></script>
 <script src="./view/js/dyslexique.js"></script>

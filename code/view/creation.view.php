@@ -25,21 +25,7 @@
         <section class="container">
             <section class="header">
 
-<<<<<<< HEAD
-            <form action="creation" method="get" class="flex-row">
-                    <div class="flex-row">
-                        <label for="titre">Titre : </label>
-
-
-                        <input type="hidden" name="ctrl" value="creation">
-
-                        <input type="text" name="titre" value=<?= $titre ?> required placeholder="Sabotage">
-
-                        <input type="hidden" name="id" value=<?= $id ?>>
-                        <input type="hidden" name="sauvegarder" value="sauvegarder">
-
-=======
-                <form action="creation" method="get" class="formLieu">
+            <form action="creation" method="get" class="formLieu">
                     <input type="hidden" name="ctrl" value="creation">
                     <input type="hidden" name="id" value=<?= $id ?>>
                     <input type="hidden" name="sauvegarder" value="sauvegarder">
@@ -48,8 +34,7 @@
                         <label for="titre">Titre : </label>
                         <input id="titre" type="text" name="titre" value="<?= $titre ?>" required
                             placeholder="Sabotage">
->>>>>>> 896805e1d90821bcd8612f1b08e19392fa1438cd
-                    </div>
+
 
                     <div class="inputs flex-col">
                         <label for="lieux">Lieux : </label>
@@ -73,8 +58,8 @@
 
                 <div class="inputs flex-col">
                     <label for="personnages">Personnages :</label>
-                    <a href="./index.php?ctrl=personnages&id=<?= $id ?>">
-                        <button class="personnage button-gris">Gérer
+                    <a href="./index.php?ctrl=personnages&article=consulterPersonnage&id=<?= $id ?>">
+                        <button class="personnage button-gris" type="button">Gérer
                             les
                             personnages
                         </button>
@@ -165,8 +150,6 @@
         document.getElementById('lieux').addEventListener('change', updateHiddenField);
     };
 </script>
-<<<<<<< HEAD
-=======
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var currentUrl = window.location.search;
@@ -186,5 +169,4 @@
 
 
 
->>>>>>> 896805e1d90821bcd8612f1b08e19392fa1438cd
 </html>
