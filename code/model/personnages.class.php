@@ -44,17 +44,16 @@ class Character
     // Setters
     public function setId(int $id): void
     {
-        if ($id >= -1) {
-            $this->id = $id;
-        } else {
-            throw new Exception("L'ID doit être supérieur ou égal à -1.");
+        if ($id < -1) {
+            throw new InvalidArgumentException("L'ID doit être supérieur ou égal à -1.");
         }
+        $this->id = $id;
     }
 
     public function setFirstName(string $first_name): void
     {
         if (empty($first_name)) {
-            throw new Exception("Le prénom ne peut pas être vide");
+            throw new InvalidArgumentException("Le prénom ne peut pas être vide.");
         }
         $this->first_name = $first_name;
     }
@@ -62,110 +61,109 @@ class Character
     public function setImage(string $image): void
     {
         if (empty($image)) {
-            throw new Exception("L'image ne peut pas être vide.");
+            throw new InvalidArgumentException("L'image ne peut pas être vide.");
         }
         $this->image = $image;
     }
 
     public function setCreator(User $creator): void
     {
-        if (empty($creator)) {
-            throw new Exception("Le créateurne peut pas être vide");
+        if ($creator === null) {
+            throw new InvalidArgumentException("Le créateur ne peut pas être null.");
         }
         $this->creator = $creator;
     }
 
-
     /* --- Méthodes CRUD --- */
 
-    public function create(): bool
+    public function create(): void
     {
-        if (
-            $this->dao->insertRelatedData("personnages", [
+        try {
+            if (!$this->dao->insert("personnages", [
                 "prenom" => $this->first_name,
                 "img" => $this->image,
-                "createur" => $this->creator->getId()
-            ])
-        ) {
-            $this->setId($this->dao->getLastInsertId("personnages")[0]["last_id"]);
-            return true;
+                "createur" => (int)$this->creator->getId()
+            ])) {
+                throw new RuntimeException("Échec de l'insertion du personnage dans la base de données.");
+            }
+            // Récupérer l'ID de la dernière insertion
+            $this->setId($this->dao->getLastId("personnages")[0]["last_id"]);
+        } catch (PDOException $e) {
+            throw new RuntimeException("Erreur lors de la création du personnage : " . $e->getMessage(), 0, $e);
         }
-        return false;
     }
 
     public static function read(int $id): ?Character
     {
-        $dao = DAO::getInstance();
-        if ($characterData = $dao->getColumnWithParameters("personnages", ["id" => $id])) {
-            $characterDatas = $characterData[0];
-            return new Character(
-                $characterDatas["prenom"],
-                $characterDatas["img"],
-                User::read($characterDatas["createur"]),
-                $characterDatas["id"]
-            );
+        try {
+            $dao = DAO::getInstance();
+            if ($characterData = $dao->getWithParameters("personnages", ["id" => (int)$id])) {
+                return new Character(
+                    (string)$characterData[0]["prenom"],
+                    (string)$characterData[0]["img"],
+                    User::read((int)$characterData[0]["createur"]),
+                    (int)$characterData[0]["id"]
+                );
+            }
+            return null; // Pas d'exception ici, car cela peut être un cas valide.
+        } catch (PDOException $e) {
+            throw new RuntimeException("Erreur lors de la lecture du personnage : " . $e->getMessage(), 0, $e);
         }
-        return null;
     }
 
-/*     public static function readCharactersOfUser(int $userId) : array {
-        $dao = DAO::getInstance();
-        $listCharacters = array();
-
-        $characters = $dao->getColumnWithParameters("personnages", ["createur" => $userId]);
-        if (empty($characters)) {
-            throw new Exception("aucun personnage trouvé");
-        }
-
-        for ($i = 0; $i < sizeof(); $i++) {
-            $creat = User::read($characters[$i]['createur']);
-            $c = new Character($characters[$i]["prenom"], $characters[$i]["img"], $creat, $characters[$i]["id"]);
-            array_push($listCharacters, $c);
-        }
-        return $listCharacters;
-    }
-
-    public function update(): bool
+    public function update(): void
     {
-        if ($this->id !== -1) {
- */
-    public function update(): bool {
-        if($this->id !== -1){
-            return $this->dao->update("personnages", [
+        if ($this->id === -1) {
+            throw new RuntimeException("Impossible de mettre à jour le personnage : L'ID est invalide.");
+        }
+
+        try {
+            if ($this->dao->update("personnages", [
                 "prenom" => $this->first_name,
                 "img" => $this->image,
-                "createur" => $this->creator->getId(),
-            ], ["id" => (int) $this->id]) > 0;
-        }
-        return false;
-    }
+                "createur" => (int)$this->creator->getId(),
+            ], ["id" => (int)$this->id]) === 0) {
+                throw new RuntimeException("Aucune donnée n'a été mise à jour dans la base de données.");
+            }
+        } catch (PDOException $e) { 
+           throw new RuntimeException("Erreur lors de la mise à jour du personnage : " . e.getMessage(), 0, $e); 
+       } 
+   }
 
-    public static function delete($id): bool
-    {
-        if ($id > 0) {
-            return DAO::getInstance()->deleteDatasById("personnages", $id);
-        }
-        return false;
-    }
+   public static function delete(int $id): void
+   {
+       if ($id <= 0) { 
+           throw new InvalidArgumentException("L'ID doit être supérieur à zéro."); 
+       } 
 
-    public static function readAllCharacters(): array
-    {
-        $dao = DAO::getInstance();
-        $listCharacters = array();
-        $characters = $dao->getColumnWithParameters("personnages", []);
-        if (empty($characters)) {
-            throw new Exception("aucun personnage trouvé");
-        }
+       try { 
+           if (!DAO::getInstance()->deleteDatasById("personnages", (int)$id)) { 
+               throw new RuntimeException("Échec de la suppression du personnage dans la base de données."); 
+           } 
+       } catch (PDOException $e) { 
+           throw new RuntimeException("Erreur lors de la suppression du personnage : " . $e.getMessage(), 0, $e); 
+       } 
+   }
 
-        for ($i = 0; $i < sizeof($characters); $i++) {
-            $creat = User::read($characters[$i]['createur']);
-
-            $c = new Character($characters[$i]['prenom'], $characters[$i]['img'], $creat, $characters[$i]['id']);
-            array_push($listCharacters, $c);
-        }
-
-        return $listCharacters;
-
-    }
+   public static function readAllCharacters(): array
+   {
+       try {
+           $dao = DAO::getInstance();
+           if ($characters = $dao->getWithParameters("personnages", [])) {
+               return array_map(function ($characterData) use ($dao) {
+                   return new Character(
+                       (string)$characterData["prenom"],
+                       (string)$characterData["img"],
+                       User::read((int)$characterData["createur"]),
+                       (int)$characterData["id"]
+                   );
+               }, $characters);
+           }
+           return []; // Retourne un tableau vide si aucun personnage n'est trouvé.
+       } catch (PDOException $e) { 
+           throw new RuntimeException("Erreur lors de la lecture des personnages : " . e.getMessage(), 0, $e); 
+       } 
+   }
 }
 ?>
+

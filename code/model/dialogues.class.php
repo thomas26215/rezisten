@@ -96,7 +96,7 @@ class Dialog
     {
         try {
             $storyId = $this->story->getId();
-            return $this->dao->insertRelatedData("dialogues", [
+            return $this->dao->insert("dialogues", [
                 "id" => $this->id,
                 "id_histoire" => $storyId,
                 "interlocuteur" => $this->speaker->getId(),
@@ -112,10 +112,6 @@ class Dialog
 
     public function update(int $newId = 0): bool
     {
-        if ($this->id <= 0) {
-            return false;
-        }
-
         $updateId = ($newId != 0) ? $newId : $this->id;
 
         // Commencer une transaction
@@ -123,13 +119,13 @@ class Dialog
 
         try {
             // Supprimer l'ancien enregistrement
-            $this->dao->deleteDatas("dialogues", [
+            $this->dao->delete("dialogues", [
                 "id" => $this->id,
                 "id_histoire" => $this->story->getId()
             ]);
 
             // Insérer le nouvel enregistrement
-            $result = $this->dao->insertRelatedData("dialogues", [
+            $result = $this->dao->insert("dialogues", [
                 "id" => $updateId,
                 "id_histoire" => $this->story->getId(),
                 "interlocuteur" => $this->speaker->getId(),
@@ -160,35 +156,45 @@ class Dialog
         if ($id < 0 || $idStory < 0) {
             throw new Exception("Impossible de supprimer : Identifiant ou histoire invalides");
         }
-        return DAO::getInstance()->deleteDatas("dialogues", ["id" => $id, "id_histoire" => $idStory]);
+        return DAO::getInstance()->delete("dialogues", ["id" => $id, "id_histoire" => $idStory]);
     }
 
-    public static function read(int $id, int $idStory): ?Dialog
+    public static function read(int $id, int $idStory): Dialog
     {
-        $dao = DAO::getInstance();
-        $results = $dao->getColumnWithParameters("dialogues", ["id" => $id, "id_histoire" => $idStory]);
+        try {
+            $dao = DAO::getInstance();
+            $results = $dao->getWithParameters("dialogues", ["id" => $id, "id_histoire" => $idStory]);
 
 
 
-        if (!empty($results)) {
-            $result = $results[0];
-            return new Dialog(
-                $result['id'],
-                Story::read($idStory),
-                Character::read($result['interlocuteur']),
-                $result['contenu'],
-                filter_var($result['bonus'], FILTER_VALIDATE_BOOLEAN),
-                $result['doublage']
-            );
+            if (!empty($results)) {
+                try {
+                    $result = $results[0];
+                    return new Dialog(
+                        $result['id'],
+                        Story::read($idStory),
+                        Character::read($result['interlocuteur']),
+                        $result['contenu'],
+                        filter_var($result['bonus'], FILTER_VALIDATE_BOOLEAN),
+                        $result['doublage']
+                    );
+                } catch (RuntimeException $e) {
+                    throw new RuntimeException("Impossible de renvoyer un dialogue après lecture : " . $e->getMessage(), 0, $e);
+                }
+                
+            } else {
+                throw new RuntimeException("Erreur lors de la lecture de dialogue => Aucun résultat");
+            }
+        } catch (PDOException $e) {
+            throw new RuntimeException("Erreur lors de la lecture de dialogue : " . $e->getMessage(), 0, $e);
         }
-        return null;
     }
 
 
     public static function readBonusDialog(int $id, int $idStory): ?Dialog
     {
         $dao = DAO::getInstance();
-        $results = $dao->getColumnWithParameters("dialogues", ["id" => $id, "id_histoire" => $idStory, "bonus" => true]);
+        $results = $dao->getWithParameters("dialogues", ["id" => $id, "id_histoire" => $idStory, "bonus" => true]);
 
         if (!empty($results)) {
             $result = $results[0];
@@ -207,7 +213,7 @@ class Dialog
     public static function readFirstBonus(int $idStory): int
     {
         $dao = DAO::getInstance();
-        $results = $dao->getColumnWithParameters("dialogues", ["id_histoire" => $idStory, "bonus" => true]);
+        $results = $dao->getWithParameters("dialogues", ["id_histoire" => $idStory, "bonus" => true]);
 
         if (!empty($results)) {
             return $results[0]['id'];
@@ -219,7 +225,7 @@ class Dialog
     {
         $dao = DAO::getInstance();
         // FIXME : sur postgres passer sur "true" au lieu de 1
-        $results = $dao->getColumnWithParameters("dialogues", ["id_histoire" => $idStory, "contenu" => "limquestion"]);
+        $results = $dao->getWithParameters("dialogues", ["id_histoire" => $idStory, "contenu" => "limquestion"]);
 
         // Vérifiez si le tableau n'est pas vide avant d'accéder à l'index 0
         if (!empty($results)) {
@@ -327,7 +333,7 @@ class Dialog
     public static function readAllByStory(int $storyId): array
     {
         $dao = DAO::getInstance();
-        $results = $dao->getColumnWithParameters('dialogues', ['id_histoire' => $storyId]);
+        $results = $dao->getWithParameters('dialogues', ['id_histoire' => $storyId]);
         $dialogues = [];
         foreach ($results as $result) {
             $dialogues[] = new Dialog(
@@ -347,7 +353,7 @@ class Dialog
 
 
         // Étape 1 : Récupérer tous les dialogues triés par ID croissant
-        $dialogues = $dao->getColumnWithParameters(
+        $dialogues = $dao->getWithParameters(
             'dialogues',
             ['id_histoire' => $idStory],
             ['id']

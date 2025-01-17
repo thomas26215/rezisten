@@ -2,17 +2,19 @@
 include_once('./model/lieux.class.php');
 include_once('framework/view.fw.php');
 
-$lieu = Place::read(1); // mettre l'id du lieu en foction de l'histoire
+$id=$_GET['id'];
+$place = Place::read($id); // mettre l'id du lieu en foction de l'histoire
 
-$nom = $lieu->getName();
-$type = $lieu->getPlaceType();
-$ville = $lieu->getCity();
-$description = $lieu->getDescription();
+$coordinates = explode(',',$place->getCoordinates());
+$latitude = $coordinates[0];
+$longitude = $coordinates[1];
+$imgLieu = $id.".webp";
 
 $view = new View();
-$view->assign('nom', $nom);
-$view->assign('type', $type);
-$view->assign('ville', $ville);
-$view->assign('description', $description);
+$view->assign('imgLieu',$imgLieu);
+$view->assign('latitude',$latitude);
+$view->assign('longitude',$longitude);  
+$view->assign('place',$place);
 $view->display('consulterLieu');
+
 ?>

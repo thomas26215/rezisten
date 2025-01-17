@@ -55,7 +55,11 @@
                             <form action="?">
                                 <input type="hidden" name="action" value="change">
                                 <input type="hidden" name="ctrl" value="question">
+                                <?php if($story->getChapter()->getNumchap() == "100"){ ?>
                                 <button class="autreQuestion button-gris"> Accéder à l'autre question</button>
+                                <?php }else{?>
+                                    <button> Pas d'autre question</button>
+                                    <?php }?>
                             </form>
                 </div>
             </section>

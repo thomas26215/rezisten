@@ -65,7 +65,7 @@ if (isset($_GET['article']) && $_GET['article'] === 'ajouterDialogue' && isset($
         $dialogue->create();
 
         // Redirection après l'ajout du dialogue
-        header("Location: creation?ctrl=creation&article=ajouterDialogue&id=" . $histoire->getId());
+        header("Location: index.php?ctrl=creation&article=ajouterDialogue&id=" . $histoire->getId());
         exit();
     } else {
         // Handle the case where the character is not found
@@ -120,7 +120,7 @@ if (isset($_GET['article']) && $_GET['article'] === 'ajouterQuestion' && isset($
     }
 
     // Redirection après l'ajout de la question
-    header("Location: creation?ctrl=creation&article=ajouterQuestion&id=" . $histoire->getId());
+    header("Location: index.php?ctrl=creation&article=ajouterQuestion&id=" . $histoire->getId());
     exit();
 }
 
@@ -171,7 +171,7 @@ if (isset($_GET['delete']) && $_GET['delete'] === 'delete' && isset($_GET['idDia
         }
 
         // Redirection après la suppression du dialogue
-        header("Location: creation?ctrl=creation&article=afficherHistoire&id=" . $histoire->getId());
+        header("Location: index.php?ctrl=creation&article=afficherHistoire&id=" . $histoire->getId());
         exit();
     } catch (Exception $e) {
         echo "Error: " . $e->getMessage();
@@ -191,7 +191,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'moveUp' && isset($_GET['idDia
     }
 
     // Redirection après le déplacement
-    header("Location: creation?ctrl=creation&article=afficherHistoire&id=" . $histoire->getId());
+    header("Location: index.php?ctrl=creation&article=afficherHistoire&id=" . $histoire->getId());
     exit();
 }
 
@@ -209,26 +209,40 @@ if (isset($_GET['action']) && $_GET['action'] === 'moveDown' && isset($_GET['idD
     }
 
     // Redirection après le déplacement
-    $redirectUrl = "creation?ctrl=creation&article=afficherHistoire&id=" . $histoire->getId();
-    error_log("Redirection vers : " . $redirectUrl); // Ajoutez cette ligne pour déboguer l'URL
+    $redirectUrl = "index.php?ctrl=creation&article=afficherHistoire&id=" . $histoire->getId();
     header("Location: " . $redirectUrl);
     exit();
 }
 // Vérification de la publication
 if (isset($_GET['footer']) && $_GET['footer'] === 'publie') {
-    $histoire->setVisibility(true);
+    if ($histoire->getVisibility() == true) {
+        $histoire->setVisibility(false);
+
+    } else {
+        $histoire->setVisibility(true);
+    }
     $histoire->update();
     // Redirection après la publication
-    header("Location: creation?ctrl=creation&article=afficherHistoire&id=" . $histoire->getId());
+    header("Location: index.php?ctrl=mesHistoires");
     exit();
 }
 // Récupération depuis le modèle
 $personnages = Character::readAllCharacters();
 $iddialog = 1;
 $dialogues[] = Question::read($id, "g");
-while (null !== (Dialog::read($iddialog, idStory: $id))) {
-    $dialogues[] = Dialog::read($iddialog, $id);
-    $iddialog++;
+
+while (true) {
+    try {
+        $dialog = Dialog::read($iddialog, idStory: $id);
+        if ($dialog === null) {
+            break;
+        }
+        $dialogues[] = $dialog;
+        $iddialog++;
+    } catch (RuntimeException $e) {
+        error_log("Error reading dialogue $iddialog: " . $e->getMessage());
+        break;
+    }
 }
 
 

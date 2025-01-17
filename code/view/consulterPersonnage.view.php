@@ -1,6 +1,6 @@
 <article class="content">
 
-    <form method="post" action="index.php?ctrl=personnages&article=consulterPersonnage" class="articleContainer">
+    <form method="post" action="index.php?ctrl=personnages&article=consulterPersonnage&id=<?= $id ?>" class="articleContainer">
         <div class="personnage">
             <input type="hidden" name="ctrl" value="personnages">
             <input type="hidden" name="action" value="selectCharacter">
@@ -35,6 +35,7 @@
 
 
         </div>
+
         <input type="hidden" name="article" value="consulterPersonnage">
 
     </form>

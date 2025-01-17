@@ -29,19 +29,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Authentification de l'utilisateur
     if (empty($errors)) {
-        // Assurez-vous que la méthode readWithMail() retourne un objet utilisateur ou null
-        $user = User::readWithMail($formData['email']);
 
-        if (!$user || !password_verify($formData['password'], $user->getPassword())) {
-            $errors[] = "Email ou mot de passe incorrect";
-        } elseif (CheckEmail::isUserCodeDefined($user->getId())) {
-            $checkEmail = CheckEmail::generate($user->getId());
-            header("Location: index.php?ctrl=emailEnvoye&userId=" . $user->getId());
-        } else {
-            $_SESSION['user_id'] = $user->getId();
-            $_SESSION['username'] = $user->getUsername();
-            header("Location: index.php?ctrl=main");
-            exit();
+        try {
+            $user = User::readWithMail($formData['email']);
+            try {
+                if (!password_verify($formData['password'], $user->getPassword())) {
+                    $errors[] = "Mot de passe incorrect";
+                } elseif (CheckEmail::isUserCodeDefined($user->getId())) {
+                    $checkEmail = CheckEmail::generate($user->getId());
+                    header("Location: index.php?ctrl=emailEnvoye&userId=" . $user->getId());
+                } else {
+                    $_SESSION['user_id'] = $user->getId();
+                    $_SESSION['username'] = $user->getUsername();
+                    header("Location: index.php?ctrl=main");
+                    exit();
+                }
+            } catch(RuntimeException $e) {
+                $errors[] = "Impossible de vérifier le code de vérification";
+            }
+        } catch (RuntimeException $e) {
+            $errors[] = "Email incorrect";
         }
     }
 }

@@ -4,13 +4,16 @@ body {
   font-size: larger;
 }
 
+main {
+  padding-top: 20px;
+}
+
 /* Pour la disposition de la page*/
 .container {
   display: flex;
   height: max-content;
   gap: 5px;
-  padding: 5px 3vw ;
-
+  padding: 5px 3vw;
 }
 
 .header {
@@ -67,7 +70,8 @@ section.header div {
   /* Permet au bouton de s'ajuster verticalement */
 }
 
-textarea{ /* Pour la partie du dialogue */
+textarea {
+  /* Pour la partie du dialogue */
 
   min-width: 20vw;
   max-width: 55vw;
@@ -75,17 +79,17 @@ textarea{ /* Pour la partie du dialogue */
   max-height: 42vh;
 }
 
-.menu{
+.menu {
   min-width: 34vw;
   max-width: 34vw;
 }
 
-button.poub{
+button.poub {
   clip-path: none;
   background-color: var(--beige) !important;
 }
 
-button.poub::before{
+button.poub::before {
   background-color: var(--beige) !important;
 }
 
@@ -117,14 +121,16 @@ button.poub::before{
   align-items: center;
   justify-content: center;
   gap: 2rem;
-} 
+}
 
 .inputs label {
   font-weight: bold;
 }
+
 .inputs input {
   height: 2rem;
 }
+
 .inputsRow {
   align-items: center;
   justify-content: center;

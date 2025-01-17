@@ -1,4 +1,5 @@
 <?php
+
 require_once(__DIR__ . "/dao.class.php");
 
 class Place {
@@ -9,7 +10,7 @@ class Place {
     private string $coordinates;
     private int $id;
     private DAO $dao;
-    
+
     public function __construct(string $name, string $place_type, string $description, string $city, string $coordinates, int $id = -1) {
         $this->setName($name);
         $this->setPlaceType($place_type);
@@ -49,108 +50,159 @@ class Place {
     /* --- Setters --- */
 
     public function setId(int $id): void {
-        if ($id >= -1) { // Vérification simple pour l'ID
-            $this->id = $id;
-        } else {
-            throw new Exception("L'ID doit être supérieur ou égal à -1.");
+        if ($id < -1) {
+            throw new InvalidArgumentException("L'ID doit être supérieur ou égal à -1.");
         }
+        $this->id = $id;
     }
 
     public function setName(string $name): void {
+        if (empty($name)) {
+            throw new InvalidArgumentException("Le nom ne peut pas être vide.");
+        }
         $this->name = $name;
     }
 
     public function setPlaceType(string $place_type): void {
+        if (empty($place_type)) {
+            throw new InvalidArgumentException("Le type de lieu ne peut pas être vide.");
+        }
         $this->place_type = $place_type;
     }
 
     public function setDescription(string $description): void {
+        if (empty($description)) {
+            throw new InvalidArgumentException("La description ne peut pas être vide.");
+        }
         $this->description = $description;
     }
 
     public function setCity(string $city): void {
+        if (empty($city)) {
+            throw new InvalidArgumentException("La ville ne peut pas être vide.");
+        }
         $this->city = $city;
     }
 
     public function setCoordinates(string $coordinates): void {
+        if (empty($coordinates)) {
+            throw new InvalidArgumentException("Les coordonnées ne peuvent pas être vides.");
+        }
+        //TODO: 
+        // Optionnel : ajouter une validation pour le format des coordonnées
+        // if (!preg_match('/^[-+]?[0-9]*\.?[0-9]+,[ ]*[-+]?[0-9]*\.?[0-9]+$/', $coordinates)) {
+        //     throw new InvalidArgumentException("Format des coordonnées invalide.");
+        // }
+        
         $this->coordinates = $coordinates;
     }
 
     /* --- Méthodes CRUD --- */
 
-    public function create(): bool {
-        if($this->dao->insertRelatedData("lieux", [
-            "nom" => $this->name,
-            "type_lieu" => $this->place_type,
-            "description" => $this->description,
-            "commune" => $this->city,
-            "coordonnee" => $this->coordinates,
-        ])) {
-            $lastId = $this->dao->getLastInsertId("lieux");
-        if (isset($lastId[0]["last_id"]) && is_numeric($lastId[0]["last_id"])) {
-            $this->setId((int)$lastId[0]["last_id"]);
-            return true;
-        }
-        }return false;
-    }
-
-    public static function read($id): ?Place {
-        $dao = DAO::getInstance();
-        if($lieuData = $dao->getColumnWithParameters("lieux", ["id" => (int)$id])){
-            return new Place(
-                $lieuData[0]["nom"],
-                $lieuData[0]["type_lieu"],
-                $lieuData[0]["description"],
-                $lieuData[0]["commune"],
-                $lieuData[0]["coordonnee"],
-                $lieuData[0]["id"]
-            );
-        }
-        return null;
-    }
-
-    public static function readAll(): ? array {
-        $dao = DAO::getInstance();
-        $result=array();
-        if($lieuData = $dao->getColumnWithParameters("lieux",[])){
-            $i=0;
-            while(isset($lieuData[$i])){
-                $places =  new Place(
-                    $lieuData[$i]["nom"],
-                    $lieuData[$i]["type_lieu"] ?? $lieuData[$i]["type_lieu"] ?? null,
-                    $lieuData[$i]["description"],
-                    $lieuData[$i]["commune"],
-                    $lieuData[$i]["coordonnee"],
-                    (int)$lieuData[$i]["id"]);
-                $result[] = $places;
-                $i++;
-            }
-            return $result;
-        }else {
-            return null;
-        }
-    }
-
-    public function update(): bool {
-        if($this->id !== -1){
-            
-            return $this->dao->update("lieux", [
+    public function create(): void {
+        try {
+            if (!$this->dao->insert("lieux", [
                 "nom" => $this->name,
                 "type_lieu" => $this->place_type,
                 "description" => $this->description,
                 "commune" => $this->city,
                 "coordonnee" => $this->coordinates,
-            ], ["id" => (int)$this->id]) > 0;
-        }
-        return false;
-    }
-    public static function delete($id) : bool{
-        if($id > 0){
-            return DAO::getInstance()->deleteDatasById("lieux", $id);
+            ])) {
+                throw new RuntimeException("Échec de l'insertion du lieu dans la base de données");
+            }
             
+            // Récupérer le dernier ID inséré
+            $lastId = $this->dao->getLastId("lieux");
+            if (isset($lastId[0]["last_id"]) && is_numeric($lastId[0]["last_id"])) {
+                $this->setId((int)$lastId[0]["last_id"]);
+            } else {
+                throw new RuntimeException("Échec de la récupération du dernier ID inséré");
+            }
+            
+        } catch (PDOException $e) {
+            throw new RuntimeException("Erreur lors de la création du lieu : " . $e->getMessage(), 0, $e);
         }
-        return false;
+    }
+
+    public static function read(int $id): ?Place {
+        if ($id <= 0) {
+            throw new InvalidArgumentException("L'ID doit être supérieur à zéro.");
+        }
+
+        try {
+            $dao = DAO::getInstance();
+            if ($lieuData = $dao->getWithParameters("lieux", ["id" => (int)$id])) {
+                return new Place(
+                    $lieuData[0]["nom"],
+                    $lieuData[0]["type_lieu"],
+                    $lieuData[0]["description"],
+                    $lieuData[0]["commune"],
+                    $lieuData[0]["coordonnee"],
+                    (int)$lieuData[0]["id"]
+                );
+            }
+            return null; // Pas d'exception ici, car cela peut être un cas valide
+        } catch (PDOException $e) {
+            throw new RuntimeException("Erreur lors de la lecture du lieu : " . $e->getMessage(), 0, $e);
+        }
+    }
+
+    public static function readAll(): array {
+        try {
+            $dao = DAO::getInstance();
+            if ($lieuData = $dao->getWithParameters("lieux", [])) {
+                return array_map(function ($data) {
+                    return new Place(
+                        $data["nom"],
+                        isset($data["type_lieu"]) ? (string)$data["type_lieu"] : '',
+                        (string)$data["description"],
+                        (string)$data["commune"],
+                        (string)$data["coordonnee"],
+                        (int)$data["id"]
+                    );
+                }, array_values($lieuData));
+            }
+            return []; // Retourne un tableau vide si aucune donnée n'est trouvée
+        } catch (PDOException $e) {
+            throw new RuntimeException("Erreur lors de la lecture des lieux : " . e.getMessage(), 0, e);
+        }
+    }
+
+    public function update(): void {
+        if ($this->id === -1) {
+            throw new RuntimeException("Impossible de mettre à jour le lieu : L'ID est invalide");
+        }
+
+        try {
+            if ($this->dao->update("lieux", [
+                "nom" =>  $this->name,
+                "type_lieu" =>  $this->place_type,
+                "description" =>  $this->description,
+                "commune" =>  $this->city,
+                "coordonnee" =>  $this->coordinates,
+            ], ["id" => (int)$this->id]) === 0) {
+                throw new RuntimeException("Aucune donnée n'a été mise à jour dans la base de données");
+            }
+            
+        } catch (PDOException $e) {
+            throw new RuntimeException("Erreur lors de la mise à jour du lieu : " . $e->getMessage(), 0, $e);
+        }
+    }
+
+    public static function delete(int $id): void{
+        if ($id <= 0) { 
+            throw new InvalidArgumentException("L'ID doit être supérieur à zéro.");
+        }
+
+        try { 
+            if (!DAO::getInstance()->deleteDatasById("lieux", $id)) { 
+                throw new RuntimeException("Échec de la suppression du lieu dans la base de données");
+            }
+        } catch (PDOException $e) { 
+            throw new RuntimeException("Erreur lors de la suppression du lieu : " . $e->getMessage(), 0, $e);
+        }
     }
 }
 
 ?>
+

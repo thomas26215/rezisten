@@ -4,6 +4,8 @@ include_once('./model/personnages.class.php');
 include_once('./model/users.class.php');
 include_once('framework/view.fw.php');
 
+$id=$_GET['id'];
+
 $imgURL = "http://localhost:8080/rezisten/imgPersonnage/";
 
 $characters = Character::readAllCharacters();
@@ -137,6 +139,7 @@ $lien = "./view/" . $article . ".view.php";
 //Créer la vue
 $view = new View();
 $view->assign('lien', $lien);
+$view->assign('id', $id);
 $view->assign('imgURL', $imgURL);
 $view->assign('characters', $characters);
 $view->assign('selectedCharacter', $selectedCharacter);
