@@ -16,7 +16,7 @@ $idDialog = $_GET['idDialog'];
 $prevSpeaker = $_GET['prevSpeaker'] ?? "none";
 $_SESSION['lastDialog'] = $idDialog;
 
-
+var_dump($_GET);
 
 $imgURL = "https://localhost:8080/rezisten/imgPersonnage/";
 $audioURL = "https://localhost:8080/rezisten/doublageDialogue/histoire".$idStory."/";
@@ -122,7 +122,7 @@ if($story->getChapter()->getNumchap() != 100){
         $view->display('question');
 }
 
-}else{
+}elseif($dialog->getContent() == "limquestion"){
     $question = Question::read($idStory,'g');
     $_SESSION['idStory'] = $idStory;
     $_SESSION['idDialog'] = $idDialog;
