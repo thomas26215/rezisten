@@ -150,8 +150,8 @@ if($story->getChapter()->getNumchap() != "100"){
         $view->assign('story',$story);
         $view->assign('question',$question);
         $view->display('question');
+    }
 }
-
 
 //Sinon on met à jour les données sur le dialogue et les personnages incluent dans ce passage.
 // On gère aussi le background en fonction de l'avancée
