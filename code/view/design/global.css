@@ -101,6 +101,11 @@ button:hover{
     background-color: var(--gris);
 }
 
+.button-vide{
+    opacity: 0;
+    cursor: initial;
+}
+
 
 a {
     text-decoration: none;
