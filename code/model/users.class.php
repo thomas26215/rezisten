@@ -119,7 +119,7 @@ class User {
         if (empty($password)) {
             throw new InvalidArgumentException("Le mot de passe ne peut pas être vide.");
         }
-        $this->password = password_hash($password, PASSWORD_DEFAULT);
+        $this->password = password_hash($password, PASSWORD_BCRYPT);
     }
 
     public function setPasswordWithoutHashing(string $password): void {
