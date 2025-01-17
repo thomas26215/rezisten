@@ -123,19 +123,35 @@ $_SESSION['background'] = $background;
 
 
 // Si le dialogue repère est détecté on bascule sur la question en appelant la vue avec les bonnes données
-if($dialog->getContent() == "limquestion"){
-    $question = Question::read($idStory,'s');
-    $_SESSION['idStory'] = $idStory;
-    $_SESSION['idDialog'] = $idDialog;
-    $_SESSION['difficulty'] = "spécifique";
+if($story->getChapter()->getNumchap() != "100"){
+    if($dialog->getContent() == "limquestion"){
+        $question = Question::read($idStory,'s');
+        $_SESSION['idStory'] = $idStory;
+        $_SESSION['idDialog'] = $idDialog;
+        $_SESSION['difficulty'] = "spécifique";
+        
     
-
-    $view->assign('background',$background);
-    $view->assign('error','');
-    $view->assign('story',$story);
-    $view->assign('question',$question);
-    $view->display('question');
+        $view->assign('background',$background);
+        $view->assign('error','');
+        $view->assign('story',$story);
+        $view->assign('question',$question);
+        $view->display('question');
+    }
+}else{
+    if($dialog->getContent() == "limquestion"){
+        $question = Question::read($idStory,'g');
+        $_SESSION['idStory'] = $idStory;
+        $_SESSION['idDialog'] = $idDialog;
+        $_SESSION['difficulty'] = "spécifique";
+        
+    
+        $view->assign('background',$background);
+        $view->assign('error','');
+        $view->assign('story',$story);
+        $view->assign('question',$question);
+        $view->display('question');
 }
+
 
 //Sinon on met à jour les données sur le dialogue et les personnages incluent dans ce passage.
 // On gère aussi le background en fonction de l'avancée
