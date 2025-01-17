@@ -141,7 +141,7 @@ class Place {
                     (int)$lieuData[0]["id"]
                 );
             }
-            return null; // Pas d'exception ici, car cela peut être un cas valide
+            return null; 
         } catch (PDOException $e) {
             throw new RuntimeException("Erreur lors de la lecture du lieu : " . $e->getMessage(), 0, $e);
         }
@@ -162,47 +162,51 @@ class Place {
                     );
                 }, array_values($lieuData));
             }
-            return []; // Retourne un tableau vide si aucune donnée n'est trouvée
+            return []; 
         } catch (PDOException $e) {
             throw new RuntimeException("Erreur lors de la lecture des lieux : " . e.getMessage(), 0, e);
         }
     }
 
-    public function update(): void {
+    public function update(): bool {
         if ($this->id === -1) {
             throw new RuntimeException("Impossible de mettre à jour le lieu : L'ID est invalide");
         }
-
+    
         try {
-            if ($this->dao->update("lieux", [
+           
+            $result = $this->dao->update("lieux", [
                 "nom" =>  $this->name,
                 "type_lieu" =>  $this->place_type,
                 "description" =>  $this->description,
                 "commune" =>  $this->city,
                 "coordonnee" =>  $this->coordinates,
-            ], ["id" => (int)$this->id]) === 0) {
+            ], ["id" => (int)$this->id]);
+    
+            if ($result === 0) {
                 throw new RuntimeException("Aucune donnée n'a été mise à jour dans la base de données");
             }
-            
+    
+            return true;  
         } catch (PDOException $e) {
             throw new RuntimeException("Erreur lors de la mise à jour du lieu : " . $e->getMessage(), 0, $e);
         }
     }
-
-    public static function delete(int $id): void{
-        if ($id <= 0) { 
+    public static function delete(int $id): bool {
+        if ($id <= 0) {
             throw new InvalidArgumentException("L'ID doit être supérieur à zéro.");
         }
-
-        try { 
-            if (!DAO::getInstance()->deleteDatasById("lieux", $id)) { 
+    
+        try {
+            if (!DAO::getInstance()->deleteDatasById("lieux", $id)) {
                 throw new RuntimeException("Échec de la suppression du lieu dans la base de données");
             }
-        } catch (PDOException $e) { 
+            return true;  
+        } catch (PDOException $e) {
             throw new RuntimeException("Erreur lors de la suppression du lieu : " . $e->getMessage(), 0, $e);
         }
     }
-}
+    }
 
 ?>
 

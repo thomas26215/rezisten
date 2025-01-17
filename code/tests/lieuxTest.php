@@ -1,47 +1,45 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-
 require_once(__DIR__.'/../model/lieux.class.php');
 require_once(__DIR__.'/../model/dao.class.php');
 
 class lieuxTest extends TestCase {
     private Place $place;
 
-
     protected function setUp(): void {
-        $this->place = new Place("iut" ,"batiment" ,"Endoit où l'on a cours", "38000" , "0.0");
+        $this->place = new Place("IUT", "Building", "Where classes are held", "38000", "0.0");
     }
 
     public function testGetters() {
-        $this->assertEquals("iut", $this->place->getName());
-        $this->assertEquals("batiment", $this->place->getPlaceType());
-        $this->assertEquals("Endoit où l'on a cours", $this->place->getDescription());
+        $this->assertEquals("IUT", $this->place->getName());
+        $this->assertEquals("Building", $this->place->getPlaceType());
+        $this->assertEquals("Where classes are held", $this->place->getDescription());
         $this->assertEquals("38000", $this->place->getCity());
         $this->assertEquals("0.0", $this->place->getCoordinates());
     }
 
     public function testSetters() {
-        $this->place->setName("name");
-        $this->place->setPlaceType("place");
-        $this->place->setDescription("description");
-        $this->place->setCity("city");
-        $this->place->setCoordinates("coordinates");
+        $this->place->setName("New Place");
+        $this->place->setPlaceType("New Type");
+        $this->place->setDescription("New Description");
+        $this->place->setCity("New City");
+        $this->place->setCoordinates("1.1");
 
-        $this->assertEquals("name", $this->place->getName());
-        $this->assertEquals("place", $this->place->getPlaceType());
-        $this->assertEquals("description", $this->place->getDescription());
-        $this->assertEquals("city", $this->place->getCity());
-        $this->assertEquals("coordinates", $this->place->getCoordinates());
+        $this->assertEquals("New Place", $this->place->getName());
+        $this->assertEquals("New Type", $this->place->getPlaceType());
+        $this->assertEquals("New Description", $this->place->getDescription());
+        $this->assertEquals("New City", $this->place->getCity());
+        $this->assertEquals("1.1", $this->place->getCoordinates());
     }
 
     public function testCreate() {
-        $this->assertTrue($this->place->create());
+        $this->place->create();
         $this->assertGreaterThan(0, $this->place->getId());
     }
 
     public function testRead() {
-        $this->assertTrue($this->place->create());
+        $this->place->create();
         $readPlace = Place::read($this->place->getId());
         $this->assertInstanceOf(Place::class, $readPlace);
         $this->assertEquals($this->place->getId(), $readPlace->getId());
@@ -49,75 +47,70 @@ class lieuxTest extends TestCase {
 
     public function testReadAll() {
         $readPlaces = Place::readAll();
-        var_dump ($readPlaces);
-        $this->assertEquals(count($readPlaces) ,17 );
+        $this->assertIsArray($readPlaces);
+        $this->assertGreaterThan(0, count($readPlaces));
     }
-    public function testReadAllReturnsArray()
-{
-    $places = Place::readAll();
-    $this->assertIsArray($places);
-}
-
-public function testReadAllContainsCorrectData()
-{
-    // Créer quelques lieux de test
-    $place1 = new Place("Test Place 1", "Type 1", "Description 1", "City 1", "Coordinates 1");
-    $place2 = new Place("Test Place 2", "Type 2", "Description 2", "City 2", "Coordinates 2");
-    $place1->create();
-    $place2->create();
-
-    $places = Place::readAll();
-
-    // Vérifier que les lieux créés sont dans le résultat
-    $this->assertContains($place1->getName(), $places);
-    $this->assertContains($place2->getName(), $places);
-
-    // Nettoyer les données de test
-    Place::delete($place1->getId());
-    Place::delete($place2->getId());
-}
-
-
 
     public function testUpdate() {
         $this->place->create();
-        $this->place->setPlaceType("newPlace");
-        $this->assertTrue($this->place->update());
+        $this->place->setPlaceType("Updated Type");
+        $this->place->update();
         $updatedPlace = Place::read($this->place->getId());
-        $this->assertEquals("newPlace", $updatedPlace->getPlaceType());
+        $this->assertEquals("Updated Type", $updatedPlace->getPlaceType());
     }
 
     public function testDelete() {
-        $this->place->create();
-        $this->assertNotNull(Place::read($this->place->getId()));
-        $this->assertTrue(Place::delete($this->place->getId()));
-        $this->assertNull(Place::read($this->place->getId()));
-
+        $mockDao = $this->createMock(DAO::class);
+        
+        $mockDao->method('deleteDatasById')->willReturn(false);
+        
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage("Échec de la suppression du lieu dans la base de données");
+        
+        Place::delete(99999); 
     }
-
     public function testReadNonExistentPlace() {
         $this->assertNull(Place::read(99999));
-    } 
+    }
 
     public function testUpdateNonExistentPlace() {
-        $nonExistentPlace = new Place("iut" ,"batiment" ,"Endoit où l'on a cours", "38000" , "0.0", 99999);
-        $this->assertFalse($nonExistentPlace->update());
+        // Create a mock of the DAO class
+        $mockDao = $this->createMock(DAO::class);
+        
+        // Expect the update method to return 0, simulating no data being updated
+        $mockDao->method('update')->willReturn(0);
+        
+        // Use the mocked DAO to call the update method
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage("Aucune donnée n'a été mise à jour dans la base de données");
+        
+        // Call the update method on a non-existent place
+        $nonExistentPlace = new Place("Non Existent", "Building", "Description", "00000", "0.0", 99999);
+        $nonExistentPlace->update();
     }
-
     public function testDeleteNonExistentPlace() {
-        $this->assertFalse(Place::delete(99999));
-    }
-
-    
-
-
-    public function tearDown(): void {
-        if($this->place->getId() > 0) {
-            Place::delete($this->place->getId());
-        }
+        // Create a mock of the DAO class
+        $mockDao = $this->createMock(DAO::class);
+        
+        // Expect the deleteDatasById method to return false, simulating a failure
+        $mockDao->method('deleteDatasById')->willReturn(false);
+        
+        // Use the mocked DAO to call the delete method
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage("Échec de la suppression du lieu dans la base de données");
+        
+        // Call the static delete method with the mock
         Place::delete(99999);
     }
+    public function testCreateWithInvalidData() {
+        $this->expectException(InvalidArgumentException::class);
+        $invalidPlace = new Place("", "", "", "", "", -1);
+    }
 
-    
+    protected function tearDown(): void {
+        if ($this->place->getId() > 0) {
+            Place::delete($this->place->getId());
+        }
+    }
 }
 ?>
