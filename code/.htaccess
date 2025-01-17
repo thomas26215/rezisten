@@ -16,7 +16,7 @@ Require all denied
     Require all granted
 </FilesMatch>
 # On autorise la lecture des images 
-<FilesMatch "\.(png)$">
+<FilesMatch "\.(png|webp|jpg|jpeg)$">
     Require all granted
 </FilesMatch>
 
