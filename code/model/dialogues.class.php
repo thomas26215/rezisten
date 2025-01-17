@@ -167,7 +167,7 @@ class Dialog
 
 
 
-            if ($results) {
+            if (!empty($results)) {
                 try {
                     $result = $results[0];
                     return new Dialog(
@@ -183,7 +183,7 @@ class Dialog
                 }
                 
             } else {
-                throw new RuntimeException("Erreur lors de la lecture de dialogue");
+                throw new RuntimeException("Erreur lors de la lecture de dialogue => Aucun résultat");
             }
         } catch (PDOException $e) {
             throw new RuntimeException("Erreur lors de la lecture de dialogue : " . $e->getMessage(), 0, $e);
