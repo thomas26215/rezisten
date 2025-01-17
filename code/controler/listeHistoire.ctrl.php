@@ -7,7 +7,7 @@ include_once('./framework/view.fw.php');
 
 $user = $_SESSION["user_id"];
 
-$idChap = $_GET['idChap'];
+$idChap = htmlspecialchars($_GET['idChap']);
 $nomChap = Chapter::read($idChap)->getTitle();
 
 try {

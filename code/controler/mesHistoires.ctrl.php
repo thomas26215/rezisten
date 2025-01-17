@@ -7,7 +7,7 @@ include_once('./model/histoires.class.php');
 $user = $_SESSION['user_id'];
 
 // Vérifier si une action de suppression est demandée
-if (isset($_GET['action']) && $_GET['action'] === 'delete' && isset($_GET['id'])) {
+if (isset($_GET['action']) && htmlspecialchars($_GET['action']) === 'delete' && isset($_GET['id'])) {
     $storyId = (int) $_GET['id'];
     Story::delete($storyId);
     // Redirection après suppression

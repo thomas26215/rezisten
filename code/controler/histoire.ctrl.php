@@ -16,7 +16,6 @@ $idDialog = htmlspecialchars($_GET['idDialog']);
 $prevSpeaker = htmlspecialchars($_GET['prevSpeaker']) ?? "none";
 $_SESSION['lastDialog'] = $idDialog;
 
-var_dump($_GET);
 
 $imgURL = "https://localhost:8080/rezisten/imgPersonnage/";
 $audioURL = "https://localhost:8080/rezisten/doublageDialogue/histoire".$idStory."/";
