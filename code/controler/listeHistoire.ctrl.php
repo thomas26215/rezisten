@@ -13,7 +13,6 @@ $nomChap = Chapter::read($idChap)->getTitle();
 try {
     echo $idChap;
     $storyIds = Story::getStoryIdsByChapter($idChap);
-    var_dump($storyIds);
 } catch (RuntimeException $e) {
     echo "Impossible de lire les ids des histoires";
 }

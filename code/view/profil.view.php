@@ -36,7 +36,7 @@
 
             <div>
                 <label for="pseudo">Pseudo : </label>
-                <input type="text" name="pseudo" id="pseudo" placeholder=<?= $pseudo ?>>
+                <input type="text" name="pseudo" id="pseudo" placeholder="<?= $pseudo ?>">
             </div>
 
             <div>

@@ -132,9 +132,6 @@ if (isset($_GET['delete']) && $_GET['delete'] === 'delete' && isset($_GET['idDia
 
     try {
         if ($typeDialogue === 'dialogue') {
-            /* $dialogue = Dialog::read(4, 102);
-            var_dump($dialogue);
-            $dialogue->update(40);*/
             $dialogue = Dialog::read($idDialogue, $histoire->getId());
 
             if ($dialogue) {
