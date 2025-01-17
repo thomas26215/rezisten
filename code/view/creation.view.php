@@ -120,6 +120,8 @@
             <?php include_once 'popup.view.php'; ?>
         </section>
         <script src="./js/popup.js"></script>
+    </main>
+    <?php include_once './view/footerCreation.view.php'; ?>
 </body>
 <script src="./js/dyslexique.js"></script>
 

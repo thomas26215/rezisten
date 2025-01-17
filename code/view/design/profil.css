@@ -94,12 +94,12 @@ form div input {
     gap: 5rem;
 }
 
-.buttons a button {
+ .buttons a button {
     height: 6rem;
     width: 25rem;
     margin: 0 !important;
 }
-
+ 
 #toggleDyslexique {
     margin: 0 !important;
     height: 6rem;

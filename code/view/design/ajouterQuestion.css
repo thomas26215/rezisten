@@ -15,10 +15,14 @@
 }
 
 .input-superpose textarea{
-    width: 100%;
+    /* width: 100%; */
     height: 10vh;
-
 }
+
+.input-superpose input{ /*TODO : aligner le text area et le input*/ 
+    width: 55vw;
+}
+
 
 .content form :last-child{ /* Pour la partie du dialogue */
     justify-content: space-around;
