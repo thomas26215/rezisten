@@ -26,9 +26,18 @@ $dialogsChangeBG = [
     2 => "Nous y sommes ?"
 ];
 
-$dialog = Dialog::read($idDialog,$idStory);
+try {
+    $dialog = Dialog::read($idDialog,$idStory);
+} catch (RuntimeException $e) {
+    $dialog = null;
+}
+
+try {
+    $story = Story::read($idStory);
+} catch (RuntimeException $e){
+    $story = null;
+}
 $view = new View();
-$story = Story::read($idStory);
 
 
 $firstBonus = Dialog::readFirstBonus($idStory);
