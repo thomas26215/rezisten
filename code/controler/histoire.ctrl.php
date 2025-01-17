@@ -154,7 +154,6 @@ if ($story->getChapter()->getNumchap() != "100") {
     }
 }
 
-
 //Sinon on met à jour les données sur le dialogue et les personnages incluent dans ce passage.
 // On gère aussi le background en fonction de l'avancée
 
