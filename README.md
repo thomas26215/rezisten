@@ -42,5 +42,6 @@ Les deux fichiers `.gitattributes` et `.gitignore` sont liés à la configuratio
 Vous pouvez modifier le fichier `.gitignore` en fonction des technologies utilisées et de l'organisation du dépôt choisie.<br>
 Il est vivement déconseillé de modifier le fichier `.gitattributes`.
 
-## Fichiers de documentation spécifique
-docs/doc_architecture.md contient toutes les informations sur l'architecture serveur et les différents moyens de connexion
+## Documentation de l'architecture
+Le fichier [rendus/docs/doc_architecture](https://gricad-gitlab.univ-grenoble-alpes.fr/iut2-info-stud/2024-s3/s3.01/team-11/rendus/-/blob/master/docs/doc_architecture.md?ref_type=heads) contient la spécification côté serveur du fonctionnement de l'application.
+Il précise comment sont installés les serveurs et comment migrer l'application sur d'autres machines que l'IUT.
