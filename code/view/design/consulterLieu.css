@@ -4,13 +4,9 @@ body {
     min-height: calc(100vh - var(--height-header) - var(--height-footer));
 }
 
-main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    max-width: 50rem;
-    margin-inline: auto;
+main{
+    width: 70%;
+    margin : auto !important;
 }
 
 .infoContainer {
@@ -19,29 +15,26 @@ main {
     width: 45rem;
 }
 
-
-h1 {
-    font-size: 50px;
-}
-
-h2 {
-    font-size: 30px;
+.lieux-img{
+    max-width: 530px;
 }
 
 h3 {
-    font-size: 25px;
+    /* font-size: 25px; */
     margin-bottom: 0;
-}
+    min-width: 10%;
+} 
 
 .description {
     display: flex;
     flex-direction: column;
-    margin-top: 2rem;
+    text-align: justify;
 }
 
 #map {
     height: 450px;
     width: 600px;
+    margin-bottom: 2rem;
 }
 
 .infoContainer img{

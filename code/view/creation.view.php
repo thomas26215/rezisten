@@ -9,7 +9,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rézisten</title>
+    <title>Création</title>
     <link rel="stylesheet" href="./view/design/global.css">
     <link rel="stylesheet" href="./view/design/creation.css">
     <link rel="stylesheet" href="./view/design/popup.css">
@@ -21,9 +21,11 @@
 
         <h1>Création d'histoire</h1>
 
+
         <section class="container">
             <section class="header">
 
+<<<<<<< HEAD
             <form action="creation" method="get" class="flex-row">
                     <div class="flex-row">
                         <label for="titre">Titre : </label>
@@ -36,9 +38,20 @@
                         <input type="hidden" name="id" value=<?= $id ?>>
                         <input type="hidden" name="sauvegarder" value="sauvegarder">
 
+=======
+                <form action="creation" method="get" class="formLieu">
+                    <input type="hidden" name="ctrl" value="creation">
+                    <input type="hidden" name="id" value=<?= $id ?>>
+                    <input type="hidden" name="sauvegarder" value="sauvegarder">
+
+                    <div class="inputs flex-col">
+                        <label for="titre">Titre : </label>
+                        <input id="titre" type="text" name="titre" value="<?= $titre ?>" required
+                            placeholder="Sabotage">
+>>>>>>> 896805e1d90821bcd8612f1b08e19392fa1438cd
                     </div>
 
-                    <div class="flex-row">
+                    <div class="inputs flex-col">
                         <label for="lieux">Lieux : </label>
                         <select id="lieux" name="lieux">
                             <?php foreach ($lieux as $lieu): ?>
@@ -47,64 +60,83 @@
                                 </option>
                             <?php endforeach; ?>
                         </select>
-                        <a href="./consulterLieu.view.php"><img src="./view/design/image/info.png" alt="informations"
-                                id="info"></a>
+
+                    <a href="./index.php?ctrl=consulterLieu&id=<?= $histoire->getPlace()->getId() ?>">
+                        <img src="./view/design/image/info.png" alt="informations" id="info">
+                    </a>
+
                     </div>
+
                     <input type="hidden" name="id_lieu" id="id_lieu" value="">
                     <button>Sauvegarder</button>
                 </form>
-                <div>
+
+                <div class="inputs flex-col">
                     <label for="personnages">Personnages :</label>
-                    <a href="./index.php?ctrl=personnages"><button class=button-gris>Consulter les
-                            personnages</button></a>
+                    <a href="./index.php?ctrl=personnages&id=<?= $id ?>">
+                        <button class="personnage button-gris">Gérer
+                            les
+                            personnages
+                        </button>
+                    </a>
                 </div>
-
             </section>
 
-            <section class="flex-col ">
-                <form method=get>
-                    <input type="hidden" name="ctrl" value="creation">
-                    <input type="hidden" name="article" value="ajouterDialogue">
-                    <input type="hidden" name="id" value=<?= $id ?>>
-                    <button class=button-gris>Ajouter un dialogue</button>
-                </form>
-                <form method=get>
-                    <input type="hidden" name="ctrl" value="creation">
-                    <input type="hidden" name="article" value="ajouterQuestion">
-                    <input type="hidden" name="id" value=<?= $id ?>>
-                    <button class=button-gris>Ajouter une question</button>
-                </form>
-                <form method=get>
-                    <input type="hidden" name="ctrl" value="creation">
-                    <input type="hidden" name="article" value="afficherHistoire">
-                    <input type="hidden" name="id" value=<?= $id ?>>
-                    <button class=button-gris>Afficher toute l'histoire</button>
-                </form>
-            </section>
+            <div class="containerBox">
+                <section class="buttonsContainer">
+                    <form method=get>
+                        <input type="hidden" name="ctrl" value="creation">
+                        <input type="hidden" name="article" value="ajouterDialogue">
+                        <input type="hidden" name="id" value=<?= $id ?>>
+                        <button id="ajouterDialogue" class=button-gris>Ajouter un dialogue</button>
+                    </form>
+                    <form method=get>
+                        <input type="hidden" name="ctrl" value="creation">
+                        <input type="hidden" name="article" value="ajouterQuestion">
+                        <input type="hidden" name="id" value=<?= $id ?>>
+                        <button id="ajouterQuestion" class=button-gris>Ajouter une question</button>
+                    </form>
+                    <form method=get>
+                        <input type="hidden" name="ctrl" value="creation">
+                        <input type="hidden" name="article" value="afficherHistoire">
+                        <input type="hidden" name="id" value=<?= $id ?>>
+                        <button id="afficherHistoire" class=button-gris>Afficher toute l'histoire</button>
+                    </form>
+                </section>
 
-            <?php
-            include_once $lien;
-            ?>
-
-
-            <section class="footer">
-                <form method=get>
-                    <input type="hidden" name="ctrl" value="mesHistoires">
-                    <button class=button-rouge>Quitter</button>
-                </form>
+                <?php
+                include_once $lien;
+                ?>
 
 
-                <form method=get>
-                    <input type="hidden" name="ctrl" value="mesHistoires">
-                    <input type="hidden" name="footer" value="publie">
-                    <button class=button-vert>Publier</button>
-                </form>
-            </section>
+                <section class="footer flex-row">
+                    <form method=get>
+                        <input type="hidden" name="ctrl" value="mesHistoires">
+                        <button class=button-rouge>Quitter</button>
+                    </form>
+
+
+
+                    <form method="get">
+                        <input type="hidden" name="ctrl" value="creation">
+                        <input type="hidden" name="footer" value="publie">
+                        <input type="hidden" name="id" value="<?= $id ?>">
+                        <button class="button-vert"><?php if ($histoire->getVisibility() == true): ?>
+                                Mettre en privé
+                            <?php else: ?>
+                                Publier
+                            <?php endif ?></button>
+                    </form>
+                </section>
+            </div>
+
+
 
             <?php include_once 'popup.view.php'; ?>
         </section>
         <script src="./js/popup.js"></script>
     </main>
+    <?php include_once './view/footerCreation.view.php'; ?>
 </body>
 <script src="./js/dyslexique.js"></script>
 
@@ -133,4 +165,26 @@
         document.getElementById('lieux').addEventListener('change', updateHiddenField);
     };
 </script>
+<<<<<<< HEAD
+=======
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var currentUrl = window.location.search;
+        var afficher = document.getElementById("afficherHistoire");
+        var ajouterD = document.getElementById("ajouterDialogue");
+        var ajouterQ = document.getElementById("ajouterQuestion");
+
+        if (currentUrl.includes('article=afficherHistoire')) {
+            afficher.classList.remove("button-gris");
+        } else if (currentUrl.includes('article=ajouterDialogue')) {
+            ajouterD.classList.remove("button-gris");
+        } else if (currentUrl.includes('article=ajouterQuestion')) {
+            ajouterQ.classList.remove("button-gris");
+        }
+    });
+</script>
+
+
+
+>>>>>>> 896805e1d90821bcd8612f1b08e19392fa1438cd
 </html>

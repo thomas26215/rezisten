@@ -1,8 +1,7 @@
 <article class="content">
 
-    <h2 class="titre">Ajouter un personnage</h2>
-
-    <form method="post" action="index.php?ctrl=personnages&article=ajouterPersonnage" class="articleContainer" enctype="multipart/form-data">
+    <form method="post" action="index.php?ctrl=personnages&article=ajouterPersonnage&id=<?= $id ?>"
+        class="articleContainer" enctype="multipart/form-data">
         <input type="hidden" name="ctrl" value="personnages">
         <input type="hidden" name="article" value="ajouterPersonnage">
         <input type="hidden" name="action" value="ajouterCharacter">
@@ -12,7 +11,7 @@
                 <label for="prenom">Prénom</label>
                 <input maxlength="15" type="text" id="prenom" name="prenom" placeholder="Pierre">
             </div>
-           
+
         </div>
 
         <div class="image">
@@ -28,7 +27,27 @@
             </div>
         </div>
 
-        <button type="submit">Ajouter personnage</button>
+        <button type="button" id="ajouterOuvrir">Ajouter personnage</button>
+        <dialog class="dialog" id="dialogAjouter">
+            <div class="containerDialog">
+                <h2>Voulez vous enregistrer le personnage <?= $selectedCharacter?->getFirstName() ?? "Jean"; ?> ?</h2>
+                <div>
+
+                    <button type="submit" id="fermerAjouter" name="fermer" class="button-vert">
+                        Oui
+                    </button>
+                    <button type="button" id="revenirAjouter" class="button-rouge">
+                        Non
+                    </button>
+                </div>
+            </div>
+        </dialog>
+        <p><?= $message ?></p>
+        <?php if (isset($errorMessage)) {
+            ?>
+            <p><?= $errorMessage ?></p><?php
+        }
+        ?>
     </form>
 
 </article>

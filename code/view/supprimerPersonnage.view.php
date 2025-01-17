@@ -1,9 +1,9 @@
 <article class="content">
-    <h2 class="titre">Supprimer un personnage</h2>
 
     <div class="articleContainer">
 
-        <form method="post" action="index.php?ctrl=personnages&article=supprimerPersonnage" class="articleContainer">
+        <form method="post" action="index.php?ctrl=personnages&article=supprimerPersonnage&id=<?= $id ?>"
+            class="">
             <input type="hidden" name="ctrl" value="personnages">
             <input type="hidden" name="action" value="selectCharacter">
             <div class="personnage">
@@ -28,7 +28,7 @@
                 </div>
             </div>
 
-            <div class="supContainer">
+            <div class="supContainer imageButton">
                 <?php
                 $imgSrc = '';
                 if ($selectedCharacter && $selectedCharacter->getCreator()->getId() == 4) {
@@ -39,23 +39,22 @@
                 ?>
                 <img src="<?= $imgSrc ?>" alt="<?= $selectedCharacter?->getFirstName() ?? "Jean"; ?>"
                     alt="<?= $selectedCharacter?->getFirstName() ?? "Jean"; ?>" style="max-width: 240px;">
-                <button type="button" id="dialogPublier" class="button-rouge">Supprimer</button>
+                <button type="button" id="supprimerOuvrir" class="button-rouge">Supprimer</button>
                 <div class="supprimer">
-                    <form method="post" action="index.php?ctrl=personnages&article=supprimerPersonnage">
+                    <form method="post" action="index.php?ctrl=personnages&article=supprimerPersonnage&id=<?= $id ?>">
                         <input type="hidden" name="ctrl" value="personnages">
                         <input type="hidden" name="characterId" value="<?= $selectedCharacter->getId() ?>">
                         <input type="hidden" name="action" value="supprimerPersonnage">
                         <input id="supprimerInput" type="hidden" name="fermer" value="false">
 
-                        <dialog id="dialog">
+                        <dialog class="dialog" id="dialogSupprimer">
                             <div class="containerDialog">
                                 <h2>Voulez vous supprimer <?= $selectedCharacter?->getFirstName() ?? "Jean"; ?> ?</h2>
                                 <div>
-
-                                    <button type="submit" id="fermerPublier" name="fermer" class="button-vert">
+                                    <button type="submit" id="fermerSupprimer" name="fermer" class="button-vert">
                                         Supprimer personnage
                                     </button>
-                                    <button type="button" id="fermerRevenir" class="button-rouge">
+                                    <button type="button" id="revenirSupprimer" class="button-rouge">
                                         Revenir
                                     </button>
                                 </div>
@@ -65,17 +64,13 @@
                 </div>
             </div>
         <?php else: ?>
+            <p><?= $message ?></p>
+            <?php if (isset($errorMessage)) {
+                ?>
+                <p><?= $errorMessage ?></p><?php
+            } ?>
             <p>Aucun personnage sélectionné. Veuillez en choisir un dans la liste.</p>
         <?php endif; ?>
     </div>
-
-    <script>
-        var submitSupprimer = document.getElementById("supprimerInput");
-        var submitButton = document.getElementById("fermerPublier");
-
-        submitButton.addEventListener("click", () => {
-            submitSupprimer.value = "true";
-        });
-    </script>
 
 </article>

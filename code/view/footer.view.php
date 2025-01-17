@@ -17,7 +17,6 @@
             </ul>
         </section>
         <section><a href="./view/conditionGeneralesDutilisation.view.php">Conditions générales d'utilisation</a></section>
-        <!-- TO DO : changer les liens pour les bonnes pages-->
         <section><a href="./view/partenaire.view.php">Partenaires</a></section>
         <section><a href="./view/contact.view.php">Contactez-nous</a></section>
     </article>

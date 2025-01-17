@@ -49,7 +49,6 @@ class lieuxTest extends TestCase {
 
     public function testReadAll() {
         $readPlaces = Place::readAll();
-        var_dump ($readPlaces);
         $this->assertEquals(count($readPlaces) ,17 );
     }
     public function testReadAllReturnsArray()

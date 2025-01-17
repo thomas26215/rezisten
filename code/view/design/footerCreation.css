@@ -1,0 +1,16 @@
+footer {
+    position: relative;
+    width: 100%;
+}
+
+#first-a {
+    position: absolute;
+    left: 20px;
+    /* Ajustez selon vos besoins */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.img {
+    max-height: 150px;
+}

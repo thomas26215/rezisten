@@ -7,26 +7,39 @@ include_once('./framework/view.fw.php');
 
 $user = $_SESSION["user_id"];
 
-$idChap = $_GET['idChap'];
+$idChap = htmlspecialchars($_GET['idChap']);
 $nomChap = Chapter::read($idChap)->getTitle();
 
-// Récupérer les IDs des histoires pour le chapitre donné
-$storyIds = Story::getStoryIdsByChapter($idChap);
+try {
+    $storyIds = Story::getStoryIdsByChapter($idChap);
+} catch (RuntimeException $e) {
+    echo "Impossible de lire les ids des histoires";
+}
 
 // Lire chaque histoire et les stocker dans une liste
 $stories = [];
 $progressions = [];
 
-foreach ($storyIds as $storyId) {
-    $story = Story::read($storyId);
-    if ($story !== null && $story->getVisibility() !== false) {
-        $stories[] = $story;
-        $progression = Progression::read($user, $storyId);
-        if ($progression !== null) {
-            $progressions[$storyId] = $progression;
+try {
+    foreach ($storyIds as $storyId) {
+        $story = Story::read($storyId);
+        if ($story->getVisibility() !== false) {
+            $stories[] = $story;
+            try {
+                $progression = Progression::read($user, $storyId);
+                if ($progression !== null) {
+                    $progressions[$storyId] = $progression;
+                }
+            } catch (RuntimeException $e) {
+                echo $e->getMessage();
+            }
         }
     }
+} catch (RuntimeException $e) {
+    echo $e->getMessage();
 }
+
+
 
 // Assignation à la vue :
 $view = new View();

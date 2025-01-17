@@ -1,9 +1,8 @@
 <article class="content">
 
-    <h2 class="titre">Modifier un personnage</h2>
     <div class="articleContainer">
 
-        <form method="post" action="index.php?ctrl=personnages&article=modifierPersonnage" class="articleContainer"
+        <form method="post" action="index.php?ctrl=personnages&article=modifierPersonnage&id=<?= $id ?>" class=""
             enctype="multipart/form-data">
             <div class="personnage">
                 <label for="personnage">Personnage à modifier : </label>
@@ -19,7 +18,7 @@
 
         </form>
         <?php if ($selectedCharacter): ?>
-            <form method="post" action="index.php?ctrl=personnages&article=modifierPersonnage"
+            <form method="post" action="index.php?ctrl=personnages&article=modifierPersonnage&id=<?= $id ?>"
                 enctype="multipart/form-data" class="articleContainer">
                 <input type="hidden" name="ctrl" value="personnages">
                 <input type="hidden" name="action" value="updateCharacter">
@@ -38,7 +37,7 @@
                     <div class="imageChoisi">
                         <p>Image</p>
                         <input type="file" id="photoUpload" name="photoUpload" accept="image/*" style="display: none;">
-                        <img id="photoSend"  src="./view/design/image/upload.png" alt="">
+                        <img id="photoSend" src="./view/design/image/upload.png" alt="">
                         <span id="fileName">Pas de fichier ajoutée</span>
                     </div>
 
@@ -51,16 +50,38 @@
                             $imgSrc = './view/design/image/imageUser/' . ($selectedCharacter->getImage() ?? "default");
                         }
                         ?>
-                        <img src="<?= $imgSrc ?>" alt="<?= $selectedCharacter?->getFirstName() ?? "Jean"; ?>"
+                        <img id="img" src="<?= $imgSrc ?>" alt="<?= $selectedCharacter?->getFirstName() ?? "Jean"; ?>"
                             alt="<?= $selectedCharacter?->getFirstName() ?? "Jean"; ?>" style="max-width: 240px;">
                     </div>
                 </div>
 
-                <button type="submit" class="button-vert">Enregistrer les modifications</button>
+                <button type="button" class="button-vert" id="modifierOuvrir">Enregistrer les modifications</button>
+                <dialog class="dialog" id="dialogModifier">
+                    <div class="containerDialog">
+                        <h2>Voulez vous modifier ce personnage ?</h2>
+                        <div>
+
+                            <button type="submit" id="fermerModifier" name="fermer" class="button-vert">
+                                Oui
+                            </button>
+                            <button type="button" id="revenirModifier" class="button-rouge">
+                                Annuler modifications
+                            </button>
+                        </div>
+                    </div>
+                </dialog>
             </form>
         <?php else: ?>
+            <p><?= $message ?></p>
+            <?php if (isset($errorMessage)) {
+                ?>
+                <p><?= $errorMessage ?></p><?php
+            }
+            ?>
             <p>Aucun personnage sélectionné. Veuillez en choisir un dans la liste.</p>
         <?php endif; ?>
+
+
     </div>
 
 </article>

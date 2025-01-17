@@ -9,14 +9,14 @@ class Progression
     private User $user;
     private Story $story;
     private bool $statut;
-    private $dao;
+    private DAO $dao;
+
     public function __construct(User $user, Story $story, bool $statut)
     {
         $this->setUser($user);
         $this->setHistory($story);
         $this->setStatus($statut);
         $this->dao = DAO::getInstance();
-
     }
 
     /* --- Getters --- */
@@ -40,16 +40,16 @@ class Progression
 
     public function setUser(User $user): void
     {
-        if ($user === NULL) {
-            throw new Exception("L'utilisateur ne peut pas être null");
+        if ($user === null) {
+            throw new InvalidArgumentException("L'utilisateur ne peut pas être null.");
         }
         $this->user = $user;
     }
 
     public function setHistory(Story $story): void
     {
-        if ($story === NULL) {
-            throw new Exception("L'histoire ne peut pas être null");
+        if ($story === null) {
+            throw new InvalidArgumentException("L'histoire ne peut pas être null.");
         }
         $this->story = $story;
     }
@@ -61,84 +61,111 @@ class Progression
 
     /* --- Méthodes CRUD --- */
 
-    public function create(): bool
+    public function create(): void
     {
         $userId = $this->user->getId();
         $historyId = $this->story->getId();
 
         if ($userId < 1) {
-            throw new Exception("Impossible de créer une demande : Aucun utilisateur ne correspond à l'id fournit");
+            throw new RuntimeException("Impossible de créer une progression : Aucun utilisateur ne correspond à l'ID fourni.");
         }
+        
         if ($historyId < 1) {
-            throw new Exception("Impossible de créer une demande : Aucune histoire ne correspond à l'id fournit");
+            throw new RuntimeException("Impossible de créer une progression : Aucune histoire ne correspond à l'ID fourni.");
         }
-        if (
-            $this->dao->insertRelatedData("PROGRESSION", [
+        
+        try {
+            if (!$this->dao->insert("progression", [
                 "id_utilisateur" => $userId,
                 "id_hist" => $historyId,
-                "statut" => $this->statut,
-            ])
-        ) {
-            return true;
-        } else {
-            return false;
+                "statut" => (int)$this->statut,
+            ])) {
+                throw new RuntimeException("Échec de l'insertion de la progression dans la base de données.");
+            }
+        } catch (PDOException $e) {
+            throw new RuntimeException("Erreur lors de la création de la progression : " . $e->getMessage(), 0, $e);
         }
     }
 
     public static function read(int $user_id, int $story_id): ?Progression
     {
-        $dao = DAO::getInstance();
-        $progressionDatas = $dao->getColumnWithParameters("progression", ["id_utilisateur" => $user_id, "id_hist" => $story_id]);
-        if ($progressionDatas) {
-            $progressionData = $progressionDatas[0];
-            $newUser = User::read($user_id);
-            $newHistory = Story::read($story_id);
-            return new Progression(
-                $newUser,
-                $newHistory,
-                $progressionData["statut"]
-            );
-        }
-        return null;
-    }
+        try {
+            $dao = DAO::getInstance();
+            $progressionDatas = $dao->getWithParameters("progression", ["id_utilisateur" => (int)$user_id, "id_hist" => (int)$story_id]);
 
-    public function update(): bool
-    {
-        if ($this->user === NULL || $this->user->getId() < 1) {
-            throw new Exception("Impossible de mettre à jour la progression : L'utilisateur est invalide");
-        }
-        if ($this->story === NULL || $this->story->getId() < 1) {
-            throw new Exception("Impossible de mettre à jour la progression : L'histoire est invalide");
-        }
-        return $this->dao->update("progression", [
-            "statut" => $this->statut
-        ], [
-            "id_utilisateur" => (int) $this->user->getId(),
-            "id_hist" => (int) $this->story->getId()
-        ]) > 0;
-    }
-
-
-    public static function delete(int $id_utilisateur, int $id_history): bool
-    {
-        if ($id_utilisateur > 0 && $id_history > 0) {
-            return DAO::getInstance()->deleteDatas("progression", ["id_utilisateur" => (int) $id_utilisateur, "id_hist" => (int) $id_history]);
-        }
-        return false;
-    }
-    public static function areAllStoriesUnlocked(int $userId, int $chapterId): bool /* Pas testé, faite par quentin */
-    //TODO: A tester
-    {
-        $storyIds = Story::getStoryIdsByChapter($chapterId);
-        foreach ($storyIds as $storyId) {
-            $progression = self::read($userId, $storyId);
-            if (!$progression || !$progression->getStatus()) {
-                return false;
+            if ($progressionDatas) {
+                return new Progression(
+                    User::read($user_id),
+                    Story::read($story_id),
+                    (bool)$progressionDatas[0]["statut"]
+                );
             }
+            return null; // Pas d'exception ici, car cela peut être un cas valide.
+        } catch (PDOException $e) {
+            throw new RuntimeException("Erreur lors de la lecture de la progression : " . $e->getMessage(), 0, $e);
         }
-        return true;
     }
 
+    public function update(): void
+    {
+        if ($this->user === null || $this->user->getId() < 1) {
+            throw new RuntimeException("Impossible de mettre à jour la progression : L'utilisateur est invalide.");
+        }
+        
+        if ($this->story === null || $this->story->getId() < 1) {
+            throw new RuntimeException("Impossible de mettre à jour la progression : L'histoire est invalide.");
+        }
+
+        try {
+            if ($this->dao->update("progression", [
+                "statut" => (int)$this->statut
+            ], [
+                "id_utilisateur" => (int)$this->user->getId(),
+                "id_hist" => (int)$this->story->getId()
+            ]) === 0) {
+                throw new RuntimeException("Aucune donnée n'a été mise à jour dans la base de données.");
+            }
+        } catch (PDOException $e) { 
+           throw new RuntimeException("Erreur lors de la mise à jour de la progression : " . $e.getMessage(), 0, $e); 
+       } 
+   }
+
+   public static function delete(int $id_utilisateur, int $id_history): void
+   {
+       if ($id_utilisateur <= 0 || $id_history <= 0) { 
+           throw new InvalidArgumentException("Les IDs doivent être supérieurs à zéro."); 
+       } 
+
+       try { 
+           if (!DAO::getInstance()->delete("progression", ["id_utilisateur" => (int)$id_utilisateur, "id_hist" => (int)$id_history])) { 
+               throw new RuntimeException("Échec de la suppression de la progression dans la base de données."); 
+           } 
+       } catch (PDOException $e) { 
+           throw new RuntimeException("Erreur lors de la suppression de la progression : " . $e.getMessage(), 0, e); 
+       } 
+   }
+
+   public static function areAllStoriesUnlocked(int $userId, int $chapterId): bool /* Pas testé */
+   //TODO: A tester
+   {
+       try { 
+           // Récupérer les IDs des histoires dans le chapitre donné.
+           $storyIds = Story::getStoryIdsByChapter($chapterId); 
+
+           foreach ($storyIds as $storyId) { 
+               // Vérifier si chaque histoire est débloquée.
+               $progression = self::read($userId, $storyId); 
+               if (!$progression || !$progression->getStatus()) { 
+                   return false; 
+               } 
+           } 
+
+           return true; // Toutes les histoires sont débloquées.
+       } catch (PDOException $e) { 
+           throw new RuntimeException("Erreur lors de la vérification des histoires débloquées : " . e.getMessage(), 0, e); 
+       } 
+   }
 }
 
 ?>
+

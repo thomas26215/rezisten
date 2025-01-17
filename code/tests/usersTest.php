@@ -11,25 +11,24 @@ class usersTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->user = new User("prapra", "brayan", "bils", "24-08-2005", "bilsbrayan@gmail.com", "2706", "a");
+        $this->user = new User("pseudoUserTest", "brayan", "bils", "24-08-2005", "test@autre.fr", "2706", "j", true);
     }
 
     public function testGetters()
     {
         $this->assertEquals("24-08-2005", $this->user->getBirthDate());
         $this->assertEquals("brayan", $this->user->getFirstName());
-        $this->assertEquals("bilsbrayan@gmail.com", $this->user->getMail());
-        $this->assertEquals("a", $this->user->getRole());
+        $this->assertEquals("test@autre.fr", $this->user->getMail());
+        $this->assertEquals("j", $this->user->getRole());
         $this->assertEquals("bils", $this->user->getSurname());
-        $this->assertEquals("prapra", $this->user->getUsername());
+        $this->assertEquals("pseudoUserTest", $this->user->getUsername());
     }
 
     public function testCreate()
     {
-        $this->assertTrue($this->user->create());
+        $this->user->create();
         $this->assertGreaterThan(0, $this->user->getId());
 
-        // Vérification des données dans la base
         $readUser = User::read($this->user->getId());
         $this->assertInstanceOf(User::class, $readUser);
         $this->assertEquals($this->user->getUsername(), $readUser->getUsername());
@@ -47,7 +46,7 @@ class usersTest extends TestCase
     {
         $this->user->create();
         $this->user->setFirstName("BrayanModifié");
-        $this->assertTrue($this->user->update());
+        $this->user->update();
         $updatedUser = User::read($this->user->getId());
         $this->assertEquals("BrayanModifié", $updatedUser->getFirstName());
     }
@@ -55,8 +54,9 @@ class usersTest extends TestCase
     public function testDelete()
     {
         $this->user->create();
-        $this->assertTrue(User::delete($this->user->getId()));
-        $this->assertNull(User::read($this->user->getId()));
+        User::delete($this->user->getId());
+        $this->expectException(RuntimeException::class);
+        User::read($this->user->getId());
     }
 
     public function testSetters()
@@ -67,43 +67,99 @@ class usersTest extends TestCase
         $this->user->setBirthDate("01-01-2000");
         $this->user->setMail("new@email.com");
         $this->user->setPassword("newPassword");
-        $this->user->setRole("b");
+        $this->user->setRole("a");
 
         $this->assertEquals("newUsername", $this->user->getUsername());
         $this->assertEquals("newFirstName", $this->user->getFirstName());
         $this->assertEquals("newSurname", $this->user->getSurname());
         $this->assertEquals("01-01-2000", $this->user->getBirthDate());
         $this->assertEquals("new@email.com", $this->user->getMail());
-        $this->assertEquals("b", $this->user->getRole());
+        $this->assertEquals("a", $this->user->getRole());
     }
 
     public function testCreateWithInvalidData()
     {
-        $this->expectException(Exception::class);
-        $invalidUser = new User("", "", "", "", "", "", "");
-        $invalidUser->create();
+        $this->expectException(InvalidArgumentException::class);
+        $invalidUser = new User("", "", "", "", "", "", "", true);
     }
 
     public function testReadNonExistentUser()
     {
-        $this->assertNull(User::read(99999));
+        $this->expectException(RuntimeException::class);
+        User::read(99999);
     }
 
     public function testUpdateNonExistentUser()
     {
-        $nonExistentUser = new User("test", "test", "test", "01-01-2000", "test@test.com", "password", "a", 99999);
-        $this->assertFalse($nonExistentUser->update());
+        $this->expectException(RuntimeException::class);
+        $nonExistentUser = new User("test", "test", "test", "01-01-2000", "test@test.com", "password", "j", true, 99999);
+        $nonExistentUser->update();
     }
 
     public function testDeleteNonExistentUser()
     {
-        $this->assertFalse(User::delete(99999));
+        $this->expectException(RuntimeException::class);
+        User::delete(99999);
+    }
+
+    public function testCreateDuplicateUsername()
+    {
+        $this->user->create();
+        $duplicateUser = new User("pseudoUserTest", "John", "Doe", "01-01-1990", "john@example.com", "password", "j", true);
+        $this->expectException(RuntimeException::class);
+        $duplicateUser->create();
+    }
+
+    public function testCreateDuplicateEmail()
+    {
+        $this->user->create();
+        $duplicateUser = new User("johndoe", "John", "Doe", "01-01-1990", "test@autre.fr", "password", "j", true);
+        $this->expectException(RuntimeException::class);
+        $duplicateUser->create();
+    }
+
+    public function testInvalidBirthDate()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        new User("test", "Test", "User", "invalid-date", "test@example.com", "password", "j", true);
+    }
+
+    public function testInvalidEmail()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        new User("test", "Test", "User", "01-01-1990", "invalid-email", "password", "j", true);
+    }
+
+    public function testInvalidRole()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        new User("test", "Test", "User", "01-01-1990", "test@example.com", "password", "x", true);
+    }
+
+    public function testPasswordHashing()
+    {
+        $plainPassword = "myPassword123";
+        $user = new User("testuser", "Test", "User", "01-01-1990", "test@example.com", $plainPassword, "j", true);
+        $this->assertNotEquals($plainPassword, $user->getPassword());
+        $this->assertTrue(password_verify($plainPassword, $user->getPassword()));
+    }
+
+    public function testReadWithMail()
+    {
+        $this->user->create();
+        $foundUser = User::readWithMail($this->user->getMail());
+        $this->assertInstanceOf(User::class, $foundUser);
+        $this->assertEquals($this->user->getId(), $foundUser->getId());
     }
 
     protected function tearDown(): void
     {
         if (isset($this->user) && $this->user->getId() > 0) {
-            User::delete($this->user->getId());
+            try {
+                User::delete($this->user->getId());
+            } catch (RuntimeException $e) {
+                // Ignorer l'exception si l'utilisateur n'existe pas déjà
+            }
         }
     }
 }

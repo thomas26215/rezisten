@@ -55,7 +55,13 @@ button {
     /* Forme du bouton */
     font-size: 20px;
     cursor: pointer;
+    transition: transform 0.15s ease-in-out;
 
+
+    /* Aligner le texte au centre (en hauteur)*/
+    display: flex;
+    justify-content: center;
+    align-items: center; 
 }
 
 button::before {
@@ -101,10 +107,15 @@ button:hover{
     background-color: var(--gris);
 }
 
+.button-vide{
+    opacity: 0;
+    cursor: initial;
+}
+
 
 a {
     text-decoration: none;
-    color: white;
+    color: var(--beige-ecriture);
 }
 
 .flex-row {
@@ -126,7 +137,12 @@ select, input, textarea{
     border: 1px solid var(--noir);
 }
 
-.error{
+.text-error{
     font-weight: bold;
     color: var(--rouge);
+}
+
+.link{
+    color: #0051db;
+    text-decoration: underline;
 }

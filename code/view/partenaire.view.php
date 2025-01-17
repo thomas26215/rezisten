@@ -25,7 +25,7 @@
                             La région Auvergne-Rhône-Alpes vous accompagne dans la découverte des hauts lieux de la
                             résistance de la région.
                         </p>
-                        <a href="https://www.auvergnerhonealpes.fr/">Voir le site web</a>
+                        <a href="https://www.auvergnerhonealpes.fr/" class="link">Voir le site web</a>
                     </section>
                 </article>
             </li>
@@ -38,7 +38,7 @@
                             Le mémorial de la Résistance retrace la vie pendant la guerre des valeureux résistants qui
                             se sont cachés sur ce plateau du Vercors.
                         </p>
-                        <a href="https://www.parc-du-vercors.fr/resistance/home">Voir le site web</a>
+                        <a href="https://www.parc-du-vercors.fr/resistance/home" class="link">Voir le site web</a>
                     </section>
                 </article>
             </li>
@@ -63,7 +63,7 @@
                             historiques et
                             labellisée Maison des illustres.
                         </p>
-                        <a href="https://www.ville-caluire.fr/culture-sport-associations/memorial-jean-moulin">Voir le
+                        <a href="https://www.ville-caluire.fr/culture-sport-associations/memorial-jean-moulin" class="link">Voir le
                             site web</a>
                     </section>
                 </article>

@@ -11,11 +11,10 @@ include_once('./model/users.class.php');
 
 
 // Récupération des données de la query string et initialisation de variables
-$idStory = $_GET['idStory'];
-$idDialog = $_GET['idDialog'];
-$prevSpeaker = $_GET['prevSpeaker'] ?? "none";
+$idStory = htmlspecialchars($_GET['idStory']);
+$idDialog = htmlspecialchars($_GET['idDialog']);
+$prevSpeaker = htmlspecialchars($_GET['prevSpeaker']) ?? "none";
 $_SESSION['lastDialog'] = $idDialog;
-
 
 
 $imgURL = "https://localhost:8080/rezisten/imgPersonnage/";
@@ -33,7 +32,11 @@ $story = Story::read($idStory);
 
 
 $firstBonus = Dialog::readFirstBonus($idStory);
-$dialogPrev = Dialog::read($idDialog - 1, $idStory);
+if($idDialog - 1 > 0){
+    $dialogPrev = Dialog::read($idDialog - 1, $idStory);
+}else{
+    $dialogPrev = Dialog::read(1,$idStory);
+}
 
 
 if ($dialog === null) {
@@ -78,8 +81,11 @@ if ($dialog === null) {
         $view->display('finHistoire');
     
 }
+
+
 // Gestion du background
 $background = $backgroundURL."hist_".$idStory."bg1.webp";
+
 // Permet de vérifier quel background est stocké dans la session si on change subitement d'histoire
 if(isset($_SESSION['background'])){
     $bgSession = explode('_',$_SESSION['background']);
@@ -100,8 +106,23 @@ $_SESSION['background'] = $background;
 
 
 // Si le dialogue repère est détecté on bascule sur la question en appelant la vue avec les bonnes données
-if($dialog->getContent() == "limquestion"){
-    $question = Question::read($idStory,'s');
+if($story->getChapter()->getNumchap() != 100){
+    if($dialog->getContent() == "limquestion"){
+        $question = Question::read($idStory,'s');
+        $_SESSION['idStory'] = $idStory;
+        $_SESSION['idDialog'] = $idDialog;
+        $_SESSION['difficulty'] = "spécifique";
+        
+    
+        $view->assign('background',$background);
+        $view->assign('error','');
+        $view->assign('story',$story);
+        $view->assign('question',$question);
+        $view->display('question');
+}
+
+}elseif($dialog->getContent() == "limquestion"){
+    $question = Question::read($idStory,'g');
     $_SESSION['idStory'] = $idStory;
     $_SESSION['idDialog'] = $idDialog;
     $_SESSION['difficulty'] = "spécifique";

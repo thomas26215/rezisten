@@ -22,11 +22,11 @@ class EmailSender {
         $this->mail->isSMTP();
         $this->mail->Host = "smtp.gmail.com";
         $this->mail->SMTPAuth = true;
-        $this->mail->Username = "venouilthomas123456@gmail.com";
-        $this->mail->Password = "fvmb zele kayh ynej";
+        $this->mail->Username = "rezisten.contact@gmail.com";
+        $this->mail->Password = "ovvs sfdd yuiq lpkv";
         $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $this->mail->Port = 587;
-        $this->mail->setFrom("venouilthomas123456@gmail.com", "rezisten");
+        $this->mail->setFrom("rezisten.contact@gmail.com", "rezisten");
     }
 
     public function setDestination(string $destination) {
@@ -78,7 +78,7 @@ class EmailSender {
                     <p>Pour débloquer votre compte et accéder aux ressources sécurisées, 
                     utilisez le code d'activation top-secret : {$code}</p>
                     
-                    <a href="{$link}" style="display:block;background-color:#33553d;color:white;padding:10px;text-decoration:none;text-align:center;">
+                    <a href="http://localhost/rendus/code/index.php?ctrl=verifierCompte" style="display:block;background-color:#33553d;color:white;padding:10px;text-decoration:none;text-align:center;">
                     ACTIVER MON COMPTE</a>
                 </div>
                 
@@ -122,7 +122,7 @@ class EmailSender {
                     
                     <p>Une fois qu'il a ce code, il pourra t'aider à réinitialiser ton mot de passe.</p>
 
-                    <a href="{$link}" style="display:block;background-color:#33553d;color:white;padding:10px;text-decoration:none;text-align:center;">
+                    <a href="http://localhost/rendus/code/index.php?ctrl=changermotdepasse" style="display:block;background-color:#33553d;color:white;padding:10px;text-decoration:none;text-align:center;">
                     RÉINITIALISER MON MOT DE PASSE</a>
                 </div>
                 
@@ -140,6 +140,41 @@ class EmailSender {
         $this->mail->addAddress($destination);
         $this->mail->isHTML(true);
         $this->mail->Subject = "=?UTF-8?B?" . base64_encode("🔐 Récupération de Mot de Passe") . "?=";
+        $this->mail->Body = $emailTemplate;
+
+        return $this->mail->send();
+    }
+
+    public function sendUserMessageToRezisten(string $userEmail, string $userName, string $subject, string $message) {
+        $emailTemplate = <<<HTML
+        <html>
+        <body style="background-color:#ebe6d6;">
+            <div style="text-align:center;background-color:#221818;color: green;padding:20px;">
+                <h1>📬 MESSAGE D'UN UTILISATEUR 📬</h1>
+            </div>
+            
+            <div style="padding:20px;">
+                <p><strong>De :</strong> {$userName} ({$userEmail})</p>
+                <p><strong>Sujet :</strong> {$subject}</p>
+                
+                <div style="background-color:#e0ffe0;padding:15px;border-radius:10px;">
+                    <h2>📝 Message</h2>
+                    <p>{$message}</p>
+                </div>
+                
+                <footer style="font-size:small;color:gray;margin-top:20px;">
+                    Ce message a été envoyé via le formulaire de contact du site.
+                </footer>
+            </div>
+        </body>
+        </html>
+        HTML;
+
+        $this->mail->clearAddresses();
+        $this->mail->setFrom($userEmail, $userName);
+        $this->mail->addAddress('rezisten.contact@gmail.com', 'Rezisten');
+        $this->mail->isHTML(true);
+        $this->mail->Subject = "=?UTF-8?B?" . base64_encode("Message de l'utilisateur: " . $subject) . "?=";
         $this->mail->Body = $emailTemplate;
 
         return $this->mail->send();
