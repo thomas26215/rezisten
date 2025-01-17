@@ -12,23 +12,23 @@ INSERT INTO CHAPITRES(numchap,titre) values(0,'Prologue'),
 
 
 --Création d'une hisoitr pour le prologue et deux pour le chapitre 1
-INSERT INTO HISTOIRES(titre,numchap,createur,id_lieu,background,visible) values('Un jour de septembre',0,4,11,'hist0_bg',true),
-('Une rencontre fortuite',1,4,8,'hist1_bg',true),
-('Sabotage',1,4,6,'hist_2bg',true),
-('De chaleureuses retrouvailles',2,4,8,'hist3_bg',true);
+INSERT INTO HISTOIRES(titre,numchap,createur,id_lieu,background,visible) values('Un jour de septembre',0,1,11,'hist0_bg',true),
+('Une rencontre fortuite',1,1,8,'hist1_bg',true),
+('Sabotage',1,1,6,'hist_2bg',true),
+('De chaleureuses retrouvailles',2,1,8,'hist3_bg',true);
 
 
 --Création de deux personnages participants au prologue
 INSERT INTO PERSONNAGES(prenom,img,createur) values('Raymond','raymond',4), --1
-('Pierre','pierre',4),   --2
-('Jean','jean',4),       --3
-('André','andre',4),     --4
-('David','david',4),     --5
-('Michel','michel',4),   --6
-('Marie','marie',4),     --7
-('Milicien','milicien',4), --8
-('Inconnu','inconnu',4),   --9
-('Narrateur','narrateur',4); --10
+('Pierre','pierre',1),   --2
+('Jean','jean',1),       --3
+('André','andre',1),     --4
+('David','david',1),     --5
+('Michel','michel',1),   --6
+('Marie','marie',1),     --7
+('Milicien','milicien',1), --8
+('Inconnu','inconnu',1),   --9
+('Narrateur','narrateur',1); --10
 
 
 
