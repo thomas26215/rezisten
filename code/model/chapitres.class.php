@@ -97,20 +97,21 @@ class Chapter
         }
     }
 
-    public static function delete(int $num_chapter): void {
+    public static function delete(int $num_chapter): bool {
         if ($num_chapter <= 0) {
             throw new InvalidArgumentException("Le numéro de chapitre doit être supérieur à zéro.");
         }
-
+    
         try {
-            if (!DAO::getInstance()->delete("chapitres", ["numchap" => (int)$num_chapter])) {
-                throw new RuntimeException("Échec de la suppression du chapitre dans la base de données.");
+            $deleted = DAO::getInstance()->delete("chapitres", ["numchap" => (int)$num_chapter]);
+            if (!$deleted) {
+                return false;  
             }
+            return true;
         } catch (PDOException $e) {
             throw new RuntimeException("Erreur lors de la suppression du chapitre : " . $e->getMessage(), 0, $e);
         }
-    }
-}
+    }}
 
 ?>
 
