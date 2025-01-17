@@ -11,7 +11,6 @@ $idChap = $_GET['idChap'];
 $nomChap = Chapter::read($idChap)->getTitle();
 
 try {
-    echo $idChap;
     $storyIds = Story::getStoryIdsByChapter($idChap);
 } catch (RuntimeException $e) {
     echo "Impossible de lire les ids des histoires";
@@ -25,7 +24,6 @@ try {
     foreach ($storyIds as $storyId) {
         $story = Story::read($storyId);
         if ($story->getVisibility() !== false) {
-            echo "ok";
             $stories[] = $story;
             try {
                 $progression = Progression::read($user, $storyId);

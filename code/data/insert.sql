@@ -1,8 +1,7 @@
 -- Création de 3 utilisateurs illustrant chacun un rôle spécifique.
-INSERT INTO UTILISATEURS(pseudo,prenom,nom,datenaiss,mail,mot_de_passe,role) VALUES('tritri','tristan','font','14/06/2005','tritri@gmail.com','1945lo1234','j'),
-('aiel','quentin','pingouin','12/10/2000','aiel.gaming@gmail.com','lepgm2024du','j'),
-('jeanm','jean','mejean','10/08/1978','jean.mejean@gmail.com','12hist34prof ','c'),
-('admin_rezisten','admin','admin','12/06/1999','admin.rezisten@rezisten.fr','jesuisadmin2025','a');
+INSERT INTO UTILISATEURS(pseudo,prenom,nom,datenaiss,mail,mot_de_passe,role) VALUES
+('admin_rezisten','rezisten','rezisten','12/10/2000','rezisten.contact@gmail.com','$2y$10$v0mMwzjy8YmJFF6ePx4tyOe.TvQzv2Vipx.oYiftj.UM3YsV2dz.m','a');
+
 
 
 --Création des deux premiers chapitres de l'histoire

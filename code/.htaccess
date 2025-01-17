@@ -1,25 +1,21 @@
-# On commence par refuser l'accès puis on l'autorise 
-Order deny,allow
-
-# On refuse tout puis on fera des exceptions
-Deny from all
+# On refuse tout par défaut
+Require all denied
 
 # On autorise l'accès à index.php
-<FilesMatch "^(index\.php)?$">
-    Allow from all
+<FilesMatch "^index\.php$">
+    Require all granted
 </FilesMatch>
 
-# On autorise les fichiers css et js
-<Files "*.css">
-    Allow from all
-</Files>
-<Files "*.js">
-    Allow from all
-</Files>
+# On autorise les fichiers CSS et JS
+<FilesMatch "\.(css|js)$">
+    Require all granted
+</FilesMatch>
 
-
-# Mise en place du renommage des différentes pages sans extension html puis php
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^([^.]+)$ $1.php [NC,L]
-
+# On autorise quelques vues spécifiques
+<FilesMatch "^(conditionGeneralesDutilisation\.view\.php|contact\.view\.php|partenaire\.view\.php)$">
+    Require all granted
+</FilesMatch>
+# On autorise la lecture des images 
+<FilesMatch "\.(png)$">
+    Require all granted
+</FilesMatch>

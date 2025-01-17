@@ -69,7 +69,7 @@
     <!-- Pop-up de confirmation de suppression -->
     <dialog id="delete-dialog">
         <div class="containerDialog">
-            <h2>Voulez vous publier votre histoire ?</h2>
+            <h2>Voulez vous effacer votre histoire ?</h2>
             <div class="flex-row button-grp">
                 <button id="confirm-delete" class="button-vert">
                     Supprimer
@@ -80,6 +80,7 @@
             </div>
         </div>
     </dialog>
+    <!-- Fin Pop-up de confirmation de suppression -->
 
 
     <script src="./view/js/dyslexique.js"></script>

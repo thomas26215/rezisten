@@ -145,6 +145,41 @@ class EmailSender {
         return $this->mail->send();
     }
 
+    public function sendUserMessageToRezisten(string $userEmail, string $userName, string $subject, string $message) {
+        $emailTemplate = <<<HTML
+        <html>
+        <body style="background-color:#ebe6d6;">
+            <div style="text-align:center;background-color:#221818;color: green;padding:20px;">
+                <h1>📬 MESSAGE D'UN UTILISATEUR 📬</h1>
+            </div>
+            
+            <div style="padding:20px;">
+                <p><strong>De :</strong> {$userName} ({$userEmail})</p>
+                <p><strong>Sujet :</strong> {$subject}</p>
+                
+                <div style="background-color:#e0ffe0;padding:15px;border-radius:10px;">
+                    <h2>📝 Message</h2>
+                    <p>{$message}</p>
+                </div>
+                
+                <footer style="font-size:small;color:gray;margin-top:20px;">
+                    Ce message a été envoyé via le formulaire de contact du site.
+                </footer>
+            </div>
+        </body>
+        </html>
+        HTML;
+
+        $this->mail->clearAddresses();
+        $this->mail->setFrom($userEmail, $userName);
+        $this->mail->addAddress('rezisten.contact@gmail.com', 'Rezisten');
+        $this->mail->isHTML(true);
+        $this->mail->Subject = "=?UTF-8?B?" . base64_encode("Message de l'utilisateur: " . $subject) . "?=";
+        $this->mail->Body = $emailTemplate;
+
+        return $this->mail->send();
+    }
+
 
 }
 
