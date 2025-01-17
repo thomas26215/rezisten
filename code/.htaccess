@@ -19,3 +19,11 @@ Require all denied
 <FilesMatch "\.(png)$">
     Require all granted
 </FilesMatch>
+
+# Exception sur le favicon
+<FilesMatch "^code/view/favicon\.ico$">
+    Require all granted
+</FilesMatch>
+<Files "favicon.ico">
+    Require all granted
+</Files>
