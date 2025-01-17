@@ -34,10 +34,13 @@
             <div class="containerDialog">
                 <h2>Voulez vous supprimer ce dialogue ?</h2>
                 <div class="flex-row button-grp">
-                    <button id="confirm-delete" class="button-vert">
+                    
+                <form method="GET" action="index.php">
+                    <button type ="submit" id="confirm-delete" class="button-vert">
                         Supprimer
                     </button>
-                    <button id="cancel-delete" class="button-rouge">
+                </form>
+                    <button  id="cancel-delete" class="button-rouge">
                         Annuler
                     </button>
                 </div>
