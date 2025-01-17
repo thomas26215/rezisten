@@ -27,7 +27,22 @@
             </div>
         </div>
 
-        <button type="submit">Ajouter personnage</button>
+        <button type="button" id="ajouterOuvrir">Ajouter personnage</button>
+        <dialog class="dialog" id="dialogAjouter">
+            <div class="containerDialog">
+                <h2>Voulez vous enregistrer le personnage <?= $selectedCharacter?->getFirstName() ?? "Jean"; ?> ?</h2>
+                <div>
+
+                    <button type="submit" id="fermerAjouter" name="fermer" class="button-vert">
+                        Oui
+                    </button>
+                    <button type="button" id="revenirAjouter" class="button-rouge">
+                        Non
+                    </button>
+                </div>
+            </div>
+        </dialog>
+        <p><?= $message ?></p>
         <?php if (isset($errorMessage)) {
             ?>
             <p><?= $errorMessage ?></p><?php

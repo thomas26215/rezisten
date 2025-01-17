@@ -4,7 +4,7 @@ include_once('./model/personnages.class.php');
 include_once('./model/users.class.php');
 include_once('framework/view.fw.php');
 
-$id=$_GET['id'];
+$id = $_GET['id'];
 
 $imgURL = "http://localhost:8080/rezisten/imgPersonnage/";
 
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 throw new Exception("Le prénom ne peut pas être vide.");
             }
             if ($uploadedImage && $uploadedImage['error'] === UPLOAD_ERR_OK) {
-                
+
                 $uploadDirectory = './view/design/image/imageUser/';
                 $fileName = basename($uploadedImage['name']);
                 $filePath = $uploadDirectory . $fileName;
@@ -62,8 +62,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             $newCharacter = new Character($firstName, $imageName, $creator);
 
-            // Save to the database
+            
             $newCharacter->create();
+            $message = "Votre personnage a été crée.";
         } catch (Exception $e) {
             $errorMessage = $e->getMessage();
         }
@@ -123,15 +124,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $characterIdToDelete = (int) $_POST['characterId'];
         $character = Character::read($characterIdToDelete);
         if ($character->getCreator()->getId() != $idUser) {
-            $errorMessage = "Vous ne pouvez pas modifier ce personnage.";
+            $errorMessage = "Vous ne pouvez pas supprimer ce personnage.";
         }
 
         if (!isset($errorMessage)) {
-            if (Character::delete($characterIdToDelete)) {
-                var_dump("hello");
-                $message = "Le personnage a été supprimé avec succès.";
-                $characters = Character::readAllCharacters(); // Refresh character list
-            }
+            $character->delete($characterIdToDelete);
+            $message = "Votre personnage a été supprimé avec success.";
+            $characters = Character::readAllCharacters(); // Refresh character list
         }
     }
 }

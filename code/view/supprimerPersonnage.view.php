@@ -39,7 +39,7 @@
                 ?>
                 <img src="<?= $imgSrc ?>" alt="<?= $selectedCharacter?->getFirstName() ?? "Jean"; ?>"
                     alt="<?= $selectedCharacter?->getFirstName() ?? "Jean"; ?>" style="max-width: 240px;">
-                <button type="button" id="dialogPublier" class="button-rouge">Supprimer</button>
+                <button type="button" id="supprimerOuvrir" class="button-rouge">Supprimer</button>
                 <div class="supprimer">
                     <form method="post" action="index.php?ctrl=personnages&article=supprimerPersonnage&id=<?= $id ?>">
                         <input type="hidden" name="ctrl" value="personnages">
@@ -47,15 +47,14 @@
                         <input type="hidden" name="action" value="supprimerPersonnage">
                         <input id="supprimerInput" type="hidden" name="fermer" value="false">
 
-                        <dialog id="dialog">
+                        <dialog class="dialog" id="dialogSupprimer">
                             <div class="containerDialog">
                                 <h2>Voulez vous supprimer <?= $selectedCharacter?->getFirstName() ?? "Jean"; ?> ?</h2>
                                 <div>
-
-                                    <button type="submit" id="fermerPublier" name="fermer" class="button-vert">
+                                    <button type="submit" id="fermerSupprimer" name="fermer" class="button-vert">
                                         Supprimer personnage
                                     </button>
-                                    <button type="button" id="fermerRevenir" class="button-rouge">
+                                    <button type="button" id="revenirSupprimer" class="button-rouge">
                                         Revenir
                                     </button>
                                 </div>
@@ -73,14 +72,5 @@
             <p>Aucun personnage sélectionné. Veuillez en choisir un dans la liste.</p>
         <?php endif; ?>
     </div>
-
-    <script>
-        var submitSupprimer = document.getElementById("supprimerInput");
-        var submitButton = document.getElementById("fermerPublier");
-
-        submitButton.addEventListener("click", () => {
-            submitSupprimer.value = "true";
-        });
-    </script>
 
 </article>
