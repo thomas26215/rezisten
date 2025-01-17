@@ -33,7 +33,11 @@ $story = Story::read($idStory);
 
 
 $firstBonus = Dialog::readFirstBonus($idStory);
-$dialogPrev = Dialog::read($idDialog - 1, $idStory);
+if($idDialog - 1 > 0){
+    $dialogPrev = Dialog::read($idDialog - 1, $idStory);
+}else{
+    $dialogPrev = Dialog::read(1,$idStory);
+}
 
 
 if ($dialog === null) {
@@ -79,23 +83,10 @@ if ($dialog === null) {
     
 }
 
-function url_exists($url) {
-    $context = stream_context_create([
-        "ssl" => [
-            "verify_peer" => false,
-            "verify_peer_name" => false
-        ]
-    ]);
 
-    $headers = @get_headers($url, 0, $context);
-    return strpos($headers[0], '200') !== false;
-}
 // Gestion du background
 $background = $backgroundURL."hist_".$idStory."bg1.webp";
 
-if(!url_exists($background)){
-    $background = $backgroundURL."default_background.webp";
-}
 // Permet de vérifier quel background est stocké dans la session si on change subitement d'histoire
 if(isset($_SESSION['background'])){
     $bgSession = explode('_',$_SESSION['background']);
@@ -116,8 +107,23 @@ $_SESSION['background'] = $background;
 
 
 // Si le dialogue repère est détecté on bascule sur la question en appelant la vue avec les bonnes données
-if($dialog->getContent() == "limquestion"){
-    $question = Question::read($idStory,'s');
+if($story->getChapter()->getNumchap() != 100){
+    if($dialog->getContent() == "limquestion"){
+        $question = Question::read($idStory,'s');
+        $_SESSION['idStory'] = $idStory;
+        $_SESSION['idDialog'] = $idDialog;
+        $_SESSION['difficulty'] = "spécifique";
+        
+    
+        $view->assign('background',$background);
+        $view->assign('error','');
+        $view->assign('story',$story);
+        $view->assign('question',$question);
+        $view->display('question');
+}
+
+}else{
+    $question = Question::read($idStory,'g');
     $_SESSION['idStory'] = $idStory;
     $_SESSION['idDialog'] = $idDialog;
     $_SESSION['difficulty'] = "spécifique";

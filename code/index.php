@@ -11,11 +11,14 @@ require_once("./model/users.class.php");
 
 // Vérifier la session utilisateur
 if(isset($_SESSION["user_id"])) {
-    if(User::read($_SESSION["user_id"]) == null) {
+    try {
+        (User::read($_SESSION["user_id"]));
+    } catch(RuntimeException) {
         session_destroy();
         $_SESSION["user_id"] = null;
     }
 }
+
 
 // Définir les contrôleurs valides
 const CTRLS = array('loginAccount', 'createAccount', 'authentification', 'mainNonConnecte', 'main','mesHistoires', 'histoire','question', 'listeChapitre', "listeHistoire", 'creation', 'personnages', 'profil', 'demandeCreateur', 'consulterLieu', 'motdepasseoublie', 'changermotdepasse', 'emailEnvoye', 'verifierCompte');

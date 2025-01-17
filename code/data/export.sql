@@ -57,7 +57,7 @@ INSERT INTO utilisateurs VALUES (1, 'tritri', 'tristan', 'font', '2005-06-14', '
 INSERT INTO utilisateurs VALUES (2, 'aiel', 'quentin', 'pingouin', '2000-10-12', 'aiel.gaming@gmail.com', 'lepgm2024du', 'j');
 INSERT INTO utilisateurs VALUES (3, 'jeanm', 'jean', 'mejean', '1978-08-10', 'jean.mejean@gmail.com', '12hist34prof ', 'c');
 INSERT INTO utilisateurs VALUES (4, 'admin_rezisten', 'admin', 'admin', '1999-06-12', 'admin.rezisten@rezisten.fr', 'jesuisadmin2025', 'a');
-insert into utilisateurs values (6,'Test','Test','Test','2005-08-24','rezisten.contact@gmail.com','$2y$10$KlAwOnqQBP1olrIkZordEunGqzlbVd1q9cRFA28rSlh5hamg6/zFm','c' );
+insert into utilisateurs values (5,'Test','Test','Test','2005-08-24','rezisten.contact@gmail.com','$2y$10$KlAwOnqQBP1olrIkZordEunGqzlbVd1q9cRFA28rSlh5hamg6/zFm','c' );
 
 --
 -- Data for Name: histoires; Type: TABLE DATA; Schema: public; Owner: superrezi
@@ -267,7 +267,7 @@ INSERT INTO dialogues VALUES (1, 4, 10, 'Déjà quelques mois que André et Pier
 
 INSERT INTO progression VALUES (1, 1, true);
 INSERT INTO progression VALUES (2, 1, false);
-
+insert into progression values(6,1,1) ;
 
 --
 -- Data for Name: questions; Type: TABLE DATA; Schema: public; Owner: superrezi

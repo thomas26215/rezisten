@@ -65,7 +65,7 @@ if (isset($_GET['article']) && $_GET['article'] === 'ajouterDialogue' && isset($
         $dialogue->create();
 
         // Redirection après l'ajout du dialogue
-        header("Location: creation?ctrl=creation&article=ajouterDialogue&id=" . $histoire->getId());
+        header("Location: index.php?ctrl=creation&article=ajouterDialogue&id=" . $histoire->getId());
         exit();
     } else {
         // Handle the case where the character is not found
@@ -230,9 +230,19 @@ if (isset($_GET['footer']) && $_GET['footer'] === 'publie') {
 $personnages = Character::readAllCharacters();
 $iddialog = 1;
 $dialogues[] = Question::read($id, "g");
-while (null !== (Dialog::read($iddialog, idStory: $id))) {
-    $dialogues[] = Dialog::read($iddialog, $id);
-    $iddialog++;
+
+while (true) {
+    try {
+        $dialog = Dialog::read($iddialog, idStory: $id);
+        if ($dialog === null) {
+            break;
+        }
+        $dialogues[] = $dialog;
+        $iddialog++;
+    } catch (RuntimeException $e) {
+        error_log("Error reading dialogue $iddialog: " . $e->getMessage());
+        break;
+    }
 }
 
 

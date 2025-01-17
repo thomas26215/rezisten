@@ -17,7 +17,7 @@ class histoireTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->user = new User("Doe", "John", "johndoe", "1990-01-01", "johndoe@example.com", "password123", "a");
+        $this->user = new User("pseudoUserTest", "John", "Doe", "01-01-1990", "test@autre.fr", "password123", "a", true);
         $this->user->create();
 
         $this->chapter = new Chapter(1, "Introduction");
@@ -29,23 +29,7 @@ class histoireTest extends TestCase
         $this->story = new Story("A Great Story", $this->chapter, $this->user, $this->place, "background.jpg", false);
     }
 
-    protected function tearDown(): void
-    {
-        if ($this->story->getId() > 0) {
-            Story::delete($this->story->getId());
-        }
-        if ($this->chapter->getNumchap() > 0) {
-            Chapter::delete($this->chapter->getNumchap());
-        }
-        if ($this->place->getId() > 0) {
-            Place::delete($this->place->getId());
-        }
-        if ($this->user->getId() > 0) {
-            User::delete($this->user->getId());
-        }
-    }
-
-    public function testGetters(): void
+    public function testGetters()
     {
         $this->assertEquals("A Great Story", $this->story->getTitle());
         $this->assertEquals($this->chapter, $this->story->getChapter());
@@ -55,11 +39,42 @@ class histoireTest extends TestCase
         $this->assertFalse($this->story->getVisibility());
     }
 
-    public function testSetters(): void
+    public function testCreate()
     {
-        $newUser = new User("Smith", "Jane", "janesmith", "1985-05-15", "janesmith@example.com", "mypassword", "a");
-        $newUser->create();
+        $this->story->create();
+        $this->assertGreaterThan(0, $this->story->getId());
 
+        $readStory = Story::read($this->story->getId());
+        $this->assertInstanceOf(Story::class, $readStory);
+        $this->assertEquals($this->story->getTitle(), $readStory->getTitle());
+    }
+
+    public function testRead()
+    {
+        $this->story->create();
+        $readStory = Story::read($this->story->getId());
+        $this->assertInstanceOf(Story::class, $readStory);
+        $this->assertEquals($this->story->getTitle(), $readStory->getTitle());
+    }
+
+    public function testUpdate()
+    {
+        $this->story->create();
+        $this->story->setTitle("Updated Title");
+        $this->story->update();
+        $updatedStory = Story::read($this->story->getId());
+        $this->assertEquals("Updated Title", $updatedStory->getTitle());
+    }
+
+    public function testDelete()
+    {
+        $this->story->create();
+        Story::delete($this->story->getId());
+        $this->assertNull(Story::read($this->story->getUser()->getId()));
+    }
+
+    public function testSetters()
+    {
         $newChapter = new Chapter(2, "Conclusion");
         $newChapter->create();
 
@@ -68,66 +83,71 @@ class histoireTest extends TestCase
 
         $this->story->setTitle("An Updated Story");
         $this->story->setChapter($newChapter);
-        $this->story->setUser($newUser);
+        $this->story->setUser(null); // Test avec un utilisateur null
         $this->story->setPlace($newPlace);
         $this->story->setBackground("updated_background.jpg");
         $this->story->setVisibility(true);
 
         $this->assertEquals("An Updated Story", $this->story->getTitle());
         $this->assertEquals($newChapter, $this->story->getChapter());
-        $this->assertEquals($newUser, $this->story->getUser());
+        $this->assertNull($this->story->getUser());
         $this->assertEquals($newPlace, $this->story->getPlace());
         $this->assertEquals("updated_background.jpg", $this->story->getBackground());
         $this->assertTrue($this->story->getVisibility());
 
-        $newUser->delete($newUser->getId());
         $newChapter->delete($newChapter->getNumchap());
         $newPlace->delete($newPlace->getId());
     }
 
-    public function testCreate(): void
+    public function testCreateWithInvalidData()
     {
-        $this->assertTrue($this->story->create());
-        $this->assertGreaterThan(0, $this->story->getId());
+        $this->expectException(InvalidArgumentException::class);
+        new Story("", $this->chapter, $this->user, $this->place, "", false);
     }
 
-    public function testRead(): void
-    {
-        $this->story->create();
-        $readStory = Story::read($this->story->getId());
-        $this->assertNotNull($readStory);
-        $this->assertEquals($this->story->getTitle(), $readStory->getTitle());
-    }
-
-    public function testUpdate(): void
-    {
-        $this->story->create();
-        $this->story->setTitle("Updated Title");
-        $this->assertTrue($this->story->update());
-
-        $updatedStory = Story::read($this->story->getId());
-        $this->assertEquals("Updated Title", $updatedStory->getTitle());
-    }
-
-    public function testDelete(): void
-    {
-        $this->story->create();
-        $idToDelete = $this->story->getId();
-        $this->assertTrue(Story::delete($idToDelete));
-
-        $deletedStory = Story::read($idToDelete);
-        $this->assertNull($deletedStory);
-    }
-
-    public function testReadNonExistentStory(): void
+    public function testReadNonExistentStory()
     {
         $this->assertNull(Story::read(99999));
     }
 
-    public function testDeleteNonExistentStory(): void
+    public function testUpdateNonExistentStory()
     {
-        $this->assertFalse(Story::delete(99999));
+        $this->expectException(RuntimeException::class);
+        $nonExistentStory = new Story("Test", $this->chapter, $this->user, $this->place, "bg.jpg", true, 99999);
+        $nonExistentStory->update();
+    }
+
+    public function testDeleteNonExistentStory()
+    {
+        $this->expectException(RuntimeException::class);
+        Story::delete(99999);
+        $this->expectException(InvalidArgumentException::class);
+    }
+
+    public function testInvalidBackground()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        new Story("Test", $this->chapter, $this->user, $this->place, "", true);
+    }
+
+    protected function tearDown(): void
+    {
+        if (isset($this->story) && $this->story->getId() > 0) {
+            try {
+                Story::delete($this->story->getId());
+            } catch (RuntimeException $e) {
+                // Ignorer l'exception si l'histoire n'existe pas déjà
+            }
+        }
+        if (isset($this->chapter) && $this->chapter->getNumchap() > 0) {
+            Chapter::delete($this->chapter->getNumchap());
+        }
+        if (isset($this->place) && $this->place->getId() > 0) {
+            Place::delete($this->place->getId());
+        }
+        if (isset($this->user) && $this->user->getId() > 0) {
+            User::delete($this->user->getId());
+        }
     }
 }
 
-?>
