@@ -130,22 +130,35 @@ class Character
        } 
    }
 
-   public static function delete(int $id): void
+   public static function delete(int $id): void
    {
        if ($id <= 0) { 
            throw new InvalidArgumentException("L'ID doit être supérieur à zéro."); 
        } 
-
+   
        try { 
-           if (!DAO::getInstance()->deleteDatasById("personnages", (int)$id)) { 
-               throw new RuntimeException("Échec de la suppression du personnage dans la base de données."); 
+           $dao = DAO::getInstance();
+           
+           // Check if the character exists before deletion
+           $character = $dao->getWithParameters("personnages", ["id" => $id]);
+           if (empty($character)) {
+               throw new RuntimeException("Le personnage avec l'ID $id n'existe pas.");
+           }
+           
+           echo "Debug: Attempting to delete character with ID: $id\n"; // Debug output
+           
+           $result = $dao->deleteDatasById("personnages", (int)$id);
+           if ($result === false) { 
+               echo "Debug: Deletion failed. DAO returned false.\n"; // Debug output
+               throw new RuntimeException("Échec de la suppression du personnage dans la base de données. ID: $id"); 
            } 
+           
+           echo "Debug: Character deleted successfully.\n"; // Debug output
        } catch (PDOException $e) { 
-           throw new RuntimeException("Erreur lors de la suppression du personnage : " . $e.getMessage(), 0, $e); 
+           echo "Debug: PDO Exception caught: " . $e->getMessage() . "\n"; // Debug output
+           throw new RuntimeException("Erreur PDO lors de la suppression du personnage : " . $e->getMessage(), 0, $e); 
        } 
-   }
-
-   public static function readAllCharacters(): array
+   }   public static function readAllCharacters(): array
    {
        try {
            $dao = DAO::getInstance();
@@ -161,7 +174,7 @@ class Character
            }
            return []; // Retourne un tableau vide si aucun personnage n'est trouvé.
        } catch (PDOException $e) { 
-           throw new RuntimeException("Erreur lors de la lecture des personnages : " . e.getMessage(), 0, $e); 
+           throw new RuntimeException("Erreur lors de la lecture des personnages : " . e->getMessage(), 0, $e); 
        } 
    }
 }
