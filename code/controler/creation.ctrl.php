@@ -230,9 +230,19 @@ if (isset($_GET['footer']) && $_GET['footer'] === 'publie') {
 $personnages = Character::readAllCharacters();
 $iddialog = 1;
 $dialogues[] = Question::read($id, "g");
-while (null !== (Dialog::read($iddialog, idStory: $id))) {
-    $dialogues[] = Dialog::read($iddialog, $id);
-    $iddialog++;
+
+while (true) {
+    try {
+        $dialog = Dialog::read($iddialog, idStory: $id);
+        if ($dialog === null) {
+            break;
+        }
+        $dialogues[] = $dialog;
+        $iddialog++;
+    } catch (RuntimeException $e) {
+        error_log("Error reading dialogue $iddialog: " . $e->getMessage());
+        break;
+    }
 }
 
 

@@ -7,16 +7,13 @@ include_once('./model/chapitres.class.php');
 include_once('./model/progression.class.php');
 include_once('./model/users.class.php');
 
-
-
+$view = new View();
 
 // Récupération des données de la query string et initialisation de variables
 $idStory = $_GET['idStory'];
 $idDialog = $_GET['idDialog'];
 $prevSpeaker = $_GET['prevSpeaker'] ?? "none";
 $_SESSION['lastDialog'] = $idDialog;
-
-
 
 $imgURL = "https://localhost:8080/rezisten/imgPersonnage/";
 $audioURL = "https://localhost:8080/rezisten/doublageDialogue/histoire".$idStory."/";
@@ -27,9 +24,18 @@ $dialogsChangeBG = [
     2 => "Nous y sommes ?"
 ];
 
-$dialog = Dialog::read($idDialog,$idStory);
-$view = new View();
-$story = Story::read($idStory);
+try {
+    $dialog = Dialog::read($idDialog,$idStory);
+} catch (RuntimeException $e) {
+    echo "erreur";
+}
+
+try {
+    $story = Story::read($idStory);
+} catch (RuntimeException $e){
+    echo "Erreur lors de la lecture de l'histoire";
+}
+
 
 
 $firstBonus = Dialog::readFirstBonus($idStory);

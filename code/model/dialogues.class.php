@@ -333,7 +333,7 @@ class Dialog
     public static function readAllByStory(int $storyId): array
     {
         $dao = DAO::getInstance();
-        $results = $dao->getColumnWithParameters('dialogues', ['id_histoire' => $storyId]);
+        $results = $dao->getWithParameters('dialogues', ['id_histoire' => $storyId]);
         $dialogues = [];
         foreach ($results as $result) {
             $dialogues[] = new Dialog(
@@ -353,7 +353,7 @@ class Dialog
 
 
         // Étape 1 : Récupérer tous les dialogues triés par ID croissant
-        $dialogues = $dao->getColumnWithParameters(
+        $dialogues = $dao->getWithParameters(
             'dialogues',
             ['id_histoire' => $idStory],
             ['id']

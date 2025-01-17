@@ -249,7 +249,7 @@ class Story
    public static function getAllStoryIds(): array 
    { 
        try { 
-           return array_column(DAO::getInstance()->getColumnWithParameters( 
+           return array_column(DAO::getInstance()->getWithParameters( 
                "histoires", [], ["id"]), 'id'); 
        } catch (PDOException $e) { 
            throw new RuntimeException("Erreur lors de la récupération des IDs d'histoires : " . e.getMessage(), 0, e); 
