@@ -1,75 +1,74 @@
- header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    /* padding-top: 10px; */
-    padding-inline: 15px;
-    box-sizing: border-box;
-    height: var(--height-header);
+ header {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     /* padding-top: 10px; */
+     padding-inline: 15px;
+     box-sizing: border-box;
+     height: var(--height-header);
 
-    /* margin-top: 20px; */
-}
-a {
-    text-decoration: none;
-    color: initial;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+     /* margin-top: 20px; */
+ }
 
-}
-p {
-    padding-top: 0;
-    margin: 0;
-    color: var(--noir);
-}
+ a {
+     text-decoration: none;
+     color: initial;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
 
-.home {
-    font-size: 9px;
-    transition: transform 0.15s ease-in-out;
-    position: relative;
-}
+ }
 
-.home:hover {
-    transform: scale(1.1);
-}
+ p {
+     padding-top: 0;
+     margin: 0;
+     color: var(--noir);
+ }
 
-.accueil-text {
-    display: none;
-    position: absolute;
-    bottom: -20px;
-}
+ .home {
+     font-size: 9px;
+     transition: transform 0.15s ease-in-out;
+     position: relative;
+ }
 
-.home:hover .accueil-text {
-    display: block;
-}
+ .home:hover {
+     transform: scale(1.1);
+ }
 
-.user {
-    font-size: 16px;
-    font-weight: bold;
-    position: relative;
-    display: inline-block;
-}
+ .accueil-text {
+     display: none;
+     position: absolute;
+     bottom: -20px;
+ }
 
-.user > img {
-    margin-top: 72px;
-    height: 100px;
-    padding: 0;
-    transition: transform 0.15s ease-in-out;
-}
+ .home:hover .accueil-text {
+     display: block;
+ }
 
-.user > img:hover {
-    transform: scale(1.1);
-}
+ .user {
+     font-size: 16px;
+     font-weight: bold;
+     position: relative;
+     display: inline-block;
+ }
 
-.nomUser {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: -40px;
-    transition: transform 0.15s ease-in-out;
-}
+ a.flex-col>img {
+     margin-top: 72px;
+     height: 100px;
+     padding: 0;
+     transition: transform 0.15s ease-in-out;
+ }
 
-.user:hover .nomUser {
-    transform: translateX(-50%) translateY(10px);
-}
+ a.flex-col>img:hover {
+     transform: scale(1.1);
+ }
+
+ .nomUser {
+     position: relative;
+     transition: transform 0.15s ease-in-out;
+ }
+
+ a.flex-col:hover .nomUser {
+     transform: translateY(10px);
+ }

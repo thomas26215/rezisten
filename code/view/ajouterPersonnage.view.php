@@ -1,6 +1,7 @@
 <article class="content">
 
-    <form method="post" action="index.php?ctrl=personnages&article=ajouterPersonnage&id=<?= $id ?>" class="articleContainer" enctype="multipart/form-data">
+    <form method="post" action="index.php?ctrl=personnages&article=ajouterPersonnage&id=<?= $id ?>"
+        class="articleContainer" enctype="multipart/form-data">
         <input type="hidden" name="ctrl" value="personnages">
         <input type="hidden" name="article" value="ajouterPersonnage">
         <input type="hidden" name="action" value="ajouterCharacter">
@@ -10,7 +11,7 @@
                 <label for="prenom">Prénom</label>
                 <input maxlength="15" type="text" id="prenom" name="prenom" placeholder="Pierre">
             </div>
-           
+
         </div>
 
         <div class="image">
@@ -27,6 +28,11 @@
         </div>
 
         <button type="submit">Ajouter personnage</button>
+        <?php if (isset($errorMessage)) {
+            ?>
+            <p><?= $errorMessage ?></p><?php
+        }
+        ?>
     </form>
 
 </article>

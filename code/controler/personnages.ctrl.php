@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     if (isset($_POST['action']) && $_POST['action'] === 'ajouterCharacter') {
         try {
-            // Retrieve form data
+            // data du form
             $firstName = trim($_POST['prenom'] ?? '');
             $uploadedImage = $_FILES['photoUpload'] ?? "null.png";
 
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 throw new Exception("Le prénom ne peut pas être vide.");
             }
             if ($uploadedImage && $uploadedImage['error'] === UPLOAD_ERR_OK) {
-                // Define upload path
+                
                 $uploadDirectory = './view/design/image/imageUser/';
                 $fileName = basename($uploadedImage['name']);
                 $filePath = $uploadDirectory . $fileName;
@@ -50,14 +50,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     throw new Exception("Erreur lors du téléchargement de l'image.");
                 }
 
-                $imageName = $fileName; // Store the filename in the database
+                $imageName = $fileName; // file  dans la base de données
             } else {
                 throw new Exception("Aucune image valide n'a été téléchargée.");
             }
 
             // Create new Character 
-            $creator = User::read($idUser); // Assuming the user ID is stored in the session
-
+            $creator = User::read($idUser); // user id de la session
             if ($creator === null) {
                 $errorMessage = "Creator ne peut pas être null";
             }
@@ -69,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errorMessage = $e->getMessage();
         }
     } elseif (isset($_POST['action']) && $_POST['action'] === 'updateCharacter' && isset($_POST['characterId'])) {
-        // Update the character
+        // Update character
         $characterIdToModify = (int) $_POST['characterId'];
         $character = Character::read($characterIdToModify);
         $newFirstName = trim($_POST['firstName']);
@@ -81,12 +80,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errorMessage = "Vous ne pouvez pas modifier ce personnage.";
         }
 
-        // Validate inputs
+        // si l'utilisateur veut modifier un seulement un des deux, l'autre reste comme avant
         if (empty($newFirstName)) {
             $newFirstName = $character->getFirstName();
         }
         if (empty($newImage)) {
             $newImage = $character->getImage();
+        }
+
+        if (empty($newImage) && empty($newFirstImage)) {
+            $errorMessage = "Vous n'avez pas fait aucune modification.";
         }
         $character = Character::read($characterIdToModify);
         if ($character) {
@@ -99,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $filePath = $uploadDirectory . $fileName;
                     // Move uploaded file
                     if (!move_uploaded_file($newImageFile['tmp_name'], $filePath)) {
-                        throw new Exception("Erreur lors du téléchargement de l'image.");
+                        $errorMessage = "Erreur lors du téléchargement de l'image.";
                     }
                     $imageName = $fileName; // mettre fichier dans la db
                 }
@@ -112,6 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!isset($errorMessage)) {
                 $character->update();
                 $characters = Character::readAllCharacters(); // update list
+                $message = "Votre personnage a été modifié avec success.";
             }
         }
     } elseif (isset($_POST['action']) && $_POST['action'] === 'supprimerPersonnage' && isset($_POST['characterId'])) {
@@ -124,6 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (!isset($errorMessage)) {
             if (Character::delete($characterIdToDelete)) {
+                var_dump("hello");
                 $message = "Le personnage a été supprimé avec succès.";
                 $characters = Character::readAllCharacters(); // Refresh character list
             }

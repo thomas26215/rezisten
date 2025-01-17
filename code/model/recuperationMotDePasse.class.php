@@ -147,7 +147,7 @@ class PasswordRecuperation {
    public static function generate(int $userId): ?PasswordRecuperation {
         try { 
             try {
-                $user = User::read($userId)
+                $user = User::read($userId);
             } catch (RuntimeException $e) {
                 throw new Exception($e->getMessage());
             }

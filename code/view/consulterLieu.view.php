@@ -37,6 +37,11 @@
         <div id="map" style="height: 500px;"></div>
         <?php include_once 'APImap.view.php'; ?>
     </main>
+    <?php if (isset($errorMessage)) {
+        ?>
+        <p><?= $errorMessage ?></p><?php
+    }
+    ?>
    
 
     <!-- Inclusion de la bibliothèque Leaflet -->

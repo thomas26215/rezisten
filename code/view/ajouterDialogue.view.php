@@ -25,8 +25,54 @@
 
         <!-- boutons -->
         <section>
-            <button class="button-rouge" type="reset">Supprimer</button>
+            <button class="button-rouge delete-button" type="reset">Supprimer</button>
             <button class="button-vert" type="submit">Valider</button>
         </section>
+
+        <!-- Pop-up de confirmation de suppression -->
+        <dialog id="delete-dialog">
+            <div class="containerDialog">
+                <h2>Voulez vous supprimer ce dialogue ?</h2>
+                <div class="flex-row button-grp">
+                    <button id="confirm-delete" class="button-vert">
+                        Supprimer
+                    </button>
+                    <button id="cancel-delete" class="button-rouge">
+                        Annuler
+                    </button>
+                </div>
+            </div>
+        </dialog>
+
+
+        <script src="./view/js/dyslexique.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const deleteButtons = document.querySelectorAll('.delete-button');
+                const deleteDialog = document.getElementById('delete-dialog');
+                const confirmDeleteButton = document.getElementById('confirm-delete');
+                const cancelDeleteButton = document.getElementById('cancel-delete');
+                let storyIdToDelete = null;
+
+                deleteButtons.forEach(button => {
+                    button.addEventListener('click', function (event) {
+                        event.preventDefault();
+                        storyIdToDelete = this.getAttribute('data-story-id');
+                        deleteDialog.showModal();
+                    });
+                });
+
+                confirmDeleteButton.addEventListener('click', function () {
+                    if (storyIdToDelete) {
+                        window.location.href = `#`;
+                    }
+                });
+
+                cancelDeleteButton.addEventListener('click', function () {
+                    event.preventDefault(); // Empêche le comportement par défaut
+                    deleteDialog.close();
+                });
+            });
+        </script>
     </form>
 </article>
