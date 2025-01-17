@@ -19,7 +19,6 @@ if(isset($_SESSION["user_id"])) {
     }
 }
 
-var_dump($_SESSION["user_id"]);
 
 // Définir les contrôleurs valides
 const CTRLS = array('loginAccount', 'createAccount', 'authentification', 'mainNonConnecte', 'main','mesHistoires', 'histoire','question', 'listeChapitre', "listeHistoire", 'creation', 'personnages', 'profil', 'demandeCreateur', 'consulterLieu', 'motdepasseoublie', 'changermotdepasse', 'emailEnvoye', 'verifierCompte');
