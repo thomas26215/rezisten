@@ -53,7 +53,7 @@
                 </form>
             </section>
 
-            <div class="flex-col">
+            <div class="flex-col bottomContainer">
                 <?php include_once $lien; ?>
                 <form action="index.php" method="get" class="footer">
                     <input type="hidden" name="id" value="<?= $id ?>">

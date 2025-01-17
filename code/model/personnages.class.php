@@ -130,7 +130,7 @@ class Character
        } 
    }
 
-   public static function delete(int $id): void
+   public static function delete(int $id): void
    {
        if ($id <= 0) { 
            throw new InvalidArgumentException("L'ID doit être supérieur à zéro."); 

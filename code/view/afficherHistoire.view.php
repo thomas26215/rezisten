@@ -4,7 +4,6 @@
 </head>
 <article class="content">
     <article>
-        <form action="">
 
             <?php foreach ($dialogues as $index => $dialogue):
                 if ($dialogue instanceof Dialog): ?>
@@ -19,7 +18,7 @@
 
                     </section>
                     <section class=flex-row>
-                        <p>
+                        <p class="left-in-article">
                             <?php if ($dialogue->getContent() !== 'limquestion'): ?>
                                 <?= $dialogue->getContent() ?>
                             <?php else: ?>
@@ -59,31 +58,46 @@
                                     <img src="./view/design/image/poubelle.png" alt="poubelle" id="poubelle">
                                 </button>
                             </form>
+                        <?php else: ?>
+                            <div id="poubelle"></div>
                         <?php endif; ?>
                     </section>
                 <?php elseif ($dialogue instanceof Question): ?>
-                    <section>
-                        <p>Question : </p>
-                        <label for="personnage"> <?= $dialogue->getQuestion() ?></label>
-                    </section>
-                    <section class=flex-row>
-                        <p>
-                            <?= $dialogue->getAnswer() ?>
-                        </p>
-                        <form method="GET" action="index.php?ctrl=personnages&article=afficherHistoire">
-                            <input type="hidden" name="ctrl" value="creation">
-                            <input type="hidden" name="article" value="afficherHistoire">
-                            <input type="hidden" name="id" value="<?= $histoire->getId() ?>">
-                            <input type="hidden" name="idDialogue" value="<?= $dialogue->getHistory()->getId() ?>">
-                            <input type="hidden" name="typeDialogue" value="question">
-                            <button type="submit" name="delete" value="delete" class="poub"><img
-                                    src="./view/design/image/poubelle.png" alt="poubelle" id="poubelle"></button>
-                        </form>
-                    </section>
+                    <div class="">
+                        <section>
+                            <p>Question : </p>
+                            <label for="personnage"> <?= $dialogue->getQuestion() ?></label>
+                        </section>
+                        <section class=flex-row>
+
+                            <p class="left-in-article">
+                                <?= $dialogue->getAnswer() ?>
+                            </p>
+                            <div id="fleche">
+                                <form class="invisble" method="GET" action="index.php">
+
+                                    <button type="button" class="bouton-modif invisble">^</button>
+                                </form>
+                                <form class="invisble" method="GET" action="index.php">
+
+                                    <button type="button" class="bouton-modif bouton-bas invisble">^</button>
+                                </form>
+                            </div>
+                            <form method="GET" action="index.php?ctrl=personnages&article=afficherHistoire">
+                                <input type="hidden" name="ctrl" value="creation">
+                                <input type="hidden" name="article" value="afficherHistoire">
+                                <input type="hidden" name="id" value="<?= $histoire->getId() ?>">
+                                <input type="hidden" name="idDialogue" value="<?= $dialogue->getHistory()->getId() ?>">
+                                <input type="hidden" name="typeDialogue" value="question">
+                                <button type="submit" name="delete" value="delete" class="poub">
+                                    <img src="./view/design/image/poubelle.png" alt="poubelle" id="poubelle">
+                                </button>
+                            </form>
+                        </section>
+                    </div>
                 <?php endif; ?>
             <?php endforeach; ?>
 
-        </form>
     </article>
 
 </article>

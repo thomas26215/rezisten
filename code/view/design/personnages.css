@@ -65,13 +65,7 @@ div {
 
 article {
   background-color: var(--beige);
-  height: 95%;
-  margin-right: 10%;
-  margin-left: -5%;
-  margin-top: 50px;
   border: 2px solid var(--noir);
-
-  position: relative;
 }
 
 #info {
@@ -174,4 +168,12 @@ section.header button {
   border: 2px solid var(--noir);
   height: 250px;
   width: 250px;
+}
+
+.menu button {
+  height: 6rem;
+} 
+
+.bottomContainer {
+  gap: 2rem;
 }

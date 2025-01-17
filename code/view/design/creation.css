@@ -115,6 +115,7 @@ button.poub::before {
 .buttonsContainer {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .inputs {
