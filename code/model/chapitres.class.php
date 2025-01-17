@@ -53,7 +53,7 @@ class Chapter
             }
             return $listChapters;
         } catch (PDOException $e) {
-            throw new RuntimeException("Erreur lors de la lecture des chapitres : " . $e->getMessage(), 0, $e);
+            throw new RuntimeException("Erreur lors de la lecture de tous les chapitres : " . $e->getMessage(), 0, $e);
         }
     }
 

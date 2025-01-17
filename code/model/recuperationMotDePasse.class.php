@@ -145,32 +145,34 @@ class PasswordRecuperation {
    /* --- Méthodes utilitaires --- */
 
    public static function generate(int $userId): ?PasswordRecuperation {
-       try { 
-           // Vérifier si l'utilisateur existe
-           if (!$user = User::read($userId)) { 
-               throw new RuntimeException("Utilisateur non trouvé."); 
-           } 
+        try { 
+            try {
+                $user = User::read($userId)
+            } catch (RuntimeException $e) {
+                throw new Exception($e->getMessage());
+            }
+            if (!$user = User::read($userId)) { 
+                throw new RuntimeException("Utilisateur non trouvé."); 
+            } 
+            self::delete($userId);
 
-           // Supprimer les anciennes récupérations
-           self::delete($userId);
-           
-           // Générer un nouveau token
-           $token = self::generateRandomString(10);
-           // Créer une nouvelle instance
-           $passwordRecuperation = new PasswordRecuperation($user, $token);
+            // Générer un nouveau token
+            $token = self::generateRandomString(10);
+            // Créer une nouvelle instance
+            $passwordRecuperation = new PasswordRecuperation($user, $token);
 
-           // Créer l'entrée dans la base de données
-           if ($passwordRecuperation->create()) { 
-               // Envoyer l'email
-               (new EmailSender())->sendRecoveryEmail($passwordRecuperation->getUser()->getMail(), $passwordRecuperation->getToken());
-               return self::read($userId); 
-           } else { 
-               throw new RuntimeException("Impossible de créer la récupération de mot de passe."); 
-           } 
-       } catch (RuntimeException $e) { 
-           throw new RuntimeException("Erreur lors de la génération du token : " . $e.getMessage(), 0, $e); 
-       } 
-   }
+            // Créer l'entrée dans la base de données
+            if ($passwordRecuperation->create()) { 
+            // Envoyer l'email
+                (new EmailSender())->sendRecoveryEmail($passwordRecuperation->getUser()->getMail(), $passwordRecuperation->getToken());
+                return self::read($userId); 
+            } else { 
+                throw new RuntimeException("Impossible de créer la récupération de mot de passe."); 
+            } 
+        } catch (RuntimeException $e) { 
+            throw new RuntimeException("Erreur lors de la génération du token : " . $e.getMessage(), 0, $e); 
+        } 
+    }
 
    private static function generateRandomString(int $length = 10): string { 
        return substr(str_shuffle(str_repeat('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / 62))), 1, $length); 

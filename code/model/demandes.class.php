@@ -48,10 +48,7 @@ class Demande {
     public function create(): void {
         try {
             $userId = $this->user->getId();
-            if ($userId < 1) {
-                throw new RuntimeException("Impossible de créer une demande : Aucun utilisateur ne correspond à l'id fourni");
-            }
-            if (!$this->dao->insertRelatedData("demandes", [
+            if (!$this->dao->insert("demandes", [
                 "id_utilisateur" => $userId,
                 "doc" => $this->document,
             ])) {
@@ -63,19 +60,18 @@ class Demande {
     }
 
     public static function read(int $id_utilisateur): ?Demande {
-        if ($id_utilisateur <= 0) {
-            throw new InvalidArgumentException("L'ID utilisateur doit être supérieur à zéro.");
-        }
-
         $dao = DAO::getInstance();
-        $demandeData = $dao->getColumnWithParameters("demandes", ["id_utilisateur" => $id_utilisateur]);
-        
+        $demandeData = $dao->getWithParameters("demandes", ["id_utilisateur" => $id_utilisateur]);
         if ($demandeData) {
-            $newUser = User::read($id_utilisateur);
-            return new Demande(
-                $newUser,
-                $demandeData[0]["doc"]
-            );
+            try {
+                $newUser = User::read($id_utilisateur);
+                return new Demande(
+                    $newUser,
+                    $demandeData[0]["doc"]
+                );
+            } catch (RuntimeException $e) {
+                throw new RuntimeException("Impossible de renvoyer une demande après lecture : " . $e->getMessage(), 0, $e);
+            }
         }
         
         return null; // Pas d'exception ici, car cela peut être un cas valide

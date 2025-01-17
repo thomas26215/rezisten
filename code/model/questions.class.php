@@ -82,9 +82,7 @@ class Question
     public function create(): void
     {
         $historyId = $this->history->getId();
-        if ($historyId < 1) {
-            throw new RuntimeException("Impossible de créer une question : Aucune histoire ne correspond à l'ID fourni.");
-        }
+        
 
         try {
             if (!$this->dao->insert("questions", [

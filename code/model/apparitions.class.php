@@ -52,7 +52,7 @@ class Apparitions {
         }
 
         try {
-            if (!$this->dao->insertRelatedData("apparitions", [
+            if (!$this->dao->insert("apparitions", [
                 "id_histoire" => $historyId,
                 "id_perso" => $characterId,
             ])) {
@@ -63,17 +63,22 @@ class Apparitions {
         }
     }
 
-    public static function read(int $id_history, int $id_character): ?Apparitions {
+    public static function read(int $id_history, int $id_character): Apparitions {
         try {
             $dao = DAO::getInstance();
-            $apparitionData = $dao->getColumnWithParameters("apparitions", ["id_histoire" => (int)$id_history, "id_perso" => (int)$id_character]);
+            $apparitionData = $dao->getWithParameters("apparitions", ["id_histoire" => (int)$id_history, "id_perso" => (int)$id_character]);
 
             if ($apparitionData) {
-                $newHistory = Story::read($id_history);
-                $newCharacter = Character::read($id_character);
-                return new Apparitions($newHistory, $newCharacter);
+                try {
+                    $newHistory = Story::read($id_history);
+                    $newCharacter = Character::read($id_character);
+                    return new Apparitions($newHistory, $newCharacter);
+                } catch (RuntimeException $e) {
+                    throw new RuntimeException("Impossible de renvoyer une apparition après lecture : "  $e->getMessage(), 0, $e);
+                }
+            } else {
+                throw new RuntimeException("Erreur lors de la lecture de l'apparition");
             }
-            return null; // Pas d'exception ici, car cela peut être un cas valide
         } catch (PDOException $e) {
             throw new RuntimeException("Erreur lors de la lecture de l'apparition : " . $e->getMessage(), 0, $e);
         }
@@ -94,7 +99,7 @@ class Apparitions {
         }
 
         // Vérifier si l'apparition existe
-        if (empty($this->dao->getColumnWithParameters("apparitions", [
+        if (empty($this->dao->getWithParameters("apparitions", [
             "id_perso" => $this->character->getId(),
             "id_histoire" => $this->history->getId()
         ]))) {
