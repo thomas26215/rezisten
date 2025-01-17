@@ -2,7 +2,7 @@
 //Récupération de l'action 
 include_once('framework/view.fw.php');
 
-$action = htmlspecialchars($_GET['action']) ?? 'none';
+$action = $_GET['action'] ?? 'none';
 $view = new View();
 
 
