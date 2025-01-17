@@ -9,7 +9,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rézisten</title>
+    <title>Création</title>
     <link rel="stylesheet" href="./view/design/global.css">
     <link rel="stylesheet" href="./view/design/creation.css">
     <link rel="stylesheet" href="./view/design/popup.css">

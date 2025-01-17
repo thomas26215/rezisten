@@ -56,6 +56,12 @@ button {
     font-size: 20px;
     cursor: pointer;
     transition: transform 0.15s ease-in-out;
+
+
+    /* Aligner le texte au centre (en hauteur)*/
+    display: flex;
+    justify-content: center;
+    align-items: center; 
 }
 
 button::before {
@@ -99,6 +105,11 @@ button:hover{
 
 .button-gris::before {
     background-color: var(--gris);
+}
+
+.button-vide{
+    opacity: 0;
+    cursor: initial;
 }
 
 
