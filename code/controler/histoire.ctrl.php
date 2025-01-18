@@ -20,7 +20,7 @@ $_SESSION['lastDialog'] = $idDialog;
 $imgURL = "https://localhost:8080/rezisten/imgPersonnage/";
 $audioURL = "https://localhost:8080/rezisten/doublageDialogue/histoire".$idStory."/";
 $placeURL = "https://localhost:8080/rezisten/imgLieux/";
-$backgroundURL = "https://192.168.14.118/rezisten/backgroundHistoire/";
+$backgroundURL = "https://localhost:8080/rezisten/backgroundHistoire/";
 $dialogsChangeBG = [
     1 => "",
     2 => "Nous y sommes ?"
@@ -60,6 +60,7 @@ if ($dialog === null) {
             $progression->create();
         }
     }
+    unset($_SESSION['background']);
 
     $place = $story->getPlace();
     $imgPlace = $placeURL.$place->getId().".webp";
@@ -81,6 +82,7 @@ if ($dialog === null) {
                 $progression->create();
             }
 
+        unset($_SESSION['background']);
         $place = $story->getPlace();
         $imgPlace = $placeURL.$place->getId().".webp";
         $view->assign('imgPlace',$imgPlace);
@@ -93,23 +95,27 @@ if ($dialog === null) {
 
 
 // Gestion du background
-$background = $backgroundURL."hist_".$idStory."bg1.webp";
-
+if(!isset($_SESSION['background'])){
+    $background = $backgroundURL."hist_".$idStory."bg1.webp";
+}
 // Permet de vérifier quel background est stocké dans la session si on change subitement d'histoire
 if(isset($_SESSION['background'])){
+    $background = $backgroundURL."hist_".$idStory."bg2.webp";
     $bgSession = explode('_',$_SESSION['background']);
 }
 
 // S'il existe un background dans la session qui correspond à un background de l'histoire actuelle on l'affiche
 if( isset($_SESSION['background']) && $_SESSION['background'] != '' && $bgSession[1] == $idStory ){
     $background = $_SESSION['background'];
+
 }else{
     // Sinon on le créé dans le cas où on a atteint un dialogue de changement précisé dans $dialogsChangeBG
     if(isset($dialogsChangeBG[$idStory]) && $dialogsChangeBG[$idStory] == $dialog->getContent()){
         $background = $backgroundURL."hist_".$idStory."bg2.webp";
+        $_SESSION['background'] = $background;
+
     }
 }
-$_SESSION['background'] = $background;
 
 
 
