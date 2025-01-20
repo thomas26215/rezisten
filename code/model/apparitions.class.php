@@ -74,7 +74,7 @@ class Apparitions {
                     $newCharacter = Character::read($id_character);
                     return new Apparitions($newHistory, $newCharacter);
                 } catch (RuntimeException $e) {
-                    throw new RuntimeException("Impossible de renvoyer une apparition après lecture : "  $e->getMessage(), 0, $e);
+                    throw new RuntimeException("Impossible de renvoyer une apparition après lecture : " . $e->getMessage(), 0, $e);
                 }
             } else {
                 throw new RuntimeException("Erreur lors de la lecture de l'apparition");
@@ -129,8 +129,8 @@ class Apparitions {
             if (!DAO::getInstance()->deleteDatasByIds("apparitions", (int)$id_history, (int)$id_character)) {
                 throw new RuntimeException("Échec de la suppression de l'apparition dans la base de données.");
             }
-        } catch (PDOException e) { 
-           throw new RuntimeException("Erreur lors de la suppression de l'apparition : " . e.getMessage(), 0, e); 
+        } catch (PDOException $e) { 
+           throw new RuntimeException("Erreur lors de la suppression de l'apparition : " . $e->getMessage(), 0, $e); 
        } 
    }
 }
