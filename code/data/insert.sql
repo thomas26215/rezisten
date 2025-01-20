@@ -1,3 +1,6 @@
+-- Création d'un utilisateur de base
+INSERT INTO UTILISATEURS(pseudo,prenom,nom,datenaiss,mail,mot_de_passe,role) VALUES
+('admin_rezisten','rezisten','rezisten','12/10/2000','rezisten.contact@gmail.com','$2y$10$v0mMwzjy8YmJFF6ePx4tyOe.TvQzv2Vipx.oYiftj.UM3YsV2dz.m','a');
 
 --Création des deux premiers chapitres de l'histoire
 INSERT INTO CHAPITRES(numchap,titre) values(0,'Prologue'),
@@ -14,7 +17,7 @@ INSERT INTO HISTOIRES(titre,numchap,createur,id_lieu,background,visible) values(
 
 
 --Création de deux personnages participants au prologue
-INSERT INTO PERSONNAGES(prenom,img,createur) values('Raymond','raymond',4), --1
+INSERT INTO PERSONNAGES(prenom,img,createur) values('Raymond','raymond',1), --1
 ('Pierre','pierre',1),   --2
 ('Jean','jean',1),       --3
 ('André','andre',1),     --4
@@ -240,4 +243,4 @@ internés en mars 1943 ? ','70','s');
 
 
 --Progression
-INSERT INTO PROGRESSION values(1,1,1);
+INSERT INTO PROGRESSION values(1,1,true);

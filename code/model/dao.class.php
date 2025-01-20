@@ -28,7 +28,7 @@ class DAO {
             // Configuration des attributs PDO pour PostgreSQL
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-            throw new Exception("Erreur PDO : ".$e->getMessage().' sur '.$this->database);
+            throw new Exception("Erreur PDO : ".$e->getMessage().' sur '.$this->dbname);
         }
     }
 
