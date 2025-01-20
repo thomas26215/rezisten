@@ -92,7 +92,6 @@ if ($dialog === null) {
         $view->display('finHistoire');
 }
 
-var_dump($_SESSION);
 
 // Initialisation par défaut du background à "bg1"
 $background = $backgroundURL . "hist_" . $idStory . "bg1.webp";
