@@ -76,10 +76,18 @@ class CheckEmail {
 
     public function create(): void {
         try {
+            // Obtenir la date et l'heure actuelles
+            $date = new DateTime();
+
+            // Ajouter 30 minutes
+            $date->add(new DateInterval('PT30M'));
+
+            // Formater la date dans le format souhaité
+            $formatted_date = $date->format('Y-m-d H:i:s');
             if (!$this->dao->insert("verifications_email", [
                 "utilisateur_id" => (int)$this->user->getId(),
                 "token" => $this->getToken(),
-                "date_expiration" => $this->getExpirationDate(),
+                "date_expiration" => $date,
             ])) {
                 throw new RuntimeException("Échec de l'insertion de la vérification d'email dans la base de données.");
             }
