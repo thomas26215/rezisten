@@ -18,7 +18,7 @@
             <li>
                 <h2>Auvergne-Rhône-Alpes</h2>
                 <article class="flex-row">
-                    <img src="./design/image/logo_region.png" alt="logo Auvergne-Rhône-Alpes" class="partenaire-img">
+                    <img src="view/design/image/logo_region.png" alt="logo Auvergne-Rhône-Alpes" class="partenaire-img">
                     <section>
                         <p class="partenaire-texte">
                             La région Auvergne-Rhône-Alpes vous accompagne dans la découverte des hauts lieux de la
@@ -31,7 +31,7 @@
             <li>
                 <h2>Mémorial de la Résistance en Vercors</h2>
                 <article class="flex-row">
-                    <img src="./design/image/memorialVercors.png" alt="logo Mémorial de la résistance en Vercors" class="partenaire-img">
+                    <img src="view/design/image/memorialVercors.png" alt="logo Mémorial de la résistance en Vercors" class="partenaire-img">
                     <section>
                         <p class="partenaire-texte">
                             Le mémorial de la Résistance retrace la vie pendant la guerre des valeureux résistants qui
@@ -44,7 +44,7 @@
             <li>
                 <h2>Mémorial prison de Montluc</h2>
                 <article class="flex-row">
-                    <img src="./design/image/memorial.jpeg" alt="logo du Mémorial Jean Moulin" class="partenaire-img">
+                    <img src="view/design/image/memorial.jpeg" alt="logo du Mémorial Jean Moulin" class="partenaire-img">
                     <section>
                         <p class="partenaire-texte">
                             Le mémorial Jean Moulin est, avec la prison de Montluc et le Centre d’histoire de la
