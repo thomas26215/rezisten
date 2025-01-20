@@ -199,8 +199,8 @@ class Story
                throw new RuntimeException("Aucune donnée n'a été mise à jour dans la base de données.");
            }
        } catch (PDOException $e) {
-           throw new RuntimeException("Erreur lors de la mise à jour de l'histoire : " . e.getMessage(), 0, e);
-       }
+        throw new RuntimeException("Erreur lors de la mise à jour de l'histoire : " . $e->getMessage(), 0, $e);
+    }
    }
 
    // Supprimer une histoire en connaissant son id
@@ -215,7 +215,7 @@ class Story
                throw new RuntimeException("Échec de la suppression de l'histoire dans la base de données."); 
            } 
        } catch (PDOException $e) { 
-           throw new RuntimeException("Erreur lors de la suppression de l'histoire : " . e.getMessage(), 0, e); 
+           throw new RuntimeException("Erreur lors de la suppression de l'histoire : " . $e->getMessage(), 0, $e); 
        } 
    }
 
@@ -231,7 +231,7 @@ class Story
                ["numchap" => (int)$idChapter] // Condition 
            ));
        } catch (PDOException $e) { 
-           throw new RuntimeException("Erreur lors du comptage des histoires : " . e.getMessage(), 0, e); 
+           throw new RuntimeException("Erreur lors du comptage des histoires : " . $e->getMessage(), 0, $e); 
        } 
    } 
 
@@ -242,7 +242,7 @@ class Story
                "histoires", ["numchap" => (int)$idChapter], ["id"] 
            ), 'id'); 
        } catch (PDOException $e) { 
-           throw new RuntimeException("Erreur lors de la récupération des IDs d'histoires par chapitre : " . e.getMessage(), 0, e); 
+           throw new RuntimeException("Erreur lors de la récupération des IDs d'histoires par chapitre : " . $e->getMessage(), 0, $e); 
        } 
    } 
 
@@ -252,7 +252,7 @@ class Story
            return array_column(DAO::getInstance()->getWithParameters( 
                "histoires", [], ["id"]), 'id'); 
        } catch (PDOException $e) { 
-           throw new RuntimeException("Erreur lors de la récupération des IDs d'histoires : " . e.getMessage(), 0, e); 
+           throw new RuntimeException("Erreur lors de la récupération des IDs d'histoires : " . $e->getMessage(), 0, $e); 
        } 
    }
 }

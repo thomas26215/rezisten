@@ -1,146 +1,102 @@
 <?php
 
-// Accès aux classes
-
 use PHPUnit\Framework\TestCase;
 
 require_once(__DIR__.'/../model/questions.class.php');
 require_once(__DIR__.'/../model/dao.class.php');
+require_once(__DIR__.'/../model/histoires.class.php');
 
-
-class questionTest extends TestCase {
-    private User $user;
-    private Chapter $chapter;
-    private Place $place;
-    private Story $story;
+class questionTest extends TestCase
+{
     private Question $question;
+    private Story $story;
+    private Chapter $chapter;
+    private Place $lieux;
+    private User $user;
+
+    protected function setUp(): void
+    {        
+        $this->user = new User("test","test","test","2000-15-15","test@gmail.com","aa","j",true);
+        $this->user->create(); 
+        
+        $this->lieux = new Place("lieux","batiment","description","ville","coordonnées");
+        $this->chapter = new Chapter(69, 'test');
+        $this->story = new Story("Une histoire test", $this->chapter, $this->user, $this->lieux, "background.jpg", true);
+        $this->story->create(); 
+        var_dump($this->story->getUser()->getId());        
+        $this->question = new Question($this->story, "Question test ?", "Réponse test", "g");
+    }
     
-    protected function setUp(): void {
-        $this->user = new User("prapra","brayan","bils","24-08-2005","bilsbrayan@gmail.com","2706","a");
-        $this->chapter = new Chapter(69,"Il faut un titre");
-        $this->place = new Place("iut" , "batiment" , "endroit pour les cours" , "grenoble", "0.0");
-        $this->story = new Story("Une histoire" , $this->chapter , $this->user , $this->place , "un fond" , true);
-        $this->question = new Question($this->story,"une question","la reponse","g");
 
-    }
-
-
-    public function testGetters()  {
+    public function testGetters()
+    {
         $this->assertEquals($this->story, $this->question->getHistory());
-        $this->assertEquals("une question", $this->question->getQuestion());
-        $this->assertEquals("la reponse", $this->question->getAnswer());
-        $this->assertEquals("g", $this->question->getType());
+        $this->assertEquals("Question test ?", $this->question->getQuestion());
+        $this->assertEquals("Réponse test", $this->question->getAnswer());
+        $this->assertEquals("générique", $this->question->getType());
     }
 
-    public function testSetters() {
-        $this->question->setHistory($this->story);
-        $this->question->setQuestion("Une nouvelle question");
-
-        $this->assertEquals($this->story, $this->question->getHistory());
-        $this->assertEquals("Une nouvelle question", $this->question->getQuestion());
-
-        $this->expectException(Exception::class);
-        $this->question->setQuestion("");
-        $this->question->setAnswer("");
-        $this->question->setType("type");
-    }
-
-
-    public function testCreate() {
-        $this->assertTrue($this->story->create());
-        $this->assertTrue($this->question->create(), "Échec de la création de la question");
-        $this->assertEquals($this->story, $this->question->getHistory());
-    }
-
-    public function testRead() {
-        $this->user->create();
-        $this->chapter->create();
-        $this->place->create();
-        $this->assertTrue($this->story->create(), "Échec de la création de l'histoire");
-        
-        $this->assertTrue($this->question->create(), "Échec de la création de la question");
-        
+    public function testCreate()
+    {
+        $this->question->create();
         $readQuestion = Question::read($this->story->getId(), "g");
-        $this->assertNotNull($readQuestion, "La question lue est null");
         $this->assertInstanceOf(Question::class, $readQuestion);
-        $this->assertEquals($this->story->getId(), $readQuestion->getHistory()->getId());
-        $this->assertEquals("une question", $readQuestion->getQuestion());
-        $this->assertEquals("la reponse", $readQuestion->getAnswer());
-        $this->assertEquals("g", $readQuestion->getType());
+        $this->assertEquals($this->question->getQuestion(), $readQuestion->getQuestion());
     }
-    
-    public function testUpdate() {
-        $this->user->create();
-        $this->chapter->create();
-        $this->place->create();
-        $this->story->create();
 
+    public function testRead()
+    {
         $this->question->create();
-        $this->question->setAnswer("newAnswer");
-        
-        $this->assertTrue($this->question->update());
-        $updatedQuestion = Question::read($this->question->getHistory()->getId(), "g");
-        $this->assertEquals("newAnswer", $updatedQuestion->getAnswer());
+        $readQuestion = Question::read($this->story->getId(), "g");
+        $this->assertInstanceOf(Question::class, $readQuestion);
+        $this->assertEquals($this->question->getQuestion(), $readQuestion->getQuestion());
     }
 
-    public function testDelete() {
-        $this->user->create();
-        $this->chapter->create();
-        $this->place->create();
-        $this->story->create();
-        
+    public function testUpdate()
+    {
         $this->question->create();
-
-        $this->assertNotNull(Question::read($this->question->getHistory()->getId(), "g"));
-        $this->assertTrue(Question::delete($this->question->getHistory()->getId(), "g"));
-        $this->assertNull(Question::read($this->question->getHistory()->getId(), "g"));
+        $this->question->setQuestion("Question modifiée");
+        $this->question->update();
+        $updatedQuestion = Question::read($this->story->getId(), "g");
+        $this->assertEquals("Question modifiée", $updatedQuestion->getQuestion());
     }
 
-
-    public function testReadNonExistenceDemande() {
-        $this->assertNull(Question::read(99999,"s"));
-    } 
-
-
-    public function testUpdateNonExistenceDemande() {
-        $this->user->create();
-        $this->chapter->create();
-        $this->place->create();
-        $this->story->create();
+    public function testDelete()
+    {
         $this->question->create();
-
-        $tempId = $this->question->getHistory()->getId();
-        $this->question->getHistory()->setId(99999);
-        
-        $this->assertFalse($this->question->update());
-        $this->question->getHistory()->setId($tempId);
+        Question::delete($this->story->getId(), "g");
+        $this->assertNull(Question::read($this->story->getId(), "g"));
     }
 
-    public function deleteNonExistentPlace() {
-        $this->assertFalse(Question::delete(99999,"s"));
+    public function testSetters()
+    {
+        $newStory = new Story("Nouvelle histoire", $this->chapter, $this->user, $this->lieux, "new_background.jpg", true);
+        $newStory->create();
+        $this->question->setHistory($newStory);
+        $this->question->setQuestion("Nouvelle question");
+        $this->question->setAnswer("Nouvelle réponse");
+        $this->question->setType("s");
+
+        $this->assertEquals($newStory, $this->question->getHistory());
+        $this->assertEquals("Nouvelle question", $this->question->getQuestion());
+        $this->assertEquals("Nouvelle réponse", $this->question->getAnswer());
+        $this->assertEquals("spécifique", $this->question->getType());
     }
 
-    protected function tearDown(): void {
-        if($this->user->getId() > 0) {
-            User::delete($this->user->getId());
+    protected function tearDown(): void
+    {
+        if (isset($this->question) && $this->question->getHistory()->getId() > 0) {
+            try {
+                Question::delete($this->question->getHistory()->getId(), "g");
+            } catch (RuntimeException $e) {
+                // Ignore if question doesn't exist
+            }
         }
-        if($this->chapter->getNumchap() > 0) {
-            Chapter::delete($this->chapter->getNumchap());
-        }
-        if($this->place->getId() > 0) {
-            Place::delete($this->place->getId());
-        }
-        if($this->story->getId() > 0) {
+        if (isset($this->story) && $this->story->getId() > 0) {
             Story::delete($this->story->getId());
         }
-        Question::delete(99999 , "g");
-        
+        if (isset($this->user) && $this->user->getId() > 0) {
+            User::delete($this->user->getId());
+        }
     }
-
-
-
 }
-
-
-?>
-

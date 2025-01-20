@@ -14,7 +14,7 @@ class apparitionTest extends TestCase {
     private Apparitions $summon;
 
     protected function setUp(): void {
-        $this->user = new User("prapra", "brayan", "bils", "24-08-2005", "bilsbrayan@gmail.com", "2706", "a");
+        $this->user = new User("prapra", "brayan", "bils", "24-08-2005", "bilsbrayan@gmail.com", "2706", "a",false);
         $this->chapter = new Chapter(69, "la tete a toto");
         $this->place = new Place("iut", "établissement", "enfer", "grenoble", "0.0");
         $this->story = new Story("Titre", $this->chapter, $this->user, $this->place, "background", false);

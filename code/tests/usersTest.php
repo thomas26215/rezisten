@@ -11,12 +11,12 @@ class usersTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->user = new User("pseudoUserTest", "brayan", "bils", "24-08-2005", "test@autre.fr", "2706", "j", true);
+        $this->user = new User("pseudoUserTest", "brayan", "bils", "2005-08-24", "test@autre.fr", "2706", "j",true);
     }
 
     public function testGetters()
     {
-        $this->assertEquals("24-08-2005", $this->user->getBirthDate());
+        $this->assertEquals("2005-08-24", $this->user->getBirthDate());
         $this->assertEquals("brayan", $this->user->getFirstName());
         $this->assertEquals("test@autre.fr", $this->user->getMail());
         $this->assertEquals("j", $this->user->getRole());
@@ -64,7 +64,7 @@ class usersTest extends TestCase
         $this->user->setUsername("newUsername");
         $this->user->setFirstName("newFirstName");
         $this->user->setSurname("newSurname");
-        $this->user->setBirthDate("01-01-2000");
+        $this->user->setBirthDate("2000-01-01");
         $this->user->setMail("new@email.com");
         $this->user->setPassword("newPassword");
         $this->user->setRole("a");
@@ -72,7 +72,7 @@ class usersTest extends TestCase
         $this->assertEquals("newUsername", $this->user->getUsername());
         $this->assertEquals("newFirstName", $this->user->getFirstName());
         $this->assertEquals("newSurname", $this->user->getSurname());
-        $this->assertEquals("01-01-2000", $this->user->getBirthDate());
+        $this->assertEquals("2000-01-01", $this->user->getBirthDate());
         $this->assertEquals("new@email.com", $this->user->getMail());
         $this->assertEquals("a", $this->user->getRole());
     }
@@ -80,7 +80,7 @@ class usersTest extends TestCase
     public function testCreateWithInvalidData()
     {
         $this->expectException(InvalidArgumentException::class);
-        $invalidUser = new User("", "", "", "", "", "", "", true);
+        $invalidUser = new User("", "", "", "", "", "", "",false);
     }
 
     public function testReadNonExistentUser()
@@ -92,7 +92,7 @@ class usersTest extends TestCase
     public function testUpdateNonExistentUser()
     {
         $this->expectException(RuntimeException::class);
-        $nonExistentUser = new User("test", "test", "test", "01-01-2000", "test@test.com", "password", "j", true, 99999);
+        $nonExistentUser = new User("test", "test", "test", "2000-01-01", "test@test.com", "password", "j", 99999);
         $nonExistentUser->update();
     }
 
@@ -105,7 +105,7 @@ class usersTest extends TestCase
     public function testCreateDuplicateUsername()
     {
         $this->user->create();
-        $duplicateUser = new User("pseudoUserTest", "John", "Doe", "01-01-1990", "john@example.com", "password", "j", true);
+        $duplicateUser = new User("pseudoUserTest", "John", "Doe", "1990-01-01", "john@example.com", "password", "j",false);
         $this->expectException(RuntimeException::class);
         $duplicateUser->create();
     }
@@ -113,7 +113,7 @@ class usersTest extends TestCase
     public function testCreateDuplicateEmail()
     {
         $this->user->create();
-        $duplicateUser = new User("johndoe", "John", "Doe", "01-01-1990", "test@autre.fr", "password", "j", true);
+        $duplicateUser = new User("johndoe", "John", "Doe", "1990-01-01", "test@autre.fr", "password", "j",true);
         $this->expectException(RuntimeException::class);
         $duplicateUser->create();
     }
@@ -121,25 +121,25 @@ class usersTest extends TestCase
     public function testInvalidBirthDate()
     {
         $this->expectException(InvalidArgumentException::class);
-        new User("test", "Test", "User", "invalid-date", "test@example.com", "password", "j", true);
+        new User("test", "Test", "User", "invalid-date", "test@example.com", "password", "j",true);
     }
 
     public function testInvalidEmail()
     {
         $this->expectException(InvalidArgumentException::class);
-        new User("test", "Test", "User", "01-01-1990", "invalid-email", "password", "j", true);
+        new User("test", "Test", "User", "1990-01-01", "invalid-email", "password", "j",true);
     }
 
     public function testInvalidRole()
     {
         $this->expectException(InvalidArgumentException::class);
-        new User("test", "Test", "User", "01-01-1990", "test@example.com", "password", "x", true);
+        new User("test", "Test", "User", "1990-01-01", "test@example.com", "password", "x",true);
     }
 
     public function testPasswordHashing()
     {
         $plainPassword = "myPassword123";
-        $user = new User("testuser", "Test", "User", "01-01-1990", "test@example.com", $plainPassword, "j", true);
+        $user = new User("testuser", "Test", "User", "1990-01-01", "test@example.com", $plainPassword, "j",true);
         $this->assertNotEquals($plainPassword, $user->getPassword());
         $this->assertTrue(password_verify($plainPassword, $user->getPassword()));
     }
@@ -163,4 +163,3 @@ class usersTest extends TestCase
         }
     }
 }
-
