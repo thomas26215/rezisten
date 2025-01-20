@@ -244,7 +244,7 @@ class Dialog
         $dao = DAO::getInstance();
         $dialogsBeforeQuestion = array();
 
-        $dialogs = $dao->getColumnWithParameters("dialogues", ["id_histoire" => $idStory]);
+        $dialogs = $dao->getWithParameters("dialogues", ["id_histoire" => $idStory]);
         if (empty($dialogs)) {
             throw new Exception("Aucun dialogue trouvé pour l'histoire " . $idStory);
         }
