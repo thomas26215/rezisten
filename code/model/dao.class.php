@@ -43,7 +43,7 @@ class DAO {
         return $this->db;
     }
 
-    private function setUtilitaire(string $query = "", array $params = []){
+    public function setUtilitaire(string $query = "", array $params = []){
         $this->daoUtilitaire = new DAOUtilitaire();
         $this->daoUtilitaire->setQuery($query);
         $this->daoUtilitaire->setParams($params);
