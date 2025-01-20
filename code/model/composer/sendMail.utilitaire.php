@@ -78,7 +78,7 @@ class EmailSender {
                     <p>Pour débloquer votre compte et accéder aux ressources sécurisées, 
                     utilisez le code d'activation top-secret : {$code}</p>
                     
-                    <a href="http://localhost/rendus/code/index.php?ctrl=verifierCompte" style="display:block;background-color:#33553d;color:white;padding:10px;text-decoration:none;text-align:center;">
+                    <a href="https://192.168.14.126/index.php?ctrl=verifierCompte" style="display:block;background-color:#33553d;color:white;padding:10px;text-decoration:none;text-align:center;">
                     ACTIVER MON COMPTE</a>
                 </div>
                 

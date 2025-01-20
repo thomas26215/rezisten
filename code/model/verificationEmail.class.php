@@ -87,7 +87,7 @@ class CheckEmail {
             if (!$this->dao->insert("verifications_email", [
                 "utilisateur_id" => (int)$this->user->getId(),
                 "token" => $this->getToken(),
-                "date_expiration" => $date,
+                "date_expiration" => $formatted_date,
             ])) {
                 throw new RuntimeException("Échec de l'insertion de la vérification d'email dans la base de données.");
             }

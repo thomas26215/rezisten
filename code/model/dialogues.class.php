@@ -17,7 +17,7 @@ class Dialog
 
     const audioURL = "192.168.14.118/rezisten/doublageDialogue/";
 
-    public function __construct(int $id, Story $story, Character $speaker, string $content, bool $bonus = false, string $dubbing = '')
+    public function __construct(int $id, Story $story, Character $speaker, string $content, bool $bonus = "false", string $dubbing = '')
     {
         $this->id = $id;
         $this->story = $story;
