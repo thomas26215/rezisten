@@ -27,6 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['auth'])) {
 
     // Validation des données
     if ($_POST['auth'] == 'create') {
+        CheckEmail::deleteExpiration();
         if (empty($formData['username']) || empty($formData['date']) || empty($formData['email']) || empty($formData['password']) || empty($formData['confirmpass'])) {
             $errors[] = "Veuillez remplir tous les champs obligatoires.";
         }

@@ -144,10 +144,19 @@ class CheckEmail {
        try { 
            if (!DAO::getInstance()->delete("verifications_email", ["utilisateur_id" => (int)$userId])) { 
                throw new RuntimeException("Échec de la suppression de la vérification d'email dans la base de données."); 
-           } 
+           }
+        CheckEmail::deleteExpiration();
        } catch (PDOException $e) { 
            throw new RuntimeException("Erreur lors de la suppression de la vérification d'email : " . $e.getMessage(), 0, $e); 
        } 
+   }
+
+   public static function deleteExpiration(): void {
+       try {
+           DAO::getInstance()->getUtilitaire()->executePrepare("delete from verifications_email where date_expiration < NOW()");
+       } catch (PDOException $e) {
+           echo $e;
+       }
    }
 
    /* --- Méthodes utilitaires --- */
