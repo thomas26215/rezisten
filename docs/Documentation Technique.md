@@ -186,104 +186,103 @@ Description à fournir .
 # Fonctionnalités
 ## 5.1 Authentification
 ### 5.1.1 Connexion au compte
-**Fonctionnalité** : Permet aux utilisateurs de se connecter à leur compte existant.
+- **Fonctionnalité** : Permet aux utilisateurs de se connecter à leur compte existant.
 **Interface utilisateur** :
-- Champ de saisie pour l'adresse e-mail
-- Champ de saisie pour le mot de passe (masqué)
-- Bouton "Se connecter"
-- Lien "Mot de passe oublié ?"
-- Lien "Créer un compte"
-**Gestion des erreurs** :
-- Message d'erreur en rouge : "Email ou mot de passe incorrect"
-- [TODO] Encadrement en rouge des champs d'email et de mot de passe
-**Sécurité** :
-- Hachage du mot de passe côté serveur
-- Protection contre les attaques XSS (HTMLSpecialchars)
-**Redirection** :
-- Vers le dashboard si les identifiants sont corrects et le compte vérifié
-- Vers la page de vérification si le compte n'est pas vérifié (avec envoi d'un e-mail de vérification)
+	- Champ de saisie pour l'adresse e-mail
+	- Champ de saisie pour le mot de passe (masqué)
+	- Bouton "Se connecter"
+	- Lien "Mot de passe oublié ?"
+	- Lien "Créer un compte"
+- **Gestion des erreurs** :
+	- Message d'erreur en rouge : "Email ou mot de passe incorrect"
+	- [TODO] Encadrement en rouge des champs d'email et de mot de passe
+- **Sécurité** :
+	- Hachage du mot de passe côté serveur
+	- Protection contre les attaques XSS (HTMLSpecialchars)
+- **Redirection** :
+	- Vers le dashboard si les identifiants sont corrects et le compte vérifié
+	- Vers la page de vérification si le compte n'est pas vérifié (avec envoi d'un e-mail de vérification)
 ### 5.1.2 Création de compte
-**Fonctionnalité** : Permet aux nouveaux utilisateurs de créer un compte.
-**Interface utilisateur** :
-- Champs de saisie : nom, prénom, date de naissance, nom d'utilisateur, e-mail, mot de passe, confirmation du mot de passe
-- Case à cocher pour accepter les conditions d'utilisation
-- Bouton "Créer un compte"
-**Vérification d'unicité** :
-- Message d'erreur si l'e-mail est déjà utilisé
-**Processus de création** :
-- Envoi d'un e-mail de confirmation avec lien et code de vérification
-- Compte créé mais inactif jusqu'à la vérification
-**Redirection** :
-- Vers la page de connexion après création réussie
+- **Fonctionnalité** : Permet aux nouveaux utilisateurs de créer un compte.
+- **Interface utilisateur** :
+	- Champs de saisie : nom, prénom, date de naissance, nom d'utilisateur, e-mail, mot de passe, confirmation du mot de passe
+	- Case à cocher pour accepter les conditions d'utilisation
+	- Bouton "Créer un compte"
+- **Vérification d'unicité** :
+	- Message d'erreur si l'e-mail est déjà utilisé
+- **Processus de création** :
+	- Envoi d'un e-mail de confirmation avec lien et code de vérification
+	- Compte créé mais inactif jusqu'à la vérification
+- **Redirection** :
+	- Vers la page de connexion après création réussie
 ### 5.1.3 E-mail envoyé
 
-**Fonctionnalité** : Informe l'utilisateur qu'un e-mail de vérification a été envoyé.
+- **Fonctionnalité** : Informe l'utilisateur qu'un e-mail de vérification a été envoyé.
 
-**Interface utilisateur** :
-- Texte d'information
-- Lien pour demander un nouveau code de confirmation
+- **Interface utilisateur** :
+	- Texte d'information
+	- Lien pour demander un nouveau code de confirmation
 ### 5.1.4 Vérification du compte
-**Fonctionnalité** : Permet à l'utilisateur de vérifier son compte.
-**Interface utilisateur** :
-- Champs de saisie : code de vérification, e-mail, mot de passe
-- Bouton "Vérifier compte"
-- Lien vers la page de connexion
-**Gestion des erreurs** :
-- Affichage d'erreurs pour code, e-mail ou mot de passe invalides
-**Redirection** :
-- Vers la page de connexion après vérification réussie
+- **Fonctionnalité** : Permet à l'utilisateur de vérifier son compte.
+- **Interface utilisateur** :
+	- Champs de saisie : code de vérification, e-mail, mot de passe
+	- Bouton "Vérifier compte"
+	- Lien vers la page de connexion
+- **Gestion des erreurs** :
+	- Affichage d'erreurs pour code, e-mail ou mot de passe invalides
+- **Redirection** :
+	- Vers la page de connexion après vérification réussie
 ### 5.1.5 Mot de passe oublié
-**Fonctionnalité** : Permet à l'utilisateur de demander un nouveau mot de passe.
+- **Fonctionnalité** : Permet à l'utilisateur de demander un nouveau mot de passe.
 **Interface utilisateur** :
-- Champ de saisie pour l'e-mail
-- Bouton "Mot de passe oublié"
-- Lien vers la page de connexion
-**Gestion des erreurs** :
-- Message d'erreur si l'adresse e-mail n'existe pas dans la base de données
+	- Champ de saisie pour l'e-mail
+	- Bouton "Mot de passe oublié"
+	- Lien vers la page de connexion
+- **Gestion des erreurs** :
+	- Message d'erreur si l'adresse e-mail n'existe pas dans la base de données
 ## 5.2 Navigation
 ### 5.2.1 MainController
-**Fonctionnalité** : Permet à l'utilisateur d'utiliser l'application.
+- **Fonctionnalité** : Permet à l'utilisateur d'utiliser l'application.
 **Interface utilisateur** :
-- Bouton "Lire les histoires"
-- Bouton "Créer une histoire"
-- Bouton "Consulter les histoires"
-**Sécurité** :
-- Restriction d'accès pour les non-créateurs
-**Redirection** :
-- Vers la liste des histoires, la création d'histoire ou la consultation des histoires
+	- Bouton "Lire les histoires"
+	- Bouton "Créer une histoire"
+	- Bouton "Consulter les histoires"
+- **Sécurité** :
+	- Restriction d'accès pour les non-créateurs
+- **Redirection** :
+	- Vers la liste des histoires, la création d'histoire ou la consultation des histoires
 ### 5.2.2 Liste des chapitres
-**Fonctionnalités** : Permet à l'utilisateur de choisir et gérer les histoires.
+- **Fonctionnalités** : Permet à l'utilisateur de choisir et gérer les histoires.
 **Interface utilisateur** :
-- Boutons des différents chapitres
-- Bouton "Chapitres des créateurs"
-- Bouton "Recommencer tout"
-**Redirection** :
-- Vers les histoires prédéfinies ou celles des créateurs
+	- Boutons des différents chapitres
+	- Bouton "Chapitres des créateurs"
+	- Bouton "Recommencer tout"
+- **Redirection** :
+	- Vers les histoires prédéfinies ou celles des créateurs
 ### 5.2.3 Liste des histoires
-**Fonctionnalités** : Permet à l'utilisateur de choisir les histoires d'un chapitre.
+- **Fonctionnalités** : Permet à l'utilisateur de choisir les histoires d'un chapitre.
 **Interface utilisateur** :
-- Boutons des différentes histoires
-**Redirection** :
-- Vers le chapitre concerné
+	- Boutons des différentes histoires
+- **Redirection** :
+	- Vers le chapitre concerné
 ### 5.2.4 Chapitres des créateurs
-**Fonctionnalité** : Permet à l'utilisateur de lire les histoires publiées par les créateurs.
-**Interface utilisateur** :
-- Boutons des différentes histoires
-**Redirection** :
-- Vers le chapitre concerné
+- **Fonctionnalité** : Permet à l'utilisateur de lire les histoires publiées par les créateurs.
+- **Interface utilisateur** :
+	- Boutons des différentes histoires
+- **Redirection** :
+	- Vers le chapitre concerné
 ### 5.2.5 Consulter mes histoires
-**Fonctionnalité** : Permet au créateur de gérer ses histoires.
-**Interface utilisateur** :
-- Boutons des histoires créées avec options de modification et suppression
-- Bouton "Créer une histoire"
-**Redirection** :
-- Vers la page "Modifier une histoire" si l'option est sélectionnée
-- Vers la page "Créer une histoire" si le bouton est cliqué
+- **Fonctionnalité** : Permet au créateur de gérer ses histoires.
+- **Interface utilisateur** :
+	- Boutons des histoires créées avec options de modification et suppression
+	- Bouton "Créer une histoire"
+- **Redirection** :
+	- Vers la page "Modifier une histoire" si l'option est sélectionnée
+	- Vers la page "Créer une histoire" si le bouton est cliqué
 ## 5.3 Profil
 ## 5.3.1 Page profil
 
 - **Fonctionnalité** : Permet à l'utilisateur ou au créateur de modifier les paramètres de son compte.**Interface utilisateur** :
-
 	- Photo de profil de l'utilisateur
 	- Pseudo de l'utilisateur
 	- Bouton "Se déconnecter"
