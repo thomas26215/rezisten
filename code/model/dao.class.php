@@ -17,7 +17,7 @@ class DAO {
     private function __construct() {
         try {
             // Construction de la chaîne de connexion pour PostgreSQL
-            $dsn = "pgsql:host={$this->host};port={$this->port};dbname={$this->dbname};";
+            $dsn = "pgsql:host={$this->host};port={$this->port};dbname={$this->dbname};sslmode=require";
 
             $this->db = new PDO($dsn, $this->user, $this->password);
 
