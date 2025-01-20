@@ -90,19 +90,16 @@ if ($dialog === null) {
         $view->assign('place', $place);
         $view->assign('idChap',$story->getChapter()->getNumchap());
         $view->display('finHistoire');
-    
 }
-
+var_dump($_SESSION);
 
 // Gestion du background
-if(!isset($_SESSION['background'])){
     $background = $backgroundURL."hist_".$idStory."bg1.webp";
-}
+    $_SESSION['background'] = $background;
+
 // Permet de vérifier quel background est stocké dans la session si on change subitement d'histoire
-if(isset($_SESSION['background'])){
-    $background = $backgroundURL."hist_".$idStory."bg2.webp";
     $bgSession = explode('_',$_SESSION['background']);
-}
+
 
 // S'il existe un background dans la session qui correspond à un background de l'histoire actuelle on l'affiche
 if( isset($_SESSION['background']) && $_SESSION['background'] != '' && $bgSession[1] == $idStory ){
