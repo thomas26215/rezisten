@@ -105,20 +105,48 @@
                 <section class="footer flex-row">
                     <form method=get>
                         <input type="hidden" name="ctrl" value="mesHistoires">
-                        <button class=button-rouge>Quitter</button>
+                        <button id="quitterHistoireOuvrir" class=button-rouge>Quitter</button>
                     </form>
+                    <dialog class="dialog" id="dialogHistoireQuitter">
+                        <div class="containerDialog">
+                            <h2>Voulez vous quitter la page création ?</h2>
+                            <div>
 
+                                <button type="submit" id="fermerQuitterHistoire" name="fermer" class="button-vert">
+                                    Quitter
+                                </button>
+                                <button type="button" id="revenirQuitterHistoire" class="button-rouge">
+                                    Revenir
+                                </button>
+                            </div>
+                        </div>
+                    </dialog>
 
 
                     <form method="get">
                         <input type="hidden" name="ctrl" value="creation">
                         <input type="hidden" name="footer" value="publie">
                         <input type="hidden" name="id" value="<?= $id ?>">
-                        <button class="button-vert"><?php if ($histoire->getVisibility() == true): ?>
+                        <button id="publierHistoireOuvrir"
+                            class="button-vert"><?php if ($histoire->getVisibility() == true): ?>
                                 Mettre en privé
                             <?php else: ?>
                                 Publier
                             <?php endif ?></button>
+                        <dialog class="dialog" id="dialogHistoirePublier">
+                            <div class="containerDialog">
+                                <h2>Voulez vous quitter la page création ?</h2>
+                                <div>
+
+                                    <button type="submit" id="fermerPublierHistoire" name="fermer" class="button-vert">
+                                        Quitter
+                                    </button>
+                                    <button type="button" id="revenirPublierHistoire" class="button-rouge">
+                                        Revenir
+                                    </button>
+                                </div>
+                            </div>
+                        </dialog>
                     </form>
                 </section>
             </div>
@@ -174,7 +202,48 @@
         }
     });
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Supprimer personnage
+        var quitterHistoireOuvrir = document.getElementById('quitterHistoireOuvrir');
+        var dialogQuitterHistoire = document.getElementById('dialogQuitterHistoire');
+        var fermerQuitterHistoire = document.getElementById('fermerQuitterHistoire');
+        var revenirQuitterHistoire = document.getElementById('revenirQuitterHistoire');
 
+        if (quitterHistoireOuvrir && dialogQuitterHistoire && fermerQuitterHistoire && revenirQuitterHistoire) {
+            quitterHistoireOuvrir.addEventListener('click', function () {
+                dialogQuitterHistoire.showModal();
+            });
+
+            fermerQuitterHistoire.addEventListener('click', function () {
+                dialogQuitterHistoire.close();
+            });
+
+            revenirQuitterHistoire.addEventListener('click', function () {
+                dialogQuitterHistoire.close();
+            });
+        }
+
+        var publierHistoireOuvrir = document.getElementById('publierHistoireOuvrir');
+        var dialogPublierHistoire = document.getElementById('dialogPublierHistoire');
+        var fermerPublierHistoire = document.getElementById('fermerPublierHistoire');
+        var revenirPublierHistoire = document.getElementById('revenirPublierHistoire');
+
+        if (publierHistoireOuvrir && dialogPublierHistoire && fermerPublierHistoire && revenirPublierHistoire) {
+            publierHistoireOuvrir.addEventListener('click', function () {
+                dialogPublierHistoire.showModal();
+            });
+
+            fermerPublierHistoire.addEventListener('click', function () {
+                dialogPublierHistoire.close();
+            });
+
+            revenirPublierHistoire.addEventListener('click', function () {
+                dialogPublierHistoire.close();
+            });
+        }
+    });
+</script>
 
 
 </html>
