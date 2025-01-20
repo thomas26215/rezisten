@@ -1,4 +1,4 @@
-Groupe 11
+wGroupe 11
 
 
 **Documentation Technique du Projet [Rezisten]**
@@ -33,144 +33,95 @@ Description à fournir .
 #### 3.1.1. **Fichier `create.sql**
 
 
-- Table des utilisateurs
-CREATE TABLE UTILISATEURS (
-    ``id`` **SERIAL PRIMARY KEY**,  -- Identifiant unique auto-incrémenté pour chaque utilisateur
-    pseudo **VARCHAR(20) NOT NULL**,   -- Nom d'utilisateur unique
-    ``prenom`` **VARCHAR(50),**                      -- Prénom de l'utilisateur 
-    ``nom`` **VARCHAR(50),**                     -- Nom de famille de l'utilisateur
-    ``datenaiss`` **DATE NOT NULL**,                -- Date de naissance de l'utilisateur
-    ``mail`` **VARCHAR(255) NOT NULL**,           -- Adresse email de l'utilisateur (doit être unique)
-    ``mot_de_passe`` **TEXT NOT NULL**,                 -- Mot de passe haché
-		                                            --(si false, il ne peut pas être dans la table créateur)
-    ``role`` **CHAR(1) NOT NULL**,                  -- indique si l'utilisateur est un joueur ou un créateur
-    **CONSTRAINT** ``mailFormat`` CHECK** (``mail`` LIKE '%@%.%'),**  -- Vérification du format de l'email
-    **CONSTRAINT** ``roleName`` **CHECK (``role`` IN('j','c','a')),**
-    **CONSTRAINT** ``pswdLength`` **CHECK (LENGTH(``mot_de_passe``) >= 10)** -- Vérification que le mot de passe a au moins 10 caractères
-);
-
-
-- Table des demandes de créateurs
-CREATE TABLE DEMANDES(
-`    id_utilisateur ` INTEGER PRIMARY KEY,         -- Référence un utilisateur de la 
-`table UTILISATEURS
-
-`    doc` VARCHAR(50) NOT NULL,                  -- Nom d'un fichier image qui contient la                                                                                      carte d'identité de la personne
-
-  FOREIGN KEY (``id_utilisateur``) REFERENCES UTILISATEURS(``id``)
-
-);
-
-
-
-- Table des lieux associés aux histoires
-CREATE TABLE LIEUX (
-    ``id`` SERIAL PRIMARY KEY,   -- Identifiant unique auto-incrémenté pour chaque lieu
-    	``nom`` VARCHAR,
-    ``type_lieu`` VARCHAR,
-    ``description`` VARCHAR,
-    ``commune`` VARCHAR,
-    ``coordonnee`` VARCHAR
-);
-
-
-- Table des chapitres
-CREATE TABLE CHAPITRES (
-    ``numchap`` INT PRIMARY KEY,                  -- Numéro unique pour chaque chapitre
-    ``titre`` VARCHAR(50) NOT NULL                -- Titre du chapitre
-);
-
-  
-- Table des histoires associées aux chapitres
-CREATE TABLE HISTOIRES (
-    ``id`` **SERIAL PRIMARY KEY**,                     -- Identifiant unique au sein d'un chapitre
-    ``titre`` **VARCHAR(50) NOT NULL**,              -- Titre de l'histoire
-    ``numchap`` **INTEGER NOT NULL**,                -- Numéro du chapitre associé à cette histoire
-    ``createur`` **INTEGER**,                         -- Référence à l'identifiant du créateur dans la table                                                              CREATEURS
-    ``id_lieu`` **INTEGER**,                         -- Référence à l'identifiant du lieu dans la table LIEUX
-    ``background`` **varchar(50) NOT NULL**,         -- Nom de l'image d'arrière plan de l'histoire                                                                            stockée sur le serveur web
-    ``visible`` **boolean**,                             -- vrai si le chapitre a été validé, faux sinon
-    **FOREIGN KEY** (``id_lieu``) **REFERENCES LIEUX**(``id``),  -- Clé étrangère référencée à la table LIEUX
-    **FOREIGN KEY** (``numchap``) **REFERENCES CHAPITRES**(``numchap``),  -- Clé étrangère  référencée à la table CHAPITRES
-    **FOREIGN KEY** (``createur``) **REFERENCES UTILISATEURS**(``id``)   -- Clé étrangère référencée à la table CREATEURS
-);
-
-
-- Table des personnages du jeu
-CREATE TABLE PERSONNAGES(
-    ``id`` **SERIAL PRIMARY KEY**,          -- Identifiant du personnage pour faciliter l'unicité des n-uplets
-    ``prenom`` **varchar(50) NOT NULL**,    -- Prenom du personnage
-    ``createur`` **INTEGER**,
-    ``img`` **varchar(50) NOT NULL**,        -- Nom de l'image (le modèle) du personnage stockée ailleurs
-    **FOREIGN KEY** (``createur``) **REFERENCES UTILISATEURS**(``id``)
-);
-
-  
-- Table des dialogues associés aux histoires
-CREATE TABLE DIALOGUES (
-    ``id`` **INTEGER**,                       -- Identifiant unique pour chaque dialogue
-    ``id_histoire`` **INTEGER**,                     -- Référence à l'identifiant de l'histoire associée
-    ``interlocuteur`` **INTEGER**,                    -- Référence au personnage qui dit ce dialogue
-    ``contenu`` **VARCHAR**(400),                    -- Contenu du dialogue
-    ``bonus``**BOOLEAN NOT NULL,**                 -- Dialogue étant un bonus lié à la question spécifique
-    ``doublage`` **VARCHAR(10),**                   -- Nom fichier audio : clé primaire
-    **PRIMARY KEY**(``id_histoire, id``),     -- Clé primaire composite pour garantir l'unicité par histoire et dialogue
-    **FOREIGN KEY** (``id_histoire``) **REFERENCES HISTOIRES**(``id``),  -- Clé étrangère référencée à la table HISTOIRES
-    **FOREIGN KEY** (``interlocuteur``) **REFERENCES PERSONNAGES**(``id``)
-
-);
-
-  
-- Table des apparitions des personnages, permet de savoir dans quelle histoire se trouve quels personnages
-CREATE TABLE APPARITIONS(
-    ``id_histoire`` **SERIAL**,
-    ``id_perso`` **SERIAL**,
-    **FOREIGN KEY** (``id_histoire``) **REFERENCES HISTOIRES**(``id``),
-    **FOREIGN KEY** (``id_perso``) **REFERENCES PERSONNAGES**(``id``),
-    **PRIMARY KEY**(``id_histoire , id_perso``)
-);
-
-  
-- Table des questions associées aux histoires
-CREATE TABLE QUESTIONS (
-    ``id_histoire`` **INTEGER**,                    -- Référence à l'identifiant de l'histoire associée
-    ``question`` **VARCHAR(200) NOT NULL**,         -- Question liée à l'histoire
-    ``reponse`` **VARCHAR(50) NOT NULL**,           -- Réponse à la question
-    ``type`` **CHAR CHECK (type IN('g','s')),**     -- Type de question ('g' pour générale, 's' pour spécifique)
-    **PRIMARY KEY**(``id_histoire,type``),
-    **FOREIGN KEY** (``id_histoire``) **REFERENCES HISTOIRES**(``id``)  -- Clé étrangère référencée à la table HISTOIRE
-);
-
-  
-- Table suivant la progression des utilisateurs dans les histoires
-CREATE TABLE PROGRESSION (
-    ``id_utilisateur`` *INTEGER*,                    -- Nom d'utilisateur lié à la progression
-    ``id_hist`` **INTEGER**,                         -- Référence à l'identifiant de l'histoire associée
-    ``statut`` **BOOLEAN DEFAULT false**,  -- Statut de progression si true : histoire finie, sinon histoire non tentée
-    **FOREIGN KEY** (``id_utilisateur``) **REFERENCES UTILISATEURS**(``id``),  -- Clé étrangère référencée à la table UTILISATEURS
-    **FOREIGN KEY** (``id_hist``) **REFERENCES HISTOIRES**(``id``),     -- Clé étrangère référencée à la table HISTOIRES
-    **PRIMARY KEY** (``id_utilisateur, id_hist``)          -- Clé primaire composite pour garantir l'unicité par utilisateur et histoire
-);
-
-  
-CREATE TABLE verifications_email (
-    ``id`` **SERIAL PRIMARY KEY**,
-    ``utilisateur_id`` **INTEGER NOT NULL**,
-    ``token`` **VARCHAR(255) NOT NULL UNIQUE**,
-    ``date_expiration`` **TIMESTAMP NOT NULL DEFAULT (CURRENT_TIMESTAMP + INTERVAL '30 minutes'),**
-    **CONSTRAINT** ``fk_utilisateur_email`` **FOREIGN KEY** (``utilisateur_id``) **REFERENCES utilisateurs**(``id``)
-
-);
-
-  
-CREATE TABLE recuperation_mot_de_passe (
-    ``id`` **SERIAL PRIMARY KEY**,
-    ``utilisateur_id`` **INTEGER NOT NULL**,
-    ``token`` **VARCHAR(255) NOT NULL UNIQUE**,
-    ``date_expiration`` **TIMESTAMP NOT NULL DEFAULT (CURRENT_TIMESTAMP + INTERVAL '30 minutes'),**
-    **CONSTRAINT** ``fk_utilisateur_recuperation`` **FOREIGN KEY** (``utilisateur_id``) **REFERENCES utilisateurs**(``id``)
-
-);
+- **TABLE** `Utilisateurs` :
+    
+    - `id` **SERIAL PRIMARY KEY** : Identifiant de l'utilisateur
+    - `pseudo` **VARCHAR(20) NOT NULL** : Pseudo de l'utilisateur
+    - `datenaiss` **DATE NOT NULL** : Date de naissance de l'utilisateur
+    - `mail` **VARCHAR(255) NOT NULL** : Adresse Mail de l'utilisateur
+    - `mot_de_passe` **TEXT NOT NULL** : Mot de passe haché
+    - `role` **CHAR(1) NOT NULL** : Indique si l'utilisateur est un joueur, un créateur ou un administrateur (_j_, _c_, ou _a_)
+    
+- **TABLE** `DEMANDES` :
+    
+    - `id_utilisateur` **INTEGER PRIMARY KEY** : Référence un utilisateur de la table UTILISATEURS
+    - `doc` **VARCHAR(50) NOT NULL** : Nom d'un fichier image qui contient la carte d'identité de la personne
+    
+- **TABLE** `LIEUX` :
+    
+    - `id` **SERIAL PRIMARY KEY** : Identifiant unique auto-incrémenté pour chaque lieu
+    - `nom` **VARCHAR**
+    - `type_lieu` **VARCHAR**
+    - `description` **VARCHAR**
+    - `commune` **VARCHAR**
+    - `coordonnee` **VARCHAR**
+    
+- **TABLE** `CHAPITRES` :
+    
+    - `numchap` **INT PRIMARY KEY** : Numéro unique pour chaque chapitre
+    - `titre` **VARCHAR(50) NOT NULL** : Titre du chapitre
+    
+- **TABLE** `HISTOIRES` :
+    
+    - `id` **SERIAL PRIMARY KEY** : Identifiant unique au sein d'un chapitre
+    - `titre` **VARCHAR(50) NOT NULL** : Titre de l'histoire
+    - `numchap` **INTEGER NOT NULL** : Numéro du chapitre associé à cette histoire
+    - `createur` **INTEGER** : Référence à l'identifiant du créateur dans la table CREATEURS
+    - `id_lieu` **INTEGER** : Référence à l'identifiant du lieu dans la table LIEUX
+    - `background` **VARCHAR(50) NOT NULL** : Nom de l'image d'arrière plan de l'histoire stockée sur le serveur web
+    - `visible` **BOOLEAN** : vrai si le chapitre a été validé, faux sinon
+    
+- **TABLE** `PERSONNAGES` :
+    
+    - `id` **SERIAL PRIMARY KEY** : Identifiant du personnage pour faciliter l'unicité des n-uplets
+    - `prenom` **VARCHAR(50) NOT NULL** : Prénom du personnage
+    - `createur` **INTEGER**
+    - `img` **VARCHAR(50) NOT NULL** : Nom de l'image (le modèle) du personnage stockée ailleurs
+    
+- **TABLE** `DIALOGUES` :
+    
+    - `id` **INTEGER**
+    - `id_histoire` **INTEGER**
+    - `interlocuteur` **INTEGER**
+    - `contenu` **VARCHAR(400)**
+    - `bonus` **BOOLEAN NOT NULL**
+    - `doublage` **VARCHAR(10)**
+    - **PRIMARY KEY**(`id_histoire`, `id`)
+    
+- **TABLE** `APPARITIONS` :
+    
+    - `id_histoire` **SERIAL**
+    - `id_perso` **SERIAL**
+    - **PRIMARY KEY**(`id_histoire`, `id_perso`)
+    
+- **TABLE** `QUESTIONS` :
+    
+    - `id_histoire` **INTEGER**
+    - `question` **VARCHAR(200) NOT NULL**
+    - `reponse` **VARCHAR(50) NOT NULL**
+    - `type` **CHAR CHECK (type IN('g','s'))**
+    - **PRIMARY KEY**(`id_histoire`, `type`)
+    
+- **TABLE** `PROGRESSION` :
+    
+    - `id_utilisateur` **INTEGER**
+    - `id_hist` **INTEGER**
+    - `statut` **BOOLEAN DEFAULT false**
+    - **PRIMARY KEY** (`id_utilisateur`, `id_hist`)
+    
+- **TABLE** `verifications_email` :
+    
+    - `id` **SERIAL PRIMARY KEY**
+    - `utilisateur_id` **INTEGER NOT NULL**
+    - `token` **VARCHAR(255) NOT NULL UNIQUE**
+    - `date_expiration` **TIMESTAMP NOT NULL DEFAULT (CURRENT_TIMESTAMP + INTERVAL '30 minutes')**
+    
+- **TABLE** `recuperation_mot_de_passe` :
+    
+    - `id` **SERIAL PRIMARY KEY**
+    - `utilisateur_id` **INTEGER NOT NULL**
+    - `token` **VARCHAR(255) NOT NULL UNIQUE**
+    - `date_expiration` **TIMESTAMP NOT NULL DEFAULT (CURRENT_TIMESTAMP + INTERVAL '30 minutes')**
 
 ## **3.2.** Relations entre les Tables
 
@@ -233,40 +184,200 @@ CREATE TABLE recuperation_mot_de_passe (
 
 
 # Fonctionnalités
+## 5.1 Authentification
+### 5.1.1 Connexion au compte
+**Fonctionnalité** : Permet aux utilisateurs de se connecter à leur compte existant.
+**Interface utilisateur** :
+- Champ de saisie pour l'adresse e-mail
+- Champ de saisie pour le mot de passe (masqué)
+- Bouton "Se connecter"
+- Lien "Mot de passe oublié ?"
+- Lien "Créer un compte"
+**Gestion des erreurs** :
+- Message d'erreur en rouge : "Email ou mot de passe incorrect"
+- [TODO] Encadrement en rouge des champs d'email et de mot de passe
+**Sécurité** :
+- Hachage du mot de passe côté serveur
+- Protection contre les attaques XSS (HTMLSpecialchars)
+**Redirection** :
+- Vers le dashboard si les identifiants sont corrects et le compte vérifié
+- Vers la page de vérification si le compte n'est pas vérifié (avec envoi d'un e-mail de vérification)
+### 5.1.2 Création de compte
+**Fonctionnalité** : Permet aux nouveaux utilisateurs de créer un compte.
+**Interface utilisateur** :
+- Champs de saisie : nom, prénom, date de naissance, nom d'utilisateur, e-mail, mot de passe, confirmation du mot de passe
+- Case à cocher pour accepter les conditions d'utilisation
+- Bouton "Créer un compte"
+**Vérification d'unicité** :
+- Message d'erreur si l'e-mail est déjà utilisé
+**Processus de création** :
+- Envoi d'un e-mail de confirmation avec lien et code de vérification
+- Compte créé mais inactif jusqu'à la vérification
+**Redirection** :
+- Vers la page de connexion après création réussie
+### 5.1.3 E-mail envoyé
 
-## **5.1** Page Login
+**Fonctionnalité** : Informe l'utilisateur qu'un e-mail de vérification a été envoyé.
 
-### **5.1.1.** Connexion Compte
-- **Fonctionnalité** : permet aux utilisateurs se connecter à leur compte existant
+**Interface utilisateur** :
+- Texte d'information
+- Lien pour demander un nouveau code de confirmation
+### 5.1.4 Vérification du compte
+**Fonctionnalité** : Permet à l'utilisateur de vérifier son compte.
+**Interface utilisateur** :
+- Champs de saisie : code de vérification, e-mail, mot de passe
+- Bouton "Vérifier compte"
+- Lien vers la page de connexion
+**Gestion des erreurs** :
+- Affichage d'erreurs pour code, e-mail ou mot de passe invalides
+**Redirection** :
+- Vers la page de connexion après vérification réussie
+### 5.1.5 Mot de passe oublié
+**Fonctionnalité** : Permet à l'utilisateur de demander un nouveau mot de passe.
+**Interface utilisateur** :
+- Champ de saisie pour l'e-mail
+- Bouton "Mot de passe oublié"
+- Lien vers la page de connexion
+**Gestion des erreurs** :
+- Message d'erreur si l'adresse e-mail n'existe pas dans la base de données
+## 5.2 Navigation
+### 5.2.1 MainController
+**Fonctionnalité** : Permet à l'utilisateur d'utiliser l'application.
+**Interface utilisateur** :
+- Bouton "Lire les histoires"
+- Bouton "Créer une histoire"
+- Bouton "Consulter les histoires"
+**Sécurité** :
+- Restriction d'accès pour les non-créateurs
+**Redirection** :
+- Vers la liste des histoires, la création d'histoire ou la consultation des histoires
+### 5.2.2 Liste des chapitres
+**Fonctionnalités** : Permet à l'utilisateur de choisir et gérer les histoires.
+**Interface utilisateur** :
+- Boutons des différents chapitres
+- Bouton "Chapitres des créateurs"
+- Bouton "Recommencer tout"
+**Redirection** :
+- Vers les histoires prédéfinies ou celles des créateurs
+### 5.2.3 Liste des histoires
+**Fonctionnalités** : Permet à l'utilisateur de choisir les histoires d'un chapitre.
+**Interface utilisateur** :
+- Boutons des différentes histoires
+**Redirection** :
+- Vers le chapitre concerné
+### 5.2.4 Chapitres des créateurs
+**Fonctionnalité** : Permet à l'utilisateur de lire les histoires publiées par les créateurs.
+**Interface utilisateur** :
+- Boutons des différentes histoires
+**Redirection** :
+- Vers le chapitre concerné
+### 5.2.5 Consulter mes histoires
+**Fonctionnalité** : Permet au créateur de gérer ses histoires.
+**Interface utilisateur** :
+- Boutons des histoires créées avec options de modification et suppression
+- Bouton "Créer une histoire"
+**Redirection** :
+- Vers la page "Modifier une histoire" si l'option est sélectionnée
+- Vers la page "Créer une histoire" si le bouton est cliqué
+## 5.3 Profil
+## 5.3.1 Page profil
+
+- **Fonctionnalité** : Permet à l'utilisateur ou au créateur de modifier les paramètres de son compte.**Interface utilisateur** :
+
+	- Photo de profil de l'utilisateur
+	- Pseudo de l'utilisateur
+	- Bouton "Se déconnecter"
+	- Section de modification des informations :
+	    - Champ de saisie pour modifier le pseudo
+	    - Champ de saisie pour modifier l'adresse e-mail
+	    - Bouton "Valider les modifications"
+	- Bouton "Mode dyslexique" (toggle)
+	- Bouton "Faire la demande pour devenir créateur"
+	- Bouton "Modifier le mot de passe"
+- **Sécurité**
+	- Vérification de l'unicité du nouveau pseudo et de la nouvelle adresse e-mail
+	- Confirmation par e-mail pour les changements d'adresse e-mail
+- **Fonctionnalités spécifiques** :
+	- Mise à jour en temps réel des informations modifiées après validation
+	- Activation/désactivation du mode dyslexique avec effet immédiat sur l'interface
+- **Redirection** :
+	- Vers la page de connexion/création de compte lors de la déconnexion
+	- Vers la page de demande pour devenir créateur
+	- Vers la page de modification du mot de passe
+### 5.3.2 Modifier le mot de passe
+- **Fonctionnalité** : Permet à l'utilisateur de modifier son mot de passe
 - **Interface utilisateur** :
-   - Champs de saisie pour l'adresse e-mail de l'utilisateur
-   - Champs de saisie pour le mot de passe (masqué)
-   - Bouton "Se Se connecter"
-   - [TODO] Lien "Mot de passe oublié ?
-   - Lien "Créer un compte"
-- **Gestion erreurs** :
-   - Si l'utilisateur se trompe d'e-mail ou de mot de passe
-      - Message d'erreur en rouge : "Email ou mot de passe incorrect"
-      - Les champs d'email et de mot de passe sont encadrés en rouge
-   - **Sécurité** :
-      - Hachage de mot de passe côté serveur
-      - Protection contre les attaques XSS
-- **Redirection** :
-   - Si l'utilisateur rentre les bons identifiants :
-   - Redirection vers le dashboard
+	- Champs de saisie pour l'email, l'ancien mot de passe, le nouveau mot de passe et la confirmation du nouveau mot de passe
+	- Bouton "Changer mot de passe"
+	- Lien "Retour à la page de connexion"
+- **Fonctionnalités spécifiques**
+	- Change le mot de passe si les informations sont correctes
+- **Redirection** : Page de connexion si l'utilisateur clique sur retour à la page de connexion
 
-### **5.1.2** Création Compte 
-- **Fonctionnalité** : Permet aux nouveaux utilisateurs de créer un compte.
-- **Interface utilisateur** :
-   - Champs de saisie pour : nom, prénom, date de naissance , nom d'utilisateur, adresse e-mail, mot de passe, confirmation du mot de passe
-   - Case à cocher pour accepter les conditions d'utilisation
-   - Bouton "Créer un compte"
-- **Vérification d'unicité** :
-   - Si l'adresse mail est déjà utilisée, message d'erreur : "Cette adresse email est déjà utilisée ! Essayer de vous connecter avec celle-ci" + Encadré en rouge
-- **Processus de création** :
-   - Envoie d'un email de confirmation avec un lien et un code de vérification. 
-   - Compte crée mais inactif jusqu'à la vérification par code de vérification
+
+## 5.4 Lire une histoire
+## 5.4.1 Dialogue
+
+- **Fonctionnalité** : Permet à l'utilisateur de lire le dialogue tout en étant immergé dans l'histoire.
+- **Interface utilisateur** :
+	- Affichage du numéro du chapitre, de l'histoire et du titre de l'histoire
+	- Une image de fond immersive correspondant à l'histoire ou au contexte
+	- Présentation des personnages (0, 1 ou 2) avec leurs avatars
+	- Affichage du nom du personnage qui parle
+	- Bouton "Précédent" pour revenir au dialogue précédent
+	- Bouton "Suivant" pour passer au dialogue suivant
+	- Texte du dialogue avec une animation de style "machine à écrire" pour une expérience interactive
+- **Sécurité** : Si l'utilisateur est sur le premier dialogue, le bouton "Précédent" est masqué ou désactivé pour éviter toute erreur de navigation.
+- **Redirection** :
+	- Si l'utilisateur appuie sur le bouton "Suivant" :
+	    - Si le prochain élément est une question, redirection vers la page de la question.
+	    - Si le prochain élément est un dialogue, redirection vers le dialogue suivant.
+	- Si l'utilisateur appuie sur le bouton "Précédent", redirection vers le dialogue précédent.
+
+### 5.4.2 Question générale
+- **Fonctionnalité** : Permet à l'utilisateur de répondre à la question générale ou de choisir de répondre à la question spécifique
+- **Interface utilisateur** :
+	- Affichage du numéro du chapitre, de l'histoire et du titre de l'histoire
+	- Une image de fond immersive correspondant à l'histoire ou au contexte
+	- Présentation des personnages (0, 1 ou 2) avec leurs avatars
+	- Affichage de l'information comme quoi c'est la question générale
+	- Bouton "Accéder à l'autre question"
+	- Bouton "Consulter le lieu"
+	- Bouton "répondre"
+	- Champs de saisie pour la réponse de l'utilisateur
+	- Texte de la question avec une animation de style "machine à écrire" pour une expérience interactive
 - **Redirection** :
-   - Après la création réussie : Page de connexion .
+	- Vers le dialogue suivant si l'utilisateur répond correctement
+	- Vers la question spécifique si l'utilisateur clique sur le bouton "Accéder à l'autre question spécifique"
+	- Vers le lieu de l'histoire si l'utilisateur clique sur "Consulter le lieu"
+
+### 5.4.2 Question spécifique
+- **Fonctionnalité** : Permet à l'utilisateur de répondre à la question spécifique ou de choisir de répondre à la question générale
+- **Interface utilisateur** :
+	- Affichage du numéro du chapitre, de l'histoire et du titre de l'histoire
+	- Une image de fond immersive correspondant à l'histoire ou au contexte
+	- Présentation des personnages (0, 1 ou 2) avec leurs avatars
+	- Affichage de l'information comme quoi c'est la question spécifique
+	- Bouton "Accéder à l'autre question"
+	- Bouton "Consulter le lieu"
+	- Bouton "répondre"
+	- Champs de saisie pour la réponse de l'utilisateur
+	- Texte de la question avec une animation de style "machine à écrire" pour une expérience interactive
+- **Redirection** :
+	- Vers le dialogue suivant si l'utilisateur répond correctement
+	- Vers la question spécifique si l'utilisateur clique sur le bouton "Accéder à l'autre question générale"
+	- Vers le lieu de l'histoire si l'utilisateur clique sur "Consulter le lieu"
+
+### 5.4.3 Fin de l'histoire
+- **Fonctionnalité** : Permet à l'utilisateur de passer à l'histoire suivante si quand l'utilisateur a finit de lire l'histoire et d'avoir des informations concernant le lieu
+- **Interface utilisateur** :
+	- Un message concernant le fait que l'utilisateur a finit l'histoire
+	- Des informations concernant le lieu
+	- Bouton "Visiter le lieu"
+	- Bouton "Histoire suivante"
+- **Redirection**
+	- Vers le lieu si l'utilisateur a cliqué sur "Visiter le lieu"
+	- Vers l'histoire suivante si l'utilisateur clique sur "Histoire suivante"
+
 # Conclusion 
 Ce document fournit vue d'ensemble détaillée aspects techniques fonctionnels projet [Rezisten]. Pour toute question suggestion veuillez nous contacter à [Rezisten.contact@gmail.com].
