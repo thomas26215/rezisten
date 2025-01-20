@@ -12,7 +12,7 @@ class CheckEmail {
     private string $expirationDate;
     private DAO $dao;
 
-    public function __construct(User $user, string $token, string $expirationDate = "00-00-00", int $id = -1) {
+    public function __construct(User $user, string $token, string $expirationDate = "2005-09-18 11:11:11", int $id = -1) {
         $this->setId($id);
         $this->setUser($user);
         $this->setToken($token);
@@ -58,7 +58,7 @@ class CheckEmail {
         if (empty($token)) {
             throw new InvalidArgumentException("Impossible de mettre le token car vide.");
         }
-        if (mb_strlen($token, 'UTF-8') !== 10) {
+        if (strlen($token) !== 10) {
             throw new InvalidArgumentException("Impossible de mettre le token : La longueur doit être de 10 caractères.");
         }
         $this->token = $token;
@@ -76,10 +76,18 @@ class CheckEmail {
 
     public function create(): void {
         try {
+            // Obtenir la date et l'heure actuelles
+            $date = new DateTime();
+
+            // Ajouter 30 minutes
+            $date->add(new DateInterval('PT30M'));
+
+            // Formater la date dans le format souhaité
+            $formatted_date = $date->format('Y-m-d H:i:s');
             if (!$this->dao->insert("verifications_email", [
                 "utilisateur_id" => (int)$this->user->getId(),
                 "token" => $this->getToken(),
-                "date_expiration" => $this->getExpirationDate(),
+                "date_expiration" => $date,
             ])) {
                 throw new RuntimeException("Échec de l'insertion de la vérification d'email dans la base de données.");
             }

@@ -16,7 +16,6 @@ $idDialog = $_GET['idDialog'];
 $prevSpeaker = $_GET['prevSpeaker'] ?? "none";
 $_SESSION['lastDialog'] = $idDialog;
 
-var_dump($_GET);
 
 $imgURL = "https://localhost:8080/rezisten/imgPersonnage/";
 $audioURL = "https://localhost:8080/rezisten/doublageDialogue/histoire".$idStory."/";
@@ -27,9 +26,18 @@ $dialogsChangeBG = [
     2 => "Nous y sommes ?"
 ];
 
-$dialog = Dialog::read($idDialog,$idStory);
+try {
+    $dialog = Dialog::read($idDialog,$idStory);
+} catch (RuntimeException $e) {
+    $dialog = null;
+}
+
+try {
+    $story = Story::read($idStory);
+} catch (RuntimeException $e){
+    $story = null;
+}
 $view = new View();
-$story = Story::read($idStory);
 
 
 $firstBonus = Dialog::readFirstBonus($idStory);
@@ -52,6 +60,7 @@ if ($dialog === null) {
             $progression->create();
         }
     }
+    unset($_SESSION['background']);
 
     $place = $story->getPlace();
     $imgPlace = $placeURL.$place->getId().".webp";
@@ -73,6 +82,7 @@ if ($dialog === null) {
                 $progression->create();
             }
 
+        unset($_SESSION['background']);
         $place = $story->getPlace();
         $imgPlace = $placeURL.$place->getId().".webp";
         $view->assign('imgPlace',$imgPlace);
@@ -85,23 +95,27 @@ if ($dialog === null) {
 
 
 // Gestion du background
-$background = $backgroundURL."hist_".$idStory."bg1.webp";
-
+if(!isset($_SESSION['background'])){
+    $background = $backgroundURL."hist_".$idStory."bg1.webp";
+}
 // Permet de vérifier quel background est stocké dans la session si on change subitement d'histoire
 if(isset($_SESSION['background'])){
+    $background = $backgroundURL."hist_".$idStory."bg2.webp";
     $bgSession = explode('_',$_SESSION['background']);
 }
 
 // S'il existe un background dans la session qui correspond à un background de l'histoire actuelle on l'affiche
 if( isset($_SESSION['background']) && $_SESSION['background'] != '' && $bgSession[1] == $idStory ){
     $background = $_SESSION['background'];
+
 }else{
     // Sinon on le créé dans le cas où on a atteint un dialogue de changement précisé dans $dialogsChangeBG
     if(isset($dialogsChangeBG[$idStory]) && $dialogsChangeBG[$idStory] == $dialog->getContent()){
         $background = $backgroundURL."hist_".$idStory."bg2.webp";
+        $_SESSION['background'] = $background;
+
     }
 }
-$_SESSION['background'] = $background;
 
 
 

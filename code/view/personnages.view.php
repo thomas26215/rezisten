@@ -2,6 +2,8 @@
 <html lang="fr">
 
 <head>
+    <link rel="icon" href="./view/favicon.ico" type="image/x-icon">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vos personnages</title>
@@ -55,16 +57,113 @@
 
             <div class="flex-col bottomContainer">
                 <?php include_once $lien; ?>
-                <form action="index.php" method="get" class="footer">
-                    <input type="hidden" name="id" value="<?= $id ?>">
+                <form action="index.php?ctrl=creation&id=<?= $id ?>" method="post" class="footer">
 
-                    <button type="submit" name="ctrl" value="creation" id="dialogQuitter" class=button-rouge>
+                    <button type="button" id="quitterOuvrir" class=button-rouge>
                         Quitter
                     </button>
+                    <dialog class="dialog" id="dialogQuitter">
+                        <div class="containerDialog">
+                            <h2>Voulez vous quitter la page personnages et revenir à création ?</h2>
+                            <div>
+
+                                <button type="submit" id="fermerQuitter" name="fermer" class="button-vert">
+                                    Quitter
+                                </button>
+                                <button type="button" id="revenirQuitter" class="button-rouge">
+                                    Revenir
+                                </button>
+                            </div>
+                        </div>
+                    </dialog>
                 </form>
             </div>
         </section>
 </body>
+<script>
+    /* Pop-up Quitter*/
+    const openQuitter = document.getElementById("quitterOuvrir");
+    const fermerQuitter = document.getElementById("fermerQuitter");
+    const RevenirQuitter = document.getElementById("revenirQuitter");
+    const idDialogue = document.getElementById("dialogQuitter");
+    //
+
+    /* Ouvir */
+    openQuitter.addEventListener("click", () => {
+        idDialogue.showModal();
+    });
+    /* ferme */
+    fermerQuitter.addEventListener("click", () => {
+        idDialogue.close();
+    });
+    /* Action + ferme */
+    RevenirQuitter.addEventListener("click", () => {
+        idDialogue.close();
+    });
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Supprimer personnage
+        var supprimerOuvrir = document.getElementById('supprimerOuvrir');
+        var dialogSupprimer = document.getElementById('dialogSupprimer');
+        var fermerSupprimer = document.getElementById('fermerSupprimer');
+        var revenirSupprimer = document.getElementById('revenirSupprimer');
+
+        if (supprimerOuvrir && dialogSupprimer && fermerSupprimer && revenirSupprimer) {
+            supprimerOuvrir.addEventListener('click', function () {
+                dialogSupprimer.showModal();
+            });
+
+            fermerSupprimer.addEventListener('click', function () {
+                dialogSupprimer.close();
+            });
+
+            revenirSupprimer.addEventListener('click', function () {
+                dialogSupprimer.close();
+            });
+        }
+
+        // Ajouter personnage
+        var ajouterOuvrir = document.getElementById('ajouterOuvrir');
+        var dialogAjouter = document.getElementById('dialogAjouter');
+        var fermerAjouter = document.getElementById('fermerAjouter');
+        var revenirAjouter = document.getElementById('revenirAjouter');
+
+        if (ajouterOuvrir && dialogAjouter && fermerAjouter && revenirAjouter) {
+            ajouterOuvrir.addEventListener('click', function () {
+                dialogAjouter.showModal();
+            });
+
+            fermerAjouter.addEventListener('click', function () {
+                dialogAjouter.close();
+            });
+
+            revenirAjouter.addEventListener('click', function () {
+                dialogAjouter.close();
+            });
+        }
+
+        // Modifier personnage
+        var modifierOuvrir = document.getElementById('modifierOuvrir');
+        var dialogModifier = document.getElementById('dialogModifier');
+        var fermerModifier = document.getElementById('fermerModifier');
+        var revenirModifier = document.getElementById('revenirModifier');
+
+        if (modifierOuvrir && dialogModifier && fermerModifier && revenirModifier) {
+            modifierOuvrir.addEventListener('click', function () {
+                dialogModifier.showModal();
+            });
+
+            fermerModifier.addEventListener('click', function () {
+                dialogModifier.close();
+            });
+
+            revenirModifier.addEventListener('click', function () {
+                dialogModifier.close();
+            });
+        }
+    });
+</script>
 <script src="./view/js/popup.js"></script>
 <script src="./view/js/dyslexique.js"></script>
 <script src="./view/js/photoSelect.js"></script>

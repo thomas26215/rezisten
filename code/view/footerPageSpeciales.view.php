@@ -1,5 +1,5 @@
 <head>
-    <link rel="icon" href="./view/favicon.ico" type="image/x-icon">    
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">    
     <link rel="stylesheet" type="text/css" href="./design/footer.css">
     <link rel="stylesheet" type="text/css" href="./design/global.css">
 </head>

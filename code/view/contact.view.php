@@ -6,32 +6,37 @@
         <meta charset="utf-8">
         <title>Rézisten</title>
         <meta name="author" content="Groupe 11" />
-        <link rel="stylesheet" type="text/css" href="./view/design/contact.css">
+        <link rel="stylesheet" type="text/css" href="./design/global.css">
+        <link rel="stylesheet" type="text/css" href="./design/contact.css">
     </head>
     <body> 
-        <?php include_once("./view/headerPageSpeciales.view.php")?>
+        <?php include_once("./headerPageSpeciales.view.php")?>
         <main>
             <h1>Nous contacter</h1>
-            <form action="" method="post"> <!-- TO DO : conpléter le php (Thomas) -->
+            <?php if (isset($message)): ?>
+                <p><?php echo htmlspecialchars($message); ?></p>
+            <?php endif; ?>
+            <form action="index.php?ctrl=contact" method="post">
                 <article>
                     <section>
                         <label for="mail">Adresse mail :</label>
-                        <input type="text" id="mail" name="mail" value="" required  placeholder="jean@gmail.com" >
+                        <input type="email" id="mail" name="mail" value="" required placeholder="jean@gmail.com">
                     </section>
                     <section>
                         <label for="objet">Objet :</label>
                         <input type="text" id="objet" name="objet" value="" required>
                     </section>
                 </article>
-                    <section>
-                        <label for="contenu">Contenue de votre message :</label>
-                        <textarea name="contenu" id="contenu"></textarea>
-                    </section>
+                <section>
+                    <label for="contenu">Contenu de votre message :</label>
+                    <textarea name="contenu" id="contenu" required></textarea>
+                </section>
                 
-                <div><button>Envoyer</button></div>
+                <div><button type="submit">Envoyer</button></div>
             </form>
         </main>
     </body>
-    <script src="./view/js/dyslexique.js"></script>
+    <script src="./js/dyslexique.js"></script>
     <?php include_once("./footerPageSpeciales.view.php"); ?>
 </html>
+

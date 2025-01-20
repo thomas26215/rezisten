@@ -32,21 +32,17 @@ section.header {
 
 .menu {
   grid-area: menu;
-  min-width: 34vw;
-  max-width: 34vw;
 }
 
 .content {
   min-width: 60vw;
   max-width: 60vw;
   margin: 0;
-  height: 60vh;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 3rem;
   box-sizing: border-box;
-  padding: 50px;
 }
 
 section.footer {
@@ -93,7 +89,6 @@ section.header button {
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  height: 60vh;
   padding: 50px;
   box-sizing: border-box;
 }
@@ -148,6 +143,11 @@ section.header button {
   border: 2px solid var(--noir);
   height: 250px;
   width: 250px;
+}
+
+.imagesContainer {
+  max-width: 250px;
+  max-height: 250px;
 }
 
 .personnage {

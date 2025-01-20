@@ -4,7 +4,7 @@ include_once('framework/view.fw.php');
 include_once('model/users.class.php');
 include_once('model/recuperationMotDePasse.class.php');
 
-$mode = $_GET['mode'] ?? 'forget';
+$mode = htmlspecialchars($_GET['mode']) ?? 'forget';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Récupération des données du formulaire
