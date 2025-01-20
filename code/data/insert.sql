@@ -17,7 +17,7 @@ INSERT INTO HISTOIRES(titre,numchap,createur,id_lieu,background,visible) values(
 
 
 --Création de deux personnages participants au prologue
-INSERT INTO PERSONNAGES(prenom,img,createur) values('Raymond','raymond',4), --1
+INSERT INTO PERSONNAGES(prenom,img,createur) values('Raymond','raymond',1), --1
 ('Pierre','pierre',1),   --2
 ('Jean','jean',1),       --3
 ('André','andre',1),     --4
@@ -243,4 +243,4 @@ internés en mars 1943 ? ','70','s');
 
 
 --Progression
-INSERT INTO PROGRESSION values(1,1,1);
+INSERT INTO PROGRESSION values(1,1,true);

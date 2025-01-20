@@ -107,7 +107,7 @@ CREATE TABLE verifications_email (
     id SERIAL PRIMARY KEY,
     utilisateur_id INTEGER NOT NULL,
     token VARCHAR(255) NOT NULL UNIQUE,
-    date_expiration TIMESTAMP NOT NULL DEFAULT (CURRENT_TIMESTAMP + INTERVAL '30 minutes'),
+    date_expiration TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_utilisateur_email FOREIGN KEY (utilisateur_id) REFERENCES utilisateurs(id)
 );
 
