@@ -12,7 +12,7 @@ class CheckEmail {
     private string $expirationDate;
     private DAO $dao;
 
-    public function __construct(User $user, string $token, string $expirationDate = "00-00-00", int $id = -1) {
+    public function __construct(User $user, string $token, string $expirationDate = "2005-09-18 11:11:11", int $id = -1) {
         $this->setId($id);
         $this->setUser($user);
         $this->setToken($token);
