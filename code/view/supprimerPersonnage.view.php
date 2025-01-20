@@ -2,8 +2,7 @@
 
     <div class="articleContainer">
 
-        <form method="post" action="index.php?ctrl=personnages&article=supprimerPersonnage&id=<?= $id ?>"
-            class="">
+        <form method="post" action="index.php?ctrl=personnages&article=supprimerPersonnage&id=<?= $id ?>" class="">
             <input type="hidden" name="ctrl" value="personnages">
             <input type="hidden" name="action" value="selectCharacter">
             <div class="personnage">
@@ -38,7 +37,7 @@
                 }
                 ?>
                 <img src="<?= $imgSrc ?>" alt="<?= $selectedCharacter?->getFirstName() ?? "Jean"; ?>"
-                    alt="<?= $selectedCharacter?->getFirstName() ?? "Jean"; ?>" style="max-width: 240px;">
+                    alt="<?= $selectedCharacter?->getFirstName() ?? "Jean"; ?>" class="imagesContainer">
                 <button type="button" id="supprimerOuvrir" class="button-rouge">Supprimer</button>
                 <div class="supprimer">
                     <form method="post" action="index.php?ctrl=personnages&article=supprimerPersonnage&id=<?= $id ?>">

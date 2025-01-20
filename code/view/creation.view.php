@@ -25,31 +25,39 @@
         <section class="container">
             <section class="header">
 
-            <form action="creation" method="get" class="formLieu">
+                <form action="creation" method="get" class="formLieu">
                     <input type="hidden" name="ctrl" value="creation">
                     <input type="hidden" name="id" value=<?= $id ?>>
                     <input type="hidden" name="sauvegarder" value="sauvegarder">
 
-                    <div class="inputs flex-col">
-                        <label for="titre">Titre : </label>
-                        <input id="titre" type="text" name="titre" value="<?= $titre ?>" required
-                            placeholder="Sabotage">
+                    <div class="inputsCont flex-col">
+                        <div class="inputs ">
+                            <label for="titre">Titre : </label>
+                            <div class="flex-row">
+                                <input id="titre" type="text" name="titre" value="<?= $titre ?>" required
+                                    placeholder="Sabotage">
+                            </div>
+                        </div>
 
 
-                    <div class="inputs flex-col">
-                        <label for="lieux">Lieux : </label>
-                        <select id="lieux" name="lieux">
-                            <?php foreach ($lieux as $lieu): ?>
-                                <option value="<?= $lieu->getId() ?>" <?= $lieu->getId() == $histoire->getPlace()->getId() ? 'selected' : '' ?>>
-                                    <?= $lieu->getName() ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
+                        <div class="inputs ">
+                            <label for="lieux">Lieux : </label>
+                            <div class="lieuxInfo flex-row">
+                                <select id="lieux" name="lieux">
+                                    <?php foreach ($lieux as $lieu): ?>
+                                        <option value="<?= $lieu->getId() ?>"
+                                            <?= $lieu->getId() == $histoire->getPlace()->getId() ? 'selected' : '' ?>>
+                                            <?= $lieu->getName() ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
 
-                    <a href="./index.php?ctrl=consulterLieu&id=<?= $histoire->getPlace()->getId() ?>">
-                        <img src="./view/design/image/info.png" alt="informations" id="info">
-                    </a>
+                                <a href="./index.php?ctrl=consulterLieu&id=<?= $histoire->getPlace()->getId() ?>">
+                                    <img src="./view/design/image/info.png" alt="informations" id="info">
+                                </a>
+                            </div>
 
+                        </div>
                     </div>
 
                     <input type="hidden" name="id_lieu" id="id_lieu" value="">

@@ -20,7 +20,7 @@
             </div>
 
             <div class="imageUser">
-                <img id="img" src="#" alt="Image preview" style="display: none; max-width: 240px;">
+                <img id="img" src="#" alt="Image preview" style="display: none;" class="imagesContainer">
             </div>
         </div>
 

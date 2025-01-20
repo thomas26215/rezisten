@@ -147,7 +147,7 @@ class Question
        } 
    }
 
-   public static function delete(int $id, string $type): void
+   public static function delete(int $id, string $type): void
    {
        if ($id <= 0) {
            throw new InvalidArgumentException("L'ID doit être supérieur à zéro.");

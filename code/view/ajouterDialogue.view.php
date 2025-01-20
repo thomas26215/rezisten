@@ -26,7 +26,7 @@
         <!-- boutons -->
         <section>
         <button class="button-rouge delete-button" type="button">Supprimer</button>
-        <button class="button-vert" type="submit">Valider</button>
+        <button class="button-vert" type="submit" id="valider">Valider</button>
         </section>
 
         <!-- Pop-up de confirmation de suppression -->
@@ -55,6 +55,7 @@
                 const cancelDeleteButton = document.getElementById('cancel-delete');
                 const dialogueForm = document.getElementById('dialogueForm');
                 const dialogueTextArea = document.getElementById('dialogueText');
+                const ajoutDialogue = document.getElementById('valider');
 
                 deleteButton.addEventListener('click', function (event) {
                     event.preventDefault();
@@ -71,11 +72,6 @@
                     event.preventDefault();
                     deleteDialog.close();
                 });
-
-                // Empêcher la soumission du formulaire par défaut
-                dialogueForm.addEventListener('submit', function (event) {
-                    event.preventDefault();
-            });
 });      
         </script>
     </form>

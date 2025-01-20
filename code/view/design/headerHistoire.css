@@ -32,6 +32,11 @@
      position: relative;
  }
 
+ .home img {
+    height: 50px;
+    width: 50px;
+ }
+
  .home:hover {
      transform: scale(1.1);
  }
