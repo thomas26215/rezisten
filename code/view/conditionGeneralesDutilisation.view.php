@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <link rel="icon" href="view/favicon.ico" type="image/x-icon">
     <title>Condition Général d'Utilisation</title>
-    <link rel="stylesheet" href="./design/CGU.css">
+    <link rel="stylesheet" href="view/design/CGU.css">
 </head>
 
 <body>
-    <?php include './headerPageSpeciales.view.php'; ?>
+    <?php include 'view/headerPageSpeciales.view.php'; ?>
     <main>
         <h1>Conditions Générales d’utilisation</h1>
         <p>En vigueur au 08/10/2024</p>
@@ -229,7 +229,7 @@ si pas bon format lors du changement d’email probleme d’erreur
             Contactez-nous » du site.
         </p>
     </main>
-    <?php include './footerPageSpeciales.view.php'; ?>
+    <?php include 'view/footerPageSpeciales.view.php'; ?>
 </body>
 
 </html>

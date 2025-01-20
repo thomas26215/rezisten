@@ -2,16 +2,16 @@
 <html lang="fr">
 
 <head>
-    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <link rel="icon" href="view/favicon.ico" type="image/x-icon">
     <meta charset="utf-8">
     <title>Rézisten</title>
     <meta name="author" content="Groupe 11" />
-    <link rel="stylesheet" type="text/css" href="./design/global.css">
-    <link rel="stylesheet" type="text/css" href="./design/partenaire.css">
+    <link rel="stylesheet" type="text/css" href="view/design/global.css">
+    <link rel="stylesheet" type="text/css" href="view/design/partenaire.css">
 </head>
 
 <body class="partenaire">
-    <?php include_once("./headerPageSpeciales.view.php"); ?>
+    <?php include_once("view/headerPageSpeciales.view.php"); ?>
     <main>
         <h1>Nos partenaires</h1>
         <ul>
@@ -69,7 +69,7 @@
             </li>
         </ul>
     </main>
-    <?php include_once("./footerPageSpeciales.view.php"); ?>
+    <?php include_once("view/footerPageSpeciales.view.php"); ?>
 </body>
     <script src="./js/dyslexique.js"></script>
 

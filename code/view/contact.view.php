@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <link rel="icon" href="./favicon.ico" type="image/x-icon">
+        <link rel="icon" href="view/favicon.ico" type="image/x-icon">
     
         <meta charset="utf-8">
         <title>Rézisten</title>
