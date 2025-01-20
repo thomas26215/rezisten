@@ -108,7 +108,7 @@ button.poub::before {
 }
 
 #lieux {
-  width: 30%;
+  width: 200px;
   height: 2rem;
 }
 
@@ -119,17 +119,32 @@ button.poub::before {
 }
 
 .inputs {
-  align-items: center;
+  flex-direction:column ;
   justify-content: center;
+  text-align: left !important;
+  width: 350px;
+  gap: 2rem;
+}
+
+.inputsCont {
+  flex-direction:column ;
+  justify-content: center;
+  width: 350px;
+  text-align: left !important;
   gap: 2rem;
 }
 
 .inputs label {
   font-weight: bold;
+  align-self: left;
+  justify-content: left;
 }
 
 .inputs input {
   height: 2rem;
+  width: 200px;
+  display: flex;
+  align-items: center;
 }
 
 .inputsRow {
@@ -139,4 +154,8 @@ button.poub::before {
 
 .personnage {
   height: 7rem;
+}
+
+.lieuxInfo {
+  justify-content: center !important;
 }

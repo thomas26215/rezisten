@@ -145,6 +145,11 @@ section.header button {
   width: 250px;
 }
 
+.imagesContainer {
+  max-width: 250px;
+  max-height: 250px;
+}
+
 .personnage {
   display: flex;
   align-items: center;

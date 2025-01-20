@@ -51,7 +51,7 @@
                         }
                         ?>
                         <img id="img" src="<?= $imgSrc ?>" alt="<?= $selectedCharacter?->getFirstName() ?? "Jean"; ?>"
-                            alt="<?= $selectedCharacter?->getFirstName() ?? "Jean"; ?>" style="max-width: 240px;">
+                            alt="<?= $selectedCharacter?->getFirstName() ?? "Jean"; ?>" class="imagesContainer">
                     </div>
                 </div>
 
