@@ -95,7 +95,9 @@ if ($dialog === null) {
 
 // Initialisation par défaut du background à "bg1"
 $background = $backgroundURL . "hist_" . $idStory . "bg1.webp";
-
+if(!isset($_SESSION['background'])){
+	$_SESSION['background'] = $background;
+}
 // Si un background existe dans la session, on vérifie s'il correspond à l'histoire actuelle
 if (isset($_SESSION['background']) && !empty($_SESSION['background'])) {
     $bgSession = explode('_', $_SESSION['background']);
