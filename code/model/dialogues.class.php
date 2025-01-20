@@ -101,7 +101,7 @@ class Dialog
                 "id_histoire" => $storyId,
                 "interlocuteur" => $this->speaker->getId(),
                 "contenu" => $this->content,
-                "bonus" => $this->bonus,
+                "bonus" => "false",
                 "doublage" => $this->dubbing
             ]);
         } catch (PDOException $e) {
@@ -130,7 +130,7 @@ class Dialog
                 "id_histoire" => $this->story->getId(),
                 "interlocuteur" => $this->speaker->getId(),
                 "contenu" => $this->content,
-                "bonus" => $this->bonus,
+                "bonus" => "false",
                 "doublage" => $this->dubbing
             ]);
 
@@ -411,7 +411,7 @@ class Dialog
 
             if ($dialog1 && $dialog2) {
                 // Échanger les IDs
-                $dialog2->update(100000000000);
+                $dialog2->update(1000000);
                 $dialog1->update($id2);
                 $dialog2->update($id1);
 
