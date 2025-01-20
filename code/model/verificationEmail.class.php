@@ -58,7 +58,7 @@ class CheckEmail {
         if (empty($token)) {
             throw new InvalidArgumentException("Impossible de mettre le token car vide.");
         }
-        if (mb_strlen($token, 'UTF-8') !== 10) {
+        if (strlen($token, 'UTF-8') !== 10) {
             throw new InvalidArgumentException("Impossible de mettre le token : La longueur doit être de 10 caractères.");
         }
         $this->token = $token;
