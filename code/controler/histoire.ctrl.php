@@ -135,7 +135,7 @@ if($story->getChapter()->getNumchap() != 100){
 }
 
 }elseif($dialog->getContent() == "limquestion"){
-    $question = Question::read($idStory,'g');
+    $question = Question::read($idStory,'s');
     $_SESSION['idStory'] = $idStory;
     $_SESSION['idDialog'] = $idDialog;
     $_SESSION['difficulty'] = "spécifique";

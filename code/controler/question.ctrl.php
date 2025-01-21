@@ -55,7 +55,10 @@ elseif ($action === "answer") {
         if ($difficulty === "générique") {
             $idDialog = $_SESSION['idDialog'] + 1;
             $dialog = Dialog::read($idDialog, $_SESSION['idStory']);
-        } else {
+        } elseif($difficulty === "spécifique" && $numChapitre == 100 ){
+$idDialog = $_GET["id"];
+            $dialog = Dialog::read($idDialog,'s');
+}else {
             $idDialog = Dialog::readFirstBonus($_SESSION['idStory']);
             $dialog = Dialog::readBonusDialog($idDialog, $_SESSION['idStory']);
         }
