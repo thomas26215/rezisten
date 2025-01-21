@@ -244,4 +244,5 @@ internés en mars 1943 ? ','70','s');
 
 
 --Progression
-INSERT INTO PROGRESSION values(1,1,true);
+INSERT INTO PROGRESSION values(1,1,true),
+(2,1,true);
