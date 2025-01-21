@@ -126,7 +126,7 @@ class Character
                 throw new RuntimeException("Aucune donnée n'a été mise à jour dans la base de données.");
             }
         } catch (PDOException $e) { 
-           throw new RuntimeException("Erreur lors de la mise à jour du personnage : " . e.getMessage(), 0, $e); 
+           throw new RuntimeException("Erreur lors de la mise à jour du personnage : " . $e->getMessage(), 0, $e); 
        } 
    }
 
@@ -141,7 +141,7 @@ class Character
                throw new RuntimeException("Échec de la suppression du personnage dans la base de données."); 
            } 
        } catch (PDOException $e) { 
-           throw new RuntimeException("Erreur lors de la suppression du personnage : " . $e.getMessage(), 0, $e); 
+           throw new RuntimeException("Erreur lors de la suppression du personnage : " . $e->getMessage(), 0, $e); 
        } 
    }
 
@@ -161,7 +161,7 @@ class Character
            }
            return []; // Retourne un tableau vide si aucun personnage n'est trouvé.
        } catch (PDOException $e) { 
-           throw new RuntimeException("Erreur lors de la lecture des personnages : " . e.getMessage(), 0, $e); 
+           throw new RuntimeException("Erreur lors de la lecture des personnages : " . $e->getMessage(), 0, $e); 
        } 
    }
 }

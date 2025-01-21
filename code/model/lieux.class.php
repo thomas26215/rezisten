@@ -164,7 +164,7 @@ class Place {
             }
             return []; // Retourne un tableau vide si aucune donnée n'est trouvée
         } catch (PDOException $e) {
-            throw new RuntimeException("Erreur lors de la lecture des lieux : " . e.getMessage(), 0, e);
+            throw new RuntimeException("Erreur lors de la lecture des lieux : " . $e->getMessage(), 0, e);
         }
     }
 
