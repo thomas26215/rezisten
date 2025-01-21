@@ -89,21 +89,9 @@ Notre application permet aux utilisateurs de :
 - Possibilité de partager vos créations avec la communauté
 
 
-## Installation
-Pour installer le projet localement, suivez ces étapes :
-
-​1. Clonez le dépôt :
- ```Shell
-   git clone https://github.com/votre-utilisateur/votre-repo.git
-```
-2. Accédez au répertoire du projet :
-```Shel
-   cd votre-repo
-```
-3. Configurez votre serveur local pour exécuter les fichiers PHP.
-// A changer car on doit passer sur postgres je crois
-4. Importez la base de données depuis le fichier ```export.sql``` dans votre gestionnaire .
-
+## Installation et architecture
+Le fichier [rendus/docs/doc_architecture](https://gricad-gitlab.univ-grenoble-alpes.fr/iut2-info-stud/2024-s3/s3.01/team-11/rendus/-/blob/master/docs/doc_architecture.md?ref_type=heads) contient la spécification côté serveur du fonctionnement de l'application.
+Il précise comment sont installés les serveurs et comment migrer l'application sur d'autres machines que l'IUT.
 
 
 ## Utilisation

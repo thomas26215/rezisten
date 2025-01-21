@@ -1,23 +1,34 @@
 <?php
 require_once("daoUtilitaire.php");
 
-// Le Data Access Object 
+// Le Data Access Object
 // Il représente la base de donnée
 class DAO {
     private static $instance = null;
     private PDO $db;
-    private string $database = 'sqlite:'.__DIR__.'/../data/database.db';
+    private string $host = '192.168.14.118'; // Hôte PostgreSQL (par défaut localhost)
+    private string $port = '5432';      // Port PostgreSQL (par défaut 5432)
+    private string $dbname = 'rezisten'; // Nom de la base de données PostgreSQL
+    private string $user = 'superrezi';  // Nom d'utilisateur PostgreSQL
+    private string $password = '2o*R4ZisT3n%25'; // Mot de passe PostgreSQL
+
     private DAOUtilitaire $daoUtilitaire;
 
     private function __construct() {
         try {
-            $this->db = new PDO($this->database);
+            // Construction de la chaîne de connexion pour PostgreSQL
+            $dsn = "pgsql:host={$this->host};port={$this->port};dbname={$this->dbname};sslmode=require";
+
+            $this->db = new PDO($dsn, $this->user, $this->password);
+
             if (!$this->db) {
-                throw new Exception("Impossible d'ouvrir ".$this->database);
+                throw new Exception("Impossible de se connecter à la base de données PostgreSQL : ".$this->dbname);
             }
+
+            // Configuration des attributs PDO pour PostgreSQL
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-            throw new Exception("Erreur PDO : ".$e->getMessage().' sur '.$this->database);
+            throw new Exception("Erreur PDO : ".$e->getMessage().' sur '.$this->dbname);
         }
     }
 
@@ -32,7 +43,7 @@ class DAO {
         return $this->db;
     }
 
-    private function setUtilitaire(string $query = "", array $params = []){
+    public function setUtilitaire(string $query = "", array $params = []){
         $this->daoUtilitaire = new DAOUtilitaire();
         $this->daoUtilitaire->setQuery($query);
         $this->daoUtilitaire->setParams($params);
