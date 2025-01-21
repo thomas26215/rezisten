@@ -94,7 +94,7 @@ if ($dialog === null) {
 
 
 // Initialisation par défaut du background à "bg1"
-if($story->getChapter()->getId() != 100){
+if($story->getChapter()->getNumChap() != 100){
     $background = $backgroundURL . "hist_" . $idStory . "bg1.webp";
     if(!isset($_SESSION['background'])){
         $_SESSION['background'] = $background;
