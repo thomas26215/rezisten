@@ -72,9 +72,11 @@
                                     </div>
                                 </dialog>
                             </form>
-                        <?php else: ?>
-                            <div id="poubelle"></div>
-                        <?php endif; ?>
+                            <button class="modifierDialogueOuvrir" type="button" data-dialogue-id="<?= $dialogue->getId() ?>">
+                                <img class="modif" src="./view/design/image/modifier.png" alt="Modifier">
+                            <?php else: ?>
+                                <div id="poubelle"></div>
+                            <?php endif; ?>
                     </section>
                 </div>
                 <hr>
@@ -87,7 +89,7 @@
                     <section class="reponseContainer flex-row">
                         <section class="reponseQuestion">
                             <h4 class="red">Réponse : </h4>
-                            <p  id="question">
+                            <p id="question">
                                 <?= $dialogue->getAnswer() ?>
                             </p>
                         </section>
@@ -133,6 +135,36 @@
         <?php endforeach; ?>
 
     </article>
+    <dialog id="editDialoguePopup">
+        <form method="POST" action="index.php?ctrl=creation&article=editDialogue">
+            <input type="hidden" name="id" value="<?= $histoire->getId() ?>">
+            <input type="hidden" name="idDialogue" id="editDialogueId">
+            <label for="content">Modifier le dialogue :</label>
+            <textarea name="content" id="editDialogueContent" rows="4" cols="50"></textarea>
+            <button type="submit">Enregistrer</button>
+            <button type="button" id="closeEditDialoguePopup">Annuler</button>
+        </form>
+    </dialog>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Open edit dialogue popup
+            document.querySelectorAll('.modifierDialogueOuvrir').forEach(button => {
+                button.addEventListener('click', function () {
+                    const dialogueId = this.getAttribute('data-dialogue-id');
+                    const dialogueContent = this.closest('.dialogues').querySelector('#dialogue').innerText;
+                    document.getElementById('editDialogueId').value = dialogueId;
+                    document.getElementById('editDialogueContent').value = dialogueContent;
+                    document.getElementById('editDialoguePopup').showModal();
+                });
+            });
+
+            // Close edit dialogue popup
+            document.getElementById('closeEditDialoguePopup').addEventListener('click', function () {
+                document.getElementById('editDialoguePopup').close();
+            });
+        });
+    </script>
 
     <script>
         //supprimerDialogue

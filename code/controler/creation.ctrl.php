@@ -181,6 +181,27 @@ if (isset($_GET['delete']) && $_GET['delete'] === 'delete' && isset($_GET['idDia
         echo "Error: " . $e->getMessage();
     }
 }
+
+// Edit dialogue
+if (isset($_GET['article']) && $_GET['article'] === 'editDialogue' && isset($_POST['idDialogue'])) {
+    $idDialogue = $_POST['idDialogue'];
+    $dialogue = Dialog::read($idDialogue, $histoire->getId());
+
+    if ($dialogue) {
+        if (isset($_POST['content'])) {
+            $dialogue->setContent($_POST['content']);
+            $dialogue->update();
+            $message = "Votre dialogue a été mis à jour.";
+        }
+    } else {
+        $errorMessage = "Dialogue non trouvé.";
+    }
+
+    // Redirection après la mise à jour du dialogue
+    header("Location: index.php?ctrl=creation&article=afficherHistoire&id=" . $histoire->getId());
+    exit();
+}
+
 // Déplacer un dialogue vers le haut
 if (isset($_GET['action']) && $_GET['action'] === 'moveUp' && isset($_GET['idDialogue'])) {
     $idDialogue = $_GET['idDialogue'];
