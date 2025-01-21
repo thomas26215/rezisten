@@ -202,20 +202,14 @@ class Story
 
    public static function delete(int $id): void
    {
-       if ($id <= 0) {
-           throw new InvalidArgumentException("L'ID doit être supérieur à zéro.");
-       }
-
-       try {
-           $dao = DAO::getInstance();
-           $result = $dao->deleteDatasById("histoires", (int)$id);
-           if ($result === false) {
-                throw new RuntimeException("Échec de la suppression de l'histoire dans la base de données.");
-           }
-       } catch (PDOException $e) {
-           throw new RuntimeException("Erreur lors de la suppression de l'histoire : " . $e->getMessage(), 0, $e);
-       }
-   }
+    {
+        if ($id <= 0) {
+            throw new InvalidArgumentException("L'ID doit être supérieur à zéro.");
+        }
+ 
+     DAO::getInstance()->deleteDatasById("histoires", (int)$id);
+    }
+}
 
 
    public static function getStoryIdsByChapter(int $idChapter): array 
