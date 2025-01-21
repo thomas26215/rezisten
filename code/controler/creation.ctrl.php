@@ -67,7 +67,7 @@ if (isset($_GET['article']) && $_GET['article'] === 'ajouterDialogue' && isset($
         $dialogue = new Dialog((int) $newDialogueId, $histoire, $personnage, $texte);
         $dialogue->create();
 
-        
+
         $message = "Votre dialogue a été enregistré.";
 
         // Redirection après l'ajout du dialogue
@@ -164,12 +164,13 @@ if (isset($_GET['delete']) && $_GET['delete'] === 'delete' && isset($_GET['idDia
                 Question::delete($idDialogue, 's');
                 $existingDialogues = Dialog::readAllByStory($histoire->getId());
                 foreach ($existingDialogues as $dialogue) {
-                if ($dialogue && $dialogue->getContent() === 'limquestion') {
-                       Dialog::delete($dialogue->getId(), $histoire->getId());
-                       Dialog::updateAfterDeletion($dialogue->getId(), $histoire->getId());
-                }
+                    if ($dialogue && $dialogue->getContent() === 'limquestion') {
+                        Dialog::delete($dialogue->getId(), $histoire->getId());
+                        Dialog::updateAfterDeletion($dialogue->getId(), $histoire->getId());
+                    }
 
-}            } else {
+                }
+            } else {
                 throw new Exception("Question not found.");
             }
         }
@@ -185,20 +186,18 @@ if (isset($_GET['delete']) && $_GET['delete'] === 'delete' && isset($_GET['idDia
 // Edit dialogue
 if (isset($_GET['article']) && $_GET['article'] === 'editDialogue' && isset($_POST['idDialogue'])) {
     $idDialogue = $_POST['idDialogue'];
-    $dialogue = Dialog::read($idDialogue, $histoire->getId());
+    $idhistoire = $_POST['id'];
+    $dialogue = Dialog::read((int) $idDialogue, (int) $idhistoire);
 
     if ($dialogue) {
         if (isset($_POST['content'])) {
             $dialogue->setContent($_POST['content']);
             $dialogue->update();
-            $message = "Votre dialogue a été mis à jour.";
         }
-    } else {
-        $errorMessage = "Dialogue non trouvé.";
     }
 
     // Redirection après la mise à jour du dialogue
-    header("Location: index.php?ctrl=creation&article=afficherHistoire&id=" . $histoire->getId());
+    header("Location: index.php?ctrl=creation&article=afficherHistoire&id=" . $idhistoire);
     exit();
 }
 
