@@ -32,8 +32,12 @@ dialog::backdrop {
     opacity: 0.4;
 }
 
-button{
+.dialog div button{
     padding: 1rem 2rem;
+    width: 300px !important;
+    max-width: none !important;
+    font-size: larger;
+    height: 60px;
 }
 
 .button-grp{

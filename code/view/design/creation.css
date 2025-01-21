@@ -115,7 +115,11 @@ button.poub::before {
 .buttonsContainer {
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
+}
+
+.buttonsContainer form button {
+  min-width: 100px;
+  max-width: 300px;
 }
 
 .inputs {

@@ -12,30 +12,30 @@
         <!-- Question -->
         <section class="input-superpose">
             <label for="question">Entrez la question : </label>
-            <textarea name="question" id="question" required></textarea>
+            <textarea name="question" id="questionInput" required></textarea>
         </section>
 
         <!-- Réponse -->
         <section class="input-superpose">
             <label for="reponse">Entrez la réponse : </label>
-            <input type="number" name="reponse" id="reponse" required></input>
+            <input type="number" name="reponse" id="reponseInput" required></input>
         </section>
 
         <!-- boutons -->
         <section>
-            <button class="button-rouge delete-button" type="reset">Supprimer</button>
-            <button class="button-vert" type="submit">Valider</button>
+            <button type="button" class="button-rouge delete-button"  id="effacerQuestionOuvrir" type="button">Effacer</button>
+            <button class="button-vert" type="submit">Enregistrer</button>
         </section>
 
         <!-- Pop-up de confirmation de suppression -->
-        <dialog id="delete-dialog">
+        <dialog class="dialog" id="effacerQuestionDialogue">
             <div class="containerDialog">
-                <h2>Voulez vous supprimer cette question ?</h2>
-                <div class="flex-row button-grp">
-                    <button id="confirm-delete" class="button-vert">
-                        Supprimer
+                <h2>Voulez vous effacer cette question ?</h2>
+                <div>
+                    <button type="button" id="fermerEffacerQuestion" class="button-vert">
+                        Effacer
                     </button>
-                    <button id="cancel-delete" class="button-rouge">
+                    <button type="button" id="revenirEffacerQuestion" class="button-rouge">
                         Annuler
                     </button>
                 </div>
@@ -45,32 +45,33 @@
 
         <script src="./view/js/dyslexique.js"></script>
         <script>
+
             document.addEventListener('DOMContentLoaded', function () {
-                const deleteButtons = document.querySelectorAll('.delete-button');
-                const deleteDialog = document.getElementById('delete-dialog');
-                const confirmDeleteButton = document.getElementById('confirm-delete');
-                const cancelDeleteButton = document.getElementById('cancel-delete');
-                let storyIdToDelete = null;
+                var questionTextArea = document.getElementById("questionInput");
+                var reponseTextArea = document.getElementById("reponseInput");
 
-                deleteButtons.forEach(button => {
-                    button.addEventListener('click', function (event) {
-                        event.preventDefault();
-                        storyIdToDelete = this.getAttribute('data-story-id');
-                        deleteDialog.showModal();
+                //supprimerQuestion
+                var effacerQuestionOuvrir = document.getElementById('effacerQuestionOuvrir');
+                var effacerQuestionDialogue = document.getElementById('effacerQuestionDialogue');
+                var fermerEffacerQuestion = document.getElementById('fermerEffacerQuestion');
+                var revenirEffacerQuestion = document.getElementById('revenirEffacerQuestion');
+
+                if (effacerQuestionOuvrir && effacerQuestionDialogue && fermerEffacerQuestion && revenirEffacerQuestion) {
+                    effacerQuestionOuvrir.addEventListener('click', function () {
+                        effacerQuestionDialogue.showModal();
                     });
-                });
 
-                confirmDeleteButton.addEventListener('click', function () {
-                    if (storyIdToDelete) {
-                        window.location.href = `#`;
-                    }
-                });
+                    fermerEffacerQuestion.addEventListener('click', function () {
+                        questionTextArea.value = '';
+                        reponseTextArea.value = '';
+                        effacerQuestionDialogue.close();
+                    });
 
-                cancelDeleteButton.addEventListener('click', function () {
-                    event.preventDefault(); // Empêche le comportement par défaut
-                    deleteDialog.close();
-                });
-            });
+                    revenirEffacerQuestion.addEventListener('click', function () {
+                        effacerQuestionDialogue.close();
+                    });
+                }
+            });  
         </script>
     </form>
 </article>
