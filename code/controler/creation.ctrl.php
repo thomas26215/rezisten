@@ -86,7 +86,7 @@ if (isset($_GET['article']) && $_GET['article'] === 'ajouterQuestion' && isset($
     $reponse = $_GET['reponse'];
 
     // Vérifier s'il y a déjà une question pour cette histoire
-    $existingQuestion = Question::read($histoire->getId(), 'g');
+    $existingQuestion = Question::read($histoire->getId(), 's');
     if ($existingQuestion) {
         // Mettre à jour la question existante
         $existingQuestion->setQuestion($questionText);
@@ -96,7 +96,7 @@ if (isset($_GET['article']) && $_GET['article'] === 'ajouterQuestion' && isset($
         $message = "Votre question a été mise à jour.";
     } else {
         // Créer une nouvelle question
-        $question = new Question($histoire, $questionText, $reponse, 'g');
+        $question = new Question($histoire, $questionText, $reponse, 's');
         $question->create();
 
         $message = 'Votre question a été ajouté.';
@@ -157,11 +157,11 @@ if (isset($_GET['delete']) && $_GET['delete'] === 'delete' && isset($_GET['idDia
                 throw new Exception("Dialogue not found.");
             }
         } else {
-            $question = Question::read($histoire->getId(), 'g');
+            $question = Question::read($histoire->getId(), 's');
 
             if ($question) {
 
-                Question::delete($idDialogue, 'g');
+                Question::delete($idDialogue, 's');
                 $existingDialogues = Dialog::readAllByStory($histoire->getId());
                 foreach ($existingDialogues as $dialogue) {
                 if ($dialogue && $dialogue->getContent() === 'limquestion') {
@@ -233,7 +233,7 @@ if (isset($_GET['footer']) && $_GET['footer'] === 'publie') {
 // Récupération depuis le modèle
 $personnages = Character::readAllCharacters();
 $iddialog = 1;
-$dialogues[] = Question::read($id, "g");
+$dialogues[] = Question::read($id, "s");
 
 while (true) {
     try {

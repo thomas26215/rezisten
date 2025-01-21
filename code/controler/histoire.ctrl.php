@@ -54,7 +54,7 @@ if ($dialog === null) {
         if (!Progression::read($_SESSION['user_id'], $_SESSION['idStory'] + 1)) {
             $progression = new Progression(
                 User::read($_SESSION['user_id']),
-                Story::read($_SESSION['idStory'] + 1),
+                Story::read($_SESSION['idStory'] +1 ),
                 true
             );
             $progression->create();
@@ -94,25 +94,30 @@ if ($dialog === null) {
 
 
 // Initialisation par défaut du background à "bg1"
-$background = $backgroundURL . "hist_" . $idStory . "bg1.webp";
-if(!isset($_SESSION['background'])){
-	$_SESSION['background'] = $background;
-}
-// Si un background existe dans la session, on vérifie s'il correspond à l'histoire actuelle
-if (isset($_SESSION['background']) && !empty($_SESSION['background'])) {
-    $bgSession = explode('_', $_SESSION['background']);
-
-    // Si le background stocké dans la session correspond à l'histoire actuelle, on l'applique
-    if (isset($bgSession[1]) && $bgSession[1] == $idStory) {
-        $background = $_SESSION['background'];
+if($story->getChapter()->getNumChap() != 100){
+    $background = $backgroundURL . "hist_" . $idStory . "bg1.webp";
+    if(!isset($_SESSION['background'])){
+        $_SESSION['background'] = $background;
     }
-}
-
-// Si un dialogue entraîne un changement de fond
-if (isset($dialogsChangeBG[$idStory]) && $dialogsChangeBG[$idStory] == $dialog->getContent()) {
-    // Mise à jour du background à "bg2" et stockage dans la session
-    $background = $backgroundURL . "hist_" . $idStory . "bg2.webp";
-    $_SESSION['background'] = $background;
+    // Si un background existe dans la session, on vérifie s'il correspond à l'histoire actuelle
+    if (isset($_SESSION['background']) && !empty($_SESSION['background'])) {
+        $bgSession = explode('_', $_SESSION['background']);
+    
+        // Si le background stocké dans la session correspond à l'histoire actuelle, on l'applique
+        if (isset($bgSession[1]) && $bgSession[1] == $idStory) {
+            $background = $_SESSION['background'];
+        }
+    }
+    
+    // Si un dialogue entraîne un changement de fond
+    if (isset($dialogsChangeBG[$idStory]) && $dialogsChangeBG[$idStory] == $dialog->getContent()) {
+        // Mise à jour du background à "bg2" et stockage dans la session
+        $background = $backgroundURL . "hist_" . $idStory . "bg2.webp";
+        $_SESSION['background'] = $background;
+    }
+    
+}else{
+    $background = $backgroundURL."default_background.webp";
 }
 
 
@@ -135,7 +140,7 @@ if($story->getChapter()->getNumchap() != 100){
 }
 
 }elseif($dialog->getContent() == "limquestion"){
-    $question = Question::read($idStory,'g');
+    $question = Question::read($idStory,'s');
     $_SESSION['idStory'] = $idStory;
     $_SESSION['idDialog'] = $idDialog;
     $_SESSION['difficulty'] = "spécifique";
