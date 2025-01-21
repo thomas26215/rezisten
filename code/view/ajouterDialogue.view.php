@@ -20,7 +20,7 @@
         <!-- dialogue -->
         <section class="flex-col">
             <label for="dialogue">Entrez le texte du dialogue : </label>
-            <textarea name="dialogue" id="dialogueText" maxlength="400"></textarea>
+            <textarea required name="dialogue" id="dialogueText" maxlength="400"></textarea>
         </section>
 
         <!-- boutons -->

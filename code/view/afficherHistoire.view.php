@@ -18,7 +18,7 @@
 
                 </section>
                 <section class=flex-row>
-                    <p class="left-in-article">
+                    <p class="left-in-article" id="dialogue">
                         <?php if ($dialogue->getContent() !== 'limquestion'): ?>
                             <?= $dialogue->getContent() ?>
                         <?php else: ?>
@@ -76,17 +76,20 @@
                         <div id="poubelle"></div>
                     <?php endif; ?>
                 </section>
+                <hr>
             <?php elseif ($dialogue instanceof Question): ?>
-                <div class="">
+                <div class="quest">
                     <section>
-                        <p>Question : </p>
+                        <h4 class="red">Question : </h4>
                         <label for="personnage"> <?= $dialogue->getQuestion() ?></label>
                     </section>
                     <section class=flex-row>
-
-                        <p class="left-in-article">
-                            <?= $dialogue->getAnswer() ?>
-                        </p>
+                        <section>
+                            <h4 class="red">Réponse : </h4>
+                            <p class="left-in-article" id="question">
+                                <?= $dialogue->getAnswer() ?>
+                            </p>
+                        </section>
                         <div id="fleche">
                             <form class="invisble" method="GET" action="index.php">
 
@@ -123,6 +126,7 @@
                             </dialog>
                         </form>
                     </section>
+                    <hr>
                 </div>
             <?php endif; ?>
         <?php endforeach; ?>

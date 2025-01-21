@@ -10,7 +10,7 @@
     display: flex;
     margin: 20px;
     margin-right: 0%;
-    
+    align-items: center;
 }
 
 .left-in-article {
@@ -19,7 +19,22 @@
     text-align: justify;
     display: flex;
     flex-wrap: wrap;
+    font-weight: bold;
+    padding: 5px;
 }
+
+
+#question  {
+    font-size: 20px;
+    font-weight: bold;
+
+}
+
+section label h4 {
+    color: var(--rouge);
+    margin: none !important;
+}
+
 
 .invisble{
     color: transparent !important;
@@ -79,4 +94,8 @@
     top: 0;
     /* L'élément se colle en haut de la fenêtre */
     justify-content: space-around;
+}
+
+.red{
+    color:var(--rouge);
 }
