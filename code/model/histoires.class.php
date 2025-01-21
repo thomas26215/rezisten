@@ -134,7 +134,7 @@ class Story
                "createur" =>  $this->user ? $this->user->getId() : null,
                "id_lieu" =>  $this->place->getId(),
                "background" =>  $this->background,
-               "visible" =>  $this->visibility,
+               "visible" =>  "false",
            ])) {
                throw new RuntimeException("Échec de l'insertion de l'histoire dans la base de données.");
            }
@@ -185,24 +185,41 @@ class Story
    {
        if ($this->id < 1) {
            throw new RuntimeException("Impossible de mettre à jour l'histoire : L'histoire est invalide.");
-       }
-       
-       try {
+   }
+
+   if($this->getVisibility()=="false"){
+	try{
            if ($this->dao->update("histoires", [
                "titre" =>  $this->title,
                "numchap" =>  $this->chapter->getNumchap(),
                "createur" =>  $this->user ?  $this->user->getId() : null,
                "id_lieu" =>  $this->place->getId(),
                "background" =>  $this->background,
-               "visible" =>  $this->visibility,
-           ], ["id" => (int)$this->id]) === 0) {
-               throw new RuntimeException("Aucune donnée n'a été mise à jour dans la base de données.");
-           }
-       } catch (PDOException $e) {
-        throw new RuntimeException("Erreur lors de la mise à jour de l'histoire : " . $e->getMessage(), 0, $e);
-    }
+               "visible" =>  "true" ,
+                ], ["id" => (int)$this->id]) === 0) {
+                   throw new RuntimeException("Aucune donnée n'a été mise à jour dans la base de données.");
+                }
+	} catch (PDOException $e) {
+        	throw new RuntimeException("Erreur lors de la mise à jour de l'histoire : " . $e->getMessage(), 0, $e);
+	}
+}
+	else{
+	    try{
+		if ($this->dao->update("histoires", [
+               "titre" =>  $this->title,
+               "numchap" =>  $this->chapter->getNumchap(),
+               "createur" =>  $this->user ?  $this->user->getId() : null,
+               "id_lieu" =>  $this->place->getId(),
+               "background" =>  $this->background,
+               "visible" =>  "false" ,
+               ], ["id" => (int)$this->id]) === 0) {
+                   throw new RuntimeException("Aucune donnée n'a été mise à jour dans la base de données.");
+	         }
+               } catch (PDOException $e) {
+		 throw new RuntimeException("Erreur lors de la mise à jour de l'histoire : " . $e->getMessage(), 0, $e);
+                }
    }
-
+}
    // Supprimer une histoire en connaissant son id
    public static function delete(int $id): void
    {
@@ -258,5 +275,4 @@ class Story
 }
 
 ?>
-
 

@@ -17,10 +17,10 @@ $prevSpeaker = $_GET['prevSpeaker'] ?? "none";
 $_SESSION['lastDialog'] = $idDialog;
 
 
-$imgURL = "https://localhost:8080/rezisten/imgPersonnage/";
-$audioURL = "https://localhost:8080/rezisten/doublageDialogue/histoire".$idStory."/";
-$placeURL = "https://localhost:8080/rezisten/imgLieux/";
-$backgroundURL = "https://localhost:8080/rezisten/backgroundHistoire/";
+$imgURL = "https://192.168.14.118/rezisten/imgPersonnage/";
+$audioURL = "https://192.168.14.118/rezisten/doublageDialogue/histoire".$idStory."/";
+$placeURL = "https://192.168.14.118/rezisten/imgLieux/";
+$backgroundURL = "https://192.168.14.118/rezisten/backgroundHistoire/";
 $dialogsChangeBG = [
     1 => "",
     2 => "Nous y sommes ?"

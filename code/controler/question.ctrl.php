@@ -12,9 +12,9 @@ $action = htmlspecialchars($_GET['action']);
 $view = new View();
 
 // Liens vers les audios/images, à modifier en fonction de l'emplacement
-$audioURL = "https://localhost:8080/rezisten/doublageDialogue/histoire" . $_SESSION['idStory'] . "/";
-$imgURL = "https://localhost:8080/rezisten/imgPersonnage/";
-$placeURL = "https://localhost:8080/rezisten/imgLieux/";
+$audioURL = "https://192.168.14.118/rezisten/doublageDialogue/histoire" . $_SESSION['idStory'] . "/";
+$imgURL = "https://192.168.14.118/rezisten/imgPersonnage/";
+$placeURL = "https://192.168.14.118/rezisten/imgLieux/";
 
 
 
@@ -40,8 +40,8 @@ if ($action === "change") {
     $view->display('question');
 }
 // Autre cas de la soumission d'une réponse. On récupère la question en fonction de la difficulté choisie et on vérifie si la réponse est correcte.
-elseif ($action == "answer") {
-    $answer = htmlspecialchars($_GET['answer']);
+elseif ($action === "answer") {
+    $answer = $_GET['answer'];
     $firstbonus = Dialog::readFirstBonus($_SESSION['idStory']);
 
     $questionType = ($_SESSION['difficulty'] == "générique") ? 'g' : 's';

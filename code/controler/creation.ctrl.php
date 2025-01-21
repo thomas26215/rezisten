@@ -149,20 +149,16 @@ if (isset($_GET['delete']) && $_GET['delete'] === 'delete' && isset($_GET['idDia
             $question = Question::read($histoire->getId(), 'g');
 
             if ($question) {
-                if (Question::delete($idDialogue, 'g')) {
-                    $existingDialogues = Dialog::readAllByStory($histoire->getId());
-                    foreach ($existingDialogues as $dialogue) {
-                        if ($dialogue && $dialogue->getContent() === 'limquestion') {
-                            Dialog::delete($dialogue->getId(), $histoire->getId());
-                            Dialog::updateAfterDeletion($dialogue->getId(), $histoire->getId());
 
-                        }
-
-                    }
-                } else {
-                    throw new Exception("Failed to delete Question ID " . $idDialogue);
+                Question::delete($idDialogue, 'g');
+                $existingDialogues = Dialog::readAllByStory($histoire->getId());
+                foreach ($existingDialogues as $dialogue) {
+                if ($dialogue && $dialogue->getContent() === 'limquestion') {
+                       Dialog::delete($dialogue->getId(), $histoire->getId());
+                       Dialog::updateAfterDeletion($dialogue->getId(), $histoire->getId());
                 }
-            } else {
+
+}            } else {
                 throw new Exception("Question not found.");
             }
         }
