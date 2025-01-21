@@ -457,6 +457,15 @@ Il est nécessaire de comprendre que si une contrainte existe sur une colonne de
     - Vers le lieu si l'utilisateur a cliqué sur "Visiter le lieu"
     - Vers l'histoire suivante si l'utilisateur clique sur "Histoire suivante"
 
+# Règles mises en place
+
+De nombreuses règles ont été mises en place lors du début de ce projet :
+
+- Le nom des variables des modèles, des classes et autres doivent être en anglais
+- Exemple pour un commit : `"Action : Repertoire->NomFichier - Description du message"`
+- Commentaires sur méthode compliquées
+- Obligation de rediriger vers `index.php` et de l'utilisation des contrôleurs quand on redirige vers une autre page. Format de l'URL : `index.php?ctrl="NomControler"`
+
 # Conclusion
 
 Ce document fournit vue d'ensemble détaillée aspects techniques fonctionnels projet [Rezisten]. Pour toute question suggestion veuillez nous contacter à [Rezisten.contact@gmail.com].
