@@ -54,9 +54,22 @@
                                 <input type="hidden" name="id" value="<?= $histoire->getId() ?>">
                                 <input type="hidden" name="idDialogue" value="<?= $dialogue->getId() ?>">
                                 <input type="hidden" name="typeDialogue" value="dialogue">
-                                <button type="submit" name="delete" value="delete" class="poub">
-                                    <img src="./view/design/image/poubelle.png" alt="poubelle" id="poubelle">
+                                <button class="supprimerDialogueOuvrir" type="button" name="delete" value="delete" class="poub">
+                                    <img src="./view/design/image/poubelle.png" alt="poubelle" class="poubelle">
                                 </button>
+                                <dialog class="dialog dialogSupprimerDialogue">
+                                    <div class="containerDialog">
+                                        <h2>Voulez vous supprimer ce dialogue ?</h2>
+                                        <div>
+                                            <button type="submit" name="delete" value="delete" class="fermerSupprimerDialogue button-vert">
+                                                Supprimer
+                                            </button>
+                                            <button type="button" class="revenirSupprimerDialogue button-rouge">
+                                                Annuler
+                                            </button>
+                                        </div>
+                                    </div>
+                                </dialog>
                             </form>
                         <?php else: ?>
                             <div id="poubelle"></div>
@@ -89,9 +102,23 @@
                                 <input type="hidden" name="id" value="<?= $histoire->getId() ?>">
                                 <input type="hidden" name="idDialogue" value="<?= $dialogue->getHistory()->getId() ?>">
                                 <input type="hidden" name="typeDialogue" value="question">
-                                <button type="submit" name="delete" value="delete" class="poub">
+                                <button id="supprimerQuestionOuvrir" type="button" name="delete" value="delete" class="poub">
                                     <img src="./view/design/image/poubelle.png" alt="poubelle" id="poubelle">
                                 </button>
+
+                                <dialog class="dialog" id="dialogSupprimerQuestion">
+                                    <div class="containerDialog">
+                                        <h2>Voulez vous supprimer cette quation ?</h2>
+                                        <div>
+                                            <button type="submit" name="delete" value="delete" id="fermerSupprimerQuestion" class="button-vert">
+                                                Supprimer
+                                            </button>
+                                            <button type="button" class="button-rouge" id="revenirSupprimerQuestion">
+                                                Annuler
+                                            </button>
+                                        </div>
+                                    </div>
+                                </dialog>
                             </form>
                         </section>
                     </div>
@@ -100,4 +127,51 @@
 
     </article>
 
+    <script>
+
+                document.addEventListener('DOMContentLoaded', function () {
+                    document.body.addEventListener('click', function(event) {
+                        if (event.target.classList.contains('supprimerDialogueOuvrir')) {
+                            var dialog = event.target.closest('form').querySelector('.dialogSupprimerDialogue');
+                            dialog.showModal();
+                        } else if (event.target.classList.contains('supprimerQuestionOuvrir')) {
+                            var dialog = event.target.closest('form').querySelector('.dialogSupprimerQuestion');
+                            dialog.showModal();
+                        } else if (event.target.classList.contains('fermerSupprimerDialogue') || 
+                                event.target.classList.contains('fermerSupprimerQuestion')) {
+                            event.target.closest('dialog').close();
+                        } else if (event.target.classList.contains('revenirSupprimerDialogue') || 
+                                event.target.classList.contains('revenirSupprimerQuestion')) {
+                            event.target.closest('dialog').close();
+                        }
+                    });
+                });
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+                //supprimerDialogue
+                
+
+                //supprimerQuestion
+                var supprimerQuestionOuvrir = document.getElementById('supprimerQuestionOuvrir');
+                var dialogSupprimerQuestion = document.getElementById('dialogSupprimerQuestion');
+                var fermerSupprimerQuestion = document.getElementById('fermerSupprimerQuestion');
+                var revenirSupprimerQuestion = document.getElementById('revenirSupprimerQuestion');
+
+                if (dialogSupprimerQuestion && supprimerQuestionOuvrir && fermerSupprimerQuestion && revenirSupprimerQuestion) {
+                    supprimerQuestionOuvrir.addEventListener('click', function () {
+                        dialogSupprimerQuestion.showModal();
+                    });
+
+                    fermerSupprimerQuestion.addEventListener('click', function () {
+                        dialogueTextArea.value = '';
+                        dialogSupprimerQuestion.close();
+                    });
+
+                    revenirSupprimerQuestion.addEventListener('click', function () {
+                        dialogSupprimerQuestion.close();
+                    });
+                }
+                });     
+    </script>
 </article>

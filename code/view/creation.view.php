@@ -105,44 +105,48 @@
                 <section class="footer flex-row">
                     <form method=get>
                         <input type="hidden" name="ctrl" value="mesHistoires">
-                        <button id="quitterHistoireOuvrir" class=button-rouge>Quitter</button>
-                    </form>
-                    <dialog class="dialog" id="dialogHistoireQuitter">
-                        <div class="containerDialog">
-                            <h2>Voulez vous quitter la page création ?</h2>
-                            <div>
+                        <button type="button" id="quitterHistoireOuvrir" class=button-rouge>Quitter</button>
+                    
+                        <dialog class="dialog" id="dialogQuitterHistoire">
+                            <div class="containerDialog">
+                                <h2>Voulez vous quitter la page création ?</h2>
+                                <div>
 
-                                <button type="submit" id="fermerQuitterHistoire" name="fermer" class="button-vert">
-                                    Quitter
-                                </button>
-                                <button type="button" id="revenirQuitterHistoire" class="button-rouge">
-                                    Revenir
-                                </button>
+                                    <button type="submit" id="fermerQuitterHistoire" name="fermer" class="button-vert">
+                                        Quitter
+                                    </button>
+                                    <button type="button" id="revenirQuitterHistoire" class="button-rouge">
+                                        Revenir
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    </dialog>
-
+                        </dialog>
+                    </form>
 
                     <form method="get">
                         <input type="hidden" name="ctrl" value="creation">
                         <input type="hidden" name="footer" value="publie">
                         <input type="hidden" name="id" value="<?= $id ?>">
-                        <button id="publierHistoireOuvrir"
+                        <button type="button" id="publierHistoireOuvrir"
                             class="button-vert"><?php if ($histoire->getVisibility() == true): ?>
                                 Mettre en privé
                             <?php else: ?>
                                 Publier
                             <?php endif ?></button>
-                        <dialog class="dialog" id="dialogHistoirePublier">
+                        <dialog class="dialog" id="dialogPublierHistoire">
                             <div class="containerDialog">
-                                <h2>Voulez vous quitter la page création ?</h2>
+                                <h2>Voulez vous <?php if ($histoire->getVisibility() == true): ?>
+                                mettre en privé
+                            <?php else: ?>
+                                publier
+                            <?php endif ?></button> votre histoire ?</h2>
                                 <div>
 
                                     <button type="submit" id="fermerPublierHistoire" name="fermer" class="button-vert">
-                                        Quitter
+                                        Oui
                                     </button>
                                     <button type="button" id="revenirPublierHistoire" class="button-rouge">
-                                        Revenir
+                                        Non
                                     </button>
                                 </div>
                             </div>
@@ -204,7 +208,7 @@
 </script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // Supprimer personnage
+        // quitter page création
         var quitterHistoireOuvrir = document.getElementById('quitterHistoireOuvrir');
         var dialogQuitterHistoire = document.getElementById('dialogQuitterHistoire');
         var fermerQuitterHistoire = document.getElementById('fermerQuitterHistoire');
@@ -224,6 +228,7 @@
             });
         }
 
+        // publier histoire
         var publierHistoireOuvrir = document.getElementById('publierHistoireOuvrir');
         var dialogPublierHistoire = document.getElementById('dialogPublierHistoire');
         var fermerPublierHistoire = document.getElementById('fermerPublierHistoire');
