@@ -132,18 +132,14 @@ class Character
 
    public static function delete(int $id): void
    {
-       if ($id <= 0) { 
-           throw new InvalidArgumentException("L'ID doit être supérieur à zéro."); 
-       } 
-
-       try { 
-           if (!DAO::getInstance()->deleteDatasById("personnages", (int)$id)) { 
-               throw new RuntimeException("Échec de la suppression du personnage dans la base de données."); 
-           } 
-       } catch (PDOException $e) { 
-           throw new RuntimeException("Erreur lors de la suppression du personnage : " . $e->getMessage(), 0, $e); 
-       } 
-   }
+    {
+        if ($id <= 0) {
+            throw new InvalidArgumentException("L'ID doit être supérieur à zéro.");
+        }
+ 
+     DAO::getInstance()->deleteDatasById("personnages", (int)$id);
+    }
+}
 
    public static function readAllCharacters(): array
    {
