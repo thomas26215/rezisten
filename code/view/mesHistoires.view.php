@@ -67,10 +67,10 @@
     <?php include_once './view/footer.view.php'; ?>
 
     <!-- Pop-up de confirmation de suppression -->
-    <dialog id="delete-dialog">
+    <dialog class="dialog" id="delete-dialog">
         <div class="containerDialog">
             <h2>Voulez vous effacer votre histoire ?</h2>
-            <div class="flex-row button-grp">
+            <div >
                 <button id="confirm-delete" class="button-vert">
                     Supprimer
                 </button>

@@ -15,6 +15,9 @@ $idUser = $_SESSION['user_id'];
 // Récupération du modèle
 $lieux = Place::readAll();
 
+$message = $_GET["message"] ?? null;
+$errorMessage = null;
+
 // Vérification création
 if (!isset($_GET['id'])) { // si l'histoire n'existe pas
     $histoire = new Story(
@@ -64,12 +67,16 @@ if (isset($_GET['article']) && $_GET['article'] === 'ajouterDialogue' && isset($
         $dialogue = new Dialog((int) $newDialogueId, $histoire, $personnage, $texte);
         $dialogue->create();
 
+        
+        $message = "Votre dialogue a été enregistré.";
+
         // Redirection après l'ajout du dialogue
-        header("Location: index.php?ctrl=creation&article=ajouterDialogue&id=" . $histoire->getId());
+        header("Location: index.php?ctrl=creation&article=ajouterDialogue&message=$message&id=" . $histoire->getId());
+
         exit();
     } else {
         // Handle the case where the character is not found
-        echo "Character not found.";
+        $errorMessage = "Personnage n'est pas trouvé";
     }
 }
 
@@ -85,10 +92,14 @@ if (isset($_GET['article']) && $_GET['article'] === 'ajouterQuestion' && isset($
         $existingQuestion->setQuestion($questionText);
         $existingQuestion->setAnswer($reponse);
         $existingQuestion->update();
+
+        $message = "Votre question a été mise à jour.";
     } else {
         // Créer une nouvelle question
         $question = new Question($histoire, $questionText, $reponse, 's');
         $question->create();
+
+        $message = 'Votre question a été ajouté.';
     }
 
     // Vérifier si un dialogue "limquestion" existe déjà
@@ -120,7 +131,7 @@ if (isset($_GET['article']) && $_GET['article'] === 'ajouterQuestion' && isset($
     }
 
     // Redirection après l'ajout de la question
-    header("Location: index.php?ctrl=creation&article=ajouterQuestion&id=" . $histoire->getId());
+    header("Location: index.php?ctrl=creation&article=ajouterQuestion&message=$message&id=" . $histoire->getId());
     exit();
 }
 
@@ -170,6 +181,27 @@ if (isset($_GET['delete']) && $_GET['delete'] === 'delete' && isset($_GET['idDia
         echo "Error: " . $e->getMessage();
     }
 }
+
+// Edit dialogue
+if (isset($_GET['article']) && $_GET['article'] === 'editDialogue' && isset($_POST['idDialogue'])) {
+    $idDialogue = $_POST['idDialogue'];
+    $dialogue = Dialog::read($idDialogue, $histoire->getId());
+
+    if ($dialogue) {
+        if (isset($_POST['content'])) {
+            $dialogue->setContent($_POST['content']);
+            $dialogue->update();
+            $message = "Votre dialogue a été mis à jour.";
+        }
+    } else {
+        $errorMessage = "Dialogue non trouvé.";
+    }
+
+    // Redirection après la mise à jour du dialogue
+    header("Location: index.php?ctrl=creation&article=afficherHistoire&id=" . $histoire->getId());
+    exit();
+}
+
 // Déplacer un dialogue vers le haut
 if (isset($_GET['action']) && $_GET['action'] === 'moveUp' && isset($_GET['idDialogue'])) {
     $idDialogue = $_GET['idDialogue'];
@@ -258,6 +290,10 @@ $view->assign('histoire', $histoire);
 $view->assign('titre', Story::read($histoire->getId())->getTitle());
 $view->assign('id', $histoire->getId());
 $view->assign('lieux', $lieux);
+$view->assign('message', $message);
+if (isset($errorMessage)) {
+    $view->assign('errorMessage', $errorMessage);
+}
 $view->assign('lien', $lien);
 $view->assign('dialogues', $dialogues);
 $view->assign('personnages', $personnages); // pour ajouter dialogue

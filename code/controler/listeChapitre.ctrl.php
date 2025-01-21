@@ -1,4 +1,4 @@
-<?php 
+<?php
 include_once('./model/chapitres.class.php');
 include_once('./model/progression.class.php');
 include_once('./model/users.class.php');
@@ -9,6 +9,12 @@ $chapitres = Chapter::readAllchapters();
 
 $chaptersStatus = [];
 $chapterUnlocked = true;
+
+if (isset($_POST["reload"])) {
+    Progression::deleteAllForUser($user->getId());
+    $progression = new Progression($user, Story::read(1), 1);
+    $progression->create();
+}
 
 foreach ($chapitres as $chapitre) {
     $numChapitre = $chapitre->getNumchap();
@@ -21,6 +27,7 @@ foreach ($chapitres as $chapitre) {
         'isUnlocked' => $isUnlocked
     ];
 }
+
 
 $view = new View();
 $view->assign('chaptersStatus', $chaptersStatus);

@@ -224,7 +224,6 @@ class Dialog
     public static function readLimit(int $idStory): int
     {
         $dao = DAO::getInstance();
-        // FIXME : sur postgres passer sur "true" au lieu de 1
         $results = $dao->getWithParameters("dialogues", ["id_histoire" => $idStory, "contenu" => "limquestion"]);
 
         // Vérifiez si le tableau n'est pas vide avant d'accéder à l'index 0
