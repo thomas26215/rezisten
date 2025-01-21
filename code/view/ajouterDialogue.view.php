@@ -3,7 +3,7 @@
     <link rel="stylesheet" href="./view/design/ajouterDialogue.css">
 </head>
 <article class="content"> 
-    <form id="dialogueForm" class="flex-col" action="creation" method="get">   
+    <form id="dialogueForm" class="flex-col" action="index.php?ctrl=creation" method="get">   
         <input type="hidden" name="ctrl" value="creation">
         <input type="hidden" name="article" value="ajouterDialogue">
         <input type="hidden" name="id" value="<?= $histoire->getId() ?>">
@@ -34,7 +34,6 @@
             <div class="containerDialog">
                 <h2>Voulez vous supprimer ce dialogue ?</h2>
                 <div class="flex-row button-grp">
-                    
                 <form method="GET" action="index.php">
                 <button type="button" id="confirm-delete" class="button-vert">Supprimer</button>
                 </form>

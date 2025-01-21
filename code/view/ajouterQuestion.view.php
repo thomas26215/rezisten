@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="./view/design/popup.css">
 </head>
 <article class="content">
-    <form action="creation" method="get">
+    <form action="index.php?ctrl=creation" method="get">
         <input type="hidden" name="ctrl" value="creation">
         <input type="hidden" name="article" value="ajouterQuestion">
         <input type="hidden" name="id" value="<?= $histoire->getId() ?>">

@@ -90,31 +90,29 @@ if ($dialog === null) {
         $view->assign('place', $place);
         $view->assign('idChap',$story->getChapter()->getNumchap());
         $view->display('finHistoire');
-    
 }
 
 
-// Gestion du background
+// Initialisation par défaut du background à "bg1"
+$background = $backgroundURL . "hist_" . $idStory . "bg1.webp";
 if(!isset($_SESSION['background'])){
-    $background = $backgroundURL."hist_".$idStory."bg1.webp";
+	$_SESSION['background'] = $background;
 }
-// Permet de vérifier quel background est stocké dans la session si on change subitement d'histoire
-if(isset($_SESSION['background'])){
-    $background = $backgroundURL."hist_".$idStory."bg2.webp";
-    $bgSession = explode('_',$_SESSION['background']);
-}
+// Si un background existe dans la session, on vérifie s'il correspond à l'histoire actuelle
+if (isset($_SESSION['background']) && !empty($_SESSION['background'])) {
+    $bgSession = explode('_', $_SESSION['background']);
 
-// S'il existe un background dans la session qui correspond à un background de l'histoire actuelle on l'affiche
-if( isset($_SESSION['background']) && $_SESSION['background'] != '' && $bgSession[1] == $idStory ){
-    $background = $_SESSION['background'];
-
-}else{
-    // Sinon on le créé dans le cas où on a atteint un dialogue de changement précisé dans $dialogsChangeBG
-    if(isset($dialogsChangeBG[$idStory]) && $dialogsChangeBG[$idStory] == $dialog->getContent()){
-        $background = $backgroundURL."hist_".$idStory."bg2.webp";
-        $_SESSION['background'] = $background;
-
+    // Si le background stocké dans la session correspond à l'histoire actuelle, on l'applique
+    if (isset($bgSession[1]) && $bgSession[1] == $idStory) {
+        $background = $_SESSION['background'];
     }
+}
+
+// Si un dialogue entraîne un changement de fond
+if (isset($dialogsChangeBG[$idStory]) && $dialogsChangeBG[$idStory] == $dialog->getContent()) {
+    // Mise à jour du background à "bg2" et stockage dans la session
+    $background = $backgroundURL . "hist_" . $idStory . "bg2.webp";
+    $_SESSION['background'] = $background;
 }
 
 

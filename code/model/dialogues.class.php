@@ -17,7 +17,7 @@ class Dialog
 
     const audioURL = "192.168.14.118/rezisten/doublageDialogue/";
 
-    public function __construct(int $id, Story $story, Character $speaker, string $content, bool $bonus = "false", string $dubbing = '')
+    public function __construct(int $id, Story $story, Character $speaker, string $content, bool $bonus = false, string $dubbing = '')
     {
         $this->id = $id;
         $this->story = $story;
@@ -101,7 +101,7 @@ class Dialog
                 "id_histoire" => $storyId,
                 "interlocuteur" => $this->speaker->getId(),
                 "contenu" => $this->content,
-                "bonus" => $this->bonus,
+                "bonus" => "false",
                 "doublage" => $this->dubbing
             ]);
         } catch (PDOException $e) {
@@ -130,7 +130,7 @@ class Dialog
                 "id_histoire" => $this->story->getId(),
                 "interlocuteur" => $this->speaker->getId(),
                 "contenu" => $this->content,
-                "bonus" => $this->bonus,
+                "bonus" => "false",
                 "doublage" => $this->dubbing
             ]);
 
@@ -244,7 +244,7 @@ class Dialog
         $dao = DAO::getInstance();
         $dialogsBeforeQuestion = array();
 
-        $dialogs = $dao->getColumnWithParameters("dialogues", ["id_histoire" => $idStory]);
+        $dialogs = $dao->getWithParameters("dialogues", ["id_histoire" => $idStory]);
         if (empty($dialogs)) {
             throw new Exception("Aucun dialogue trouvé pour l'histoire " . $idStory);
         }
@@ -411,7 +411,7 @@ class Dialog
 
             if ($dialog1 && $dialog2) {
                 // Échanger les IDs
-                $dialog2->update(100000000000);
+                $dialog2->update(1000000);
                 $dialog1->update($id2);
                 $dialog2->update($id1);
 

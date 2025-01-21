@@ -27,6 +27,13 @@ de sécurité Debian tous les jours à 10h. Les fichiers permettant de gérer ce
 
 Les deux serveurs sont en https accessibles uniquement sur le port 443 grâce à des certificats autosignés.
 
+Les versions des logiciels utilisés sont les suivantes à la date du 20/01/2025 :  
+- postgres 15.10
+- apache 2.4.62
+- php 8.4.3 
+- noyau linux 6.1.0-28-amd64
+- OpenSSH_9.2p1 Debian-2+deb12u4 
+- openSSL 3.0.15
 
 # Guide de déploiement de l'application
 

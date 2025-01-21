@@ -154,8 +154,8 @@ class CheckEmail {
    public static function deleteExpiration(): void {
        try {
            $dao = DAO::getInstance();
-           $dao->setUtilitaire();
-            $dao->getUtilitaire()->executePrepare("delete from verifications_email where date_expiration < NOW()");
+           $dao->setUtilitaire("delete from verifications_email where date_expiration < NOW()");
+            $dao->getUtilitaire()->executePrepare();
        } catch (PDOException $e) {
            echo $e;
        }

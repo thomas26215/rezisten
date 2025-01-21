@@ -16,17 +16,19 @@ class questionTest extends TestCase
 
     protected function setUp(): void
     {        
-        $this->user = new User("test","test","test","2000-15-15","test@gmail.com","aa","j",true);
+        $this->user = new User("test","test","test","2000-01-15","test@gmail.com","aa","j",true);
         $this->user->create(); 
         
         $this->lieux = new Place("lieux","batiment","description","ville","coordonnées");
-        $this->chapter = new Chapter(69, 'test');
+        $this->lieux->create(); // Create the place
+        
+        $this->chapter = new Chapter(70, 'test');
+        $this->chapter->create();
         $this->story = new Story("Une histoire test", $this->chapter, $this->user, $this->lieux, "background.jpg", true);
         $this->story->create(); 
-        var_dump($this->story->getUser()->getId());        
+        
         $this->question = new Question($this->story, "Question test ?", "Réponse test", "g");
-    }
-    
+    }    
 
     public function testGetters()
     {
@@ -84,19 +86,26 @@ class questionTest extends TestCase
     }
 
     protected function tearDown(): void
-    {
+{
+    if (isset($this->lieux) && $this->lieux->getId() > 0) {
+        Place::delete($this->lieux->getId());
+    }
+    if (isset($this->user) && $this->user->getId() > 0) {
+        User::delete($this->user->getId());
+    }
+
+    if (isset($this->chapter) && $this->chapter->getNumchap() > 0) {
+        Chapter::delete($this->chapter->getNumchap());
+    }
+
         if (isset($this->question) && $this->question->getHistory()->getId() > 0) {
             try {
                 Question::delete($this->question->getHistory()->getId(), "g");
             } catch (RuntimeException $e) {
-                // Ignore if question doesn't exist
             }
         }
         if (isset($this->story) && $this->story->getId() > 0) {
             Story::delete($this->story->getId());
-        }
-        if (isset($this->user) && $this->user->getId() > 0) {
-            User::delete($this->user->getId());
         }
     }
 }
