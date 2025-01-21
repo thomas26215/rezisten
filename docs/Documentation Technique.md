@@ -225,11 +225,29 @@ Chaque modèle correspond à une table de la base de données. Egalement, chaque
 - `generateRandomString` : **Méthode privée** qui renvoie un token de 10 caractères généré aléatoirement.
 - `checkAndDeleteCode(string $token): void` : Vérifie si le code existe dans la table et le supprime. Si le code est invalide, ça renvoie une exception.
 
-### 4.2.7 Modèle `VerificationEmail`
+### 4.2.8 Modèle `VerificationEmail`
 
 - `generate(int $userId): ?PasswordRecuperation` : renvoie un objet `VerificationEmail`. avec un token généré aléatoirement pour l'utilisateur rentré en paramètres. Supprime par la même occasion tous les utilisateurs dont le temps d'expiration est dépassé.
 - `generateRandomString` : **Méthode privée** qui renvoie un token de 10 caractères généré aléatoirement.
 - `checkAndDeleteCode(string $token): void` : Vérifie si le code existe dans la table et le supprime. Si le code est invalide, ça renvoie une exception.
+
+## 4.3 Contraintes
+
+Il est nécessaire de comprendre que si une contrainte existe sur une colonne de la table correspondant au modèle, la contrainte existe pour le setter sur le modèle (Exemple : Si nous avons `username NOT NULL` dans la BDD, il est évident que nous vérifions également que `username!=NULL` dans le modèle). Nous ne préciserons pas ce genre d'évidence dans la suite de cette doc technique
+
+### 4.3.1 Modèle `User`
+
+- `birthDate` :
+    - Le format doit être **jj-mm-aaaa**
+    - L'utilisateur doit avoir + de 16 ans
+
+### 4.3.2 `recuperationMotDePasse`
+
+- `setToken` : Le token doit faire exactmenent 10 caractères
+
+### 4.3.3 `recuperationMotDePasse`
+
+- `setToken` : Le token doit faire exactement 10 caractères
 
 # Fonctionnalités
 
