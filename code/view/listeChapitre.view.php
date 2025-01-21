@@ -66,7 +66,7 @@
                     </div>
                 </div>
             </dialog>
-        </form>
+        </form></q>
     </main>
     <?php include_once './view/footer.view.php'; ?>
 

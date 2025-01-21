@@ -18,13 +18,13 @@
         </section>
 
         <!-- dialogue -->
-        <section class="flex-col">
+        <section class="texteDialogue">
             <label for="dialogue">Entrez le texte du dialogue : </label>
             <textarea required name="dialogue" id="dialogueText" maxlength="400"></textarea>
         </section>
 
         <!-- boutons -->
-        <section>
+        <section class="buttons">
             <button class="button-rouge" id="effacerDialogueOuvrir" type="button">Effacer</button>
             <button class="button-vert" type="submit">Enregistrer</button>
         </section>

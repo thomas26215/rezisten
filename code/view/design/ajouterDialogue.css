@@ -26,3 +26,12 @@ textarea{ /* Pour la partie du dialogue */
     justify-content: space-between !important;
     align-items: initial !important;
 }
+.texteDialogue {
+    display: flex;
+    flex-direction: column;
+}
+
+.buttons {
+    width: 95%;
+    justify-content: space-around;
+}

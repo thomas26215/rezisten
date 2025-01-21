@@ -75,7 +75,8 @@
                             <button class="modifierDialogueOuvrir" type="button" data-dialogue-id="<?= $dialogue->getId() ?>">
                                 <img class="modif" src="./view/design/image/modifier.png" alt="Modifier">
                             <?php else: ?>
-                                <div id="poubelle"></div>
+                                <div class="vide"></div>
+                                <div class="vide"></div>
                             <?php endif; ?>
                     </section>
                 </div>
@@ -135,14 +136,18 @@
         <?php endforeach; ?>
 
     </article>
-    <dialog id="editDialoguePopup">
+    <dialog class="dialogModif" id="editDialoguePopup">
         <form method="POST" action="index.php?ctrl=creation&article=editDialogue">
             <input type="hidden" name="id" value="<?= $histoire->getId() ?>">
             <input type="hidden" name="idDialogue" id="editDialogueId">
-            <label for="content">Modifier le dialogue :</label>
-            <textarea name="content" id="editDialogueContent" rows="4" cols="50"></textarea>
-            <button type="submit">Enregistrer</button>
-            <button type="button" id="closeEditDialoguePopup">Annuler</button>
+            <div class="flex-col">
+                <label for="content">Modifier le dialogue :</label>
+                <textarea class="modifInput" name="content" id="editDialogueContent" rows="4" cols="50"></textarea>
+            </div>
+            <div class="flex-col buttons">
+                <button type="submit">Enregistrer</button>
+                <button type="button" id="closeEditDialoguePopup">Annuler</button>
+            </div>
         </form>
     </dialog>
 
