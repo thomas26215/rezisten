@@ -7,90 +7,91 @@
 
         <?php foreach ($dialogues as $index => $dialogue):
             if ($dialogue instanceof Dialog): ?>
-
-                <section>
-                    <label for="personnage">
-                        <?php if ($dialogue->getContent() !== 'limquestion'): ?>
-                            Personnage qui parle : <?= $dialogue->getSpeaker()->getFirstName() ?? "questions" ?></label>
-                    <?php else: ?>
-                        <h4>POSITION DE LA QUESTION</h4>
-                    <?php endif; ?>
-
-                </section>
-                <section class=flex-row>
-                    <p class="left-in-article" id="dialogue">
-                        <?php if ($dialogue->getContent() !== 'limquestion'): ?>
-                            <?= $dialogue->getContent() ?>
+                <div class="dialogues">
+                    <section>
+                        <label for="personnage">
+                            <?php if ($dialogue->getContent() !== 'limquestion'): ?>
+                                Personnage qui parle : <?= $dialogue->getSpeaker()->getFirstName() ?? "questions" ?></label>
                         <?php else: ?>
-                            Flèche pour déplacer la position de la question ->
+                            <h4>POSITION DE LA QUESTION</h4>
                         <?php endif; ?>
-                    </p>
-                    <div id="fleche">
-                        <?php if ($index > 1): ?>
+
+                    </section>
+                    <section class="reponseContainer flex-row">
+                        <p class="left-in-article" id="dialogue">
+                            <?php if ($dialogue->getContent() !== 'limquestion'): ?>
+                                <?= $dialogue->getContent() ?>
+                            <?php else: ?>
+                                Flèche pour déplacer la position de la question ->
+                            <?php endif; ?>
+                        </p>
+                        <div id="fleche">
+                            <?php if ($index > 1): ?>
+                                <form method="GET" action="index.php">
+                                    <input type="hidden" name="ctrl" value="creation">
+                                    <input type="hidden" name="article" value="afficherHistoire">
+                                    <input type="hidden" name="id" value="<?= $histoire->getId() ?>">
+                                    <input type="hidden" name="action" value="moveUp">
+                                    <input type="hidden" name="idDialogue" value="<?= $dialogue->getId() ?>">
+                                    <button type="submit" class="bouton-modif">^</button>
+                                </form>
+                            <?php endif; ?>
+                            <?php if ($index < count($dialogues) - 1): ?>
+                                <form method="GET" action="index.php">
+                                    <input type="hidden" name="ctrl" value="creation">
+                                    <input type="hidden" name="article" value="afficherHistoire">
+                                    <input type="hidden" name="id" value="<?= $histoire->getId() ?>">
+                                    <input type="hidden" name="action" value="moveDown">
+                                    <input type="hidden" name="idDialogue" value="<?= $dialogue->getId() ?>">
+                                    <button type="submit" class="bouton-modif bouton-bas">^</button>
+                                </form>
+                            <?php endif; ?>
+                        </div>
+                        <?php if ($dialogue->getContent() !== 'limquestion'): ?>
                             <form method="GET" action="index.php">
                                 <input type="hidden" name="ctrl" value="creation">
                                 <input type="hidden" name="article" value="afficherHistoire">
                                 <input type="hidden" name="id" value="<?= $histoire->getId() ?>">
-                                <input type="hidden" name="action" value="moveUp">
                                 <input type="hidden" name="idDialogue" value="<?= $dialogue->getId() ?>">
-                                <button type="submit" class="bouton-modif">^</button>
-                            </form>
-                        <?php endif; ?>
-                        <?php if ($index < count($dialogues) - 1): ?>
-                            <form method="GET" action="index.php">
-                                <input type="hidden" name="ctrl" value="creation">
-                                <input type="hidden" name="article" value="afficherHistoire">
-                                <input type="hidden" name="id" value="<?= $histoire->getId() ?>">
-                                <input type="hidden" name="action" value="moveDown">
-                                <input type="hidden" name="idDialogue" value="<?= $dialogue->getId() ?>">
-                                <button type="submit" class="bouton-modif bouton-bas">^</button>
-                            </form>
-                        <?php endif; ?>
-                    </div>
-                    <?php if ($dialogue->getContent() !== 'limquestion'): ?>
-                        <form method="GET" action="index.php">
-                            <input type="hidden" name="ctrl" value="creation">
-                            <input type="hidden" name="article" value="afficherHistoire">
-                            <input type="hidden" name="id" value="<?= $histoire->getId() ?>">
-                            <input type="hidden" name="idDialogue" value="<?= $dialogue->getId() ?>">
-                            <input type="hidden" name="typeDialogue" value="dialogue">
-                            <button class="supprimerDialogueOuvrir poub" type="button" name="delete" value="delete">
-                                <img src="./view/design/image/poubelle.png" alt="poubelle" class="poubelle">
-                            </button>
-                            <dialog class="dialog dialogSupprimerDialogue">
-                                <div class="containerDialog">
-                                    <h2>Voulez vous supprimer ce dialogue ?</h2>
-                                    <div>
-                                        <button type="submit" name="delete" value="delete"
-                                            class="fermerSupprimerDialogue button-vert">
-                                            Supprimer
-                                        </button>
-                                        <button type="button" class="revenirSupprimerDialogue button-rouge">
-                                            Annuler
-                                        </button>
+                                <input type="hidden" name="typeDialogue" value="dialogue">
+                                <button class="supprimerDialogueOuvrir poub" type="button" name="delete" value="delete">
+                                    <img src="./view/design/image/poubelle.png" alt="poubelle" class="poubelle">
+                                </button>
+                                <dialog class="dialog dialogSupprimerDialogue">
+                                    <div class="containerDialog">
+                                        <h2>Voulez vous supprimer ce dialogue ?</h2>
+                                        <div>
+                                            <button type="submit" name="delete" value="delete"
+                                                class="fermerSupprimerDialogue button-vert">
+                                                Supprimer
+                                            </button>
+                                            <button type="button" class="revenirSupprimerDialogue button-rouge">
+                                                Annuler
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
-                            </dialog>
-                        </form>
-                    <?php else: ?>
-                        <div id="poubelle"></div>
-                    <?php endif; ?>
-                </section>
+                                </dialog>
+                            </form>
+                        <?php else: ?>
+                            <div id="poubelle"></div>
+                        <?php endif; ?>
+                    </section>
+                </div>
                 <hr>
             <?php elseif ($dialogue instanceof Question): ?>
                 <div class="quest">
                     <section>
                         <h4 class="red">Question : </h4>
-                        <label for="personnage"> <?= $dialogue->getQuestion() ?></label>
+                        <label class="bold" for="personnage"> <?= $dialogue->getQuestion() ?></label>
                     </section>
-                    <section class=flex-row>
-                        <section>
+                    <section class="reponseContainer flex-row">
+                        <section class="reponseQuestion">
                             <h4 class="red">Réponse : </h4>
-                            <p class="left-in-article" id="question">
+                            <p  id="question">
                                 <?= $dialogue->getAnswer() ?>
                             </p>
                         </section>
-                        <div id="fleche">
+                        <div class="flecheInvisible" id="fleche">
                             <form class="invisble" method="GET" action="index.php">
 
                                 <button type="button" class="bouton-modif invisble">^</button>

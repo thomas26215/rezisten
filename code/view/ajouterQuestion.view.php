@@ -12,7 +12,7 @@
         <!-- Question -->
         <section class="input-superpose">
             <label for="question">Entrez la question : </label>
-            <textarea name="question" id="questionInput" required></textarea>
+            <textarea maxlength="200" name="question" id="questionInput" required></textarea>
         </section>
 
         <!-- Réponse -->
@@ -27,6 +27,11 @@
                 type="button">Effacer</button>
             <button class="button-vert" type="submit">Enregistrer</button>
         </section>
+
+        <p><?= $message ?></p>
+        <?php if (isset($errorMessage)) { ?>
+            <p><?= $errorMessage ?></p>
+        <?php } ?>
 
         <!-- Pop-up de confirmation de suppression -->
         <dialog class="dialog" id="effacerQuestionDialogue">
