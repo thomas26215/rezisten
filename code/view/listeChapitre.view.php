@@ -42,9 +42,11 @@
             <input type="hidden" name="idChap" value="100">
             <button class="button-gris" type="submit">Chapitres des créateurs</button>
         </form>
-        <form method="post" action="index.php">
+        <form method="post" action="index.php?ctrl=listeChapitre">
+            <input type="hidden" name="reload" value="true">
             <button class="button-bleu" type="submit">Recommencer tout <img class="img-button"
-                    src="./view/design/image/recommencer.png" alt="(Reload)"> </button>
+                    src="./view/design/image/recommencer.png" alt="(Recommencer)">
+            </button>
         </form>
     </main>
     <?php include_once './view/footer.view.php'; ?>

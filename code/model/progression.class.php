@@ -149,6 +149,21 @@ class Progression
         }
     }
 
+    public static function deleteAllForUser(int $id_utilisateur): void
+    {
+        if ($id_utilisateur <= 0) {
+            throw new InvalidArgumentException("Le ID doivent être supérieurs à zéro.");
+        }
+
+        try {
+            if (!DAO::getInstance()->delete("progression", ["id_utilisateur" => (int) $id_utilisateur])) {
+                throw new RuntimeException("Échec de la suppression de la progression dans la base de données.");
+            }
+        } catch (PDOException $e) {
+            throw new RuntimeException("Erreur lors de la suppression de la progression : " . $e->getMessage(), 0, e);
+        }
+    }
+
     public static function areChapterUnlocked(int $userId, int $chapterId): bool
     {
         try {
