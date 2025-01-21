@@ -10,6 +10,7 @@ testdb/rezisten.db
 code/data/database.db
 code/data/insertQuentin.sql
 code/model/daoPostgres.class.php
+code/view/image/imageUser/
 ### Eclipse ###
 .metadata
 tmp/
