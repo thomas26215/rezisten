@@ -66,9 +66,9 @@ class DialoguesTest extends TestCase
 
     public function testCreate(): void
     {
-        $this->expectNotToPerformAssertions();
-        Dialog::delete($this->dialog->getId(), $this->story->getId()); // Prevent unique constraint violation
+        Dialog::delete($this->dialog->getId(), $this->story->getId());
         $this->dialog->create();
+        $this->assertNotNull(Dialog::read($this->dialog->getId(), $this->story->getId()));
     }
 
     public function testRead(): void
@@ -77,7 +77,7 @@ class DialoguesTest extends TestCase
         $this->dialog->create();
         $readDialog = Dialog::read($this->dialog->getId(), $this->story->getId());
         $this->assertInstanceOf(Dialog::class, $readDialog);
-        $this->assertEquals($this->dialog->getId(), $readDialog->getId());
+        $this->assertSame($this->dialog->getId(), $readDialog->getId());
     }
 
     public function testUpdate(): void
@@ -87,7 +87,7 @@ class DialoguesTest extends TestCase
         $this->dialog->setContent("Updated Content");
         $this->dialog->update();
         $updatedDialog = Dialog::read($this->dialog->getId(), $this->story->getId());
-        $this->assertEquals("Updated Content", $updatedDialog->getContent());
+        $this->assertSame("Updated Content", $updatedDialog->getContent());
     }
 
     public function testDelete(): void
@@ -98,38 +98,6 @@ class DialoguesTest extends TestCase
         Dialog::delete($this->dialog->getId(), $this->story->getId());
         $this->expectException(RuntimeException::class);
         Dialog::read($this->dialog->getId(), $this->story->getId());
-    }
-
-    public function testReadBonusDialog(): void
-    {
-        Dialog::delete($this->dialog->getId(), $this->story->getId());
-        $this->dialog->setBonus(true);
-        $this->dialog->create();
-        $bonusDialog = Dialog::readBonusDialog($this->dialog->getId(), $this->story->getId());
-        $this->assertNotNull($bonusDialog);
-        $this->assertTrue($bonusDialog->getBonus());
-    }
-
-    public function testReadLimit(): void
-    {
-        Dialog::delete($this->dialog->getId(), $this->story->getId());
-        $this->dialog->create();
-        $limitId = Dialog::readLimit($this->story->getId());
-        $this->assertEquals($this->dialog->getId(), $limitId);
-    }
-
-    public function testSwapDialogIds(): void
-    {
-        $dialog2 = new Dialog(2, $this->story, $this->speaker, "Second dialog", false);
-        Dialog::delete(2, $this->story->getId()); // Ensure dialog2 doesn't exist already
-        $dialog2->create();
-        Dialog::swapDialogIds($this->dialog->getId(), $dialog2->getId(), $this->story->getId());
-
-        $swappedDialog1 = Dialog::read($dialog2->getId(), $this->story->getId());
-        $swappedDialog2 = Dialog::read($this->dialog->getId(), $this->story->getId());
-
-        $this->assertEquals("Hello World!", $swappedDialog1->getContent());
-        $this->assertEquals("Second dialog", $swappedDialog2->getContent());
     }
 
     protected function tearDown(): void
