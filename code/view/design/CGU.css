@@ -11,3 +11,7 @@ main{
 h1{
     text-align: center;
 }
+
+ul>li, p{
+    font-weight:bold;
+}
