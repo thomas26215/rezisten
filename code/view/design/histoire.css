@@ -148,3 +148,8 @@ h2.speaker::before {
 .consulter-lieux{
     gap: 5px;
 }
+
+.repondre{
+    margin-left: 5%;
+    padding: 1rem 2rem;
+}
