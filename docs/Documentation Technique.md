@@ -38,8 +38,6 @@ Le projet [Rezisten] est une application interactive de narration qui permet aux
     - Le système suit la progression des utilisateurs dans les différentes histoires.
 6. Création d'histoires :
     - Les créateurs peuvent ajouter de nouveaux personnages, dialogues et lieux.
-7. Validation du contenu : - Les histoires créées par les utilisateurs doivent être validées avant d'être visibles publiquement.
-   Cette structure permet une expérience immersive où la narration est étroitement liée à des lieux réels, encourageant l'exploration et l'apprentissage à travers des histoires interactives
 
 ## Aperçu du Projet
 
@@ -265,7 +263,7 @@ Il est nécessaire de comprendre que si une contrainte existe sur une colonne de
 
 ### 4.3.2 `recuperationMotDePasse`
 
-- `setToken` : Le token doit faire exactmenent 10 caractères
+- `setToken` : Le token doit faire exactement 10 caractères
 
 ### 4.3.3 `recuperationMotDePasse`
 
@@ -499,6 +497,44 @@ De nombreuses règles ont été mises en place lors du début de ce projet :
 - Exemple pour un commit : `"Action : Repertoire->NomFichier - Description du message"`
 - Commentaires sur méthode compliquées
 - Obligation de rediriger vers `index.php` et de l'utilisation des contrôleurs quand on redirige vers une autre page. Format de l'URL : `index.php?ctrl="NomControler"`
+
+# Technologies utilisées
+
+Nous avons utilisé les langages de programmation HTML et CSS ainsi que JavaScript pour tout ce qui est lié au front et PHP pour tout ce qui est lié au BackEnd. Côté serveur, nous avons utilisé un serveur machine avec PostgreSQL pour la gestion des données des utilisateurs
+
+# Tests
+
+## Objectifs et portée
+
+- Définir clairement les objectifs des tests et leur portée[5].
+- Préciser les fonctionnalités et composants à tester[3].
+- Identifier les critères d'acceptation et les résultats attendus[1].
+
+## Types de tests
+
+- Détailler les différents types de tests à réaliser (unitaires, d'intégration, fonctionnels, de performance, etc.)[3].
+- Expliquer l'approche structurée pour chaque niveau de test, en respectant la pyramide de tests[3].
+
+## Ressources et outils
+
+- Identifier les ressources nécessaires (personnel, compétences, environnements de test)[1].
+- Sélectionner les outils d'automatisation appropriés comme Selenium ou Appium[4][6].
+- Décrire les frameworks d'automatisation à utiliser[2].
+
+## Planification et calendrier
+
+- Établir un calendrier détaillé avec les dates de début et de fin pour chaque phase de test[1].
+- Définir les étapes importantes et les livrables attendus[5].
+
+## Gestion des risques et qualité
+
+- Identifier et atténuer les risques associés au processus de test[7].
+- Établir des métriques de qualité et des critères d'évaluation de l'efficacité des tests[7].
+
+## Documentation et rapports
+
+- Décrire les procédures de documentation des tests et de gestion des résultats[7].
+- Définir le format et la fréquence des rapports d'avancement[5].
 
 # Conclusion
 
