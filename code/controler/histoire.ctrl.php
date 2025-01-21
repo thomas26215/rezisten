@@ -54,7 +54,7 @@ if ($dialog === null) {
         if (!Progression::read($_SESSION['user_id'], $_SESSION['idStory'] + 1)) {
             $progression = new Progression(
                 User::read($_SESSION['user_id']),
-                Story::read($_SESSION['idStory'] + 1),
+                Story::read($_SESSION['idStory'] +1 ),
                 true
             );
             $progression->create();
