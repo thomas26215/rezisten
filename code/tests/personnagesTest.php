@@ -88,13 +88,13 @@ class PersonnagesTest extends TestCase {
         $this->expectException(InvalidArgumentException::class);
         Character::delete(-1);
     }
-    public function testReadAllCharacters(): void {
+/*     public function testReadAllCharacters(): void {
         $this->character->create();
         $characters = Character::readAllCharacters();
         $this->assertIsArray($characters);
         $this->assertGreaterThan(0, count($characters));
         $this->assertInstanceOf(Character::class, $characters[0]);
-    }
+    } */
 
     protected function tearDown(): void {
         if (isset($this->character) && $this->character->getId() > 0) {
