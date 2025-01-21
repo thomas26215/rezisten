@@ -15,6 +15,10 @@
 
     <main class="flex-col">
         <h1>Les Chapitres</h1>
+        <form action="index.php">
+            <input type="hidden" name="ctrl" value="didacticiel">
+            <button class="button-bleu" type="submit">Didacticiel</button>
+        </form>
         <?php foreach ($chaptersStatus as $chapterStatus): ?>
             <?php
             $chapitre = $chapterStatus['chapitre'];
@@ -62,7 +66,7 @@
                     </div>
                 </div>
             </dialog>
-        </form>
+        </form></q>
     </main>
     <?php include_once './view/footer.view.php'; ?>
 

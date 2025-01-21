@@ -120,20 +120,14 @@ class Apparitions {
         }
     }
 
-    public static function delete(int $id_history, int $id_character): void {
-        if ($id_character <= 0 || $id_history <= 0) {
-            throw new InvalidArgumentException("Les IDs doivent être supérieurs à zéro.");
+    public static function delete(int $id_history, int $id_character): void
+    {
+        if ($id_history <= 0 || $id_character <= 0) {
+            throw new InvalidArgumentException("L'ID doit être supérieur à zéro.");
         }
+    DAO::getInstance()->deleteDatasByIds("apparitions", (int)$id_history, (int)$id_character);
 
-        try {
-            if (!DAO::getInstance()->deleteDatasByIds("apparitions", (int)$id_history, (int)$id_character)) {
-                throw new RuntimeException("Échec de la suppression de l'apparition dans la base de données.");
-            }
-        } catch (PDOException $e) { 
-           throw new RuntimeException("Erreur lors de la suppression de l'apparition : " . $e->getMessage(), 0, $e); 
-       } 
-   }
+    }
 }
 
 ?>
-

@@ -124,3 +124,18 @@ section .reponseContainer {
 .bold {
     font-weight: bold;
 }
+
+.modifierDialogueOuvrir{
+    clip-path: none;
+    background-color: var(--beige);
+}
+
+.modifierDialogueOuvrir::before{
+    clip-path: none;
+    background-color: var(--beige);
+}
+
+.vide {
+    height: 52px;
+    width: 20%;
+}

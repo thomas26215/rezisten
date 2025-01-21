@@ -95,7 +95,7 @@ class Demande {
             throw new InvalidArgumentException("L'ID utilisateur doit être supérieur à zéro.");
         }
 
-        if (!DAO::getInstance()->deleteDatas("demandes", ["id_utilisateur" => (int)$id_utilisateur])) {
+        if (!DAO::getInstance()->delete("demandes", ["id_utilisateur" => (int)$id_utilisateur])) {
             throw new RuntimeException("Échec de la suppression de la demande dans la base de données");
         }
     }

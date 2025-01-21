@@ -67,7 +67,7 @@ if (isset($_GET['article']) && $_GET['article'] === 'ajouterDialogue' && isset($
         $dialogue = new Dialog((int) $newDialogueId, $histoire, $personnage, $texte);
         $dialogue->create();
 
-        
+
         $message = "Votre dialogue a été enregistré.";
 
         // Redirection après l'ajout du dialogue
@@ -164,12 +164,13 @@ if (isset($_GET['delete']) && $_GET['delete'] === 'delete' && isset($_GET['idDia
                 Question::delete($idDialogue, 's');
                 $existingDialogues = Dialog::readAllByStory($histoire->getId());
                 foreach ($existingDialogues as $dialogue) {
-                if ($dialogue && $dialogue->getContent() === 'limquestion') {
-                       Dialog::delete($dialogue->getId(), $histoire->getId());
-                       Dialog::updateAfterDeletion($dialogue->getId(), $histoire->getId());
-                }
+                    if ($dialogue && $dialogue->getContent() === 'limquestion') {
+                        Dialog::delete($dialogue->getId(), $histoire->getId());
+                        Dialog::updateAfterDeletion($dialogue->getId(), $histoire->getId());
+                    }
 
-}            } else {
+                }
+            } else {
                 throw new Exception("Question not found.");
             }
         }
@@ -181,6 +182,25 @@ if (isset($_GET['delete']) && $_GET['delete'] === 'delete' && isset($_GET['idDia
         echo "Error: " . $e->getMessage();
     }
 }
+
+// Edit dialogue
+if (isset($_GET['article']) && $_GET['article'] === 'editDialogue' && isset($_POST['idDialogue'])) {
+    $idDialogue = $_POST['idDialogue'];
+    $idhistoire = $_POST['id'];
+    $dialogue = Dialog::read((int) $idDialogue, (int) $idhistoire);
+
+    if ($dialogue) {
+        if (isset($_POST['content'])) {
+            $dialogue->setContent($_POST['content']);
+            $dialogue->update();
+        }
+    }
+
+    // Redirection après la mise à jour du dialogue
+    header("Location: index.php?ctrl=creation&article=afficherHistoire&id=" . $idhistoire);
+    exit();
+}
+
 // Déplacer un dialogue vers le haut
 if (isset($_GET['action']) && $_GET['action'] === 'moveUp' && isset($_GET['idDialogue'])) {
     $idDialogue = $_GET['idDialogue'];

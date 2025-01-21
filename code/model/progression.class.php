@@ -134,20 +134,13 @@ class Progression
         }
     }
 
-    public static function delete(int $id_utilisateur, int $id_history): void
+    public static function delete(int $id_user, int $id_history): void
     {
-        if ($id_utilisateur <= 0 || $id_history <= 0) {
-            throw new InvalidArgumentException("Les IDs doivent être supérieurs à zéro.");
+        if ($id_user <= 0 || $id_history <= 0) {
+            throw new InvalidArgumentException("L'ID doit être supérieur à zéro.");
         }
-
-        try {
-            if (!DAO::getInstance()->delete("progression", ["id_utilisateur" => (int) $id_utilisateur, "id_hist" => (int) $id_history])) {
-                throw new RuntimeException("Échec de la suppression de la progression dans la base de données.");
-            }
-        } catch (PDOException $e) {
-            throw new RuntimeException("Erreur lors de la suppression de la progression : " . $e->getMessage(), 0, e);
-        }
-    }
+    DAO::getInstance()->delete("progression", ["id_utilisateur" => (int) $id_user, "id_hist" => (int) $id_history]) ;
+    }    
 
     public static function deleteAllForUser(int $id_utilisateur): void
     {

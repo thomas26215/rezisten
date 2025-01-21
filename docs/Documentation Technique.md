@@ -17,7 +17,29 @@
 
 ## Introduction
 
-Ce document présente les spécifications techniques et fonctionnelles du projet [Rezisten]. Il décrit la structure des bases de données, les principales fonctionnalités et le déroulement des interactions utilisateur.
+Le projet [Rezisten] est une application interactive de narration qui permet aux utilisateurs de lire et aux créateurs de créer des histoires liées à des lieux spécifiques. Voici les principales caractéristiques du projet :
+
+1. Rôles des utilisateurs :
+    - Utilisateurs standard : Peuvent lire les histoires disponibles.
+    - Créateurs : Peuvent à la fois lire et créer des histoires.
+2. Structure des histoires :
+    - Chaque histoire est associée à un lieu spécifique.
+    - Les histoires sont organisées en chapitres.
+3. Système de questions :
+    - Les histoires de base comportent deux types de questions :
+        - Une question générale
+        - Une question spécifique
+    - Les créateurs peuvent ajouter une seule question à leurs histoires.
+4. Interaction avec les lieux :
+    - Chaque histoire est liée à un lieu réel.
+    - Les questions incluent un lien permettant de visiter rapidement le lieu associé.
+    - Une fois l'histoire terminée, l'utilisateur a également accès à un lien vers le lieu.
+5. Progression :
+    - Le système suit la progression des utilisateurs dans les différentes histoires.
+6. Création d'histoires :
+    - Les créateurs peuvent ajouter de nouveaux personnages, dialogues et lieux.
+7. Validation du contenu : - Les histoires créées par les utilisateurs doivent être validées avant d'être visibles publiquement.
+   Cette structure permet une expérience immersive où la narration est étroitement liée à des lieux réels, encourageant l'exploration et l'apprentissage à travers des histoires interactives
 
 ## Aperçu du Projet
 
@@ -456,6 +478,27 @@ Il est nécessaire de comprendre que si une contrainte existe sur une colonne de
 - **Redirection**
     - Vers le lieu si l'utilisateur a cliqué sur "Visiter le lieu"
     - Vers l'histoire suivante si l'utilisateur clique sur "Histoire suivante"
+
+# Mise à jour à venir
+
+1. Compléter la demande de créateur
+2. Ajouter la vérification d'histoire
+3. Les fonctionnalités de l'administrateur
+4. Un système de récompense
+5. La possibilité pour un créateur de mettre son propre fond
+6. Les musiques d'ambiance
+7. La possibilité de collaboration entre créateurs
+8. Un système de sauvegarde plus précis
+9. Un système de photo de profil
+
+# Règles mises en place
+
+De nombreuses règles ont été mises en place lors du début de ce projet :
+
+- Le nom des variables des modèles, des classes et autres doivent être en anglais
+- Exemple pour un commit : `"Action : Repertoire->NomFichier - Description du message"`
+- Commentaires sur méthode compliquées
+- Obligation de rediriger vers `index.php` et de l'utilisation des contrôleurs quand on redirige vers une autre page. Format de l'URL : `index.php?ctrl="NomControler"`
 
 # Conclusion
 
