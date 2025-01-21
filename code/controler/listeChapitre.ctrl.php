@@ -1,4 +1,4 @@
-<?php
+<?php 
 include_once('./model/chapitres.class.php');
 include_once('./model/progression.class.php');
 include_once('./model/users.class.php');
@@ -8,19 +8,18 @@ $user = User::read($_SESSION["user_id"]);
 $chapitres = Chapter::readAllchapters();
 
 $chaptersStatus = [];
-$previousChapterUnlocked = true;
+$chapterUnlocked = true;
 
 foreach ($chapitres as $chapitre) {
     $numChapitre = $chapitre->getNumchap();
     if ($numChapitre == 100) {
         continue; // Skip chapter 100
     }
-    $isUnlocked = $numChapitre == 0 || $previousChapterUnlocked;
+    $isUnlocked = $numChapitre == 0 || Progression::areChapterUnlocked($user->getId(), $numChapitre);
     $chaptersStatus[] = [
         'chapitre' => $chapitre,
         'isUnlocked' => $isUnlocked
     ];
-    $previousChapterUnlocked = $isUnlocked && Progression::areAllStoriesUnlocked($user->getId(), $numChapitre);
 }
 
 $view = new View();

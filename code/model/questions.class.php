@@ -143,7 +143,7 @@ class Question
                 throw new RuntimeException("Aucune donnée n'a été mise à jour dans la base de données.");
             }
         } catch (PDOException $e) {
-           throw new RuntimeException("Erreur lors de la mise à jour de la question : " . $e.getMessage(), 0, $e); 
+           throw new RuntimeException("Erreur lors de la mise à jour de la question : " . $e->getMessage(), 0, $e); 
        }
    }
 

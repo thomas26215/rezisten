@@ -132,7 +132,7 @@ class CheckEmail {
                 throw new RuntimeException("Aucune donnée n'a été mise à jour dans la base de données.");
             }
         } catch (PDOException $e) { 
-           throw new RuntimeException("Erreur lors de la mise à jour de la vérification d'email : " . $e.getMessage(), 0, $e); 
+           throw new RuntimeException("Erreur lors de la mise à jour de la vérification d'email : " . $e->getMessage(), 0, $e); 
        } 
    }
 
@@ -147,7 +147,7 @@ class CheckEmail {
            }
         CheckEmail::deleteExpiration();
        } catch (PDOException $e) { 
-           throw new RuntimeException("Erreur lors de la suppression de la vérification d'email : " . $e.getMessage(), 0, $e); 
+           throw new RuntimeException("Erreur lors de la suppression de la vérification d'email : " . $e->getMessage(), 0, $e); 
        } 
    }
 

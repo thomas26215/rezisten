@@ -124,7 +124,7 @@ class PasswordRecuperation {
                 throw new RuntimeException("Aucune donnée n'a été mise à jour dans la base de données.");
             }
         } catch (PDOException $e) { 
-           throw new RuntimeException("Erreur lors de la mise à jour de la récupération de mot de passe : " . $e.getMessage(), 0, $e); 
+           throw new RuntimeException("Erreur lors de la mise à jour de la récupération de mot de passe : " . $e->getMessage(), 0, $e); 
        } 
    }
 
@@ -138,7 +138,7 @@ class PasswordRecuperation {
                throw new RuntimeException("Échec de la suppression de la récupération de mot de passe dans la base de données."); 
            } 
        } catch (PDOException $e) { 
-           throw new RuntimeException("Erreur lors de la suppression de la récupération de mot de passe : " . $e.getMessage(), 0, $e); 
+           throw new RuntimeException("Erreur lors de la suppression de la récupération de mot de passe : " . $e->getMessage(), 0, $e); 
        } 
    }
 
@@ -170,7 +170,7 @@ class PasswordRecuperation {
                 throw new RuntimeException("Impossible de créer la récupération de mot de passe."); 
             } 
         } catch (RuntimeException $e) { 
-            throw new RuntimeException("Erreur lors de la génération du token : " . $e.getMessage(), 0, $e); 
+            throw new RuntimeException("Erreur lors de la génération du token : " . $e->getMessage(), 0, $e); 
         } 
     }
 
