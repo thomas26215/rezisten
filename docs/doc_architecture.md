@@ -103,6 +103,9 @@ Vous pouvez ensuite placer le dossier où vous le souhaitez mais de manière cla
 https://[ip_machine]/rezisten/  
 Les liens sont gérés ensuite dans le code.
 
+Sur le serveur web qui contient l'application, il y a également un script /usr/local/bin/send_images qui met à jour les images des créateurs et les envoie vers ce serveur dans le dossier imgPersonnages, cela permet de faire
+de la place dans l'application.
+
 ## 2- Résumé 
 Pour clarifier tout cela, voici une liste des fichiers et/ou dossiers nécessaires au fonctionnement de l'application sur chaque serveur.
 
