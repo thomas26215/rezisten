@@ -181,7 +181,7 @@ class Dialog
                 } catch (RuntimeException $e) {
                     throw new RuntimeException("Impossible de renvoyer un dialogue après lecture : " . $e->getMessage(), 0, $e);
                 }
-                
+
             } else {
                 throw new RuntimeException("Erreur lors de la lecture de dialogue => Aucun résultat");
             }
@@ -383,7 +383,7 @@ class Dialog
                     return false;
                 }
             }
-            
+
 
             $newId++; // Incrémenter le nouvel ID attendu
         }
@@ -397,7 +397,7 @@ class Dialog
      * @param int $idStory The ID of the story.
      * @return void
      */
-  
+
     public static function swapDialogIds(int $id1, int $id2, int $idStory): bool
     {
         $dao = DAO::getInstance();
