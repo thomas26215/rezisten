@@ -2,37 +2,74 @@
 <html lang="fr">
 
 <head>
-        <link rel="icon" href="./view/favicon.ico" type="image/x-icon">
-    
+    <link rel="icon" href="./view/favicon.ico" type="image/x-icon">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Didacticiel</title>
     <link rel="stylesheet" href="./view/design/global.css">
+    <link rel="stylesheet" href="./view/design/CGU.css">
 </head>
 
 <body>
     <?php include_once './view/headerHistoire.view.php'; ?>
     <main class="flex-col">
-        <h1>Vous allez commencer votre lecture.</h1>
-        <h2>Avant de rentrer dans l'histoire, voici comment se déroulera votre expérience</h2>
-        <h3> - Vous serez placé dans la peau de plusieurs personnages ayant vécus a l'époque des faits</h3>
-        <h4> - À un moment donné de votre lecture, vous devrez répondre à une question
-            en lien avec un site historique. Vous aurez le choix entre deux questions et ce choix impactera 
-            la suite de votre aventure.</h4>
-        <h5> - Parmi les deux questions, vous pourrez toujours répondre à l'une d'entres elles à l'aide 
-            des informations fournies. L'autre cependant vous demendera des connaissances plus poussés des 
-            lieux en question, nous vous recommandons donc de les visiter afin de trouver la réponse.
-        </h5>
-        <h6>Bonne lecture !</h6>
+        <h1>Bienvenue dans le didacticiel de Rezisten !</h1>
+        <p>Sur notre applications vous disposerez de plusieurs fonctionnalité détaillé si dessous.</p>
+
+        <h2>Votre profil</h2>
+        <ul>
+            <li>Dans votre profil vous disposez d'un mode pour les dyslexique afin d'adapter votre expérience.</li>
+            <li>Vous pouvez également modifier votre mot de passe si l'envie vous en prends.</li>
+            <li>Enfin, vous pouvez faire une demande pour devenir créateur !</li>
+        </ul>
+
+        <h2>Lecture d'histoire</h2>
+        <p>Sur notre application, vous retrouverez 2 types d'histoires. Les histoires officiel écrite par les fondateurs
+            de Rézisten et les histoires proposées par des personnes agréés.</p>
+        <ul>
+            <li>Nos histoires</li>
+            <p>Chaque histoire est fictive et se déroule dans un lieu historique ! Les histoires sont des dialogues
+                entre des personnages, fictif pour la plupart, mais aussi des personnages historique tel que Jean
+                Moulin.</p>
+            <p>
+                A un moment de l'histoire vous serez interrompus par une question vous invitant à visiter le lieu pour
+                en apprendre plus sur celui-ci.
+                La première question qui vous est proposées ne peut être répondu qu'en vous rendant sur place et vous
+                proposeras une fin plus complète (plus de dialogues, des évènements plus impactant).
+                Dans le cas ou vous ne pourriez pas vous rendre sur place vous pouvez changer de question pour une plus
+                simple où la réponse se trouve dans la page "consulter lieux".
+            </p>
+            <p>A la fin d'une histoire vous accéderez à une page vous expliquant succintement la véritable histoire du
+                lieu afin que vous puissiez diférencier le réel de l'imaginaire !
+            </p>
+            <li>Les histoires des créateurs</li>
+            <p>Pour les histoires des créateurs, le principe est relativement similaire, la différence est que vous
+                aurez une seule question ou vous devrez chercher la réponse sur internet.</p>
+        </ul>
+
         <form action="?" method="get">
-                <input type="hidden" name="ctrl" value="histoire">
-                <input type="hidden" name="idStory" value="1">
-                <input type="hidden" name="idDialog" value="1">
-                <input type="hidden" name="didacticiel" value="1">
+            <input type="hidden" name="ctrl" value="histoire">
+            <input type="hidden" name="idStory" value="1">
+            <input type="hidden" name="idDialog" value="1">
+            <input type="hidden" name="didacticiel" value="1">
             <button type="submit">Commencer la lecture -></button>
         </form>
+        <h2>Mission recrutement</h2>
+        <p>BLABLA CREATEUR</p>
+
+        <a href="index.php?ctrl=demandeCreateur">
+            <button class="button-gris">Faire la demande d'être créateur</button>
+        </a>
+
+
+        <div class="flex-row">
+            <img src="https://192.168.14.118/rezisten/imgPersonnage/raymond.webp" alt="Image du personnage numéro 1">
+            <img src="https://192.168.14.118/rezisten/imgPersonnage/jean.webp" alt="Image du personnage numéro 2">
+        </div>
     </main>
+    <?php include_once './view/footer.view.php'; ?>
 </body>
-    <script src="./view/js/dyslexique.js"></script>
+<script src="./view/js/dyslexique.js"></script>
 
 </html>
