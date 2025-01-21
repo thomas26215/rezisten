@@ -236,19 +236,16 @@ class Dialog
 
 
 
-
-
-
-    public static function getDialogsBeforeQuestion(int $idStory): array
+    /* public static function getDialogsBeforeQuestion(int $idStory): array
     {
         $dao = DAO::getInstance();
         $dialogsBeforeQuestion = array();
-
+    
         $dialogs = $dao->getWithParameters("dialogues", ["id_histoire" => $idStory]);
         if (empty($dialogs)) {
             throw new Exception("Aucun dialogue trouvé pour l'histoire " . $idStory);
         }
-
+    
         $i = 0;
         while ($i < count($dialogs) && $dialogs[$i]['contenu'] !== 'limquestion') {
             $story = Story::read($idStory);
@@ -268,65 +265,64 @@ class Dialog
     }
 
     public static function getBonusDialogsAfterQuestion(int $idStory): array
-    {
-        $dao = DAO::getInstance();
-        $dialogsBonus = array();
+{
+    $dao = DAO::getInstance();
+    $dialogsBonus = array();
 
-        $dialogs = $dao->getColumnWithParameters("dialogues", ["id_histoire" => $idStory]);
-        if (empty($dialogs)) {
-            throw new Exception("Aucun dialogue trouvé");
-        }
-
-        foreach ($dialogs as $dialog) {
-            if ($dialog['bonus'] === true) {
-                $story = Story::read($idStory);
-                $speaker = Character::read($dialog['interlocuteur']);
-                $d = new Dialog(
-                    $dialog['id'],
-                    $story,
-                    $speaker,
-                    $dialog['contenu'],
-                    (bool) $dialog['bonus'],
-                    $dialog['doublage']
-                );
-                $dialogsBonus[] = $d;
-            }
-        }
-        return $dialogsBonus;
+    $dialogs = $dao->getWithParameters("dialogues", ["id_histoire" => $idStory]);
+    if (empty($dialogs)) {
+        throw new Exception("Aucun dialogue trouvé");
     }
 
-    public static function getClassicDialogsAfterQuestion(int $idStory): array
-    {
-        $dao = DAO::getInstance();
-        $dialogsClassic = array();
-
-        $dialogs = $dao->getColumnWithParameters("dialogues", ["id_histoire" => $idStory]);
-        if (empty($dialogs)) {
-            throw new Exception("Aucun dialogue trouvé");
+    foreach ($dialogs as $dialog) {
+        if ($dialog['bonus'] === true) {
+            $story = Story::read($idStory);
+            $speaker = Character::read($dialog['interlocuteur']);
+            $d = new Dialog(
+                $dialog['id'],
+                $story,
+                $speaker,
+                $dialog['contenu'],
+                (bool) $dialog['bonus'],
+                $dialog['doublage']
+            );
+            $dialogsBonus[] = $d;
         }
-
-        foreach ($dialogs as $dialog) {
-            if ($dialog['bonus'] === false) {
-                $story = Story::read($idStory);
-                $speaker = Character::read($dialog['interlocuteur']);
-                $d = new Dialog(
-                    $dialog['id'],
-                    $story,
-                    $speaker,
-                    $dialog['contenu'],
-                    (bool) $dialog['bonus'],
-                    $dialog['doublage']
-                );
-                $dialogsClassic[] = $d;
-            }
-        }
-        return $dialogsClassic;
     }
+    return $dialogsBonus;
+}
+public static function getClassicDialogsAfterQuestion(int $idStory): array
+{
+    $dao = DAO::getInstance();
+    $dialogsClassic = array();
+
+    $dialogs = $dao->getWithParameters("dialogues", ["id_histoire" => $idStory]);
+    if (empty($dialogs)) {
+        throw new Exception("Aucun dialogue trouvé");
+    }
+
+    foreach ($dialogs as $dialog) {
+        if ($dialog['bonus'] === false) {
+            $story = Story::read($idStory);
+            $speaker = Character::read($dialog['interlocuteur']);
+            $d = new Dialog(
+                $dialog['id'],
+                $story,
+                $speaker,
+                $dialog['contenu'],
+                (bool) $dialog['bonus'],
+                $dialog['doublage']
+            );
+            $dialogsClassic[] = $d;
+        }
+    }
+    return $dialogsClassic;
+} */
 
     public static function countDialogs(int $idStory): int
     {
         $dao = DAO::getInstance();
-        $result = $dao->getColumnWithParameters("dialogues", ["id_histoire" => $idStory]);
+        $result = $dao->getWithParameters("dialogues", ["id_histoire" => $idStory]);
         return count($result);
     }
 
