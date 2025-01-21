@@ -48,17 +48,16 @@ elseif ($action === "answer") {
     $question = Question::read($_SESSION['idStory'], $questionType);
 
     if ($answer == $question->getAnswer()) {
-
         $difficulty = $_SESSION['difficulty'];
         // Si la réponse est correcte on varie le "chemin" choisi par l'utilisateur entre fin courte et fin longue
         // Ensuite on renvoie vers la vue de l'histoire
         if ($difficulty === "générique") {
             $idDialog = $_SESSION['idDialog'] + 1;
             $dialog = Dialog::read($idDialog, $_SESSION['idStory']);
-        } elseif($difficulty === "spécifique" && $numChapitre == 100 ){
-$idDialog = $_GET["id"];
-            $dialog = Dialog::read($idDialog,'s');
-}else {
+        } elseif ($difficulty === "spécifique" && $question->getHistory()->getChapter()->getNumchap() == 100) {
+            $idDialog = $_SESSION['idDialog'] + 1;
+            $dialog = Dialog::read($idDialog, $_SESSION['idStory']);
+        } else {
             $idDialog = Dialog::readFirstBonus($_SESSION['idStory']);
             $dialog = Dialog::readBonusDialog($idDialog, $_SESSION['idStory']);
         }

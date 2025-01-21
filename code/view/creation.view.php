@@ -25,7 +25,7 @@
         <section class="container">
             <section class="header">
 
-                <form action="creation" method="get" class="formLieu">
+                <form action="index.php?ctrl=creation" method="get" class="formLieu">
                     <input type="hidden" name="ctrl" value="creation">
                     <input type="hidden" name="id" value=<?= $id ?>>
                     <input type="hidden" name="sauvegarder" value="sauvegarder">
