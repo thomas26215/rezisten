@@ -1,7 +1,7 @@
 -- Création d'un utilisateur de base
 INSERT INTO UTILISATEURS(pseudo,prenom,nom,datenaiss,mail,mot_de_passe,role) VALUES
 ('admin_rezisten','rezisten','rezisten','12/10/2000','rezisten.contact@gmail.com','$2y$10$v0mMwzjy8YmJFF6ePx4tyOe.TvQzv2Vipx.oYiftj.UM3YsV2dz.m','a'),
-('#DesinnePourComprendre','julien2','julien2','01/02/2023','julien.joten@gmail.com','$2y$12$MCOSk7WyRZ5U8OLWof4wIuxmMvY06XKqS9zexVMMIhKEHjFFS/A7q','j');
+('#Dessine_Pour_Comprendre','julien2','julien2','01/02/2023','julien.joten@gmail.com','$2y$12$MCOSk7WyRZ5U8OLWof4wIuxmMvY06XKqS9zexVMMIhKEHjFFS/A7q','j');
 
 --Création des deux premiers chapitres de l'histoire
 INSERT INTO CHAPITRES(numchap,titre) values(0,'Prologue'),
@@ -42,7 +42,7 @@ VALUES
 (4, 1, 2, 'Mais non ! Arrête de t’inquiéter pour rien, les surveillants sont tous bien trop occupés à écouter la leur de radio, il n’y a aucun risque pour nous.', false,'41'),
 (5, 1, 3, 'Je tends alors un verre à Raymond. De la gnôle faite par mon grand-père que j’ai ramenée il y a déjà quelques semaines de ça. Raymond l’accepte à contre-cœur et en prend une gorgée.', false,'51'),
 (6, 1, 1, 'Ça ne vous fait pas peur vous qu’on ait perdu aussi vite ?', false,'61'),
-(7, 1, 3, 'Mais non ! Tout va bien, c’est de l’autre coté de la France, il n''y a pas de raison que ça nous impacte.', false,'71'),
+(7, 1, 3, 'Mais non ! Tout va bien, c’est de l’autre côté de la France, il n''y a pas de raison que ça nous impacte.', false,'71'),
 (8, 1, 2, 'Exactement, maintenant amuse-toi avec nous !', false,'81'),
 (9, 1, 5, 'Le sort de tes parents ne t’inquiète pas Pierre ?', false,'91'),
 (10, 1, 10, 'David est assis sur un lit dans un coin de la pièce, à son habitude.', false,'101'),
@@ -234,7 +234,7 @@ INSERT INTO APPARITIONS VALUES
 
 --Création des questions pour prologue
 INSERT INTO QUESTIONS(id_histoire,question,reponse,type) values(1,'Combien de résistants furent exécutés là où se trouvent nos héros ?','76','g'),
-(1,' Combien de personnes ont signé les bas relief de la ferme','4','s');
+(1,' Combien de personnes ont signé les bas relief de la ferme ?','4','s');
 
 --Pour l'histoire 1 chapitre 1
 INSERT INTO QUESTIONS(id_histoire,question,reponse,type) values(2,'En quelle année furent découverts les enfants juifs cachés dans cette maison ?','44','g'),
