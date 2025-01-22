@@ -21,7 +21,7 @@ $errorMessage = null;
 // Vérification création
 if (!isset($_GET['id'])) { // si l'histoire n'existe pas
     $histoire = new Story(
-        "Titre",
+        "Sans titre",
         Chapter::read(100),
         User::read($idUser), // changer par id de cette user
         Place::read(1),

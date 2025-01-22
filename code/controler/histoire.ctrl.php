@@ -15,7 +15,6 @@ $idStory = $_GET['idStory'];
 $idDialog = $_GET['idDialog'];
 $prevSpeaker = $_GET['prevSpeaker'] ?? "none";
 $_SESSION['lastDialog'] = $idDialog;
-$didacticiel = $_GET['didacticiel'];
 
 
 $imgURL = "https://192.168.14.118/rezisten/imgPersonnage/";
@@ -183,13 +182,8 @@ $view->assign('dialog',$dialog);
 $view->assign('idDialog',$idDialog);
 $view->assign('story',$story);
 $view->assign('idStory',$idStory);
-$view->assign('didacticiel', $didacticiel);
-if ($idStory=="1" && $didacticiel=="0"){
-    $view->display('didacticiel');
-} 
-else {
-    $view->display('histoire');
-}
+$view->display('histoire');
+
 
 
 ?>
