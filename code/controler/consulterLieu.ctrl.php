@@ -3,8 +3,10 @@ include_once('./model/lieux.class.php');
 include_once('framework/view.fw.php');
 
 $id=htmlspecialchars($_GET['id']);
-$place = Place::read($id); // mettre l'id du lieu en foction de l'histoire
+$place = Place::read($id); /* mettre l'id du lieu en foction de l'histoire */
 
+
+/* Séparation des coordonnées en latitude et longitude */
 $coordinates = explode(',',$place->getCoordinates());
 $latitude = $coordinates[0];
 $longitude = $coordinates[1];

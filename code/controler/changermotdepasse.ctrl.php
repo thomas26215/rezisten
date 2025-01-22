@@ -7,7 +7,8 @@ include_once('model/recuperationMotDePasse.class.php');
 $mode = htmlspecialchars($_GET['mode']) ?? 'forget';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Récupération des données du formulaire
+    
+    /* Récupération des données du formulaire */
     $email = $_POST['email'] ?? '';
     $newPassword = $_POST['new_password'] ?? '';
     $confirmPassword = $_POST['confirm_password'] ?? '';
@@ -16,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($mode === 'forget') {
         $code = $_POST['code'] ?? '';
 
-        // Validation des champs
+        /* Validation des champs*/
         if (empty($email)) {
             $errors[] = "L'email est requis.";
         }
@@ -31,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $errors[] = "Les mots de passe ne correspondent pas.";
         }
 
-        // Si aucune erreur, procéder à la mise à jour du mot de passe
+        /* Si aucune erreur, procéder à la mise à jour du mot de passe */
         if (empty($errors)) {
             try {
                 $user = User::readWithMail($email);
@@ -58,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } elseif ($mode === 'authentified') {
         $oldPassword = $_POST['old_password'] ?? '';
 
-        // Validation des champs
+        /* Validation des champs */
         if (empty($email)) {
             $errors[] = "L'email est requis.";
         }
@@ -73,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $errors[] = "Les mots de passe ne correspondent pas.";
         }
 
-        // Si aucune erreur, procéder à la mise à jour du mot de passe
+        /* Si il n'y a pas d'erreur, procéder à la mise à jour du mot de passe */
         if (empty($errors)) {
             try {
                 $user = User::readWithMail($email);

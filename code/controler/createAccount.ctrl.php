@@ -15,7 +15,7 @@ $formData = [
 ];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['auth'])) {
-    // Récupération et nettoyage des données du formulaire
+    /* Récupération et nettoyage des données du formulaire */
     foreach ($formData as $key => $value) {
         if (isset($_POST[$key])) {
             $formData[$key] = $key === 'email' 
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['auth'])) {
     }
     $formData['check'] = isset($_POST['check']);
 
-    // Validation des données
+    /* Validation des données */
     if ($_POST['auth'] == 'create') {
         CheckEmail::deleteExpiration();
         if (empty($formData['username']) || empty($formData['date']) || empty($formData['email']) || empty($formData['password']) || empty($formData['confirmpass'])) {
@@ -47,18 +47,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['auth'])) {
         }
         if (empty($errors)) {
             try {
-                // Traitement pour la création de compte
+                
+                /* Traitement pour la création de compte */
                 $user = new User($formData['username'], $formData['first_name'], $formData['surname'], $formData['date'], $formData['email'], $formData['password'], 'j', true);
                 $user->create();
                 $checkEmail = CheckEmail::generate($user->getId());
                 echo "Compte créé avec succès pour " . $formData['username'];
-                // Initialisation de la progression
+                
+                /* Initialisation de la progression */
                 $progression = new Progression($user, Story::read(1), true);
                 $progression->create();
-                // Réinitialiser le formulaire après un succès
+                
+                /* Réinitialiser le formulaire après un succès */
                 $formData = array_fill_keys(array_keys($formData), '');
                 $formData['check'] = false;
-                //Redirection vers index.php
+
+                /* Redirection vers index.php */
                 header("Location: index.php?ctrl=emailEnvoye&userId=" . $user->getId());
             } catch (Exception $e) {
                 if($e->getCode() == '23000') {
@@ -70,14 +74,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['auth'])) {
         }
 
     } elseif ($_POST['auth'] == 'login') {
-        // Redirection vers la page de connexion
+
+        /* Redirection vers la page de connexion */
         header("Location: login.php");
         exit();
     }
 }
 
 $view = new View();
-// Passez les données du formulaire et les erreurs à la vue
+
+/* Passez les données du formulaire et les erreurs à la vue */
 $view->assign('formData', $formData);
 $view->assign('errors', $errors);
 $view->display('createAccount');

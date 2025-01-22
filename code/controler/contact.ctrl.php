@@ -4,19 +4,19 @@ include_once('model/composer/sendMail.utilitaire.php');
 
 $emailSender = new EmailSender();
 
-// Vérifiez si le formulaire a été soumis
+/* Vérifiez si le formulaire a été soumis */
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Récupérez les données du formulaire
+    /* Récupérez les données du formulaire */
     $mail = $_POST['mail'] ?? '';
     $objet = $_POST['objet'] ?? '';
     $contenu = $_POST['contenu'] ?? '';
 
-    // Validez les données (exemple basique)
+    /* Validez les données (exemple basique) */
     if (filter_var($mail, FILTER_VALIDATE_EMAIL) && !empty($objet) && !empty($contenu)) {
-        // Utilisez votre fonction sendMail pour envoyer l'email
-        // sendMail($mail, $objet, $contenu);
         
-        // Redirigez ou affichez un message de succès
+         
+         
+        /* Redirigez ou affichez un message de succès */
         $emailSender->sendUserMessageToRezisten($mail, "user", $objet, $contenu);
         $message = "Votre message a été envoyé avec succès!";
 
@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 $view = new View();
-// Passez le message à la vue si nécessaire
+/* Passez le message à la vue si nécessaire */
 if (isset($message)) {
     $view->assign('message', $message);
 }
