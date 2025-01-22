@@ -183,7 +183,7 @@ if (isset($_GET['delete']) && $_GET['delete'] === 'delete' && isset($_GET['idDia
     }
 }
 
-// Edit dialogue
+// Modification du dialogue
 if (isset($_GET['article']) && $_GET['article'] === 'editDialogue' && isset($_POST['idDialogue'])) {
     $idDialogue = $_POST['idDialogue'];
     $idhistoire = $_POST['id'];
@@ -200,7 +200,24 @@ if (isset($_GET['article']) && $_GET['article'] === 'editDialogue' && isset($_PO
     header("Location: index.php?ctrl=creation&article=afficherHistoire&id=" . $idhistoire);
     exit();
 }
+// Modification de la question
+if (isset($_GET['article']) && $_GET['article'] === 'editQuestion' && isset($_POST['idQuestion'])) {
+    $idQuestion = $_POST['idQuestion'];
+    $idhistoire = $_POST['id'];
+    $question = Question::read((int) $idhistoire, 's');
 
+    if ($question) {
+        if (isset($_POST['question']) && isset($_POST['answer'])) {
+            $question->setQuestion($_POST['question']);
+            $question->setAnswer($_POST['answer']);
+            $question->update();
+        }
+    }
+
+    // Redirection après la mise à jour de la question
+    header("Location: index.php?ctrl=creation&article=afficherHistoire&id=" . $idhistoire);
+    exit();
+}
 // Déplacer un dialogue vers le haut
 if (isset($_GET['action']) && $_GET['action'] === 'moveUp' && isset($_GET['idDialogue'])) {
     $idDialogue = $_GET['idDialogue'];

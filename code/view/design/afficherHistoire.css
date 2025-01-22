@@ -125,12 +125,12 @@ section .reponseContainer {
     font-weight: bold;
 }
 
-.modifierDialogueOuvrir{
+.modifierDialogueOuvrir, .modifierQuestionOuvrir{
     clip-path: none;
     background-color: var(--beige);
 }
 
-.modifierDialogueOuvrir::before{
+.modifierDialogueOuvrir::before, .modifierQuestionOuvrir::before{
     clip-path: none;
     background-color: var(--beige);
 }
