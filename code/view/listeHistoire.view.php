@@ -22,7 +22,6 @@
                 <input type="hidden" name="ctrl" value="histoire">
                 <input type="hidden" name="idStory" value="<?= $storie->getId() ?>">
                 <input type="hidden" name="idDialog" value="1">
-                <input type="hidden" name="didacticiel" value="0">
                 <?php if ((isset($progressions[$storie->getId()]) && $progressions[$storie->getId()]->getStatus() == 1) ||($storie->getChapter()->getNumchap()==100)): ?>
                     <button class="button-gris" type="submit">
                         <?= $storie->getTitle() ?>
