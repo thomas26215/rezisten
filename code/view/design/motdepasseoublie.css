@@ -79,7 +79,5 @@ span {
 }
 
 .lienVerif {
-    color: var(--noir);
     font-weight: bold;
-    text-decoration: underline;
 }

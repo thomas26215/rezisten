@@ -105,35 +105,37 @@
                                 <button type="button" class="bouton-modif bouton-bas invisble">^</button>
                             </form>
                         </div>
-                        <form method="GET" action="index.php?ctrl=personnages&article=afficherHistoire">
-                            <input type="hidden" name="ctrl" value="creation">
-                            <input type="hidden" name="article" value="afficherHistoire">
-                            <input type="hidden" name="id" value="<?= $histoire->getId() ?>">
-                            <input type="hidden" name="idDialogue" value="<?= $dialogue->getHistory()->getId() ?>">
-                            <input type="hidden" name="typeDialogue" value="question">
-                            <button id="supprimerQuestionOuvrir" type="button" name="delete" value="delete" class="poub">
-                                <img src="./view/design/image/poubelle.png" alt="poubelle" id="poubelle">
-                            </button>
+                        <div class="flex-row supmodif">
+                            <form method="GET" action="index.php?ctrl=personnages&article=afficherHistoire">
+                                <input type="hidden" name="ctrl" value="creation">
+                                <input type="hidden" name="article" value="afficherHistoire">
+                                <input type="hidden" name="id" value="<?= $histoire->getId() ?>">
+                                <input type="hidden" name="idDialogue" value="<?= $dialogue->getHistory()->getId() ?>">
+                                <input type="hidden" name="typeDialogue" value="question">
+                                <button id="supprimerQuestionOuvrir" type="button" name="delete" value="delete" class="poub">
+                                    <img src="./view/design/image/poubelle.png" alt="poubelle" id="poubelle">
+                                </button>
 
-                            <dialog class="dialog" id="dialogSupprimerQuestion">
-                                <div class="containerDialog">
-                                    <h2>Voulez vous supprimer cette question ?</h2>
-                                    <div>
-                                        <button type="submit" name="delete" value="delete" id="fermerSupprimerQuestion"
-                                            class="button-rouge">
-                                            Supprimer
-                                        </button>
-                                        <button type="button" class="button-vert" id="revenirSupprimerQuestion">
-                                            Annuler
-                                        </button>
+                                <dialog class="dialog" id="dialogSupprimerQuestion">
+                                    <div class="containerDialog">
+                                        <h2>Voulez vous supprimer cette question ?</h2>
+                                        <div>
+                                            <button type="submit" name="delete" value="delete" id="fermerSupprimerQuestion"
+                                                class="button-rouge">
+                                                Supprimer
+                                            </button>
+                                            <button type="button" class="button-vert" id="revenirSupprimerQuestion">
+                                                Annuler
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
-                            </dialog>
-                        </form>
-                        <button class="modifierQuestionOuvrir" type="button"
-                            data-dialogue-id="<?= $dialogue->getHistory()->getId() ?>">
-                            <img class="modif" src="./view/design/image/modifier.png" alt="Modifier">
-                        </button>
+                                </dialog>
+                            </form>
+                            <button class="modifierQuestionOuvrir" type="button"
+                                data-dialogue-id="<?= $dialogue->getHistory()->getId() ?>">
+                                <img class="modif" src="./view/design/image/modifier.png" alt="Modifier">
+                            </button>
+                        </div>
                     </section>
                     <hr>
                 </div>
@@ -174,86 +176,5 @@
         </form>
     </dialog>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Open edit question popup
-            document.querySelectorAll('.modifierQuestionOuvrir').forEach(button => {
-                button.addEventListener('click', function () {
-                    const questionId = this.getAttribute('data-question-id');
-                    const questionContent = this.closest('.quest').querySelector('label[for="personnage"]').innerText;
-                    const answerContent = this.closest('.quest').querySelector('#question').innerText;
-                    document.getElementById('editQuestionId').value = questionId;
-                    document.getElementById('editQuestionContent').value = questionContent;
-                    document.getElementById('editAnswerContent').value = answerContent;
-                    document.getElementById('editQuestionPopup').showModal();
-                });
-            });
-
-            // Close edit question popup
-            document.getElementById('closeEditQuestionPopup').addEventListener('click', function () {
-                document.getElementById('editQuestionPopup').close();
-            });
-        });
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Open edit dialogue popup
-            document.querySelectorAll('.modifierDialogueOuvrir').forEach(button => {
-                button.addEventListener('click', function () {
-                    const dialogueId = this.getAttribute('data-dialogue-id');
-                    const dialogueContent = this.closest('.dialogues').querySelector('#dialogue').innerText;
-                    document.getElementById('editDialogueId').value = dialogueId;
-                    document.getElementById('editDialogueContent').value = dialogueContent;
-                    document.getElementById('editDialoguePopup').showModal();
-                });
-            });
-
-            // Close edit dialogue popup
-            document.getElementById('closeEditDialoguePopup').addEventListener('click', function () {
-                document.getElementById('editDialoguePopup').close();
-            });
-        });
-    </script>
-
-    <script>
-        //supprimerDialogue
-        document.addEventListener('DOMContentLoaded', function () {
-            document.body.addEventListener('click', function (event) {
-                let target = event.target.closest('.supprimerDialogueOuvrir, .fermerSupprimerDialogue, .revenirSupprimerDialogue');
-
-                if (!target) return;
-
-                if (target.classList.contains('supprimerDialogueOuvrir')) {
-                    var dialog = target.closest('form').querySelector('.dialogSupprimerDialogue');
-                    dialog.showModal();
-                } else if (target.classList.contains('fermerSupprimerDialogue') ||
-                    target.classList.contains('revenirSupprimerDialogue')) {
-                    target.closest('dialog').close();
-                }
-            });
-        });
-
-        document.addEventListener('DOMContentLoaded', function () {
-            //supprimerQuestion
-            var supprimerQuestionOuvrir = document.getElementById('supprimerQuestionOuvrir');
-            var dialogSupprimerQuestion = document.getElementById('dialogSupprimerQuestion');
-            var fermerSupprimerQuestion = document.getElementById('fermerSupprimerQuestion');
-            var revenirSupprimerQuestion = document.getElementById('revenirSupprimerQuestion');
-
-            if (dialogSupprimerQuestion && supprimerQuestionOuvrir && fermerSupprimerQuestion && revenirSupprimerQuestion) {
-                supprimerQuestionOuvrir.addEventListener('click', function () {
-                    dialogSupprimerQuestion.showModal();
-                });
-
-                fermerSupprimerQuestion.addEventListener('click', function () {
-                    dialogueTextArea.value = '';
-                    dialogSupprimerQuestion.close();
-                });
-
-                revenirSupprimerQuestion.addEventListener('click', function () {
-                    dialogSupprimerQuestion.close();
-                });
-            }
-        });     
-    </script>
+    <script src="./view/js/creation.js"></script>
 </article>

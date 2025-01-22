@@ -10,7 +10,7 @@
 <body>
     <?php include_once("./view/header.view.php")?>
     <main>
-        <form method="post" class="formContainer">
+        <form method="post" class="formContainer flex-col">
             <h1>Email Envoyé</h1>
             <p class="texte" style="margin-bottom: 0px">Nous avons envoyé un email d'activation à </p>
             <h2 style="margin-top: 0px;"><?=$email?></h2>
@@ -24,7 +24,7 @@
             }
             ?>
             <div class="formContainer">
-                <button style="color: red; margin-top: 80px;" class="lienVerif" name="send" value="newCode">Renvoyer l'e-mail de vérification</button>
+                <button class="lienVerif" name="send" value="newCode">Renvoyer l'e-mail de vérification</button>
             </div>
         </form>
     </main>

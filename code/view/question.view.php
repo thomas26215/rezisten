@@ -62,11 +62,9 @@
                 </div>
             </section>
         </article>
-
+        <script src="./view/js/dyslexique.js"></script>
+        <script src="./view/js/machineAEcrire.js"></script>
     </main>
-
 </body>
-<script src="./view/js/dyslexique.js"></script>
-<script src="./view/js/machineAEcrire.js"></script>
 
 </html>

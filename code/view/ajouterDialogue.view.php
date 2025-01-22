@@ -50,63 +50,8 @@
         </dialog>
 
 
-        <script src="./view/js/dyslexique.js"></script>
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                const dialogueTextArea = document.getElementById('dialogueText');
-
-                //supprimerDialogue
-                var effacerDialogueOuvrir = document.getElementById('effacerDialogueOuvrir');
-                var dialogEffacerDialogue = document.getElementById('dialogEffacerDialogue');
-                var fermerEffacerDialogue = document.getElementById('fermerEffacerDialogue');
-                var revenirEffacerDialogue = document.getElementById('revenirEffacerDialogue');
-
-                if (dialogEffacerDialogue && effacerDialogueOuvrir && fermerEffacerDialogue && revenirEffacerDialogue) {
-                    effacerDialogueOuvrir.addEventListener('click', function () {
-                        dialogEffacerDialogue.showModal();
-                    });
-
-                    fermerEffacerDialogue.addEventListener('click', function () {
-                        dialogueTextArea.value = '';
-                        dialogEffacerDialogue.close();
-                    });
-
-                    revenirEffacerDialogue.addEventListener('click', function () {
-                        dialogEffacerDialogue.close();
-                    });
-                }
-            });      
-        </script>
+        <script src="./view/js/creation.js"></script>
     </form>
 </article>
 
-
-<script src="./view/js/dyslexique.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const dialogueForm = document.getElementById('dialogueForm');
-        const dialogueTextArea = document.getElementById('dialogueText');
-
-        //supprimerDialogue
-        var supprimerDialogueOuvrir = document.getElementById('supprimerDialogueOuvrir');
-        var dialogSupprimerDialogue = document.getElementById('dialogSupprimerDialogue');
-        var fermerSupprimerDialogue = document.getElementById('fermerSupprimerDialogue');
-        var revenirSupprimerDialogue = document.getElementById('revenirSupprimerDialogue');
-
-        if (supprimerDialogueOuvrir && dialogSupprimerDialogue && fermerSupprimerDialogue && revenirSupprimerDialogue) {
-            supprimerDialogueOuvrir.addEventListener('click', function () {
-                dialogSupprimerDialogue.showModal();
-            });
-
-            fermerSupprimerDialogue.addEventListener('click', function () {
-                dialogueTextArea.value = '';
-                dialogSupprimerDialogue.close();
-            });
-
-            revenirSupprimerDialogue.addEventListener('click', function () {
-                dialogSupprimerDialogue.close();
-            });
-        }
-    });      
-</script>
 </article>

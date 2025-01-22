@@ -24,6 +24,5 @@
     <?php include_once './view/footer.view.php'; ?>
 
 </body>
-<script src="./view/js/dyslexique.js"></script>
 
 </html>

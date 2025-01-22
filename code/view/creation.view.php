@@ -155,101 +155,11 @@
                     </form>
                 </section>
             </div>
-
-
-
             <?php include_once 'popup.view.php'; ?>
         </section>
-        <script src="./js/popup.js"></script>
+        <script src="./view/js/dyslexique.js"></script>
+        <script src="./view/js/creation.js"></script>
     </main>
     <?php include_once './view/footerCreation.view.php'; ?>
 </body>
-<script src="./js/dyslexique.js"></script>
-
-<script>
-    // Vérifiez si le mode dyslexique est activé dans le localStorage
-    if (localStorage.getItem('dyslexique') === 'true') {
-        document.body.classList.add('dyslexique');
-    }
-
-    // Ajoutez un écouteur d'événement au bouton pour basculer le mode dyslexique
-    document.getElementById('toggleDyslexique').addEventListener('click', function () {
-        document.body.classList.toggle('dyslexique');
-        // Stockez la préférence dans le localStorage
-        localStorage.setItem('dyslexique', document.body.classList.contains('dyslexique'));
-    });
-</script>
-<script>
-    // Fonction pour mettre à jour le champ caché
-    function updateHiddenField() {
-        document.getElementById('id_lieu').value = document.getElementById('lieux').value;
-    }
-
-    // Exécuter au chargement de la page
-    window.onload = function () {
-        updateHiddenField();
-        document.getElementById('lieux').addEventListener('change', updateHiddenField);
-    };
-</script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var currentUrl = window.location.search;
-        var afficher = document.getElementById("afficherHistoire");
-        var ajouterD = document.getElementById("ajouterDialogue");
-        var ajouterQ = document.getElementById("ajouterQuestion");
-
-        if (currentUrl.includes('article=afficherHistoire')) {
-            afficher.classList.remove("button-gris");
-        } else if (currentUrl.includes('article=ajouterDialogue')) {
-            ajouterD.classList.remove("button-gris");
-        } else if (currentUrl.includes('article=ajouterQuestion')) {
-            ajouterQ.classList.remove("button-gris");
-        }
-    });
-</script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // quitter page création
-        var quitterHistoireOuvrir = document.getElementById('quitterHistoireOuvrir');
-        var dialogQuitterHistoire = document.getElementById('dialogQuitterHistoire');
-        var fermerQuitterHistoire = document.getElementById('fermerQuitterHistoire');
-        var revenirQuitterHistoire = document.getElementById('revenirQuitterHistoire');
-
-        if (quitterHistoireOuvrir && dialogQuitterHistoire && fermerQuitterHistoire && revenirQuitterHistoire) {
-            quitterHistoireOuvrir.addEventListener('click', function () {
-                dialogQuitterHistoire.showModal();
-            });
-
-            fermerQuitterHistoire.addEventListener('click', function () {
-                dialogQuitterHistoire.close();
-            });
-
-            revenirQuitterHistoire.addEventListener('click', function () {
-                dialogQuitterHistoire.close();
-            });
-        }
-
-        // publier histoire
-        var publierHistoireOuvrir = document.getElementById('publierHistoireOuvrir');
-        var dialogPublierHistoire = document.getElementById('dialogPublierHistoire');
-        var fermerPublierHistoire = document.getElementById('fermerPublierHistoire');
-        var revenirPublierHistoire = document.getElementById('revenirPublierHistoire');
-
-        if (publierHistoireOuvrir && dialogPublierHistoire && fermerPublierHistoire && revenirPublierHistoire) {
-            publierHistoireOuvrir.addEventListener('click', function () {
-                dialogPublierHistoire.showModal();
-            });
-
-            fermerPublierHistoire.addEventListener('click', function () {
-                dialogPublierHistoire.close();
-            });
-
-            revenirPublierHistoire.addEventListener('click', function () {
-                dialogPublierHistoire.close();
-            });
-        }
-    });
-</script>
-
-
 </html>

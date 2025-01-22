@@ -52,37 +52,7 @@
                 </div>
             </div>
         </dialog>
-
-
-        <script src="./view/js/dyslexique.js"></script>
-        <script>
-
-            document.addEventListener('DOMContentLoaded', function () {
-                var questionTextArea = document.getElementById("questionInput");
-                var reponseTextArea = document.getElementById("reponseInput");
-
-                //supprimerQuestion
-                var effacerQuestionOuvrir = document.getElementById('effacerQuestionOuvrir');
-                var effacerQuestionDialogue = document.getElementById('effacerQuestionDialogue');
-                var fermerEffacerQuestion = document.getElementById('fermerEffacerQuestion');
-                var revenirEffacerQuestion = document.getElementById('revenirEffacerQuestion');
-
-                if (effacerQuestionOuvrir && effacerQuestionDialogue && fermerEffacerQuestion && revenirEffacerQuestion) {
-                    effacerQuestionOuvrir.addEventListener('click', function () {
-                        effacerQuestionDialogue.showModal();
-                    });
-
-                    fermerEffacerQuestion.addEventListener('click', function () {
-                        questionTextArea.value = '';
-                        reponseTextArea.value = '';
-                        effacerQuestionDialogue.close();
-                    });
-
-                    revenirEffacerQuestion.addEventListener('click', function () {
-                        effacerQuestionDialogue.close();
-                    });
-                }
-            });  
-        </script>
+          
     </form>
+    <script src="./view/js/creation.js"></script>
 </article>

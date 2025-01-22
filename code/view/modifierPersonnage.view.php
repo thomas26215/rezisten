@@ -80,8 +80,5 @@
             ?>
             <p>Aucun personnage sélectionné. Veuillez en choisir un dans la liste.</p>
         <?php endif; ?>
-
-
     </div>
-
 </article>

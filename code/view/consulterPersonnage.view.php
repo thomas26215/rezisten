@@ -32,12 +32,7 @@
             ?>
             <img src="<?= $imgSrc ?>" alt="<?= $selectedCharacter?->getFirstName() ?? "Jean"; ?>"
             alt="<?= $selectedCharacter?->getFirstName() ?? "Jean"; ?>" style="max-width: 240px;">
-
-
         </div>
-
         <input type="hidden" name="article" value="consulterPersonnage">
-
     </form>
-
 </article>
