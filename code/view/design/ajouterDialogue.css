@@ -3,22 +3,24 @@
     margin: 20px;
 }
 
-.content form>:nth-child(2){ /* Pour la partie du dialogue */
-    flex-direction: column;
-    width: max-content;
+.select-perso{
+    font-size: medium;
+    margin-left: 2%;
 }
 
-.content form>:nth-child(2) label{ /* Pour la partie du dialogue */
+.dialog-label{ /* Pour la partie du dialogue */
     display: flex;
     align-self: flex-start;
 }
 
-textarea{ /* Pour la partie du dialogue */
+textarea{ 
     height: 20vh;
     width: 55vw;
+    display: flex;
+    align-self: flex-start;
 }
 
-.content form :last-child{ /* Pour la partie du dialogue */
+.effacer-enregistrer{ /* bouttons */
     justify-content: space-around;
 }
 

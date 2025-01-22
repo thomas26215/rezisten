@@ -23,8 +23,6 @@
     width: 55vw;
 }
 
-
-.content form :last-child{ /* Pour la partie du dialogue */
+.effacer-enregistrer{ /* bouttons */
     justify-content: space-around;
 }
-

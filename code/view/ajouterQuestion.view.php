@@ -22,7 +22,7 @@
         </section>
 
         <!-- boutons -->
-        <section>
+        <section class="effacer-enregistrer">
             <button type="button" class="button-rouge delete-button" id="effacerQuestionOuvrir"
                 type="button">Effacer</button>
             <button class="button-vert" type="submit">Enregistrer</button>
