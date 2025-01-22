@@ -39,10 +39,10 @@
             <div class="containerDialog">
                 <h2>Voulez vous effacer ce dialogue ?</h2>
                 <div>
-                    <button type="button" id="fermerEffacerDialogue" class="button-vert">
+                    <button type="button" id="fermerEffacerDialogue" class="button-rouge">
                         Effacer
                     </button>
-                    <button type="button" class="button-rouge" id="revenirEffacerDialogue">
+                    <button type="button" class="button-vert" id="revenirEffacerDialogue">
                         Annuler
                     </button>
                 </div>

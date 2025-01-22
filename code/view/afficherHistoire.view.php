@@ -62,10 +62,10 @@
                                         <h2>Voulez vous supprimer ce dialogue ?</h2>
                                         <div>
                                             <button type="submit" name="delete" value="delete"
-                                                class="fermerSupprimerDialogue button-vert">
+                                                class="fermerSupprimerDialogue button-rouge">
                                                 Supprimer
                                             </button>
-                                            <button type="button" class="revenirSupprimerDialogue button-rouge">
+                                            <button type="button" class="revenirSupprimerDialogue">
                                                 Annuler
                                             </button>
                                         </div>
@@ -119,10 +119,10 @@
                                     <h2>Voulez vous supprimer cette question ?</h2>
                                     <div>
                                         <button type="submit" name="delete" value="delete" id="fermerSupprimerQuestion"
-                                            class="button-vert">
+                                            class="button-rouge">
                                             Supprimer
                                         </button>
-                                        <button type="button" class="button-rouge" id="revenirSupprimerQuestion">
+                                        <button type="button" class="button-vert" id="revenirSupprimerQuestion">
                                             Annuler
                                         </button>
                                     </div>
@@ -145,7 +145,7 @@
                 <textarea class="modifInput" name="content" id="editDialogueContent" rows="4" cols="50"></textarea>
             </div>
             <div class="flex-col buttons">
-                <button type="submit">Enregistrer</button>
+                <button type="submit" class="button-vert">Enregistrer</button>
                 <button type="button" id="closeEditDialoguePopup">Annuler</button>
             </div>
         </form>

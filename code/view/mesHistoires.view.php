@@ -73,10 +73,10 @@
         <div class="containerDialog">
             <h2>Voulez vous effacer votre histoire ?</h2>
             <div>
-                <button id="confirm-delete" class="button-vert">
+                <button id="confirm-delete" class="button-rouge">
                     Supprimer
                 </button>
-                <button id="cancel-delete" class="button-rouge">
+                <button id="cancel-delete">
                     Annuler
                 </button>
             </div>

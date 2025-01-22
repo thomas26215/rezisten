@@ -43,10 +43,10 @@
             <div class="containerDialog">
                 <h2>Voulez vous effacer cette question ?</h2>
                 <div>
-                    <button type="button" id="fermerEffacerQuestion" class="button-vert">
+                    <button type="button" id="fermerEffacerQuestion" class="button-rouge">
                         Effacer
                     </button>
-                    <button type="button" id="revenirEffacerQuestion" class="button-rouge">
+                    <button type="button" id="revenirEffacerQuestion" class="button-vert">
                         Annuler
                     </button>
                 </div>
