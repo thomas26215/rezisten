@@ -6,7 +6,7 @@ include_once('framework/view.fw.php');
 
 $id=htmlspecialchars($_GET['id']);
 
-$imgURL = "http://localhost:8080/rezisten/imgPersonnage/";
+$imgURL = "http://192.168.14.118/rezisten/imgPersonnage/";
 
 $characters = Character::readAllCharacters();
 $selectedCharacter = null;

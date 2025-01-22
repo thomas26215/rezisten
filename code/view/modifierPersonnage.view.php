@@ -47,7 +47,7 @@
                         if ($selectedCharacter && $selectedCharacter->getCreator()->getId() == 4) {
                             $imgSrc = $imgURL . ($selectedCharacter->getImage() ?? "default") . ".webp";
                         } else if ($selectedCharacter) {
-                            $imgSrc = './view/design/image/imageUser/' . ($selectedCharacter->getImage() ?? "default");
+                            $imgSrc = $imgURL . ($selectedCharacter->getImage() ?? "default");
                         }
                         ?>
                         <img id="img" src="<?= $imgSrc ?>" alt="<?= $selectedCharacter?->getFirstName() ?? "Jean"; ?>"

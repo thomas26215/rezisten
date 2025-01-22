@@ -113,10 +113,10 @@
                                 <h2>Voulez vous quitter la page création ?</h2>
                                 <div>
 
-                                    <button type="submit" id="fermerQuitterHistoire" name="fermer" class="button-vert">
+                                    <button type="submit" id="fermerQuitterHistoire" name="fermer" class="button-rouge">
                                         Quitter
                                     </button>
-                                    <button type="button" id="revenirQuitterHistoire" class="button-rouge">
+                                    <button type="button" id="revenirQuitterHistoire" class="button-vert">
                                         Revenir
                                     </button>
                                 </div>

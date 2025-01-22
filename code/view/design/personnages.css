@@ -190,3 +190,17 @@ section.header button {
 .imageButton {
   gap: 3rem;
 }
+
+.texte {
+  gap: 1rem;
+  margin: 20px 80px;
+}
+
+.texte span {
+  color: var(--rouge);
+  font-weight: bold;
+}
+
+.texte p {
+  text-align: center;
+}

@@ -4,6 +4,12 @@
         <input type="hidden" name="article" value="ajouterPersonnage">
         <input type="hidden" name="action" value="ajouterCharacter">
 
+        <div class="texte flex-col">
+            <span>Attention !</span>
+            <p>Après la création d'un personnage son image sera visible maximum 10 minutes après.
+                Cependant si vous avez un message confirmant sa création, il a bien été crée !</p>
+        </div>
+
         <div class="noms">
             <div>
                 <label for="prenom">Prénom</label>

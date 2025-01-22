@@ -16,9 +16,13 @@ try {
     echo "Impossible de lire les ids des histoires";
 }
 
-// Lire chaque histoire et les stocker dans une liste
 $stories = [];
 $progressions = [];
+
+/**
+ * Boucles qui lie chacune des histoires et les stocks dans une liste
+ * et si il y a une progression, il l'ajoute au $progressions
+ */
 
 try {
     foreach ($storyIds as $storyId) {

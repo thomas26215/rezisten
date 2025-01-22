@@ -47,9 +47,8 @@ if($idDialog - 1 > 0){
     $dialogPrev = Dialog::read(1,$idStory);
 }
 
-
+/**  S'il n'y a plus de dialogue => fin avec bonus, on met à jour la progression si besoin en vérifiant qu'on est bien sur une fin bonus */
 if ($dialog === null) {
-    // S'il n'y a plus de dialogue => fin avec bonus, on met à jour la progression si besoin en vérifiant qu'on est bien sur une fin bonus
     if ($idDialog >= Dialog::readFirstBonus($idStory)) {
         if (!Progression::read($_SESSION['user_id'], $_SESSION['idStory'] + 1)) {
             $progression = new Progression(
@@ -69,9 +68,15 @@ if ($dialog === null) {
     $view->assign('place', $place);
     $view->assign('idChap',$story->getChapter()->getNumchap());
     $view->display('finHistoire');
-} elseif($dialogPrev != null && $dialog->getBonus() != $dialogPrev->getBonus() && $_SESSION['difficulty'] == "générique") {
-    // Sinon il faut s'assurer qu'on est pas dans le cas du dialogue numéro 1, que le dialogue demandé est  bonus sachant que le dialogue d'avant est non bonus
-    // et que la difficulté est bien celle générique, ensuite on réalise les mêmes opérations concernant la progression
+} 
+
+    /**  
+     *   Sinon il faut s'assurer qu'on est pas dans le cas du dialogue numéro 1, 
+     *   que le dialogue demandé est  bonus sachant que le dialogue d'avant est non bonus
+     *   et que la difficulté est bien celle générique, ensuite on réalise les mêmes opérations concernant la progression
+     */
+
+elseif($dialogPrev != null && $dialog->getBonus() != $dialogPrev->getBonus() && $_SESSION['difficulty'] == "générique") {
 
             if (!Progression::read($_SESSION['user_id'], $_SESSION['idStory'] + 1)) {
                 $progression = new Progression(
@@ -93,25 +98,30 @@ if ($dialog === null) {
 }
 
 
-// Initialisation par défaut du background à "bg1"
-if($story->getChapter()->getNumChap() != 100){
+/** 
+ *  Initialisation par défaut du background à "bg1"
+ */
+ if($story->getChapter()->getNumChap() != 100){
     $background = $backgroundURL . "hist_" . $idStory . "bg1.gif";
     if(!isset($_SESSION['background'])){
         $_SESSION['background'] = $background;
     }
-    // Si un background existe dans la session, on vérifie s'il correspond à l'histoire actuelle
-    if (isset($_SESSION['background']) && !empty($_SESSION['background'])) {
+
+/**
+ *       Si un background existe dans la session, on vérifie s'il correspond à l'histoire actuelle
+ */    
+if (isset($_SESSION['background']) && !empty($_SESSION['background'])) {
         $bgSession = explode('_', $_SESSION['background']);
     
-        // Si le background stocké dans la session correspond à l'histoire actuelle, on l'applique
+        /*Si le background stocké dans la session correspond à l'histoire actuelle, on l'applique */
         if (isset($bgSession[1]) && $bgSession[1] == $idStory) {
             $background = $_SESSION['background'];
         }
     }
     
-    // Si un dialogue entraîne un changement de fond
+    /* Si un dialogue entraîne un changement de fond */
     if (isset($dialogsChangeBG[$idStory]) && $dialogsChangeBG[$idStory] == $dialog->getContent()) {
-        // Mise à jour du background à "bg2" et stockage dans la session
+        /* Mise à jour du background à "bg2" et stockage dans la session*/
         $background = $backgroundURL . "hist_" . $idStory . "bg2.gif";
         $_SESSION['background'] = $background;
     }
@@ -123,7 +133,10 @@ if($story->getChapter()->getNumChap() != 100){
 
 
 
-// Si le dialogue repère est détecté on bascule sur la question en appelant la vue avec les bonnes données
+/** 
+ * Si le dialogue repère est détecté on bascule sur la question en appelant la vue avec les bonnes données
+*/
+
 if($story->getChapter()->getNumchap() != 100){
     if($dialog->getContent() == "limquestion"){
         $question = Question::read($idStory,'s');
@@ -153,9 +166,10 @@ if($story->getChapter()->getNumchap() != 100){
     $view->display('question');
 }
 
-//Sinon on met à jour les données sur le dialogue et les personnages incluent dans ce passage.
-// On gère aussi le background en fonction de l'avancée
-
+/** 
+ * Sinon on met à jour les données sur le dialogue et les personnages incluent dans ce passage.
+ * On gère aussi le background en fonction de l'avancée
+*/
 
 $dialLimit = Dialog::readLimit($idStory);
 
@@ -165,7 +179,8 @@ $imgSpeaker = $imgURL.$speaker->getImage().".webp";
 $dub = $audioURL.$dialog->getDubbing().".WAV";
 if($prevSpeaker != $speaker->getImage()){
     $prevSpeaker = $imgURL.$prevSpeaker.".webp";
-}else{
+}
+else{
     $prevSpeaker = "none.webp";
 }
 

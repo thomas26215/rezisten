@@ -25,14 +25,23 @@
 
 .effacer-enregistrer{ /* bouttons */
     justify-content: space-around;
-<<<<<<< HEAD
-}
-=======
 }
 
 .buttons {
     width: 95%;
     justify-content: space-around;
 }
+ .texte span {
+    color: var(--rouge);
+    font-weight: bold;
+ }
 
->>>>>>> 2c0a7237124a754948b1d4aecb6e7afe9b2d5cbf
+ .texte p {
+    text-align: center;
+ }
+
+ .texte {
+    gap: 1rem;
+    margin: 40px 90px;
+ }
+
