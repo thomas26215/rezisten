@@ -8,13 +8,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil</title>
     <link rel="stylesheet" href="./view/design/profil.css">
+    <link rel="stylesheet" href="./view/design/popup.css">
 </head>
 
 <body>
     <?php include_once("./view/header.view.php") ?>
     <main>
         <form class="non-style" method="post" action="?ctrl=profil">
-            <button class="deconnect button-rouge" name="disconnect">Se déconnecter</button>
+            <button id="openDeconnecter" type="button" class="deconnect button-rouge" >Se déconnecter</button>
+
+            <dialog class="dialog" id="dialogDeconnecter">
+                <div class="containerDialog">
+                    <h2>Voulez vous vous deconnecter ?</h2>
+                    <div>
+                        <button type="submit" id="fermerDeconnecter" name="disconnect" class="button-rouge">
+                            Se deconnecter
+                        </button>
+                        <button type="button" id="revenirDeconnecter" class="button-vert">
+                            Revenir
+                        </button>
+                    </div>
+                </div>
+            </dialog>
         </form>
         <div class="container">
             <div class="profilHead">
@@ -65,5 +80,27 @@
     <?php include_once("./view/footer.view.php") ?>
 </body>
 <script src="./view/js/dyslexique.js"></script>
+
+<script>
+    const openDeconnecter = document.getElementById("openDeconnecter");
+    const fermerDeconnecter = document.getElementById("fermerDeconnecter");
+    const revenirDeconnecter = document.getElementById("revenirDeconnecter");
+    const dialogDeconnecter = document.getElementById("dialogDeconnecter");
+    //
+
+    /* Ouvir */
+    openDeconnecter.addEventListener("click", () => {
+        dialogDeconnecter.showModal();
+    });
+    /* ferme */
+    fermerDeconnecter.addEventListener("click", () => {
+        dialogDeconnecter.close();
+    });
+    /* Action + ferme */
+    revenirDeconnecter.addEventListener("click", () => {
+        dialogDeconnecter.close();
+    });
+
+</script>
 
 </html>

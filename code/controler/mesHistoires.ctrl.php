@@ -6,19 +6,19 @@ include_once('./model/histoires.class.php');
 
 $user = $_SESSION['user_id'];
 
-// Vérifier si une action de suppression est demandée
+/* Vérifier si une action de suppression est demandée */
 if (isset($_GET['action']) && htmlspecialchars($_GET['action']) === 'delete' && isset($_GET['id'])) {
     $storyId = (int) $_GET['id'];
     Story::delete($storyId);
-    // Redirection après suppression
+    /* Redirection après suppression */
     header('Location: index.php?ctrl=mesHistoires');
     exit();
 }
 
-// Lire chaque histoire et les stocker dans deux listes distinctes
+/* Lire chaque histoire et les stocker dans deux listes distinctes, une pour celle publiées, et une qui ne le sont pas */
 $publishedStories = [];
 $savedStories = [];
-$allStoryIds = Story::getAllStoryIds(); // Utilisation de la méthode getAllStoryIds
+$allStoryIds = Story::getAllStoryIds(); /* Utilisation de la méthode getAllStoryIds */
 
 foreach ($allStoryIds as $storyId) {
     $story = Story::read($storyId);

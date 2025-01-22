@@ -74,10 +74,11 @@
                             </form>
                             <button class="modifierDialogueOuvrir" type="button" data-dialogue-id="<?= $dialogue->getId() ?>">
                                 <img class="modif" src="./view/design/image/modifier.png" alt="Modifier">
-                            <?php else: ?>
-                                <div class="vide"></div>
-                                <div class="vide"></div>
-                            <?php endif; ?>
+                            </button>
+                        <?php else: ?>
+                            <div class="vide"></div>
+                            <div class="vide"></div>
+                        <?php endif; ?>
                     </section>
                 </div>
                 <hr>
@@ -129,6 +130,10 @@
                                 </div>
                             </dialog>
                         </form>
+                        <button class="modifierQuestionOuvrir" type="button"
+                            data-dialogue-id="<?= $dialogue->getHistory()->getId() ?>">
+                            <img class="modif" src="./view/design/image/modifier.png" alt="Modifier">
+                        </button>
                     </section>
                     <hr>
                 </div>
@@ -150,7 +155,46 @@
             </div>
         </form>
     </dialog>
+    <dialog class="dialogModif" id="editQuestionPopup">
+        <form method="POST" action="index.php?ctrl=creation&article=editQuestion&id=<?= $histoire->getId() ?>">
+            <input type="hidden" name="id" value="<?= $histoire->getId() ?>">
+            <input type="hidden" name="idQuestion" id="editQuestionId">
+            <div class="flex-col">
+                <label for="question">Modifier la question :</label>
+                <textarea class="modifInput" name="question" id="editQuestionContent" rows="4" cols="50"></textarea>
+            </div>
+            <div class="flex-col">
+                <label for="answer">Modifier la réponse :</label>
+                <textarea class="modifInput" name="answer" id="editAnswerContent" rows="4" cols="50"></textarea>
+            </div>
+            <div class="flex-col buttons">
+                <button type="submit">Enregistrer</button>
+                <button type="button" id="closeEditQuestionPopup">Annuler</button>
+            </div>
+        </form>
+    </dialog>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Open edit question popup
+            document.querySelectorAll('.modifierQuestionOuvrir').forEach(button => {
+                button.addEventListener('click', function () {
+                    const questionId = this.getAttribute('data-question-id');
+                    const questionContent = this.closest('.quest').querySelector('label[for="personnage"]').innerText;
+                    const answerContent = this.closest('.quest').querySelector('#question').innerText;
+                    document.getElementById('editQuestionId').value = questionId;
+                    document.getElementById('editQuestionContent').value = questionContent;
+                    document.getElementById('editAnswerContent').value = answerContent;
+                    document.getElementById('editQuestionPopup').showModal();
+                });
+            });
+
+            // Close edit question popup
+            document.getElementById('closeEditQuestionPopup').addEventListener('click', function () {
+                document.getElementById('editQuestionPopup').close();
+            });
+        });
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Open edit dialogue popup

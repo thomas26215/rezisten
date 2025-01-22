@@ -56,7 +56,9 @@
 
             <div class="buttons">
                 <button type="submit">Changer mot de passe</button>
-                <a href="login.view.php">Retour à la page de connexion</a>
+                <?php if ($mode === 'forget'): ?>
+                    <a href="login.view.php">Retour à la page de connexion</a>
+                <?php endif; ?>
             </div>
         </form>
     </main>

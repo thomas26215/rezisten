@@ -7,8 +7,12 @@ $errors = [];
 $user = User::read((int)$_SESSION['user_id']);
 
 
-// teste si on a modifié les infos et met a jour la base si oui
-if (isset($_POST['pseudo']) && strlen($_POST['pseudo'])!=0) {
+/**
+ *  Vérifie si le mail ou le pseudo ont été modifiés, 
+ *  si l'un d'entre eux l'a été, il les met à jour dans la base de données
+ */
+
+ if (isset($_POST['pseudo']) && strlen($_POST['pseudo'])!=0) {
     $user->setUsername($_POST['pseudo']);
     $user->update();
 }
@@ -24,7 +28,10 @@ if (isset($_POST['mail']) && strlen($_POST['mail'])!=0) {
 
 
 
-
+/**
+ * Si l'utilisateur souhaite se déconnecter,
+ * détruit la session et renvoie vers la page de connexion
+ */
 if(isset($_POST['disconnect'])) {
     session_destroy();
     header("Location: index.php");

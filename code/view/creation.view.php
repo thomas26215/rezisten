@@ -16,6 +16,7 @@
 </head>
 
 <body>
+
     <?php include_once './view/headerHistoire.view.php'; ?>
     <main class="flex-col">
 
@@ -106,7 +107,7 @@
                     <form method=get>
                         <input type="hidden" name="ctrl" value="mesHistoires">
                         <button type="button" id="quitterHistoireOuvrir" class=button-rouge>Quitter</button>
-                    
+
                         <dialog class="dialog" id="dialogQuitterHistoire">
                             <div class="containerDialog">
                                 <h2>Voulez vous quitter la page création ?</h2>
@@ -122,27 +123,27 @@
                             </div>
                         </dialog>
                     </form>
-
                     <form method="get">
                         <input type="hidden" name="ctrl" value="creation">
                         <input type="hidden" name="footer" value="publie">
                         <input type="hidden" name="id" value="<?= $id ?>">
-                        <button type="button" id="publierHistoireOuvrir"
-                            class="button-vert"><?php if ($histoire->getVisibility() == true): ?>
+                        <button type="button" id="publierHistoireOuvrir" class="button-vert">
+                            <?php if ($histoire->getVisibility() == true): ?>
                                 Mettre en privé
                             <?php else: ?>
                                 Publier
                             <?php endif ?></button>
                         <dialog class="dialog" id="dialogPublierHistoire">
                             <div class="containerDialog">
-                                <h2>Voulez vous <?php if ($histoire->getVisibility() == true): ?>
-                                mettre en privé
-                            <?php else: ?>
-                                publier
-                            <?php endif ?></button> votre histoire ?</h2>
+                                <h2>Voulez vous <?php if ($histoire->getVisibility() === true): ?>
+                                        mettre en privé
+                                    <?php else: ?>
+                                        publier
+                                    <?php endif ?></button> votre histoire ?
+                                </h2>
                                 <div>
 
-                                    <button type="submit" id="fermerPublierHistoire" name="fermer" class="button-vert">
+                                    <button type="submit" id="fermerPublierHistoire" class="button-vert">
                                         Oui
                                     </button>
                                     <button type="button" id="revenirPublierHistoire" class="button-rouge">
