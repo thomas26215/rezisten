@@ -17,7 +17,27 @@
 
 ## Introduction
 
-Ce document présente les spécifications techniques et fonctionnelles du projet [Rezisten]. Il décrit la structure des bases de données, les principales fonctionnalités et le déroulement des interactions utilisateur.
+Le projet [Rezisten] est une application interactive de narration qui permet aux utilisateurs de lire et aux créateurs de créer des histoires liées à des lieux spécifiques. Voici les principales caractéristiques du projet :
+
+1. Rôles des utilisateurs :
+    - Utilisateurs standard : Peuvent lire les histoires disponibles.
+    - Créateurs : Peuvent à la fois lire et créer des histoires.
+2. Structure des histoires :
+    - Chaque histoire est associée à un lieu spécifique.
+    - Les histoires sont organisées en chapitres.
+3. Système de questions :
+    - Les histoires de base comportent deux types de questions :
+        - Une question générale
+        - Une question spécifique
+    - Les créateurs peuvent ajouter une seule question à leurs histoires.
+4. Interaction avec les lieux :
+    - Chaque histoire est liée à un lieu réel.
+    - Les questions incluent un lien permettant de visiter rapidement le lieu associé.
+    - Une fois l'histoire terminée, l'utilisateur a également accès à un lien vers le lieu.
+5. Progression :
+    - Le système suit la progression des utilisateurs dans les différentes histoires.
+6. Création d'histoires :
+    - Les créateurs peuvent ajouter de nouveaux personnages, dialogues et lieux.
 
 ## Aperçu du Projet
 
@@ -243,7 +263,7 @@ Il est nécessaire de comprendre que si une contrainte existe sur une colonne de
 
 ### 4.3.2 `recuperationMotDePasse`
 
-- `setToken` : Le token doit faire exactmenent 10 caractères
+- `setToken` : Le token doit faire exactement 10 caractères
 
 ### 4.3.3 `recuperationMotDePasse`
 
@@ -457,6 +477,18 @@ Il est nécessaire de comprendre que si une contrainte existe sur une colonne de
     - Vers le lieu si l'utilisateur a cliqué sur "Visiter le lieu"
     - Vers l'histoire suivante si l'utilisateur clique sur "Histoire suivante"
 
+# Mise à jour à venir
+
+1. Compléter la demande de créateur
+2. Ajouter la vérification d'histoire
+3. Les fonctionnalités de l'administrateur
+4. Un système de récompense
+5. La possibilité pour un créateur de mettre son propre fond
+6. Les musiques d'ambiance
+7. La possibilité de collaboration entre créateurs
+8. Un système de sauvegarde plus précis
+9. Un système de photo de profil
+
 # Règles mises en place
 
 De nombreuses règles ont été mises en place lors du début de ce projet :
@@ -465,6 +497,153 @@ De nombreuses règles ont été mises en place lors du début de ce projet :
 - Exemple pour un commit : `"Action : Repertoire->NomFichier - Description du message"`
 - Commentaires sur méthode compliquées
 - Obligation de rediriger vers `index.php` et de l'utilisation des contrôleurs quand on redirige vers une autre page. Format de l'URL : `index.php?ctrl="NomControler"`
+
+# Technologies utilisées
+
+Nous avons utilisé les langages de programmation HTML et CSS ainsi que JavaScript pour tout ce qui est lié au front et PHP pour tout ce qui est lié au BackEnd. Côté serveur, nous avons utilisé un serveur machine avec PostgreSQL pour la gestion des données des utilisateurs
+
+# Tests
+
+Pour pouvoir lancer les tests unitaires, il est important soit de se connecter à la base de donnée sous Postgress avec les identifiants suivant : 
+
+Soit sous Sqlite, en changeant le nom du fichier `dao.class.php` en `daoPostgres.class.php` et le fichier `daoSqlite.class.php` en `dao.class.php` .
+
+## Tests Unitaires
+
+## Tests pour la classe User
+
+- Getters et setters
+- Création d'un utilisateur
+- Lecture d'un utilisateur
+- Mise à jour d'un utilisateur
+- Suppression d'un utilisateur
+- Lecture d'un utilisateur par email
+
+## Tests pour la classe CheckEmail
+
+- Getters et setters
+- Création d'une vérification d'email
+- Lecture d'une vérification d'email
+- Mise à jour d'une vérification d'email
+- Suppression d'une vérification d'email
+- Génération d'un nouveau token de vérification
+- Vérification et suppression d'un code de vérification
+- Vérification de l'existence d'un code pour un utilisateur
+
+## Tests pour la classe Progression
+
+- Getters et setters
+- Création d'une progression
+- Lecture d'une progression
+- Mise à jour d'une progression
+- Suppression d'une progression
+- Vérification du déblocage d'un chapitre pour un utilisateur
+
+## Tests pour la classe Apparitions
+
+- Getters et setters
+- Création d'une apparition
+- Lecture d'une apparition
+- Mise à jour d'une apparition
+- Suppression d'une apparition
+
+## Tests pour la classe Chapitres
+
+- Getters et setters
+- Création d'un chapitre
+- Lecture d'un chapitre
+- Mise à jour d'un chapitre
+- Suppression d'un chapitre
+
+## Tests pour la classe Demandes
+
+- Getters et setters
+- Création d'une demande
+- Lecture d'une demande
+- Mise à jour d'une demande
+- Suppression d'une demande
+
+## Tests pour la classe Dialogue
+
+- Getters et setters
+- Création d'un dialogue
+- Lecture d'un dialogue
+- Mise à jour d'un dialogue
+- Suppression d'un dialogue
+
+## Tests pour la classe Histoire
+
+- Getters et setters
+- Création d'une histoire
+- Lecture d'une histoire
+- Mise à jour d'une histoire
+- Suppression d'une histoire
+
+## Tests pour la classe Lieux
+
+- Getters et setters
+- Création d'un lieu
+- Lecture d'un lieu
+- Mise à jour d'un lieu
+- Suppression d'un lieu
+
+## Tests pour la classe Personnages
+
+- Getters et setters
+- Création d'un personnage
+- Lecture d'un personnage
+- Mise à jour d'un personnage
+- Suppression d'un personnage
+
+## Tests pour la classe Progression
+
+- Getters et setters
+- Création d'une progression
+- Lecture d'une progression
+- Mise à jour d'une progression
+- Suppression d'une progression
+- Verification de si un chapitre est débloqué
+
+## Tests pour la classe Question
+
+- Getters et setters
+- Création d'une question
+- Lecture d'une question
+- Mise à jour d'une question
+- Suppression d'une question
+
+
+## Objectifs et portée
+
+- Définir clairement les objectifs des tests et leur portée[5].
+- Préciser les fonctionnalités et composants à tester[3].
+- Identifier les critères d'acceptation et les résultats attendus[1].
+
+## Types de tests
+
+- Détailler les différents types de tests à réaliser (unitaires, d'intégration, fonctionnels, de performance, etc.)[3].
+- Expliquer l'approche structurée pour chaque niveau de test, en respectant la pyramide de tests[3].
+
+## Ressources et outils
+
+- Identifier les ressources nécessaires (personnel, compétences, environnements de test)[1].
+- Sélectionner les outils d'automatisation appropriés comme Selenium ou Appium[4][6].
+- Décrire les frameworks d'automatisation à utiliser[2].
+
+## Planification et calendrier
+
+- Établir un calendrier détaillé avec les dates de début et de fin pour chaque phase de test[1].
+- Définir les étapes importantes et les livrables attendus[5].
+
+## Gestion des risques et qualité
+
+- Identifier et atténuer les risques associés au processus de test[7].
+- Établir des métriques de qualité et des critères d'évaluation de l'efficacité des tests[7].
+
+## Documentation et rapports
+
+- Décrire les procédures de documentation des tests et de gestion des résultats[7].
+- Définir le format et la fréquence des rapports d'avancement[5].
 
 # Conclusion
 

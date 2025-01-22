@@ -1,12 +1,32 @@
-body{
+body {
     background-image: var(--background-drapeau);
 }
 
-main{
+main {
     width: 70%;
-    margin : auto !important;
-    text-align: justify ;
+    margin: auto !important;
+    text-align: justify;
+    min-height: calc(100vh - var(--height-header) - var(--height-footer));
 }
-h1{
+
+h1 {
+    text-align: center;
+}
+
+ul>li,
+p {
+    font-weight: bold;
+}
+
+#info {
+    max-height: 50px;
+}
+
+.maindidac {
+    align-items: flex-start !important;
+}
+
+.centree{
+    width: 100% !important;
     text-align: center;
 }

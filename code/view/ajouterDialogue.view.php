@@ -10,7 +10,7 @@
 
         <section>
             <label for="personnage">Personnage qui parle : </label>
-            <select name="nom">
+            <select name="nom" class="select-perso">
                 <?php foreach ($personnages as $perso): ?>
                     <option value="<?= $perso->getFirstName() ?>"><?= $perso->getFirstName() ?></option>
                 <?php endforeach; ?>

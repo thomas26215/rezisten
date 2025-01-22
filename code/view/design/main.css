@@ -61,3 +61,8 @@ button.bloque:focus+.msgCreateur,
 .msgCreateur:hover {
     display: block;
 }
+
+.img-button {
+    position: absolute;
+    right : 50px;
+}

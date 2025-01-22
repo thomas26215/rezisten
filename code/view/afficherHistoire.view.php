@@ -137,7 +137,7 @@
 
     </article>
     <dialog class="dialogModif" id="editDialoguePopup">
-        <form method="POST" action="index.php?ctrl=creation&article=editDialogue">
+        <form method="POST" action="index.php?ctrl=creation&article=editDialogue&id=<?= $histoire->getId() ?>">
             <input type="hidden" name="id" value="<?= $histoire->getId() ?>">
             <input type="hidden" name="idDialogue" id="editDialogueId">
             <div class="flex-col">

@@ -21,13 +21,13 @@
             </a>
             <?php if ($userrole == 'j'): ?>
                 <a class="bloque">
-                    <button class="button-gris bloque" type="submit">Créer une histoire <img src="./view/design/image/cadenas.png"
+                    <button class="button-gris bloque" type="submit">Créer une histoire <img class="img-button" src="./view/design/image/cadenas.png"
                             alt="(Bloqué)"></button>
                     <div class="msgCreateur">Vous devez être créateur pour accéder à cette fonctionnalité : faites une
                         demande sur votre profil</div>
                 </a>
                 <a class="bloque">
-                    <button class="button-gris bloque" type="submit">Consulter mes histoires <img
+                    <button class="button-gris bloque" type="submit">Consulter mes histoires <img class="img-button" 
                             src="./view/design/image/cadenas.png" alt="(Bloqué)"></button>
                     <div class="msgCreateur">Vous devez être créateur pour accéder à cette fonctionnalité : faites une
                         demande sur votre profil</div>

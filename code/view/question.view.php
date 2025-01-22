@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Question</title>
-    <link rel="stylesheet" type="text/css" href="./view/design/histoire.css">
     <link rel="stylesheet" type="text/css" href="./view/design/global.css">
+    <link rel="stylesheet" type="text/css" href="./view/design/histoire.css">
 </head>
 
 <body>
