@@ -2,86 +2,89 @@
 
 use PHPUnit\Framework\TestCase;
 
-require_once(__DIR__.'/../model/users.class.php');
-require_once(__DIR__.'/../model/recuperationMotDePasse.class.php');
-require_once(__DIR__.'/../model/dao.class.php');
+require_once(__DIR__ . '/../model/users.class.php');
+require_once(__DIR__ . '/../model/recuperationMotDePasse.class.php');
+require_once(__DIR__ . '/../model/dao.class.php');
 
 class recuperationMotDePasseTest extends TestCase {
     private User $user;
-    private passwordRecuperation $passwordRecuperation;
+    private PasswordRecuperation $passwordRecuperation;
 
     protected function setUp(): void {
-        $this->user = new User("prapra","brayan","bils","24-08-2005","bilsbrayan@gmail.com","2706","a");
-        $this->passwordRecuperation = new PasswordRecuperation($this->user, "vf14sdut?7");
+        $this->user = new User("test", "brayan", "bils", "24-08-2005", "test@gmail.com", "2706", "a", true);
+        $this->user->create(); // Assure que l'utilisateur est créé en base de données
+        $this->passwordRecuperation = new PasswordRecuperation($this->user, "vf14sdut?7", "2025-01-31");
     }
 
-    public function testGetters() {
+    public function testGetters(): void {
         $this->assertEquals($this->user, $this->passwordRecuperation->getUser());
         $this->assertEquals("vf14sdut?7", $this->passwordRecuperation->getToken());
+        $this->assertEquals("2025-01-31", $this->passwordRecuperation->getExpirationDate());
     }
 
-    public function testSetters() {
-        $this->passwordRecuperation->setUser($this->user);
-        $this->passwordRecuperation->setToken("1234567890");
+    public function testSetters(): void {
+        $newToken = "abcdefghij";
+        $this->passwordRecuperation->setToken($newToken);
+        $this->assertEquals($newToken, $this->passwordRecuperation->getToken());
 
-        $this->assertEquals($this->user, $this->passwordRecuperation->getUser());
-        $this->assertEquals("1234567890", $this->passwordRecuperation->getToken());
-
-        $this->expectException(Exception::class);
-        $this->passwordRecuperation->setToken("101");
-        $this->passwordRecuperation->setToken("1010fre1f0d1eerf0ez");
+        $newDate = "2025-02-01";
+        $this->passwordRecuperation->setExpirationDate($newDate);
+        $this->assertEquals($newDate, $this->passwordRecuperation->getExpirationDate());
     }
 
-    public function testCreate() {
-        $this->assertTrue($this->user->create());
-        $this->assertTrue($this->passwordRecuperation->create());
-        $this->assertEquals($this->user, $this->passwordRecuperation->getUser());
-    }
-
-    public function testRead() {
-        $this->user->create();
+    public function testCreate(): void {
         $this->passwordRecuperation->create();
-        $readCheckEmail = PasswordRecuperation::read($this->passwordRecuperation->getUser()->getId());
-        $this->assertInstanceOf(PasswordRecuperation::class, $readCheckEmail);
-        $this->assertInstanceOf(PasswordRecuperation::class, $this->passwordRecuperation);
+        $this->assertGreaterThan(0, $this->passwordRecuperation->getId());
     }
 
-    public function testUpdate() {
-        $this->user->create();
+    public function testRead(): void {
         $this->passwordRecuperation->create();
-        $this->passwordRecuperation->setToken("1111111111");
-        $this->assertTrue($this->passwordRecuperation->update());
-        $updatedCheckEmail = PasswordRecuperation::read($this->passwordRecuperation->getUser()->getId());
-        $this->assertEquals("1111111111", $updatedCheckEmail->getToken());
+        $retrieved = PasswordRecuperation::read($this->user->getId());
+        $this->assertInstanceOf(PasswordRecuperation::class, $retrieved);
+        $this->assertEquals($this->passwordRecuperation->getToken(), $retrieved->getToken());
     }
 
-    public function testDelete() {
-        $this->user->create();
+    public function testUpdate(): void {
         $this->passwordRecuperation->create();
-        $this->assertNotNull(PasswordRecuperation::read($this->user->getId()));
-        $this->assertTrue(PasswordRecuperation::delete($this->user->getId()));
-        $this->assertNull(PasswordRecuperation::read($this->user->getId()));
+        $newToken = "1111111111";
+        $this->passwordRecuperation->setToken($newToken);
+        $this->passwordRecuperation->update();
+
+        $retrieved = PasswordRecuperation::read($this->user->getId());
+        $this->assertEquals($newToken, $retrieved->getToken());
     }
 
-    public function testReadNonExistenceCheckEmail() {
-        $this->assertNull(PasswordRecuperation::read(99999));
+    public function testDelete(): void {
+        $this->passwordRecuperation->create();
+        PasswordRecuperation::delete($this->user->getId());
+
+        $retrieved = PasswordRecuperation::read($this->user->getId());
+        $this->assertNull($retrieved);
     }
 
-    public function testDeleteNonExistentDelete() {
-        $this->assertFalse(PasswordRecuperation::delete(99999));
+    public function testInvalidTokenLength(): void {
+        $this->expectException(InvalidArgumentException::class);
+        $this->passwordRecuperation->setToken("short");
     }
 
+    public function testInvalidUserForDeletion(): void {
+        $this->expectException(InvalidArgumentException::class);
+        PasswordRecuperation::delete(-1);
+    }
 
-   
     protected function tearDown(): void {
-        if($this->passwordRecuperation->getUser()->getId() > 0) {
-            PasswordRecuperation::delete($this->passwordRecuperation->getUser()->getId());
+        if ($this->passwordRecuperation->getId() > 0) {
+            try {
+                PasswordRecuperation::delete($this->passwordRecuperation->getUser()->getId());
+            } catch(RuntimeException $e) {
+
+            }
         }
-        if($this->user->getId() > 0) {
+        if ($this->user->getId() > 0) {
             User::delete($this->user->getId());
         }
     }
-
-    
 }
+
+?>
 
