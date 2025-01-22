@@ -31,14 +31,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($errors)) {
 
         try {
+            /*Récupération de l'adresse mail*/
             $user = User::readWithMail($formData['email']);
             try {
+                /**
+                 * Vérification du mot de passe
+                 * si mot de passe incorrect : renvoie une erreur
+                 */
                 if (!password_verify($formData['password'], $user->getPassword())) {
                     $errors[] = "Mot de passe incorrect";
                 } elseif (CheckEmail::isUserCodeDefined($user->getId())) {
                     $checkEmail = CheckEmail::generate($user->getId());
                     header("Location: index.php?ctrl=emailEnvoye&userId=" . $user->getId());
                 } else {
+                    //création de la session pour l'utilisateur
                     $_SESSION['user_id'] = $user->getId();
                     $_SESSION['username'] = $user->getUsername();
                     header("Location: index.php?ctrl=main");
