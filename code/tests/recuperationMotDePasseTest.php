@@ -11,15 +11,15 @@ class recuperationMotDePasseTest extends TestCase {
     private PasswordRecuperation $passwordRecuperation;
 
     protected function setUp(): void {
-        $this->user = new User("test", "brayan", "bils", "24-08-2005", "test@gmail.com", "2706", "a", true);
+        $this->user = new User("test", "brayan", "bils", "08-24-2005", "test@gmail.com", "2706", "a", true);
         $this->user->create(); // Assure que l'utilisateur est créé en base de données
-        $this->passwordRecuperation = new PasswordRecuperation($this->user, "vf14sdut?7", "2025-01-31");
+        $this->passwordRecuperation = new PasswordRecuperation($this->user, "vf14sdut?7", "01-01-2025");
     }
 
     public function testGetters(): void {
         $this->assertEquals($this->user, $this->passwordRecuperation->getUser());
         $this->assertEquals("vf14sdut?7", $this->passwordRecuperation->getToken());
-        $this->assertEquals("2025-01-31", $this->passwordRecuperation->getExpirationDate());
+        $this->assertEquals("01-01-2025", $this->passwordRecuperation->getExpirationDate());
     }
 
     public function testSetters(): void {
@@ -27,7 +27,7 @@ class recuperationMotDePasseTest extends TestCase {
         $this->passwordRecuperation->setToken($newToken);
         $this->assertEquals($newToken, $this->passwordRecuperation->getToken());
 
-        $newDate = "2025-02-01";
+        $newDate = "02-02-2025";
         $this->passwordRecuperation->setExpirationDate($newDate);
         $this->assertEquals($newDate, $this->passwordRecuperation->getExpirationDate());
     }
