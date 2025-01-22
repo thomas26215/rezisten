@@ -146,7 +146,7 @@ h2.speaker::before {
 }
 
 .consulter-lieux{
-    gap: 5px;
+    margin-top: 0.5%;
 }
 
 .repondre{
