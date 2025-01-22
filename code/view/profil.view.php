@@ -21,10 +21,10 @@
                 <div class="containerDialog">
                     <h2>Voulez vous vous deconnecter ?</h2>
                     <div>
-                        <button type="submit" id="fermerDeconnecter" name="disconnect" class="button-vert">
-                            Deconnecter
+                        <button type="submit" id="fermerDeconnecter" name="disconnect" class="button-rouge">
+                            Se deconnecter
                         </button>
-                        <button type="button" id="revenirDeconnecter" class="button-rouge">
+                        <button type="button" id="revenirDeconnecter" class="button-vert">
                             Revenir
                         </button>
                     </div>
