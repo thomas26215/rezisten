@@ -17,6 +17,8 @@ class apparitionTest extends TestCase {
     private Story $story;
     private Character $character;
     private Apparitions $summon;
+    private Story $newStory;
+    private Character $newCharacter;
 
     protected function setUp(): void {
         $uniqueEmail = "bilsbrayan" . uniqid() . "@gmail.com";
@@ -31,29 +33,31 @@ class apparitionTest extends TestCase {
         
         $this->story = new Story("Titre", $this->chapter, $this->user, $this->place, "background", false);
         $this->story->create();
+        $this->newStory = new Story("titreModifié", $this->chapter, $this->user, $this->place, "background", false);
+        $this->newStory->create();
+
         
         $this->character = new Character("Jean", "image", $this->user);
         $this->character->create();
-        
-        $this->summon = new Apparitions($this->story, $this->character);
-    }
+        $this->newCharacter = new Character("Kevin", "image", $this->user);
+        $this->newCharacter->create();
 
+        $this->summon = new Apparitions($this->story, $this->character);
+
+
+    }
     public function testGetters() {
         $this->assertEquals($this->story, $this->summon->getHistory());
         $this->assertEquals($this->character, $this->summon->getCharacter());
     }
 
     public function testSetters() {
-        $newStory = new Story("titreModifié", $this->chapter, $this->user, $this->place, "background", false);
-        $newStory->create();
-        $newCharacter = new Character("Kevin", "image", $this->user);
-        $newCharacter->create();
 
-        $this->summon->setHistory($newStory);
-        $this->summon->setCharacter($newCharacter);
+        $this->summon->setHistory($this->newStory);
+        $this->summon->setCharacter($this->newCharacter);
 
-        $this->assertEquals($newStory, $this->summon->getHistory());
-        $this->assertEquals($newCharacter, $this->summon->getCharacter());
+        $this->assertEquals($this->newStory, $this->summon->getHistory());
+        $this->assertEquals($this->newCharacter, $this->summon->getCharacter());
     }
 
     public function testCreate() {
@@ -73,7 +77,6 @@ class apparitionTest extends TestCase {
     public function testUpdate() {
         $this->summon->create();
         
-        // Update the existing story instead of creating a new one
         $this->story->setTitle("UpdatedTitre");
         $this->story->update();
         
@@ -110,13 +113,15 @@ class apparitionTest extends TestCase {
         $this->summon->update();
     }
 
-    protected function tearDown(): void {
-        Apparitions::delete($this->story->getId(), $this->character->getId());
-        Character::delete($this->character->getId());
+    protected function tearDown(): void {        
+        Apparitions::delete($this->story->getId(), $this->character->getId());        
         Story::delete($this->story->getId());
+        Story::delete($this->newStory->getId());
         Place::delete($this->place->getId());
-        Chapter::delete($this->chapter->getNumchap());
+        Character::delete($this->character->getId());
+        Character::delete($this->newCharacter->getId());
         User::delete($this->user->getId());
+        Chapter::delete($this->chapter->getNumchap());    
     }
 }
 ?>

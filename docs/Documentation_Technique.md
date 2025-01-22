@@ -508,6 +508,14 @@ Pour pouvoir lancer les tests unitaires, il est important soit de se connecter �
 
 Soit sous Sqlite, en changeant le nom du fichier `dao.class.php` en `daoPostgres.class.php` et le fichier `daoSqlite.class.php` en `dao.class.php` .
 
+La sécurité de Postgres étant renforcée, il faut se connecter au serveur web pour accéder au code et pouvoir lire la base de données. Pour ce faire vous pouvez vous connecter en ssh au serveur web avec les identifiants suivants :  
+user : root  
+mdp : MACHINEQuentin2005!VIRTUELLE  
+Ensuite, rendez vous dans le dossier /var/www/html/rendus/code et éxecutez la commande : 
+`./vendor/bin/phpunit tests/`  
+
+Normalement, vous ne devriez avoir aucune erreur affichée par PhpUnit
+
 ## Tests Unitaires
 
 ## Tests pour la classe User

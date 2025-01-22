@@ -5,7 +5,7 @@ CREATE TABLE UTILISATEURS (
     prenom VARCHAR(50),                      -- Prénom de l'utilisateur
     nom VARCHAR(50),                      -- Nom de famille de l'utilisateur
     datenaiss DATE NOT NULL,                -- Date de naissance de l'utilisateur
-    mail VARCHAR(255) NOT NULL,             -- Adresse email de l'utilisateur (doit être unique)
+    mail VARCHAR(255) UNIQUE NOT NULL,             -- Adresse email de l'utilisateur (doit être unique)
     mot_de_passe TEXT NOT NULL,                 -- Mot de passe haché
                                             --(si false, il ne peut pas être dans la table créateur)
     role CHAR(1) NOT NULL,                  -- indique si l'utilisateur est un admin ou non, en théorie 1 seul admin

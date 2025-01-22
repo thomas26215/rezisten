@@ -18,14 +18,16 @@ class ChapitreTest extends TestCase {
     }
 
     public function testSetters(): void {
-        $this->chapter->setNumChap(2);
+        $this->chapter->setNumChap(14);
         $this->chapter->setTitle("Comment réellement foirer son école d'art");
 
-        $this->assertEquals(2, $this->chapter->getNumchap());
+        $this->assertEquals(14, $this->chapter->getNumchap());
         $this->assertEquals("Comment réellement foirer son école d'art", $this->chapter->getTitle());
 
         $this->expectException(InvalidArgumentException::class);
-        $this->chapter->setTitle("");
+        
+        $this->chapter->setTitle(false);
+        
     }
 
     public function testCreate(): void {
