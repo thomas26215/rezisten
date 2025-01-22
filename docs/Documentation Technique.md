@@ -504,6 +504,115 @@ Nous avons utilisé les langages de programmation HTML et CSS ainsi que JavaScri
 
 # Tests
 
+Pour pouvoir lancer les tests unitaires, il est important soit de se connecter à la base de donnée sous Postgress avec les identifiants suivant : 
+
+Soit sous Sqlite, en changeant le nom du fichier `dao.class.php` en `daoPostgres.class.php` et le fichier `daoSqlite.class.php` en `dao.class.php` .
+
+## Tests Unitaires
+
+## Tests pour la classe User
+
+- Getters et setters
+- Création d'un utilisateur
+- Lecture d'un utilisateur
+- Mise à jour d'un utilisateur
+- Suppression d'un utilisateur
+- Lecture d'un utilisateur par email
+
+## Tests pour la classe CheckEmail
+
+- Getters et setters
+- Création d'une vérification d'email
+- Lecture d'une vérification d'email
+- Mise à jour d'une vérification d'email
+- Suppression d'une vérification d'email
+- Génération d'un nouveau token de vérification
+- Vérification et suppression d'un code de vérification
+- Vérification de l'existence d'un code pour un utilisateur
+
+## Tests pour la classe Progression
+
+- Getters et setters
+- Création d'une progression
+- Lecture d'une progression
+- Mise à jour d'une progression
+- Suppression d'une progression
+- Vérification du déblocage d'un chapitre pour un utilisateur
+
+## Tests pour la classe Apparitions
+
+- Getters et setters
+- Création d'une apparition
+- Lecture d'une apparition
+- Mise à jour d'une apparition
+- Suppression d'une apparition
+
+## Tests pour la classe Chapitres
+
+- Getters et setters
+- Création d'un chapitre
+- Lecture d'un chapitre
+- Mise à jour d'un chapitre
+- Suppression d'un chapitre
+
+## Tests pour la classe Demandes
+
+- Getters et setters
+- Création d'une demande
+- Lecture d'une demande
+- Mise à jour d'une demande
+- Suppression d'une demande
+
+## Tests pour la classe Dialogue
+
+- Getters et setters
+- Création d'un dialogue
+- Lecture d'un dialogue
+- Mise à jour d'un dialogue
+- Suppression d'un dialogue
+
+## Tests pour la classe Histoire
+
+- Getters et setters
+- Création d'une histoire
+- Lecture d'une histoire
+- Mise à jour d'une histoire
+- Suppression d'une histoire
+
+## Tests pour la classe Lieux
+
+- Getters et setters
+- Création d'un lieu
+- Lecture d'un lieu
+- Mise à jour d'un lieu
+- Suppression d'un lieu
+
+## Tests pour la classe Personnages
+
+- Getters et setters
+- Création d'un personnage
+- Lecture d'un personnage
+- Mise à jour d'un personnage
+- Suppression d'un personnage
+
+## Tests pour la classe Progression
+
+- Getters et setters
+- Création d'une progression
+- Lecture d'une progression
+- Mise à jour d'une progression
+- Suppression d'une progression
+- Verification de si un chapitre est débloqué
+
+## Tests pour la classe Question
+
+- Getters et setters
+- Création d'une question
+- Lecture d'une question
+- Mise à jour d'une question
+- Suppression d'une question
+
+
 ## Objectifs et portée
 
 - Définir clairement les objectifs des tests et leur portée[5].
