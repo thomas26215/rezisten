@@ -16,7 +16,7 @@ class questionTest extends TestCase
 
     protected function setUp(): void
     {        
-        $this->user = new User("test","test","test","2000-01-15","test@gmail.com","aa","j",true);
+        $this->user = new User("test","test","test","08-24-2005","test@gmail.com","aa","j",true);
         $this->user->create(); 
         
         $this->lieux = new Place("lieux","batiment","description","ville","coordonnées");

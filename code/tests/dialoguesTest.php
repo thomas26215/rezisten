@@ -19,7 +19,7 @@ class DialoguesTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->user = new User("test","test","test","2000-01-15","test@gmail.com","aa","j",true);
+        $this->user = new User("test","test","test","08-24-2005","test@gmail.com","aa","j",true);
         $this->user->create(); 
         
         $this->place = new Place("lieux","batiment","description","ville","coordonnées");
@@ -45,7 +45,7 @@ class DialoguesTest extends TestCase
 
     public function testSetters(): void
     {
-        $newUser = new User("AnotherUser", "Second", "User", "1995-05-05", "another@example.com", "pass", "j", false);
+        $newUser = new User("AnotherUser", "Second", "User", "08-02-2005", "another@example.com", "pass", "j", false);
         $newStory = new Story("Another Story", $this->chapter, $newUser, new Place("AnotherPlace", "Room", "Desc", "54321", "1.0"), "Another Synopsis", true);
         $newSpeaker = new Character(2, "Villain", $newUser);
 

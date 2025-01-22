@@ -12,7 +12,7 @@ class demandesTest extends TestCase {
 
     protected function setUp(): void {
         $uniqueEmail = "bilsbrayan" . uniqid() . "@gmail.com";
-        $this->user = new User("prapra","brayan","bils","24-08-2005", $uniqueEmail,"2706","c",true);
+        $this->user = new User("prapra","brayan","bils","08-24-2005", $uniqueEmail,"2706","c",true);
         $this->user->create();
         $this->demande = new Demande($this->user,"acces");
     }
