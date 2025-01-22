@@ -6,7 +6,12 @@ main{
     width: 70%;
     margin : auto !important;
     text-align: justify ;
+    min-height: calc(100vh - var(--height-header) - var(--height-footer));
 }
 h1{
     text-align: center;
+}
+
+ul>li, p{
+    font-weight:bold;
 }

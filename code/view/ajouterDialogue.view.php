@@ -18,16 +18,21 @@
         </section>
 
         <!-- dialogue -->
-        <section class="flex-col">
-            <label for="dialogue" class="dialog-label">Entrez le texte du dialogue : </label>
-            <textarea name="dialogue" id="dialogueText" maxlength="400"></textarea>
+        <section class="texteDialogue">
+            <label for="dialogue">Entrez le texte du dialogue : </label>
+            <textarea required name="dialogue" id="dialogueText" maxlength="400"></textarea>
         </section>
 
         <!-- boutons -->
-        <section class="effacer-enregistrer">
+        <section class="buttons">
             <button class="button-rouge" id="effacerDialogueOuvrir" type="button">Effacer</button>
             <button class="button-vert" type="submit">Enregistrer</button>
         </section>
+
+        <p><?= $message ?></p>
+        <?php if (isset($errorMessage)) { ?>
+            <p><?= $errorMessage ?></p>
+        <?php } ?>
 
         <!-- Pop-up de confirmation de suppression -->
         <dialog class="dialog" id="dialogEffacerDialogue">

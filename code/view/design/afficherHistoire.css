@@ -1,16 +1,15 @@
 .content article {
     overflow-y: auto;
     overflow-x: hidden;
-
+    padding: 15px;
+    box-sizing: border-box;
     height: 50vh;
     width: 60vw;
 }
 
 .content section {
     display: flex;
-    margin: 20px;
-    margin-right: 0%;
-    
+    align-items: center;
 }
 
 .left-in-article {
@@ -19,7 +18,22 @@
     text-align: justify;
     display: flex;
     flex-wrap: wrap;
+    font-weight: bold;
+    padding: 5px;
 }
+
+
+#question  {
+    font-size: 20px;
+    font-weight: bold;
+
+}
+
+section label h4 {
+    color: var(--rouge);
+    margin: 0 !important;
+}
+
 
 .invisble{
     color: transparent !important;
@@ -57,8 +71,6 @@
 
 #poubelle {
     align-self: center;
-    width: 50px;
-    height: 50px;
 }
 
 #fleche {
@@ -68,6 +80,7 @@
 #fleche button {
     font-weight: bold;
     font-size: larger;
+    padding: 0;
 }
 
 .flex-row {
@@ -79,4 +92,50 @@
     top: 0;
     /* L'élément se colle en haut de la fenêtre */
     justify-content: space-around;
+}
+
+.red{
+    color:var(--rouge);
+    margin: 0;
+    min-width: 116px;
+}
+
+.dialogues {
+    display: flex;
+    flex-direction: column;
+}
+
+section .reponseContainer {
+    margin: 0 !important;
+    height: fit-content;
+    justify-content: space-between;
+    
+}
+
+.reponseQuestion{
+    width: 25%;
+    gap: 10px;
+}
+
+.flecheInvisible {
+    height: 0;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.modifierDialogueOuvrir{
+    clip-path: none;
+    background-color: var(--beige);
+}
+
+.modifierDialogueOuvrir::before{
+    clip-path: none;
+    background-color: var(--beige);
+}
+
+.vide {
+    height: 52px;
+    width: 20%;
 }

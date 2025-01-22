@@ -43,3 +43,34 @@ dialog::backdrop {
 .button-grp{
     width: 100%;
 }
+
+.dialogModif {
+    height: 450px;
+    width: 400px;
+    font-size: larger;
+}
+
+.dialogModif form {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.modifInput {
+    width: 380px;
+
+    min-width: 100px;
+    max-width: 380px;
+    min-height: 100px;
+    max-height: 220px;
+}
+
+.dialogModif .buttons {
+    gap: 2rem;
+}
+
+.dialogModif .buttons button {
+    height: 4rem;
+    width: 300px;
+    font-size: larger;
+}
