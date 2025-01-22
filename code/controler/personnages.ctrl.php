@@ -18,8 +18,6 @@ if (isset($errorMessage)) {
 
 if (isset($_SESSION['user_id'])) {
     $idUser = $_SESSION['user_id'];
-} else {
-    $idUser = 4;
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

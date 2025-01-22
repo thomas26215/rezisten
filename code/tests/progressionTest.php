@@ -15,13 +15,12 @@ class progressionTest extends TestCase {
     private Place $place;
     private Story $story;
     private Progression $progression;
-    
     protected function setUp(): void {
         $uniqueEmail = "bilsbrayan" . uniqid() . "@gmail.com";
-        $this->user = new User("prapra","brayan","bils","24-08-2005", $uniqueEmail,"2706","a", true);
+        $this->user = new User("prapra","brayan","bils","08-24-2005", $uniqueEmail,"2706","a", true);
         $this->user->create();
         
-        $this->chapter = new Chapter(145,"Il faut un titre");
+        $this->chapter = new Chapter(160,"Il faut un titre");
         $this->chapter->create();
         
         $this->place = new Place("iut" , "batiment" , "endroit pour les cours" , "grenoble", "0.0");

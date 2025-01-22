@@ -24,7 +24,8 @@
         <div class="supContainer">
             <?php
             $imgSrc = '';
-            if ($selectedCharacter && $selectedCharacter->getCreator()->getId() == 4) {
+
+            if ($selectedCharacter && $selectedCharacter->getCreator()->getId() == 1) {
                 $imgSrc = $imgURL . ($selectedCharacter->getImage() ?? "default") . ".webp";
             } else if ($selectedCharacter) {
                 $imgSrc = $imgURL . ($selectedCharacter->getImage() ?? "default");

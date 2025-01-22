@@ -18,7 +18,7 @@ class histoireTest extends TestCase
     protected function setUp(): void
     {
         $uniqueEmail = "johndoe" . uniqid() . "@test.com";
-        $this->user = new User("testUser", "John", "Doe", "01-01-1990", $uniqueEmail, "password123", "a", true);
+        $this->user = new User("testUser", "John", "Doe", "08-24-2005", $uniqueEmail, "password123", "a", true);
         $this->user->create();
         
         $this->chapter = new Chapter(time(), "Introduction");

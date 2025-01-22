@@ -20,7 +20,7 @@ class apparitionTest extends TestCase {
 
     protected function setUp(): void {
         $uniqueEmail = "bilsbrayan" . uniqid() . "@gmail.com";
-        $this->user = new User("prapra", "brayan", "bils", "24-08-2005", $uniqueEmail, "2706aaaaaaaaaaaaaa", "a", false);
+        $this->user = new User("prapra", "brayan", "bils", "08-24-2005", $uniqueEmail, "2706aaaaaaaaaaaaaa", "a", false);
         $this->user->create();
         
         $this->chapter = new Chapter(time(), "la tete a toto");

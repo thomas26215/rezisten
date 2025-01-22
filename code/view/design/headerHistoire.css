@@ -2,12 +2,9 @@
      display: flex;
      justify-content: space-between;
      align-items: center;
-     /* padding-top: 10px; */
      padding-inline: 15px;
      box-sizing: border-box;
      height: var(--height-header);
-
-     /* margin-top: 20px; */
  }
 
  a {
@@ -76,4 +73,8 @@
 
  a.flex-col:hover .nomUser {
      transform: translateY(10px);
+ }
+
+.img-profile{
+    border: 3px solid var(--noir);
  }

@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <?php include_once("./view/headerProfile.view.php") ?>
+    <?php include_once("./view/header.view.php") ?>
     <main>
         <form class="non-style" method="post" action="?ctrl=profil">
             <button id="openDeconnecter" type="button" class="deconnect button-rouge" >Se déconnecter</button>

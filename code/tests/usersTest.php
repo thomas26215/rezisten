@@ -11,12 +11,12 @@ class usersTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->user = new User("pseudoUserTest", "brayan", "bils", "2005-08-24", "test@autre.fr", "2706", "j",true);
+        $this->user = new User("pseudoUserTest", "brayan", "bils", "08-24-2005", "test@autre.fr", "2706", "j",true);
     }
 
     public function testGetters()
     {
-        $this->assertEquals("2005-08-24", $this->user->getBirthDate());
+        $this->assertEquals("08-24-2005", $this->user->getBirthDate());
         $this->assertEquals("brayan", $this->user->getFirstName());
         $this->assertEquals("test@autre.fr", $this->user->getMail());
         $this->assertEquals("j", $this->user->getRole());

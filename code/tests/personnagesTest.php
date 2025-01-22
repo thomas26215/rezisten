@@ -12,7 +12,7 @@ class PersonnagesTest extends TestCase {
 
     protected function setUp(): void {
         $uniqueEmail = "testuser" . uniqid() . "@test.com";
-        $this->user = new User("testuser", "Test", "User", "01-01-1990", $uniqueEmail, "password123", "c", true);
+        $this->user = new User("testuser", "Test", "User", "08-24-2005", $uniqueEmail, "password123", "c", true);
         $this->user->create();
         $this->character = new Character("Pierre", "chemin/image.jpg", $this->user);
     }
