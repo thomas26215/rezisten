@@ -96,7 +96,7 @@ if ($dialog === null) {
 
 // Initialisation par défaut du background à "bg1"
 if($story->getChapter()->getNumChap() != 100){
-    $background = $backgroundURL . "hist_" . $idStory . "bg1.webp";
+    $background = $backgroundURL . "hist_" . $idStory . "bg1.gif";
     if(!isset($_SESSION['background'])){
         $_SESSION['background'] = $background;
     }
@@ -113,7 +113,7 @@ if($story->getChapter()->getNumChap() != 100){
     // Si un dialogue entraîne un changement de fond
     if (isset($dialogsChangeBG[$idStory]) && $dialogsChangeBG[$idStory] == $dialog->getContent()) {
         // Mise à jour du background à "bg2" et stockage dans la session
-        $background = $backgroundURL . "hist_" . $idStory . "bg2.webp";
+        $background = $backgroundURL . "hist_" . $idStory . "bg2.gif";
         $_SESSION['background'] = $background;
     }
     
