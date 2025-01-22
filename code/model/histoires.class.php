@@ -5,6 +5,7 @@ require_once(__DIR__ . "/users.class.php");
 require_once(__DIR__ . "/chapitres.class.php");
 require_once(__DIR__ . "/lieux.class.php");
 require_once(__DIR__ . "/dialogues.class.php");
+require_once(__DIR__ . "/questions.class.php");
 
 class Story
 {
@@ -207,19 +208,26 @@ class Story
 
     public static function delete(int $id): void
     { {
-        $idDialogue = 0;
+            $idDialogue = 0;
             if ($id <= 0) {
                 throw new InvalidArgumentException("L'ID doit être supérieur à zéro.");
             }
 
-            $nbDialogs = sizeof(Dialog::readAllByStory($id));   
+            try {
+                $nbDialogs = sizeof(Dialog::readAllByStory($id));
 
-            do{
-                $idDialogue=$idDialogue+1;
-                Dialog::delete($idDialogue,$id);
-                $nbDialogs =$nbDialogs - 1;
-            }while($nbDialogs > 0);
+                do {
+                    $idDialogue = $idDialogue + 1;
+                    Dialog::delete($idDialogue, $id);
+                    $nbDialogs = $nbDialogs - 1;
+                } while ($nbDialogs > 0);
+            } catch (PDOException $e) {
+                throw new RuntimeException("Erreur lors de la suppression des dialogues de l'histoire : " . $e->getMessage(), 0, $e);
+            }
+            if (Question::read($id, 's') != null) {
+                Question::delete($id, 's');
 
+            }
             DAO::getInstance()->deleteDatasById("histoires", (int) $id);
         }
     }
