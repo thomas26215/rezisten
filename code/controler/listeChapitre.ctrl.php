@@ -15,11 +15,13 @@ if (isset($_POST["reload"])) {
     $progression = new Progression($user, Story::read(1), 1);
     $progression->create();
 }
-
+/**
+ * Permet de savoir si un chapitre et vérouillé ou non
+ */
 foreach ($chapitres as $chapitre) {
     $numChapitre = $chapitre->getNumchap();
     if ($numChapitre == 100) {
-        continue; // Skip chapter 100
+        continue; // Permet d'éviter le chapitre 100, qui est différent car c'est un accès aux histoire faites par les créateurs
     }
     $isUnlocked = $numChapitre == 0 || Progression::areChapterUnlocked($user->getId(), $numChapitre);
     $chaptersStatus[] = [
