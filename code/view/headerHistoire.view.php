@@ -2,7 +2,6 @@
 include_once('./model/users.class.php');
 ?>
 
-
 <head>
    <link rel="icon" href="./view/favicon.ico" type="image/x-icon">
 
