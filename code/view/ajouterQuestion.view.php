@@ -9,6 +9,11 @@
         <input type="hidden" name="article" value="ajouterQuestion">
         <input type="hidden" name="id" value="<?= $histoire->getId() ?>">
 
+        <div class="flex-col texte">
+            <span>Attention !</span>
+            <p>Vous ne pouvez rajouter qu'une question dans votre histoire. Une deuxième question rajoutée remplacera la première.</p>
+        </div>
+
         <!-- Question -->
         <section class="input-superpose">
             <label for="question">Entrez la question : </label>

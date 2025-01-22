@@ -32,4 +32,17 @@
     width: 95%;
     justify-content: space-around;
 }
+ .texte span {
+    color: var(--rouge);
+    font-weight: bold;
+ }
+
+ .texte p {
+    text-align: center;
+ }
+
+ .texte {
+    gap: 1rem;
+    margin: 40px 90px;
+ }
 
