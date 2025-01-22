@@ -30,11 +30,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     if (isset($_POST['action']) && $_POST['action'] === 'ajouterCharacter') {
         try {
-            // data du form
+            /* données du form */
             $firstName = trim($_POST['prenom'] ?? '');
             $uploadedImage = $_FILES['photoUpload'] ?? "null.png";
 
-            // Validate inputs
+             /* Valider les entrées */
             if (empty($firstName)) {
                 throw new Exception("Le prénom ne peut pas être vide.");
             }
@@ -45,17 +45,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $filePath = $uploadDirectory . $fileName;
 
 
-                // Move uploaded file
+                /**
+                 * Déplacer la photo ajouter par l'utilisateur
+                 */
                 if (!move_uploaded_file($uploadedImage['tmp_name'], $filePath)) {
                     throw new Exception("Erreur lors du téléchargement de l'image.");
                 }
 
-                $imageName = $fileName; // file  dans la base de données
+                $imageName = $fileName; // dossier dans la base de données
             } else {
                 throw new Exception("Aucune image valide n'a été téléchargée.");
             }
 
-            // Create new Character 
+            /**
+             *  Création d'un nouveau personnage
+             */ 
             $creator = User::read($idUser); // user id de la session
             if ($creator === null) {
                 $errorMessage = "Creator ne peut pas être null";
@@ -69,19 +73,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errorMessage = $e->getMessage();
         }
     } elseif (isset($_POST['action']) && $_POST['action'] === 'updateCharacter' && isset($_POST['characterId'])) {
-        // Update character
+        
+        /* modification d'un personnage */
+
         $characterIdToModify = (int) $_POST['characterId'];
         $character = Character::read($characterIdToModify);
         $newFirstName = trim($_POST['firstName']);
         $newImageFile = $_FILES['photoUpload'];
         $newImage = $newImageFile['name'];
 
-        // si personnage pas crée par l'utilisateur il ne peut pas le modifier
+        /* si un personnage n'est pas crée par l'utilisateur il ne peut pas le modifier */
         if ($character->getCreator()->getId() != $idUser) {
             $errorMessage = "Vous ne pouvez pas modifier ce personnage.";
         }
 
-        // si l'utilisateur veut modifier un seulement un des deux, l'autre reste comme avant
+        /* si l'utilisateur veut modifier un seule un des deux, l'autre reste comme avant */
         if (empty($newFirstName)) {
             $newFirstName = $character->getFirstName();
         }
@@ -97,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if (!empty($newImageFile['name'])) {
                 if ($newImageFile && is_array($newImageFile)) {
-                    // Define upload path
+                    // Definir le chemin pour l'upload
                     $uploadDirectory = './view/design/image/imageUser/';
                     $fileName = basename($newImage);
                     $filePath = $uploadDirectory . $fileName;
@@ -105,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     if (!move_uploaded_file($newImageFile['tmp_name'], $filePath)) {
                         $errorMessage = "Erreur lors du téléchargement de l'image.";
                     }
-                    $imageName = $fileName; // mettre fichier dans la db
+                    $imageName = $fileName;  /* mettre fichier dans la base de données */
                 }
             }
 
@@ -115,12 +121,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if (!isset($errorMessage)) {
                 $character->update();
-                $characters = Character::readAllCharacters(); // update list
+                $characters = Character::readAllCharacters(); /* Mettre à jour la liste */
                 $message = "Votre personnage a été modifié avec success.";
             }
         }
     } elseif (isset($_POST['action']) && $_POST['action'] === 'supprimerPersonnage' && isset($_POST['characterId'])) {
-        // Deletion logic triggered by form submission
+        
+        /* suppression déclenchée par la soumission du formulaire */
         $characterIdToDelete = (int) $_POST['characterId'];
         $character = Character::read($characterIdToDelete);
         if ($character->getCreator()->getId() != $idUser) {
@@ -130,17 +137,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!isset($errorMessage)) {
             $character->delete($characterIdToDelete);
             $message = "Votre personnage a été supprimé avec success.";
-            $characters = Character::readAllCharacters(); // Refresh character list
+            $characters = Character::readAllCharacters(); /* Rafraîchir la liste des charactères */
         }
     }
 }
 
 $article = htmlspecialchars($_GET['article']) ?? 'consulterPersonnage';
 
-//Autres variables
+/* Autres variables */
 $lien = "./view/" . $article . ".view.php";
 
-//Créer la vue
+/* Créer la vue */
 $view = new View();
 $view->assign('lien', $lien);
 $view->assign('id', $id);

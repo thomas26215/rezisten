@@ -6,14 +6,16 @@ require_once("model/verificationEmail.class.php");
 
 $view = new View();
 
-// Vérification si le formulaire a été soumis
+/* Vérification si le formulaire a été soumis */
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Récupérer les données du formulaire
-    $email = $_POST['email'] ?? ''; // Utilisation de l'opérateur null coalescent pour éviter les erreurs
+    /* Récupérer les données du formulaire */
+    $email = $_POST['email'] ?? ''; 
+    /* Utilisation de l'opérateur null coalescent pour éviter les erreurs */
     $password = $_POST['password'] ?? '';
-    $token = $_POST['token'] ?? ''; // Assurez-vous que le token est récupéré
+    $token = $_POST['token'] ?? ''; 
+    /* Assurez-vous que le token est récupéré */
 
-    // Validation des données
+    /* Validation des données */
     $errors = [];
     if (empty($token)) {
         $errors[] = "Le code de vérification est requis.";
@@ -25,17 +27,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = "Le mot de passe est requis.";
     }
 
-    // Si aucune erreur, procéder à la vérification
+    /* Si aucune erreur, procéder à la vérification */
     if (empty($errors)) {
         try {
-            // Récupérer l'utilisateur par email
+            /* Récupérer l'utilisateur par email */
             $user = User::readWithMail($email);
             if ($user) {
-                echo $user->getId(); // Affiche l'ID de l'utilisateur pour le débogage
+                echo $user->getId(); 
+                /* Affiche l'ID de l'utilisateur pour le débogage */
 
-                // Vérifiez si l'email existe et récupérez le code
+                /* Vérifiez si l'email existe et récupérez le code */
                 if ($checkEmail = CheckEmail::read($user->getId())) {
-                    // Utilisez le token ici
+                    /* Utilisez le token ici */
                     if (!$checkEmail->checkAndDeleteCode($token)) {
                         $errors[] = "Le code de vérification est invalide.";
                         header("Location: index.php");
@@ -52,14 +55,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Affichage des erreurs (s'il y en a)
+/* Affichage des erreurs (s'il y en a) */
 if (!empty($errors)) {
     foreach ($errors as $error) {
         echo "<p class='error'>$error</p>";
     }
 }
 
-// Affichez la vue par défaut si aucune action n'a été effectuée
+/* Affichez la vue par défaut si aucune action n'a été effectuée */
 $view->display("verifierCompte");
 
 ?>
