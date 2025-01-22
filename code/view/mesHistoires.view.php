@@ -16,7 +16,9 @@
 
     <main class="flex-col">
         <h1>Mes Histoires</h1>
-
+        <a href="index.php?ctrl=didacticiel#partie-createur">
+            <button class="creer">Didacticiel</button>
+        </a>
         <?php if (!empty($publishedStories)): ?>
             <div class="histoires">
                 <p class="titres">Sauvegardées :</p>
@@ -70,7 +72,7 @@
     <dialog class="dialog" id="delete-dialog">
         <div class="containerDialog">
             <h2>Voulez vous effacer votre histoire ?</h2>
-            <div >
+            <div>
                 <button id="confirm-delete" class="button-vert">
                     Supprimer
                 </button>

@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <?php include_once './view/headerHistoire.view.php'; ?>
+    <?php include_once './view/header.view.php'; ?>
     <main class="flex-col maindidac">
         <h1 class="centree">Bienvenue dans le didacticiel de Rezisten !</h1>
         <p class="centree">Sur notre application, vous disposerez de plusieurs fonctionnalités détaillées ci-dessous.
@@ -55,7 +55,7 @@
                 <button type="submit">Commencer la lecture -></button>
             </form>
         </div>
-        <h2>Mission recrutement</h2>
+        <h2 id="partie-createur">Mission recrutement</h2>
         <p>Pour devenir créateur, vous pouvez cliquer sur le bouton ci-dessous. Vous serez redirigé sur un formulaire
             vous concernant afin de prouver que vous avez les compétences afin de devenir créateur d'histoire sur notre
             site. Vous êtes passionné, professeur, prouvez-nous votre passion pour la transmettre avec nous !</p>

@@ -48,14 +48,18 @@
         </form>
 
         <div class="buttons">
-            <button class="" id="toggleDyslexique">Mode dyslexique</button>
+            <button class="profil-button" id="toggleDyslexique">Mode dyslexique</button>
 
             <a href="index.php?ctrl=demandeCreateur">
-                <button class="button-gris">Demander à être créateur</button>
+                <button class="button-gris profil-button">Demander à être créateur</button>
             </a>
             <a href="index.php?ctrl=changermotdepasse&mode=authentified">
-                <button class="button-gris">Modifier mon mot de passe</button>
+                <button class="button-gris profil-button">Modifier mon mot de passe</button>
             </a>
+            <a href="index.php?ctrl=didacticiel">
+                <button class="profil-button">Didacticiel</button>
+            </a>
+            </form>
         </div>
     </main>
     <?php include_once("./view/footer.view.php") ?>

@@ -78,10 +78,6 @@ main {
     border-top: 2px solid var(--noir);
 }
 
-.modif {
-    color: red;
-}
-
 .creer {
     height: 80px;
     width: 20rem;
