@@ -245,4 +245,5 @@ INSERT INTO QUESTIONS(id_histoire,question,reponse,type) values(2,'En quelle ann
 
 --Progression
 INSERT INTO PROGRESSION values(1,1,true),
-(2,1,true);
+(2,1,true),
+(3,1,true);
