@@ -18,10 +18,11 @@ class DialoguesTest extends TestCase
 
 
     protected function setUp(): void
-    {
+    {                
+
         $this->user = new User("test","test","test","08-24-2005","test@gmail.com","aa","j",true);
         $this->user->create(); 
-        
+
         $this->place = new Place("lieux","batiment","description","ville","coordonnées");
         $this->place->create(); // Create the place
         $this->speaker = new Character("test", "chemin", $this->user);
@@ -44,11 +45,11 @@ class DialoguesTest extends TestCase
     }
 
     public function testSetters(): void
-    {
+    {        
+
         $newUser = new User("AnotherUser", "Second", "User", "08-02-2005", "another@example.com", "pass", "j", false);
         $newStory = new Story("Another Story", $this->chapter, $newUser, new Place("AnotherPlace", "Room", "Desc", "54321", "1.0"), "Another Synopsis", true);
         $newSpeaker = new Character(2, "Villain", $newUser);
-
         $this->dialog->setId(2);
         $this->dialog->setStory($newStory);
         $this->dialog->setSpeaker($newSpeaker);
@@ -102,25 +103,13 @@ class DialoguesTest extends TestCase
 
     protected function tearDown(): void
 {
-    if (isset($this->lieux) && $this->place->getId() > 0) {
-        Place::delete($this->place->getId());
-    }
-    if (isset($this->user) && $this->user->getId() > 0) {
-        User::delete($this->user->getId());
-    }
+    Dialog::delete($this->dialog->getId(),$this->story->getId());
+    Story::delete($this->story->getId());
+    Chapter::delete($this->chapter->getNumchap());
+    Character::delete($this->speaker->getId());
+    Place::delete($this->place->getId());
+    User::delete($this->user->getId());
+}
 
-    if (isset($this->chapter) && $this->chapter->getNumchap() > 0) {
-        Chapter::delete($this->chapter->getNumchap());
-    }
 
-        if (isset($this->dialog) && $this->dialog->getId() > 0) {
-            try {
-                Dialog::delete($this->dialog->getId(), "g");
-            } catch (RuntimeException $e) {
-            }
-        }
-        if (isset($this->story) && $this->story->getId() > 0) {
-            Story::delete($this->story->getId());
-        }
-    }
 }

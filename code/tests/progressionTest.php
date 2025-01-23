@@ -14,6 +14,7 @@ class progressionTest extends TestCase {
     private Chapter $chapter;
     private Place $place;
     private Story $story;
+    private Story $newStory;
     private Progression $progression;
     protected function setUp(): void {
         $uniqueEmail = "bilsbrayan" . uniqid() . "@gmail.com";
@@ -28,6 +29,9 @@ class progressionTest extends TestCase {
         
         $this->story = new Story("Une histoire" , $this->chapter , $this->user , $this->place , "un fond" , true);
         $this->story->create();
+        $this->newStory = new Story("Nouvelle histoire", $this->chapter, $this->user, $this->place, "nouveau fond", true);
+        $this->newStory->create();
+
         
         $this->progression = new Progression($this->user, $this->story , true);
     }
@@ -39,13 +43,11 @@ class progressionTest extends TestCase {
     }
 
     public function testSetters() {
-        $newStory = new Story("Nouvelle histoire", $this->chapter, $this->user, $this->place, "nouveau fond", true);
-        $newStory->create();
         
-        $this->progression->setHistory($newStory);
+        $this->progression->setHistory($this->newStory);
         $this->progression->setStatus(false);
 
-        $this->assertEquals($newStory, $this->progression->getHistory());
+        $this->assertEquals($this->newStory, $this->progression->getHistory());
         $this->assertFalse($this->progression->getStatus());
     }
 
@@ -108,6 +110,7 @@ class progressionTest extends TestCase {
     protected function tearDown(): void {
         Progression::delete($this->user->getId(), $this->story->getId());
         Story::delete($this->story->getId());
+        Story::delete($this->newStory->getId());
         Place::delete($this->place->getId());
         Chapter::delete($this->chapter->getNumchap());
         User::delete($this->user->getId());

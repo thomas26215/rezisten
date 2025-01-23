@@ -50,10 +50,10 @@
                             <div class="containerDialog">
                                 <h2>Voulez vous supprimer <?= $selectedCharacter?->getFirstName() ?? "Jean"; ?> ?</h2>
                                 <div>
-                                    <button type="submit" id="fermerSupprimer" name="fermer" class="button-vert">
+                                    <button type="submit" id="fermerSupprimer" name="fermer" class="button-rouge">
                                         Supprimer personnage
                                     </button>
-                                    <button type="button" id="revenirSupprimer" class="button-rouge">
+                                    <button type="button" id="revenirSupprimer" class="button-vert">
                                         Revenir
                                     </button>
                                 </div>

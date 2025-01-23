@@ -10,6 +10,7 @@ class questionTest extends TestCase
 {
     private Question $question;
     private Story $story;
+    private Story $newStory;
     private Chapter $chapter;
     private Place $lieux;
     private User $user;
@@ -26,6 +27,9 @@ class questionTest extends TestCase
         $this->chapter->create();
         $this->story = new Story("Une histoire test", $this->chapter, $this->user, $this->lieux, "background.jpg", true);
         $this->story->create(); 
+        $this->newStory = new Story("Nouvelle histoire", $this->chapter, $this->user, $this->lieux, "new_background.jpg", true);
+        $this->newStory->create();
+
         
         $this->question = new Question($this->story, "Question test ?", "Réponse test", "g");
     }    
@@ -72,40 +76,23 @@ class questionTest extends TestCase
 
     public function testSetters()
     {
-        $newStory = new Story("Nouvelle histoire", $this->chapter, $this->user, $this->lieux, "new_background.jpg", true);
-        $newStory->create();
-        $this->question->setHistory($newStory);
+        $this->question->setHistory($this->newStory);
         $this->question->setQuestion("Nouvelle question");
         $this->question->setAnswer("Nouvelle réponse");
-        $this->question->setType("s");
+        $this->question->setType("g");
 
-        $this->assertEquals($newStory, $this->question->getHistory());
+        $this->assertEquals($this->newStory, $this->question->getHistory());
         $this->assertEquals("Nouvelle question", $this->question->getQuestion());
         $this->assertEquals("Nouvelle réponse", $this->question->getAnswer());
-        $this->assertEquals("spécifique", $this->question->getType());
+        $this->assertEquals("générique", $this->question->getType());
     }
 
-    protected function tearDown(): void
-{
-    if (isset($this->lieux) && $this->lieux->getId() > 0) {
-        Place::delete($this->lieux->getId());
-    }
-    if (isset($this->user) && $this->user->getId() > 0) {
-        User::delete($this->user->getId());
-    }
-
-    if (isset($this->chapter) && $this->chapter->getNumchap() > 0) {
-        Chapter::delete($this->chapter->getNumchap());
-    }
-
-        if (isset($this->question) && $this->question->getHistory()->getId() > 0) {
-            try {
-                Question::delete($this->question->getHistory()->getId(), "g");
-            } catch (RuntimeException $e) {
-            }
-        }
-        if (isset($this->story) && $this->story->getId() > 0) {
-            Story::delete($this->story->getId());
-        }
-    }
+    protected function tearDown(): void{
+    Question::delete($this->story->getId(),"g");
+    Story::delete($this->story->getId());
+    Story::delete($this->newStory->getId());
+    Chapter::delete($this->chapter->getNumchap());
+    Place::delete($this->lieux->getId());
+    User::delete($this->user->getId());
+}
 }

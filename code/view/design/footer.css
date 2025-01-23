@@ -1,5 +1,8 @@
 footer {
     background-color: var(--beige);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 footer>article {
@@ -9,7 +12,7 @@ footer>article {
     width: 100%;
     border: none;
     height: var(--height-footer);
-
+    gap: 2rem;
 }
 
 img.img {
@@ -44,4 +47,17 @@ footer>section ul {
 li>a {
     width: fit-content;
     
+}
+
+@media (max-width: 920px) {
+    footer>article {
+        flex-wrap: wrap;
+        gap: 3rem;
+        height: auto;
+        padding: 1.5rem;
+    }
+
+    footer {
+        flex-direction: column-reverse !important;
+    }
 }

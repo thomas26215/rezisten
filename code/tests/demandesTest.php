@@ -91,9 +91,15 @@ class demandesTest extends TestCase {
     }
 
     protected function tearDown(): void {
+        if(Demande::read($this->user->getId()) !== null){
+            Demande::delete($this->user->getId());
+        }
         if(isset($this->user) && $this->user->getId() > 0) {
             User::delete($this->user->getId());
+        
+        }  
+
         }
     }
-}
+
 ?>

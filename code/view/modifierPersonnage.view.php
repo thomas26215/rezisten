@@ -61,10 +61,10 @@
                         <h2>Voulez vous modifier ce personnage ?</h2>
                         <div>
 
-                            <button type="submit" id="fermerModifier" name="fermer" class="button-vert">
+                            <button type="submit" id="fermerModifier" name="fermer" class="button-rouge">
                                 Oui
                             </button>
-                            <button type="button" id="revenirModifier" class="button-rouge">
+                            <button type="button" id="revenirModifier" class="button-vert">
                                 Annuler modifications
                             </button>
                         </div>
