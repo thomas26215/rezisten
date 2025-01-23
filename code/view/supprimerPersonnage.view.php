@@ -31,7 +31,7 @@
                 <?php
                 $imgSrc = '';
                 if ($selectedCharacter && $selectedCharacter->getCreator()->getId() == 1) {
-                    $imgSrc = $imgURL . ($selectedCharacter->getImage() ?? "default") . ".webp";
+                    $imgSrc = $imgURL . ($selectedCharacter->getImage() ?? "default");
                 } else if ($selectedCharacter) {
                     $imgSrc = $imgURL . ($selectedCharacter->getImage() ?? "default");
                 }

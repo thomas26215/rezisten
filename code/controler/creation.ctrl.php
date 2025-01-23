@@ -25,7 +25,7 @@ if (!isset($_GET['id'])) { // si l'histoire n'existe pas
         Chapter::read(100),
         User::read($idUser),
         Place::read(1),
-        "default_background.webp",
+        "default_background.gif",
         false
     );
     $histoire->create();
