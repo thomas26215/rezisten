@@ -92,7 +92,6 @@
 
             </section>
         </article>
-
     </main>
 </body>
 <script src="./view/js/dyslexique.js"></script>

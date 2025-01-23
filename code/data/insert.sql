@@ -88,7 +88,7 @@ VALUES
 (42,1,3,'Le lendemain nous étions tous mobilisés pour la bataille. Mais la bande de rebelles que nous étions n''allions pas accepter cela, on décida donc de fuir et de se cacher.',true,'421'),
 (43,1,3,'La guerre fût déclarée le 3 septembre deux jours après.',true,'431'),
 (44,1,3,'Durant un an et demi les combats sévirent, jusqu''à l''armistice du 22 juin 1940.',true,'441'),
-(45,1,5,'La suite de notre histoire, elle commença un matin de juillet 1940 dans le sud ouest français.',true,'451');
+(45,1,3,'La suite de notre histoire, elle commença un matin de juillet 1940 dans le sud ouest français.',true,'451');
 
 
 
@@ -237,7 +237,7 @@ INSERT INTO QUESTIONS(id_histoire,question,reponse,type) values(1,'Combien de r�
 (1,' Combien de personnes ont signé les bas relief de la ferme ?','4','s');
 
 --Pour l'histoire 1 chapitre 1
-INSERT INTO QUESTIONS(id_histoire,question,reponse,type) values(2,'En quelle année furent découverts les enfants juifs cachés dans cette maison ?','44','g'),
+INSERT INTO QUESTIONS(id_histoire,question,reponse,type) values(2,'En quelle année furent découverts les enfants juifs cachés dans cette maison ?','1944','g'),
 (2,'Combien de chambres contient encore cette maison ? ','6','s');
 
 

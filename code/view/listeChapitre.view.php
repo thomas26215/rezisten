@@ -47,26 +47,7 @@
             <input type="hidden" name="idChap" value="100">
             <button class="button-gris" type="submit">Chapitre des créateurs</button>
         </form>
-        <form method="post" action="index.php">
-            <button id="recommencerOuvrir" class="button-bleu" type="button">Recommencer tout <img class="img-button"
-                    src="./view/design/image/recommencer.png" alt="(Reload)">
-            </button>
-
-            <dialog class="dialog" id="dialogRecommencer">
-                <div class="containerDialog">
-                    <h2>Voulez vous recommencer vos histoires ?</h2>
-                    <div>
-
-                        <button type="submit" id="fermerRecommencer" name="fermer" class="button-vert">
-                            Oui
-                        </button>
-                        <button type="button" id="revenirRecommencer" class="button-rouge">
-                            Revenir
-                        </button>
-                    </div>
-                </div>
-            </dialog>
-        </form></q>
+       
     </main>
     <?php include_once './view/footer.view.php'; ?>
 
