@@ -127,7 +127,7 @@ if (isset($_SESSION['background']) && !empty($_SESSION['background'])) {
     }
     
 }else{
-    $background = $backgroundURL."default_background.webp";
+    $background = $backgroundURL."default_background.gif";
 }
 
 
