@@ -9,26 +9,6 @@
     <meta name="author" content="Brayan" />
     <link rel="stylesheet" type="text/css" href="./view/design/histoire.css">
     <link rel="stylesheet" type="text/css" href="./view/design/global.css">
-    <style>
-        .texte-machine {
-            font-family: 'Courier New', Courier, monospace;
-            white-space: nowrap; /* Évite les retours à la ligne */
-            overflow: hidden;   /* Masque le texte qui n'est pas encore affiché */
-            border-right: 2px solid black; /* Curseur clignotant */
-            display: inline-block;
-            animation: blink 0.7s steps(1) infinite;
-        }
-
-        /* Animation pour le curseur clignotant */
-        @keyframes blink {
-            0%, 50% {
-                border-color: black;
-            }
-            51%, 100% {
-                border-color: transparent;
-            }
-        }
-    </style>
 </head>
 
 <body>
@@ -72,14 +52,8 @@
                         Suivant ></button>
                     </div>
                 </form>
-
-                
-                
-
-
             </section>
         </article>
-
     </main>
 </body>
 <script src="./view/js/dyslexique.js"></script>
