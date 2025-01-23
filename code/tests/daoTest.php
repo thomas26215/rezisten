@@ -14,7 +14,7 @@ class DAOTest extends TestCase {
         $this->dao = DAO::getInstance();
         $this->utilitaire = new DAOUtilitaire();
         $this->utilitaire->setQuery("CREATE TABLE IF NOT EXISTS {$this->testTable} (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        id SERIAL PRIMARY KEY,
         name TEXT NOT NULL,
         value INTEGER NOT NULL
     )");
