@@ -175,10 +175,10 @@ $dialLimit = Dialog::readLimit($idStory);
 
 $idChap = $story->getChapter()->getNumchap();
 $speaker = $dialog->getSpeaker();
-$imgSpeaker = $imgURL.$speaker->getImage().".webp";
+$imgSpeaker = $imgURL.$speaker->getImage();
 $dub = $audioURL.$dialog->getDubbing().".WAV";
 if($prevSpeaker != $speaker->getImage()){
-    $prevSpeaker = $imgURL.$prevSpeaker.".webp";
+    $prevSpeaker = $imgURL.$prevSpeaker;
 }
 else{
     $prevSpeaker = "none.webp";
