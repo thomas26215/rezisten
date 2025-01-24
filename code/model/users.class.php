@@ -1,5 +1,4 @@
 <?php
-
 require_once(__DIR__ . "/dao.class.php");
 
 class User {
@@ -11,7 +10,7 @@ class User {
     private string $mail;
     private string $password;
     private string $role;
-    
+
     private DAO $dao;
 
     public function __construct(string $username, string $firstName, string $surname, string $birthDate, string $mail, string $password, string $role, bool $transformInHashedPassword, int $id = -1) {

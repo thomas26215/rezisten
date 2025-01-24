@@ -108,6 +108,10 @@ Voici des idées que nous pensons intégrer par la suites :
 - Un système social, plus précisément pouvoir ajouter ses amis, et voir où ils en sont dans leurs histoires, mais également les histoires qu'ils ont pu partager
 - Un système de vote, grâce au quel on pourrait mettre en avant les histoires que les gens ont le plus aimés.
 
+## Présence d'une documentation technique
+
+La documentation technique est disponible à l'emplacement **rendus/docs/Documentation technique"" du projet. Elle contient des informations sur l'architecture de l'application, les technologies utilisées, les fonctionnalités, et les instructions pour l'installation et l'utilisation de l'application.
+
 
 ## Droits d'auteur
 Ce projet est protégé par les droits d'auteur. Tous les droits sont réservés à **[L’édition de ce site est assurée par Tristan FONTANIERE, Quentin PEGUIN, Sophie ARNAUD, Thomas VENOUIL, Maria Luiza CELUSNIAK DE SOUZA, Brayan BILS, Elouan JOANNIC, étudiants à l’IUT2 de Grenoble.]**. Aucune partie de ce projet ne peut être reproduite, distribuée ou modifiée sans l'autorisation écrite préalable du titulaire des droits.
