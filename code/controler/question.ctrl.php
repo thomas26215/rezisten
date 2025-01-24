@@ -68,7 +68,7 @@ elseif ($action === "answer") {
 
         $speaker = $dialog->getSpeaker();
         $dub = $audioURL . $dialog->getDubbing() . ".WAV";
-        $imgSpeaker = $imgURL . $speaker->getImage() . ".webp";
+        $imgSpeaker = $imgURL . $speaker->getImage();
         $dialLimit = Dialog::readLimit($_SESSION['idStory']);
 
         $view->assign('prevSpeaker', $_SESSION['prevSpeaker']);

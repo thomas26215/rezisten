@@ -30,9 +30,6 @@ section.header {
   max-height: 50px;
 }
 
-.menu {
-  grid-area: menu;
-}
 
 .content {
   min-width: 60vw;
@@ -203,4 +200,18 @@ section.header button {
 
 .texte p {
   text-align: center;
+}
+
+@media (max-width: 1020px) {
+  .menu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .articleContainer {
+    min-width: 95%;
+    display: flex;
+    flex-wrap: wrap;
+  }
 }

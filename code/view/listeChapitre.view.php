@@ -45,7 +45,7 @@
         <form method="get" action="index.php">
             <input type="hidden" name="ctrl" value="listeHistoire">
             <input type="hidden" name="idChap" value="100">
-            <button class="button-gris" type="submit">Chapitres des créateurs</button>
+            <button class="button-gris" type="submit">Chapitre des créateurs</button>
         </form>
        
     </main>

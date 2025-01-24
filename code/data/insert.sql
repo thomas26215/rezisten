@@ -1,7 +1,8 @@
 -- Création d'un utilisateur de base
 INSERT INTO UTILISATEURS(pseudo,prenom,nom,datenaiss,mail,mot_de_passe,role) VALUES
 ('admin_rezisten','rezisten','rezisten','12/10/2000','rezisten.contact@gmail.com','$2y$10$v0mMwzjy8YmJFF6ePx4tyOe.TvQzv2Vipx.oYiftj.UM3YsV2dz.m','a'),
-('#Dessine_Pour_Comprendre','julien2','julien2','01/02/2023','julien.joten@gmail.com','$2y$12$MCOSk7WyRZ5U8OLWof4wIuxmMvY06XKqS9zexVMMIhKEHjFFS/A7q','j');
+('#Dessine_Pour_Comprendre','julien2','julien2','01/02/2023','julien.joten@gmail.com','$2y$12$MCOSk7WyRZ5U8OLWof4wIuxmMvY06XKqS9zexVMMIhKEHjFFS/A7q','j'),
+('createur','','','12/12/1979','jean.neymar@gmail.com','$2y$12$cPrcVkQfr2nltCIz8OCFFu6M7dIq0BMM7m8DnE.MVjfwkZLsBmN.e','c');
 
 --Création des deux premiers chapitres de l'histoire
 INSERT INTO CHAPITRES(numchap,titre) values(0,'Prologue'),
@@ -18,16 +19,16 @@ INSERT INTO HISTOIRES(titre,numchap,createur,id_lieu,background,visible) values(
 
 
 --Création de deux personnages participants au prologue
-INSERT INTO PERSONNAGES(prenom,img,createur) values('Raymond','raymond',1), --1
-('Pierre','pierre',1),   --2
-('Jean','jean',1),       --3
-('André','andre',1),     --4
-('David','david',1),     --5
-('Michel','michel',1),   --6
-('Marie','marie',1),     --7
-('Milicien','milicien',1), --8
-('Inconnu','inconnu',1),   --9
-('Narrateur','narrateur',1); --10
+INSERT INTO PERSONNAGES(prenom,img,createur) values('Raymond','raymond.webp',1), --1
+('Pierre','pierre.webp',1),   --2
+('Jean','jean.webp',1),       --3
+('André','andre.webp',1),     --4
+('David','david.webp',1),     --5
+('Michel','michel.webp',1),   --6
+('Marie','marie.webp',1),     --7
+('Milicien','milicien.webp',1), --8
+('Inconnu','inconnu.webp',1),   --9
+('Narrateur','narrateur.webp',1); --10
 
 
 
@@ -244,4 +245,5 @@ INSERT INTO QUESTIONS(id_histoire,question,reponse,type) values(2,'En quelle ann
 
 --Progression
 INSERT INTO PROGRESSION values(1,1,true),
-(2,1,true);
+(2,1,true),
+(3,1,true);

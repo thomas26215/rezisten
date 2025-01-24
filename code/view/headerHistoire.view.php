@@ -11,10 +11,14 @@ include_once('./model/users.class.php');
 </head>
 
 <header>
-   <a href="./index.php?ctrl=main" class="home">
-      <img src="./view/design/image/home.png" alt="home">
-      <p class="accueil-text">Accueil</p>
-   </a>
+   <form action="index.php" method="get">
+      <input type="hidden" name="ctrl" value="main">
+      <button class="buttons home" type="submit" >
+         <img src="./view/design/image/home.png" alt="home">
+         <span class="accueil-text">Accueil</span>
+      </button>
+   </form>
+
    <a href="./index.php?ctrl=profil" class="flex-col">
       <img class="img-profile" src="./view/design/image/photoProfil.jpg" alt="user">
       <p class="nomUser"><?= (User::read((int) $_SESSION['user_id']))->getUsername() ?></p>

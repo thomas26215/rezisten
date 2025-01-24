@@ -78,3 +78,15 @@
 .img-profile{
     border: 3px solid var(--noir);
  }
+
+ .buttons {
+    background-color: initial;
+    border: none;
+    width: fit-content;
+ }
+
+ .buttons::before{
+    background-color:initial ;
+    border: none;
+
+ }
