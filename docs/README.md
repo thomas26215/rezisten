@@ -110,7 +110,7 @@ Voici des idées que nous pensons intégrer par la suites :
 
 ## Présence d'une documentation technique
 
-La documentation technique est disponible à l'emplacement **rendus/docs/Documentation technique"" du projet. Elle contient des informations sur l'architecture de l'application, les technologies utilisées, les fonctionnalités, et les instructions pour l'installation et l'utilisation de l'application.
+La documentation technique est disponible à l'emplacement **rendus/docs/Documentation technique** du projet. Elle contient des informations sur l'architecture de l'application, les technologies utilisées, les fonctionnalités, et les instructions pour l'installation et l'utilisation de l'application.
 
 
 ## Droits d'auteur
