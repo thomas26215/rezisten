@@ -6,29 +6,38 @@ require_once("daoUtilitaire.php");
 class DAO {
     private static $instance = null;
     private PDO $db;
-    private string $host = '192.168.14.118'; // Hôte PostgreSQL (par défaut localhost)
-    private string $port = '5432';      // Port PostgreSQL (par défaut 5432)
-    private string $dbname = 'rezisten'; // Nom de la base de données PostgreSQL
-    private string $user = 'superrezi';  // Nom d'utilisateur PostgreSQL
-    private string $password = '2o*R4ZisT3n%25'; // Mot de passe PostgreSQL
+    private bool $useServer = false; // Variable pour choisir entre serveur et SQLite
+
+    // Configuration pour PostgreSQL
+    private string $host = '192.168.14.118';
+    private string $port = '5432';
+    private string $dbname = 'rezisten';
+    private string $user = 'superrezi';
+    private string $password = '2o*R4ZisT3n%25';
+
+    // Configuration pour SQLite
+    private string $sqliteDatabase = 'sqlite:'.__DIR__.'/../data/database.db';
 
     private DAOUtilitaire $daoUtilitaire;
 
     private function __construct() {
         try {
-            // Construction de la chaîne de connexion pour PostgreSQL
-            $dsn = "pgsql:host={$this->host};port={$this->port};dbname={$this->dbname};sslmode=require";
-
-            $this->db = new PDO($dsn, $this->user, $this->password);
-
-            if (!$this->db) {
-                throw new Exception("Impossible de se connecter à la base de données PostgreSQL : ".$this->dbname);
+            if ($this->useServer) {
+                // Connexion PostgreSQL
+                $dsn = "pgsql:host={$this->host};port={$this->port};dbname={$this->dbname};sslmode=require";
+                $this->db = new PDO($dsn, $this->user, $this->password);
+            } else {
+                // Connexion SQLite
+                $this->db = new PDO($this->sqliteDatabase);
             }
 
-            // Configuration des attributs PDO pour PostgreSQL
+            if (!$this->db) {
+                throw new Exception("Impossible de se connecter à la base de données");
+            }
+
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-            throw new Exception("Erreur PDO : ".$e->getMessage().' sur '.$this->dbname);
+            throw new Exception("Erreur PDO : " . $e->getMessage());
         }
     }
 
@@ -53,6 +62,14 @@ class DAO {
         return $this->daoUtilitaire;
     }
 
+    public function getNowFunction(): string {
+        if ($this->useServer) { // PostgreSQL
+            return "CURRENT_TIMESTAMP";
+        } else { // SQLite
+            return "datetime('now')";
+        }
+    }
+
     /**
      * Insère des données liées dans la table spécifiée.
      *
@@ -60,9 +77,8 @@ class DAO {
      * @param array $datas Les données à insérer sous forme clé-valeur.
      * @return bool Retourne true si l'insertion réussit, false sinon.
      * @throws Exception Si une erreur se produit lors de la préparation ou exécution de la requête SQL.
-     * @note Exemple d'utilisation : $dao->insertRelatedData("users", ["username" => "thomas26215", "prenom" => "Thomas", ...]);
      */
-    public function insert($table, $datas) {
+    public function insert(string $table, array $datas): bool {
         try {
             $this->setUtilitaire("", $datas);
             list($columns, $placeholders) = $this->daoUtilitaire->buildQueryParts();
@@ -81,9 +97,8 @@ class DAO {
      * @param array $columns Les colonnes à récupérer (par défaut, toutes les colonnes).
      * @return array La liste des données récupérées.
      * @throws PDOException Si une erreur de base de données se produit.
-     * @note $dao->getColumnWithParameters("users", ["id" => 11, "nom" => "toto"], ["titre", "id"]);
      */
-    public function getWithParameters($table, $parameters, $columns = ['*']) {
+    public function getWithParameters(string $table, array $parameters, array $columns = ['*']): array {
         try {
             $this->setUtilitaire("", $parameters);
             $selectColumns = implode(', ', $columns);
@@ -101,7 +116,7 @@ class DAO {
         }
     }
 
-    public function getLastId(string $table){
+    public function getLastId(string $table): array {
         try{
             $query = "SELECT MAX(id) AS last_id FROM $table";
             $this->setUtilitaire($query);
@@ -120,9 +135,8 @@ class DAO {
     * @param array $whereConditions Un tableau associatif des conditions WHERE.
     * @return int Le nombre de lignes affectées.
     * @throws PDOException Si une erreur de base de données se produit.
-    * @note $numberRowAffected = $dao->update("users", ["prenom" => "Thomas", "nom" => "Venouil", ...], ["id" => 147]);
     */
-    public function update($table, $updateData, $whereConditions) {
+    public function update(string $table, array $updateData, array $whereConditions): int {
         try {
             $this->setUtilitaire();
             list($setClause, $setValues) = $this->daoUtilitaire->buildSetClause($updateData);
@@ -146,16 +160,17 @@ class DAO {
      * @param int $userId L'identifiant de l'utilisateur à supprimer.
      * @return bool Retourne true si la suppression réussit, false sinon.
      */
-    public function deleteDatasById($table, $userId) {
+    public function deleteDatasById(string $table, int $userId): bool {
         return $this->delete($table, ['id' => $userId]);
     }
-    public function deleteDatasByIdAndType($table, $Id, $type) {
+
+    public function deleteDatasByIdAndType(string $table, int $Id, string $type): bool {
         return $this->delete($table, ['id_histoire' => $Id , 'type' => $type]);
     }
-    public function deleteDatasByIds($table, $Idhistoire, $idPerso) {
+
+    public function deleteDatasByIds(string $table, int $Idhistoire, int $idPerso): bool {
         return $this->delete($table, ['id_histoire' => $Idhistoire , 'id_perso' => $idPerso]);
     }
-
 
     /**
      * Supprime des données d'une table en fonction des conditions spécifiées.
@@ -165,7 +180,7 @@ class DAO {
      * @return bool Retourne true si la suppression réussit, false sinon.
      * @throws Exception Si les conditions sont vides.
      */
-    public function delete($table, array $conditions) {
+    public function delete(string $table, array $conditions): bool {
         if (empty($conditions)) {
             throw new Exception("Les conditions ne peuvent pas être vides.");
         }
